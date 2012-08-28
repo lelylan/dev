@@ -1,96 +1,92 @@
---- 
-title: 'Statuses'
-style: 'description'
----
-      <article>
+<article>
 
-      <aside class="menu">
-      </br>
-      <table>
-        <tbody>
-          <tr><td>&raquo; <a href="#get-a-status">Get a status</a></td></tr>
-          <tr><td>&raquo; <a href="#get-all-statuses">Get all statuses</a></td></tr>
-          <tr><td>&raquo; <a href="#create-a-status">Create a status</a></td></tr>
-          <tr><td>&raquo; <a href="#update-a-status">Update a status</a></td></tr>
-          <tr><td>&raquo; <a href="#delete-a-status">Delete a status</a></td></tr>
-        </tbody>
-      </table>
-      </aside>
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#get-a-status">Get a status</a></td></tr>
+    <tr><td>&raquo; <a href="#get-all-statuses">Get all statuses</a></td></tr>
+    <tr><td>&raquo; <a href="#create-a-status">Create a status</a></td></tr>
+    <tr><td>&raquo; <a href="#update-a-status">Update a status</a></td></tr>
+    <tr><td>&raquo; <a href="#delete-a-status">Delete a status</a></td></tr>
+  </tbody>
+</table>
+</aside>
 
-      <h1 class="call"><a name="statuses">Statuses</a></h1>
+<h1 class="call"><a name="statuses"><%= title %></a></h1>
 
-      <p>
-      Properties are not always enough to describe the status of a device. Think at a roller 
-      shutter for example. It has the property <code>aperture</code> that is <code>100</code>
-      when open or <code>0</code> when closed. But what if the roller shutter is opening? It
-      is nether open or close. To have a complete control over the device status in a specific
-      moment of its life is to use the status API.
-      </p>
+<p>
+Properties are not always enough to describe the status of a device. Think at a roller 
+shutter for example. It has the property <code>aperture</code> that is <code>100</code>
+when open or <code>0</code> when closed. But what if the roller shutter is opening? It
+is nether open or close. To have a complete control over the device status in a specific
+moment of its life is to use the status API.
+</p>
 
-      </article>
+</article>
 
-      <br/>
+<br/>
 
-      <article>
+<article>
 
-      <h1 class="call"><a name="get-a-status">GET /statuses/:id</a></h1>
+<h1 class="call"><a name="get-a-status">GET /statuses/:id</a></h1>
 
-      <p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> status identified from its ID.</p>
+<p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> status identified from its ID.</p>
 
-      <h4>Resource URL</h4>
-      <div class="preview">
-        <pre><code class="no-highlight">GET https://api.lelylan.com/statuses/:id</code></pre>
-      </div>
+<h4>Resource URL</h4>
+<div class="preview">
+  <pre><code class="no-highlight">GET https://api.lelylan.com/statuses/:id</code></pre>
+</div>
 
-      <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-      <table class="zebra-striped">
-        <tbody>
-          <tr>
-            <td class="parameter">
-              <span>id</span>
-              <span class="info">required</span>
-            </td>
-            <td>
-              The ID of the desired status.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired status.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-      <h4>Example Request</h4>
+<h4>Example Request</h4>
 
-      <ul class="tabs" data-tabs="tabs">
-        <li class="curl active"><a href="#get-a-status-curl">Curl</a></li>
-        <li class="js"><a href="#get-a-status-js">Javascript</a></li>
-        <li class="ruby"><a href="#get-a-status-ruby">Ruby</a></li>
-      </ul>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-a-status-curl">Curl</a></li>
+  <li class="js"><a href="#get-a-status-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-a-status-ruby">Ruby</a></li>
+</ul>
 
-      <div class="pill-content">
-        <div class="curl active" id="get-a-status-curl">
-          <div class="preview">
-              <pre><code class="no-highlight">curl https://api.lelylan.com/statuses/4e035bd3d033a9e891000035.json</code></pre>
-          </div>
-        </div>
-        <div class="js" id="get-a-status-js">
-          <div class="preview">
-              <pre><code># todo</code></pre>
-          </div>
-        </div>
-        <div class="ruby" id="get-a-status-ruby">
-          <div class="preview">
-              <pre><code># todo</code></pre>
-          </div>
-        </div>
-      </div>
+<div class="pill-content">
+  <div class="curl active" id="get-a-status-curl">
+    <div class="preview">
+        <pre><code class="no-highlight">curl https://api.lelylan.com/statuses/4e035bd3d033a9e891000035.json</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-a-status-js">
+    <div class="preview">
+        <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-a-status-ruby">
+    <div class="preview">
+        <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-      <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-      <h4 id="status-representation">Example body response</h4>
+<h4 id="status-representation">Example body response</h4>
 
-      <div class="preview"><pre><code>{
+<div class="preview"><pre><code>{
   "uri": "https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035",
   "id": "4e035bd3d033a9e891000035",
   "name": "Setting intensity",
@@ -106,237 +102,240 @@ style: 'description'
     "values": null,
     "range": {"min": "0", "max": "100"}
   }]
-}</code></pre></div>
+}</code></pre>
+</div>
 
-      <h4>Body response explained</h4>
+<h4>Body response explained</h4>
 
-      <dl>
-        <dd><span>uri</span> - Status URI.</dd>
-        <dd><span>id</span> - Status ID.</dd>
-        <dd><span>name</span> - Status name.</dd>
-        <dd><span>pending</span> - Pending status.</dd>
-        <dd><span>properties</span> - List of properties that affect the status.</dd>
-        <div>
-          <dd><span>uri</span> - Property URI.</dd>
-          <dd><span>values</span> - List of matching values.</dd>
-          <dd><span>range</span> - Matching range based on <code>min</code> and <code>max</code>
-            values (when min and max are not defined range is <code>null</code>).</dd>
-        </div>
-      </dl>
+<dl>
+  <dd><span>uri</span> - Status URI.</dd>
+  <dd><span>id</span> - Status ID.</dd>
+  <dd><span>name</span> - Status name.</dd>
+  <dd><span>pending</span> - Pending status.</dd>
+  <dd><span>properties</span> - List of properties that affect the status.</dd>
+  <div>
+    <dd><span>uri</span> - Property URI.</dd>
+    <dd><span>values</span> - List of matching values.</dd>
+    <dd><span>range</span> - Matching range based on <code>min</code> and <code>max</code>
+      values (when min and max are not defined range is <code>null</code>).</dd>
+  </div>
+</dl>
 
-      <br/>
+<br/>
 
-      <h1><a name="connections">How do I use the properties connections?</a></h1>
+<h1><a name="connections">How do I use the properties connections?</a></h1>
 
-      <p>
-      A status is based on its properties. To understand when a status match to a device
-      status in a specific moment of its life check the following rules.
-      </p>
+<p>
+A status is based on its properties. To understand when a status match to a device
+status in a specific moment of its life check the following rules.
+</p>
 
-      <ul>
-        <li>The property value is included into the status property <code>values</code> list?</li>
-        <li>The property value is included into the <code>range</code> defined by its min and end max value?</li>
-        <li>The pending value is the same as the device pending value?</li>
-      </ul>
+<ul>
+  <li>The property value is included into the status property <code>values</code> list?</li>
+  <li>The property value is included into the <code>range</code> defined by its min and end max value?</li>
+  <li>The pending value is the same as the device pending value?</li>
+</ul>
 
-      <p>
+<p>
 
-      <span class="label notice">Notice</span>
-      Lelylan does not offer a server side service to get the device status. Learn how to get
-      it through client side <a href="/api/devices/#status">libraries</a>.
-      </p>
+<span class="label notice">Notice</span>
+Lelylan does not offer a server side service to get the device status. Learn how to get
+it through client side <a href="/api/devices/#status">libraries</a>.
+</p>
 
-      </article>
+</article>
 
 
-      <br/>
+<br/>
 
-      <article>
-        <h1 class="call"><a name="get-all-statuses">GET /statuses</a></h1>
+<article>
+  <h1 class="call"><a name="get-all-statuses">GET /statuses</a></h1>
 
-        <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) statuses.</p>
+  <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) statuses.</p>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight"># created statuses
+  <h4>Resource URL</h4>
+  <div class="preview">
+  <pre><code class="no-highlight"># created statuses
 GET https://api.lelylan.com/statuses</code><code class="no-highlight"># all statuses
 GET https://api.lelylan.com/statuses/public</code></pre>
-        </div>
+</div>
 
-        <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Status name to search.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>start</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>per</span>
-                <span class="info">optional</span>
-                <span class="info">default to '25'</span>
-              </td>
-              <td>
-                Number of resources per page.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Status name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <h4>Example Request</h4>
+<h4>Example Request</h4>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#get-all-statuses-curl">Curl</a></li>
-          <li class="js"><a href="#get-all-statuses-js">Javascript</a></li>
-          <li class="ruby"><a href="#get-all-statuses-ruby">Ruby</a></li>
-        </ul>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-all-statuses-curl">Curl</a></li>
+  <li class="js"><a href="#get-all-statuses-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-all-statuses-ruby">Ruby</a></li>
+</ul>
 
-        <div class="pill-content">
-          <div class="curl active" id="get-all-statuses-curl">
-            <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/statuses.json</code></pre>
-            </div>
-          </div>
-          <div class="js" id="get-all-statuses-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="get-all-statuses-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+<div class="pill-content">
+  <div class="curl active" id="get-all-statuses-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/statuses.json</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-all-statuses-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-all-statuses-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code class="no-highlight">[
   { # status representation }, 
   { # status representation },
   ...
-]</code></pre></div>
+]</code></pre>
+</div>
 
-      <p>
-        See <a href="#status-representation">status representation</a> for body response.
-      </p>
-      </article>
+<p>
+  See <a href="#status-representation">status representation</a> for body response.
+</p>
 
-      <br/>
+</article>
 
-      <article>
-        <h1 class="call"><a name="create-a-status">POST /statuses</a></h1>
+<br/>
 
-        <p>
-          Create a status and returns extended information for it.
-        </p>
+<article>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">POST  https://api.lelylan.com/statuses</code></pre>
-        </div>
+<h1 class="call"><a name="create-a-status">POST /statuses</a></h1>
 
-        <h4>Parameters</h4>
+<p>
+  Create a status and returns extended information for it.
+</p>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                Status name.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>pending</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                 Pending value. <a href="/api/devices/#pending">Learn more about</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>properties</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Array of properties affecting the status.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested">
-                <span>&raquo; property.uri</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                Property URI.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested">
-                <span>&raquo; property.value</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                List of matching values.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested extra">
-                <span>&raquo; property.range.min</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Minimum value on range definition.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested extra">
-                <span>&raquo; property.range.max</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Maximum value on range definition.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">POST  https://api.lelylan.com/statuses</code></pre>
+</div>
 
+<h4>Parameters</h4>
 
-        <h4>Example Request</h4>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Status name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+          Pending value. <a href="/api/devices/#pending">Learn more about</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties affecting the status.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.uri</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property URI.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of matching values.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested extra">
+        <span>&raquo; property.range.min</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Minimum value on range definition.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested extra">
+        <span>&raquo; property.range.max</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Maximum value on range definition.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#create-a-status-curl">Curl</a></li>
-          <li class="js"><a href="#create-a-status-js">Javascript</a></li>
-          <li class="ruby"><a href="#create-a-status-ruby">Ruby</a></li>
-        </ul>
+<h4>Example Request</h4>
 
-        <div class="pill-content">
-          <div class="curl active" id="create-a-status-curl">
-            <div class="preview">
-              <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/statuses.json
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#create-a-status-curl">Curl</a></li>
+  <li class="js"><a href="#create-a-status-js">Javascript</a></li>
+  <li class="ruby"><a href="#create-a-status-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="create-a-status-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/statuses.json
      -d '{ "name": "Setting intensity",
            "pending": "true",
            "properties": [{
@@ -344,136 +343,138 @@ GET https://api.lelylan.com/statuses/public</code></pre>
              "range": { "min": "0", "max": "100" }
            }]
          }'</code></pre>
-            </div>
-          </div>
-          <div class="js" id="create-a-status-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="create-a-status-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="js" id="create-a-status-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="create-a-status-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pre></div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <p>
-          See <a href="#status-representation">status representation</a> for body response.
-        </p>
-      </article>
+<p>
+  See <a href="#status-representation">status representation</a> for body response.
+</p>
 
-      <br/>
+</article>
 
-      <article>
-        <h1 class="call"><a name="update-a-status">PUT /statuses/:id</a></h1>
+<br/>
 
-        <p>
-          Update a status identified from its ID and returns extended information for it.
-        </p>
+<article>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">PUT  https://api.lelylan.com/statuses/:id</code></pre>
-        </div>
+<h1 class="call"><a name="update-a-status">PUT /statuses/:id</a></h1>
 
-        <h4>Parameters</h4>
+<p>
+  Update a status identified from its ID and returns extended information for it.
+</p>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>id</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                The ID of the desired status.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Status name.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>pending</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                 Pending value. <a href="/api/devices/#pending">Learn more about</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>properties</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Array of properties affecting the status.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested">
-                <span>&raquo; property.uri</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                Property URI.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested">
-                <span>&raquo; property.value</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                List of matching values.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested extra">
-                <span>&raquo; property.range.min</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Minimum value on range definition.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter nested extra">
-                <span>&raquo; property.range.max</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Maximum value on range definition.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">PUT  https://api.lelylan.com/statuses/:id</code></pre>
+</div>
 
-        <h4>Example Request</h4>
+<h4>Parameters</h4>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#update-a-status-curl">Curl</a></li>
-          <li class="js"><a href="#update-a-status-js">Javascript</a></li>
-          <li class="ruby"><a href="#update-a-status-ruby">Ruby</a></li>
-        </ul>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired status.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Status name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+          Pending value. <a href="/api/devices/#pending">Learn more about</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties affecting the status.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.uri</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property URI.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of matching values.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested extra">
+        <span>&raquo; property.range.min</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Minimum value on range definition.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested extra">
+        <span>&raquo; property.range.max</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Maximum value on range definition.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <div class="pill-content">
-          <div class="curl active" id="update-a-status-curl">
-            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a.json
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#update-a-status-curl">Curl</a></li>
+  <li class="js"><a href="#update-a-status-js">Javascript</a></li>
+  <li class="ruby"><a href="#update-a-status-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="update-a-status-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a.json
      -d '{ "name": "Max Intensity",
            "pending": "false",
            "properties": [{
@@ -481,101 +482,102 @@ Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pr
              "values": ["100"]
            }]
         }'</code></pre>
-            </div>
-          </div>
-          <div class="js" id="update-a-status-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="update-a-status-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="js" id="update-a-status-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="update-a-status-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <p>
-        <span class="label notice">Notice</span>
-        When updating <code>properties</code> all previous connected properties are replaced.
-        </p>
+<p>
+<span class="label notice">Notice</span>
+When updating <code>properties</code> all previous connected properties are replaced.
+</p>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <p>
-          See <a href="#status-representation">status representation</a> for body response.
-        </p>
+<p>
+  See <a href="#status-representation">status representation</a> for body response.
+</p>
 
-      </article>
+</article>
 
-      <br/>
+<br/>
 
-      <article>
+<article>
 
-        <h1 class="call"><a name="delete-a-status">DELETE /statuses/:id</a></h1>
+<h1 class="call"><a name="delete-a-status">DELETE /statuses/:id</a></h1>
 
-        <p>
-        Delete a statuses identified from its ID and returns extended information for it.</br>
-        Connected properties are not deleted.
-        </p>
+<p>
+Delete a statuses identified from its ID and returns extended information for it.</br>
+Connected properties are not deleted.
+</p>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">DELETE https://api.lelylan.com/statuses/:id</code></pre>
-        </div>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">DELETE https://api.lelylan.com/statuses/:id</code></pre>
+</div>
 
-        <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>id</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                The ID of the desired status.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired status.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <h4>Example Request</h4>
+<h4>Example Request</h4>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#delete-a-status-curl">Curl</a></li>
-          <li class="js"><a href="#delete-a-status-js">Javascript</a></li>
-          <li class="ruby"><a href="#delete-a-status-ruby">Ruby</a></li>
-        </ul>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#delete-a-status-curl">Curl</a></li>
+  <li class="js"><a href="#delete-a-status-js">Javascript</a></li>
+  <li class="ruby"><a href="#delete-a-status-ruby">Ruby</a></li>
+</ul>
 
-        <div class="pill-content">
-          <div class="curl active" id="delete-a-status-curl">
-            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a</code></pre>
-            </div>
-          </div>
-          <div class="js" id="delete-a-status-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="delete-a-status-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+<div class="pill-content">
+  <div class="curl active" id="delete-a-status-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a</code></pre>
+  </div>
+</div>
+<div class="js" id="delete-a-status-js">
+  <div class="preview">
+      <pre><code># todo</code></pre>
+  </div>
+</div>
+<div class="ruby" id="delete-a-status-ruby">
+  <div class="preview">
+      <pre><code># todo</code></pre>
+  </div>
+</div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <p>
-          See <a href="#status-representation">status representation</a> for body response.
-        </p>
-      </article>
+<p>
+See <a href="#status-representation">status representation</a> for body response.
+</p>
+
+</article>

@@ -1,36 +1,30 @@
---- 
-title: 'Documentation'
-style: 'docs-index'
----
+<h2><%= Settings.titles['start'] %></h2>
 
-      <h2>Getting Started</h2>
+<article>
+<div><h3><%= link_to 'Introduction', static_path('start/introduction') %></h3> <span>Introduction to Lelylan</span></div>
+<div><h3><%= link_to 'Build your first app', static_path('start/first-app') %></h3> <span>A mobile app in 15 minutes</span></div>
+<div><h3><%= link_to 'Connect your first device', static_path('start/first-physical') %></h3> <span>Control the physical world</span></div>
+<div><h3><%= link_to 'Tutorials & articles', static_path('start/tutorials') %></h3> <span>Tutorials and articles</span></div>
+<div><h3><%= link_to 'Showcases', static_path('start/showcases') %></h3> <span>Connected house apps</span></div>
+</article>
 
-      <article>
-      <div><h3><a href="/start/introduction/">Introduction</a></h3> <span>Introduction to Lelylan</span></div>
-      <div><h3><a href="/start/first-app/">Build your first app</a></h3> <span>A mobile app in 15 minutes</span></div>
-      <div><h3><a href="/start/first-physical/">Connect your first device</a></h3> <span>Control the physical world</span></div>
-      <div><h3><a href="/start/tutorials/">Tutorials & articles</a></h3> <span>Tutorials and articles</span></div>
-      <div><h3><a href="/start/showcases/">Showcases</a></h3> <span>Connected house apps</span></div>
-      </article>
+<h2><%= Settings.titles['api'] %></h2>
 
-      <h2>REST API</h2>
+<article>
+<div><h3><%= link_to 'Core concepts', static_path('api/core') %></h3> <span>Shared ideas</span></div>
+<div><h3><%= link_to 'Devices', static_path('api/devices') %></h3> <span>Devices you interact with</span></div>
+<div><h3><%= link_to 'Types', static_path('api/types') %></h3> <span>Identify your device structure</span></div>
+<div><h3><%= link_to 'Locations', static_path('api/locations') %></h3> <span>Places we live in</span></div>
+<div><h3><%= link_to 'Physical devices', static_path('api/physicals') %></h3> <span>Connect the physical world</span></div>
+<div><h3><%= link_to 'Oauth', static_path('api/oauth') %></h3> <span>Access to your resource</span></div>
+<div><h3><%= link_to 'Realtime', static_path('api/realtime') %></h3> <span>Get realtime notifications</span></div>
+</article>
 
-      <article>
-      <div><h3><a href="/api/core/">Core concepts</a></h3> <span>Shared ideas</span></div>
-      <div><h3><a href="/api/devices/">Devices</a></h3> <span>Devices you interact with</span></div>
-      <div><h3><a href="/api/types/">Types</a></h3> <span>Identify your device structure</span></div>
-      <div><h3><a href="/api/locations/">Locations</a></h3> <span>Places we live in</span></div>
-      <div><h3><a href="/api/physicals/">Physical devices</a></h3> <span>Connect the physical world</span></div>
-      <div><h3><a href="/api/oauth/">Oauth</a></h3> <span>Access to your resource</span></div>
-      <div><h3><a href="/api/realtime/">Realtime</a></h3> <span>Get realtime notifications</span></div>
-      </article>
+<h2><%= Settings.titles['community'] %></h2>
 
-      <h2>Community</h2>
-
-      <article>
-      <div><h3><a href="/community/clients/">Client libraries</a></h3> <span>Use your favorite language</span></div>
-      <div><h3><a href="/community/support/">Support</a></h3> <span>Solve any problems</span></div>
-      <div><h3><a href="/community/faq/">FAQ</a></h3> <span>Frequently asked questions</span></div>
-      <!--<div><h3><a href="https://lelylan.uservoice.com">Feedback</a></h3> <span>Tell us your ideas</span></div>-->
-      </article>
-
+<article>
+<div><h3><%= link_to 'Client libraries', static_path('community/clients') %></h3> <span>Use your favorite language</span></div>
+<div><h3><%= link_to 'Support', static_path('community/support') %></h3> <span>Solve any problems</span></div>
+<div><h3><%= link_to 'FAQ', static_path('community/faq') %></h3> <span>Frequently asked questions</span></div>
+<!--<div><h3><a href="https://lelylan.uservoice.com">Feedback</a></h3> <span>Tell us your ideas</span></div>-->
+</article>

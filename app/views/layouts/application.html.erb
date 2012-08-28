@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lelylan Dev Center</title>
+  <title>Lelylan Dev Center | <%= title %></title>
 
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 
-<body class="docs description">
+<body class="docs <%= body_style %>">
 
   <header id="header">
     <h1><a href="/">Lelylan Dev Center</a></h1>
@@ -18,37 +18,37 @@
   <article id="article">
 
     <nav id="nav">
-      <h2><a href="/start/">Getting started</a></h2>
+      <h2><%= link_to 'Getting started', static_path('start') %></h2>
       <ul>
-        <li><a href="/start/introduction/">Introduction</a></li>
-        <li><a href="/start/first-app/">Build your first app</a> <span class="label">todo</span></li>
-        <li><a href="/start/first-physical/">Connect your first device</a> <span class="label">todo</span></li>
-        <li><a href="/start/tutorials/">Tutorials & articles</a> <span class="label">todo</span></li>
-        <li><a href="/start/showcases/">Showcases</a> <span class="label">todo</span></li>
+        <li><%= link_to 'Introduction', static_path('start/introduction') %></li>
+        <li><%= link_to 'Build your first app', static_path('start/first-app') %> <span class="label">todo</span></li>
+        <li><%= link_to 'Connect your first device', static_path('start/first-physical') %> <span class="label">todo</span></li>
+        <li><%= link_to 'Tutorials & articles', static_path('start/tutorials') %> <span class="label">todo</span></li>
+        <li><%= link_to 'Showcases', static_path('start/showcases') %> <span class="label">todo</span></li>
       </ul>
 
-      <h2><a href="/api/">API</a></h2>
+      <h2><%= link_to 'API', static_path('api') %></h2>
       <ul>
-        <li><a href="/api/core/">Core concepts</a></li>
-        <li><a href="/api/devices/">Devices</a></li>
-        <li class="little">&raquo; <a href="/api/devices/consumptions/">Consumptions</a></li>
-        <li class="little">&raquo; <a href="/api/devices/histories/">Histories</a></li>
-        <li><a href="/api/types/">Types</a></li>
-        <li class="little">&raquo; <a href="/api/types/properties/">Properties</a></li>
-        <li class="little">&raquo; <a href="/api/types/functions/">Functions</a></li>
-        <li class="little">&raquo; <a href="/api/types/statuses/">Statuses</a></li>
-        <li class="little">&raquo; <a href="/api/types/categories/">Categories</a></li>
-        <li><a href="/api/locations/">Locations</a></li>
-        <li><a href="/api/physicals/">Physical devices</a> <span class="label">todo</span></li>
-        <li><a href="/api/oauth/">Oauth</a></li>
-        <li><a href="/api/realtime/">Realtime</a> <span class="label">todo</span></li>
+        <li><%= link_to 'Core concepts', static_path('api/core') %></li>
+        <li><%= link_to 'Devices', static_path('api/devices') %></li>
+        <li class="little">&raquo; <%= link_to 'Consumptions', static_path('api/devices/consumptions') %></li>
+        <li class="little">&raquo; <%= link_to 'Histories', static_path('api/devices/histories') %></li>
+        <li><%= link_to 'Types', static_path('api/types') %></li>
+        <li class="little">&raquo; <%= link_to 'Properties', static_path('api/types/properties') %></li>
+        <li class="little">&raquo; <%= link_to 'Functions', static_path('api/types/functions') %></li>
+        <li class="little">&raquo; <%= link_to 'Statuses', static_path('api/types/statuses') %></li>
+        <li class="little">&raquo; <%= link_to 'Categories', static_path('api/types/categories') %></li>
+        <li><%= link_to 'Locations', static_path('api/locations') %></li>
+        <li><%= link_to 'Physical devices', static_path('api/physicals') %> <span class="label">todo</span></li>
+        <li><%= link_to 'Oauth', static_path('api/oauth') %></li>
+        <li><%= link_to 'Realtime', static_path('api/realtime') %> <span class="label">todo</span></li>
       </ul>
 
-      <h2><a href="/community/">Community</h2>
+      <h2><%= link_to 'Community', static_path('community') %></h2>
       <ul>
-        <li><a href="/community/clients/">Client libraries</a></li>
-        <li><a href="/community/support/">Support</a></li>        
-        <li><a href="/community/faq/">FAQ</a></li>
+        <li><%= link_to 'Client libraries', static_path('community/clients') %></li>
+        <li><%= link_to 'Support', static_path('community/support') %></li>
+        <li><%= link_to 'FAQ', static_path('community/faq') %></li>
         <!--<li><a href="https://lelylan.uservoice.com">Your feedback</a></li>-->
       </ul>
 
@@ -65,11 +65,11 @@
 
       <%= yield %> 
 
-      <%# if comment_enabled %>
+      <% if not index_page? %>
       <article class="comments">
-        <%# render 'partials/services/disqus' %>
+        <%= render 'shared/services/disqus' %>
       </article>
-      <%# end %>
+      <% end %>
     </section>
 
   </article>

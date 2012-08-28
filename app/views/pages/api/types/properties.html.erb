@@ -1,93 +1,89 @@
---- 
-title: 'Properties'
-style: 'description'
----
-      <article>
+<article>
 
-      <aside class="menu">
-      </br>
-      <table>
-        <tbody>
-          <tr><td>&raquo; <a href="#get-a-property">Get a property</a></td></tr>
-          <tr><td>&raquo; <a href="#get-all-properties">Get all properties</a></td></tr>
-          <tr><td>&raquo; <a href="#create-a-property">Create a property</a></td></tr>
-          <tr><td>&raquo; <a href="#update-a-property">Update a property</a></td></tr>
-          <tr><td>&raquo; <a href="#delete-a-property">Delete a property</a></td></tr>
-        </tbody>
-      </table>
-      </aside>
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#get-a-property">Get a property</a></td></tr>
+    <tr><td>&raquo; <a href="#get-all-properties">Get all properties</a></td></tr>
+    <tr><td>&raquo; <a href="#create-a-property">Create a property</a></td></tr>
+    <tr><td>&raquo; <a href="#update-a-property">Update a property</a></td></tr>
+    <tr><td>&raquo; <a href="#delete-a-property">Delete a property</a></td></tr>
+  </tbody>
+</table>
+</aside>
 
-      <h1 class="call"><a name="properties">Properties</a></h1>
+<h1 class="call"><a name="properties"><%= title %></a></h1>
 
-      <p>
-      A property is whatever vary in a device during time. It can be the intensity in 
-      a dimmer, the temperature in a cooling system or the volume in a television.
-      </p>
+<p>
+A property is whatever vary in a device during time. It can be the intensity in 
+a dimmer, the temperature in a cooling system or the volume in a television.
+</p>
 
-      </article>
+</article>
 
-      <br/>
+<br/>
 
-      <article>
+<article>
 
-      <h1 class="call"><a name="get-a-property">GET /properties/:id</a></h1>
+<h1 class="call"><a name="get-a-property">GET /properties/:id</a></h1>
 
-      <p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> property identified from its ID.</p>
+<p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> property identified from its ID.</p>
 
-      <h4>Resource URL</h4>
-      <div class="preview">
-        <pre><code class="no-highlight">GET https://api.lelylan.com/properties/:id</code></pre>
-      </div>
+<h4>Resource URL</h4>
+<div class="preview">
+  <pre><code class="no-highlight">GET https://api.lelylan.com/properties/:id</code></pre>
+</div>
 
-      <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-      <table class="zebra-striped">
-        <tbody>
-          <tr>
-            <td class="parameter">
-              <span>id</span>
-              <span class="info">required</span>
-            </td>
-            <td>
-              The ID of the desired property.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired property.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-      <h4>Example Request</h4>
+<h4>Example Request</h4>
 
-      <ul class="tabs" data-tabs="tabs">
-        <li class="curl active"><a href="#get-a-property-curl">Curl</a></li>
-        <li class="js"><a href="#get-a-property-js">Javascript</a></li>
-        <li class="ruby"><a href="#get-a-property-ruby">Ruby</a></li>
-      </ul>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-a-property-curl">Curl</a></li>
+  <li class="js"><a href="#get-a-property-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-a-property-ruby">Ruby</a></li>
+</ul>
 
-      <div class="pill-content">
-        <div class="curl active" id="get-a-property-curl">
-          <div class="preview">
-              <pre><code class="no-highlight">curl https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json</code></pre>
-          </div>
-        </div>
-        <div class="js" id="get-a-property-js">
-          <div class="preview">
-              <pre><code># todo</code></pre>
-          </div>
-        </div>
-        <div class="ruby" id="get-a-property-ruby">
-          <div class="preview">
-              <pre><code># todo</code></pre>
-          </div>
-        </div>
-      </div>
+<div class="pill-content">
+  <div class="curl active" id="get-a-property-curl">
+    <div class="preview">
+        <pre><code class="no-highlight">curl https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-a-property-js">
+    <div class="preview">
+        <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-a-property-ruby">
+    <div class="preview">
+        <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-      <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-      <h4 id="property-representation">Example body response</h4>
+<h4 id="property-representation">Example body response</h4>
 
-      <div class="preview"><pre><code>{
+<div class="preview"><pre><code>{
   "uri": "https://api.lelylan.com/properties/4e01c65ad033a98ba3000018",
   "id": "4e01c65ad033a98ba3000018",
   "name": "Intensity",
@@ -97,362 +93,368 @@ style: 'description'
   "updated_at": "2012-07-09T08:35:57Z"
 }</code></pre></div>
 
-      <h4>Body response explained</h4>
+<h4>Body response explained</h4>
 
-      <dl>
-        <dd><span>uri</span> - Property URI.</dd>
-        <dd><span>id</span> - Property ID.</dd>
-        <dd><span>name</span> - Property name.</dd>
-        <dd><span>default</span> - Default property value assigned to the device when created.</dd>
-        <dt><span>values</span> - Suggested property values.</dt>
-      </dl>
+<dl>
+<dd><span>uri</span> - Property URI.</dd>
+<dd><span>id</span> - Property ID.</dd>
+<dd><span>name</span> - Property name.</dd>
+<dd><span>default</span> - Default property value assigned to the device when created.</dd>
+<dt><span>values</span> - Suggested property values.</dt>
+</dl>
 
-      <p>
-      <span class="label notice">Notice</span>
-      <code>values</code> can be useful to automatically build a UI that suggests to the user the possible
-      property values. No validations on this list are applied when device properties changes.
-      </p>
+<p>
+<span class="label notice">Notice</span>
+<code>values</code> can be useful to automatically build a UI that suggests to the user the possible
+property values. No validations on this list are applied when device properties changes.
+</p>
 
-      </article>
+</article>
 
-      <br>
+<br>
 
-      <article>
-        <h1 class="call"><a name="get-all-properties">GET /properties</a></h1>
+<article>
 
-        <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) properties.</p>
+<h1 class="call"><a name="get-all-properties">GET /properties</a></h1>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight"># created properties
+<p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) properties.</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight"># created properties
 GET https://api.lelylan.com/properties</code><code class="no-highlight"># all properties
 GET https://api.lelylan.com/properties/public</code></pre>
-        </div>
+</div>
 
-        <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Property name to search.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>start</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>per</span>
-                <span class="info">optional</span>
-                <span class="info">default to '25'</span>
-              </td>
-              <td>
-                Number of resources per page.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <h4>Example Request</h4>
+<h4>Example Request</h4>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#get-all-properties-curl">Curl</a></li>
-          <li class="js"><a href="#get-all-properties-js">Javascript</a></li>
-          <li class="ruby"><a href="#get-all-properties-ruby">Ruby</a></li>
-        </ul>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-all-properties-curl">Curl</a></li>
+  <li class="js"><a href="#get-all-properties-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-all-properties-ruby">Ruby</a></li>
+</ul>
 
-        <div class="pill-content">
-          <div class="curl active" id="get-all-properties-curl">
-            <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/properties.json</code></pre>
-            </div>
-          </div>
-          <div class="js" id="get-all-properties-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="get-all-properties-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+<div class="pill-content">
+  <div class="curl active" id="get-all-properties-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/properties.json</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-all-properties-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-all-properties-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code class="no-highlight">[
   { # property representation }, 
   { # property representation },
   ...
 ]</code></pre></div>
 
-      <p>
-        See <a href="#property-representation">property representation</a> for body response.
-      </p>
-      </article>
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
+</article>
 
-      <br/>
+<br/>
 
-      <article>
-        <h1 class="call"><a name="create-a-property">POST /properties</a></h1>
+<article>
 
-        <p>
-          Create a property and returns extended information for it.
-        </p>
+<h1 class="call"><a name="create-a-property">POST /properties</a></h1>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">POST  https://api.lelylan.com/properties</code></pre>
-        </div>
+<p>
+  Create a property and returns extended information for it.
+</p>
 
-        <h4>Parameters</h4>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">POST  https://api.lelylan.com/properties</code></pre>
+</div>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                Property name.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>default</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Default property value assigned to the device when created.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>values</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Suggested property values.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<h4>Parameters</h4>
 
-        <h4>Example Request</h4>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>default</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Default property value assigned to the device when created.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>values</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Suggested property values.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#create-a-property-curl">Curl</a></li>
-          <li class="js"><a href="#create-a-property-js">Javascript</a></li>
-          <li class="ruby"><a href="#create-a-property-ruby">Ruby</a></li>
-        </ul>
+<h4>Example Request</h4>
 
-        <div class="pill-content">
-          <div class="curl active" id="create-a-property-curl">
-            <div class="preview">
-              <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/properties.json 
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#create-a-property-curl">Curl</a></li>
+  <li class="js"><a href="#create-a-property-js">Javascript</a></li>
+  <li class="ruby"><a href="#create-a-property-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="create-a-property-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/properties.json 
      -d '{ "name": "Intensity",
            "default": "0",
            "values": ["0","1","2","3", ... , "99", "100"],
          }'</code></pre>
-            </div>
-          </div>
-          <div class="js" id="create-a-property-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="create-a-property-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="js" id="create-a-property-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="create-a-property-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
-Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pre>
+</div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <p>
-          See <a href="#property-representation">property representation</a> for body response.
-        </p>
-      </article>
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
 
-      <br/>
+</article>
 
-      <article>
-        <h1 class="call"><a name="update-a-property">PUT /properties/:id</a></h1>
+<br/>
 
-        <p>
-          Update a property identified from its ID and returns extended information for it.
-        </p>
+<article>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">PUT  https://api.lelylan.com/properties/:id</code></pre>
-        </div>
+<h1 class="call"><a name="update-a-property">PUT /properties/:id</a></h1>
 
-        <h4>Parameters</h4>
+<p>
+  Update a property identified from its ID and returns extended information for it.
+</p>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>id</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                The ID of the desired property.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Property name.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>default</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Default property value assigned to the device when created.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>values</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Suggested property values.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">PUT  https://api.lelylan.com/properties/:id</code></pre>
+</div>
 
-        <h4>Example Request</h4>
+<h4>Parameters</h4>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#update-a-property-curl">Curl</a></li>
-          <li class="js"><a href="#update-a-property-js">Javascript</a></li>
-          <li class="ruby"><a href="#update-a-property-ruby">Ruby</a></li>
-        </ul>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired property.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>default</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Default property value assigned to the device when created.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>values</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Suggested property values.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <div class="pill-content">
-          <div class="curl active" id="update-a-property-curl">
-            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#update-a-property-curl">Curl</a></li>
+  <li class="js"><a href="#update-a-property-js">Javascript</a></li>
+  <li class="ruby"><a href="#update-a-property-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="update-a-property-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json
      -d '{ "default": "100" }'</code></pre>
-            </div>
-          </div>
-          <div class="js" id="update-a-property-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="update-a-property-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="js" id="update-a-property-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="update-a-property-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <h4>Example body response</h4>
+<h4>Example body response</h4>
 
-        <p>
-          See <a href="#property-representation">property representation</a> for body response.
-        </p>
-      </article>
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
 
-      <br/>
+</article>
 
-      <article>
+<br/>
 
-        <h1 class="call"><a name="delete-a-property">DELETE /properties/:id</a></h1>
+<article>
 
-        <p>
-          Delete a property identified from its ID and returns extended information for it.
-        </p>
+<h1 class="call"><a name="delete-a-property">DELETE /properties/:id</a></h1>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">DELETE https://api.lelylan.com/properties/:id</code></pre>
-        </div>
+<p>
+  Delete a property identified from its ID and returns extended information for it.
+</p>
 
-        <h4>Parameters</h4>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">DELETE https://api.lelylan.com/properties/:id</code></pre>
+</div>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>id</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                The ID of the desired property.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<h4>Parameters</h4>
 
-        <h4>Example Request</h4>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired property.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#delete-a-property-curl">Curl</a></li>
-          <li class="js"><a href="#delete-a-property-js">Javascript</a></li>
-          <li class="ruby"><a href="#delete-a-property-ruby">Ruby</a></li>
-        </ul>
+<h4>Example Request</h4>
 
-        <div class="pill-content">
-          <div class="curl active" id="delete-a-property-curl">
-            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pre>
-            </div>
-          </div>
-          <div class="js" id="delete-a-property-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="delete-a-property-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#delete-a-property-curl">Curl</a></li>
+  <li class="js"><a href="#delete-a-property-js">Javascript</a></li>
+  <li class="ruby"><a href="#delete-a-property-ruby">Ruby</a></li>
+</ul>
 
-        <h4>Example header response</h4>
+<div class="pill-content">
+  <div class="curl active" id="delete-a-property-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pre>
+    </div>
+  </div>
+  <div class="js" id="delete-a-property-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="delete-a-property-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<h4>Example header response</h4>
 
-        <h4>Example body response</h4>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <p>
-          See <a href="#property-representation">property representation</a> for body response.
-        </p>
-      </article>
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
+</article>

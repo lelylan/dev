@@ -57,6 +57,7 @@ iframe{margin:10px 0}
 #nav #search input{width:150px;outline:none}
 #nav #search:before{content:"";position:absolute;left:0;top:-5px;bottom:-5px;width:20px;background:-webkit-gradient(linear,left top,right top,from(#f4f4f4),to(rgba(244,244,244,0.30)))}
 #nav #search:after{content:"";position:absolute;right:0;top:-5px;bottom:-5px;width:20px;background:-webkit-gradient(linear,left top,right top,from(rgba(244,244,244,0.30)),to(#f4f4f4))}
+
 #section{position:absolute;top:0;left:270px;bottom:0;right:0;background:#fff;padding:16px 35px;font:15px "helvetica neue",helvetica,arial,sans-serif;overflow:auto;-webkit-overflow-scrolling:touch;}
 #section p,#section hr,#section h2,#section h3,#section ul,#section ol{max-width:650px}
 #section h1{margin:10px 0 20px 0; font-weight:normal}
@@ -70,18 +71,21 @@ iframe{margin:10px 0}
 #section .unified{margin-bottom:0px !important;}
 
 select#preview{position:absolute;right:10px;top:38px}
-body.docs-index #section h2{font:20px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;border-bottom:1px solid #e8e8e8;padding:0 0 5px 0;margin:10px 150px 20px 0}
-body.docs-index #section article{overflow:hidden;max-width:750px;}
-body.docs-index #section article div{width:200px;height:50px;float:left;margin:0 30px 30px 0;}
-body.docs-index #section article div h3{font:18px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;margin:5px 0}
-body.docs-index #section article div span{line-height:1.3em;display:block;opacity:.7}
+body.index #section h2{font:20px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;border-bottom:1px solid #e8e8e8;padding:0 0 5px 0;margin:15px 150px 20px 0}
+body.index #section article{overflow:hidden;max-width:750px;}
+body.index #section article div{width:200px;height:50px;float:left;margin:0 30px 30px 0;}
+body.index #section article div h3{font:18px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;margin:5px 0}
+body.index #section article div span{line-height:1.3em;display:block;opacity:.7}
 
 body.api #section h2{margin:20px 0;}
 body.api #section h2:first-child{margin-top:0}
 body.api #section h3{padding:3px 5px;margin:10px 0;border-bottom:1px solid #e0e0e0}
 
+body.description #section{padding:25px 35px;}
 body.description #section article{max-width:650px;}
-body.description #section .call{font-size: 36px; padding-top: 0px;}
+body.description #section h1.call{font-size: 36px;}
+body.description #section h1.call {margin:0; margin-bottom: 20px;}
+body.description #section h1.call a {padding-top:25px;}
 body.description #section h4{padding-top: 10px;}
 body.description #section h2 .nested{margin-left: 10px; font-size: 16px;}
 

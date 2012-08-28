@@ -1,262 +1,258 @@
---- 
-title: 'Histories'
-style: 'description'
----
-      <article>
+<article>
 
-      <aside class="menu">
-      </br>
-      <table>
-        <tbody>
-          <tr><td>&raquo; <a href="#get-a-history">Get a history</a></td></tr>
-          <tr><td>&raquo; <a href="#get-all-histories">Get all histories</a></td></tr>
-        </tbody>
-      </table>
-      </aside>
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#get-a-history">Get a history</a></td></tr>
+    <tr><td>&raquo; <a href="#get-all-histories">Get all histories</a></td></tr>
+  </tbody>
+</table>
+</aside>
 
-      <h1 class="call"><a name="histories">Histories</a></h1>
-      <p>
-      Whenever a device changes its properties a new history resource is created.
-      This happens in different ways, like executing a function or interacting with the
-      physical world.
-      </p>
+<h1 class="call"><a name="histories"><%= title %></a></h1>
 
-      <p>
-      This resource saves the changed device properties and can be used to extract usage
-      patterns to improve the way you live your house.
-      </p>
+<p>
+Whenever a device changes its properties a new history resource is created.
+This happens in different ways, like executing a function or interacting with the
+physical world.
+</p>
 
-      </article>
+<p>
+This resource saves the changed device properties and can be used to extract usage
+patterns to improve the way you live your house.
+</p>
 
-      <br/>
+</article>
 
-      <article>
+<br/>
 
-        <h1 class="call"><a name="get-a-history">GET /histories/:id</a></h1>
+<article>
 
-        <p>
-          Returns extended information for a given history identified from its ID
-          (the device described in the history resource must be owned).
-        </p>
+  <h1 class="call"><a name="get-a-history">GET /histories/:id</a></h1>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">GET https://api.lelylan.com/histories/:id</code></pre>
-        </div>
+  <p>
+    Returns extended information for a given history identified from its ID
+    (the device described in the history resource must be owned).
+  </p>
 
-        <h4>Parameters</h4>
+  <h4>Resource URL</h4>
+  <div class="preview">
+  <pre><code class="no-highlight">GET https://api.lelylan.com/histories/:id</code></pre>
+  </div>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>id</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                The ID of the desired history.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <h4>Parameters</h4>
 
-        <h4>Example Request</h4>
+  <table class="zebra-striped">
+    <tbody>
+      <tr>
+        <td class="parameter">
+          <span>id</span>
+          <span class="info">required</span>
+        </td>
+        <td>
+          The ID of the desired history.
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#get-a-history-curl">Curl</a></li>
-          <li class="js"><a href="#get-a-history-js">Javascript</a></li>
-          <li class="ruby"><a href="#get-a-history-ruby">Ruby</a></li>
-        </ul>
+  <h4>Example Request</h4>
 
-        <div class="pill-content">
-          <div class="curl active" id="get-a-history-curl">
-            <div class="preview">
-              <pre><code class="no-highlight">curl https://api.lelylan.com/histories/4dece6f3d033a9b9a90000a9.json</code></pre>
-            </div>
-          </div>
-          <div class="js" id="get-a-history-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="get-a-history-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+  <ul class="tabs" data-tabs="tabs">
+    <li class="curl active"><a href="#get-a-history-curl">Curl</a></li>
+    <li class="js"><a href="#get-a-history-js">Javascript</a></li>
+    <li class="ruby"><a href="#get-a-history-ruby">Ruby</a></li>
+  </ul>
 
-        <h4>Example header response</h4>
+  <div class="pill-content">
+    <div class="curl active" id="get-a-history-curl">
+      <div class="preview">
+        <pre><code class="no-highlight">curl https://api.lelylan.com/histories/4dece6f3d033a9b9a90000a9.json</code></pre>
+      </div>
+    </div>
+    <div class="js" id="get-a-history-js">
+      <div class="preview">
+        <pre><code># todo</code></pre>
+      </div>
+    </div>
+    <div class="ruby" id="get-a-history-ruby">
+      <div class="preview">
+        <pre><code># todo</code></pre>
+      </div>
+    </div>
+  </div>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <h4>Example header response</h4>
 
-        <h4 id="history-representation">Example body response</h4>
+  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <div class="preview"><pre><code>{
+  <h4 id="history-representation">Example body response</h4>
+
+  <div class="preview"><pre><code>{
   "uri": "https://api.lelylan.com/histories/4dff3172d033a9806300034f",
   "id": "4dff3172d033a9806300034f",
   "device": { "uri": "https://api.lelylan.com/devices/4dff3172d033a9806300001a" },
-  "created_at": "2012-07-09T08:35:57Z"
+  "created_at": "2012-07-09T08:35:57Z",
   "properties": [{ 
     "uri": "https://api.lelylan.com/properties/4d72d033a98063efd30044",
     "value": "100",
     "physical": "25" 
-  }],
+  }]
 }</code></pre></div>
 
-        <h4>Body response explained</h4>
+<h4>Body response explained</h4>
 
-        <dl>
-          <dd><span>uri</span> - History URI.</dd>
-          <dd><span>id</span> - History ID.</dd>
-          <dd><span>device</span> - Changed device URI.</dd>
-          <dt><span>properties</span> - Changed device properties.</dt>
-          <div>
-            <dd><span>uri</span> - Property URI.</dd>
-            <dd><span>value</span> - Changed property value.</dd>
-            <dd><span>physical</span> - Changed physical property value.
-            <a href="/api/devices/#pending">Learn more about</a></dd>
-          </div>
-        </dl>
+<dl>
+  <dd><span>uri</span> - History URI.</dd>
+  <dd><span>id</span> - History ID.</dd>
+  <dd><span>device</span> - Changed device URI.</dd>
+  <dt><span>properties</span> - Changed device properties.</dt>
+  <div>
+    <dd><span>uri</span> - Property URI.</dd>
+    <dd><span>value</span> - Changed property value.</dd>
+    <dd><span>physical</span> - Changed physical property value.
+    <a href="/api/devices/#pending">Learn more about</a></dd>
+  </div>
+</dl>
 
-      </article>
+</article>
 
-      <br/>
+<br/>
 
-      <article>
-        <h1 class="call"><a name="get-all-histories">GET /devices/:id/histories</a></h1>
+<article>
+<h1 class="call"><a name="get-all-histories">GET /devices/:id/histories</a></h1>
 
-        <p>
-          Returns a list of history resources related to one owned devices.
-        </p>
+<p>
+  Returns a list of history resources related to one owned devices.
+</p>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">GET https://api.lelylan.com/histories</code></pre>
-        </div>
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">GET https://api.lelylan.com/histories</code></pre>
+</div>
 
-        <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>device</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                The device URI of the desired history resources.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>property</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Property URI to search.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>value</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Property value to search.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>physical</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Physical value to search. <a href="/api/devices/#pending">Learn more about</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>from</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Get all resources created after this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p> 
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>to</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                Get all resources created before this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p> 
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>start</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>per</span>
-                <span class="info">optional</span>
-                <span class="info">default to '25'</span>
-              </td>
-              <td>
-                Number of resources per page.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>device</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The device URI of the desired history resources.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>property</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property URI to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>value</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property value to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>physical</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Physical value to search. <a href="/api/devices/#pending">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>from</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Get all resources created after this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p> 
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>to</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Get all resources created before this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p> 
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-        <h4>Example Request</h4>
+<h4>Example Request</h4>
 
-        <ul class="tabs" data-tabs="tabs">
-          <li class="curl active"><a href="#get-all-histories-curl">Curl</a></li>
-          <li class="js"><a href="#get-all-histories-js">Javascript</a></li>
-          <li class="ruby"><a href="#get-all-histories-ruby">Ruby</a></li>
-        </ul>
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-all-histories-curl">Curl</a></li>
+  <li class="js"><a href="#get-all-histories-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-all-histories-ruby">Ruby</a></li>
+</ul>
 
-        <div class="pill-content">
-          <div class="curl active" id="get-all-histories-curl">
-            <div class="preview">
-              <pre><code class="no-highlight">curl GET https://api.lelylan.com/histories.json?
-         device=https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1
-              </code></pre>
-            </div>
-          </div>
-          <div class="js" id="get-all-histories-js">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-          <div class="ruby" id="get-all-histories-ruby">
-            <div class="preview">
-              <pre><code># todo</code></pre>
-            </div>
-          </div>
-        </div>
+<div class="pill-content">
+  <div class="curl active" id="get-all-histories-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl GET https://api.lelylan.com/histories.json?
+         device=https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-all-histories-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-all-histories-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
 
-        <h4>Example header response</h4>
+<h4>Example header response</h4>
 
-        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-        <h4 id="history-representation">Example body response</h4>
+<h4 id="history-representation">Example body response</h4>
 
-        <div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code class="no-highlight">[
   { # device history representation },
   { # device history representation },
   ...
 ]</code></pre></div>
 
-      <p>
-        See <a href="#history-representation">device history representation</a> for body response.
-      </p>
+<p>
+  See <a href="#history-representation">device history representation</a> for body response.
+</p>
 
-      </article>
+</article>
