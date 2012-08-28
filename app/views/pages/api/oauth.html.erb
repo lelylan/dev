@@ -1,0 +1,440 @@
+<article>
+
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#registration">Registration</a></td></tr>
+    <tr><td>&raquo; <a href="#oauth-flows">Oauth Flows</a></td></tr>
+    <tr><td class='inside'>&raquo; <a href="#authorization-code">Authorization Code Flow</a></td></tr>
+    <tr><td class='inside'>&raquo; <a href="#implicit-grant">Implicit Grant Flow</a></td></tr>
+    <tr><td class='inside'>&raquo; <a href="#password-credentials">Password Credentials</a></td></tr>
+    <tr><td>&raquo; <a href="#refresh-access-token">Refresh access token</a></td></tr>
+    <tr><td>&raquo; <a href="#api-requests">API requests</a></td></tr>
+    <tr><td>&raquo; <a href="#scopes">Scopes</a></td></tr>
+    <tr><td>&raquo; <a href="#more-information">More information</a></td></tr>
+  </tbody>
+</table>
+</aside>
+
+<h1 class="call"><a name="functions"><%= title %></a></h1>
+
+<p>
+Lelylan API uses the OAuth 2.0 protocol for authentication and authorization. 
+OAuth lets users grant the access to the desired resources to third party applications, 
+giving them the possibility to enable and disable those accesses whenever they want.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="registration">Registration</a></h1>
+
+<p>
+All developers need to <a href="http://lelylan.com/oauth/applications">register their application</a>
+before getting started. A registered OAuth application is assigned with a unique
+Client ID and Client Secret.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="oauth-flows">OAuth Flows</a></h1>
+
+<p>
+Lelylan supports the following flows.
+</p>
+
+<ul>
+  <li>
+  <a href="#authorization-code" class="bigger">Authorization Code Flow</a>
+  for apps with servers that can store persistent information.
+  </li>
+  <li>
+  <a href="#implicit-grant" class="bigger">Implicit Grant Flow</a> for apps
+  running in a browser (read Javascript) or mobile apps.
+  </li>
+  <li>
+  <a href="#password-credentials" class="bigger">Password Credentials</a> when previous
+  flows can't be used or during development.
+  </li>
+</ul>
+
+</article>
+
+<article>
+
+<h2><a name="authorization-code">Authorization Code</a></h2>
+
+<p>
+The Authorization Code flow is made up from two parts. In the first your application
+asks to the user the permission to access their data. If the user approves Lelylan
+sends to the client an authorization code. In the second part, the client POST the
+authorization code along with its client secret to the Lelylan in order to get the
+access token.
+</p>
+
+<h3><a name="authorization-code">1. Redirect the user to the authorization page</a></h3>
+
+<p>
+Redirect the user to the authorization endpoint.
+<p>
+
+<div class="preview"><pre><code class="no-highlight">https://lelylan.com/oauth/authorization?
+        response_type=code&
+        client_id=client_id&
+        redirect_uri=redirect_uri&
+        scope=scope&
+        state=state</code></pre></div>
+
+<dl>
+  <dd><span>response_type</span> - 
+  Always use 'code' as response type.</dd>
+  <dd><span>client_id</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
+  <dd><span>redirect_uri</span> -
+  <a href="http://lelylan.com/oauth/applications">Registered</a>
+  application URI where the user is redirected after authorization.</dd>
+  <dd><span>scope</span> - 
+  Application privileges. <a href="#scopes">Learn more about</a>.</dd>
+  <dd><span>state</span> - 
+  Optional opaque value used by the client to maintain state between the request and callback.</dd>
+</dl>
+
+<p>
+If the user grants the access Lelylan redirects the user to <code>redirect_uri</code>
+and appends the authorization code in the query string. This code will be used to get
+the final access token.
+</p>
+
+<div class="preview"><pre><code class="no-highlight">https://example.com/redirect-uri?code=code&state=state</code></pre></div>
+
+<h3><a name="authorization-code">2. Get the access token</a></h3>
+
+<p>
+Get the access token (remember to basic authenticate with client id and client secret).
+<p>
+
+<div class="preview"><pre><code class="no-highlight">curl -u client_id:client_secret http://lelylan.com/oauth/token
+     -X POST -d 'grant_type=authorization_code&code=code&redirect_uri=redirect_uri'</code></pre>
+</div>
+
+<dl>
+  <dd><span>client_id</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
+  <dd><span>client_secret</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client secret.</dd>
+  <dd><span>grant_type</span> - 
+  Always use 'authorization_code' as grant type.</dd>
+  <dd><span>code</span> - 
+  Authorization code (from the previous step).</dd>
+  <dd><span>redirect_uri</span> - 
+  Application URI where the user is redirected after authorization.</dd>
+</dl>
+
+  <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<div class="preview"><pre><code class="no-highlight">{
+  "access_token": "b37cecfc700f7651e",
+  "token_type": "bearer",
+  "expires_in": 7200,
+  "refresh_token": "a2ecd5abbdf6527"
+}</code></pre></div>
+
+</article>
+
+<article>
+
+<h2><a name="implicit-grant">Implicit Grant</a></h2>
+
+<p>
+This flow is meant for Javascript-based web applications that can't maintain state 
+over time (it includes Actionscript and Silverlight and similar).
+</p>
+
+<p>
+The flow start redirecting the user to the authorization endpoint.
+<p>
+
+<div class="preview"><pre><code class="no-highlight">https://lelylan.com/oauth/authorization?
+        response_type=token&
+        client_id=client_id&
+        redirect_uri=redirect_uri&
+        scope=scope&
+        state=state</code></pre>
+</div>
+
+<dl>
+  <dd><span>response_type</span> - 
+  Always use 'token' as response type.</dd>
+  <dd><span>client_id</span> -
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
+  <dd><span>redirect_uri</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a>
+  application URI where the user is redirected after authorization.</dd>
+  <dd><span>scope</span> - 
+  Application privileges. <a href="#scopes">Learn more about</a>.</dd>
+  <dd><span>state</span> - 
+  Optional opaque value used by the client to maintain state between the request and callback.</dd>
+</dl>
+
+<p>
+If the user grants the access Lelylan redirects the user to <code>redirect_uri</code>
+and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment</a>.
+</p>
+
+<div class="preview"><pre><code class="no-highlight">https://example.com/redirect-uri#
+        access_token=056c1abaf9130cf3554cc6a&
+        token_type=bearer&
+        expires_in=7200&
+        state=remember-me</code></pre></div>
+
+<p>
+If your application is pure Javascript, you can easily parse the token from the URI. 
+If your application is a native phone app perform the flow in an embedded webview and
+redirect the user to a dummy website where you can grab the token from the URL.
+</p>
+
+</article>
+
+<article>
+
+<h2><a name="password-credentials">Password Credentials</a></h2>
+
+<p>
+This flow is suitable in cases where the resource owner has a trust relationship
+with the client, such as its computer operating system or a highly privileged application.
+Use this flow only when other flows are not viable or when you need a fast way to test
+your application.
+</p>
+
+<p>
+Get the access token (remember to basic authenticate with client id and client secret).
+<p>
+
+<div class="preview"><pre><code class="no-highlight">curl -u client_id:client_secret http://lelylan.com/oauth/token
+     -X POST -d 'grant_type=password&username=email&password=password&scope=scope'</code></pre>
+</div>
+
+<dl>
+  <dd><span>client_id</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
+  <dd><span>client_secret</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client secret.</dd>
+  <dd><span>grant_type</span> - 
+  Always use 'password' as grant type.</dd>
+  <dd><span>username</span> - 
+  Registered user email.</dd>
+  <dd><span>password</span> - 
+  Registered user password.</dd>
+  <dd><span>scope</span> - 
+  Application privileges. <a href="#scopes">Learn more about</a>.</dd>
+</dl>
+
+<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<div class="preview"><pre><code class="no-highlight">{
+  "access_token":"b37cecfc700f7651e",
+  "token_type":"bearer",
+  "expires_in":7200,
+  "refresh_token":"a2ecd5abbdf6527"
+}</code></pre>
+</div>
+
+<p>
+<span class="label notice">Notice</span>
+Lelylan take special care for applications using this flow and can block it whenever
+the security for the final user is compromised.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="refresh-access-token">Refresh Access Token</a></h1>
+
+<p>
+For security reasons an access token expires every two hours. To refresh it with a
+valid one you can use the refresh token you received together with the access token.
+<p>
+
+<div class="preview"><pre><code class="no-highlight">curl -u client_id:client_secret http://lelylan.com/oauth/token
+     -X POST -d 'grant_type=refresh_token&refresh_token=refresh_token'</code></pre>
+</div>
+
+<dl>
+  <dd><span>client_id</span> -
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
+  <dd><span>client_secret</span> - 
+  <a href="http://lelylan.com/oauth/applications">Registered</a> Client secret.</dd>
+  <dd><span>grant_type</span> - 
+  Always use 'refresh_token' as grant type.</dd>
+  <dd><span>refresh_token</span> - 
+  Refresh token code (from previous access token request).</dd>
+</dl>
+
+<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<div class="preview"><pre><code class="no-highlight">{
+  "access_token":"b37cecfc700f7651e",
+  "token_type":"bearer",
+  "expires_in":7200,
+  "refresh_token":"a2ecd5abbdf6527"
+}</code></pre>
+</div>
+
+<p>
+Use the <code>access_token</code> to make requests to Lelylan API.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="api-requests">API requests</a></h1>
+
+<p>
+Once you have the access token it's easy to use the APIs. 
+</p>
+
+<p><strong>Header request</strong></p>
+
+<div class="preview"><pre><code class="no-highlight">curl https://api.lelylan.com/devices.json
+     -H "Authorization: OAuth 056c1abaf9130cf3554cc6a"</code></pre>
+</div>
+
+<p><strong>Query string request</strong></p>
+
+<div class="preview"><pre><code class="no-highlight">curl https://api.lelylan.com/devices?access_token=056c1abaf9130cf3554cc6a</code></pre></div>
+
+<p><strong>Body request</strong></p>
+
+<div class="preview"><pre><code class="no-highlight">curl https://api.lelylan.com/devices
+     -X POST -d 'access_token=056c1abaf9130cf3554cc6a'</code></pre>
+</div>
+
+<p>
+<span class="label notice">Notice</span>
+Public services does not need an access token.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="scopes">Scopes</a></h1>
+
+<p>
+Scopes let you specify what can and can't be accessed.
+</p>
+
+</br>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>SCOPE</th>
+      <th>DESCRIPTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>resources</strong></td>
+      <td>Read and write access to all resources.</td>
+    </tr>
+    <tr>
+      <td><strong>resource.read</strong></td>
+      <td>Read access to all resources.</td>
+    </tr>
+    <tr>
+      <td><strong>devices</strong></td>
+      <td>Read and write access to devices.</td>
+    </tr>
+    <tr>
+      <td><strong>devices.read</strong></td>
+      <td>Read access to devices.</td>
+    </tr>
+    <tr>
+      <td><strong>types</strong></td>
+      <td>Read and write access to types.</td>
+    </tr>
+    <tr>
+      <td><strong>types.read</strong></td>
+      <td>Read access to types.</td>
+    </tr>
+    <tr>
+      <td><strong>locations</strong></td>
+      <td>Read and write access to locations.</td>
+    </tr>
+    <tr>
+      <td><strong>locations.read</strong></td>
+      <td>Read access to locations.</td>
+    </tr>
+    <tr>
+      <td><strong>user</strong></td>
+      <td>Read access to user (GET /me).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+In the following request an application requires read access for all resources and write
+access for devices. You can specify multiple scopes by separating them by a space.
+<p>
+
+<div class="preview"><pre><code class="no-highlight">https://lelylan.com/oauth/authorization?
+        response_type=code&
+        client_id=client_id&
+        redirect_uri=redirect_uri&
+        scope=resources.read+device</code></pre>
+</div>
+
+<p>
+<span class="label notice">Notice</span>
+When no scope is defined <code>user</code> is set as the default.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="more-information">More information</a></h1>
+
+<p>
+It can be a little tricky to get started with OAuth. Here are a few links that
+might be of help.
+</p>
+
+<ul>
+  <li>
+  <a href="http://developers.facebook.com/docs/authentication/" class="bigger">Facebook</a>
+  </li>
+  <li>
+  <a href="http://developer.github.com/v3/oauth/" class="bigger">Github</a>
+  </li>
+  <li>
+  <a href="https://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
+  </li>
+  <li>
+  <a href="https://github.com/intridea/oauth2" class="bigger">OAuth2 Gem</a>
+  </li>
+  <li>
+  <a href="/community/clients/" class="bigger">Lelylan Client Libraries</a>
+  </li>
+</ul>
+
+</article>

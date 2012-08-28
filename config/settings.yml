@@ -1,0 +1,30 @@
+index_pages: 
+  - index
+  - start
+  - api
+  - community
+titles:
+  '':  The connected home
+  'start': Getting Started
+  'start/introduction': Introduction
+  'start/first-app': Build your First App
+  'start/first-physical': Connect your First Device
+  'start/tutorials': Tutorials & Articles
+  'start/showcases': Showcases
+  'api': Lelylan API
+  'api/core': Core Concepts
+  'api/devices': Devices
+  'api/devices/consumptions': Consumptions
+  'api/devices/histories': Histories
+  'api/types': Types
+  'api/types/properties': Properties
+  'api/types/functions': Functions
+  'api/types/statuses': Statuses
+  'api/locations': Locations
+  'api/oauth': OAuth 2.0
+  'api/realtime': Realtime
+  'api/physicals': Physical devices
+  'community': Community
+  'community/clients': Clients Libraries
+  'community/support': Support
+  'community/faq': Frequently Asked Questions

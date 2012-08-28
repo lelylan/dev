@@ -1,5 +1,6 @@
 class PagesController < HighVoltage::PagesController
   #before_filter :authenticate
+
   helper_method :body_style, :title, :index_page?
 
   def body_style
@@ -11,6 +12,6 @@ class PagesController < HighVoltage::PagesController
   end
 
   def title
-    Settings.titles[params[:id]]
+    Settings.titles[params[:id]] || 'Develop the connected house'
   end
 end

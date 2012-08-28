@@ -1,0 +1,687 @@
+<article>
+
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#get-a-location">Get a location</a></td></tr>
+    <tr><td>&raquo; <a href="#get-all-descendants">Get all descendants</a></td></tr>
+    <tr><td>&raquo; <a href="#get-all-locations">Get all locations</a></td></tr>
+    <tr><td>&raquo; <a href="#create-a-location">Create a location</a></td></tr>
+    <tr><td>&raquo; <a href="#update-a-location">Update a location</a></td></tr>
+    <tr><td>&raquo; <a href="#delete-a-location">Delete a location</a></td></tr>
+  </tbody>
+</table>
+</aside>
+
+<h1 class="call"><a name="locations"><%= title %></a></h1>
+
+<p>
+Locations are the places we live in and where physical devices are placed. Lelylan
+identifies three kind of locations: <strong>houses</strong>, <strong>floors</strong> 
+and <strong>rooms</strong>. They are used to represent the physical locations and they 
+usually are organized in a hierarchical structure (an house contains many floors, which 
+in turn, contains many rooms and so on).
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="get-a-location">GET /locations/:id</a></h1>
+
+<p>Returns extended information for a given location identified from its ID.</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">GET https://api.lelylan.com/locations/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired location.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-a-location-curl">Curl</a></li>
+  <li class="js"><a href="#get-a-location-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-a-location-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="get-a-location-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl https://api.lelylan.com/loactions/1.json</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-a-location-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-a-location-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4 id="location-representation">Example body response</h4>
+
+<div class="preview highlight"><pre><code>{
+  "uri": "http://api.lelylan.com/locations/7532",
+  "id": "7532",
+  "name": "First floor",
+  "type": "floor",
+  "created_at": "2012-07-31T17:35:14Z",
+  "updated_at": "2012-07-31T17:35:15Z",
+  "parent": {
+    "uri": "http://api.lelylan.com/locations/7533",
+    "id": "7533",
+    "name": "Summer house"
+  },
+  "ancestors": [{
+    "uri": "http://api.lelylan.com/locations/7534",
+    "id": "7534",
+    "name": "Summer house block" 
+    }, {
+    "uri": "http://api.lelylan.com/locations/7533",
+    "id": "7533",
+    "name": "Summer house"
+  }],
+  "locations": [{
+    "uri": "http://api.lelylan.com/locations/7535",
+    "id": "7535",
+    "name": "Bed Room"
+    }, {
+    "uri": "http://api.lelylan.com/locations/7536",
+    "id": "7536",
+    "name": "kitchen"
+  }],
+  "devices": [{
+    "uri": "http://api.lelylan.com/devices/50181753d033a9ec0e000023",
+    "id": "50181753d033a9ec0e000023",
+    "name": "Floor light"
+  }]
+}</code></pre>
+</div>
+
+<h4>Body Response explained</h4>
+
+<dl>
+  <dd><span>uri</span> - Location URI.</dd>
+  <dd><span>id</span> - Location ID.</dd>
+  <dd><span>name</span> - Location name.</dd>
+  <dd><span>type</span> - Location type. See <a href="#types">existing types</a>.</dd>
+  <dd><span>parent</span> - Parent location.</dd>
+  <dd><span>ancestors</span> - Ancestor locations (from the root).</dd>
+  <dd><span>locations</span> - List of directly connected locations.</dd>
+  <dt><span>devices</span> - List of directly connected devices.</dt>
+</dl>
+
+<br/>
+<h1><a href="#types" name="types">Location types</a></h1>
+
+<p>
+List of available location types. No other type values are accepted for the moment.
+</p>
+
+</br>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>VALUE</th>
+      <th>DESCRIPTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>house</code></td>
+      <td>Define a building location like a house or skyscraper.</td>
+    </tr>
+    <tr>
+      <td><code>floor</code></td>
+      <td>Define a floor in the building.</td>
+    </tr>
+    <tr>
+      <td><code>room</code></td>
+      <td>Define a room in the building.</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">
+        Table1. List of location types. If we are missing a location type you can live
+        without <a href="/community/support/">drop us a line</a>.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="get-all-descendants">GET /locations/:id/descendants</a></h1>
+
+<p>
+Returns a list of descendent locations for a given location identified from its ID.
+</p>
+
+<p>
+  If you get the descendants of a house you get all floors and rooms it
+  has inside and for each of them the contained devices. This let you have full control
+  on the structure of your locations.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">GET https://api.lelylan.com/locations/:id/descendants</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired location.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-all-descendants-curl">Curl</a></li>
+  <li class="js"><a href="#get-all-descendants-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-all-descendants-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="get-all-descendants-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl https://api.lelylan.com/locations/7944/descendants.json</code></pre>
+    </div>
+  </div>
+  <div class="js" id="get-all-descendants-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-all-descendants-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4 id="location-representation">Example body response</h4>
+
+<div class="preview highlight"><pre><code>[{
+  "uri": "http://api.lelylan.com/locations/7947",
+  "name": "Bedroom",
+  "id": "7947",
+  "parent": {
+    "uri": "http://api.lelylan.com/locations/7944",
+    "id": "7944",
+    "name": "Ground floor"
+  },
+  "devices": [{
+    "uri": "http://api.lelylan.com/devices/50181d88d033a91216000006",
+    "id": "50181d88d033a91216000006",
+    "name": "Bedroom light"
+  }]
+}, {
+  "uri": "http://api.lelylan.com/locations/7948",
+  "name": "Kitchen",
+  "id": "7948",
+  "parent": {
+    "uri": "http://api.lelylan.com/locations/7944",
+    "id": "7944",
+    "name": "Ground floor"
+  },
+  "devices": [{
+    "uri": "http://api.lelylan.com/devices/50181d88d033a91216000006",
+    "id": "50181d88d033a91216000006",
+    "name": "Kitchen light"
+  }]
+}]</code></pre>
+</div>
+
+<h4>Body Response explained</h4>
+
+<p>
+  For each descendant location you get the following info.
+</p>
+
+<dl>
+  <dd><span>uri</span> - Descendent URI.</dd>
+  <dd><span>id</span> - Descendent ID.</dd>
+  <dd><span>name</span> - Descendent name.</dd>
+  <dd><span>parent</span> - Descendent parent location.</dd>
+  <dt><span>devices</span> - List of devices connected to the descendent location.</dt>
+</dl>
+
+</article>
+
+<br>
+
+<article>
+
+<h1 class="call"><a name="get-all-locations">GET /locations</a></h1>
+
+<p>Returns a list of owned locations.</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">GET https://api.lelylan.com/locations</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Location name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>type</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Type to search. See <a href="#types">existing types</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#get-all-locations-curl">Curl</a></li>
+  <li class="js"><a href="#get-all-locations-js">Javascript</a></li>
+  <li class="ruby"><a href="#get-all-locations-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="get-all-locations-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/locations.json?type=room
+</code></pre></div>
+  </div>
+  <div class="js" id="get-all-locations-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="get-all-locations-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<div class="preview highlight"><pre><code class="no-highlight">[
+  { # location representation }, 
+  { # location representation },
+  ...
+]</code></pre></div>
+
+<p>
+  See <a href="#location-representation">location representation</a> for body response.
+</p>
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="create-a-location">POST /locations</a></h1>
+
+<p>
+  Create a location and returns extended information for it.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">POST  https://api.lelylan.com/locations</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Location name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>type</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Location type. See <a href="#types">existing types</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>into</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Parent location URI containing the location.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>locations</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of location URIs to connect.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>devices</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of device URIs to connect.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#create-a-location-curl">Curl</a></li>
+  <li class="js"><a href="#create-a-location-js">Javascript</a></li>
+  <li class="ruby"><a href="#create-a-location-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="create-a-location-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/locations.json
+     -d '{ "name": "Bedroom",
+           "into": "https://api.lelylan.com/locations/:floor",
+           "devices": [
+             https://api.lelylan.com/devices/:light"
+             https://api.lelylan.com/devices/:dimmer",
+             https://api.lelylan.com/devices/:rollershutter",
+           ]
+         }'</code></pre>
+    </div>
+  </div>
+  <div class="js" id="create-a-location-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="create-a-location-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+Location: https://api.lelylan.com/locations/41</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#location-representation">location representation</a> for body response.
+</p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="update-a-location">PUT /locations/:id</a></h1>
+
+<p>
+  Update a location identified from its ID and returns extended information for it.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">PUT  https://api.lelylan.com/locations/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired locations.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Locations name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>type</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Location type. See <a href="#types">existing types</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>into</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Parent location URI containing the location.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>locations</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of location URIs to connect.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>devices</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of device URIs to connect.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#update-a-location-curl">Curl</a></li>
+  <li class="js"><a href="#update-a-location-js">Javascript</a></li>
+  <li class="ruby"><a href="#update-a-location-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="update-a-location-curl">
+    <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/locations/1.json
+     -d '{ "name": "Ground floor bedroom",
+           "into": "https://api.lelylan.com/locations/:ground",
+           "devices": [
+             "https://api.lelylan.com/devices/:powermeter",
+             "https://api.lelylan.com/devices/:rgb"
+           ]
+         }' </code></pre>
+  </div>
+  <div class="js" id="update-a-location-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="update-a-location-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div> 
+
+<p>
+<span class="label notice">Notice</span>
+When updating <code>devices</code> all previous connected devices are replaced. Same for
+<code>locations</code>.
+</p>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#location-representation">location representation</a> for body response.
+</p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="delete-a-location">DELETE /locations/:id</a></h1>
+
+<p>
+Delete a location identified from its ID and returns extended information for it.</br>
+All direct children becomes root elements (without a parent). Connected devices are not
+deleted.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">DELETE https://api.lelylan.com/locations/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired location.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="tabs" data-tabs="tabs">
+  <li class="curl active"><a href="#delete-a-location-curl">Curl</a></li>
+  <li class="js"><a href="#delete-a-location-js">Javascript</a></li>
+  <li class="ruby"><a href="#delete-a-location-ruby">Ruby</a></li>
+</ul>
+
+<div class="pill-content">
+  <div class="curl active" id="delete-a-location-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/locations/1</code></pre>
+    </div>
+  </div>
+  <div class="js" id="delete-a-location-js">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="ruby" id="delete-a-location-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#location-representation">location representation</a> for body response.
+</p>
+
+</article>
