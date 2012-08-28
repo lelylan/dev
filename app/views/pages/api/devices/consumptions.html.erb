@@ -1,0 +1,660 @@
+--- 
+title: 'Consumptions'
+style: 'description'
+---
+      <article>
+
+        <aside class="menu">
+        </br>
+        <table>
+          <tbody>
+            <tr><td>&raquo; <a href="#get-a-consumption">Get a consumption</a></td></tr>
+            <tr><td>&raquo; <a href="#get-all-consumptions">Get all consumptions</a></td></tr>
+            <tr><td>&raquo; <a href="#create-a-consumption">Create a consumption</a></td></tr>
+            <tr><td>&raquo; <a href="#update-a-consumption">Update a consumption</a></td></tr>
+            <tr><td>&raquo; <a href="#delete-a-consumption">Delete a consumption</a></td></tr>
+          </tbody>
+        </table>
+        </aside>
+
+        <h1 class="call"><a name="consumptions">Consumptions</a></h1>
+
+        <p>
+        Consumptions let you to monitor how much electricity your devices are using.
+        Lelylan gives you two ways to measure energy consumptions.
+        </p>
+
+        <ul>
+          <li>
+          <strong id="instantaneous">Instantaneous</strong>. Cumulative measurements in which the difference 
+          between two successive measurements represents the energy consumed during the 
+          intervening time. Electricity meters usually use instantaneous measurement.
+          </li>
+
+          <li>
+          <strong id="durational">Durational</strong>. Specifies a starting and an ending time as well as 
+          the energy used in the intervening period. Realtime device energy usage usually
+          use durational measurement.
+          </li>
+        </ul>
+
+      </article>
+
+      <br>
+
+      <article>
+        <h1 class="call"><a name="get-a-consumption">GET /consumptions/:id</a></h1>
+
+        <p>
+          Returns extended information for a given consumption identified from its ID.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">GET https://api.lelylan.com/consumptions/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired consumption.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-a-consumption-curl">Curl</a></li>
+          <li class="js"><a href="#get-a-consumption-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-a-consumption-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-a-consumption-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="get-a-consumption-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-a-consumption-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4 id="consumption-representation">Example body response</h4>
+
+        <div class="preview"><pre><code>{
+  "uri": "https://api.lelylan.com/consumptions/4dff4417d033a980c700001c",
+  "id": "4dff4417d033a980c700001c",
+  "device": { "uri": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1" },
+  "type": "durational",
+  "value": "0.05",
+  "unit": "kwh",
+  "occur_at": "2011-06-20 14:58:57 +0200",
+  "end_at": "2011-06-20 14:59:57 +0200",
+  "duration": "60.0"
+}</code></pre></div>
+
+        <h4>Body Response explained</h4>
+
+        <dl>
+          <dd><span>uri</span> - Consumption URI.</dd>
+          <dd><span>id</span> - Consumption ID.</dd>
+          <dd><span>device</span> - Measured device URI.</dd>
+          <dd><span>type</span> - Consumption type.</dd>
+          <dd><span>value</span> - Energy consumption value.</dd>
+          <dd><span>unit</span> - Energy consumption unit.</dd>
+          <dd><span>occur_at</span> - Time the consumption is taken.</dd>
+          <dd><span>end_to</span> - Time the consumption validity ends. Present 
+            only in <a href="#durational">durational consumptions</a>. 
+          </dd>
+          <dd><span>duration</span> - Time span in seconds where the consumption is valid. Present 
+            only in <a href="#durational">durational consumptions</a>.
+          </dd>
+          </dd>
+        </dl>
+
+      </article>
+
+
+
+      <br>
+
+      <article>
+        <h1 class="call"><a name="get-all-consumptions">GET /consumptions</a></h1>
+
+        <p>Returns a list of cunsumptions related to owned devices.</p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">GET https://api.lelylan.com/consumptions</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>device</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Measured device URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>type</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Energy consumption type.
+                <span class="info">Valid values: 'instantaneous', 'durational'.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>unit</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Energy consumption unit.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>from</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Get all resources occurred after this time.
+                See <a href="/api/core/#time-formats">accepted time formats</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>to</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Get all resources occurred before this time.
+                See <a href="/api/core/#time-formats">accepted time formats</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>start</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>per</span>
+                <span class="info">optional</span>
+                <span class="info">default to '25'</span>
+              </td>
+              <td>
+                Number of resources per page.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <p>
+          Returns durational consumptions created after yesterday.
+        </p>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#all-all-consumptions-curl">Curl</a></li>
+          <li class="js"><a href="#get-all-consumptions-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-all-consumptions-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-all-consumptions-curl">
+            <div class="preview"><pre><code class="no-highlight"> curl -L https://api.lelylan.com/consumptions.json?type=durational</code></pre>
+            </div>
+          </div>
+          <div class="js" id="get-all-consumptions-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-all-consumptions-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">[
+  { # consumption representation }, 
+  { # consumption representation },
+  ...
+]</code></pre></div>
+
+        <p>
+          See <a href="#consumption-representation">cunsumption representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="create-a-consumption">POST /consumptions</a></h1>
+
+        <p>
+          Create a consumption and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">POST  https://api.lelylan.com/consumptions</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>device</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Measured device URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter extra">
+                <span>type</span>
+                <span class="info">optional</span>
+                <span class="info">default to 'instantaneous'</span>
+              </td>
+              <td>
+                Consumption type.
+                <span class="info">Valid values: 'instantaneous', 'durational'.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>value</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Energy consumption value.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>unit</span>
+                <span class="info">optional</span>
+                <span class="info">default to 'kwh'</span>
+              </td>
+              <td>
+                Energy consumption unit.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>occur_at</span>
+                <span class="info">optional</span>
+                <span class="info">default to now</span>
+              </td>
+              <td>
+                Time the consumption is taken.
+                See <a href="/api/core/#time-formats">accepted time formats</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>end_to</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Time the consumption validity ends.
+                See <a href="/api/core/#time-formats">accepted time formats</a>.</br>
+                Valid only when type param is set to <a href="#durational">durational</a>.
+              </td>
+            </tr>
+             <tr>
+              <td class="parameter">
+                <span>duration</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Time span in seconds where the consumption is valid.<br/>
+                Valid only when type param is set to <a href="#durational">durational</a>.
+              </td>
+            </tr>
+           </tbody>
+        </table>
+
+        <p>
+          <span class="label notice">Notice</span>
+          When creating a durational consumption you can miss one param between 
+          <code>occur_at</code>, <code>end_at</code> or <code>duration</code> (two
+          are required). Lelylan will automatically calculate the missing one.
+        </p>
+
+        <h4>Example Request</h4>
+
+        <p>
+          Create an instantaneous consumption.
+        </p>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#create-an-instantaneous-consumption-curl">Curl</a></li>
+          <li class="js"><a href="#create-an-instantaneous-consumption-js">Javascript</a></li>
+          <li class="ruby"><a href="#create-an-instantaneous-consumption-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="create-an-instantaneous-consumption-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X POST https://housy.lelylan.com/consumptions.json
+     -d '{
+          "type": "instantaneous"
+          "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
+          "value": "125.55",
+          "unit": "kwh",
+          "occur_at": "2025-08-17 07:49:38 +0200"
+        }'</code></pre></div>
+          </div>
+          <div class="js" id="create-an-instantaneous-consumption-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="create-an-instantaneous-consumption-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Create a durational consumption.
+        </p>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#create-a-durational-consumption-curl">Curl</a></li>
+          <li class="js"><a href="#create-a-durational-consumption-js">Javascript</a></li>
+          <li class="ruby"><a href="#create-a-durational-consumption-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="create-a-durational-consumption-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X POST https://housy.lelylan.com/consumptions.json
+     -d '{
+          "type": "durational"
+          "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
+          "value": "0.05",
+          "unit": "kwh",
+          "occur_at": "2012-07-09T08:35:57Z",
+          "end_at": "2012-07-09T08:38:57Z",
+          "duration": "180" 
+        }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="create-a-durational-consumption-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="create-a-durational-consumption-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#consumption-representation">consumption representation</a> for body response.
+        </p>
+      </article>
+
+      <br/>
+
+      <article>
+
+        <h1 class="call"><a name="update-a-consumption">PUT /consumption/:id</a></h1>
+
+        <p>
+          Update a consumption identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT  https://api.lelylan.com/consumption/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired consumption.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>device</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Measured device URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter extra">
+                <span>type</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Consumption type.
+                <span class="info">Valid values: 'instantaneous', 'durational'.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>value</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Energy consumption value.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>unit</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Energy consumption unit.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>occur_at</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Time the consumption is taken.
+                See <a href="/api/core/#time-formats">accepted time formats</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>end_to</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Time the consumption validity ends.
+                See <a href="/api/core/#time-formats">accepted time formats</a>.</br>
+                Valid only when type param is set to <a href="#durational">durational</a>.
+              </td>
+            </tr>
+             <tr>
+              <td class="parameter">
+                <span>duration</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Time span in seconds where the consumption is valid.<br/>
+                Valid only when type param is set to <a href="#durational">durational</a>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#update-a-consumption-curl">Curl</a></li>
+          <li class="js"><a href="#update-a-consumption-js">Javascript</a></li>
+          <li class="ruby"><a href="#update-a-consumption-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="update-a-consumption-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json
+     -d '{ "value": "0.10" }</code></pre>
+            </div>
+          </div>
+          <div class="js" id="update-a-consumption-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="update-a-consumption-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#consumption-representation">consumption representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="delete-a-consumption">DELETE /consumptions/:id</a></h1>
+
+        <p>
+          Delete a consumption identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">DELETE https://api.lelylan.com/consumptions/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#delete-a-consumption-curl">Curl</a></li>
+          <li class="js"><a href="#delete-a-consumption-js">Javascript</a></li>
+          <li class="ruby"><a href="#delete-a-consumption-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="delete-a-consumption-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="delete-a-consumption-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="delete-a-consumption-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#consumption-representation">consumption representation</a> for body response.
+        </p>
+      </article>

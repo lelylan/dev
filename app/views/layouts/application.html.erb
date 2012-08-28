@@ -1,14 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dev</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title>Lelylan Dev Center</title>
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
+<body class="docs description">
+
+  <header id="header">
+    <h1><a href="/">Lelylan Dev Center</a></h1>
+    <h2><a href="/">Documentation</a><%# breadcrumbs_html %></h2>
+  </header>
+
+  <article id="article">
+
+    <nav id="nav">
+      <h2><a href="/start/">Getting started</a></h2>
+      <ul>
+        <li><a href="/start/introduction/">Introduction</a></li>
+        <li><a href="/start/first-app/">Build your first app</a> <span class="label">todo</span></li>
+        <li><a href="/start/first-physical/">Connect your first device</a> <span class="label">todo</span></li>
+        <li><a href="/start/tutorials/">Tutorials & articles</a> <span class="label">todo</span></li>
+        <li><a href="/start/showcases/">Showcases</a> <span class="label">todo</span></li>
+      </ul>
+
+      <h2><a href="/api/">API</a></h2>
+      <ul>
+        <li><a href="/api/core/">Core concepts</a></li>
+        <li><a href="/api/devices/">Devices</a></li>
+        <li class="little">&raquo; <a href="/api/devices/consumptions/">Consumptions</a></li>
+        <li class="little">&raquo; <a href="/api/devices/histories/">Histories</a></li>
+        <li><a href="/api/types/">Types</a></li>
+        <li class="little">&raquo; <a href="/api/types/properties/">Properties</a></li>
+        <li class="little">&raquo; <a href="/api/types/functions/">Functions</a></li>
+        <li class="little">&raquo; <a href="/api/types/statuses/">Statuses</a></li>
+        <li class="little">&raquo; <a href="/api/types/categories/">Categories</a></li>
+        <li><a href="/api/locations/">Locations</a></li>
+        <li><a href="/api/physicals/">Physical devices</a> <span class="label">todo</span></li>
+        <li><a href="/api/oauth/">Oauth</a></li>
+        <li><a href="/api/realtime/">Realtime</a> <span class="label">todo</span></li>
+      </ul>
+
+      <h2><a href="/community/">Community</h2>
+      <ul>
+        <li><a href="/community/clients/">Client libraries</a></li>
+        <li><a href="/community/support/">Support</a></li>        
+        <li><a href="/community/faq/">FAQ</a></li>
+        <!--<li><a href="https://lelylan.uservoice.com">Your feedback</a></li>-->
+      </ul>
+
+      <!--<div id="search">-->
+        <!--<form accept-charset="UTF-8" action="/docs/search" method="get">-->
+          <!--<div style="margin:0;padding:0;display:inline">-->
+          <!--</div>-->
+          <!--<input type="search" name="query" value="" placeholder="Search..." results="0" />-->
+        <!--</form>-->
+      <!--</div>-->
+    </nav>
+
+    <section id="section"> 
+
+      <%= yield %> 
+
+      <%# if comment_enabled %>
+      <article class="comments">
+        <%# render 'partials/services/disqus' %>
+      </article>
+      <%# end %>
+    </section>
+
+  </article>
 
 </body>
 </html>

@@ -27,6 +27,9 @@
 /config/settings/*.local.yml
 /config/environments/*.local.yml
 
+# Assets
+/public/assets
+
 # Procfile env config
 .env
 .production.env

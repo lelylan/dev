@@ -1,0 +1,505 @@
+--- 
+title: 'Functions'
+style: 'description'
+---
+      <article>
+
+      <aside class="menu">
+      </br>
+      <table>
+        <tbody>
+          <tr><td>&raquo; <a href="#get-a-function">Get a function</a></td></tr>
+          <tr><td>&raquo; <a href="#get-all-functions">Get all functions</a></td></tr>
+          <tr><td>&raquo; <a href="#create-a-function">Create a function</a></td></tr>
+          <tr><td>&raquo; <a href="#update-a-function">Update a function</a></td></tr>
+          <tr><td>&raquo; <a href="#delete-a-function">Delete a function</a></td></tr>
+        </tbody>
+      </table>
+      </aside>
+
+      <h1 class="call"><a name="functions">Functions</a></h1>
+
+      <p>
+      Functions defines the daily interactions you have with the devices in your house, 
+      for example when you turn on a light, close a door or raise the temperature in a 
+      room. With functions you can control any device in the same way you do everyday of 
+      your life.
+      </p>
+
+      </article>
+
+      <br/>
+
+      <article>
+
+        <h1 class="call"><a name="get-a-function">GET /functions/:id</a></h1>
+
+        <p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> function identified from its ID.</p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">GET https://api.lelylan.com/functions/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired function.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-a-function-curl">Curl</a></li>
+          <li class="js"><a href="#get-a-function-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-a-function-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-a-function-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="get-a-function-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-a-function-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4 id="function-representation">Example body response</h4>
+
+        <div class="preview"><pre><code>{
+  "uri": "https://api.lelylan.com/functions/4e01f110d033a98ccf00003a",
+  "id": "4e01f110d033a98ccf00003a",
+  "name": "Set intensity",
+  "created_at": "2012-08-14T15:13:05Z",
+  "updated_at": "2012-08-14T15:13:05Z",
+  "properties": [
+    { "uri": "https://api.lelylan.com/properties/4e01c65ad033a98ba3000018",
+      "value": "on" },
+    { "uri": "https://api.lelylan.com/properties/4e01c65ad033a98ba3000019",
+      "value": null },
+  ]
+}</code></pre></div>
+
+        <h4>Body response explained</h4>
+
+        <dl>
+          <dd><span>uri</span> - Function URI.</dd>
+          <dd><span>id</span> - Function ID.</dd>
+          <dd><span>name</span> - Function name.</dd>
+          <dd><span>properties</span> - List of properties the function updates.</dd>
+          <div>
+            <dd><span>uri</span> - Property URI.</dd>
+            <dd><span>value</span> - Value assigned to the device property when the function is
+            executed.
+            </dd>
+          </div>
+        </dl>
+
+        <p>
+        <span class="label notice">Notice</span>
+        If you don't set a property <code>value</code> the convention is that that property should
+        be filled to the user. For example the function 'set intensity' requires the intensity property
+        to be filled by the user. For this reason its value should be <code>null</code>.
+        </p>
+
+      </article>
+
+
+      <br>
+
+      <article>
+        <h1 class="call"><a name="get-all-functions">GET /functions</a></h1>
+
+        <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) functions.</p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight"># created functions
+GET https://api.lelylan.com/functions</code><code class="no-highlight"># all functions
+GET https://api.lelylan.com/functions/public</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Property name to search.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>start</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>per</span>
+                <span class="info">optional</span>
+                <span class="info">default to '25'</span>
+              </td>
+              <td>
+                Number of resources per page.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-all-funcitons-curl">Curl</a></li>
+          <li class="js"><a href="#get-all-funcitons-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-all-funcitons-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-all-funcitons-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/functions.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="get-all-funcitons-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-all-funcitons-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <div class="preview highlight"><pre><code class="no-highlight">[
+  { # function representation }, 
+  { # function representation },
+  ...
+]</code></pre></div>
+
+      <p>
+        See <a href="#function-representation">function representation</a> for body response.
+      </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="create-a-function">POST /functions</a></h1>
+
+        <p>
+          Create a function and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">POST https://api.lelylan.com/functions</code></pre>
+        </div>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Function name.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>properties</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Array of properties.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.uri</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Property URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.value</span>
+                <span class="info">optional</span>
+                <span class="info">default to empty</span>
+              </td>
+              <td>
+                Value assigned to the device property when the function is executed.<br/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#create-a-function-curl">Curl</a></li>
+          <li class="js"><a href="#create-a-function-js">Javascript</a></li>
+          <li class="ruby"><a href="#create-a-function-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="create-a-function-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/functions.json 
+     -d '{ "name": "Set intensity",
+           "properties": [
+             { "uri": "https://api.lelylan.com/properties/:status", "value": "on"},
+             { "uri": "https://api.lelylan.com/properties/:intensity" }
+           ]
+         }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="create-a-function-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="create-a-function-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+Location: https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#function-representation">function representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="update-a-function">PUT /functions/:id</a></h1>
+
+        <p>
+          Update a function identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT  https://api.lelylan.com/functions/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired function.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Function name.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>properties</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Array of properties.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.uri</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Property URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.value</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Value assigned to the device property when the function is executed.<br/> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#update-a-function-curl">Curl</a></li>
+          <li class="js"><a href="#update-a-function-js">Javascript</a></li>
+          <li class="ruby"><a href="#update-a-function-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="update-a-function-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json
+     -d '{ "name": "Set intensity" }</code></pre>
+            </div>
+          </div>
+          <div class="js" id="update-a-function-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="update-a-function-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <p>
+        <span class="label notice">Notice</span>
+        When updating <code>properties</code> all previous connected properties are replaced.
+        </p>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#function-representation">function representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+
+      <h1 class="call"><a name="delete-a-function">DELETE /functions/:id</a></h1>
+
+      <p>
+      Delete a function identified from its ID and returns extended information for it. </br>
+      Connected properties are not deleted.
+      </p>
+
+      <h4>Resource URL</h4>
+      <div class="preview">
+        <pre><code class="no-highlight">DELETE https://api.lelylan.com/functions/:id</code></pre>
+      </div>
+
+      <h4>Parameters</h4>
+
+      <table class="zebra-striped">
+        <tbody>
+          <tr>
+            <td class="parameter">
+              <span>id</span>
+              <span class="info">required</span>
+            </td>
+            <td>
+              The ID of the desired function.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Example Request</h4>
+
+      <ul class="tabs" data-tabs="tabs">
+        <li class="curl active"><a href="#delete-a-function-curl">Curl</a></li>
+        <li class="js"><a href="#delete-a-function-js">Javascript</a></li>
+        <li class="ruby"><a href="#delete-a-function-ruby">Ruby</a></li>
+      </ul>
+
+      <div class="pill-content">
+        <div class="curl active" id="delete-a-function-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre>
+        </div>
+      </div>
+      <div class="js" id="delete-a-function-js">
+        <div class="preview">
+              <pre><code># todo</code></pre>
+        </div>
+      </div>
+      <div class="ruby" id="delete-a-function-ruby">
+        <div class="preview">
+              <pre><code># todo</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+    <h4>Example body response</h4>
+
+    <p>
+    See <a href="#function-representation">function representation</a> for body response.
+    </p>
+      </article>

@@ -1,0 +1,410 @@
+--- 
+title: 'Categories'
+style: 'description'
+---
+      <article>
+
+      <aside class="menu">
+      </br>
+      <table>
+        <tbody>
+          <tr><td>&raquo; <a href="#get-a-category">Get a category</a></td></tr>
+          <tr><td>&raquo; <a href="#get-all-categories">Get all categories</a></td></tr>
+          <tr><td>&raquo; <a href="#create-a-category">Create a category</a></td></tr>
+          <tr><td>&raquo; <a href="#update-a-category">Update a category</a></td></tr>
+          <tr><td>&raquo; <a href="#delete-a-category">Delete a category</a></td></tr>
+        </tbody>
+      </table>
+      </aside>
+
+      <h1 class="call"><a name="categories">Categories</a></h1>
+
+      <p>
+      Categories are used to logically organize types. As the number of types start to 
+      grow up, it is important to be able to group types in categories. For example 
+      lights, dimmers and RGB lights are three different types, but sharing the base
+      concept of being a light, they could be grouped together.
+      </p>
+
+      </article>
+
+      <br>
+
+      <article>
+        <h1 class="call"><a name="get-a-category">GET /category/:id</a></h1>
+
+        <p>Returns extended information for a given <a href="/api/core/#public-resources">public</a>
+        category identified from its ID.</p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">GET https://api.lelylan.com/categories/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired category.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-a-category-curl">Curl</a></li>
+          <li class="js"><a href="#get-a-category-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-a-category-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-a-category-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl https://api.lelylan.com/categories/4e01b7a7d033a98b2900001a.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="get-a-category-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-a-category-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4 id="category-representation">Example body response</h4>
+
+        <div class="preview"><pre><code>{
+  "uri": "https://housy.lelylan.com/category/4e01b7a7d033a98b2900001a",
+  "id": "4e01b7a7d033a98b2900001a",
+  "name": "Lights",
+  "created_at": "2012-07-09T08:35:57Z",
+  "updated_at": "2012-07-09T08:35:57Z"
+}</code></pre></div>
+
+        <h4>Body Response explained</h4>
+
+        <dl>
+          <dd><span>id</span> - Category ID.</dd>
+          <dd><span>uri</span> - Category URI.</dd>
+          <dd><span>name</span> - Category name.</dd>
+        </dl>
+
+      </article>
+
+      <br>
+
+      <article>
+        <h1 class="call"><a name="get-all-categories">GET /categories</a></h1>
+
+        <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) categories.</p>
+
+        <h4>Resource URL</h4>
+
+        <pre><code class="no-highlight"># created categories
+GET https://api.lelylan.com/categories</code><code class="no-highlight"># all categories
+GET https://api.lelylan.com/categories/public</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Category name to search.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>start</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                URI of the last fetched record. Learn more about <a href="/rest/core/#pagination">pagination</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>per</span>
+                <span class="info">optional</span>
+                <span class="info">default to '25'</span>
+              </td>
+              <td>
+                Number of resources per page.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-all-categories-curl">Curl</a></li>
+          <li class="js"><a href="#get-all-categories-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-all-categories-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-all-categories-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/categories/public.json</code></pre></div>
+          </div>
+          <div class="js" id="get-all-categories-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-all-categories-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <div class="preview highlight"><pre><code class="no-highlight">[
+  { # category representation }, 
+  { # category representation },
+  ...
+]</code></pre></div>
+
+      <p>
+        See <a href="#category-representation">category representation</a> for body response.
+      </p>
+      </article>
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="create-a-category">POST /categories</a></h1>
+
+        <p>
+          Create category and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">POST https://api.lelylan.com/categories</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Category name.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#create-a-category-curl">Curl</a></li>
+          <li class="js"><a href="#create-a-category-js">Javascript</a></li>
+          <li class="ruby"><a href="#create-a-category-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="create-a-category-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/categories.json 
+     -d '{ "name": "Lighting" }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="create-a-category-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="create-a-category-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+Location: https://api.lelylan.com/categories/4e01b7a7d033a98b2900001a</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#category-representation">category representation</a> for body response.
+        </p>
+      </article>
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="update-a-category">PUT /categories/:id</a></h1>
+
+        <p>
+          Update a category identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT  https://api.lelylan.com/categories/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired category.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Category name.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#update-a-category-curl">Curl</a></li>
+          <li class="js"><a href="#update-a-category-js">Javascript</a></li>
+          <li class="ruby"><a href="#update-a-category-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="update-a-category-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/categories/4e01b7a7d033a98b2900001a.json
+     -d '{ "name": "Lights" }'</code></pre>
+
+            </div>
+          </div>
+          <div class="js" id="update-a-category-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="update-a-category-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#category-representation">category representation</a> for body response.
+        </p>
+      </article>
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="delete-a-category">DELETE /categories/:id</a></h1>
+
+        <p>
+          Delete a category identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">DELETE https://api.lelylan.com/categories/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired category.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#delete-a-category-curl">Curl</a></li>
+          <li class="js"><a href="#delete-a-category-js">Javascript</a></li>
+          <li class="ruby"><a href="#delete-a-category-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="delete-a-category-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/categories/4e01b7a7d033a98b2900001a.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="delete-a-category-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="delete-a-category-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#category-representation">category representation</a> for body response.
+        </p>
+      </article>

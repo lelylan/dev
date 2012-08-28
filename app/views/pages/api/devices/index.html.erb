@@ -1,0 +1,1161 @@
+--- 
+title: 'Devices'
+style: 'description'
+---
+
+      <article>
+
+        <aside class="menu">
+        </br>
+        <table>
+          <tbody>
+            <tr><td>&raquo; <a href="#get-a-device">Get a device</a></td></tr>
+            <tr><td>&raquo; <a href="#get-all-devices">Get all devices</a></td></tr>
+            <tr><td>&raquo; <a href="#create-a-device">Create a device</a></td></tr>
+            <tr><td>&raquo; <a href="#update-a-device">Update a device</a></td></tr>
+            <tr><td>&raquo; <a href="#delete-a-device">Delete a device</a></td></tr>
+            <tr><td>&raquo; <a href="#update-properties">Update properties</a></td></tr>
+            <tr><td>&raquo; <a href="#execute-a-function">Execute a function</a></td></tr>
+            <tr><td>&raquo; <a href="#connect-physical-device">Connect physical device</a></td></tr>
+            <tr><td>&raquo; <a href="#disconnect-physical-device">Disconnect physical device</a></td></tr>
+            <tr><td>&raquo; <a href="#pending">Pending device explained</a></td></tr>
+            <tr><td>&raquo; <a href="#status">Device status</a></td></tr>
+          </tbody>
+        </table>
+        </aside>
+
+        <h1 class="call"><a name="devices">Devices</a></h1>
+
+        <p>
+        A device is everything you interact with everyday of your life. You interact with 
+        lights, appliances, alarms, cooling and heating systems, smoke and gas sensors, 
+        rolling shutters and windows, irrigations, video surveillance, gates, multimedia 
+        (audio and video) and much more. 
+        </p>
+
+        <p>
+        The Device API defines a set of services to create, monitor and control all the devices
+        in your house. The final goal is to map every device to a unique URI which provides
+        control over it.
+        A device is characterized by a <a href="/api/types/">type</a> from which it inherits
+        the type <a href="/api/types/properties/">properties</a>. For example when you create
+        a dimmer the device inherits the <em>status</em> ('on' or 'off') and <em>intensity</em> 
+        (from '0' to '100').
+        </p>
+
+        <p>
+        By default a device is not connected to the physical world as it makes easy to experiment
+        third party applications without the hassle of additional hardware costs. Anyway, connecting
+        a device to a physical device can be done whenever you want using the
+        <a href="/api/devices/#connect-physical-device">physical service</a>.
+        </p>
+
+      </article>
+
+      <br><br>
+
+      <article>
+        <h1 class="call"><a name="get-a-device">GET /devices/:id</a></h1>
+
+        <p>Returns extended information for a given device identified from its ID.</p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">GET https://api.lelylan.com/devices/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-a-device-curl">Curl</a></li>
+          <li class="js"><a href="#get-a-device-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-a-device-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-a-device-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1.json</code></pre>
+            </div>
+          </div>
+          <div class="js" id="get-a-device-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-a-device-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4 id="device-representation">Example body response</h4>
+
+        <div class="preview"><pre><code>{
+  "uri": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
+  "id": "4dece6f3d033a9b9a90000a1",
+  "name": "Closet dimmer",
+  "pending": false,
+  "type": { "uri": "https://api.lelylan.com/types/4decdd0cd033a95e25000054" },
+  "properties": [{ 
+    "uri": "https://api.lelylan.com/properties/4decdd07d033a95e25000043", 
+    "id": "4decdd07d033a95e25000046",
+    "value": "on",
+    "physical": "on"
+  }, { 
+    "uri": "https://api.lelylan.com/properties/4decdd08d033a95e25000044", 
+    "id": "4decdd07d033a95e25000046",
+    "value": "100",
+    "physical": "100"
+  }],
+  "physical": { "uri": "https://mqtt.lelylan.com/devices/8ecfd2f3d033a9b9a729000e4" },
+  "created_at": "2012-07-09T08:35:57Z",
+  "updated_at": "2012-07-09T08:35:57Z"
+}</code></pre></div>
+
+        <h4>Body Response explained</h4>
+
+        <dl>
+          <dd><span>uri</span> - Device URI.</dd>
+          <dd><span>id</span> - Device ID.</dd>
+          <dd><span>name</span> - Device name.</dd>
+          <dd><span>type</span> - Device type.</dd>
+          <dd><span>pending</span> - Pending status. <a href="/api/devices/#pending">Learn more about</a>.</dd>
+          <dt><span>properties</span> - Device properties.</dt>
+          <div>
+            <dd><span>uri</span> - Property URI.</dd>
+            <dd><span>id</span> - Property ID.</dd>
+            <dd><span>value</span> - Property value.</dd>
+            <dd><span>physical</span> - Physical property value. <a href="/api/devices/#pending">Learn more about</a>.</dd>
+          </div>
+          <dd><span>physical</span> - Connected phisical device. <a href="/api/devices/#connect-physical-device">Learn more about</a>.</dd>
+          <div>
+            <dd><span>uri</span> - Phisical device URI.</dd>
+          </div>
+        </dl>
+
+      </article>
+
+
+
+      <br>
+
+      <article>
+        <h1 class="call"><a name="get-all-devices">GET /devices</a></h1>
+
+        <p>Returns a list of owned devices.</p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">GET https://api.lelylan.com/devices</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Device name to search.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>type</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Type URI to search.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>pending</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Device pending status. <a href="/api/devices/#pending">Learn more about</a>. </br>
+                <span class="info">Valid values: true, false.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>property</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Property URI to search.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>value</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Property value to search.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>physical</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Physical value to search. <a href="/api/devices/#pending">Learn more about</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>start</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>per</span>
+                <span class="info">optional</span>
+                <span class="info">default to '25'</span>
+              </td>
+              <td>
+                Number of resources per page.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#get-all-devices-curl">Curl</a></li>
+          <li class="js"><a href="#get-all-devices-js">Javascript</a></li>
+          <li class="ruby"><a href="#get-all-devices-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="get-all-devices-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/devices.json?
+        type=https://api.lelylan.com/types/4dcb9e200500d</code></pre></div>
+          </div>
+          <div class="js" id="get-all-devices-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="get-all-devices-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">[
+  { # device representation }, 
+  { # device representation },
+  ...
+]</code></pre></div>
+
+      <p>
+        See <a href="#device-representation">device representation</a> for body response.
+      </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+
+        <h1 class="call"><a name="create-a-device">POST /devices</a></h1>
+
+        <p>
+          Create a device and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">POST  https://api.lelylan.com/devices</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Device name.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>type</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Type URI. <a href="/api/types/">Learn more about types</a>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#create-a-device-curl">Curl</a></li>
+          <li class="js"><a href="#create-a-device-js">Javascript</a></li>
+          <li class="ruby"><a href="#create-a-device-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="create-a-device-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/devices.json 
+     -d '{ "name": "Closet dimmer", 
+           "type": "https://api.lelylan.com/types/4decdd0cd033a95e25000054",
+         }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="create-a-device-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="create-a-device-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+Location: https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#device-representation">device representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="update-a-device">PUT /devices/:id</a></h1>
+
+        <p>
+          Update a device identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT  https://api.lelylan.com/devices/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>name</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Device name.
+              </td>
+            </tr>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>type</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Type URI. <a href="/api/types/">Learn more about types</a>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#update-a-device-curl">Curl</a></li>
+          <li class="js"><a href="#update-a-device-js">Javascript</a></li>
+          <li class="ruby"><a href="#update-a-device-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="update-a-device-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1.json
+     -d '{ "name": "Zigbee closet dimmer" }</code></pre>
+            </div>
+          </div>
+          <div class="js" id="update-a-device-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="update-a-device-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#device-representation">device representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="delete-a-device">DELETE /devices/:id</a></h1>
+
+        <p>
+          Delete a device identified from its ID and returns extended information for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">DELETE https://api.lelylan.com/devices/:id</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#delete-a-device-curl">Curl</a></li>
+          <li class="js"><a href="#delete-a-device-js">Javascript</a></li>
+          <li class="ruby"><a href="#delete-a-device-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="delete-a-device-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1</code></pre>
+            </div>
+          </div>
+          <div class="js" id="delete-a-device-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="delete-a-device-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="#device-representation">device representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      </br>
+
+      <article>
+
+        <h1 class="call"><a name="update-properties">PUT /devices/:id/properties</a></h1>
+
+        <p>
+          Update properties on a device identified from its ID and returns extended 
+          representation for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT https://api.lelylan.com/devices/:id/properties</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>pending</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Device pending status. <a href="/api/devices/#pending">Learn more about</a>. </br>
+                <span class="info">Valid values: true, false.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>properties</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Array of properties to change.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.uri</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Property URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.value</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Property value.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.physical</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Physical property value. <a href="/api/devices/#pending">Learn more about</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <%# render 'partials/content/extra_params' %>
+
+        <h4>Example Requests</h4>
+
+        <p>Set the device <code>status</code> to <code>on</code> and the device <code>intensity</code> to <code>50%</code>.</p>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#update-properties-curl">Curl</a></li>
+          <li class="js"><a href="#update-properties-js">Javascript</a></li>
+          <li class="ruby"><a href="#update-properties-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="update-properties-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4d6f3a9b9a08c/properties.json
+     -d '{
+            "properties": [
+               { "uri": "https://api.lelylan.com/properties/4de7d033a0043",
+                 "value": "on" },
+               { "uri": "https://api.lelylan.com/properties/4de8d033a0044",
+                 "value": "50" }
+             ]
+         }'
+              </code></pre>
+            </div>
+          </div>
+          <div class="js" id="update-properties-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="update-properties-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <%= render 'partials/content/physical_not_physical' %>
+
+        <h4>Example body response</h4>
+        <p>
+          See <a href="/api/devices/#device-representation">device representation</a> for body response.
+        </p>
+
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="execute-a-function">PUT /devices/:id/functions</a></h1>
+
+        <p>
+          Execute a function on a device identified from its ID and returns extended 
+          representation for it.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT https://api.lelylan.com/devices/:id/functions</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>function</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Function URI to execute.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>pending</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Device pending status. <a href="/api/devices/#pending">Learn more about</a>. </br>
+                <span class="info">Valid values: true, false.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>properties</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Array of properties.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.uri</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Property URI.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.value</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Property value.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; property.physical</span>
+                <span class="info">optional</span>
+              </td>
+              <td>
+                Physical property value. <a href="/api/devices/#pending">Learn more about</a>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Requests</h4>
+
+        <p>
+        <strong>Turn on a device</strong>. In this example we do not send properties because the function 
+        <code>turns on</code> set the property <code>status</code> to <code>on</code> by default.
+        </p>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#execute-a-function-i-curl">Curl</a></li>
+          <li class="js"><a href="#execute-a-function-i-js">Javascript</a></li>
+          <li class="ruby"><a href="#execute-a-function-i-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="execute-a-function-i-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4decd033a9b208c/functions.json
+     -d '{ "function": "https://api.lelylan.com/functions/4dc15033a9b2104" }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="execute-a-function-i-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="execute-a-function-i-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <p>
+        <strong>Set the device intensity to 90%</strong>. In this example the function sets the
+        property <code>status</code> to <code>on</code> by default and expect the intensity value
+        to be sent from the user.
+        </p>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#execute-a-function-ii-curl">Curl</a></li>
+          <li class="js"><a href="#execute-a-function-ii-js">Javascript</a></li>
+          <li class="ruby"><a href="#execute-a-function-ii-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="execute-a-function-ii-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4decd033a9b208c/functions.json
+     -d '{ "funciton": "https://api.lelylan.com/functions/4dc15033a9b2107",
+           "properties": [{ 
+             "uri": "https://api.lelylan.com/properties/4dece3a9b900a1", 
+             "value": "90" }]
+         }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="execute-a-function-ii-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="execute-a-function-ii-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          <span class="label notice">Notice</span>
+          To better understand how funciton works check out the
+          <a href="/api/types/functions/">functions API</a>.
+        </p>
+
+        <%= render 'partials/content/physical_not_physical' %>
+
+        <h4>Example body response</h4>
+        <p>
+          See <a href="/api/devices/#device-representation">device representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="connect-physical-device">PUT /devices/:id/physical</a></h1>
+
+        <p>
+          Create the connection between a device and a physical device.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">PUT https://api.lelylan.com/devices/:id/physical</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter">
+                <span>physical</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Pysical device to connect.
+              </td>
+            </tr>
+            <tr>
+              <td class="parameter nested">
+                <span>&raquo; physical.uri</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                Physical device URI.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#connect-physical-device-curl">Curl</a></li>
+          <li class="js"><a href="#connect-physical-device-js">Javascript</a></li>
+          <li class="ruby"><a href="#connect-physical-device-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="connect-physical-device-curl">
+            <div class="preview">
+              <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4dece033a900a1/physical.json
+     -d '{ "physical": { "uri": "https://mqtt.lelylan.com/devices/8ecfd3a0e4" } }'</code></pre>
+            </div>
+          </div>
+          <div class="js" id="connect-physical-device-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="connect-physical-device-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4 id="device-representation">Example body response</h4>
+
+        <p>
+          See <a href="/api/devices/#device-representation">device representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+        <h1 class="call"><a name="disconnect-physical-device">DELETE /devices/:id/physical</a></h1>
+
+        <p>
+          Delete the connection between a device and a physical device.
+        </p>
+
+        <h4>Resource URL</h4>
+        <div class="preview">
+        <pre><code class="no-highlight">DELETE https://api.lelylan.com/devices/:id/physical</code></pre>
+        </div>
+
+        <h4>Parameters</h4>
+
+        <table class="zebra-striped">
+          <tbody>
+            <tr>
+              <td class="parameter">
+                <span>id</span>
+                <span class="info">required</span>
+              </td>
+              <td>
+                The ID of the desired device.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Example Request</h4>
+
+        <ul class="tabs" data-tabs="tabs">
+          <li class="curl active"><a href="#disconnect-physical-device-curl">Curl</a></li>
+          <li class="js"><a href="#disconnect-physical-device-js">Javascript</a></li>
+          <li class="ruby"><a href="#disconnect-physical-device-ruby">Ruby</a></li>
+        </ul>
+
+        <div class="pill-content">
+          <div class="curl active" id="disconnect-physical-device-curl">
+            <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/devices/4dece69b9a00a1/physical</code></pre>
+            </div>
+          </div>
+          <div class="js" id="disconnect-physical-device-js">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+          <div class="ruby" id="disconnect-physical-device-ruby">
+            <div class="preview">
+              <pre><code># todo</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h4>Example header response</h4>
+
+        <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+        <h4>Example body response</h4>
+
+        <p>
+          See <a href="/api/devices/#device-representation">device representation</a> for body response.
+        </p>
+      </article>
+
+
+
+      <br/>
+
+      <article>
+
+      <h1 class="call"><a name="pending">Pending device explained</a></h1>
+
+      <p>
+      A device connected to the physical world does not change instantaneously.
+      Think at when you open a roller shutter. From the moment you send the request and
+      the moment it is open few seconds are needed. During this period of time
+      the device is pending, as it's waiting for its final status to be reached.
+      </p>
+
+      <p>
+      The pending resource in this period of time can be pretty useful. It lets you track
+      what's going on in the physical world. Suppose you want to set its <code>level</code>
+      to <code>100%</code>. This can be easily done setting the property value to
+      the desired value, but what if I want to know the rolling shutter level after
+      one second? Here is where the physical property comes handy as it is used to 
+      continuously monitor the real-time status of the physical device properties.
+      Lets make a couple of examples.
+      </p>
+
+      <h2>Get all pending devices</h2>
+
+      <ul class="tabs" data-tabs="tabs">
+        <li class="curl active"><a href="#get-all-pending-devices-curl">Curl</a></li>
+        <li class="js"><a href="#get-all-pending-devices-js">Javascript</a></li>
+        <li class="ruby"><a href="#get-all-pending-devices-ruby">Ruby</a></li>
+      </ul>
+
+      <div class="pill-content">
+        <div class="curl active" id="get-all-pending-devices-curl">
+          <div class="preview">
+              <pre><code class="no-highlight">curl https://api.lelylan.com/devices.json?pending=true</code></pre>
+          </div>
+        </div>
+        <div class="js" id="get-all-pending-devices-js">
+          <div class="preview">
+              <pre><code># todo</code></pre>
+          </div>
+        </div>
+        <div class="ruby" id="get-all-pending-devices-ruby">
+          <div class="preview">
+              <pre><code># todo</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <p>
+      In this example we get one pending resource related to a rolling shutter that has to 
+      reach the aperture level of <code>100%</code>. The physical device aperture is at
+      <code>28%</code> when the request has been executed.
+      </p>
+
+      <div class="preview"><pre><code>[{
+  "uri": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
+  "id": "4dece6f3d033a9b9a90000a1",
+  "name": "Rolling shutter",
+  "pending": true,
+  "properties": [{
+    "uri": "https://api.lelylan.com/properties/4decdd07d033a95e25000046",
+    "id": "4decdd07d033a95e25000046",
+    "value": "100",
+    "physical": "28"
+  }],
+  "physical": { "uri": "https://mqtt.lelylan.com/devices/8ecfd2f3d033a9b9a729000e4" },
+  "created_at": "2011-06-06 16:40:51 +0200",
+  "updated_at": "2011-06-06 16:40:52 +0200"
+}]</code></pre></div>
+
+      </br>
+      <h2>Set device as pending</h2>
+
+      <p>Updates the aperture <code>level</code> to <code>46%</code> and sets the pending status
+      to <code>true</code>.
+
+      <ul class="tabs" data-tabs="tabs">
+        <li class="curl active"><a href="#update-pending-device-curl">Curl</a></li>
+        <li class="js"><a href="#update-pending-device-js">Javascript</a></li>
+        <li class="ruby"><a href="#update-pending-device-ruby">Ruby</a></li>
+      </ul>
+
+      <div class="pill-content">
+        <div class="curl active" id="update-pending-device-curl">
+          <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4f843545d033a980a4000006/properties.json
+     -d '{  "status": true,
+            "properties": [{
+               "uri": "https://api.lelylan.com/properties/4decdd07d033a95e25000046",
+               "physical": "46" 
+             }]
+         }'</code></pre>
+        </div>
+      </div>
+      <div class="js" id="update-pending-device-js">
+        <div class="preview">
+          <pre><code># todo</code></pre>
+        </div>
+      </div>
+      <div class="ruby" id="update-pending-device-ruby">
+        <div class="preview">
+          <pre><code># todo</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h4>Example body response</h4>
+    <p>
+    See <a href="#device-representation">pending representation</a> for body response.
+    </p>
+
+    <p>
+    <span class="label notice">Notice</span>
+    The pending resource makes most sense when a device is connected to a
+    <a href="/api/devices/physical/">physical device</a> as its main goal is to reflect
+    the physical world changes. Anyway, you can simulate the physical world setting the
+    <code>physical</code> property whenever you need it.
+    </p>
+    </article>
+
+    <br/>
+
+    <article>
+
+    <h1 class="call"><a name="status">Device status explained</a></h1>
+
+    <p>
+    Sometimes properties are not enough to describe the device status. 
+    Think at a roller shutter for example. It has the property <code>status</code> 
+    that accept the values <code>open</code> and <code>close</code>. Now think at 
+    what happens when a roller shutter is opening. It is neither open or close, but just 
+    opening. To have a complete control over the device every moment of its life use the 
+    status resource.
+    </p>
+
+    <p>
+    Right now this service is not available on server side. To get the device status you must
+    use one of the existing <a href="/community/clients/">javascript libraries</a>.
+    This decision is due to performance motivation and to the fact that the status information 
+    is related to browser visualization tasks.
+    </p>
+
+    <ul class="tabs" data-tabs="tabs">
+      <li class="js active"><a href="#get-js">Javascript</a></li>
+    </ul>
+
+    <div class="pill-content">
+      <div class="js active" id="get-js">
+        <div class="preview">
+          <pre><code>device = Device.find(uri);
+status = device.status();</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    In this example we show how to get the device status. Just find the device through
+    its id and call the <code>status()</code> method. See the
+    <a href="/api/types/statuses/#status-representation">status representation</a> to 
+    get an idea of its structure.
+    </p>
+
+    <p>
+    <span class="label notice">Notice</span> 
+    If you think that this functionality must be present in the server side
+    <a href="/community/support/">write us</a> your use cases and why you need it.
+    We are open to introducing it if real needs comes up.
+    </p>
+
+    </article>
