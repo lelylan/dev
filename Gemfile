@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.8'
 gem 'mongoid', '~> 3.0.3'
 gem 'devise'
@@ -9,6 +11,7 @@ gem 'high_voltage'
 gem 'jquery-rails'
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'foreman'
 end
 

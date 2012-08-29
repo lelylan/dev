@@ -1,0 +1,24 @@
+<header class="intro">
+<h2>Sign in to Lelylan</h2>
+<h3>{ connected house for developers }</h3>
+</header>
+
+</br>
+
+<div class="content">
+
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <div><%= f.label :email, class: 'email-label' %>
+      <%= f.email_field :email, class: 'text-input' %></div>
+
+    <div><%= f.label :password, class: 'password-label' %>
+      <%= f.password_field :password, class: 'text-input'  %></div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class='invisible'><%= f.check_box :remember_me, checked: true %> <%= f.label :remember_me %></div>
+    <% end -%>
+
+    <div class="bcta"><%= f.submit "Sign in", class: 'cta' %></div>
+  <% end %>
+
+</div>

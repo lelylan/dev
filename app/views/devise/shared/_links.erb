@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+  <li><%= link_to 'Edit profile[URI]', '/profile' %></li>
+  <li><%= link_to 'Applications[URI]', '/applications' %></li>
+  <li><%= link_to 'Authorized applications[URI]', '/application' %></li>
+<% else %>
+  <% if (params[:action] != 'new') and (params[:controller] != 'session') %>
+  <li><%= link_to 'Sign in', new_user_session_path  %></li>
+  <% end %>
+  <li><%= link_to 'Forgot your password?', new_password_path(resource_name) %><li>
+<% end %>
