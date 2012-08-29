@@ -69,5 +69,5 @@ Dev::Application.configure do
   config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
 
   # Enable single files being compiled in production
-  config.assets.precompile += ['basic.css']
+  config.assets.precompile += ['basic.css', 'bootstrap.min.css', 'default.css', 'highlight/hemisu-light.css']
 end
