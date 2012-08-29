@@ -1,4 +1,3 @@
-$(function () { $('.tabs').tabs(); })
 $(function () { hljs.initHighlightingOnLoad(); })
 
 var Site = {}

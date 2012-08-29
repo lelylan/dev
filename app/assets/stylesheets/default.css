@@ -70,7 +70,10 @@ iframe{margin:10px 0}
 #section h2{font-size:28px;margin:25px 0 10px 0;line-height:1.4em;}
 #section h3{margin:15px 0 10px 0;font-weight:normal; font-size:20px;}
 #section ul,#section ol{margin:15px 0;line-height:1.7em}
-#section ul.tabs,#section ol.tabs{margin:15px 0 0 0;line-height:1.7em}
+#section ul.nav-tabs,#section ol.nav-tabs{margin:15px 0 0 0;line-height:1.7em}
+#section ul.nav-tabs li.active a,#section ol.nav-tabs li.active a{background-color:#F6F6F6}
+#section ul.nav-tabs{padding-left:0}
+#section div.tab-content pre{border-top:none}
 #section .preview{position:relative;margin-bottom:10px;}
 #section .preview .handle{position:absolute;left:520px;top:0;padding:0 4px;height:15px;line-height:10px;font-size:13px;cursor:pointer;}
 #section .unified pre{border-bottom: none;}
