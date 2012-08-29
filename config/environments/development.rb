@@ -34,4 +34,7 @@ Dev::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Session store
+  config.session_store :cookie_store, key: '_dev_session'
 end

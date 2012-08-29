@@ -65,9 +65,9 @@ Dev::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  # enable the same cookies for authenticating diffferent domains
-  config.session_store :cookie_store, key: '_dev_session', domain: :all
-
   # Enable single files being compiled in production
   config.assets.precompile += ['basic.css', 'bootstrap.min.css', 'default.css', 'highlight/hemisu-light.css']
+
+  # Session store
+  config.session_store :cookie_store, key: '_dev_session', domain: ENV[SESSION_STORE_DOMAIN]
 end

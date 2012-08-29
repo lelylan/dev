@@ -34,4 +34,7 @@ Dev::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # session store
+  config.session_store :cookie_store, key: '_dev_session'
 end
