@@ -57,24 +57,24 @@ in turn, contains many rooms and so on).
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-a-location-curl">Curl</a></li>
-  <li class="js"><a href="#get-a-location-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-a-location-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-a-location-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-location-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl https://api.lelylan.com/loactions/1.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-a-location-js">
+  <div class="tab-pane" id="get-a-location-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-a-location-ruby">
+  <div class="tab-pane" id="get-a-location-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -219,24 +219,24 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-descendants-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-descendants-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-descendants-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-descendants-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-descendants-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-descendants-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-descendants-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-descendants-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl https://api.lelylan.com/locations/7944/descendants.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-all-descendants-js">
+  <div class="tab-pane" id="get-all-descendants-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-descendants-ruby">
+  <div class="tab-pane" id="get-all-descendants-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -336,23 +336,23 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-locations-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-locations-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-locations-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-locations-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-locations-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-locations-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-locations-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-locations-curl">
     <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/locations.json?type=room
 </code></pre></div>
   </div>
-  <div class="js" id="get-all-locations-js">
+  <div class="tab-pane" id="get-all-locations-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-locations-ruby">
+  <div class="tab-pane" id="get-all-locations-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -446,14 +446,14 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-location-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-location-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-location-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-location-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-location-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/locations.json
      -d '{ "name": "Bedroom",
@@ -466,12 +466,12 @@ Returns a list of descendent locations for a given location identified from its 
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-location-js">
+  <div class="tab-pane" id="create-a-location-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-location-ruby">
+  <div class="tab-pane" id="create-a-location-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -569,14 +569,14 @@ Location: https://api.lelylan.com/locations/41</code></pre></div>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-location-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-location-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-location-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-location-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-location-curl">
     <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/locations/1.json
      -d '{ "name": "Ground floor bedroom",
            "into": "https://api.lelylan.com/locations/:ground",
@@ -586,12 +586,12 @@ Location: https://api.lelylan.com/locations/41</code></pre></div>
            ]
          }' </code></pre>
   </div>
-  <div class="js" id="update-a-location-js">
+  <div class="tab-pane" id="update-a-location-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-location-ruby">
+  <div class="tab-pane" id="update-a-location-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -651,23 +651,23 @@ deleted.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-location-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-location-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-location-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#delete-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-location-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/locations/1</code></pre>
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-location-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/locations/1.json</code></pre>
     </div>
   </div>
-  <div class="js" id="delete-a-location-js">
+  <div class="tab-pane" id="delete-a-location-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="delete-a-location-ruby">
+  <div class="tab-pane" id="delete-a-location-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>

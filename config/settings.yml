@@ -38,6 +38,3 @@ code_pages:
   - api/types/functions
   - api/types/statuses
   - api/locations
-  - api/oauth
-  - api/realtime
-  - api/physicals
