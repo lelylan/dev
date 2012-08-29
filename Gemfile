@@ -10,7 +10,6 @@ gem 'bundler'
 gem 'high_voltage'
 
 group :development, :test do
-  gem 'awesome_print'
   gem 'foreman'
 end
 

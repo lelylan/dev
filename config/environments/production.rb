@@ -67,4 +67,7 @@ Dev::Application.configure do
 
   # enable the same cookies for authenticating diffferent domains
   config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
+
+  # Enable single files being compiled in production
+  config.assets.precompile += ['basic.css']
 end
