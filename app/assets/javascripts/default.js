@@ -35,7 +35,6 @@ $(function () {
     var languages = ['curl', 'javascript', 'ruby'];
     for (var i=0; i < languages.length; i++) {
       language = languages[i];
-      console.log(fragment_contains(language), language)
       if (fragment_contains(language)) {
         $.cookie('lelylan_dev_language', language);
       }

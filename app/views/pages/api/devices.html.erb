@@ -250,23 +250,23 @@ a device to a physical device can be done whenever you want using the
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-devices-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-devices-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-devices-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-devices-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-devices-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-devices-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-devices-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-devices-curl">
     <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/devices.json?
 type=https://api.lelylan.com/types/4dcb9e200500d</code></pre></div>
   </div>
-  <div class="js" id="get-all-devices-js">
+  <div class="tab-pane" id="get-all-devices-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-devices-ruby">
+  <div class="tab-pane" id="get-all-devices-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -335,14 +335,14 @@ type=https://api.lelylan.com/types/4dcb9e200500d</code></pre></div>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-device-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-device-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-device-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-device-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-device-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/devices.json 
 -d '{ "name": "Closet dimmer", 
@@ -350,12 +350,12 @@ type=https://api.lelylan.com/types/4dcb9e200500d</code></pre></div>
     }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-device-js">
+  <div class="tab-pane" id="create-a-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-device-ruby">
+  <div class="tab-pane" id="create-a-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -424,24 +424,24 @@ Update a device identified from its ID and returns extended information for it.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-device-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-device-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-device-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-device-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-device-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1.json
      -d '{ "name": "Zigbee closet dimmer" }</code></pre>
     </div>
   </div>
-  <div class="js" id="update-a-device-js">
+  <div class="tab-pane" id="update-a-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-device-ruby">
+  <div class="tab-pane" id="update-a-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -493,23 +493,23 @@ Update a device identified from its ID and returns extended information for it.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-device-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-device-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-device-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#delete-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-device-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-device-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1</code></pre>
     </div>
   </div>
-  <div class="js" id="delete-a-device-js">
+  <div class="tab-pane" id="delete-a-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="delete-a-device-ruby">
+  <div class="tab-pane" id="delete-a-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -610,14 +610,14 @@ Update a device identified from its ID and returns extended information for it.
 
 <p>Set the device <code>status</code> to <code>on</code> and the device <code>intensity</code> to <code>50%</code>.</p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-properties-curl">Curl</a></li>
-  <li class="js"><a href="#update-properties-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-properties-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-properties-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-properties-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4d6f3a9b9a08c/properties.json
      -d '{
             "properties": [
@@ -629,12 +629,12 @@ Update a device identified from its ID and returns extended information for it.
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="update-properties-js">
+  <div class="tab-pane" id="update-properties-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-properties-ruby">
+  <div class="tab-pane" id="update-properties-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -744,25 +744,25 @@ Update a device identified from its ID and returns extended information for it.
 <code>turns on</code> set the property <code>status</code> to <code>on</code> by default.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#execute-a-function-i-curl">Curl</a></li>
-  <li class="js"><a href="#execute-a-function-i-js">Javascript</a></li>
-  <li class="ruby"><a href="#execute-a-function-i-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#execute-a-function-i-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#execute-a-function-i-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#execute-a-function-i-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="execute-a-function-i-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="execute-a-function-i-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4decd033a9b208c/functions.json
      -d '{ "function": "https://api.lelylan.com/functions/4dc15033a9b2104" }'</code></pre>
     </div>
   </div>
-  <div class="js" id="execute-a-function-i-js">
+  <div class="tab-pane" id="execute-a-function-i-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="execute-a-function-i-ruby">
+  <div class="tab-pane" id="execute-a-function-i-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -775,14 +775,14 @@ property <code>status</code> to <code>on</code> by default and expect the intens
 to be sent from the user.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#execute-a-function-ii-curl">Curl</a></li>
-  <li class="js"><a href="#execute-a-function-ii-js">Javascript</a></li>
-  <li class="ruby"><a href="#execute-a-function-ii-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#execute-a-function-ii-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#execute-a-function-ii-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#execute-a-function-ii-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="execute-a-function-ii-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="execute-a-function-ii-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4decd033a9b208c/functions.json
      -d '{ "funciton": "https://api.lelylan.com/functions/4dc15033a9b2107",
@@ -792,12 +792,12 @@ to be sent from the user.
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="execute-a-function-ii-js">
+  <div class="tab-pane" id="execute-a-function-ii-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="execute-a-function-ii-ruby">
+  <div class="tab-pane" id="execute-a-function-ii-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -870,25 +870,25 @@ to be sent from the user.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#connect-physical-device-curl">Curl</a></li>
-  <li class="js"><a href="#connect-physical-device-js">Javascript</a></li>
-  <li class="ruby"><a href="#connect-physical-device-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#connect-physical-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#connect-physical-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#connect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="connect-physical-device-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="connect-physical-device-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4dece033a900a1/physical.json
      -d '{ "physical": { "uri": "https://mqtt.lelylan.com/devices/8ecfd3a0e4" } }'</code></pre>
     </div>
   </div>
-  <div class="js" id="connect-physical-device-js">
+  <div class="tab-pane" id="connect-physical-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="connect-physical-device-ruby">
+  <div class="tab-pane" id="connect-physical-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -940,23 +940,23 @@ to be sent from the user.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#disconnect-physical-device-curl">Curl</a></li>
-  <li class="js"><a href="#disconnect-physical-device-js">Javascript</a></li>
-  <li class="ruby"><a href="#disconnect-physical-device-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#disconnect-physical-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#disconnect-physical-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#disconnect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="disconnect-physical-device-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="disconnect-physical-device-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/devices/4dece69b9a00a1/physical</code></pre>
     </div>
   </div>
-  <div class="js" id="disconnect-physical-device-js">
+  <div class="tab-pane" id="disconnect-physical-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="disconnect-physical-device-ruby">
+  <div class="tab-pane" id="disconnect-physical-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -1000,24 +1000,24 @@ Lets make a couple of examples.
 
 <h2>Get all pending devices</h2>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-pending-devices-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-pending-devices-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-pending-devices-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="curl active"><a href="#get-all-pending-devices-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class="javascript"><a href="#get-all-pending-devices-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class="ruby"><a href="#get-all-pending-devices-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-pending-devices-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-pending-devices-curl">
     <div class="preview">
         <pre><code class="no-highlight">curl https://api.lelylan.com/devices.json?pending=true</code></pre>
     </div>
   </div>
-  <div class="js" id="get-all-pending-devices-js">
+  <div class="tab-pane" id="get-all-pending-devices-javascript">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-pending-devices-ruby">
+  <div class="tab-pane" id="get-all-pending-devices-ruby">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
@@ -1052,14 +1052,14 @@ reach the aperture level of <code>100%</code>. The physical device aperture is a
 <p>Updates the aperture <code>level</code> to <code>46%</code> and sets the pending status
 to <code>true</code>.
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-pending-device-curl">Curl</a></li>
-  <li class="js"><a href="#update-pending-device-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-pending-device-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="curl active"><a href="#update-pending-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class="javascript"><a href="#update-pending-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class="ruby"><a href="#update-pending-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-pending-device-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-pending-device-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/devices/4f843545d033a980a4000006/properties.json
      -d '{  "status": true,
             "properties": [{
@@ -1069,12 +1069,12 @@ to <code>true</code>.
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="update-pending-device-js">
+  <div class="tab-pane" id="update-pending-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-pending-device-ruby">
+  <div class="tab-pane" id="update-pending-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -1119,14 +1119,14 @@ This decision is due to performance motivation and to the fact that the status i
 is related to browser visualization tasks.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="js active"><a href="#get-js">Javascript</a></li>
+<ul class="nav nav-tabs">
+  <li class="active" data-toggle="tab" class="javascript"><a href="#get-status-javascript">Javascript</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="js active" id="get-js">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-status-javascript">
     <div class="preview">
-          <pre><code>device = Device.find(uri);
+      <pre><code>device = Device.find(uri);
 status = device.status();</code></pre>
     </div>
   </div>
