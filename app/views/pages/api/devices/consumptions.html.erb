@@ -68,24 +68,24 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-a-consumption-curl">Curl</a></li>
-  <li class="js"><a href="#get-a-consumption-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-a-consumption-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-a-consumption-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-consumption-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-a-consumption-js">
+  <div class="tab-pane" id="get-a-consumption-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-a-consumption-ruby">
+  <div class="tab-pane" id="get-a-consumption-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -224,23 +224,23 @@ Lelylan gives you two ways to measure energy consumptions.
   Returns durational consumptions created after yesterday.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#all-all-consumptions-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-consumptions-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-consumptions-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-consumptions-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-consumptions-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-consumptions-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-consumptions-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-consumptions-curl">
     <div class="preview"><pre><code class="no-highlight"> curl -L https://api.lelylan.com/consumptions.json?type=durational</code></pre>
     </div>
   </div>
-  <div class="js" id="get-all-consumptions-js">
+  <div class="tab-pane" id="get-all-consumptions-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-consumptions-ruby">
+  <div class="tab-pane" id="get-all-consumptions-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -371,14 +371,14 @@ Lelylan gives you two ways to measure energy consumptions.
   Create an instantaneous consumption.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-an-instantaneous-consumption-curl">Curl</a></li>
-  <li class="js"><a href="#create-an-instantaneous-consumption-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-an-instantaneous-consumption-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#create-an-instantaneous-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-an-instantaneous-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-an-instantaneous-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-an-instantaneous-consumption-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-an-instantaneous-consumption-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X POST https://housy.lelylan.com/consumptions.json
      -d '{
           "type": "instantaneous"
@@ -388,12 +388,12 @@ Lelylan gives you two ways to measure energy consumptions.
           "occur_at": "2025-08-17 07:49:38 +0200"
         }'</code></pre></div>
   </div>
-  <div class="js" id="create-an-instantaneous-consumption-js">
+  <div class="tab-pane" id="create-an-instantaneous-consumption-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-an-instantaneous-consumption-ruby">
+  <div class="tab-pane" id="create-an-instantaneous-consumption-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -404,14 +404,14 @@ Lelylan gives you two ways to measure energy consumptions.
   Create a durational consumption.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-durational-consumption-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-durational-consumption-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-durational-consumption-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-durational-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-durational-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-durational-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-durational-consumption-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-durational-consumption-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://housy.lelylan.com/consumptions.json
      -d '{
@@ -425,12 +425,12 @@ Lelylan gives you two ways to measure energy consumptions.
         }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-durational-consumption-js">
+  <div class="tab-pane" id="create-a-durational-consumption-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-durational-consumption-ruby">
+  <div class="tab-pane" id="create-a-durational-consumption-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -552,24 +552,24 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-consumption-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-consumption-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-consumption-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-consumption-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-consumption-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json
      -d '{ "value": "0.10" }</code></pre>
     </div>
   </div>
-  <div class="js" id="update-a-consumption-js">
+  <div class="tab-pane" id="update-a-consumption-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-consumption-ruby">
+  <div class="tab-pane" id="update-a-consumption-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -621,23 +621,23 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-consumption-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-consumption-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-consumption-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="curl active"><a href="#delete-a-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class="javascript"><a href="#delete-a-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class="ruby"><a href="#delete-a-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-consumption-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-consumption-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json</code></pre>
     </div>
   </div>
-  <div class="js" id="delete-a-consumption-js">
+  <div class="tab-pane" id="delete-a-consumption-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="delete-a-consumption-ruby">
+  <div class="tab-pane" id="delete-a-consumption-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
