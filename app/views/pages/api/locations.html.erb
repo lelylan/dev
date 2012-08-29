@@ -66,7 +66,7 @@ in turn, contains many rooms and so on).
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-location-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl https://api.lelylan.com/loactions/1.json</code></pre>
+      <pre><code class="no-highlight">curl https://api.lelylan.com/loactions/4dece6f3d033a9b9a90000d1.json</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-javascript">
@@ -88,38 +88,38 @@ in turn, contains many rooms and so on).
 <h4 id="location-representation">Example body response</h4>
 
 <div class="preview highlight"><pre><code>{
-  "uri": "http://api.lelylan.com/locations/7532",
-  "id": "7532",
+  "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1",
+  "id": "4dece6f3d033a9b9a90000d1",
   "name": "First floor",
   "type": "floor",
   "created_at": "2012-07-31T17:35:14Z",
   "updated_at": "2012-07-31T17:35:15Z",
   "parent": {
-    "uri": "http://api.lelylan.com/locations/7533",
-    "id": "7533",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000e1",
+    "id": "4dece6f3d033a9b9a90000e1",
     "name": "Summer house"
   },
   "ancestors": [{
-    "uri": "http://api.lelylan.com/locations/7534",
-    "id": "7534",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000e2",
+    "id": "4dece6f3d033a9b9a90000e2",
     "name": "Summer house block" 
     }, {
-    "uri": "http://api.lelylan.com/locations/7533",
-    "id": "7533",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000e1",
+    "id": "4dece6f3d033a9b9a90000e1",
     "name": "Summer house"
   }],
   "locations": [{
-    "uri": "http://api.lelylan.com/locations/7535",
-    "id": "7535",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d2",
+    "id": "4dece6f3d033a9b9a90000d2",
     "name": "Bed Room"
     }, {
-    "uri": "http://api.lelylan.com/locations/7536",
-    "id": "7536",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d3",
+    "id": "4dece6f3d033a9b9a90000d3",
     "name": "kitchen"
   }],
   "devices": [{
-    "uri": "http://api.lelylan.com/devices/50181753d033a9ec0e000023",
-    "id": "50181753d033a9ec0e000023",
+    "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
+    "id": "4dece6f3d033a9b9a90000a1",
     "name": "Floor light"
   }]
 }</code></pre>
@@ -134,8 +134,8 @@ in turn, contains many rooms and so on).
   <dd><span>type</span> - Location type. See <a href="#types">existing types</a>.</dd>
   <dd><span>parent</span> - Parent location.</dd>
   <dd><span>ancestors</span> - Ancestor locations (from the root).</dd>
-  <dd><span>locations</span> - List of directly connected locations.</dd>
-  <dt><span>devices</span> - List of directly connected devices.</dt>
+  <dd><span>locations</span> - List of directly (contained) connected locations.</dd>
+  <dt><span>devices</span> - List of directly (contained) connected devices.</dt>
 </dl>
 
 <br/>
@@ -228,7 +228,7 @@ Returns a list of descendent locations for a given location identified from its 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-descendants-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl https://api.lelylan.com/locations/7944/descendants.json</code></pre>
+      <pre><code class="no-highlight">curl https://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1/descendants.json</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-descendants-javascript">
@@ -250,31 +250,31 @@ Returns a list of descendent locations for a given location identified from its 
 <h4 id="location-representation">Example body response</h4>
 
 <div class="preview highlight"><pre><code>[{
-  "uri": "http://api.lelylan.com/locations/7947",
+  "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d2",
   "name": "Bedroom",
-  "id": "7947",
+  "id": "4dece6f3d033a9b9a90000d2",
   "parent": {
-    "uri": "http://api.lelylan.com/locations/7944",
-    "id": "7944",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1",
+    "id": "4dece6f3d033a9b9a90000d1",
     "name": "Ground floor"
   },
   "devices": [{
-    "uri": "http://api.lelylan.com/devices/50181d88d033a91216000006",
-    "id": "50181d88d033a91216000006",
+    "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a2",
+    "id": "4dece6f3d033a9b9a90000a2",
     "name": "Bedroom light"
   }]
 }, {
-  "uri": "http://api.lelylan.com/locations/7948",
+  "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d3",
   "name": "Kitchen",
-  "id": "7948",
+  "id": "4dece6f3d033a9b9a90000d3",
   "parent": {
-    "uri": "http://api.lelylan.com/locations/7944",
-    "id": "7944",
+    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000a1",
+    "id": "4dece6f3d033a9b9a90000a1",
     "name": "Ground floor"
   },
   "devices": [{
-    "uri": "http://api.lelylan.com/devices/50181d88d033a91216000006",
-    "id": "50181d88d033a91216000006",
+    "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a2",
+    "id": "4dece6f3d033a9b9a90000a2",
     "name": "Kitchen light"
   }]
 }]</code></pre>
@@ -577,7 +577,7 @@ Location: https://api.lelylan.com/locations/41</code></pre></div>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-location-curl">
-    <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/locations/1.json
+    <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1.json
      -d '{ "name": "Ground floor bedroom",
            "into": "https://api.lelylan.com/locations/:ground",
            "devices": [
@@ -659,7 +659,7 @@ deleted.
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-location-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/locations/1.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1.json</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-javascript">
