@@ -79,7 +79,7 @@ iframe{margin:10px 0}
 #section .unified pre{border-bottom: none;}
 #section .unified{margin-bottom:0px !important;}
 
-select#preview{margin-left:10px;}
+select#language{margin-left:10px;}
 body.index #section h2{font:20px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;border-bottom:1px solid #e8e8e8;padding:0 0 5px 0;margin:15px 150px 20px 0}
 body.index #section article{overflow:hidden;max-width:750px;}
 body.index #section article div{width:200px;height:50px;float:left;margin:0 30px 30px 0;}

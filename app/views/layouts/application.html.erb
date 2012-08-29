@@ -16,10 +16,10 @@
       <%= render "devise/shared/links" %>
       <% if code_page? -%>
       <li>
-      <select id="preview">
-        <option>See examples in Curl</option>
-        <option>See examples in JavaScript</option>
-        <option>See examples in Ruby</option>
+      <select id="language">
+        <option value="curl">See examples in Curl</option>
+        <option value="javascript">See examples in JavaScript</option>
+        <option value="ruby">See examples in Ruby</option>
       </select>
       </li>
     <% end -%>
