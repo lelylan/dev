@@ -28,3 +28,16 @@ titles:
   'community/clients': Clients Libraries
   'community/support': Support
   'community/faq': Frequently Asked Questions
+code_pages:
+  - api/core
+  - api/devices
+  - api/devices/consumptions
+  - api/devices/histories
+  - api/types
+  - api/types/properties
+  - api/types/functions
+  - api/types/statuses
+  - api/locations
+  - api/oauth
+  - api/realtime
+  - api/physicals

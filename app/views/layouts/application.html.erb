@@ -11,7 +11,20 @@
   <body class="docs <%= body_style %>">
     <header id="header">
     <div class="left"><h1><a href="/">Lelylan Dev Center</a></h1></div>
-    <nav class="to-menu"><ul><%= render "devise/shared/links" %></ul></nav>
+    <nav>
+    <ul>
+      <%= render "devise/shared/links" %>
+      <% if code_page? -%>
+      <li>
+      <select id="preview">
+        <option>See examples in Curl</option>
+        <option>See examples in JavaScript</option>
+        <option>See examples in Ruby</option>
+      </select>
+      </li>
+    <% end -%>
+    </ul>
+    </nav>
     <!--<h2><a href="/">Documentation</a><%# breadcrumbs_html %></h2>-->
     </header>
 
