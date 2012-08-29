@@ -55,24 +55,24 @@ your life.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-a-function-curl">Curl</a></li>
-  <li class="js"><a href="#get-a-function-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-a-function-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-a-function-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-function-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-a-function-js">
+  <div class="tab-pane" id="get-a-function-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-a-function-ruby">
+  <div class="tab-pane" id="get-a-function-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -175,23 +175,23 @@ GET https://api.lelylan.com/functions/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-funcitons-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-funcitons-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-funcitons-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#get-all-funcitons-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-funcitons-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-funcitons-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-funcitons-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-funcitons-curl">
     <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/functions.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-all-funcitons-js">
+  <div class="tab-pane" id="get-all-funcitons-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-funcitons-ruby">
+  <div class="tab-pane" id="get-all-funcitons-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -279,14 +279,14 @@ GET https://api.lelylan.com/functions/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-function-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-function-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-function-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-function-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-function-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/functions.json 
      -d '{ "name": "Set intensity",
@@ -297,12 +297,12 @@ GET https://api.lelylan.com/functions/public</code></pre>
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-function-js">
+  <div class="tab-pane" id="create-a-function-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-function-ruby">
+  <div class="tab-pane" id="create-a-function-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -392,24 +392,24 @@ Location: https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-function-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-function-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-function-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-function-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-function-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json
      -d '{ "name": "Set intensity" }</code></pre>
     </div>
   </div>
-  <div class="js" id="update-a-function-js">
+  <div class="tab-pane" id="update-a-function-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-function-ruby">
+  <div class="tab-pane" id="update-a-function-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -467,23 +467,23 @@ Connected properties are not deleted.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-function-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-function-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-function-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#delete-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-function-curl">
-      <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre>
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-function-curl">
+      <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json</code></pre>
   </div>
 </div>
-<div class="js" id="delete-a-function-js">
+<div class="tab-pane" id="delete-a-function-javascript">
   <div class="preview">
         <pre><code># todo</code></pre>
   </div>
 </div>
-<div class="ruby" id="delete-a-function-ruby">
+<div class="tab-pane" id="delete-a-function-ruby">
   <div class="preview">
         <pre><code># todo</code></pre>
   </div>

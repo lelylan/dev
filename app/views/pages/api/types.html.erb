@@ -82,24 +82,24 @@ type identified from its ID.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-a-type-curl">Curl</a></li>
-  <li class="js"><a href="#get-a-type-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-a-type-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-a-type-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-type-curl">
     <div class="preview">
         <pre><code class="no-highlight">curl https://api.lelylan.com/types/4e00e545d033a98909000206.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-a-type-js">
+  <div class="tab-pane" id="get-a-type-js">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-a-type-ruby">
+  <div class="tab-pane" id="get-a-type-ruby">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
@@ -253,22 +253,22 @@ GET https://api.lelylan.com/types/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-types-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-types-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-types-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-types-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-types-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-types-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-types-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-types-curl">
     <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/types/public.json</code></pre></div>
   </div>
-  <div class="js" id="get-all-types-js">
+  <div class="tab-pane" id="get-all-types-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-types-ruby">
+  <div class="tab-pane" id="get-all-types-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -383,14 +383,14 @@ GET https://api.lelylan.com/types/public</code></pre>
 In this example the resource IDs are identified from friendly names.
 </p>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-type-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-type-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-type-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-type-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-type-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/types.json 
      -d '{ "name": "Light", 
@@ -403,12 +403,12 @@ In this example the resource IDs are identified from friendly names.
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-type-js">
+  <div class="tab-pane" id="create-a-type-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-type-ruby">
+  <div class="tab-pane" id="create-a-type-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -510,14 +510,14 @@ Location: https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1</code></pre></d
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-type-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-type-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-type-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-type-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-type-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1.json 
      -d '{ "name": "RGB Light", 
            "properties": ["https://api.lelylan.com/properties/:status",
@@ -525,12 +525,12 @@ Location: https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1</code></pre></d
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="update-a-type-js">
+  <div class="tab-pane" id="update-a-type-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-type-ruby">
+  <div class="tab-pane" id="update-a-type-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -589,23 +589,23 @@ all previous connected resources are replaced.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-type-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-type-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-type-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class=""><a href="#delete-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class=""><a href="#delete-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-type-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-type-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1.json</code></pre>
     </div>
   </div>
-  <div class="js" id="delete-a-type-js">
+  <div class="tab-pane" id="delete-a-type-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="delete-a-type-ruby">
+  <div class="tab-pane" id="delete-a-type-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>

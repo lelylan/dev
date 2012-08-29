@@ -53,24 +53,24 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-a-property-curl">Curl</a></li>
-  <li class="js"><a href="#get-a-property-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-a-property-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-a-property-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-property-curl">
     <div class="preview">
         <pre><code class="no-highlight">curl https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-a-property-js">
+  <div class="tab-pane" id="get-a-property-javascript">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-a-property-ruby">
+  <div class="tab-pane" id="get-a-property-ruby">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
@@ -163,23 +163,23 @@ GET https://api.lelylan.com/properties/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-properties-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-properties-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-properties-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-properties-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-properties-curl">
     <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/properties.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-all-properties-js">
+  <div class="tab-pane" id="get-all-properties-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-properties-ruby">
+  <div class="tab-pane" id="get-all-properties-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -254,14 +254,14 @@ GET https://api.lelylan.com/properties/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-property-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-property-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-property-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-property-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-property-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/properties.json 
      -d '{ "name": "Intensity",
@@ -270,12 +270,12 @@ GET https://api.lelylan.com/properties/public</code></pre>
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-property-js">
+  <div class="tab-pane" id="create-a-property-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-property-ruby">
+  <div class="tab-pane" id="create-a-property-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -356,24 +356,24 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-property-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-property-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-property-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-property-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-property-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json
      -d '{ "default": "100" }'</code></pre>
     </div>
   </div>
-  <div class="js" id="update-a-property-js">
+  <div class="tab-pane" id="update-a-property-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-property-ruby">
+  <div class="tab-pane" id="update-a-property-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -425,23 +425,23 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-property-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-property-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-property-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#delete-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class=""><a href="#delete-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class=""><a href="#delete-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pre>
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-property-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json</code></pre>
     </div>
   </div>
-  <div class="js" id="delete-a-property-js">
+  <div class="tab-pane" id="delete-a-property-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="delete-a-property-ruby">
+  <div class="tab-pane" id="delete-a-property-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>

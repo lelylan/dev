@@ -56,24 +56,24 @@ moment of its life is to use the status API.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-a-status-curl">Curl</a></li>
-  <li class="js"><a href="#get-a-status-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-a-status-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-a-status-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-status-curl">
     <div class="preview">
         <pre><code class="no-highlight">curl https://api.lelylan.com/statuses/4e035bd3d033a9e891000035.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-a-status-js">
+  <div class="tab-pane" id="get-a-status-js">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-a-status-ruby">
+  <div class="tab-pane" id="get-a-status-ruby">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
@@ -197,23 +197,23 @@ GET https://api.lelylan.com/statuses/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#get-all-statuses-curl">Curl</a></li>
-  <li class="js"><a href="#get-all-statuses-js">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-statuses-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-statuses-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-statuses-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-statuses-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="get-all-statuses-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-statuses-curl">
     <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/statuses.json</code></pre>
     </div>
   </div>
-  <div class="js" id="get-all-statuses-js">
+  <div class="tab-pane" id="get-all-statuses-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="get-all-statuses-ruby">
+  <div class="tab-pane" id="get-all-statuses-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -326,14 +326,14 @@ GET https://api.lelylan.com/statuses/public</code></pre>
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#create-a-status-curl">Curl</a></li>
-  <li class="js"><a href="#create-a-status-js">Javascript</a></li>
-  <li class="ruby"><a href="#create-a-status-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="create-a-status-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-status-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/statuses.json
      -d '{ "name": "Setting intensity",
@@ -345,12 +345,12 @@ GET https://api.lelylan.com/statuses/public</code></pre>
          }'</code></pre>
     </div>
   </div>
-  <div class="js" id="create-a-status-js">
+  <div class="tab-pane" id="create-a-status-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="create-a-status-ruby">
+  <div class="tab-pane" id="create-a-status-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -466,14 +466,14 @@ Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pr
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#update-a-status-curl">Curl</a></li>
-  <li class="js"><a href="#update-a-status-js">Javascript</a></li>
-  <li class="ruby"><a href="#update-a-status-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="update-a-status-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-status-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a.json
      -d '{ "name": "Max Intensity",
            "pending": "false",
@@ -484,12 +484,12 @@ Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pr
         }'</code></pre>
     </div>
   </div>
-  <div class="js" id="update-a-status-js">
+  <div class="tab-pane" id="update-a-status-js">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="ruby" id="update-a-status-ruby">
+  <div class="tab-pane" id="update-a-status-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -547,23 +547,23 @@ Connected properties are not deleted.
 
 <h4>Example Request</h4>
 
-<ul class="tabs" data-tabs="tabs">
-  <li class="curl active"><a href="#delete-a-status-curl">Curl</a></li>
-  <li class="js"><a href="#delete-a-status-js">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-status-ruby">Ruby</a></li>
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#delete-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#delete-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<div class="pill-content">
-  <div class="curl active" id="delete-a-status-curl">
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-status-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a</code></pre>
   </div>
 </div>
-<div class="js" id="delete-a-status-js">
+<div class="tab-pane" id="delete-a-status-js">
   <div class="preview">
       <pre><code># todo</code></pre>
   </div>
 </div>
-<div class="ruby" id="delete-a-status-ruby">
+<div class="tab-pane" id="delete-a-status-ruby">
   <div class="preview">
       <pre><code># todo</code></pre>
   </div>
