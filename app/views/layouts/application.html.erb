@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Lelylan Dev Center | <%= title %></title>
+  <head>
+    <title>Lelylan Dev Center | <%= title %></title>
 
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
+    <%= stylesheet_link_tag    'bootstrap.min', 'default', 'highlight/hemisu-light', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<body class="docs <%= body_style %>">
-
-  <header id="header">
-  <h1>
-    <a href="/">Lelylan Dev Center</a>
-    <%= render 'devise/shared/links' %>
-  </h1>
+  <body class="docs <%= body_style %>">
+    <header id="header">
+    <div class="left"><h1><a href="/">Lelylan Dev Center</a></h1></div>
+    <nav class="to-menu"><ul><%= render "devise/shared/links" %></ul></nav>
     <!--<h2><a href="/">Documentation</a><%# breadcrumbs_html %></h2>-->
-  </header>
+    </header>
 
-  <article id="article">
+    <article id="article">
 
     <nav id="nav">
-      <%= render 'shared/menu' %>
+    <%= render 'shared/menu' %>
     </nav>
 
     <section id="section"> 
-      <%= yield %> 
-      <%= render 'shared/services/disqus' %>
+    <%= yield %> 
+    <%= render 'shared/services/disqus' %>
     </section>
 
-  </article>
+    </article>
 
-</body>
+  </body>
 </html>

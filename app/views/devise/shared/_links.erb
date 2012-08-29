@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
+  <li><%= link_to 'Authorized applications', '/application' %></li>
+  <li><%= link_to 'Your applications', '/applications' %></li>
+  <li><%= link_to 'Edit profile', '/profile' %></li>
   <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-  <li><%= link_to 'Edit profile[URI]', '/profile' %></li>
-  <li><%= link_to 'Applications[URI]', '/applications' %></li>
-  <li><%= link_to 'Authorized applications[URI]', '/application' %></li>
 <% else %>
   <% if (params[:action] != 'new') and (params[:controller] != 'session') %>
   <li><%= link_to 'Sign in', new_user_session_path  %></li>
