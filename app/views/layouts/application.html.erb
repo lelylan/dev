@@ -4,9 +4,7 @@
     <title>Lelylan Dev Center | <%= title %></title>
 
     <%= stylesheet_link_tag    'bootstrap.min', 'default', 'highlight/hemisu-light', media: 'all' %>
-    <%# javascript_include_tag 'application' %>
-    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <%= javascript_include_tag 'jquery', 'bootstrap-tab', 'default', 'raphael', 'highlight.pack' %>
     <%= csrf_meta_tags %>
   </head>
 
