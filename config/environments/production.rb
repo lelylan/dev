@@ -69,5 +69,5 @@ Dev::Application.configure do
   config.assets.precompile += ['basic.css', 'bootstrap.min.css', 'default.css', 'highlight/hemisu-light.css']
 
   # Session store
-  config.session_store :cookie_store, key: '_dev_session', domain: ENV[SESSION_STORE_DOMAIN]
+  config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
 end
