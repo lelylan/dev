@@ -1,4 +1,21 @@
 <article>
+<script src="assets/js/jquery.js"></script>
+    <script src="http://twitter.github.com/assets/js/google-code-prettify/prettify.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-transition.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-alert.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-modal.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-tab.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-tooltip.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-popover.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-button.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-carousel.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-typeahead.js"></script>
+    <script src="http://twitter.github.com/assets/js/bootstrap-affix.js"></script>
+    <script src="http://twitter.github.com/assets/js/application.js"></script>
+</script>
 
 <aside class="menu">
 </br>
@@ -77,11 +94,25 @@ a device to a physical device can be done whenever you want using the
 
 <h4>Example Request</h4>
 
-<%#<ul class="tabs" data-tabs="tabs">%>
-  <%#<li class="curl active"><a href="#get-all-devices-curl">Curl</a></li>%>
-  <%#<li class="js"><a href="#get-all-devices-js">Javascript</a></li>%>
-  <%#<li class="ruby"><a href="#get-all-devices-ruby">Ruby</a></li>%>
-<%#</ul>%>
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#home">Home</a></li>
+  <li><a href="#profile">Profile</a></li>
+  <li><a href="#messages">Messages</a></li>
+  <li><a href="#settings">Settings</a></li>
+</ul>
+ 
+<div class="tab-content">
+  <div class="tab-pane active" id="home">...</div>
+  <div class="tab-pane" id="profile">...</div>
+  <div class="tab-pane" id="messages">...</div>
+  <div class="tab-pane" id="settings">...</div>
+</div>
+ 
+<script>
+  $(function () {
+    $('#myTab a:last').tab('show');
+  })
+</script>
 
 
 <ul class="nav nav-tabs">

@@ -8,7 +8,6 @@ gem 'devise'
 gem 'rails_config'
 gem 'bundler'
 gem 'high_voltage'
-gem 'jquery-rails'
 
 group :development, :test do
   gem 'awesome_print'
