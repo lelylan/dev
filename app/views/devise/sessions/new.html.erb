@@ -1,6 +1,9 @@
 <header class="intro">
 <h2>Sign in to Lelylan</h2>
 <h3>{ connected house for developers }</h3>
+<% if flash[:alert] -%>
+<h3 class="errors"><%= flash[:alert] %></h3>
+<% end -%>
 </header>
 
 </br>
