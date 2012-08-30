@@ -34,7 +34,7 @@ giving them the possibility to enable and disable those accesses whenever they w
 <h1 class="call"><a name="registration">Registration</a></h1>
 
 <p>
-All developers need to <a href="http://lelylan.com/oauth/applications">register their application</a>
+All developers need to <%= link_to 'register their applications', "#{people_host}/oauth/applications" %>
 before getting started. A registered OAuth application is assigned with a unique
 Client ID and Client Secret.
 </p>
@@ -97,9 +97,9 @@ Redirect the user to the authorization endpoint.
   <dd><span>response_type</span> - 
   Always use 'code' as response type.</dd>
   <dd><span>client_id</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
   <dd><span>redirect_uri</span> -
-  <a href="http://lelylan.com/oauth/applications">Registered</a>
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %>
   application URI where the user is redirected after authorization.</dd>
   <dd><span>scope</span> - 
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
@@ -127,9 +127,9 @@ Get the access token (remember to basic authenticate with client id and client s
 
 <dl>
   <dd><span>client_id</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
-  <dd><span>client_secret</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client secret.</dd>
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
+  <dd><span>client_secret</span> -
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client secret.</dd>
   <dd><span>grant_type</span> - 
   Always use 'authorization_code' as grant type.</dd>
   <dd><span>code</span> - 
@@ -174,9 +174,9 @@ The flow start redirecting the user to the authorization endpoint.
   <dd><span>response_type</span> - 
   Always use 'token' as response type.</dd>
   <dd><span>client_id</span> -
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
-  <dd><span>redirect_uri</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a>
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
+  <dd><span>redirect_uri</span> -
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %>
   application URI where the user is redirected after authorization.</dd>
   <dd><span>scope</span> - 
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
@@ -223,10 +223,10 @@ Get the access token (remember to basic authenticate with client id and client s
 </div>
 
 <dl>
-  <dd><span>client_id</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
-  <dd><span>client_secret</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client secret.</dd>
+  <dd><span>client_id</span> -
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
+  <dd><span>client_secret</span> -
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client secret.</dd>
   <dd><span>grant_type</span> - 
   Always use 'password' as grant type.</dd>
   <dd><span>username</span> - 
@@ -272,9 +272,9 @@ valid one you can use the refresh token you received together with the access to
 
 <dl>
   <dd><span>client_id</span> -
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client ID.</dd>
-  <dd><span>client_secret</span> - 
-  <a href="http://lelylan.com/oauth/applications">Registered</a> Client secret.</dd>
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
+  <dd><span>client_secret</span> -
+  <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client secret.</dd>
   <dd><span>grant_type</span> - 
   Always use 'refresh_token' as grant type.</dd>
   <dd><span>refresh_token</span> - 
