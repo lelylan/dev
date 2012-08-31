@@ -352,39 +352,39 @@ Scopes let you specify what can and can't be accessed.
   <tbody>
     <tr>
       <td><strong>resources</strong></td>
-      <td>Read and write access to all resources.</td>
+      <td>Read and write access to all resources (devices, locations and types).</td>
     </tr>
     <tr>
-      <td><strong>resource.read</strong></td>
-      <td>Read access to all resources.</td>
+      <td><strong>resource-read</strong></td>
+      <td>Read access to all your resources (devices, locations and types).</td>
     </tr>
     <tr>
       <td><strong>devices</strong></td>
-      <td>Read and write access to devices.</td>
+      <td>Read and write access to all your devices.</td>
     </tr>
     <tr>
-      <td><strong>devices.read</strong></td>
-      <td>Read access to devices.</td>
+      <td><strong>devices-read</strong></td>
+      <td>Read access to all your devices.</td>
     </tr>
     <tr>
       <td><strong>types</strong></td>
-      <td>Read and write access to types.</td>
+      <td>Read and write access to all your types.</td>
     </tr>
     <tr>
-      <td><strong>types.read</strong></td>
-      <td>Read access to types.</td>
+      <td><strong>types-read</strong></td>
+      <td>Read access to all your types.</td>
     </tr>
     <tr>
       <td><strong>locations</strong></td>
-      <td>Read and write access to locations.</td>
+      <td>Read and write access to all your locations.</td>
     </tr>
     <tr>
-      <td><strong>locations.read</strong></td>
-      <td>Read access to locations.</td>
+      <td><strong>locations-read</strong></td>
+      <td>Read access to all your locations.</td>
     </tr>
     <tr>
       <td><strong>user</strong></td>
-      <td>Read access to user (GET /me).</td>
+      <td>Read access to your profile (GET /me).</td>
     </tr>
   </tbody>
 </table>
@@ -398,7 +398,7 @@ access for devices. You can specify multiple scopes by separating them by a spac
         response_type=code&
         client_id=client_id&
         redirect_uri=redirect_uri&
-        scope=resources.read+device</code></pre>
+        scope=resources-read+device</code></pre>
 </div>
 
 <p>

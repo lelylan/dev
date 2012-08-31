@@ -4,7 +4,6 @@ index_pages:
   - api
   - community
 titles:
-  '':  The connected home
   'start': Getting Started
   'start/introduction': Introduction
   'start/first-app': Build your First App
