@@ -86,12 +86,12 @@ access token.
 Redirect the user to the authorization endpoint.
 <p>
 
-<div class="preview"><pre><code class="no-highlight">https://lelylan.com/oauth/authorization?
-        response_type=code&
-        client_id=client_id&
-        redirect_uri=redirect_uri&
-        scope=scope&
-        state=state</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">http://lelylan.com/oauth/authorization?
+       response_type=&lt;code&gt;&
+       client_id=&lt;client_id&gt;&
+       redirect_uri=&lt;redirect_uri&gt;&
+       scope=&lt;scope&gt;&
+       state=&lt;state&gt;</code></pre></div>
 
 <dl>
   <dd><span>response_type</span> - 
@@ -113,7 +113,7 @@ and appends the authorization code in the query string. This code will be used t
 the final access token.
 </p>
 
-<div class="preview"><pre><code class="no-highlight">https://example.com/redirect-uri?code=code&state=state</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">http://example.com/redirect-uri?code=code&state=state</code></pre></div>
 
 <h3><a name="authorization-code">2. Get the access token</a></h3>
 
@@ -121,8 +121,11 @@ the final access token.
 Get the access token (remember to basic authenticate with client id and client secret).
 <p>
 
-<div class="preview"><pre><code class="no-highlight">curl -u client_id:client_secret http://lelylan.com/oauth/token
-     -X POST -d 'grant_type=authorization_code&code=code&redirect_uri=redirect_uri'</code></pre>
+<div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
+     -u  &lt;client_id&gt;:&lt;client_secret&gt; \
+     -d 'grant_type=authorization_code' \
+     -d 'code=&lt;code&gt;' \
+     -d 'redirect_uri=&lt;redirect_uri&gt;'</code></pre>
 </div>
 
 <dl>
@@ -138,13 +141,13 @@ Get the access token (remember to basic authenticate with client id and client s
   Application URI where the user is redirected after authorization.</dd>
 </dl>
 
-  <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-<div class="preview"><pre><code class="no-highlight">{
-  "access_token": "b37cecfc700f7651e",
+<div class="preview"><pre><code>{
+  "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
+  "refresh_token": "ec1a59d298aa51b3f133b6135b817bb19eb917aac5bc7821d410ffbf5ebXXXXX",
   "token_type": "bearer",
-  "expires_in": 7200,
-  "refresh_token": "a2ecd5abbdf6527"
+  "expires_in": 7200
 }</code></pre></div>
 
 </article>
@@ -162,12 +165,12 @@ over time (it includes Actionscript and Silverlight and similar).
 The flow start redirecting the user to the authorization endpoint.
 <p>
 
-<div class="preview"><pre><code class="no-highlight">https://lelylan.com/oauth/authorization?
-        response_type=token&
-        client_id=client_id&
-        redirect_uri=redirect_uri&
-        scope=scope&
-        state=state</code></pre>
+<div class="preview"><pre><code class="no-highlight">http://lelylan.com/oauth/authorization?
+       response_type=&lt;token&gt;&
+       client_id=&lt;client_id&gt;&
+       redirect_uri=&lt;redirect_uri&gt;&
+       scope=&lt;scope&gt;&
+       state=&lt;state&gt;</code></pre>
 </div>
 
 <dl>
@@ -189,11 +192,11 @@ If the user grants the access Lelylan redirects the user to <code>redirect_uri</
 and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment</a>.
 </p>
 
-<div class="preview"><pre><code class="no-highlight">https://example.com/redirect-uri#
-        access_token=056c1abaf9130cf3554cc6a&
-        token_type=bearer&
-        expires_in=7200&
-        state=remember-me</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">http://example.com/redirect-uri#
+       access_token=1146eeea7054e3fc39aebb0f3820742981c65e243a2fa85174ce98b564XXXXX&
+       token_type=bearer&
+       expires_in=7200&
+       state=remember-me</code></pre></div>
 
 <p>
 If your application is pure Javascript, you can easily parse the token from the URI. 
@@ -218,8 +221,11 @@ your application.
 Get the access token (remember to basic authenticate with client id and client secret).
 <p>
 
-<div class="preview"><pre><code class="no-highlight">curl -u client_id:client_secret http://lelylan.com/oauth/token
-     -X POST -d 'grant_type=password&username=email&password=password&scope=scope'</code></pre>
+<div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
+     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -d 'grant_type=password' \
+     -d 'username=&lt;user-email&gt;' \
+     -d 'password=&lt;user-password&gt;'</code></pre>
 </div>
 
 <dl>
@@ -239,13 +245,12 @@ Get the access token (remember to basic authenticate with client id and client s
 
 <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-<div class="preview"><pre><code class="no-highlight">{
-  "access_token":"b37cecfc700f7651e",
-  "token_type":"bearer",
-  "expires_in":7200,
-  "refresh_token":"a2ecd5abbdf6527"
-}</code></pre>
-</div>
+<div class="preview"><pre><code>{
+  "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
+  "refresh_token": "ec1a59d298aa51b3f133b6135b817bb19eb917aac5bc7821d410ffbf5ebXXXXX",
+  "token_type": "bearer",
+  "expires_in": 7200
+}</code></pre></div>
 
 <p>
 <span class="label notice">Notice</span>
@@ -266,8 +271,10 @@ For security reasons an access token expires every two hours. To refresh it with
 valid one you can use the refresh token you received together with the access token.
 <p>
 
-<div class="preview"><pre><code class="no-highlight">curl -u client_id:client_secret http://lelylan.com/oauth/token
-     -X POST -d 'grant_type=refresh_token&refresh_token=refresh_token'</code></pre>
+<div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
+     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -d 'grant_type=refresh_token' \
+     -d 'refresh_token=&lt;refresh-token&gt;'</code></pre>
 </div>
 
 <dl>
@@ -283,12 +290,12 @@ valid one you can use the refresh token you received together with the access to
 
 <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
-<div class="preview"><pre><code class="no-highlight">{
-  "access_token":"b37cecfc700f7651e",
-  "token_type":"bearer",
-  "expires_in":7200,
-  "refresh_token":"a2ecd5abbdf6527"
-}</code></pre>
+<div class="preview"><pre><code>{
+  "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
+  "refresh_token": "ec1a59d298aa51b3f133b6135b817bb19eb917aac5bc7821d410ffbf5ebXXXXX",
+  "token_type": "bearer",
+  "expires_in": 7200
+}</code></pre></div>
 </div>
 
 <p>
@@ -309,18 +316,18 @@ Once you have the access token it's easy to use the APIs.
 
 <p><strong>Header request</strong></p>
 
-<div class="preview"><pre><code class="no-highlight">curl https://api.lelylan.com/devices.json
-     -H "Authorization: OAuth 056c1abaf9130cf3554cc6a"</code></pre>
+<div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices.json
+     -H "Authorization: OAuth &lt;token&gt;"</code></pre>
 </div>
 
 <p><strong>Query string request</strong></p>
 
-<div class="preview"><pre><code class="no-highlight">curl https://api.lelylan.com/devices?access_token=056c1abaf9130cf3554cc6a</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices?access_token=&lt;token&gt;</code></pre></div>
 
 <p><strong>Body request</strong></p>
 
-<div class="preview"><pre><code class="no-highlight">curl https://api.lelylan.com/devices
-     -X POST -d 'access_token=056c1abaf9130cf3554cc6a'</code></pre>
+<div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices
+     -X POST -d 'access_token=&lt;token&gt;'</code></pre>
 </div>
 
 <p>
@@ -394,7 +401,7 @@ In the following request an application requires read access for all resources a
 access for devices. You can specify multiple scopes by separating them by a space.
 <p>
 
-<div class="preview"><pre><code class="no-highlight">https://lelylan.com/oauth/authorization?
+<div class="preview"><pre><code class="no-highlight">http://lelylan.com/oauth/authorization?
         response_type=code&
         client_id=client_id&
         redirect_uri=redirect_uri&
@@ -427,10 +434,10 @@ might be of help.
   <a href="http://developer.github.com/v3/oauth/" class="bigger">Github</a>
   </li>
   <li>
-  <a href="https://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
+  <a href="http://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
   </li>
   <li>
-  <a href="https://github.com/intridea/oauth2" class="bigger">OAuth2 Gem</a>
+  <a href="http://github.com/intridea/oauth2" class="bigger">OAuth2 Gem</a>
   </li>
   <li>
   <a href="/community/clients/" class="bigger">Lelylan Client Libraries</a>
