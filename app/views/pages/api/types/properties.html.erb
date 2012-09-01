@@ -62,7 +62,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-property-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-property-javascript">
@@ -84,13 +84,13 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 <h4 id="property-representation">Example body response</h4>
 
 <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/properties/4e01c65ad033a98ba3000018",
-  "id": "4e01c65ad033a98ba3000018",
-  "name": "Intensity",
+  "uri": "http://api.lelylan.com/properties/5041e9e9230de31300000001",
+  "id": "5041e9e9230de31300000001",
+  "name":" Intensity",
   "default": "0",
-  "values": ["0","1","2","3", ... , "99","100"],
-  "created_at": "2012-07-09T08:35:57Z",
-  "updated_at": "2012-07-09T08:35:57Z"
+  "values": ["0","20","40","60","80","100"],
+  "created_at": "2012-09-01T10:56:41Z",
+  "updated_at": "2012-09-01T10:56:41Z"
 }</code></pre></div>
 
 <h4>Body response explained</h4>
@@ -171,7 +171,8 @@ GET https://api.lelylan.com/properties/public</code></pre>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-properties-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/properties.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/properties.json \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-properties-javascript">
@@ -263,11 +264,14 @@ GET https://api.lelylan.com/properties/public</code></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-property-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/properties.json 
-     -d '{ "name": "Intensity",
-           "default": "0",
-           "values": ["0","1","2","3", ... , "99", "100"],
-         }'</code></pre>
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/properties.json \
+      -H 'Authorization: Bearer &lt;token&gt' \
+      -H 'Content-Type: application/json' \
+      -d '{ 
+            "name": "Intensity",
+            "default": "0",
+            "values": ["0","20","40","60","80","100"] 
+          }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-property-javascript">
@@ -364,7 +368,9 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/properties/5041e9e9230de31300000001.json \
+     -H 'Authorization: Bearer &lt;token&gt' \
+     -H 'Content-Type: application/json' \
      -d '{ "default": "100" }'</code></pre>
     </div>
   </div>
@@ -433,7 +439,9 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/properties/4e01c65ad033a98ba3000018.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/5041e9e9230de31300000001.json \
+     -H 'Authorization: Bearer &lt;token&gt'
+     -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-property-javascript">
