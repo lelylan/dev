@@ -16,34 +16,39 @@
 <h1 class="call"><a name="types"><%= title %></a></h1>
 
 <p>
-A type describes the structure of a device. In its simplest form every type is
-characterized by three key elements.
+A type describes the structure of a device.
+In its simplest form every type can be defined as the combination of three key elements.
+
 </p>
 
 <ul>
   <li><a href="/api/types/properties/">Properties</a>: what vary during time.</li> 
   <li><a href="/api/types/functions/">Functions</a>: what a device can do.</li>
-  <li><a href="/api/types/statuses/">Statuses</a>: what a device is in a specific time of its life.</li>
+  <li><a href="/api/types/statuses/">Statuses</a>: what a device is (in a specific time of its life).</li>
 </ul>
-
-<p>
-Types are public for default. This means that you can search between all defined types 
-(e.g light, dimmer, alarm, heater, window, etc.) or create new ones and share them with
-everyone. Here there is an example about a possible dimmer type.
-</p>
 
 <br/>
 
+<p>
+Here an example describing an hypothetical dimmer type.
+</p>
+
 <table>
-  <thead>
-    <tr><td colspan="2"><strong>DIMMER STRUCTURE</strong></td></tr>
-  </thead>
   <tbody>
     <tr><td><strong>Properties</strong></td><td>stauts, intensity</td></tr>
     <tr><td><strong>Functions</strong></td><td>turn on, turn off, set intensity</td></tr>
     <tr><td><strong>Statuses</strong></td><td>On, Off, 50% intensity, low intensity, high intensity</td></tr>
   </tbody>
 </table>
+
+<p>
+It can be a little tricky to get started with types. When you first see its
+json structure it appears to be quite complex, but it isn't. 
+As suggestion you should first read the
+<a href="/api/types/properties/">properties</a>, 
+<a href="/api/types/functions/">functions</a> and
+<a href="/api/types/statuses/">statuses</a> documentation.
+</p>
 
 </article>
 
@@ -61,7 +66,7 @@ type identified from its ID.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">GET https://api.lelylan.com/types/:id</code></pre>
+  <pre><code class="no-highlight">GET http://api.lelylan.com/types/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -91,7 +96,7 @@ type identified from its ID.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-type-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl https://api.lelylan.com/types/4e00e545d033a98909000206.json</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/types/5042234270eda61200000006</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-type-js">
@@ -113,65 +118,67 @@ type identified from its ID.
 <h4 id="type-representation">Example body response</h4>
 
 <div class="preview highlight"><pre><code>{
-  "uri": "https://api.lelylan.com/types/4e00e545d033a98909000206",
-  "id": "4e00e545d033a98909000206",
+  "uri": "http://api.lelylan.com/types/5042234270eda61200000006",
+  "id": "5042234270eda61200000006",
   "name": "Dimmer",
-  "created_at": "2012-07-09T08:35:57Z",
-  "updated_at": "2012-07-06T04:39:15Z",
+  "created_at": "2012-09-01T15:01:22Z",
+  "updated_at": "2012-09-01T15:01:22Z",
   "properties": [{
-    "uri": "https://api.lelylan.com/properties/4e00e545d033a989090001f3",
-    "id": "4e00e545d033a989090001f3",
-    "name": "Status",
-    "default": "off",
-    "values": ["on","off"] }
-    }, {
-   "uri": "http://api.lelylan.com/properties/4e00e545d033a989090001f4",
-    "id": "4e00e545d033a989090001f4",
+    "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+    "id": "50420c3a267ff51300000001",
     "name": "Intensity",
     "default": "0",
-    "values": ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90" "100"]
+    "values": ["0", "20", "40", "60", "80", "100"],
+  }, {
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+    "id": "50420c7e267ff51000000001",
+    "name": "Status",
+    "default": "off",
+    "values": ["on", "off"],
   }],
   "functions": [{
-    "uri": "https://api.lelylan.com/functions/4e00e545d033a989090001f8",
-    "id": "4e00e545d033a989090001f8",
-    "name": "Turn on",
-    "properties": [{ 
-      "uri": "https://api.lelylan.com/properties/4e00e545d033a989090001f3", 
-      "value": "on" }]
-    }, {
-    "uri": "https://api.lelylan.com/functions/4e00e545d033a989090001fa",
-    "id": "4e00e545d033a989090001fa",
-    "name": "Turn off",
-    "properties": [{
-      "uri": "https://api.lelylan.com/properties/4e00e545d033a989090001f3",
-      "value": "off" }],
-    }, {
-    "uri": "https://api.lelylan.com/functions/4e00e545d033a989090001fe",
-    "id": "4e00e545d033a989090001fe",
+    "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003",
+    "id": "5042205c70eda61000000003",
     "name": "Set intensity",
     "properties": [{
-      "uri": "https://api.lelylan.com/properties/4e00e545d033a989090001f3",
+      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
       "value": "on"
     }, {
-      "uri": "http://api.lelylan.com/properties/intensity",
-      "value": ""
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "value": null
+    }]
+  }, {
+    "uri": "http://api.lelylan.com/functions/5042209370eda61000000005",
+    "id": "5042209370eda61000000005",
+    "name": "Turn on",
+    "properties": [{
+      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+      "value": "on"
+    }]
+  }, {
+    "uri": "http://api.lelylan.com/functions/504220c470eda60d00000004",
+    "id": "504220c470eda60d00000004",
+    "name": "Turn on",
+    "properties": [{
+      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+      "value": "off"
     }]
   }],
   "statuses": [{
-    "uri": "https://api.lelylan.com/statuses/4e00e545d033a989090001fd",
-    "id": "4e00e545d033a989090001fd",
+    "uri": "http://api.lelylan.com/statuses/50421dbd70eda60a0000000b",
+    "id": "50421dbd70eda60a0000000b",
     "name": "Setting intensity",
     "pending": true,
-    "properties": [{ 
-      "uri": "https://api.lelylan.com/properties/4e00e545d033a989090001f4", 
+    "properties": [{
+      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+      "values": ["on"],
+      "range": null
+    }, {
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
       "values": null,
       "range": { "min": "0", "max": "100" }
     }]
-  }],
-  "categories": [{
-    "uri": "https://api.lelylan.com/categories/4e00e545d033a98909000205",
-    "id": "4e00e545d033a98909000205",
-    "name": "Lighting" }],
+  }]
 }</code></pre></div>
 
 <h4>Body Response explained</h4>
@@ -190,15 +197,6 @@ type identified from its ID.
   <a href="/api/types/categories/">Learn more about categories</a>.</dd>
 </dl>
 
-<p>
-<span class="label notice">Notice</span>
-It can be a little tricky to get started with the type resource. Check out the
-<a href="/api/types/properties/">properties</a>, 
-<a href="/api/types/functions/">functions</a>,
-<a href="/api/types/statuses/">statuses</a> and
-<a href="/api/types/categories/">categories</a> connections to understand how it works.
-</p>
-
 </article>
 
 <br>
@@ -212,8 +210,8 @@ It can be a little tricky to get started with the type resource. Check out the
 <h4>Resource URL</h4>
 <div class="preview">
 <pre><code class="no-highlight"># created types
-GET https://api.lelylan.com/types</code><code class="no-highlight"># all types
-GET https://api.lelylan.com/types/public</code></pre>
+GET http://api.lelylan.com/types</code><code class="no-highlight"># all types
+GET http://api.lelylan.com/types/public</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -261,7 +259,8 @@ GET https://api.lelylan.com/types/public</code></pre>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-types-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/types/public.json</code></pre></div>
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/types \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
   </div>
   <div class="tab-pane" id="get-all-types-js">
     <div class="preview">
@@ -281,90 +280,89 @@ GET https://api.lelylan.com/types/public</code></pre>
 
 <h4>Example body response</h4>
 
-<div class="preview highlight"><pre><code>[
+<div class="preview"><pre><code>[
   {
-    "uri": "http://www.example.com/types/502a511fd033a999350001c1",
-    "id": "502a511fd033a999350001c1",
-    "name": "Light",
-    "created_at": "2012-08-13T13:25:34Z",
-    "updated_at": "2012-08-13T13:25:34Z"
-  }, {
-    "uri": "http://www.example.com/types/502a511fd033a999350001c2",
-    "id": "502a511fd033a999350001c2",
+    "uri": "http://api.lelylan.com/types/5042223470eda60d00000005",
+    "id": "5042223470eda60d00000005",
     "name": "Dimmer",
-    "created_at": "2012-08-14T13:22:39Z",
-    "updated_at": "2012-08-14T13:22:39Z"
-  }, 
-  ...
+    "created_at": "2012-09-01T14:56:52Z",
+    "updated_at": "2012-09-01T14:56:52Z"
+  }, {
+    "uri": "http://api.lelylan.com/types/5042229270eda61200000005",
+    "id": "5042229270eda61200000005",
+    "name": "Light",
+    "created_at": "2012-09-01T14:58:26Z",
+    "updated_at": "2012-09-01T14:58:26Z"
+  }, ...
 ]</code></pre></div>
 
-      <p>
-      Due to the type complexity structure the type representation is a simplified version of 
-      its <a href="#type-representation">extended representation</a>.
-      </p>
+<p>
+Due to the type complexity structure the type representation is a simplified version of 
+its <a href="#type-representation">extended representation</a>.
+</p>
 
-      </article>
+</article>
 
-      <br/>
+<br/>
 
-      <article>
+<article>
 
-        <h1 class="call"><a name="create-a-type">POST /types</a></h1>
+<h1 class="call"><a name="create-a-type">POST /types</a></h1>
 
-        <p>
-          Create a type and returns extended information for it.
-        </p>
+<p>
+Create a type and returns extended information for it.
+</p>
 
-        <h4>Resource URL</h4>
-        <div class="preview">
-        <pre><code class="no-highlight">POST https://api.lelylan.com/types</code></pre>
-        </div>
+<h4>Resource URL</h4>
+<div class="preview">
+        <pre><code class="no-highlight">POST http://api.lelylan.com/types</code></pre>
+</div>
 
-        <h4>Parameters</h4>
+<h4>Parameters</h4>
 
-        <table class="zebra-striped">
-          <tbody>
-            <tr>
-              <td class="parameter">
-                <span>name</span>
-                <span class="info">required</span>
-              </td>
-              <td>
-                Type name.
-              </td>
-            </tr>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>properties</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                List of property URIs. 
-                <a href="/api/types/properties/">Learn more about properties</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>functions</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                List of function URIs.
-                <a href="/api/types/functions/">Learn more about functions</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="parameter">
-                <span>statuses</span>
-                <span class="info">optional</span>
-              </td>
-              <td>
-                List of status URIs.
-                <a href="/api/types/statuses/">Learn more about statuses</a>.
-              </td>
-            </tr>
-          </tbody>
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Type name.
+      </td>
+    </tr>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>properties</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of property URIs. 
+      <a href="/api/types/properties/">Learn more about properties</a>.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>functions</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of function URIs.
+      <a href="/api/types/functions/">Learn more about functions</a>.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>statuses</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of status URIs.
+      <a href="/api/types/statuses/">Learn more about statuses</a>.
+    </td>
+  </tr>
+</tbody>
         </table>
 
 <h4>Example Request</h4>
@@ -383,14 +381,23 @@ In this example the resource IDs are identified from friendly names.
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-type-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/types.json 
-     -d '{ "name": "Light", 
-           "properties": ["https://api.lelylan.com/properties/:status"],
-           "functions":  ["https://api.lelylan.com/functions/:turn-on",
-                          "https://api.lelylan.com/functions/:turn-off"],
-           "statuses":   ["https://api.lelylan.com/statuses/:on",
-                          "https://api.lelylan.com/statuses/:off"]
-           "categories": ["https://api.lelylan.com/categories/:lighting"],
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/types \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ 
+           "name": "Dimmer",
+           "properties": [ 
+             "http://api.lelylan.com/properties/&lt;status&gt;",
+             "http://api.lelylan.com/properties/&lt;intensity&gt;"
+           ],
+           "functions": [
+             "http://api.lelylan.com/functions/&lt;turn-on&gt;",
+             "http://api.lelylan.com/functions/&lt;turn-off&gt;",
+             "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
+           ],
+           "statuses": [ 
+             "http://api.lelylan.com/statuses/&lt;setting-intensity&gt;"
+           ]
          }'</code></pre>
     </div>
   </div>
@@ -409,7 +416,7 @@ In this example the resource IDs are identified from friendly names.
 <h4>Example header response</h4>
 
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
-Location: https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1</code></pre></div>
+Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -431,7 +438,7 @@ Location: https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1</code></pre></d
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  https://api.lelylan.com/types/:id</code></pre>
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/types/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -499,11 +506,10 @@ Location: https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1</code></pre></d
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-type-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1.json 
-     -d '{ "name": "RGB Light", 
-           "properties": ["https://api.lelylan.com/properties/:status",
-                          "https://api.lelylan.com/properties/:rgb"]
-         }'</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/types/5042234270eda61200000006 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ "name": "Dimmer RBG" }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-type-js">
@@ -549,7 +555,7 @@ all previous connected resources are replaced.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/types/:id</code></pre>
+<pre><code class="no-highlight">DELETE http://api.lelylan.com/types/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -578,7 +584,9 @@ all previous connected resources are replaced.
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-type-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/types/4dece6f3d033a9b9a90000a1.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/types/5042234270eda61200000006 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-type-js">

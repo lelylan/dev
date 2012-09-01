@@ -77,7 +77,8 @@ Lelylan gives you two ways to measure energy consumptions.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-consumption-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/consumptions/50424e696de0741000000004 \
+    -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-consumption-javascript">
@@ -99,15 +100,15 @@ Lelylan gives you two ways to measure energy consumptions.
 <h4 id="consumption-representation">Example body response</h4>
 
 <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/consumptions/4dff4417d033a980c700001c",
-  "id": "4dff4417d033a980c700001c",
-  "device": { "uri": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1" },
+  "uri": "http://api.lelylan.com/consumptions/50424e696de0741000000004",
+  "id": "50424e696de0741000000004",
+  "device": { "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1" },
   "type": "durational",
   "value": "0.05",
   "unit": "kwh",
-  "occur_at": "2011-06-20 14:58:57 +0200",
-  "end_at": "2011-06-20 14:59:57 +0200",
-  "duration": "60.0"
+  "occur_at": "2012-08-01T20:00:00Z",
+  "end_at": "2012-08-01T20:00:30Z",
+  "duration": 30
 }</code></pre></div>
 
 <h4>Body Response explained</h4>
@@ -120,7 +121,7 @@ Lelylan gives you two ways to measure energy consumptions.
   <dd><span>value</span> - Energy consumption value.</dd>
   <dd><span>unit</span> - Energy consumption unit.</dd>
   <dd><span>occur_at</span> - Time the consumption is taken.</dd>
-  <dd><span>end_to</span> - Time the consumption validity ends. Present 
+  <dd><span>end_at</span> - Time the consumption validity ends. Present 
     only in <a href="#durational">durational consumptions</a>. 
   </dd>
   <dd><span>duration</span> - Time span in seconds where the consumption is valid. Present 
@@ -232,7 +233,8 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-consumptions-curl">
-    <div class="preview"><pre><code class="no-highlight"> curl -L https://api.lelylan.com/consumptions.json?type=durational</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/consumptions?type=durational \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-consumptions-javascript">
@@ -336,7 +338,7 @@ Lelylan gives you two ways to measure energy consumptions.
     </tr>
     <tr>
       <td class="parameter">
-        <span>end_to</span>
+        <span>end_at</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -379,14 +381,16 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <div class="tab-content">
   <div class="tab-pane active" id="create-an-instantaneous-consumption-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X POST https://housy.lelylan.com/consumptions.json
+    <div class="preview"><pre><code class="no-highlight">curl -X POST http://api.lelylan.com/consumptions \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
      -d '{
-          "type": "instantaneous"
-          "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
-          "value": "125.55",
-          "unit": "kwh",
-          "occur_at": "2025-08-17 07:49:38 +0200"
-        }'</code></pre></div>
+           "type": "instantaneous",
+           "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
+           "value": "23.42",
+           "unit": "kwh",
+           "occur_at": "2012-08-01T20:00:00Z"
+         }'</code></pre></div>
   </div>
   <div class="tab-pane" id="create-an-instantaneous-consumption-javascript">
     <div class="preview">
@@ -413,16 +417,17 @@ Lelylan gives you two ways to measure energy consumptions.
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-durational-consumption-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST https://housy.lelylan.com/consumptions.json
-     -d '{
-          "type": "durational"
-          "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
-          "value": "0.05",
-          "unit": "kwh",
-          "occur_at": "2012-07-09T08:35:57Z",
-          "end_at": "2012-07-09T08:38:57Z",
-          "duration": "180" 
-        }'</code></pre>
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/consumptions \
+      -H 'Authorization: Bearer &lt;token&gt;' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "type": "durational",
+            "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
+            "value": "0.05",
+            "unit": "kwh",
+            "occur_at": "2012-08-01T20:00:00Z",
+            "end_at": "2012-08-01T20:00:30Z"
+         }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-durational-consumption-javascript">
@@ -528,7 +533,7 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
     </tr>
     <tr>
       <td class="parameter">
-        <span>end_to</span>
+        <span>end_at</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -560,8 +565,10 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-consumption-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json
-     -d '{ "value": "0.10" }</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/consumptions/50424e696de0741000000004 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ "value": "0.1" }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-consumption-javascript">
@@ -629,7 +636,9 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-consumption-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/consumptions/4dece6f3d033a9b9a90043e9.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/consumptions/50424e696de0741000000004 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-consumption-javascript">

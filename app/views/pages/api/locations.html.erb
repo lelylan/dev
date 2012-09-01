@@ -36,7 +36,7 @@ in turn, contains many rooms and so on).
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/locations/:id</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/locations/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -66,7 +66,8 @@ in turn, contains many rooms and so on).
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-location-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl https://api.lelylan.com/loactions/4dece6f3d033a9b9a90000d1.json</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/locations/50427cef14a0d61200000001 \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-javascript">
@@ -88,39 +89,35 @@ in turn, contains many rooms and so on).
 <h4 id="location-representation">Example body response</h4>
 
 <div class="preview highlight"><pre><code>{
-  "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1",
-  "id": "4dece6f3d033a9b9a90000d1",
-  "name": "First floor",
+  "uri": "http://api.lelylan.com/locations/50427d2414a0d61200000002",
+  "id": "50427d2414a0d61200000002",
+  "name": "Ground floor",
   "type": "floor",
-  "created_at": "2012-07-31T17:35:14Z",
-  "updated_at": "2012-07-31T17:35:15Z",
+  "created_at": "2012-09-01T21:24:52Z",
+  "updated_at": "2012-09-01T21:24:52Z",
   "parent": {
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000e1",
-    "id": "4dece6f3d033a9b9a90000e1",
-    "name": "Summer house"
+    "uri": "http://api.lelylan.com/locations/50427cef14a0d61200000001",
+    "id": "50427cef14a0d61200000001",
+    "name": "Country house"
   },
   "ancestors": [{
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000e2",
-    "id": "4dece6f3d033a9b9a90000e2",
-    "name": "Summer house block" 
-    }, {
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000e1",
-    "id": "4dece6f3d033a9b9a90000e1",
-    "name": "Summer house"
+    "uri": "http://api.lelylan.com/locations/50427cef14a0d61200000001",
+    "id": "50427cef14a0d61200000001",
+    "name": "Country house"
   }],
   "locations": [{
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d2",
-    "id": "4dece6f3d033a9b9a90000d2",
-    "name": "Bed Room"
-    }, {
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d3",
-    "id": "4dece6f3d033a9b9a90000d3",
+    "uri": "http://api.lelylan.com/locations/50427d5914a0d60a00000001",
+    "id": "50427d5914a0d60a00000001",
     "name": "kitchen"
+  }, {
+    "uri": "http://api.lelylan.com/locations/50427d7314a0d61000000001",
+    "id": "50427d7314a0d61000000001",
+    "name": "Bedroom"
   }],
   "devices": [{
-    "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
-    "id": "4dece6f3d033a9b9a90000a1",
-    "name": "Floor light"
+    "uri": "http://api.lelylan.com/devices/50427de78f76ad1000000001",
+    "id": "50427de78f76ad1000000001",
+    "name": "Entrance Light"
   }]
 }</code></pre>
 </div>
@@ -198,7 +195,7 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/locations/:id/descendants</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/locations/:id/descendants</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -228,7 +225,8 @@ Returns a list of descendent locations for a given location identified from its 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-descendants-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl https://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1/descendants.json</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/locations/50427d2414a0d61200000002/descendants \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-descendants-javascript">
@@ -249,33 +247,33 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4 id="location-representation">Example body response</h4>
 
-<div class="preview highlight"><pre><code>[{
-  "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d2",
-  "name": "Bedroom",
-  "id": "4dece6f3d033a9b9a90000d2",
+<div class="preview"><pre><code>[{
+  "uri": "http://api.lelylan.com/locations/50427d5914a0d60a00000001",
+  "id": "50427d5914a0d60a00000001",
+  "name": "kitchen",
   "parent": {
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1",
-    "id": "4dece6f3d033a9b9a90000d1",
+    "uri": "http://api.lelylan.com/locations/50427d2414a0d61200000002",
+    "id": "50427d2414a0d61200000002",
     "name": "Ground floor"
   },
   "devices": [{
-    "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a2",
-    "id": "4dece6f3d033a9b9a90000a2",
-    "name": "Bedroom light"
+    "uri": "http://api.lelylan.com/devices/50427de78f76ad1000000001",
+    "id": "50427de78f76ad1000000001",
+    "name": "Kitchen Light"
   }]
 }, {
-  "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000d3",
-  "name": "Kitchen",
-  "id": "4dece6f3d033a9b9a90000d3",
+  "uri": "http://api.lelylan.com/locations/50427d7314a0d61000000001",
+  "id": "50427d7314a0d61000000001",
+  "name": "Bedroom",
   "parent": {
-    "uri": "http://api.lelylan.com/locations/4dece6f3d033a9b9a90000a1",
-    "id": "4dece6f3d033a9b9a90000a1",
+    "uri": "http://api.lelylan.com/locations/50427d2414a0d61200000002",
+    "id": "50427d2414a0d61200000002",
     "name": "Ground floor"
   },
   "devices": [{
-    "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a2",
-    "id": "4dece6f3d033a9b9a90000a2",
-    "name": "Kitchen light"
+    "uri": "http://api.lelylan.com/devices/50427dcf8f76ad0a00000001",
+    "id": "50427dcf8f76ad0a00000001",
+    "name": "Bedroom light"
   }]
 }]</code></pre>
 </div>
@@ -306,7 +304,7 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/locations</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/locations</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -344,8 +342,8 @@ Returns a list of descendent locations for a given location identified from its 
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-locations-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/locations.json?type=room
-</code></pre></div>
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/locations \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
   </div>
   <div class="tab-pane" id="get-all-locations-javascript">
     <div class="preview">
@@ -388,7 +386,7 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  https://api.lelylan.com/locations</code></pre>
+<pre><code class="no-highlight">POST  http://api.lelylan.com/locations</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -455,15 +453,15 @@ Returns a list of descendent locations for a given location identified from its 
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-location-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/locations.json
-     -d '{ "name": "Bedroom",
-           "into": "https://api.lelylan.com/locations/:floor",
-           "devices": [
-             https://api.lelylan.com/devices/:light"
-             https://api.lelylan.com/devices/:dimmer",
-             https://api.lelylan.com/devices/:rollershutter",
-           ]
-         }'</code></pre>
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/locations \
+    -H 'Authorization: Bearer &lt;token&gt;' \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "into": "http://api.lelylan.com/locations/50427d2414a0d61200000002",
+          "name": "Bedroom",
+          "type": "room",
+          "devices": ["http://api.lelylan.com/devices/50427de78f76ad1000000001"]
+        }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-location-javascript">
@@ -481,7 +479,7 @@ Returns a list of descendent locations for a given location identified from its 
 <h4>Example header response</h4>
 
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
-Location: https://api.lelylan.com/locations/41</code></pre></div>
+Location: http://api.lelylan.com/locations/41</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -503,7 +501,7 @@ Location: https://api.lelylan.com/locations/41</code></pre></div>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  https://api.lelylan.com/locations/:id</code></pre>
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/locations/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -577,14 +575,10 @@ Location: https://api.lelylan.com/locations/41</code></pre></div>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-location-curl">
-    <pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1.json
-     -d '{ "name": "Ground floor bedroom",
-           "into": "https://api.lelylan.com/locations/:ground",
-           "devices": [
-             "https://api.lelylan.com/devices/:powermeter",
-             "https://api.lelylan.com/devices/:rgb"
-           ]
-         }' </code></pre>
+    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/locations/50427d5914a0d60a00000001 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ "name": "Babies bedroom" }'</code></pre>
   </div>
   <div class="tab-pane" id="update-a-location-javascript">
     <div class="preview">
@@ -624,13 +618,13 @@ When updating <code>devices</code> all previous connected devices are replaced. 
 
 <p>
 Delete a location identified from its ID and returns extended information for it.</br>
-All direct children becomes root elements (without a parent). Connected devices are not
-deleted.
+All direct children becomes root elements (without a parent). </br>
+Connected devices are not deleted.
 </p>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/locations/:id</code></pre>
+<pre><code class="no-highlight">DELETE  http://api.lelylan.com/locations/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -659,7 +653,9 @@ deleted.
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-location-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/locations/4dece6f3d033a9b9a90000d1.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">>curl -X DELETE http://api.lelylan.com/locations/50427d5914a0d60a00000001 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-javascript">

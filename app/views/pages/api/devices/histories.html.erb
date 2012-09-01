@@ -38,7 +38,7 @@ patterns to improve the way you live your house.
 
   <h4>Resource URL</h4>
   <div class="preview">
-  <pre><code class="no-highlight">GET https://api.lelylan.com/histories/:id</code></pre>
+  <pre><code class="no-highlight">GET http://api.lelylan.com/histories/:id</code></pre>
   </div>
 
   <h4>Parameters</h4>
@@ -68,7 +68,8 @@ patterns to improve the way you live your house.
   <div class="tab-content">
     <div class="tab-pane active" id="get-a-history-curl">
       <div class="preview">
-        <pre><code class="no-highlight">curl https://api.lelylan.com/histories/4dece6f3d033a9b9a90000a9.json</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/histories/5042490a6de0740d00000004 \
+-H 'Authorization: Bearer &lt;token&gt;'</code></pre>
       </div>
     </div>
     <div class="tab-pane" id="get-a-history-js">
@@ -90,14 +91,14 @@ patterns to improve the way you live your house.
   <h4 id="history-representation">Example body response</h4>
 
   <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/histories/4dff3172d033a9806300034f",
-  "id": "4dff3172d033a9806300034f",
-  "device": { "uri": "https://api.lelylan.com/devices/4dff3172d033a9806300001a" },
-  "created_at": "2012-07-09T08:35:57Z",
-  "properties": [{ 
-    "uri": "https://api.lelylan.com/properties/4d72d033a98063efd30044",
+  "uri": "http://api.lelylan.com/histories/5042490a6de0740d00000004",
+  "id": "5042490a6de0740d00000004",
+  "device": { "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001" },
+  "created_at": "2012-09-01T17:42:34Z",
+  "properties": [{
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "value": "100",
-    "physical": "25" 
+    "physical": "50"
   }]
 }</code></pre></div>
 
@@ -129,7 +130,7 @@ patterns to improve the way you live your house.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/histories</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/histories</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -223,8 +224,8 @@ patterns to improve the way you live your house.
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-histories-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl GET https://api.lelylan.com/histories.json?
-         device=https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/histories \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-histories-js">
