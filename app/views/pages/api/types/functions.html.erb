@@ -34,7 +34,7 @@ your life.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/functions/:id</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -64,7 +64,7 @@ your life.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-function-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-function-javascript">
@@ -86,17 +86,18 @@ your life.
 <h4 id="function-representation">Example body response</h4>
 
 <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/functions/4e01f110d033a98ccf00003a",
-  "id": "4e01f110d033a98ccf00003a",
+  "uri": "http://api.lelylan.com/functions/504210df70eda60a00000003",
+  "id": "504210df70eda60a00000003",
   "name": "Set intensity",
-  "created_at": "2012-08-14T15:13:05Z",
-  "updated_at": "2012-08-14T15:13:05Z",
-  "properties": [
-    { "uri": "https://api.lelylan.com/properties/4e01c65ad033a98ba3000018",
-      "value": "on" },
-    { "uri": "https://api.lelylan.com/properties/4e01c65ad033a98ba3000019",
-      "value": null },
-  ]
+  "created_at": "2012-09-01T13:42:55Z",
+  "updated_at": "2012-09-01T13:42:55Z",
+  "properties": [{
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+    "value": "on"
+  }, {
+    "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+    "value": null
+  }]
 }</code></pre></div>
 
 <h4>Body response explained</h4>
@@ -117,7 +118,7 @@ your life.
 <p>
 <span class="label notice">Notice</span>
 If you don't set a property <code>value</code> the convention is that that property should
-be filled to the user. For example the function 'set intensity' requires the intensity property
+be filled by the user. For example the function 'set intensity' requires the intensity property
 to be filled by the user. For this reason its value should be <code>null</code>.
 </p>
 
@@ -134,8 +135,8 @@ to be filled by the user. For this reason its value should be <code>null</code>.
 <h4>Resource URL</h4>
 <div class="preview">
 <pre><code class="no-highlight"># created functions
-GET https://api.lelylan.com/functions</code><code class="no-highlight"># all functions
-GET https://api.lelylan.com/functions/public</code></pre>
+GET http://api.lelylan.com/functions</code><code class="no-highlight"># all functions
+GET http://api.lelylan.com/functions/public</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -183,7 +184,8 @@ GET https://api.lelylan.com/functions/public</code></pre>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-funcitons-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/functions.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/functions \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-funcitons-javascript">
@@ -229,7 +231,7 @@ GET https://api.lelylan.com/functions/public</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST https://api.lelylan.com/functions</code></pre>
+<pre><code class="no-highlight">POST http://api.lelylan.com/functions</code></pre>
 </div>
 </div>
 
@@ -288,11 +290,14 @@ GET https://api.lelylan.com/functions/public</code></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-function-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/functions.json 
-     -d '{ "name": "Set intensity",
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/functions \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ 
+           "name": "Set intensity",
            "properties": [
-             { "uri": "https://api.lelylan.com/properties/:status", "value": "on"},
-             { "uri": "https://api.lelylan.com/properties/:intensity" }
+             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "value": "on"},
+             { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;" }
            ]
          }'</code></pre>
     </div>
@@ -312,7 +317,7 @@ GET https://api.lelylan.com/functions/public</code></pre>
 <h4>Example header response</h4>
 
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
-Location: https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre>
+Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 </div>
 
 <h4>Example body response</h4>
@@ -335,7 +340,7 @@ Location: https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  https://api.lelylan.com/functions/:id</code></pre>
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -400,8 +405,17 @@ Location: https://api.lelylan.com/functions/4e01f110d033a98ccf00003a</code></pre
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-function-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json
-     -d '{ "name": "Set intensity" }</code></pre>
+    <div class="preview"><pre><code class="no-highlight">
+curl -X PUT http://api.lelylan.com/functions/504210df70eda60a00000003 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ 
+           "name": "Set intensity to 50%",
+           "properties": [
+             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "value": "on"},
+             { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;", "value": "50" }
+           ]
+         }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-function-javascript">
@@ -446,7 +460,7 @@ Connected properties are not deleted.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">DELETE https://api.lelylan.com/functions/:id</code></pre>
+  <pre><code class="no-highlight">DELETE http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -475,7 +489,9 @@ Connected properties are not deleted.
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-function-curl">
-      <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/functions/4e01f110d033a98ccf00003a.json</code></pre>
+      <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/functions/504210df70eda60a00000003 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Length: 0'</code></pre>
   </div>
 </div>
 <div class="tab-pane" id="delete-a-function-javascript">

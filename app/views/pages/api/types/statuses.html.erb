@@ -35,7 +35,7 @@ moment of its life is to use the status API.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">GET https://api.lelylan.com/statuses/:id</code></pre>
+  <pre><code class="no-highlight">GET http://api.lelylan.com/statuses/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -65,7 +65,7 @@ moment of its life is to use the status API.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-status-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl https://api.lelylan.com/statuses/4e035bd3d033a9e891000035.json</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-status-js">
@@ -87,20 +87,20 @@ moment of its life is to use the status API.
 <h4 id="status-representation">Example body response</h4>
 
 <div class="preview"><pre><code>{
-  "uri": "https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035",
-  "id": "4e035bd3d033a9e891000035",
+  "uri": "http://api.lelylan.com/statuses/5042176370eda61200000004",
+  "id": "5042176370eda61200000004",
   "name": "Setting intensity",
   "pending": true,
-  "created_at": "2012-08-14T15:52:10Z",
-  "updated_at": "2012-08-14T15:52:10Z",
-  "properties": [{
-    "uri": "https://housy.lelylan.com/properties/:status",
+  "created_at": "2012-09-01T14:10:43Z",
+  "updated_at": "2012-09-01T14:10:43Z",
+  "properties":[{
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "values": ["on"],
     "range": null
   }, {
-    "uri": "https://housy.lelylan.com/properties/:intensity",
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
     "values": null,
-    "range": {"min": "0", "max": "100"}
+    "range": { "min": "0","max": "100" }
   }]
 }</code></pre>
 </div>
@@ -156,8 +156,8 @@ it through client side <a href="/api/devices/#status">libraries</a>.
   <h4>Resource URL</h4>
   <div class="preview">
   <pre><code class="no-highlight"># created statuses
-GET https://api.lelylan.com/statuses</code><code class="no-highlight"># all statuses
-GET https://api.lelylan.com/statuses/public</code></pre>
+GET http://api.lelylan.com/statuses</code><code class="no-highlight"># all statuses
+GET http://api.lelylan.com/statuses/public</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -205,7 +205,8 @@ GET https://api.lelylan.com/statuses/public</code></pre>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-statuses-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -L https://api.lelylan.com/statuses.json</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/statuses \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-statuses-js">
@@ -251,7 +252,7 @@ GET https://api.lelylan.com/statuses/public</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  https://api.lelylan.com/statuses</code></pre>
+<pre><code class="no-highlight">POST  http://api.lelylan.com/statuses</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -335,13 +336,19 @@ GET https://api.lelylan.com/statuses/public</code></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-status-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST https://api.lelylan.com/statuses.json
-     -d '{ "name": "Setting intensity",
-           "pending": "true",
-           "properties": [{
-             "uri": "https://api.lelylan.com/properties/4dd4d3ecd033a92a0a180062",
-             "range": { "min": "0", "max": "100" }
-           }]
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/statuses
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "Setting intensity",
+           "pending": true,
+           "properties": [{ 
+              "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
+              "values": ["on"]
+            },{ 
+              "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
+              "range": { "min": "0", "max": "100" }
+            }]
          }'</code></pre>
     </div>
   </div>
@@ -360,7 +367,7 @@ GET https://api.lelylan.com/statuses/public</code></pre>
 <h4>Example header response</h4>
 
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
-Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pre></div>
+Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -382,7 +389,7 @@ Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pr
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  https://api.lelylan.com/statuses/:id</code></pre>
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/statuses/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -474,14 +481,20 @@ Location: https://housy.lelylan.com/statuses/4e035bd3d033a9e891000035</code></pr
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-status-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a.json
-     -d '{ "name": "Max Intensity",
-           "pending": "false",
-           "properties": [{
-             "uri": "https://api.lelylan.com/properties/4dd4d3ecd033a92a0a180062", 
-             "values": ["100"]
-           }]
-        }'</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/statuses/5042176370eda61200000004 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ 
+           "name": "Lowering intensity",
+           "pending": true,
+           "properties": [{ 
+              "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
+              "values": ["on"]
+            },{ 
+              "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
+              "range": { "min": "0", "max": "25" }
+            }]
+         }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-status-js">
@@ -526,7 +539,7 @@ Connected properties are not deleted.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/statuses/:id</code></pre>
+<pre><code class="no-highlight">DELETE http://api.lelylan.com/statuses/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -555,7 +568,9 @@ Connected properties are not deleted.
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-status-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE https://api.lelylan.com/statuses/4e01f110d033a98ccf00003a</code></pre>
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/statuses/5042176370eda61200000004 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Length: 0'</code></pre>
   </div>
 </div>
 <div class="tab-pane" id="delete-a-status-js">

@@ -32,7 +32,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">GET https://api.lelylan.com/properties/:id</code></pre>
+  <pre><code class="no-highlight">GET http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -122,8 +122,8 @@ property values. No validations on this list are applied when device properties 
 <h4>Resource URL</h4>
 <div class="preview">
 <pre><code class="no-highlight"># created properties
-GET https://api.lelylan.com/properties</code><code class="no-highlight"># all properties
-GET https://api.lelylan.com/properties/public</code></pre>
+GET http://api.lelylan.com/properties</code><code class="no-highlight"># all properties
+GET http://api.lelylan.com/properties/public</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -216,7 +216,7 @@ GET https://api.lelylan.com/properties/public</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  https://api.lelylan.com/properties</code></pre>
+<pre><code class="no-highlight">POST  http://api.lelylan.com/properties</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -289,7 +289,7 @@ GET https://api.lelylan.com/properties/public</code></pre>
 <h4>Example header response</h4>
 
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
-Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pre>
+Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
 </div>
 
 <h4>Example body response</h4>
@@ -312,7 +312,7 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  https://api.lelylan.com/properties/:id</code></pre>
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -410,7 +410,7 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/properties/:id</code></pre>
+<pre><code class="no-highlight">DELETE http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -440,7 +440,7 @@ Location: https://api.lelylan.com/properties/4e01c65ad033a98ba3000018</code></pr
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-property-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/5041e9e9230de31300000001.json \
-     -H 'Authorization: Bearer &lt;token&gt'
+     -H 'Authorization: Bearer &lt;token&gt' \
      -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
