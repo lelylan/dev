@@ -24,7 +24,7 @@ titles:
   'api/realtime': Realtime
   'api/physicals': Physical devices
   'community': Community
-  'community/clients': Clients Libraries
+  'community/clients': Client Libraries
   'community/support': Support
   'community/faq': Frequently Asked Questions
 code_pages:
