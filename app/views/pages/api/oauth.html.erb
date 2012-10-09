@@ -73,7 +73,7 @@ Lelylan supports the following flows.
 <h2><a name="authorization-code">Authorization Code</a></h2>
 
 <p>
-The Authorization Code flow is made up from two parts. In the first your application
+The Authorization Code flow is made up from two parts. At first your application
 asks to the user the permission to access their data. If the user approves Lelylan
 sends to the client an authorization code. In the second part, the client POST the
 authorization code along with its client secret to the Lelylan in order to get the
@@ -108,7 +108,7 @@ Redirect the user to the authorization endpoint.
 </dl>
 
 <p>
-If the user grants the access Lelylan redirects the user to <code>redirect_uri</code>
+If the user grants the access, Lelylan redirects the user to <code>redirect_uri</code>
 and appends the authorization code in the query string. This code will be used to get
 the final access token.
 </p>
@@ -188,7 +188,7 @@ The flow start redirecting the user to the authorization endpoint.
 </dl>
 
 <p>
-If the user grants the access Lelylan redirects the user to <code>redirect_uri</code>
+If the user grants the access, Lelylan redirects the user to <code>redirect_uri</code>
 and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment</a>.
 </p>
 
@@ -200,7 +200,7 @@ and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragme
 
 <p>
 If your application is pure Javascript, you can easily parse the token from the URI. 
-If your application is a native phone app perform the flow in an embedded webview and
+If your application is a native phone app you perform the flow in an embedded webview and
 redirect the user to a dummy website where you can grab the token from the URL.
 </p>
 
@@ -211,7 +211,7 @@ redirect the user to a dummy website where you can grab the token from the URL.
 <h2><a name="password-credentials">Password Credentials</a></h2>
 
 <p>
-This flow is suitable in cases where the resource owner has a trust relationship
+This flow is suitable when the resource owner has a trust relationship
 with the client, such as its computer operating system or a highly privileged application.
 Use this flow only when other flows are not viable or when you need a fast way to test
 your application.
@@ -254,7 +254,7 @@ Get the access token (remember to basic authenticate with client id and client s
 
 <p>
 <span class="label notice">Notice</span>
-Lelylan take special care for applications using this flow and can block it whenever
+Lelylan cares about applications using this flow and can block it whenever
 the security for the final user is compromised.
 </p>
 
@@ -397,8 +397,8 @@ Scopes let you specify what can and can't be accessed.
 </table>
 
 <p>
-In the following request an application requires read access for all resources and write
-access for devices. You can specify multiple scopes by separating them by a space.
+In the following request an application requires read access for all resources and writes
+access for devices. You can specify multiple scopes by separating them with a space.
 <p>
 
 <div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
