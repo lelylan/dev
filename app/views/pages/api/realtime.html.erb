@@ -1,18 +1,627 @@
 <article>
 
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#realtime">Real-time</a></td></tr>
+    <tr><td>&raquo; <a href="#how-to-subscribe">How to subscribe</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#register">Register a client</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#callback">Create a callback URL</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#subscriptions">Subscriptions</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#how-to-create-a-subscription">How to create a subscription</a></td></tr>
+    <tr><td>&raquo; <a href="#subscriptions-api">Subscriptions API</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#get-a-subscription">Get a subscription</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#get-all-subscriptions">Get client subscriptions</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#create-a-subscription">Create a subscription</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#update-a-subscription">Update a subscription</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#delete-a-subscription">Delete a subscription</a></td></tr>
+  </tbody>
+</table>
+</aside>
+
 <h1 class="call"><a name="realtime"><%= title %></a></h1>
 
 <span class="label warning">Coming soon</span></br>
 
 <p>
-By adopting parts of the
-<a href="http://pubsubhubbub.googlecode.com/">Pubsubhubub protocol</a>
-protocol we want to create a system where your application gets notified in realtime
-when changes happens.
-Instead of polling Lelylan servers to check to see if there are updates, you can
-rely upon our servers to POST to a callback URL on your server when new data is
-available. Developers running servers like Node.js can provide real-time experiences
-of events to their users.
+Real-time Lelylan updates provide your application with instant notifications of 
+what happens to Lelylan and the physical world. The most interesting way to view the world
+is live, as it happens. Through the use of a couple simple web hooks, we've been able to create
+a system where your application gets notified of changes as they happen.
+</p>
+
+<p>
+Our real-time API serves a couple of basic needs. First, instead of polling the Lelylan servers
+to check to see what's happening, we POST to your servers new data when available. Second, 
+developers running servers like Node.js can provide real-time experiences of events to their users.
+We're most excited to see what developers will create with live data at their fingertips.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="how-to-subscribe">How to subscribe</a></h1>
+
+<p>
+Using the subscription services you can get real-time updates by subscribing to one (or more)
+<strong>resource</strong> and to one (or more) related <strong>event</strong>.
+</p>
+
+<h3 class="call"><a name="register">Register a client</a></h3>
+
+<p>
+To create a subscription, you must first register a 
+<%= link_to 'client', "#{people_host}/oauth/applications" %>
+to obtain a client_id and client_secret.
+</p>
+
+<h3 class="call"><a name="callback">Create a callback URL</a></h3>
+
+<p>
+When we have new updates to send your server. This callback URL must support POST methods so
+that when we have new data we'll POST this data to your callback.
+</p>
+
+<h3 class="call"><a name="subscriptions">Subscriptions</a></h3>
+
+<p>
+The following table describes the available resources and events you can subscribe at.
+</p>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th style="width: 110px;">RESOURCE</th>
+      <th style="width: 150px;">EVENTS</th>
+      <th>DESCRIPTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <span class="label warning">status</span>
+      </td>
+      <td>
+        <span class="label warning">update</span>
+      </td>
+      <td>
+        Receive notifications when a device changes its status by interacting with the physical
+        device, executing a <a href="/api/devices#execute-a-function">funcion</a>
+        or changing its <a href="/api/devices#update-properties">properties</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="label warning">consumption</span>
+      </td>
+      <td>
+        <span class="label warning">create</span>
+      </td>
+      <td>
+        Receive notifications when a <a href="/api/devices/consumptions">device consumption</a>
+        is created.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="label warning">devices</span>
+      </td>
+      <td>
+        <span class="label warning">create</span>
+        <span class="label warning">update</span>
+        <span class="label warning">delete</span>
+      </td>
+      <td>
+        Receive notifications when a <a href="/api/devices">device</a> is created, updated or removed.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="label warning">locations</span>
+      </td>
+      <td>
+        <span class="label warning">create</span>
+        <span class="label warning">update</span>
+        <span class="label warning">delete</span>
+      </td>
+      <td>
+        Receive notifications when a <a href="/api/locations">location</a> is created, updated or removed.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="label warning">type</span>
+      </td>
+      <td>
+        <span class="label warning">create</span>
+        <span class="label warning">update</span>
+        <span class="label warning">delete</span>
+      </td>
+      <td>
+        Receive notifications when a <a href="/api/types">type</a> is created, updated or removed.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="call"><a name="how-to-create-a-subscription">How to create a subscription</a></h3>
+
+<p>
+  To create a subscription make a POST request to the subscriptions endpoint.
+  Here an example where we subscribe to all devices status updates.
+  Check out the <a href="#subscriptions-api">subscriptions API</a> to know more.
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-subscription-example-curl" data-toggle="tab" class="curl">Curl</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-subscription-example-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/subscriptions \
+     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -H 'Content-Type: application/json' \
+     -d '{
+          "resources": ["status"],
+          "events": ["update"],
+          "callback_uri": "http://callback.com/lelylan"
+        }'</code></pre>
+    </div>
+  </div>
+</div>
+
+<p>
+<span class="label notice">Notice</span>
+Subscriptions are always referred to a specific 
+<%= link_to 'client', "#{people_host}/oauth/applications" %>.
+To make the request work, basic authenticate your request using the application 
+client ID and the client secret.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="subscriptions-api">Subscriptions API</a></h1>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="get-a-subscription">GET /subscriptions/:id</a></h2>
+
+<p>
+  Returns extended information for a given subscription identified from its ID.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">GET http://api.lelylan.com/subscriptions/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired subscription.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-subscription-curl">
+    <div class="preview">
+    <pre><code class="no-highlight">curl http://api.lelylan.com/subscriptions/50427cef14a0d61200000001 \
+     -u &lt;client_id&gt;:&lt;client_secret&gt;</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-subscription-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-subscription-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4 id="subscription-representation">Example body response</h4>
+
+<div class="preview highlight"><pre><code>{
+  "uri": "http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026",
+  "id": "508acdffd033a9ea77000026",
+  "client_uri": "http://people.lelylan.com/oauth/applications/508acdffd033a9ea77000025",
+  "resources": ["status"],
+  "events": ["update"],
+  "callback_uri": "http://callback.com/lelylan",
+  "created_at": "2012-10-26T17:53:03Z",
+  "updated_at": "2012-10-26T17:53:03Z"
+}</code></pre>
+</div>
+
+<h4>Body Response explained</h4>
+
+<dl>
+  <dd><span>uri</span> - Subscription URI.</dd>
+  <dd><span>id</span> - Subscription ID.</dd>
+  <dd><span>client_uri</span> - Client application URI.</dd>
+  <dd><span>resources</span> - Notified resources. See <a href="#subscriptions">available resources</a>.</dd>
+  <dd><span>events</span> - Notified events. See <a href="#subscriptions">available events</a>.</dd>
+  <dd><span>callback_uri</span> - Callback URI receiving the real-time updates.</dd>
+</dl>
+
+</article>
+
+<br>
+
+<article>
+
+<h2 class="call"><a name="get-all-subscriptions">GET /subscriptions</a></h2>
+
+<p>Returns a list of all subscriptions related to a client.</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">GET http://api.lelylan.com/subscriptions</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>resource</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Resource name to search. See <a href="#subscriptions">available resources</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>event</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Event name to search. See <a href="#subscriptions">available events</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-subscriptions-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-subscriptions-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-subscriptions-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-subscriptions-curl">
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/subscriptions \
+     -u &lt;client_id&gt;:&lt;client_secret&gt;</code></pre></code></pre></div>
+  </div>
+  <div class="tab-pane" id="get-all-subscriptions-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-subscriptions-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<div class="preview highlight"><pre><code class="no-highlight">[
+  { # subscription representation }, 
+  { # subscription representation },
+  ...
+]</code></pre></div>
+
+<p>
+  See <a href="#subscription-representation">subscription representation</a> for body response.
+</p>
+</article>
+
+<br/>
+
+<article>
+
+<h2 class="call"><a name="create-a-subscription">POST /subscriptions</a></h2>
+
+<p>
+  Create a subscription and returns extended information for it.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">POST  http://api.lelylan.com/subscriptions</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>resources</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        List of notified resources. See <a href="#subscriptions">available resources</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>events</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        List of notified events. See <a href="#subscriptions">available events</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>callback_uri</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Callback URI receiving the real-time updates.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-subscription-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/subscriptions \
+    -u &lt;client_id&gt;:&lt;client_secret&gt; \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "resources": ["device"],
+          "events": ["update"],
+          "callback_uri": "http://callback.com/lelylan"
+        }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-subscription-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-subscription-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#subscription-representation">subscription representation</a> for body response.
+</p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h2 class="call"><a name="update-a-subscription">PUT /subscriptions/:id</a></h2>
+
+<p>
+  Update a subscription identified from its ID and returns extended information for it.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/subscriptions/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired subscriptions.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>resources</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of notified resources. See <a href="#subscriptions">available resources</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>events</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of notified events. See <a href="#subscriptions">available events</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>callback_uri</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Callback URI receiving the real-time updates.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-subscription-curl">
+    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
+     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -H 'Content-Type: application/json' \
+     -d '{ 
+          "resources": ["device", "location", "types"],
+          "events": ["create", "update", "delete"]
+         }'</code></pre>
+  </div>
+  <div class="tab-pane" id="update-a-subscription-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-subscription-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div> 
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#subscription-representation">subscription representation</a> for body response.
+</p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h2 class="call"><a name="delete-a-subscription">DELETE /subscriptions/:id</a></h2>
+
+<p>
+Delete a subscription identified from its ID and returns extended information for it.</br>
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">DELETE  http://api.lelylan.com/subscriptions/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired subscription.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#delete-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-subscription-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
+     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -H 'Content-Length: 0'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-subscription-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-subscription-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
 </article>

@@ -99,6 +99,8 @@ body.description #section article{max-width:660px;}
 body.description #section h1.call{font-size: 36px;}
 body.description #section h1.call {margin:0; margin-bottom: 20px;}
 body.description #section h1.call a {padding-top:25px;}
+body.description #section h2.call a {padding-top:25px;}
+body.description #section h3.call a {padding-top:19px;}
 body.description #section h4{padding-top: 10px;}
 body.description #section h2 .nested{margin-left: 10px; font-size: 16px;}
 
