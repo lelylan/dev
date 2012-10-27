@@ -100,6 +100,8 @@ The following table describes the available resources and events you can subscri
       </td>
       <td>
         <span class="label warning">create</span>
+        <span class="label warning">update</span>
+        <span class="label warning">delete</span>
       </td>
       <td>
         Receive notifications when a <a href="/api/devices/consumptions">device consumption</a>
@@ -528,7 +530,7 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -H 'Content-Type: application/json' \
      -d '{ 
-          "resources": ["device", "location", "types"],
+          "resources": ["device", "location", "type"],
           "events": ["create", "update", "delete"]
          }'</code></pre>
   </div>
