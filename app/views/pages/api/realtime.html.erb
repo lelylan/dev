@@ -25,7 +25,7 @@
 <span class="label warning">Coming soon</span></br>
 
 <p>
-Real-time Lelylan updates provide your application with instant notifications of 
+Real-time Lelylan updates provide your application with instant notifications of
 what happens to Lelylan and the physical world. The most interesting way to view the world
 is live, as it happens. Through the use of a couple simple web hooks, we've been able to create
 a system where your application gets notified of changes as they happen.
@@ -33,7 +33,7 @@ a system where your application gets notified of changes as they happen.
 
 <p>
 Our real-time API serves a couple of basic needs. First, instead of polling the Lelylan servers
-to check to see what's happening, we POST to your servers new data when available. Second, 
+to check to see what's happening, we POST to your servers new data when available. Second,
 developers running servers like Node.js can provide real-time experiences of events to their users.
 We're most excited to see what developers will create with live data at their fingertips.
 </p>
@@ -54,7 +54,7 @@ Using the subscription services you can get real-time updates by subscribing to 
 <h3 class="call"><a name="register">Register a client</a></h3>
 
 <p>
-To create a subscription, you must first register a 
+To create a subscription, you must first register a
 <%= link_to 'client', "#{people_host}/oauth/applications" %>
 to obtain a client_id and client_secret.
 </p>
@@ -72,79 +72,138 @@ that when we have new data we'll POST this data to your callback.
 The following table describes the available resources and events you can subscribe at.
 </p>
 
-<table class="zebra-striped">
+<table class="zebra-striped lowcase">
   <thead>
     <tr>
       <th style="width: 110px;">RESOURCE</th>
-      <th style="width: 150px;">EVENTS</th>
+      <th style="width: 150px;">EVENT</th>
       <th>DESCRIPTION</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <span class="label warning">status</span>
+        <code>devices</code>
       </td>
       <td>
-        <span class="label warning">update</span>
+        <code>property-updated</code>
       </td>
       <td>
-        Receive notifications when a device changes its status by interacting with the physical
+        Receive notifications when a device changes its properties by interacting with the physical
         device, executing a <a href="/api/devices#execute-a-function">funcion</a>
-        or changing its <a href="/api/devices#update-properties">properties</a>.
+        or changing its <a href="/api/devices#update-properties">properties</a>. Use this event
+        to get realtime feedback about your device status.
       </td>
     </tr>
     <tr>
       <td>
-        <span class="label warning">consumption</span>
+        <code>devices</code>
       </td>
       <td>
-        <span class="label warning">create</span>
-        <span class="label warning">update</span>
-        <span class="label warning">delete</span>
+        <code>consumption-created</code>
       </td>
       <td>
         Receive notifications when a <a href="/api/devices/consumptions">device consumption</a>
-        is created.
+        is created. Use this event to track energy consumption of your devices.
       </td>
     </tr>
     <tr>
       <td>
-        <span class="label warning">devices</span>
+        <code>devices</code>
       </td>
       <td>
-        <span class="label warning">create</span>
-        <span class="label warning">update</span>
-        <span class="label warning">delete</span>
+        <code>created</code>
       </td>
       <td>
-        Receive notifications when a <a href="/api/devices">device</a> is created, updated or removed.
+        Receive a notification when a <a href="/api/devices#create-a-device">device is created</a>.
       </td>
     </tr>
     <tr>
       <td>
-        <span class="label warning">locations</span>
+        <code>devices</code>
       </td>
       <td>
-        <span class="label warning">create</span>
-        <span class="label warning">update</span>
-        <span class="label warning">delete</span>
+        <code>updated</code>
       </td>
       <td>
-        Receive notifications when a <a href="/api/locations">location</a> is created, updated or removed.
+        Receive a notification when a <a href="/api/devices#update-a-device">device is update</a>.
       </td>
     </tr>
     <tr>
       <td>
-        <span class="label warning">type</span>
+        <code>devices</code>
       </td>
       <td>
-        <span class="label warning">create</span>
-        <span class="label warning">update</span>
-        <span class="label warning">delete</span>
+        <code>deleted</code>
       </td>
       <td>
-        Receive notifications when a <a href="/api/types">type</a> is created, updated or removed.
+        Receive a notification when a <a href="/api/devices#delete-a-device">device is deleted</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>types</code>
+      </td>
+      <td>
+        <code>created</code>
+      </td>
+      <td>
+        Receive a notification when a <a href="/api/types#create-a-type">type is created</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>types</code>
+      </td>
+      <td>
+        <code>updated</code>
+      </td>
+      <td>
+        Receive a notification when a <a href="/api/types#update-a-type">type is update</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>types</code>
+      </td>
+      <td>
+        <code>deleted</code>
+      </td>
+      <td>
+        Receive a notification when a <a href="/api/types#delete-a-types">location is deleted</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>locations</code>
+      </td>
+      <td>
+        <code>created</code>
+      </td>
+      <td>
+        Receive a notification when a <a href="/api/locations#create-a-location">location is created</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>locations</code>
+      </td>
+      <td>
+        <code>updated</code>
+      </td>
+      <td>
+        Receive a notification when a <a href="/api/locations#update-a-location">location is update</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>locations</code>
+      </td>
+      <td>
+        <code>deleted</code>
+      </td>
+      <td>
+        Receive a notification when a <a href="/api/locations#delete-a-location">location is deleted</a>.
       </td>
     </tr>
   </tbody>
@@ -153,9 +212,10 @@ The following table describes the available resources and events you can subscri
 <h3 class="call"><a name="how-to-create-a-subscription">How to create a subscription</a></h3>
 
 <p>
-  To create a subscription make a POST request to the subscriptions endpoint.
-  Here an example where we subscribe to all devices status updates.
-  Check out the <a href="#subscriptions-api">subscriptions API</a> to know more.
+  To create a subscription make a POST request to the subscriptions endpoint setting the
+  <code>resource</code> and <code>event</code> you want notifications for. Here an example
+  where we subscribe to all devices status updates. Check out the
+  <a href="#subscriptions-api">subscriptions API</a> for more information.
 </p>
 
 <ul class="nav nav-tabs">
@@ -169,8 +229,8 @@ The following table describes the available resources and events you can subscri
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -H 'Content-Type: application/json' \
      -d '{
-          "resources": ["status"],
-          "events": ["update"],
+          "resource": "device",
+          "event": "property-updated",
           "callback_uri": "http://callback.com/lelylan"
         }'</code></pre>
     </div>
@@ -179,9 +239,9 @@ The following table describes the available resources and events you can subscri
 
 <p>
 <span class="label notice">Notice</span>
-Subscriptions are always referred to a specific 
+Subscriptions are always referred to a specific
 <%= link_to 'client', "#{people_host}/oauth/applications" %>.
-To make the request work, basic authenticate your request using the application 
+To make the request work, basic authenticate your request using the application
 client ID and the client secret.
 </p>
 
@@ -261,8 +321,8 @@ client ID and the client secret.
   "uri": "http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026",
   "id": "508acdffd033a9ea77000026",
   "client_uri": "http://people.lelylan.com/oauth/applications/508acdffd033a9ea77000025",
-  "resources": ["status"],
-  "events": ["update"],
+  "resource": "devices",
+  "event": "property-updated",
   "callback_uri": "http://callback.com/lelylan",
   "created_at": "2012-10-26T17:53:03Z",
   "updated_at": "2012-10-26T17:53:03Z"
@@ -275,8 +335,8 @@ client ID and the client secret.
   <dd><span>uri</span> - Subscription URI.</dd>
   <dd><span>id</span> - Subscription ID.</dd>
   <dd><span>client_uri</span> - Client application URI.</dd>
-  <dd><span>resources</span> - Notified resources. See <a href="#subscriptions">available resources</a>.</dd>
-  <dd><span>events</span> - Notified events. See <a href="#subscriptions">available events</a>.</dd>
+  <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
+  <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
   <dd><span>callback_uri</span> - Callback URI receiving the real-time updates.</dd>
 </dl>
 
@@ -352,13 +412,13 @@ client ID and the client secret.
 <h4>Example body response</h4>
 
 <div class="preview highlight"><pre><code class="no-highlight">[
-  { # subscription representation }, 
+  { # subscription representation },
   { # subscription representation },
   ...
 ]</code></pre></div>
 
 <p>
-  See <a href="#subscription-representation">subscription representation</a> for body response.
+See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 </article>
 
@@ -369,7 +429,7 @@ client ID and the client secret.
 <h2 class="call"><a name="create-a-subscription">POST /subscriptions</a></h2>
 
 <p>
-  Create a subscription and returns extended information for it.
+Create a subscription and returns extended information for it.
 </p>
 
 <h4>Resource URL</h4>
@@ -383,20 +443,20 @@ client ID and the client secret.
   <tbody>
     <tr>
       <td class="parameter">
-        <span>resources</span>
+        <span>resource</span>
         <span class="info">required</span>
       </td>
       <td>
-        List of notified resources. See <a href="#subscriptions">available resources</a>.
+        Notified resource. See <a href="#subscriptions">available resources</a>.
       </td>
     </tr>
     <tr>
       <td class="parameter">
-        <span>events</span>
+        <span>event</span>
         <span class="info">required</span>
       </td>
       <td>
-        List of notified events. See <a href="#subscriptions">available events</a>.
+        Notified event. See <a href="#subscriptions">available events</a>.
       </td>
     </tr>
     <tr>
@@ -427,8 +487,8 @@ client ID and the client secret.
     -u &lt;client_id&gt;:&lt;client_secret&gt; \
     -H 'Content-Type: application/json' \
     -d '{
-          "resources": ["device"],
-          "events": ["update"],
+          "resource": "devices",
+          "event": "property-updated",
           "callback_uri": "http://callback.com/lelylan"
         }'</code></pre>
     </div>
@@ -447,13 +507,13 @@ client ID and the client secret.
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></pre></div>
 
 <h4>Example body response</h4>
 
 <p>
-  See <a href="#subscription-representation">subscription representation</a> for body response.
+See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
 </article>
@@ -465,7 +525,7 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
 <h2 class="call"><a name="update-a-subscription">PUT /subscriptions/:id</a></h2>
 
 <p>
-  Update a subscription identified from its ID and returns extended information for it.
+Update a subscription identified from its ID and returns extended information for it.
 </p>
 
 <h4>Resource URL</h4>
@@ -488,20 +548,20 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
     </tr>
     <tr>
       <td class="parameter">
-        <span>resources</span>
+        <span>resource</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of notified resources. See <a href="#subscriptions">available resources</a>.
+        Notified resource. See <a href="#subscriptions">available resources</a>.
       </td>
     </tr>
     <tr>
       <td class="parameter">
-        <span>events</span>
+        <span>event</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of notified events. See <a href="#subscriptions">available events</a>.
+        Notified event. See <a href="#subscriptions">available events</a>.
       </td>
     </tr>
     <tr>
@@ -529,9 +589,9 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
     <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -H 'Content-Type: application/json' \
-     -d '{ 
-          "resources": ["device", "location", "type"],
-          "events": ["create", "update", "delete"]
+     -d '{
+          "resource": "locations",
+          "event": "created"
          }'</code></pre>
   </div>
   <div class="tab-pane" id="update-a-subscription-javascript">
@@ -544,7 +604,7 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
       <pre><code># todo</code></pre>
     </div>
   </div>
-</div> 
+</div>
 
 <h4>Example header response</h4>
 
@@ -553,7 +613,7 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
 <h4>Example body response</h4>
 
 <p>
-  See <a href="#subscription-representation">subscription representation</a> for body response.
+See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
 </article>
@@ -602,18 +662,18 @@ Delete a subscription identified from its ID and returns extended information fo
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -H 'Content-Length: 0'</code></pre>
-    </div>
   </div>
-  <div class="tab-pane" id="delete-a-subscription-javascript">
-    <div class="preview">
+</div>
+<div class="tab-pane" id="delete-a-subscription-javascript">
+  <div class="preview">
       <pre><code># todo</code></pre>
-    </div>
   </div>
-  <div class="tab-pane" id="delete-a-subscription-ruby">
-    <div class="preview">
+</div>
+<div class="tab-pane" id="delete-a-subscription-ruby">
+  <div class="preview">
       <pre><code># todo</code></pre>
-    </div>
   </div>
+</div>
 </div>
 
 <h4>Example header response</h4>
@@ -623,7 +683,7 @@ Delete a subscription identified from its ID and returns extended information fo
 <h4>Example body response</h4>
 
 <p>
-  See <a href="#subscription-representation">subscription representation</a> for body response.
+See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
 </article>
