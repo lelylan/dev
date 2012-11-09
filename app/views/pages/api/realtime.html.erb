@@ -320,7 +320,7 @@ client ID and the client secret.
 <div class="preview highlight"><pre><code>{
   "uri": "http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026",
   "id": "508acdffd033a9ea77000026",
-  "client_uri": "http://people.lelylan.com/oauth/applications/508acdffd033a9ea77000025",
+  "client": { "uri": "http://people.lelylan.com/oauth/applications/508acdffd033a9ea77025" },
   "resource": "devices",
   "event": "property-updated",
   "callback_uri": "http://callback.com/lelylan",
@@ -334,7 +334,7 @@ client ID and the client secret.
 <dl>
   <dd><span>uri</span> - Subscription URI.</dd>
   <dd><span>id</span> - Subscription ID.</dd>
-  <dd><span>client_uri</span> - Client application URI.</dd>
+  <dd><span>client.uri</span> - Client application URI.</dd>
   <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
   <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
   <dd><span>callback_uri</span> - Callback URI receiving the real-time updates.</dd>
