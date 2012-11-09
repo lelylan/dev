@@ -1,4 +1,4 @@
-index_pages: 
+index_pages:
   - index
   - start
   - api
@@ -37,3 +37,4 @@ code_pages:
   - api/types/functions
   - api/types/statuses
   - api/locations
+  - api/realtime

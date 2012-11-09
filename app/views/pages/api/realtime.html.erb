@@ -6,10 +6,12 @@
   <tbody>
     <tr><td>&raquo; <a href="#realtime">Real-time</a></td></tr>
     <tr><td>&raquo; <a href="#how-to-subscribe">How to subscribe</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#register">Register a client</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#callback">Create a callback URL</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#subscriptions">Subscriptions</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#how-to-create-a-subscription">How to create a subscription</a></td></tr>
+    <%#<tr><td class="inside">&raquo; <a href="#register">Register a client</a></td></tr>%>
+    <%#<tr><td class="inside">&raquo; <a href="#callback">Create a callback URL</a></td></tr>%>
+    <%#<tr><td class="inside">&raquo; <a href="#subscriptions">Subscriptions</a></td></tr>%>
+    <%#<tr><td class="inside">&raquo; <a href="#how-to-create-a-subscription">How to create a subscription</a></td></tr>%>
+    <tr><td>&raquo; <a href="#receiving-updates">Receiving updates</a></td></tr>
+    <tr><td>&raquo; <a href="#security">Security check</a></td></tr>
     <tr><td>&raquo; <a href="#subscriptions-api">Subscriptions API</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#get-a-subscription">Get a subscription</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#get-all-subscriptions">Get client subscriptions</a></td></tr>
@@ -248,6 +250,101 @@ client ID and the client secret.
 </article>
 
 </br>
+
+<article>
+
+<h1 class="call"><a name="receiving-updates">Receiving updates</a></h1>
+
+<p>
+When someone, for example, update a device property firing an event related to your subscriptions,
+a POST request is sent to the callback URL defined in the subscription. The post body contains
+a JSON representation with the following fields.
+</p>
+
+<h4 id="payload-representation">Sent Payload Example</h4>
+
+<div class="preview"><pre><code>{
+  "id": "5042344b95ac441000000013",
+  "resource": "devices",
+  "event": "property-updated",
+  "data": {
+    "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
+    "id": "5042344b95fc441000000001",
+    "name": "Closet dimmer",
+    "type": { "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d" },
+    "pending": false,
+    "created_at": "2012-09-01T16:00:32Z",
+    "updated_at": "2012-09-01T16:00:32Z",
+    "properties": [{
+      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+      "id": "50420c7e267ff51000000001",
+      "value": "on",
+      "physical": "on" }],
+    "physical": {
+      "uri": "http://mqtt.lelylan.com/physicals/5042205c70eda61000000003"
+    }
+  }
+}</code></pre></div>
+
+<h4>Payload explained</h4>
+
+<dl>
+  <dd><span>id</span> - Notified event unique ID.</dd>
+  <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
+  <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
+  <dd><span>data</span> - Notified resource representation.
+  This representation is consistent with Lelylan
+  <a href="/api/devices#device-representation">device representation</a>,
+  <a href="/api/types#type-representation">type representation</a> and
+  <a href="/api/locations#location-representation">location representation</a>.
+  </dd>
+</dl>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="security">Security check</a></h1>
+
+<p>
+To verify that the payload you received comes from us, you can verify the "X-Hub-Signature"
+header. This will be a SHA-1-signed hexadecimal digest, using your client secret as a key
+and the payload as the message. Here an example in Ruby.
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="verify-payload-ruby">
+    <div class="preview">
+      <pre><code>require 'openssl'
+
+client_secret = CLIENT_SECRET
+signature     = request.headers['X-Hub-Signature']
+payload       = request.body
+
+digest = OpenSSL::Digest::Digest.new('sha1')
+verify_signature = OpenSSL::HMAC.hexdigest(digest, client_secret, payload)
+
+raise InvalidSignature, "Invalid X-Hub-Signature" if signature != verify_signature</code></pre>
+    </div>
+  </div>
+</div>
+
+<p>
+  <span class="label notice">Notice</span>
+  One important note is related to the OAuth 2 authorization system. As we do not want to notify
+  events for resources not authorized from the user to third party applications we first check
+  for the authorized resources and then (eventually) fire the notification.
+</p>
+
+</article>
+
+</br></br>
 
 <article>
 

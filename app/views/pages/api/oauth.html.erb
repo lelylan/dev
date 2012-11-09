@@ -20,8 +20,8 @@
 <h1 class="call"><a name="functions"><%= title %></a></h1>
 
 <p>
-Lelylan API uses the OAuth 2.0 protocol for authentication and authorization. 
-OAuth lets users grant the access to the desired resources to third party applications, 
+Lelylan API uses the OAuth 2.0 protocol for authentication and authorization.
+OAuth lets users grant the access to the desired resources to third party applications,
 giving them the possibility to enable and disable those accesses whenever they want.
 </p>
 
@@ -94,16 +94,16 @@ Redirect the user to the authorization endpoint.
        state=&lt;state&gt;</code></pre></div>
 
 <dl>
-  <dd><span>response_type</span> - 
+  <dd><span>response_type</span> -
   Always use 'code' as response type.</dd>
-  <dd><span>client_id</span> - 
+  <dd><span>client_id</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
   <dd><span>redirect_uri</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %>
   application URI where the user is redirected after authorization.</dd>
-  <dd><span>scope</span> - 
+  <dd><span>scope</span> -
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
-  <dd><span>state</span> - 
+  <dd><span>state</span> -
   Optional opaque value used by the client to maintain state between the request and callback.</dd>
 </dl>
 
@@ -129,15 +129,15 @@ Get the access token (remember to basic authenticate with client id and client s
 </div>
 
 <dl>
-  <dd><span>client_id</span> - 
+  <dd><span>client_id</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
   <dd><span>client_secret</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client secret.</dd>
-  <dd><span>grant_type</span> - 
+  <dd><span>grant_type</span> -
   Always use 'authorization_code' as grant type.</dd>
-  <dd><span>code</span> - 
+  <dd><span>code</span> -
   Authorization code (from the previous step).</dd>
-  <dd><span>redirect_uri</span> - 
+  <dd><span>redirect_uri</span> -
   Application URI where the user is redirected after authorization.</dd>
 </dl>
 
@@ -157,7 +157,7 @@ Get the access token (remember to basic authenticate with client id and client s
 <h2><a name="implicit-grant">Implicit Grant</a></h2>
 
 <p>
-This flow is meant for Javascript-based web applications that can't maintain state 
+This flow is meant for Javascript-based web applications that can't maintain state
 over time (it includes Actionscript and Silverlight and similar).
 </p>
 
@@ -174,16 +174,16 @@ The flow start redirecting the user to the authorization endpoint.
 </div>
 
 <dl>
-  <dd><span>response_type</span> - 
+  <dd><span>response_type</span> -
   Always use 'token' as response type.</dd>
   <dd><span>client_id</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
   <dd><span>redirect_uri</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %>
   application URI where the user is redirected after authorization.</dd>
-  <dd><span>scope</span> - 
+  <dd><span>scope</span> -
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
-  <dd><span>state</span> - 
+  <dd><span>state</span> -
   Optional opaque value used by the client to maintain state between the request and callback.</dd>
 </dl>
 
@@ -199,7 +199,7 @@ and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragme
        state=remember-me</code></pre></div>
 
 <p>
-If your application is pure Javascript, you can easily parse the token from the URI. 
+If your application is pure Javascript, you can easily parse the token from the URI.
 If your application is a native phone app perform the flow in an embedded webview and
 redirect the user to a dummy website where you can grab the token from the URL.
 </p>
@@ -233,13 +233,13 @@ Get the access token (remember to basic authenticate with client id and client s
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
   <dd><span>client_secret</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client secret.</dd>
-  <dd><span>grant_type</span> - 
+  <dd><span>grant_type</span> -
   Always use 'password' as grant type.</dd>
-  <dd><span>username</span> - 
+  <dd><span>username</span> -
   Registered user email.</dd>
-  <dd><span>password</span> - 
+  <dd><span>password</span> -
   Registered user password.</dd>
-  <dd><span>scope</span> - 
+  <dd><span>scope</span> -
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
 </dl>
 
@@ -282,9 +282,9 @@ valid one you can use the refresh token you received together with the access to
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.</dd>
   <dd><span>client_secret</span> -
   <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client secret.</dd>
-  <dd><span>grant_type</span> - 
+  <dd><span>grant_type</span> -
   Always use 'refresh_token' as grant type.</dd>
-  <dd><span>refresh_token</span> - 
+  <dd><span>refresh_token</span> -
   Refresh token code (from previous access token request).</dd>
 </dl>
 
@@ -311,7 +311,7 @@ Use the <code>access_token</code> to make requests to Lelylan API.
 <h1 class="call"><a name="api-requests">API requests</a></h1>
 
 <p>
-Once you have the access token it's easy to use the APIs. 
+Once you have the access token it's easy to use the APIs.
 </p>
 
 <p><strong>Header request</strong></p>
@@ -427,6 +427,9 @@ might be of help.
 </p>
 
 <ul>
+  <li>
+  <a href="https://developers.google.com/accounts/docs/OAuth2" class="bigger">Google</a>
+  </li>
   <li>
   <a href="http://developers.facebook.com/docs/authentication/" class="bigger">Facebook</a>
   </li>
