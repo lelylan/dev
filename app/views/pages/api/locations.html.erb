@@ -20,8 +20,7 @@
 Locations are the places we live in and where physical devices are placed. Lelylan
 identifies three kind of locations: <strong>houses</strong>, <strong>floors</strong> 
 and <strong>rooms</strong>. They are used to represent the physical locations and they 
-usually are organized in a hierarchical structure (an house contains many floors, which 
-in turn, contains many rooms and so on).
+usually are organized in a hierarchical structure (a house contains many floors, which contain many rooms and so on).
 </p>
 
 </article>
@@ -32,7 +31,7 @@ in turn, contains many rooms and so on).
 
 <h1 class="call"><a name="get-a-location">GET /locations/:id</a></h1>
 
-<p>Returns extended information for a given location identified from its ID.</p>
+<p>Returns extended information for a given location identified by its ID.</p>
 
 <h4>Resource URL</h4>
 <div class="preview">
@@ -139,7 +138,7 @@ in turn, contains many rooms and so on).
 <h1><a href="#types" name="types">Location types</a></h1>
 
 <p>
-List of available location types. No other type values are accepted for the moment.
+List of available location types. No other type values are accepted right now.
 </p>
 
 </br>
@@ -154,7 +153,7 @@ List of available location types. No other type values are accepted for the mome
   <tbody>
     <tr>
       <td><code>house</code></td>
-      <td>Define a building location like a house or skyscraper.</td>
+      <td>Define a building location like a house or a skyscraper.</td>
     </tr>
     <tr>
       <td><code>floor</code></td>
@@ -162,14 +161,14 @@ List of available location types. No other type values are accepted for the mome
     </tr>
     <tr>
       <td><code>room</code></td>
-      <td>Define a room in the building.</td>
+      <td>Define a room in the floor.</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td colspan="2">
-        Table1. List of location types. If we are missing a location type you can live
-        without <a href="/community/support/">drop us a line</a>.
+        Table1. List of location types. If we are missing a location type you can't live
+        without, just <a href="/community/support/">drop us a line</a>.
       </td>
     </tr>
   </tfoot>
@@ -188,8 +187,8 @@ Returns a list of descendent locations for a given location identified from its 
 </p>
 
 <p>
-  If you get the descendants of a house you get all floors and rooms it
-  has inside and for each of them the contained devices. This let you have full control
+  If you get the descendants of a house you get all the floors and the rooms it
+  has inside and - for each of them - the contained devices. This gives you full control
   on the structure of your locations.
 </p>
 
@@ -381,7 +380,7 @@ Returns a list of descendent locations for a given location identified from its 
 <h1 class="call"><a name="create-a-location">POST /locations</a></h1>
 
 <p>
-  Create a location and returns extended information for it.
+  Create a location and return extended information for it.
 </p>
 
 <h4>Resource URL</h4>
@@ -617,8 +616,8 @@ When updating <code>devices</code> all previous connected devices are replaced. 
 <h1 class="call"><a name="delete-a-location">DELETE /locations/:id</a></h1>
 
 <p>
-Delete a location identified from its ID and returns extended information for it.</br>
-All direct children becomes root elements (without a parent). </br>
+Delete a location identified from its ID and return extended information for it.</br>
+All direct children become root elements (without a parent). </br>
 Connected devices are not deleted.
 </p>
 
