@@ -24,8 +24,6 @@
 
 <h1 class="call"><a name="realtime"><%= title %></a></h1>
 
-<span class="label warning">Coming soon</span></br>
-
 <p>
 Real-time Lelylan updates provide your application with instant notifications of
 what happens to Lelylan and the physical world. The most interesting way to view the world
@@ -299,6 +297,15 @@ a JSON representation with the following fields.
   <a href="/api/locations#location-representation">location representation</a>.
   </dd>
 </dl>
+
+<h4>Callback response</h4>
+
+<p>
+  You should respond with a 2xx HTTP status when the callback URL is called. If a different
+  HTTP status is received, Lelylan will try to send the payload 10 times with an exponantially
+  growing delay between the requests (1 sec, 3 secs, 9, secs, 27 secs, ..., 16 hours). After
+  the 10th failed attempt the event is set as processed.
+</p>
 
 </article>
 
