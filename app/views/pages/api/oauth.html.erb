@@ -12,6 +12,8 @@
     <tr><td>&raquo; <a href="#refresh-access-token">Refresh access token</a></td></tr>
     <tr><td>&raquo; <a href="#api-requests">API requests</a></td></tr>
     <tr><td>&raquo; <a href="#scopes">Scopes</a></td></tr>
+    <tr><td>&raquo; <a href="#resource-filtering">Resource filtering</a></td></tr>
+    <tr><td>&raquo; <a href="#expiring-token">Expiring token</a></td></tr>
     <tr><td>&raquo; <a href="#more-information">More information</a></td></tr>
   </tbody>
 </table>
@@ -24,6 +26,8 @@ Lelylan API uses the OAuth 2.0 protocol for authentication and authorization.
 OAuth lets users grant the access to the desired resources to third party applications,
 giving them the possibility to enable and disable those accesses whenever they want.
 </p>
+
+<%= image_tag('oauth.png', class: 'img-rounded') %>
 
 </article>
 
@@ -411,6 +415,56 @@ access for devices. You can specify multiple scopes by separating them with a sp
 <p>
 <span class="label notice">Notice</span>
 When no scope is defined <code>user</code> is set as the default.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="resource-filtering">Resource filtering</a></h1>
+
+<span class="label warning">improve docs</span>
+
+<p>
+Lelylan offers to the users a detailed control about the resource a third party
+application can access. On the authorization page there is a button named
+<strong>Filter Accessible Devices</strong> which let the user access the filter
+page (image below) and select the desired devices.
+</p>
+
+<%= image_tag('oauth-filter.png', class: 'img-rounded') %>
+
+<p>
+A user can directly filter a device (top section) or all devices contained into a
+location (bottom section). In the case you add all devices contained in a location
+keep in mind that when new ones are added, the access to them is not inherited. The
+third party application will not be able to access them and a new authorization will
+be needed in case the user want to make them accessible.
+</p>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="expiring-token">Expiring token</a></h1>
+
+<p>
+When authorizing a third party application an access token is defined with an
+expiration time. This means that it will last for 2 hours. After this period of
+time a new token must be created using the <a href="#refresh-access-token">
+refresh token</a>. It's all about security and it's a good thing.
+</p>
+
+<%= image_tag('oauth-expire.png', class: 'img-polaroid') %>
+
+<p>
+Anyway, when testing your applications a not expiring token could be something
+useful. Just uncheck the <strong>Expirable Token</strong> check box and you'll
+get it.
 </p>
 
 </article>
