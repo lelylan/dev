@@ -1,7 +1,7 @@
         <h4>Considerations about the physical world</h4>
 
         <p>
-        When you send the request two flows can be applied. Which one is chosen, depends 
+        When you send the request two flows can be applied. Which one is chosen, depends
         from the device being connected or not to a physical device.
         </p>
 
@@ -13,11 +13,12 @@
           </li>
 
           <li>
-          <strong>Connected physical device</strong>. 
+          <strong>Connected physical device</strong>.
           Changes are not instantaneously applied. What you get back is the expected device
           representation. This means that what you get back is not the actual physical device
-          representation, but the one you asked for (optimistic flow). 
-          <a href="/api/devices/#pending">Learn more about</a>
+          representation, but the one you asked for (optimistic flow). To know more about the
+          device check out its <a href="/api/devices/#pending">pending status</a> or ask for
+          <a href="/api/realtime">realtime feedback</a>.
           </li>
         </ul>
 
@@ -27,7 +28,7 @@
         <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
 
         <p>
-          With a connected physical device you get a 
+          With a connected physical device you get a
           <a href="https://tools.ietf.org/html/rfc2616#section-10.2.3">202 response</a>.
         </p>
         <div class="preview"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>

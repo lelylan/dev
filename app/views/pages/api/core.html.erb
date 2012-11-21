@@ -211,7 +211,7 @@ The following examples describe the same time using two different accepted forma
 </h1>
 
 <p>
-We limit requests to <strong>5000</strong> per day. You can check
+We limit requests to <strong>10000</strong> per day. You can check
 the returned HTTP headers of any API request to see your current status.
 </p>
 
@@ -220,12 +220,17 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre></div>
 
 <p>
-When you exceed the API calls limit you get a 403 response.
+When you exceed the API calls limit your request is forbidden.
 </p>
 
 <div class="preview"><pre><code>HTTP/1.1 403 Forbidden
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 0</code></pre></div>
+
+<p>
+Please <a href="mailto:touch@lelylan.com">contact</a> us to request white listed access for
+your application.
+</p>
 
 </article>
 

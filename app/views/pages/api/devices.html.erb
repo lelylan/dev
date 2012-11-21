@@ -11,8 +11,6 @@
     <tr><td>&raquo; <a href="#delete-a-device">Delete a device</a></td></tr>
     <tr><td>&raquo; <a href="#update-properties">Update properties</a></td></tr>
     <tr><td>&raquo; <a href="#execute-a-function">Execute a function</a></td></tr>
-    <tr><td>&raquo; <a href="#connect-physical-device">Connect physical device</a></td></tr>
-    <tr><td>&raquo; <a href="#disconnect-physical-device">Disconnect physical device</a></td></tr>
     <tr><td>&raquo; <a href="#pending">Pending device explained</a></td></tr>
     <tr><td>&raquo; <a href="#status">Device status</a></td></tr>
   </tbody>
@@ -22,27 +20,22 @@
 <h1 class="call"><a name="devices"><%= title %></a></h1>
 
 <p>
-A device is everything you interact with everyday of your life. You interact with 
-lights, appliances, alarms, cooling and heating systems, smoke and gas sensors, 
-rolling shutters and windows, irrigations, video surveillance, gates, multimedia 
-(audio and video) and much more. 
+A device is everything you interact with everyday of your life. You interact with
+lights, appliances, alarms, cooling and heating systems, smoke and gas sensors,
+rolling shutters and windows, irrigations, video surveillance, gates, multimedia
+(audio and video) and much more.
 </p>
 
 <p>
 The Device API defines a set of services to create, monitor and control all the devices
 in your house. The final goal is to map every device to a unique URI which provides
 control over it.
-A device is characterized by a <a href="/api/types/">type</a> it inherits
-the type <a href="/api/types/properties/">properties</a> from. For example when you create
-a dimmer the device inherits the <em>status</em> ('on' or 'off') and the <em>intensity</em> 
-(from '0' to '100').
-</p>
 
-<p>
-By default a device is not connected to the physical world as it makes it easy to experiment
-third party applications without the hassle of additional hardware costs. Anyway, connecting
-a device to a physical device can be done whenever you want by using the
-<a href="/api/devices/#connect-physical-device">physical service</a>.
+A device is characterized by a <a href="/api/types/">type</a> and from the
+<a href="/api/types/properties/">properties</a> it inherits from.
+For example creating a dimmer lets the device inherit the <em>status</em>
+(<code>on</code> or <code>off</code>) and the <em>intensity</em> (from <code>
+0</code> to <code>100</code>) values.
 </p>
 
 </article>
@@ -116,6 +109,7 @@ a device to a physical device can be done whenever you want by using the
   "pending": false,
   "created_at": "2012-09-01T16:00:32Z",
   "updated_at": "2012-09-01T16:00:32Z",
+  "physical": { "uri": "http://arduino.house.com/5042205c70eda61" },
   "properties": [{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "id": "50420c7e267ff51000000001",
@@ -123,13 +117,10 @@ a device to a physical device can be done whenever you want by using the
     "physical": "on"
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-    "uri": "50420c3a267ff51300000001",
+    "id": "50420c3a267ff51300000001",
     "value": "100",
     "physical": "100"
   }],
-  "physical": {
-    "uri": "http://mqtt.lelylan.com/physicals/5042205c70eda61000000003"
-  }
 }</code></pre></div>
 
 <h4>Body Response explained</h4>
@@ -138,18 +129,15 @@ a device to a physical device can be done whenever you want by using the
   <dd><span>uri</span> - Device URI.</dd>
   <dd><span>id</span> - Device ID.</dd>
   <dd><span>name</span> - Device name.</dd>
-  <dd><span>type</span> - Device type.</dd>
+  <dd><span>type</span> - Device type. <a href="/api/types">Learn more about</a>.</dd>
   <dd><span>pending</span> - Pending status. <a href="/api/devices/#pending">Learn more about</a>.</dd>
+  <dd><span>physical</span> - Connected physical device URI. <a href="/api/physicals">Learn more about</a>.</dd>
   <dt><span>properties</span> - Device properties.</dt>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>id</span> - Property ID.</dd>
     <dd><span>value</span> - Property value.</dd>
     <dd><span>physical</span> - Physical property value. <a href="/api/devices/#pending">Learn more about</a>.</dd>
-  </div>
-  <dd><span>physical</span> - Connected phisical device. <a href="/api/devices/#connect-physical-device">Learn more about</a>.</dd>
-  <div>
-    <dd><span>uri</span> - Phisical device URI.</dd>
   </div>
 </dl>
 
@@ -201,6 +189,15 @@ a device to a physical device can be done whenever you want by using the
     </tr>
     <tr>
       <td class="parameter">
+        <span>physical</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Physical device URI to search. <a href="/api/physicals">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
         <span>property</span>
         <span class="info">optional</span>
       </td>
@@ -209,8 +206,8 @@ a device to a physical device can be done whenever you want by using the
       </td>
     </tr>
     <tr>
-      <td class="parameter">
-        <span>value</span>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -218,8 +215,8 @@ a device to a physical device can be done whenever you want by using the
       </td>
     </tr>
     <tr>
-      <td class="parameter">
-        <span>physical</span>
+      <td class="parameter nested">
+        <span>&raquo; property.physical</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -281,7 +278,7 @@ a device to a physical device can be done whenever you want by using the
 <h4>Example body response</h4>
 
 <div class="preview"><pre><code class="no-highlight">[
-  { # device representation }, 
+  { # device representation },
   { # device representation },
   ...
 ]</code></pre></div>
@@ -327,7 +324,16 @@ a device to a physical device can be done whenever you want by using the
         <span class="info">required</span>
       </td>
       <td>
-        Type URI. <a href="/api/types/">Learn more about types</a>.
+        Type URI. <a href="/api/types/">Learn more about</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>physical</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Physical device URI. <a href="/api/physicals">Learn more about</a>
       </td>
     </tr>
   </tbody>
@@ -350,7 +356,8 @@ a device to a physical device can be done whenever you want by using the
     -H 'Content-Type: application/json' \
     -d '{
           "name": "Closet dimmer",
-          "type": "http://api.lelylan.com/types/5042310470eda60a0000000d"
+          "type": "http://api.lelylan.com/types/5042310470eda60a0000000d",
+          "physical": "http://arduino.house.com/5042205c70eda61"
         }'</code></pre>
     </div>
   </div>
@@ -368,7 +375,7 @@ a device to a physical device can be done whenever you want by using the
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
 <h4>Example body response</h4>
@@ -420,7 +427,16 @@ Update a device identified from its ID and returns extended information for it.
         <span class="info">optional</span>
       </td>
       <td>
-        Type URI. <a href="/api/types/">Learn more about types</a>.
+        Type URI. <a href="/api/types/">Learn more about</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>physical</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Physical device URI. <a href="/api/physicals">Learn more about</a>
       </td>
     </tr>
   </tbody>
@@ -543,8 +559,9 @@ Update a device identified from its ID and returns extended information for it.
 <h1 class="call"><a name="update-properties">PUT /devices/:id/properties</a></h1>
 
 <p>
-  Update properties on a device identified from its ID and returns extended 
-  representation for it.
+  Update properties on a device identified from its ID and returns extended
+  representation for it. If a physical device is connected, Lelylan forward the
+  changes to the <a href="/api/physicals">physical world</a>.
 </p>
 
 <h4>Resource URL</h4>
@@ -630,10 +647,10 @@ Update a device identified from its ID and returns extended information for it.
     -H 'Authorization: Bearer &lt;token&gt;' \
     -H 'Content-Type: application/json' \
     -d '{
-          "properties": [{ 
+          "properties": [{
             "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
             "value": "on"
-          },{ 
+          },{
             "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
             "value": "50" }
           ]
@@ -668,8 +685,9 @@ Update a device identified from its ID and returns extended information for it.
 <h1 class="call"><a name="execute-a-function">PUT /devices/:id/functions</a></h1>
 
 <p>
-  Execute a function on a device identified from its ID and returns extended 
-  representation for it.
+  Execute a function on a device identified from its ID and returns extended representation
+  for it. If a physical device is connected, Lelylan forward the changes to the
+  <a href="/api/physicals">physical world</a>.
 </p>
 
 <h4>Resource URL</h4>
@@ -751,7 +769,7 @@ Update a device identified from its ID and returns extended information for it.
 <h4>Example Requests</h4>
 
 <p>
-<strong>Turn on a device</strong>. In this example we do not send properties because the function 
+<strong>Turn on a device</strong>. In this example we do not send properties because the function
 <code>turns on</code> set the property <code>status</code> to <code>on</code> by default.
 </p>
 
@@ -800,8 +818,8 @@ to be sent from the user.
         <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/functions \
     -H 'Authorization: Bearer &lt;token&gt;' \
     -H 'Content-Type: application/json' \
-    -d '{ 
-          "function": "http://api.lelylan.com/functions/&lt;turn-on&gt;"
+    -d '{
+          "function": "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
           "properties": [{
             "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
             "value": "90" }
@@ -824,7 +842,7 @@ to be sent from the user.
 
 <p>
   <span class="label notice">Notice</span>
-  To better understand how funciton works check out the
+  To deeply understand how functions work check out the
   <a href="/api/types/functions/">functions API</a>.
 </p>
 
@@ -841,192 +859,13 @@ to be sent from the user.
 
 <article>
 
-<h1 class="call"><a name="connect-physical-device">PUT /devices/:id/physical</a></h1>
-
-<p>
-<span class="label warning">todo</span>
-Right now Lelylan doesn't communicate with the physical world. We are working on that.
-</p>
-
-<p>
-  Create the connection between a device and a physical device.
-</p>
-
-<h4>Resource URL</h4>
-<div class="preview">
-<pre><code class="no-highlight">PUT http://api.lelylan.com/devices/:id/physical</code></pre>
-</div>
-
-<h4>Parameters</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>id</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The ID of the desired device.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
-        <span>physical</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Pysical device to connect.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; physical.uri</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Physical device URI.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Example Request</h4>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#connect-physical-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#connect-physical-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#connect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="connect-physical-device-curl">
-    <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/physical \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Type: application/json' \
-      -d '{
-            "physical": {
-              "uri": "http://mqtt.lelylan.com/physicals/5042205c70eda61000000006"
-            }
-          }'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="connect-physical-device-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="connect-physical-device-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<h4>Example header response</h4>
-
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
-
-<h4 id="device-representation">Example body response</h4>
-
-<p>
-  See <a href="/api/devices/#device-representation">device representation</a> for body response.
-</p>
-
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="disconnect-physical-device">DELETE /devices/:id/physical</a></h1>
-
-<p>
-  Delete the connection between a device and a physical device.
-</p>
-
-<h4>Resource URL</h4>
-<div class="preview">
-<pre><code class="no-highlight">DELETE http://api.lelylan.com/devices/:id/physical</code></pre>
-</div>
-
-<h4>Parameters</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>id</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The ID of the desired device.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Example Request</h4>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#disconnect-physical-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#disconnect-physical-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#disconnect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="disconnect-physical-device-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/devices/5042344b95fc441000000001/physical \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Length: 0'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="disconnect-physical-device-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="disconnect-physical-device-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<h4>Example header response</h4>
-
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
-
-<h4>Example body response</h4>
-
-<p>
-  See <a href="/api/devices/#device-representation">device representation</a> for body response.
-</p>
-
-</article>
-
-<br/>
-
-<article>
-
 <h1 class="call"><a name="pending">Pending device explained</a></h1>
 
 <p>
-A device connected to the physical world does not change instantaneously.
-Think at when you open a roller shutter. From the moment you send the request, and
-the moment it is open, a few seconds are needed. During this period of time
-the device is pending, as it's waiting for its final status to be reached.
-</p>
-
-<p>
-The pending resource in this period of time can be pretty useful. It lets you track
-what's going on in the physical world. Suppose you want to set its <code>level</code>
-to <code>100%</code>. This can be easily done setting the property value to
-the desired value, but what if I want to know the rolling shutter level after
-one second? Here is where the physical property comes in handy as it is used to 
-continuously monitor the real-time status of the physical device properties.
-Let's make a couple of examples.
+A device connected to the physical world does not change instantaneously. Think at when you
+open a roller shutter. From the moment you send the open request, and the moment it's
+physically open, a few seconds are needed. During this period of time the device is defined
+as <strong>pending</strong>, as it's waiting for its final status to be reached.
 </p>
 
 <h2>Get all pending devices</h2>
@@ -1057,7 +896,7 @@ Let's make a couple of examples.
 </div>
 
 <p>
-In this example we get one pending resource related to a rolling shutter that has to 
+In this example we get one pending resource related to a rolling shutter that has to
 reach the aperture level of <code>100%</code>. The physical device aperture is at
 <code>28%</code> when the request is executed.
 </p>
@@ -1067,13 +906,13 @@ reach the aperture level of <code>100%</code>. The physical device aperture is a
   "id": "4dece6f3d033a9b9a90000a1",
   "name": "Rolling shutter",
   "pending": true,
+  "physical": { "uri": "http://arduino.house.com/5042205c70eda61" },
   "properties": [{
     "uri": "http://api.lelylan.com/properties/4decdd07d033a95e25000046",
     "id": "4decdd07d033a95e25000046",
     "value": "100",
     "physical": "28"
   }],
-  "physical": { "uri": "http://mqtt.lelylan.com/physicals/8ecfd2f3d033a9b9a729000e4" },
   "created_at": "2012-09-01T16:00:32Z",
   "updated_at": "2012-09-01T16:00:32Z"
 }]</code></pre></div>
@@ -1095,11 +934,11 @@ to <code>true</code>.
     <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
     -H 'Authorization: Bearer &lt;token&gt;' \
     -H 'Content-Type: application/json' \
-    -d '{ 
+    -d '{
           "pending": true,
-          "properties": [{ 
+          "properties": [{
             "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-            "physical": "46" 
+            "physical": "46"
           }]
          }'</code></pre>
     </div>
@@ -1116,18 +955,18 @@ to <code>true</code>.
   </div>
 </div>
 
-<h4>Example body response</h4>
-
-<p>
-See <a href="#device-representation">pending representation</a> for body response.
-</p>
-
 <p>
 <span class="label notice">Notice</span>
 The pending resource makes sense when a device is connected to a
 <a href="/api/devices/physical/">physical device</a> as its main goal is to reflect
-the changes of the physical world. Anyway, you can simulate the physical world setting the
-<code>physical</code> property whenever you need it.
+the changes of the physical world. Anyway, you can easily simulate the physical world
+setting the <code>physical</code> property whenever you need it.
+</p>
+
+<h4>Example body response</h4>
+
+<p>
+See <a href="#device-representation">pending representation</a> for body response.
 </p>
 
 </article>
@@ -1139,19 +978,19 @@ the changes of the physical world. Anyway, you can simulate the physical world s
 <h1 class="call"><a name="status">Device status explained</a></h1>
 
 <p>
-Sometimes properties are not enough to describe the device status. 
-Think at a roller shutter for example. It has the property <code>status</code> 
-that accept the values <code>open</code> and <code>close</code>. Now think at 
-what happens when a roller shutter is opening. It is neither open or close, but just 
-opening. To have a complete control over the device at every moment of its life use the 
+Sometimes properties are not enough to describe the device status.
+Think at a roller shutter for example. It has the property <code>status</code>
+that accepts the values <code>open</code> and <code>close</code>. Now think at
+what happens when a roller shutter is opening. It is neither open or close, but just
+opening. To have a complete control over the device at every moment of its life use the
 status resource.
 </p>
 
 <p>
 Right now this service is not available on server side. To get the device status you must
 use one of the existing <a href="/community/clients/">javascript libraries</a>.
-This decision is due to performance motivation and to the fact that the status information 
-is related to browser visualization tasks.
+This decision is due to performance motivation and to the fact that the status information
+is a client visualization tasks.
 </p>
 
 <ul class="nav nav-tabs">
@@ -1170,15 +1009,15 @@ status = device.status();</code></pre>
 <p>
 In this example we show how to get the device status. Just find the device through
 its id and call the <code>status()</code> method. See the
-<a href="/api/types/statuses/#status-representation">status representation</a> to 
+<a href="/api/types/statuses/#status-representation">status representation</a> to
 get an idea of its structure.
 </p>
 
 <p>
-<span class="label notice">Notice</span> 
+<span class="label notice">Notice</span>
 If you think that this functionality must be present in the server side
 <a href="/community/support/">write us</a> your use cases and why you need it.
-We are open to introducing it if real needs come up.
+We are open to discussions.
 </p>
 
 </article>
