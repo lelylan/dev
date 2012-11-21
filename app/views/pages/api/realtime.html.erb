@@ -34,8 +34,7 @@ a system where your application gets notified of changes as they happen.
 <p>
 Our real-time API serves a couple of basic needs. First, instead of polling the Lelylan servers
 to check to see what's happening, we POST to your servers new data when available. Second,
-developers running servers like Node.js can provide real-time experiences of events to their users.
-We're most excited to see what developers will create with live data at their fingertips.
+developers running servers like Node.js can provide real-time experiences to their users.
 </p>
 
 </article>
@@ -47,23 +46,22 @@ We're most excited to see what developers will create with live data at their fi
 <h1 class="call"><a name="how-to-subscribe">How to subscribe</a></h1>
 
 <p>
-Using the subscription services you can get real-time updates by subscribing to one (or more)
-<strong>resource</strong> and to one (or more) related <strong>event</strong>.
+You can get real-time updates by subscribing to a <strong>resource</strong>
+and its related <strong>event</strong>.
 </p>
 
 <h3 class="call"><a name="register">Register a client</a></h3>
 
 <p>
-To create a subscription, you must first register a
-<%= link_to 'client', "#{people_host}/oauth/applications" %>
-to obtain a client_id and client_secret.
+Register a <%= link_to 'client', "#{people_host}/oauth/applications" %>
+to obtain a Client ID and Client Secret.
 </p>
 
 <h3 class="call"><a name="callback">Create a callback URL</a></h3>
 
 <p>
-When we have new updates to send your server. This callback URL must support POST methods so
-that when we have new data we'll POST this data to your callback.
+Create a service able to receive Lelylan updates. This callback URL must support
+the POST method because when we have new data we POST this data to your callback.
 </p>
 
 <h3 class="call"><a name="subscriptions">Subscriptions</a></h3>
@@ -100,8 +98,8 @@ The following table describes the available resources and events you can subscri
         <code>consumption-created</code>
       </td>
       <td>
-        Receive notifications when a <a href="/api/devices/consumptions">device consumption</a>
-        is created.
+        Receive notifications when a <a href="/api/devices/consumptions#create-a-consumption">
+        device consumption is created</a>.
       </td>
     </tr>
     <tr>
@@ -167,7 +165,7 @@ The following table describes the available resources and events you can subscri
         <code>deleted</code>
       </td>
       <td>
-        Receive a notification when a <a href="/api/types#delete-a-types">location is deleted</a>.
+        Receive a notification when a <a href="/api/types#delete-a-type">type is deleted</a>.
       </td>
     </tr>
     <tr>
@@ -211,7 +209,7 @@ The following table describes the available resources and events you can subscri
 <p>
   To create a subscription make a POST request to the subscriptions endpoint setting the
   <code>resource</code> and <code>event</code> you want notifications for. Here an example
-  where we subscribe to all devices status updates. Check out the
+  where we subscribe to all device properties updates. Check out the
   <a href="#subscriptions-api">subscriptions API</a> for more information.
 </p>
 
@@ -239,7 +237,7 @@ The following table describes the available resources and events you can subscri
 Subscriptions are always referred to a specific
 <%= link_to 'client', "#{people_host}/oauth/applications" %>.
 To make the request work, basic authenticate your request using the application
-client ID and the client secret.
+Client ID and the Client Secret.
 </p>
 
 </article>
@@ -252,60 +250,58 @@ client ID and the client secret.
 
 <p>
 When a user fires an event (for example creating a new device), a POST request is sent
-to the callback URL defined in the subscription. The post body contains a JSON
-representation with the following fields.
+to the callback URL defined in the subscription.
 </p>
 
 <h4 id="payload-representation">Payload example</h4>
 
 <div class="preview"><pre><code>{
+  "nonce": "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
   "resource": "devices",
   "event": "created",
-  "nonce": "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
   "data": {
-    "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
-    "id": "5042344b95fc441000000001",
-    "name": "Closet dimmer",
-    "type": { "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d" },
-    "pending": false,
-    "created_at": "2012-09-01T16:00:32Z",
-    "updated_at": "2012-09-01T16:00:32Z",
-    "properties": [{
-      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-      "id": "50420c7e267ff51000000001",
-      "value": "on",
-      "physical": "on" }],
-    "physical": {
-      "uri": "http://mqtt.lelylan.com/physicals/5042205c70eda61000000003"
-    }
+     "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
+     "id": "5042344b95fc441000000001",
+     "name": "Closet dimmer",
+     "type": { "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d" },
+     "pending": false,
+     "created_at": "2012-09-01T16:00:32Z",
+     "updated_at": "2012-09-01T16:00:32Z",
+     "properties": [{
+        "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+        "id": "50420c7e267ff51000000001",
+        "value": "on", "physical": "on" }],
+     "physical": {
+        "uri": "http://mqtt.lelylan.com/physicals/5042205c70eda61000000003"
+     }
   }
 }</code></pre></div>
 
 <h4>Payload explained</h4>
 
 <dl>
-  <dd><span>id</span> - Notified event unique ID.</dd>
+  <dd><span>nonce</span> - Random unique identifier to avaid replay attacks.</dd>
   <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
   <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
-  <dd><span>nonce</span> - Random unique identifier to avaid replay attacks.</dd>
   <dd><span>data</span> - Notified resource representation.
   This representation is consistent with the
   <a href="/api/devices#device-representation">device</a>,
   <a href="/api/types#type-representation">type</a>,
   <a href="/api/locations#location-representation">location</a> and
   <a href="/api/devices/consumptions#consumption-representation">consumption</a> representation.
-  The only <em>special case</em> is related to the property-updated event which posts only the
-  updated properties and not the entire device representation.
+  The only <em>exception</em> is related to the property-updated event which posts only the
+  updated properties and not the entire device representation. Keep this difference in mind.
   </dd>
 </dl>
 
 <h4>Callback response</h4>
 
 <p>
-  You should respond with a 2xx HTTP status when the callback URL is called. If a different
-  HTTP status is received, Lelylan will try to send the payload 10 times with an exponantially
-  growing delay between the requests (1 sec, 3 secs, 9, secs, 27 secs, ..., 16 hours). After
-  the 10th failed attempt the event is set as processed and no more calls will be made.
+  Respond with a 2xx HTTP status when the callback URL is called. If a different
+  HTTP status is received, Lelylan will try to re-send the payload 10 times with an
+  exponentially growing delay between the requests (1 sec, 3 secs, 9, secs, 27 secs,
+  ..., 16 hours). After the 10th failed attempt the event is set as processed and no
+  more calls are made.
 </p>
 
 </article>
@@ -317,28 +313,46 @@ representation with the following fields.
 <h1 class="call"><a name="security">Security check</a></h1>
 
 <p>
-To verify that the payload you received comes from us, you can verify the "X-Hub-Signature"
-header. This will be a SHA-1-signed hexadecimal digest, using your client secret as a key
-and the payload as the message. Here an example in Ruby.
+To verify that the payload you received comes from us, you must verify the "X-Hub-Signature"
+header. This is a SHA-1-signed hexadecimal digest using your client secret as key and the
+payload as message.
 </p>
 
+<h4>Signature check example</h4>
+
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class="active"><a href="#verify-payload-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="verify-payload-ruby">
+  <div class="tab-pane" id="verify-payload-ruby">
     <div class="preview">
       <pre><code>require 'openssl'
 
-client_secret = CLIENT_SECRET
-signature     = request.headers['X-Hub-Signature']
-payload       = request.body
+secret    = CLIENT_SECRET
+signature = request.headers['X-Hub-Signature']
+payload   = request.body
 
 digest = OpenSSL::Digest::Digest.new('sha1')
-verify_signature = OpenSSL::HMAC.hexdigest(digest, client_secret, payload)
+verify = OpenSSL::HMAC.hexdigest(digest, client_secret, payload.to_json.to_s)
 
-raise InvalidSignature, "Invalid X-Hub-Signature" if signature != verify_signature</code></pre>
+raise InvalidSignature, "Invalid X-Hub-Signature" if signature != verify</code></pre>
+    </div>
+  </div>
+    <div class="tab-pane active" id="verify-payload-javascript">
+    <div class="preview">
+      <pre><code>var crypto = require('crypto');
+
+var secret    = CLIENT_SECRET,
+    signature = request.headers('X-Hub-Signature'),
+    payload   = request.body();
+
+digest = crypto.createHmac("sha1", secret);
+digest.update(JSON.stringify(payload));
+verify = digest.digest('hex')
+
+if (signature != verify) throw new(Error)("Invalid X-Hub-Signature");</code></pre>
     </div>
   </div>
 </div>
@@ -687,10 +701,7 @@ Update a subscription identified from its ID and returns extended information fo
     <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -H 'Content-Type: application/json' \
-     -d '{
-          "resource": "locations",
-          "event": "created"
-         }'</code></pre>
+     -d '{ "resource": "locations", "event": "created" }'</code></pre>
   </div>
   <div class="tab-pane" id="update-a-subscription-javascript">
     <div class="preview">
