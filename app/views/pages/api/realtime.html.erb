@@ -89,10 +89,7 @@ The following table describes the available resources and events you can subscri
         <code>property-updated</code>
       </td>
       <td>
-        Receive notifications when a device changes its properties by interacting with the physical
-        device, executing a <a href="/api/devices#execute-a-function">funcion</a>
-        or changing its <a href="/api/devices#update-properties">properties</a>. Use this event
-        to get realtime feedback about your device status.
+        Receive notifications when a device changes its properties.
       </td>
     </tr>
     <tr>
@@ -104,7 +101,7 @@ The following table describes the available resources and events you can subscri
       </td>
       <td>
         Receive notifications when a <a href="/api/devices/consumptions">device consumption</a>
-        is created. Use this event to track energy consumption of your devices.
+        is created.
       </td>
     </tr>
     <tr>
@@ -254,17 +251,17 @@ client ID and the client secret.
 <h1 class="call"><a name="receiving-updates">Receiving updates</a></h1>
 
 <p>
-When someone, for example, update a device property firing an event related to your subscriptions,
-a POST request is sent to the callback URL defined in the subscription. The post body contains
-a JSON representation with the following fields.
+When a user fires an event (for example creating a new device), a POST request is sent
+to the callback URL defined in the subscription. The post body contains a JSON
+representation with the following fields.
 </p>
 
 <h4 id="payload-representation">Payload example</h4>
 
 <div class="preview"><pre><code>{
-  "id": "5042344b95ac441000000013",
   "resource": "devices",
-  "event": "property-updated",
+  "event": "created",
+  "nonce": "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
   "data": {
     "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
     "id": "5042344b95fc441000000001",
@@ -290,11 +287,15 @@ a JSON representation with the following fields.
   <dd><span>id</span> - Notified event unique ID.</dd>
   <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
   <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
+  <dd><span>nonce</span> - Random unique identifier to avaid replay attacks.</dd>
   <dd><span>data</span> - Notified resource representation.
-  This representation is consistent with Lelylan
-  <a href="/api/devices#device-representation">device representation</a>,
-  <a href="/api/types#type-representation">type representation</a> and
-  <a href="/api/locations#location-representation">location representation</a>.
+  This representation is consistent with the
+  <a href="/api/devices#device-representation">device</a>,
+  <a href="/api/types#type-representation">type</a>,
+  <a href="/api/locations#location-representation">location</a> and
+  <a href="/api/devices/consumptions#consumption-representation">consumption</a> representation.
+  The only <em>special case</em> is related to the property-updated event which posts only the
+  updated properties and not the entire device representation.
   </dd>
 </dl>
 
@@ -304,7 +305,7 @@ a JSON representation with the following fields.
   You should respond with a 2xx HTTP status when the callback URL is called. If a different
   HTTP status is received, Lelylan will try to send the payload 10 times with an exponantially
   growing delay between the requests (1 sec, 3 secs, 9, secs, 27 secs, ..., 16 hours). After
-  the 10th failed attempt the event is set as processed.
+  the 10th failed attempt the event is set as processed and no more calls will be made.
 </p>
 
 </article>
@@ -341,13 +342,6 @@ raise InvalidSignature, "Invalid X-Hub-Signature" if signature != verify_signatu
     </div>
   </div>
 </div>
-
-<p>
-  <span class="label notice">Notice</span>
-  One important note is related to the OAuth 2 authorization system. As we do not want to notify
-  events for resources not authorized from the user to third party applications we first check
-  for the authorized resources and then (eventually) fire the notification.
-</p>
 
 </article>
 

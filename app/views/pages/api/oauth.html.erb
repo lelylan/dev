@@ -162,11 +162,8 @@ Get the access token (remember to basic authenticate with client id and client s
 
 <p>
 This flow is meant for Javascript-based web applications that can't maintain state
-over time (it includes Actionscript and Silverlight and similar).
-</p>
-
-<p>
-The flow start redirecting the user to the authorization endpoint.
+over time (it includes Actionscript, Silverlight and similar).
+The flow starts redirecting the user to the authorization endpoint.
 <p>
 
 <div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
@@ -193,7 +190,7 @@ The flow start redirecting the user to the authorization endpoint.
 
 <p>
 If the user grants the access, Lelylan redirects the user to <code>redirect_uri</code>
-and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment</a>.
+and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment URI</a>.
 </p>
 
 <div class="preview"><pre><code class="no-highlight">http://example.com/redirect-uri#
@@ -228,8 +225,9 @@ Get the access token (remember to basic authenticate with client id and client s
 <div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -d 'grant_type=password' \
-     -d 'username=&lt;user-email&gt;' \
-     -d 'password=&lt;user-password&gt;'</code></pre>
+     -d 'username=&lt;email&gt;' \
+     -d 'password=&lt;password&gt;' \
+     -d 'scope=&lt;scope&gt;</code></pre>
 </div>
 
 <dl>
@@ -240,9 +238,9 @@ Get the access token (remember to basic authenticate with client id and client s
   <dd><span>grant_type</span> -
   Always use 'password' as grant type.</dd>
   <dd><span>username</span> -
-  Registered user email.</dd>
+  <%= link_to 'Registered', "#{people_host}/users/edit" %> user email.</dd>
   <dd><span>password</span> -
-  Registered user password.</dd>
+  <%= link_to 'Registered', "#{people_host}/users/edit" %> user password.</dd>
   <dd><span>scope</span> -
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
 </dl>
@@ -271,8 +269,8 @@ the security for the final user is compromised.
 <h1 class="call"><a name="refresh-access-token">Refresh Access Token</a></h1>
 
 <p>
-For security reasons an access token expires every two hours. To refresh it with a
-valid one you can use the refresh token you received together with the access token.
+For security reasons an access token expires every two hours. To get a new one
+use the refresh token you previously received together with the access token.
 <p>
 
 <div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
@@ -315,20 +313,20 @@ Use the <code>access_token</code> to make requests to Lelylan API.
 <h1 class="call"><a name="api-requests">API requests</a></h1>
 
 <p>
-Once you have the access token it's easy to use the APIs.
+Once you have the access token you can access the API in different ways.
 </p>
 
-<p><strong>Header request</strong></p>
+<p><strong>Authorization header</strong></p>
 
 <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices.json
-     -H "Authorization: OAuth &lt;token&gt;"</code></pre>
+     -H "Authorization: Bearer &lt;token&gt;"</code></pre>
 </div>
 
-<p><strong>Query string request</strong></p>
+<p><strong>Query string access_token param</strong></p>
 
 <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices?access_token=&lt;token&gt;</code></pre></div>
 
-<p><strong>Body request</strong></p>
+<p><strong>Body access_token param</strong></p>
 
 <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices
      -X POST -d 'access_token=&lt;token&gt;'</code></pre>
@@ -348,7 +346,8 @@ Public services does not need an access token.
 <h1 class="call"><a name="scopes">Scopes</a></h1>
 
 <p>
-Scopes let you specify what can and can't be accessed.
+Scopes let you specify what can and can't be accessed from a third party application. </br>
+When no scopes are defined <code>user</code> is the default one.
 </p>
 
 </br>
@@ -363,35 +362,43 @@ Scopes let you specify what can and can't be accessed.
   <tbody>
     <tr>
       <td><strong>resources</strong></td>
-      <td>Read and write access to all resources (devices, locations and types).</td>
+      <td>Read and write access to resources (devices, locations and types).</td>
     </tr>
     <tr>
       <td><strong>resource-read</strong></td>
-      <td>Read access to all your resources (devices, locations and types).</td>
+      <td>Read access to your resources (devices, locations and types).</td>
     </tr>
     <tr>
       <td><strong>devices</strong></td>
-      <td>Read and write access to all your devices.</td>
+      <td>Read, control and write access to your devices.</td>
+    </tr>
+    <tr>
+      <td><strong>devices-control</strong></td>
+      <td>Read and control access to your devices.</td>
     </tr>
     <tr>
       <td><strong>devices-read</strong></td>
-      <td>Read access to all your devices.</td>
+      <td>Read access to your devices.</td>
     </tr>
     <tr>
       <td><strong>types</strong></td>
-      <td>Read and write access to all your types.</td>
+      <td>Read and write access to your types.</td>
     </tr>
     <tr>
       <td><strong>types-read</strong></td>
-      <td>Read access to all your types.</td>
+      <td>Read access to your types.</td>
     </tr>
     <tr>
       <td><strong>locations</strong></td>
-      <td>Read and write access to all your locations.</td>
+      <td>Read and write access to your locations.</td>
     </tr>
     <tr>
       <td><strong>locations-read</strong></td>
-      <td>Read access to all your locations.</td>
+      <td>Read access to your locations.</td>
+    </tr>
+    <tr>
+      <td><strong>privates</strong></td>
+      <td>Read access to the private fields (device secret and activation code) of your devices.</td>
     </tr>
     <tr>
       <td><strong>user</strong></td>
@@ -400,22 +407,20 @@ Scopes let you specify what can and can't be accessed.
   </tbody>
 </table>
 
+<p><strong>Example</strong></p>
+
 <p>
-In the following request an application requires read access for all resources and writes
-access for devices. You can specify multiple scopes by separating them with a space.
+In the following request an application requires read access for all resources and write
+access for all devices. You can specify multiple scopes by separating them with a space
+(encoded as a <code>+</code>).
 <p>
 
 <div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
         response_type=code&
         client_id=client_id&
         redirect_uri=redirect_uri&
-        scope=resources-read+device</code></pre>
+        scope=resources-read+devices</code></pre>
 </div>
-
-<p>
-<span class="label notice">Notice</span>
-When no scope is defined <code>user</code> is set as the default.
-</p>
 
 </article>
 
@@ -425,23 +430,19 @@ When no scope is defined <code>user</code> is set as the default.
 
 <h1 class="call"><a name="filtering-resources">Filtering resources</a></h1>
 
-<span class="label warning">improve docs</span>
-
 <p>
-Lelylan offers to the users a detailed control about the resource a third party
-application can access. On the authorization page there is a button named
-<strong>Filter Accessible Devices</strong> which let the user access the filter
-page (image below) and select the desired devices.
+Lelylan offers a detailed control about the resource a third party application can
+access. Simply click to the <strong>Filter Accessible Devices</strong> button (in the
+authorization page) and add the desired accessible devices.
 </p>
 
-<%= image_tag('oauth-filter.png', class: 'img-rounded') %>
+<%# image_tag('oauth-filter.png', class: 'img-rounded') %>
 
 <p>
-A user can directly filter a device (top section) or all devices contained into a
-location (bottom section). In the case you add all devices contained in a location
-keep in mind that when new ones are added, the access to them is not inherited. The
-third party application will not be able to access them and a new authorization will
-be needed in case the user want to make them accessible.
+A user can filter a specific device or all devices contained into a location.
+In case you add all devices contained in a location (keep in mind that when new
+ones are added into the location, the access to them is not inherited, and a new
+authorization is needed).
 </p>
 
 </article>
@@ -453,18 +454,16 @@ be needed in case the user want to make them accessible.
 <h1 class="call"><a name="expiring-token">Expiring token</a></h1>
 
 <p>
-When authorizing a third party application an access token is defined with an
-expiration time. This means that it will last for 2 hours. After this period of
-time a new token must be created using the <a href="#refresh-access-token">
-refresh token</a>. It's all about security and it's a good thing.
+When authorizing a third party application an access token expires in 2 hours.
+After this period of time a new token must be <a href="#refresh-access-token">
+refreshed</a>. It's all about security and it's a good thing.
 </p>
 
 <%= image_tag('oauth-expire.png', class: 'img-polaroid') %>
 
 <p>
-Anyway, when testing your applications a not expiring token could be something
-useful. Just uncheck the <strong>Expirable token</strong> check box and you'll
-get it.
+Anyway, when developing your applications a not expiring token could be something
+useful. Simply uncheck the <strong>Expiring token</strong> checkbox.
 </p>
 
 </article>
