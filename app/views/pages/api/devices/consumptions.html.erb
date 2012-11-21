@@ -22,13 +22,13 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <ul>
   <li>
-  <strong id="instantaneous">Instantaneous</strong>. Cumulative measurements in which the difference 
-  between two successive measurements represents the energy consumed during the 
+  <strong id="instantaneous">Instantaneous</strong>. Cumulative measurements in which the difference
+  between two successive measurements represents the energy consumed during the
   intervening time. Electricity meters usually use instantaneous measurement.
   </li>
 
   <li>
-  <strong id="durational">Durational</strong>. Specifies a starting and an ending time as well as 
+  <strong id="durational">Durational</strong>. Specifies a starting and an ending time as well as
   the energy used in the intervening period. Realtime device energy usage usually
   use durational measurement.
   </li>
@@ -47,7 +47,7 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/consumptions/:id</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/consumptions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -121,10 +121,10 @@ Lelylan gives you two ways to measure energy consumptions.
   <dd><span>value</span> - Energy consumption value.</dd>
   <dd><span>unit</span> - Energy consumption unit.</dd>
   <dd><span>occur_at</span> - Time the consumption is taken.</dd>
-  <dd><span>end_at</span> - Time the consumption validity ends. Present 
-    only in <a href="#durational">durational consumptions</a>. 
+  <dd><span>end_at</span> - Time the consumption validity ends. Present
+    only in <a href="#durational">durational consumptions</a>.
   </dd>
-  <dd><span>duration</span> - Time span in seconds where the consumption is valid. Present 
+  <dd><span>duration</span> - Time span in seconds where the consumption is valid. Present
     only in <a href="#durational">durational consumptions</a>.
   </dd>
   </dd>
@@ -142,7 +142,7 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET https://api.lelylan.com/consumptions</code></pre>
+<pre><code class="no-highlight">GET http://api.lelylan.com/consumptions</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -256,7 +256,7 @@ Lelylan gives you two ways to measure energy consumptions.
 <h4>Example body response</h4>
 
 <div class="preview"><pre><code class="no-highlight">[
-  { # consumption representation }, 
+  { # consumption representation },
   { # consumption representation },
   ...
 ]</code></pre></div>
@@ -279,7 +279,7 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  https://api.lelylan.com/consumptions</code></pre>
+<pre><code class="no-highlight">POST  http://api.lelylan.com/consumptions</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -362,7 +362,7 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <p>
   <span class="label notice">Notice</span>
-  When creating a durational consumption you can miss one param between 
+  When creating a durational consumption you can miss one param between
   <code>occur_at</code>, <code>end_at</code> or <code>duration</code> (two
   are required). Lelylan will automatically calculate the missing one.
 </p>
@@ -386,7 +386,7 @@ Lelylan gives you two ways to measure energy consumptions.
      -H 'Content-Type: application/json' \
      -d '{
            "type": "instantaneous",
-           "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
+           "device": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
            "value": "23.42",
            "unit": "kwh",
            "occur_at": "2012-08-01T20:00:00Z"
@@ -422,7 +422,7 @@ Lelylan gives you two ways to measure energy consumptions.
       -H 'Content-Type: application/json' \
       -d '{
             "type": "durational",
-            "device": "https://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1", 
+            "device": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
             "value": "0.05",
             "unit": "kwh",
             "occur_at": "2012-08-01T20:00:00Z",
@@ -445,8 +445,8 @@ Lelylan gives you two ways to measure energy consumptions.
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
-Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+Location: http://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -468,7 +468,7 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
 <h4>Resource URL</h4>
 
 <div class="preview">
-<pre><code class="no-highlight">PUT  https://api.lelylan.com/consumption/:id</code></pre>
+<pre><code class="no-highlight">PUT  http://api.lelylan.com/consumption/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -607,7 +607,7 @@ Location: https://api.lelylan.com/consumptions/4dff4417d033a980c700001c</code></
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/consumptions/:id</code></pre>
+<pre><code class="no-highlight">DELETE http://api.lelylan.com/consumptions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>

@@ -1,0 +1,221 @@
+<article>
+
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#activate-a-device">Activate a device</a></td></tr>
+    <tr><td>&raquo; <a href="#deactivate-a-device">Deactivate a device</a></td></tr>
+  </tbody>
+</table>
+</aside>
+
+<h1 class="call"><a name="activations"><%= title %></a></h1>
+
+<p>
+When you create a device, it's automatically yours. This is generally what you want when
+hacking and playing with Lelylan, but real needs can be different. There are at least a
+couple of scenarios we should talk about and where moving the device ownership is what
+you want.
+</p>
+
+<ul>
+  <li>
+  <strong>Selling a great device</strong>.
+  Suppose you are a startup and you want to produce a new smart light with the best design ever.
+  You want to put it in the stores and let everyone buy it letting them to be the new and unique
+  owners of your device.
+  </li>
+  <li>
+  <strong>Making a gift</strong>.
+  Suppose you are a wonderful girlfriend and a great hacker. You have built the most beautiful
+  light in earth and you want to give it to your man to celebrate your first year.
+  </li>
+</ul>
+
+<p>
+As you can see, we need an easy way to move the device ownership to somebody else, in a controlled
+way. To do this you can use the activation services, keeping in mind few simple things.
+</p>
+
+<ul>
+  <li>
+  <strong>Only one person at time can be the owner of a device</strong>. This means that is
+  somehow somebody steals your activation code and try to become the device owner after you
+  already claimed it, they will fail in the attempt.
+  </li>
+  <li>
+  <strong>Deactivate your device to let other people own it</strong>. As we said, only one
+  person at time can be the owner of a device, but we give you the chance to move it whenever
+  you want. First have to <a href="#activate-a-device">deactivated</a> it (so that nobody
+  is owning it) and then pass the activation code to the new owner.
+  </li>
+</ul>
+
+<p>
+Steps should be clear now. Lets dig into the available services.
+</p>
+
+</article>
+
+<br>
+
+<article>
+
+<h1 class="call"><a name="activate-a-device">POST /activations</a></h1>
+
+<p>
+Activate a device and returns extended information for it.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">POST  http://api.lelylan.com/activations</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>activation_code</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Device <a href="/api/devices#get-a-device-private-info">activation code</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#create-an-instantaneous-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-an-instantaneous-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-an-instantaneous-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-an-instantaneous-consumption-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X POST http://api.lelylan.com/activations \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ "activation_code": "3a9e8732e30c7c06031ad28fd5310425bca3d9bc" }'</code></pre></div>
+  </div>
+  <div class="tab-pane" id="create-an-instantaneous-consumption-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-an-instantaneous-consumption-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
+
+<h4>Example response</h4>
+
+<p>
+  See <a href="/api/devices#device-representation">device representation</a> for body response.
+</p>
+
+<h4>Example response when a device is already activated</h4>
+
+<div class="preview"><pre><code>{
+  "status": "422",
+  "method": "POST",
+  "request": "http://api.lelylan.com/activations",
+  "error": {
+    "code": "notifications.resource.already_activated",
+    "description": "Resource is already activated",
+    "body": { "activation_code": "3cd6360a163b112c5eb910967c5866f77f019694" }
+  }
+}</code></pre></div>
+
+<p>
+<span class="label notice">Notice</span>
+When you create a device, it's yours by default. This means that to let others own that same
+device, you must first <a href="#activate-a-device">deactivate</a> it.
+</p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="deactivate-a-device">DELETE /activations/:id</a></h1>
+
+<p>
+Deactivate a device identified from its ID and returns extended information for it.
+When a device is deactivated anyone has the activation code can claim its ownership.
+Until that moment the previous owner remains.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">DELETE https://api.lelylan.com/activations/:id</code></pre>
+</div>
+
+<h4>Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired device.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="curl active"><a href="#delete-a-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class="javascript"><a href="#delete-a-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class="ruby"><a href="#delete-a-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-consumption-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/activations/50424e696de0741000002304 \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Length: 0'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-consumption-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-consumption-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<p>
+  See <a href="/api/devices#device-representation">device representation</a> for body response.
+</p>
+
+</article>

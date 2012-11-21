@@ -15,6 +15,7 @@ titles:
   'api/devices': Devices
   'api/devices/consumptions': Consumptions
   'api/devices/histories': Histories
+  'api/devices/activations': Activations
   'api/types': Types
   'api/types/properties': Properties
   'api/types/functions': Functions
