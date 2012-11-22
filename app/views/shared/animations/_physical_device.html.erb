@@ -7,28 +7,30 @@
           <a class="btn btn-warning" href="#">Forward Lelylan request &raquo;</a>
 
           <p>
-          When you update the <a href="/api/devices#update-properties/">device properties</a>
-          Lelylan forward a request to the physical device to update its properties.
-          For example the following request turns on a light by setting its status
-          value to on.
+          When you update the device status changing its
+          <a href="/api/devices#update-properties">properties</a> or executing a
+          <a href="/api/devices#execute-a-function">function</a>, Lelylan forward
+          the request to the connected physical device URI to update its properties.
           </p>
 
-          <div class="preview"><pre><code class="no-highlight">PUT https://arduino.house.com/physical-light-id
+          <div class="preview"><pre><code class="no-highlight">PUT http://arduino.house.com/physical-light-id
     {
       "properties": [{
-        "uri": "https://api.lelylan.com/properties/status-id", 
-        "id": "status-id",
-        "value": "on" 
+        "uri": "http://api.lelylan.com/properties/status-id",
+        "id": "status-id", "value": "on"
       }]
     }</code></pre></div>
+
         </div>
 
         <div class="second-step">
 
           <a class="btn btn-warning" href="#">Apply Lelylan request &raquo;</a>
           <p>
-          When the physical device receives the request it must transform it to be compliant with
-          a standard like Zigbee, Wifi or Konnex (use the one you feel most confident with).
+          When the physical device receives the request it must transform it to be compliant
+          with a standard like Zigbee, WiFi, X10, Konnex or the one you feel most confident with.
+          At this point <strong>the physical device applies the desired changes in the physical
+          world</strong>.
           </p>
 
         </div>
@@ -36,21 +38,19 @@
         <div class="third-step">
 
           <p>
-          The physical device apply the requested changes and responds with its
-          updated JSON representation.
+          Once the physical device has changed its status, Lelylan gets notified with its
+          updated JSON representation. As the whole physical device flow is
+          <a href="/api/devices#physical-request-process">asynchronous</a>, subscribe
+          to the <a href="/api/realtime">realtime service</a> to have realtime notifications.
           </p>
 
           <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
           <div class="preview"><pre><code>{
-  "uri": "https://arduino.house.com/physical-light-id",
-  "id": "physical-light-id",
-  "name": "Physical light",
-  "type": { "uri": "https://api.lelylan.com/types/light-type-id" },
-  "callback": { "uri": "https://api.lelylan.com/devices/light-id" },
-  "properties": [{ 
-    "uri": "https://api.lelylan.com/properties/status-id", 
-    "id": "4decdd07d033a95e25000046",
-    "physical": "on"
+  "uri": "http://arduino.house.com/physical-light-id",
+  "callback": { "uri": "http://api.lelylan.com/devices/light-id" },
+  "properties": [{
+    "uri": "http://api.lelylan.com/properties/status-id",
+    "id": "status-id", "physical": "on"
   }]
 }</code></pre></div>
 

@@ -1,128 +1,508 @@
-      <article>
+<article>
 
-      <aside class="menu">
-      </br>
-      <table>
-        <tbody>
-          <tr><td>&raquo; <a href="#physical-devices-flow">Physical Devices Flow</a></td></tr>
-          <tr><td>&raquo; <a href="#hardware-solutions">Hardware solutions</a></td></tr>
-        </tbody>
-      </table>
-      </aside>
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td>&raquo; <a href="#physical-overview">Overview</a></td></tr>
+    <tr><td>&raquo; <a href="#hardware-solutions">Hardware solutions</a></td></tr>
+    <tr><td>&raquo; <a href="#physical-devices-api">Physical devices API</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#update-physical-configuration">Update physical configuration</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#update-physical-properties">Update physical properties</a></td></tr>
+    <tr><td class="inside">&raquo; <a href="#update-device-properties">Update device properties</a></td></tr>
+  </tbody>
+</table>
+</aside>
 
-      <h1 class="call"><a name="physical-devices"><%= title %></a></h1>
+<h1 class="call"><a name="physical-devices"><%= title %></a></h1>
 
-      <span class="label warning">coming soon</span>
+<p>
+Physical devices are the real objects you physically interact with everyday of your life
+like lights, appliances, alarms and more. To enable the communication between Lelylan
+and the physical devices, they should provide a simple set of web services.
+<p>
 
-      <p>
-      Physical devices are the objects you physically interact with everyday of your life
-      like lights, appliances, alarms and more. To enable the communication between Lelylan
-      and the physical devices you have to provide them with a simple set of web services.
-      <p>
+<p>
+Keep in mind that physical devices are characterized uniquely by their properties. This keeps
+physical devices simple to build, still giving the possibility to extend their functionalities
+adding new services (e.g. rules engines, sceneries, etc.) on top of Lelylan whenever you want.
+<p>
 
-      <p>
-      Physical devices are characterized uniquely by their properties. This keeps physical
-      devices simple to build, still giving the possibility to extend their functionalities
-      adding new services (e.g. rules engines, sceneries, etc.) on top of Lelylan whenever
-      you want.
-      <p>
+</article>
 
-      </article>
+</br>
 
-      </br>
+<article>
 
-      <article>
+<h1 class="call"><a name="physical-overview">Overview</a></h1>
 
-      <h1 class="call"><a name="physical-devices-flow">Physical Devices Flow</a></h1>
+<%= render 'shared/animations/physical_device' %>
 
-      <%= render 'shared/animations/physical_device' %>
+</article>
 
-      </article>
+</br>
 
-      </br>
+<article>
 
-      <article>
+<h1 class="call"><a name="hardware-solutions">Hardware solutions</a></h1>
 
-      <h1 class="call"><a name="hardware-solutions">Hardware solutions</a></h1>
+<p>
+To build a physical device you can use different hardware solutions varying
+on <strong>computational power</strong>, <strong>wireless capability</strong>
+and <strong>budget</strong>.
+</p>
 
-      <p>
-      To build a physical device you can use different hardware solutions varying 
-      on <strong>computational power</strong>, <strong>wireless capability</strong>
-      and <strong>budget</strong>.
-      </p>
+<table>
+  <thead>
+    <tr>
+      <td><strong>MODEL</strong></td>
+      <td><strong>DESCRIPTION</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.arduino.cc/">Arduino</a></td>
+      <td>
+        Open-source electronics prototyping platform.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://electricimp.com/">Electric imp</a></td>
+      <td>
+        A complete and cheap solution to connect devices to the internet, wirelessly.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.raspberrypi.org/">Raspberry Pi</a></td>
+      <td>
+        Credit-card sized computer as ARM GNU/Linux box for $25.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://nanode.eu/">Nanode</a></td>
+      <td>
+        Open-source Arduino-like board that has in-built web connectivity.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openpicus.com/">openPICUS</a></td>
+      <td>
+        Platform to control and communication for your electronic devices through the web.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.libelium.com/">Libelium</a></td>
+      <td>
+        Hardware technology for the implementation of wireless sensor networks.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://netduino.com/">Netduino</a></td>
+      <td>
+        Open-source electronics platform using the .NET Micro Framework.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://developer.android.com/tools/adk/index.html">Android ADK</a></td>
+      <td>
+        Designed to let hardware builders and software developers create accessories for Android.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://rascalmicro.com/">The Rascal</a></td>
+      <td>
+        Small computer to monitor and control the world remotely.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://pandaboard.org/">Beagle Board</a></td>
+      <td>
+        Open OMAP 4 mobile software development platform.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.plugcomputer.org/">Plug Computer</a></td>
+      <td>
+        Small form factor server.
+      </td>
+    </tr>
+    <tfoot>
+      <tr>
+        <td colspan="2">
+          Read
+          <a href="http://www.lelylan.com/blog/electronics/">Hacking the Internet of Things</a> and
+          <a href="http://www.lelylan.com/blog/boards/">Get into the House</a> to learn more about.
+        </td>
+      </tr>
+    </tfoot>
+  </tbody>
+</table>
 
-      <table>
-        <thead>
-          <tr>
-            <td><strong>MODEL</strong></td>
-            <td><strong>DESCRIPTION</strong></td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="http://www.arduino.cc/">Arduino</a></td>
-            <td>
-              Open-source electronics prototyping platform.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://nanode.eu/">Nanode</a></td>
-            <td>
-              Open-source Arduino-like board that has in-built web connectivity.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://www.openpicus.com/">openPICUS</a></td>
-            <td>
-              Platform to control and communication for your electronic devices through the web.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://netduino.com/">Netduino</a></td>
-            <td>
-              Open-source electronics platform using the .NET Micro Framework.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://www.libelium.com/">Libelium</a></td>
-            <td>
-              Hardware technology for the implementation of wireless sensor networks.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://www.raspberrypi.org/">Raspberry Pi</a></td>
-            <td>
-              Credit-card sized computer as ARM GNU/Linux box for $25.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://rascalmicro.com/">The Rascal</a></td>
-            <td>
-              Small computer to monitor and control the world remotely.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://pandaboard.org/">Beagle Board</a></td>
-            <td>
-              Open OMAP 4 mobile software development platform.
-            </td>
-          </tr>
-          <tr>
-            <td><a href="http://www.plugcomputer.org/">Plug Computer</a></td>
-            <td>
-              Small form factor server.
-            </td>
-          </tr>
-          <tfoot>
-            <tr>
-              <td colspan="2">
-                Read 
-                <a href="http://www.lelylan.com/blog/electronics/">Hacking the Internet of Things</a> and
-                <a href="http://www.lelylan.com/blog/boards/">Get into the House</a> to learn more about.
-              </td>
-            </tr>
-          </tfoot>
-        </tbody>
-      </table>
+</article>
 
-      </article>
+</br></br>
+
+<article>
+
+<h1 class="call"><a name="physical-devices-api">Physical Devices API</a></h1>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="update-physical-configuration">Update physical configuration</a></h2>
+
+<p>
+Configure the physical device identified by its URI and returns extended information for it.
+The configuration consists on saving two parameters.
+</p>
+
+<ul>
+  <li>
+  <strong>Device URI</strong>. Matching <a href="/api/devices#get-a-device">device</a> URI
+  where the physical device sends the physical changes.
+  </li>
+  <li>
+  <strong>Access Token</strong>. Access token needed to authorize the physical requests
+  to the device URI.
+  </li>
+</ul>
+
+<p>
+This service is called by the <a href="/api/devices#configure-physical-accesses">device access
+service</a>, which will generate the access token and send the device URI to the physical.
+</p>
+
+<h4>Resource URL</h4>
+
+<div class="preview">
+<pre><code class="no-highlight">POST http://arduino.house.com/physical-id</code></pre>
+</div>
+
+<h4>Headers</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>X-Physical-Signature</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The message signature. To verify that the payload you received comes from lelylan, you
+        must verify the "X-Physical-Signature" header. This is a SHA-1-signed hexadecimal digest
+        using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
+        the payload as message.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Body Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>nonce</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Random unique identifier to avoid replay attacks.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>callback</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Matching <a href="/api/devices#get-a-device">device</a> URI.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>access_token</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Access token to access the matching <a href="/api/devices#get-a-device">device</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-physical-configuration-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-physical-configuration-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-physical-configuration-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-physical-configuration-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST http://arduino.house.com/physical-id \
+    -H 'Content-Type: application/json' \
+    -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
+    -d '{
+          "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
+          "callback": "http://api.lelylan.com/devices/device-id",
+          "access_token": "d1eca7d40ab4915291b9aa0a859ecaab69bbd6829635a68dd6b7a3952de93f77"
+        }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-configuration-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-configuration-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4 id="physical-device-representation">Example body response</h4>
+
+<div class="preview"><pre><code>{
+  "uri": "http://arduino.house.com/physical-id",
+  "callback": { "uri": "http://api.lelylan.com/devices/light-id" },
+  "properties": [{
+    "uri": "http://api.lelylan.com/properties/status-id",
+    "id": "status-id", "value": "on" }]
+}</code></pre></div>
+
+<h4>Body Response explained</h4>
+
+<dl>
+  <dd><span>uri</span> - Physical device URI.</dd>
+  <dd><span>callback</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
+  <dt><span>properties</span> - Physical device properties.</dt>
+</dl>
+
+</article>
+
+</br>
+
+<article>
+
+<h2 class="call"><a name="update-physical-properties">Update physical properties</a></h2>
+
+<p>
+Update the physical device identified by its URI and returns extended information for it. </br>
+This service is called from Lelylan when a device changes its
+<a href="/api/devices#update-properties">properties</a> or
+<a href="/api/devices#update-properties">executes a function</a>.
+
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code class="no-highlight">POST http://arduino.house.com/physical-id</code></pre>
+</div>
+
+<h4>Headers</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>X-Physical-Signature</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The message signature. To verify that the payload you received comes from lelylan, you
+        must verify the "X-Physical-Signature" header. This is a SHA-1-signed hexadecimal digest
+        using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
+        the payload as message.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Body Parameters</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>nonce</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Random unique identifier to avoid replay attacks.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties to change.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.uri</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property URI.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Physical property value.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-physical-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-physical-device-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-physical-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-physical-device-properties-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST http://arduino.house.com/physical-id \
+    -H 'Content-Type: application/json' \
+    -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
+    -d '{
+          "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
+          "properties": [{
+            "uri": "http://api.lelylan.com/properties/status-id",
+            "id": "status-id",
+            "value": "on" }]
+        }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+
+<h4 id="physical-device-representation">Example body response</h4>
+
+<div class="preview"><pre><code>{
+  "uri": "http://arduino.house.com/physical-id",
+  "callback": { "uri": "http://api.lelylan.com/devices/light-id" },
+  "properties": [{
+    "uri": "http://api.lelylan.com/properties/status-id",
+    "id": "status-id", "value": "on" }]
+}</code></pre></div>
+
+<h4>Body Response explained</h4>
+
+<dl>
+  <dd><span>uri</span> - Physical device URI.</dd>
+  <dd><span>callback</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
+  <dt><span>properties</span> - Physical device properties.</dt>
+</dl>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="update-device-properties">Update device properties</a></h1>
+
+<p>
+Once the physical device saves the device uri and the related access token it's easy to update
+Lelylan. Just use the <a href="/api/devices#update-properties">properties service</a> with few
+slightly changes due to the fact that usually physical devices do not uses HTTPS.
+</p>
+
+<ul>
+  <li>
+  <strong>nonce</strong>. Every request must contain a nonce. A nonce is a unique string between
+  all requests coming from the physical device and it is used to avoid replay attacs.
+  </li>
+  <li>
+  <strong>X-Physical-Signature</strong>. Every request must contain the X-Physical-Signature
+  header which is the message signature used from Lelylan to verify that the payload comes from
+  the physical device. This must be a SHA-1-signed hexadecimal digest using the
+  <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
+  the payload as message.
+  </li>
+</ul>
+
+<p>
+The secret must be stored in the physical device and the access token used to authorize the
+request should be the one <a href="#update-physical-configuration">previously set</a>.
+</p>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-device-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-device-properties-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt; \
+    -H 'Authorization: Bearer &lt;token&gt;' \
+    -H 'X-Physical-Signature: &lt;signature&gt;' \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
+          "properties": [{
+            "uri": "http://api.lelylan.com/properties/status-id",
+            "id": "status-id",
+            "value": "on" }]
+        }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+</article>

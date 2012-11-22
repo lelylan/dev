@@ -113,7 +113,7 @@ table span.info{display: block; font-weight: normal; color: #888;}
 table span.info a{color: #FF7600;}
 table a.bigger{font-size:15px;}
 
-#section aside{position:absolute; left: 720px; width:200px;}
+#section aside{position:absolute; left: 720px; width:220px;}
 #section aside h3{margin-top: 3px;}
 #section aside p.message{font-size: 13px;}
 
@@ -142,5 +142,5 @@ body.pages-index .more{float:right;margin:0;padding:10px 30px 15px 0;font-size:1
 article.comments {margin-top: 60px; padding-top: 10px; border-top: solid 1px; border-color: #DADADA;}
 aside table td {line-height: 15px;}
 aside.menu {position:fixed !important; margin-left:270px;}
-aside.menu td.inside {padding-left:22px; border-top: none; padding-top:5px}
+aside.menu td.inside {padding-left:22px;}
 dl dd{line-height: 1.7em;}

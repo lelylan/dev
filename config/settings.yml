@@ -39,3 +39,4 @@ code_pages:
   - api/types/statuses
   - api/locations
   - api/realtime
+  - api/physicals
