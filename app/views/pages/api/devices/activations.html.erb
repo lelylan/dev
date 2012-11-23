@@ -4,6 +4,7 @@
 </br>
 <table>
   <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#activate-a-device">Activate a device</a></td></tr>
     <tr><td>&raquo; <a href="#deactivate-a-device">Deactivate a device</a></td></tr>
   </tbody>
@@ -15,16 +16,14 @@
 <p>
 When you create a device, it's automatically yours. This is generally what you want when
 hacking and playing with Lelylan, but real needs can be different. There are at least a
-couple of scenarios we should talk about and where moving the device ownership is what
-you want.
+couple of scenarios where changing the device ownership is what you want.
 </p>
 
 <ul>
   <li>
   <strong>Selling a great device</strong>.
-  Suppose you are a startup and you want to produce a new smart light with the best design ever.
-  You want to put it in the stores and let everyone buy it letting them to be the new and unique
-  owners of your device.
+  Suppose you are a startup and you want to produce a new smart device with the best design ever.
+  You want to put it in the stores and let everyone own it.
   </li>
   <li>
   <strong>Making a gift</strong>.
@@ -40,21 +39,17 @@ way. To do this you can use the activation services, keeping in mind few simple 
 
 <ul>
   <li>
-  <strong>Only one person at time can be the owner of a device</strong>. This means that is
-  somehow somebody steals your activation code and try to become the device owner after you
-  already claimed it, they will fail in the attempt.
+  <strong>Only one person at time can be the owner of a device</strong>. If someone takes your
+  activation code and try to activate the device after you already did it, the activation will
+  not work.
   </li>
   <li>
-  <strong>Deactivate your device to let other people own it</strong>. As we said, only one
-  person at time can be the owner of a device, but we give you the chance to move it whenever
-  you want. First have to <a href="#activate-a-device">deactivated</a> it (so that nobody
-  is owning it) and then pass the activation code to the new owner.
+  <strong>Deactivate your device to let other people own it</strong>. When you create a device
+  it's yours by default. To move the device ownership you must first <a href="#deactivate-a-device">
+  deactivate</a> it. Once deactivated, the device can be <a href="#activate-a-device">claimed</a>
+  from whoever has the activation code.
   </li>
 </ul>
-
-<p>
-Steps should be clear now. Lets dig into the available services.
-</p>
 
 </article>
 
