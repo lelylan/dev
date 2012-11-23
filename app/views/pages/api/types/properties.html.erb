@@ -4,6 +4,7 @@
 </br>
 <table>
   <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#get-a-property">Get a property</a></td></tr>
     <tr><td>&raquo; <a href="#get-all-properties">Get all properties</a></td></tr>
     <tr><td>&raquo; <a href="#create-a-property">Create a property</a></td></tr>
@@ -16,7 +17,7 @@
 <h1 class="call"><a name="properties"><%= title %></a></h1>
 
 <p>
-A property is whatever vary in a device during time. It can be the intensity in 
+A property is whatever vary in a device during time. It can be the intensity in
 a dimmer, the temperature in a cooling system or the volume in a television.
 </p>
 
@@ -194,7 +195,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
 <h4>Example body response</h4>
 
 <div class="preview highlight"><pre><code class="no-highlight">[
-  { # property representation }, 
+  { # property representation },
   { # property representation },
   ...
 ]</code></pre></div>
@@ -267,10 +268,10 @@ GET http://api.lelylan.com/properties/public</code></pre>
       <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/properties.json \
       -H 'Authorization: Bearer &lt;token&gt' \
       -H 'Content-Type: application/json' \
-      -d '{ 
+      -d '{
             "name": "Intensity",
             "default": "0",
-            "values": ["0","20","40","60","80","100"] 
+            "values": ["0","20","40","60","80","100"]
           }'</code></pre>
     </div>
   </div>
@@ -288,7 +289,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
 </div>
 

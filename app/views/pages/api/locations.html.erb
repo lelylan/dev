@@ -4,6 +4,7 @@
 </br>
 <table>
   <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#get-a-location">Get a location</a></td></tr>
     <tr><td>&raquo; <a href="#get-all-descendants">Get all descendants</a></td></tr>
     <tr><td>&raquo; <a href="#get-all-locations">Get all locations</a></td></tr>
@@ -18,8 +19,8 @@
 
 <p>
 Locations are the places we live in and where physical devices are placed. Lelylan
-identifies three kind of locations: <strong>houses</strong>, <strong>floors</strong> 
-and <strong>rooms</strong>. They are used to represent the physical locations and they 
+identifies three kind of locations: <strong>houses</strong>, <strong>floors</strong>
+and <strong>rooms</strong>. They are used to represent the physical locations and they
 usually are organized in a hierarchical structure (a house contains many floors, which contain many rooms and so on).
 </p>
 
@@ -363,7 +364,7 @@ Returns a list of descendent locations for a given location identified from its 
 <h4>Example body response</h4>
 
 <div class="preview highlight"><pre><code class="no-highlight">[
-  { # location representation }, 
+  { # location representation },
   { # location representation },
   ...
 ]</code></pre></div>
@@ -477,7 +478,7 @@ Returns a list of descendent locations for a given location identified from its 
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre></div>
 
 <h4>Example body response</h4>
@@ -589,7 +590,7 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
       <pre><code># todo</code></pre>
     </div>
   </div>
-</div> 
+</div>
 
 <p>
 <span class="label notice">Notice</span>

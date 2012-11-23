@@ -4,6 +4,7 @@
 </br>
 <table>
   <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#get-a-function">Get a function</a></td></tr>
     <tr><td>&raquo; <a href="#get-all-functions">Get all functions</a></td></tr>
     <tr><td>&raquo; <a href="#create-a-function">Create a function</a></td></tr>
@@ -16,9 +17,9 @@
 <h1 class="call"><a name="functions"><%= title %></a></h1>
 
 <p>
-Functions defines the daily interactions you have with the devices in your house, 
-for example when you turn on a light, close a door or raise the temperature in a 
-room. With functions you can control any device in the same way you do everyday of 
+Functions defines the daily interactions you have with the devices in your house,
+for example when you turn on a light, close a door or raise the temperature in a
+room. With functions you can control any device in the same way you do everyday of
 your life.
 </p>
 
@@ -207,7 +208,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
 <h4>Example body response</h4>
 
 <div class="preview highlight"><pre><code class="no-highlight">[
-  { # function representation }, 
+  { # function representation },
   { # function representation },
   ...
 ]</code></pre></div>
@@ -293,7 +294,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
       <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/functions \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
-     -d '{ 
+     -d '{
            "name": "Set intensity",
            "properties": [
              { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "value": "on"},
@@ -389,7 +390,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Value assigned to the device property when the function is executed.<br/> 
+        Value assigned to the device property when the function is executed.<br/>
       </td>
     </tr>
   </tbody>
@@ -409,7 +410,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 curl -X PUT http://api.lelylan.com/functions/504210df70eda60a00000003 \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
-     -d '{ 
+     -d '{
            "name": "Set intensity to 50%",
            "properties": [
              { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "value": "on"},

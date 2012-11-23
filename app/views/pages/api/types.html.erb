@@ -4,6 +4,7 @@
 </br>
 <table>
   <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#get-a-type">Get a type</a></td></tr>
     <tr><td>&raquo; <a href="#get-all-types">Get all types</a></td></tr>
     <tr><td>&raquo; <a href="#create-a-type">Create a type</a></td></tr>
@@ -22,7 +23,7 @@ In its simplest form every type can be defined as the combination of three key e
 </p>
 
 <ul>
-  <li><a href="/api/types/properties/">Properties</a>: what vary during time.</li> 
+  <li><a href="/api/types/properties/">Properties</a>: what vary during time.</li>
   <li><a href="/api/types/functions/">Functions</a>: what a device can do.</li>
   <li><a href="/api/types/statuses/">Statuses</a>: what a device is (in a specific time of its life).</li>
 </ul>
@@ -43,9 +44,9 @@ Here an example describing an hypothetical dimmer type.
 
 <p>
 It can be a little tricky to get started with types. When you first see its
-json structure it appears to be quite complex, but it isn't. 
+json structure it appears to be quite complex, but it isn't.
 As suggestion you should first read the
-<a href="/api/types/properties/">properties</a>, 
+<a href="/api/types/properties/">properties</a>,
 <a href="/api/types/functions/">functions</a> and
 <a href="/api/types/statuses/">statuses</a> documentation.
 </p>
@@ -60,7 +61,7 @@ As suggestion you should first read the
 
 <p>
 
-Returns extended information for a given <a href="/api/core/#public-resources">public</a> 
+Returns extended information for a given <a href="/api/core/#public-resources">public</a>
 type identified from its ID.
 </p>
 
@@ -187,13 +188,13 @@ type identified from its ID.
   <dd><span>id</span> - Type ID.</dd>
   <dd><span>uri</span> - Type URI.</dd>
   <dd><span>name</span> - Type name.</dd>
-  <dd><span>properties</span> - Type properties. 
+  <dd><span>properties</span> - Type properties.
   <a href="/api/types/properties/">Learn more about properties</a>.</dd>
-  <dd><span>functions</span> - Type functions. 
+  <dd><span>functions</span> - Type functions.
   <a href="/api/types/functions/">Learn more about functions</a>.</dd>
-  <dd><span>statuses</span> - Type statuses. 
+  <dd><span>statuses</span> - Type statuses.
   <a href="/api/types/statuses/">Learn more about statuses</a>.</dd>
-  <dd><span>categories</span> - Type categories. 
+  <dd><span>categories</span> - Type categories.
   <a href="/api/types/categories/">Learn more about categories</a>.</dd>
 </dl>
 
@@ -297,7 +298,7 @@ GET http://api.lelylan.com/types/public</code></pre>
 ]</code></pre></div>
 
 <p>
-Due to the type complexity structure the type representation is a simplified version of 
+Due to the type complexity structure the type representation is a simplified version of
 its <a href="#type-representation">extended representation</a>.
 </p>
 
@@ -338,7 +339,7 @@ Create a type and returns extended information for it.
       <span class="info">optional</span>
     </td>
     <td>
-      List of property URIs. 
+      List of property URIs.
       <a href="/api/types/properties/">Learn more about properties</a>.
     </td>
   </tr>
@@ -384,9 +385,9 @@ In this example the resource IDs are identified from friendly names.
       <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/types \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
-     -d '{ 
+     -d '{
            "name": "Dimmer",
-           "properties": [ 
+           "properties": [
              "http://api.lelylan.com/properties/&lt;status&gt;",
              "http://api.lelylan.com/properties/&lt;intensity&gt;"
            ],
@@ -395,7 +396,7 @@ In this example the resource IDs are identified from friendly names.
              "http://api.lelylan.com/functions/&lt;turn-off&gt;",
              "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
            ],
-           "statuses": [ 
+           "statuses": [
              "http://api.lelylan.com/statuses/&lt;setting-intensity&gt;"
            ]
          }'</code></pre>
@@ -415,7 +416,7 @@ In this example the resource IDs are identified from friendly names.
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created 
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></div>
 
 <h4>Example body response</h4>
@@ -526,7 +527,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
 
 <p>
 <span class="label notice">Notice</span>
-When updating a type connection (properties, functions, statuses or categories) 
+When updating a type connection (properties, functions, statuses or categories)
 all previous connected resources are replaced.
 </p>
 

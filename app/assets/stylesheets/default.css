@@ -139,6 +139,7 @@ body.pages-index .bcta{font-size:20px;margin:5px 0 20px;}
 body.pages-index .bcta button,body.pages-index .bcta .cta{font-size:20px;margin:0 5px}
 body.pages-index .more{float:right;margin:0;padding:10px 30px 15px 0;font-size:18px}
 
+.upcase { text-transform:uppercase; }
 article.comments {margin-top: 60px; padding-top: 10px; border-top: solid 1px; border-color: #DADADA;}
 aside table td {line-height: 15px;}
 aside.menu {position:fixed !important; margin-left:270px;}

@@ -4,6 +4,7 @@
 </br>
 <table>
   <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#get-a-status">Get a status</a></td></tr>
     <tr><td>&raquo; <a href="#get-all-statuses">Get all statuses</a></td></tr>
     <tr><td>&raquo; <a href="#create-a-status">Create a status</a></td></tr>
@@ -16,7 +17,7 @@
 <h1 class="call"><a name="statuses"><%= title %></a></h1>
 
 <p>
-Properties are not always enough to describe the status of a device. Think at a roller 
+Properties are not always enough to describe the status of a device. Think at a roller
 shutter for example. It has the property <code>aperture</code> that is <code>100</code>
 when open or <code>0</code> when closed. But what if the roller shutter is opening? It
 is nether open or close. To have a complete control over the device status in a specific
@@ -228,7 +229,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
 <h4>Example body response</h4>
 
 <div class="preview highlight"><pre><code class="no-highlight">[
-  { # status representation }, 
+  { # status representation },
   { # status representation },
   ...
 ]</code></pre>
@@ -342,10 +343,10 @@ GET http://api.lelylan.com/statuses/public</code></pre>
      -d '{
            "name": "Setting intensity",
            "pending": true,
-           "properties": [{ 
+           "properties": [{
               "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
               "values": ["on"]
-            },{ 
+            },{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
               "range": { "min": "0", "max": "100" }
             }]
@@ -484,13 +485,13 @@ Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre
     <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/statuses/5042176370eda61200000004 \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
-     -d '{ 
+     -d '{
            "name": "Lowering intensity",
            "pending": true,
-           "properties": [{ 
+           "properties": [{
               "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
               "values": ["on"]
-            },{ 
+            },{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
               "range": { "min": "0", "max": "25" }
             }]
