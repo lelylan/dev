@@ -7,12 +7,7 @@
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#realtime">Real-time</a></td></tr>
     <tr><td>&raquo; <a href="#how-to-subscribe">How to subscribe</a></td></tr>
-    <%#<tr><td class="inside">&raquo; <a href="#register">Register a client</a></td></tr>%>
-    <%#<tr><td class="inside">&raquo; <a href="#callback">Create a callback URL</a></td></tr>%>
-    <%#<tr><td class="inside">&raquo; <a href="#subscriptions">Subscriptions</a></td></tr>%>
-    <%#<tr><td class="inside">&raquo; <a href="#how-to-create-a-subscription">How to create a subscription</a></td></tr>%>
     <tr><td>&raquo; <a href="#receiving-updates">Receiving updates</a></td></tr>
-    <tr><td>&raquo; <a href="#security">Security check</a></td></tr>
     <tr><td>&raquo; <a href="#subscriptions-api">Subscriptions API</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#get-a-subscription">Get a subscription</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#get-all-subscriptions">Get client subscriptions</a></td></tr>
@@ -305,58 +300,13 @@ to the callback URL defined in the subscription.
   more calls are made.
 </p>
 
-</article>
-
-</br>
-
-<article>
-
-<h1 class="call"><a name="security">Security check</a></h1>
+<h4>Security check</h4>
 
 <p>
 To verify that the payload you received comes from us, you must verify the "X-Hub-Signature"
 header. This is a SHA-1-signed hexadecimal digest using your client secret as key and the
-payload as message.
+payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
 </p>
-
-<h4>Signature check example</h4>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#verify-payload-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane" id="verify-payload-ruby">
-    <div class="preview">
-      <pre><code>require 'openssl'
-
-secret    = CLIENT_SECRET
-signature = request.headers['X-Hub-Signature']
-payload   = request.body
-
-digest = OpenSSL::Digest::Digest.new('sha1')
-verify = OpenSSL::HMAC.hexdigest(digest, client_secret, payload.to_json.to_s)
-
-raise InvalidSignature, "Invalid X-Hub-Signature" if signature != verify</code></pre>
-    </div>
-  </div>
-    <div class="tab-pane active" id="verify-payload-javascript">
-    <div class="preview">
-      <pre><code>var crypto = require('crypto');
-
-var secret    = CLIENT_SECRET,
-    signature = request.headers('X-Hub-Signature'),
-    payload   = request.body();
-
-digest = crypto.createHmac("sha1", secret);
-digest.update(JSON.stringify(payload));
-verify = digest.digest('hex')
-
-if (signature != verify) throw new(Error)("Invalid X-Hub-Signature");</code></pre>
-    </div>
-  </div>
-</div>
 
 </article>
 

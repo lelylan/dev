@@ -51,6 +51,13 @@ way. To do this you can use the activation services, keeping in mind few simple 
   </li>
 </ul>
 
+<p>
+<span class="label notice">Notice</span>
+Once the device is acetivated you must reset the physical
+<a href="/api/devices#update-physical-access">access credentials</a>
+or you will not get any update from the physical world (the physical
+device also needs to know the new owner).
+</p>
 </article>
 
 <br>
@@ -138,7 +145,7 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
 <p>
 <span class="label notice">Notice</span>
 When you create a device, it's yours by default. This means that to let others own that same
-device, you must first <a href="#activate-a-device">deactivate</a> it.
+device, you must first <a href="#deactivate-a-device">deactivate</a> it.
 </p>
 
 </article>
@@ -157,7 +164,7 @@ Until that moment the previous owner remains.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/activations/:id</code></pre>
+<pre><code class="no-highlight">DELETE https://api.lelylan.com/activations/:activation_code</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -166,11 +173,11 @@ Until that moment the previous owner remains.
   <tbody>
     <tr>
       <td class="parameter">
-        <span>id</span>
+        <span>activation_code</span>
         <span class="info">required</span>
       </td>
       <td>
-        The ID of the desired device.
+        The <a href="/api/devices#get-a-device-private-info">activation code</a> of the desired device.
       </td>
     </tr>
   </tbody>

@@ -38,21 +38,21 @@
         <div class="third-step">
 
           <p>
-          Once the physical device has changed its status, Lelylan gets notified with its
-          updated JSON representation. As the whole physical device flow is
-          <a href="/api/devices#physical-request-process">asynchronous</a>, subscribe
-          to the <a href="/api/realtime">realtime service</a> to have realtime notifications.
+          Once the physical device has changed its status Lelylan gets notified with a 202
+          Accepted status. As the whole physical communication flow is
+          <a href="/api/physicals#asyncronous">asynchronous</a>, subscribe
+          to the <a href="/api/realtime">realtime service</a> to have back realtime notifications.
           </p>
 
-          <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
-          <div class="preview"><pre><code>{
-  "uri": "http://arduino.house.com/physical-light-id",
-  "callback": { "uri": "http://api.lelylan.com/devices/light-id" },
-  "properties": [{
-    "uri": "http://api.lelylan.com/properties/status-id",
-    "id": "status-id", "physical": "on"
-  }]
-}</code></pre></div>
+          <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
+          <%#<div class="preview"><pre><code>{%>
+  <%#"uri": "http://arduino.house.com/physical-light-id",%>
+  <%#"callback": { "uri": "http://api.lelylan.com/devices/light-id" },%>
+  <%#"properties": [{%>
+    <%#"uri": "http://api.lelylan.com/properties/status-id",%>
+    <%#"id": "status-id", "physical": "on"%>
+  <%#}]%>
+<%#}</code></pre></div>%>
 
         </div>
       </div>

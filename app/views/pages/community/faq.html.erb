@@ -1,8 +1,106 @@
+<article>
+
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
+    <tr><td>&raquo; <a href="#devices-vs-physical">Devices vs Physical Devices</a></td></tr>
+    <tr><td>&raquo; <a href="#signature-header">Signature header</a></td></tr>
+  </tbody>
+</table>
+</aside>
+
 <h1 class="call"><a name="faq"><%= title %></a></h1>
 
 <p>
-<span class="label warning">coming soon</span>
-Right now the FAQ page is empty. If you think we are missing a good explanation on some
-basic concepts <a href="http://twitter.com/#!/lelylan">tweet</a> or 
-<a href="mailto:touch@lelylan.com">mail</a> us.
+If you think we are missing a clear description about any concept related to Lelylan, please
+<a href="http://twitter.com/#!/lelylan">tweet</a> or
+<a href="mailto:touch@lelylan.com">mail</a> us. We are looking forward to hear your doubts.
 </p>
+
+</article>
+
+</br>
+
+<article>
+
+<h2 class="call"><a name="devices-vs-physical">Differences between devices and physical devices</a></h2>
+
+<p>
+Sometimes you could be confused between <a href="/api/devices">devices</a> and
+<a href="/api/physicals">physical devices</a> (aka physicals).
+
+<ul>
+  <li>
+  <strong>Device</strong>. Resource defined in Lelylan as virtual representation of an object.
+  A device can be connected to the physical world through the physical param and only if this
+  connection exists all commands sent to the device are forwarded to the physical world.
+  </li>
+  <li>
+  <strong>Physical device</strong>. The physical object you interact with in the real world.
+  It receives all commands from the device it is connected to and sends the realtime updates
+  to keep the device updated in realtime.
+  </li>
+</ul>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="signature-header">Signature header</a></h2>
+
+<p>
+When communicating with external services we can't assume an HTTPS connection. This happens
+for example when sending a realtime updates to a subscribed third party application or when
+we communicating with the physical world.
+<p>
+
+<p>
+To make those communications secure we need to add a <strong>nonce</strong> (unique string
+between all requests) and a <strong>signature</strong> which proves the message is generated
+from us. A signature is made by an SHA-1-signed hexadecimal digest using a secret as key and
+the payload as message.
+</p>
+
+<h4>Signature check example</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#verify-payload-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane" id="verify-payload-ruby">
+    <div class="preview">
+      <pre><code>require 'openssl'
+
+secret    = CLIENT_SECRET
+signature = request.headers['X-Physical-Signature']
+payload   = request.body
+
+digest = OpenSSL::Digest::Digest.new('sha1')
+verify = OpenSSL::HMAC.hexdigest(digest, client_secret, payload.to_json.to_s)
+
+raise InvalidSignature, "Invalid X-Physical-Signature" if signature != verify</code></pre>
+    </div>
+  </div>
+    <div class="tab-pane active" id="verify-payload-javascript">
+    <div class="preview">
+      <pre><code>var crypto = require('crypto');
+
+var secret    = CLIENT_SECRET,
+    signature = request.headers('X-Physical-Signature'),
+    payload   = request.body();
+
+digest = crypto.createHmac("sha1", secret);
+digest.update(JSON.stringify(payload));
+verify = digest.digest('hex')
+
+if (signature != verify) throw new(Error)("Invalid X-Physical-Signature");</code></pre>
+    </div>
+  </div>
+</div>
+
+</article>
+

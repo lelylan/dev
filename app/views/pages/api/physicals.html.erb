@@ -157,8 +157,6 @@ and send property updates from/to Lelylan in a secure way.
 
 </article>
 
-<br/>
-
 <article>
 
 <h2 class="call"><a name="update-physical-configuration">Update physical configuration</a></h2>
@@ -187,7 +185,7 @@ service</a>, which will generate the access token and send the device URI to the
 <h4>Resource URL</h4>
 
 <div class="preview">
-<pre><code class="no-highlight">POST http://arduino.house.com/physical-id</code></pre>
+<pre><code class="no-highlight">PUT http://arduino.house.com/physical-id</code></pre>
 </div>
 
 <h4>Headers</h4>
@@ -203,7 +201,7 @@ service</a>, which will generate the access token and send the device URI to the
         The message signature. To verify that the payload you received comes from lelylan, you
         must verify the "X-Physical-Signature" header. This is a SHA-1-signed hexadecimal digest
         using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
-        the payload as message.
+        the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -254,7 +252,7 @@ service</a>, which will generate the access token and send the device URI to the
 <div class="tab-content">
   <div class="tab-pane active" id="update-physical-configuration-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://arduino.house.com/physical-id \
+      <pre><code class="no-highlight">curl -X PUT http://arduino.house.com/physical-id \
     -H 'Content-Type: application/json' \
     -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
     -d '{
@@ -282,21 +280,7 @@ service</a>, which will generate the access token and send the device URI to the
 
 <h4 id="physical-device-representation">Example body response</h4>
 
-<div class="preview"><pre><code>{
-  "uri": "http://arduino.house.com/physical-id",
-  "device": { "uri": "http://api.lelylan.com/devices/light-id" },
-  "properties": [{
-    "uri": "http://api.lelylan.com/properties/status-id",
-    "id": "status-id", "value": "on" }]
-}</code></pre></div>
-
-<h4>Body Response explained</h4>
-
-<dl>
-  <dd><span>uri</span> - Physical device URI.</dd>
-  <dd><span>device</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
-  <dt><span>properties</span> - Physical device properties.</dt>
-</dl>
+<p>Response body is empty.</p>
 
 </article>
 
@@ -316,7 +300,7 @@ This service is called from Lelylan when a device changes its
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST http://arduino.house.com/physical-id</code></pre>
+<pre><code class="no-highlight">PUT http://arduino.house.com/physical-id</code></pre>
 </div>
 
 <h4>Headers</h4>
@@ -332,7 +316,7 @@ This service is called from Lelylan when a device changes its
         The message signature. To verify that the payload you received comes from lelylan, you
         must verify the "X-Physical-Signature" header. This is a SHA-1-signed hexadecimal digest
         using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
-        the payload as message.
+        the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -401,7 +385,7 @@ This service is called from Lelylan when a device changes its
 <div class="tab-content">
   <div class="tab-pane active" id="update-physical-device-properties-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://arduino.house.com/physical-id \
+      <pre><code class="no-highlight">curl -X PUT http://arduino.house.com/physical-id \
     -H 'Content-Type: application/json' \
     -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
     -d '{
@@ -427,57 +411,45 @@ This service is called from Lelylan when a device changes its
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 202 OK</code></pre></div>
 
-<h4 id="physical-device-representation">Example body response</h4>
+<h4 id="physical-device-representation">Body response empty</h4>
 
-<div class="preview"><pre><code>{
-  "uri": "http://arduino.house.com/physical-id",
-  "device": { "uri": "http://api.lelylan.com/devices/light-id" },
-  "properties": [{
-    "uri": "http://api.lelylan.com/properties/status-id",
-    "id": "status-id", "value": "on" }]
-}</code></pre></div>
-
-<h4>Body Response explained</h4>
-
-<dl>
-  <dd><span>uri</span> - Physical device URI.</dd>
-  <dd><span>device</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
-  <dt><span>properties</span> - Physical device properties.</dt>
-</dl>
-
+<p>
+Lelylan does not wait for the response body because the communication is async. The physical
+device will update <a name="update-device-properties">Lelylan device properties</a> once the
+physical changes are applied</p>
 </article>
 
 </br>
 
 <article>
 
-<h1 class="call"><a name="update-device-properties">Update device properties</a></h1>
+<h1 class="call"><a name="update-device-properties">Update device properties on Lelylan</a></h1>
 
 <p>
 Once the physical device saves the device uri and the related access token it's easy to update
 Lelylan. Just use the <a href="/api/devices#update-properties">properties service</a> with few
-slightly changes due to the fact that usually physical devices do not uses HTTPS.
+slightly changes due to the fact physical devices do not have to use HTTPS.
 </p>
 
 <ul>
   <li>
   <strong>nonce</strong>. Every request must contain a nonce. A nonce is a unique string between
-  all requests coming from the physical device and it is used to avoid replay attacs.
+  all requests coming from the physical device and it is used to avoid replay attacks.
   </li>
   <li>
   <strong>X-Physical-Signature</strong>. Every request must contain the X-Physical-Signature
   header which is the message signature used from Lelylan to verify that the payload comes from
   the physical device. This must be a SHA-1-signed hexadecimal digest using the
   <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
-  the payload as message.
+  the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
   </li>
 </ul>
 
 <p>
-The secret must be stored in the physical device and the access token used to authorize the
-request should be the one <a href="#update-physical-configuration">previously set</a>.
+<span class="label notice">Notice</span>
+The device <code>secret</code> must be stored in the physical device.
 </p>
 
 <h4>Example Request</h4>
@@ -748,7 +720,7 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
 <h4>Step 2 - Let the physical devices access Lelylan</h4>
 
 <p>
-In the orher side the physical device must be able to send the physical world updates to
+In the other side the physical device must be able to send the physical world updates to
 Lelylan. To make this happen configure the physical device
 <a href="#update-physical-access">access credentials</a>.
 </p>
