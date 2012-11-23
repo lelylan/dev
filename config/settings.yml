@@ -24,6 +24,7 @@ titles:
   'api/oauth': OAuth 2.0
   'api/realtime': Realtime
   'api/physicals': Physical devices
+  'api/physicals/nodes': Physical nodes
   'community': Community
   'community/clients': Client Libraries
   'community/support': Support

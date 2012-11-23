@@ -46,6 +46,7 @@ table .orange{color:#f89406;border-bottom-color:#f89406;}
 table .headerSortUp.orange,table .headerSortDown.orange{background-color:#fee9cc;}
 table .purple{color:#7a43b6;border-bottom-color:#7a43b6;}
 table .headerSortUp.purple,table .headerSortDown.purple{background-color:#e2d5f0;}
+.zebra-striped tbody tr.last-row td{ border-bottom: 1px solid #ddd; }
 
 .dropdown-menu,.nav.secondary-nav .dropdown-menu{right:0;border:0;}
 .topbar div>ul a.menu:hover,.nav a.menu:hover,.topbar div>ul li.open .menu,.nav li.open .menu,.topbar div>ul .dropdown-toggle:hover,.nav .dropdown-toggle:hover,.topbar div>ul .dropdown.open .dropdown-toggle,.nav .dropdown.open .dropdown-toggle{background:#444;background:rgba(255, 255, 255, 0.05);}
@@ -73,6 +74,7 @@ dl span {font-weight: bold}
 
 .label{padding:1px 3px 2px;font-size:9.75px;font-weight:bold;color:#ffffff;text-transform:uppercase;white-space:nowrap;background-color:#bfbfbf;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;text-shadow:none;}.label.important{background-color:#c43c35;}
 .label.warning{background-color:#f89406;}
+.label.fail{background-color:red;}
 .label.success{background-color:#46a546;}
 .label.notice{background-color:#62cffc;}
 

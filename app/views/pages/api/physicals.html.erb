@@ -11,6 +11,7 @@
     <tr><td class="inside">&raquo; <a href="#update-physical-configuration">Update physical configuration</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#update-physical-properties">Update physical properties</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#update-device-properties">Update device properties</a></td></tr>
+    <tr><td>&raquo; <a href="#physical-devices-communication">Physical devices communication</a></td></tr>
     <tr><td>&raquo; <a href="#how-to-use-physical">How to use a physical device</a></td></tr>
   </tbody>
 </table>
@@ -150,12 +151,13 @@ and <strong>budget</strong>.
 
 <p>
 The physical devices API let you to connect any device to the web. We worked a lot on making
-them simple. This is really important to us, because everyone must be able to create new devices.
-The following services do one thing. They explain how a physical device can receive and send
-<strong>property updates</strong> from/to Lelylan, everything in a secure way.
+them simple and they basically do one thing: they describe how a physical device can receive
+and send property updates from/to Lelylan in a secure way.
 </p>
 
 </article>
+
+<br/>
 
 <article>
 
@@ -516,6 +518,178 @@ request should be the one <a href="#update-physical-configuration">previously se
 
 </article>
 
+<br/><br/>
+
+<article>
+
+<h1 class="call"><a name="physical-devices-communication">Physical devices communication flows</a></h1>
+
+<p>
+Physical devices must be accessible from the Internet in order to be used from Lelylan.
+The common solution is to associate a URI to the physical device and directly
+communicate with it. Anyway other solutions based on communication protocols like
+<a href="http://mqtt.org/">MQTT</a> and
+<a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a> are suggested.
+Each approach has some pros and cons we discuss below.
+</p>
+
+<h2 class="call"><a name="physical-direct">Direct URI</a></h2>
+
+<p>
+Your physical device is directly accessible through a URI. To make it possible you need a Static
+IP Address or a Tunnel (using solutions like
+<a href="http://progrium.com/localtunnel/">Local Tunnel</a>,
+<a href="https://forwardhq.com/">Forward</a> or
+<a href="http://tunnlr.com/">Tunnlr</a>).
+</p>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <td><strong>FEATURES DESCRIPTION</strong></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Easy to use during the prototyping phase.
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Needs a static IP address or a Tunnel.
+      </td>
+      <td>
+        <span class="label fail">cons</span>
+      </td>
+    </tr>
+    <tr class="last-row">
+      <td>
+        Can't move a device to different houses when using a static IP address.
+      </td>
+      <td>
+        <span class="label fail">cons</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="call"><a name="physical-websocket">WebSocket</a></h2>
+
+<p>
+Your physical device is connected to a <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
+server as a client. The WebSocket server keeps the connection open with the physical devices
+and no static IP address is needed.
+</p>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <td><strong>FEATURES DESCRIPTION</strong></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Easy to use with the <a href="/api/physicals/nodes#websocket">WebSocket Physical Node</a>.
+        <span class="label">coming soon</span>
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Doesn't need a static IP address or a Tunnel.
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Can move physical devices everywhere (it has a unique associated URI).
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr class="last-row">
+      <td>
+        Complex protocol if compared to MQTT.
+      </td>
+      <td>
+        <span class="label fail">cons</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="call"><a name="physical-mqtt">MQTT</a></h2>
+
+<p>
+Your physical device is connected to a <a href="http://mqtt.org/">MQTT</a> server as a client.
+The MQTT server keeps the connection open with the physical devices and no static IP address
+is needed.
+</p>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <td><strong>FEATURES DESCRIPTION</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        Easy to use with the <a href="/api/physicals/nodes#mqtt">MQTT Physical Node</a>.
+        <span class="label">coming soon</span>
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Doesn't need a static IP address or a Tunnel.
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Can move physical devices everywhere (it has a unique associated URI).
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lightweight protocol if compared to WebSocket.
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+    <tr class="last-row">
+      <td>
+        Protocol created for the communication between devices and the Internet.
+      </td>
+      <td>
+        <span class="label success">pros</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</article>
+
 </br>
 
 <article>
@@ -524,8 +698,8 @@ request should be the one <a href="#update-physical-configuration">previously se
 
 <p>
 Once the physical device implements the required services you can use it with Lelylan
-by following few simple steps. For our examples suppose that the physical device can
-be accessible trhough the uri <code>http://arduino.house.com/5042205c70eda61</code>.
+by following few simple steps. For our examples we suppose to have a physical device
+accessible trough the URI <code>http://arduino.house.com/5042205c70eda61</code>.
 </p>
 
 <h4>Step 1 - Let Lelylan access the physical devices</h4>
@@ -571,10 +745,6 @@ when <a href="/api/devices/#update-properties">properties are updated</a> and
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
-<p>
-
-</p>
-
 <h4>Step 2 - Let the physical devices access Lelylan</h4>
 
 <p>
@@ -611,7 +781,8 @@ Lelylan. To make this happen configure the physical device
 <h4>Step 3 - You are done</h4>
 
 <p>
-Nothing else to do. Now you can control and monitor to the physical world using Lelylan.
+Nothing else to do. Now you can control and monitor the physical world using Lelylan.
 </p>
 
 </article>
+
