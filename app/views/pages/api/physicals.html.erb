@@ -11,6 +11,7 @@
     <tr><td class="inside">&raquo; <a href="#update-physical-configuration">Update physical configuration</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#update-physical-properties">Update physical properties</a></td></tr>
     <tr><td class="inside">&raquo; <a href="#update-device-properties">Update device properties</a></td></tr>
+    <tr><td>&raquo; <a href="#how-to-use-physical">How to use a physical device</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -146,6 +147,13 @@ and <strong>budget</strong>.
 <article>
 
 <h1 class="call"><a name="physical-devices-api">Physical Devices API</a></h1>
+
+<p>
+The physical devices API let you to connect any device to the web. We worked a lot on making
+them simple. This is really important to us, because everyone must be able to create new devices.
+The following services do one thing. They explain how a physical device can receive and send
+<strong>property updates</strong> from/to Lelylan, everything in a secure way.
+</p>
 
 </article>
 
@@ -505,5 +513,105 @@ request should be the one <a href="#update-physical-configuration">previously se
     </div>
   </div>
 </div>
+
+</article>
+
+</br>
+
+<article>
+
+<h1 class="call"><a name="how-to-use-physical">How to use a physical device</a></h1>
+
+<p>
+Once the physical device implements the required services you can use it with Lelylan
+by following few simple steps. For our examples suppose that the physical device can
+be accessible trhough the uri <code>http://arduino.house.com/5042205c70eda61</code>.
+</p>
+
+<h4>Step 1 - Let Lelylan access the physical devices</h4>
+
+<p>
+The first thing to do is to <a href="/api/devices#create-a-device">create a device</a> with
+the physical URI. When this is done, Lelylan will automatically update the physical device
+when <a href="/api/devices/#update-properties">properties are updated</a> and
+<a href="/api/devices/#execute-a-function">functions are executed</a>.
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-device-with-physical-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-device-with-physical-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-device-with-physical-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-device-with-physical-curl">
+    <div class="preview">
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/devices \
+    -H 'Authorization: Bearer &lt;token&gt;' \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "name": "Light",
+          "type": "http://api.lelylan.com/types/&lt;light-id&gt;",
+          "physical": "http://arduino.house.com/5042205c70eda61"
+        }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-device-with-physical-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-device-with-physical-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
+
+<p>
+
+</p>
+
+<h4>Step 2 - Let the physical devices access Lelylan</h4>
+
+<p>
+In the orher side the physical device must be able to send the physical world updates to
+Lelylan. To make this happen configure the physical device
+<a href="#update-physical-access">access credentials</a>.
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-physical-access-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-physical-access-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-physical-access-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-physical-sent-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/accesses \
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-sent-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-sent-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Step 3 - You are done</h4>
+
+<p>
+Nothing else to do. Now you can control and monitor to the physical world using Lelylan.
+</p>
 
 </article>
