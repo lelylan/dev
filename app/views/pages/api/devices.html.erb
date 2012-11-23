@@ -291,7 +291,7 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
     </tr>
     <tr>
       <td class="parameter">
-        <span>property</span>
+        <span>properties[uri]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -299,8 +299,8 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
       </td>
     </tr>
     <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.value</span>
+      <td class="parameter">
+        <span>properties[value]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -308,8 +308,8 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
       </td>
     </tr>
     <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.physical</span>
+      <td class="parameter">
+        <span>properties[physical]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -349,7 +349,7 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-devices-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices \
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices?properties[value]=on \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
   </div>
   <div class="tab-pane" id="get-all-devices-javascript">

@@ -213,7 +213,7 @@ service</a>, which will generate the access token and send the device URI to the
     </tr>
     <tr>
       <td class="parameter">
-        <span>callback</span>
+        <span>device</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -248,7 +248,7 @@ service</a>, which will generate the access token and send the device URI to the
     -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
     -d '{
           "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
-          "callback": "http://api.lelylan.com/devices/device-id",
+          "device": "http://api.lelylan.com/devices/device-id",
           "access_token": "d1eca7d40ab4915291b9aa0a859ecaab69bbd6829635a68dd6b7a3952de93f77"
         }'</code></pre>
     </div>
@@ -273,7 +273,7 @@ service</a>, which will generate the access token and send the device URI to the
 
 <div class="preview"><pre><code>{
   "uri": "http://arduino.house.com/physical-id",
-  "callback": { "uri": "http://api.lelylan.com/devices/light-id" },
+  "device": { "uri": "http://api.lelylan.com/devices/light-id" },
   "properties": [{
     "uri": "http://api.lelylan.com/properties/status-id",
     "id": "status-id", "value": "on" }]
@@ -283,7 +283,7 @@ service</a>, which will generate the access token and send the device URI to the
 
 <dl>
   <dd><span>uri</span> - Physical device URI.</dd>
-  <dd><span>callback</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
+  <dd><span>device</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
   <dt><span>properties</span> - Physical device properties.</dt>
 </dl>
 
@@ -422,7 +422,7 @@ This service is called from Lelylan when a device changes its
 
 <div class="preview"><pre><code>{
   "uri": "http://arduino.house.com/physical-id",
-  "callback": { "uri": "http://api.lelylan.com/devices/light-id" },
+  "device": { "uri": "http://api.lelylan.com/devices/light-id" },
   "properties": [{
     "uri": "http://api.lelylan.com/properties/status-id",
     "id": "status-id", "value": "on" }]
@@ -432,7 +432,7 @@ This service is called from Lelylan when a device changes its
 
 <dl>
   <dd><span>uri</span> - Physical device URI.</dd>
-  <dd><span>callback</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
+  <dd><span>device</span> - <a href="/api/devices#get-a-device">Device URI</a>.</dd>
   <dt><span>properties</span> - Physical device properties.</dt>
 </dl>
 

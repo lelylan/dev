@@ -148,7 +148,7 @@ patterns to improve the way you live your house.
     </tr>
     <tr>
       <td class="parameter">
-        <span>property</span>
+        <span>properties[uri]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -157,7 +157,7 @@ patterns to improve the way you live your house.
     </tr>
     <tr>
       <td class="parameter">
-        <span>value</span>
+        <span>properties[value]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -166,7 +166,7 @@ patterns to improve the way you live your house.
     </tr>
     <tr>
       <td class="parameter">
-        <span>physical</span>
+        <span>properties[physical]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -179,7 +179,7 @@ patterns to improve the way you live your house.
         <span class="info">optional</span>
       </td>
       <td>
-        Get all resources created after this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p> 
+        Get all resources created after this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p>
       </td>
     </tr>
     <tr>
@@ -188,7 +188,7 @@ patterns to improve the way you live your house.
         <span class="info">optional</span>
       </td>
       <td>
-        Get all resources created before this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p> 
+        Get all resources created before this time. See <a href="/api/core/#time-formats">accepted time formats</a>.</p>
       </td>
     </tr>
     <tr>
@@ -224,7 +224,7 @@ patterns to improve the way you live your house.
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-histories-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/histories \
+      <pre><code class="no-highlight">curl http://api.lelylan.com/histories?from=2012-07-03 12:45:29Z \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
