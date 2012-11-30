@@ -11,6 +11,7 @@
     <tr><td>&raquo; <a href="#time-formats">Accepted time formats</a></td></tr>
     <tr><td>&raquo; <a href="#errors">Errors response</a></td></tr>
     <tr><td>&raquo; <a href="#rate-limit">Rate limit</a></td></tr>
+    <tr><td>&raquo; <a href="#http-caching">HTTP caching</a></td></tr>
     <tr><td>&raquo; <a href="#verbs">HTTP verbs limitations</a></td></tr>
     <tr><td>&raquo; <a href="#rest">REST interface</a></td></tr>
   </tbody>
@@ -162,7 +163,7 @@ The following examples describe the same time using two different accepted forma
 <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 401 Unauthorized</code></pre></div>
 
 <div class="preview"><pre><code>{
-  "status": "401",
+  "status": 401,
   "method": "POST",
   "request": "http://api.lelylan.com/devices/4f4bb686d033a957c1000251",
   "error": {
@@ -176,7 +177,7 @@ The following examples describe the same time using two different accepted forma
 <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 404 Not Found</code></pre></div>
 
 <div class="preview"><pre><code>{
-  "status": "404",
+  "status": 404,
   "method": "GET",
   "request": "http://api.lelylan.com/devices/4f4ba959d033a95549000261",
   "error": {
@@ -191,7 +192,7 @@ The following examples describe the same time using two different accepted forma
 <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 422 Not Valid</code></pre></div>
 
 <div class="preview"><pre><code>{
-  "status": "422",
+  "status": 422,
   "method": "POST",
   "request": "http://api.lelylan.com/devices",
   "error": {
@@ -239,6 +240,36 @@ your application.
 
 <article>
 
+<h1 class="call"><a name="http-caching">HTTP caching</a></h1>
+
+<p>
+HTTP caching is a universally adopted specification across all modern web
+browsers. Appropriate use of these standards let you improve response times
+and reduce server load. At Lelylan we focus on conditional requests.
+</p>
+
+<p>
+When a conditional requests is made across the network, unmodified resources result
+in an empty response body, aka 304 Not Modified, saving the cost of transferring the
+resource back to the end client. To make this possible Lelylan returns the
+<code>Etag</code> and <code>Last-Modified</code> headers.
+</p>
+
+<div class="preview"><pre><code>Etag: "e59b3c1fca50b5d0bf44c931253ded86"
+Last-Modified: Sat, 01 Sep 2012 16:00:32 GMT</code></pre></div>
+
+<p>
+Learn more about
+<a href="https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers#conditional-requests">
+conditional requests</a> to make your app faster.
+</p>
+
+</article>
+
+<br/>
+
+<article>
+
 <h1 class="call"><a name="verbs">HTTP verbs limitations</a></h1>
 
 <p>
@@ -246,6 +277,7 @@ Not all HTTP clients are able to make PUT or DELETE requests (e.g. web browsers)
 In order to work around this limitation, it is possible to send a POST request
 with a <code>_method</code> parameter set to <code>put</code> or <code>delete</code>.
 </p>
+
 </article>
 
 <br/>
