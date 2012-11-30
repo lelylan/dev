@@ -133,39 +133,6 @@ The following table describes the available resources and events you can subscri
     </tr>
     <tr>
       <td>
-        <code>types</code>
-      </td>
-      <td>
-        <code>created</code>
-      </td>
-      <td>
-        Receive a notification when a <a href="/api/types#create-a-type">type is created</a>.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>types</code>
-      </td>
-      <td>
-        <code>updated</code>
-      </td>
-      <td>
-        Receive a notification when a <a href="/api/types#update-a-type">type is update</a>.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>types</code>
-      </td>
-      <td>
-        <code>deleted</code>
-      </td>
-      <td>
-        Receive a notification when a <a href="/api/types#delete-a-type">type is deleted</a>.
-      </td>
-    </tr>
-    <tr>
-      <td>
         <code>locations</code>
       </td>
       <td>
@@ -282,7 +249,6 @@ to the callback URL defined in the subscription.
   <dd><span>data</span> - Notified resource representation.
   This representation is consistent with the
   <a href="/api/devices#device-representation">device</a>,
-  <a href="/api/types#type-representation">type</a>,
   <a href="/api/locations#location-representation">location</a> and
   <a href="/api/devices/consumptions#consumption-representation">consumption</a> representation.
   The only <em>exception</em> is related to the property-updated event which posts only the
