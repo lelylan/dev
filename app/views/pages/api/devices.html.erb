@@ -453,13 +453,13 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
   <div class="tab-pane active" id="create-a-device-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/devices \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "name": "Closet dimmer",
-          "type": "http://api.lelylan.com/types/5042310470eda60a0000000d",
-          "physical": "http://arduino.house.com/5042205c70eda61"
-        }'</code></pre>
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "Closet dimmer",
+           "type": "http://api.lelylan.com/types/5042310470eda60a0000000d",
+           "physical": "http://arduino.house.com/5042205c70eda61"
+         }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-device-javascript">

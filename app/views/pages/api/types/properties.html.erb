@@ -172,7 +172,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-properties-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/properties.json \
+    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/properties \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
@@ -265,14 +265,14 @@ GET http://api.lelylan.com/properties/public</code></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-property-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/properties.json \
-      -H 'Authorization: Bearer &lt;token&gt' \
-      -H 'Content-Type: application/json' \
-      -d '{
-            "name": "Intensity",
-            "default": "0",
-            "values": ["0","20","40","60","80","100"]
-          }'</code></pre>
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/properties \
+     -H 'Authorization: Bearer &lt;token&gt' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "Intensity",
+           "default": "0",
+           "values": ["0","20","40","60","80","100"]
+         }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-property-javascript">
@@ -369,7 +369,7 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/properties/5041e9e9230de31300000001.json \
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/properties/5041e9e9230de31300000001 \
      -H 'Authorization: Bearer &lt;token&gt' \
      -H 'Content-Type: application/json' \
      -d '{ "default": "100" }'</code></pre>
@@ -440,7 +440,7 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/5041e9e9230de31300000001.json \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/5041e9e9230de31300000001 \
      -H 'Authorization: Bearer &lt;token&gt' \
      -H 'Content-Length: 0'</code></pre>
     </div>
