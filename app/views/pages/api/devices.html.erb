@@ -13,15 +13,7 @@
     <tr><td>&raquo; <a href="#delete-a-device">Delete a device</a></td></tr>
     <tr><td>&raquo; <a href="#update-properties">Update properties</a></td></tr>
     <tr><td>&raquo; <a href="#execute-a-function">Execute a function</a></td></tr>
-    <tr><td>&raquo; <a href="#update-physical-access">Update physical access</a></td></tr>
-  </tbody>
-</table>
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="#pending" class="upcase">Advanced</a></td></tr>
-    <tr><td>&raquo; <a href="#pending">Pending device</a></td></tr>
-    <tr><td>&raquo; <a href="#status">Device status</a></td></tr>
+    <tr><td>&raquo; <a href="#update-physical-access">Update physical access token</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -116,7 +108,6 @@ For example creating a dimmer lets the device inherit the <em>status</em>
   "id": "5042344b95fc441000000001",
   "name": "Closet dimmer",
   "type": { "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d" },
-  "pending": false,
   "created_at": "2012-09-01T16:00:32Z",
   "updated_at": "2012-09-01T16:00:32Z",
   "physical": { "uri": "http://arduino.house.com/5042205c70eda61" },
@@ -124,12 +115,14 @@ For example creating a dimmer lets the device inherit the <em>status</em>
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "id": "50420c7e267ff51000000001",
     "value": "on",
-    "physical": "on"
+    "physical_value": "on",
+    "pending": false
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
     "id": "50420c3a267ff51300000001",
     "value": "100",
-    "physical": "100"
+    "physical_value": "100",
+    "pending": false
   }],
 }</code></pre></div>
 
@@ -140,14 +133,14 @@ For example creating a dimmer lets the device inherit the <em>status</em>
   <dd><span>id</span> - Device ID.</dd>
   <dd><span>name</span> - Device name.</dd>
   <dd><span>type</span> - Device type. <a href="/api/types">Learn more about</a>.</dd>
-  <dd><span>pending</span> - Pending status. <a href="/api/devices/#pending">Learn more about</a>.</dd>
   <dd><span>physical</span> - Connected physical device URI. <a href="/api/physicals">Learn more about</a>.</dd>
   <dt><span>properties</span> - Device properties.</dt>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>id</span> - Property ID.</dd>
     <dd><span>value</span> - Property value.</dd>
-    <dd><span>physical</span> - Physical property value. <a href="/api/devices/#pending">Learn more about</a>.</dd>
+    <dd><span>physical_value</span> - Physical property value. <a href="/community/faq#value-and-physical-value">Learn more about</a>.</dd>
+    <dd><span>pending</span> - Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
 
@@ -161,8 +154,8 @@ show some sensitive information like the device secret and the activation code. 
 get them is to use the private service described in this section.
 </p>
 
-<p>
-<span class="label notice">Notice</span>
+<p class="notice">
+<span class="label">Notice</span>
 To access this service you must be using the <a href="/api/oauth#scopes">privates scope</a>.
 </p>
 
@@ -280,16 +273,6 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
     </tr>
     <tr>
       <td class="parameter">
-        <span>pending</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Device pending status. <a href="/api/devices/#pending">Learn more about</a>. </br>
-        <span class="info">Valid values: true, false.</span>
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
         <span>physical</span>
         <span class="info">optional</span>
       </td>
@@ -317,11 +300,21 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
     </tr>
     <tr>
       <td class="parameter">
-        <span>properties[physical]</span>
+        <span>properties[physical_value]</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical value to search. <a href="/api/devices/#pending">Learn more about</a>
+        Physical value to search. <a href="/community/faq#value-and-physical-value">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties[pending]</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Pending property status to search. <a href="/community/faq#pending-devices">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
     <tr>
@@ -687,16 +680,6 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter">
-        <span>pending</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Device pending status. <a href="/api/devices/#pending">Learn more about</a>. </br>
-        <span class="info">Valid values: true, false.</span>
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
         <span>properties</span>
         <span class="info">required</span>
       </td>
@@ -716,7 +699,7 @@ Update a device identified from its ID and returns extended information for it.
     <tr>
       <td class="parameter nested">
         <span>&raquo; property.value</span>
-        <span class="info">required</span>
+        <span class="info">optional</span>
       </td>
       <td>
         Property value.
@@ -724,11 +707,21 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.physical</span>
+        <span>&raquo; property.physical_value</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical property value. <a href="/api/devices/#pending">Learn more about</a>
+        Physical property value. <a href="/community/faq#value-and-physical-value">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
   </tbody>
@@ -824,16 +817,6 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter">
-        <span>pending</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Device pending status. <a href="/api/devices/#pending">Learn more about</a>. </br>
-        <span class="info">Valid values: true, false.</span>
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
         <span>properties</span>
         <span class="info">optional</span>
       </td>
@@ -853,7 +836,7 @@ Update a device identified from its ID and returns extended information for it.
     <tr>
       <td class="parameter nested">
         <span>&raquo; property.value</span>
-        <span class="info">required</span>
+        <span class="info">optional</span>
       </td>
       <td>
         Property value.
@@ -861,11 +844,21 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.physical</span>
+        <span>&raquo; property.physical_value</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical property value. <a href="/api/devices/#pending">Learn more about</a>.
+        Physical property value. <a href="/community/faq#value-and-physical-value">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
   </tbody>
@@ -945,8 +938,8 @@ to be sent from the user.
   </div>
 </div>
 
-<p>
-  <span class="label notice">Notice</span>
+<p class="notice">
+  <span class="label">Notice</span>
   To deeply understand how functions work check out the
   <a href="/api/types/functions">functions API</a>.
 </p>
@@ -1077,173 +1070,6 @@ the device uri and with the new access token.
 
 <p>
   See <a href="#device-representation">device representation</a> for body response.
-</p>
-
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="pending">Pending device explained</a></h1>
-
-<p>
-A device connected to the physical world does not change instantaneously. Think at when you
-open a roller shutter. From the moment you send the open request, and the moment it's
-physically open, a few seconds are needed. During this period of time the device is defined
-as <strong>pending</strong>, as it's waiting for its final status to be reached.
-</p>
-
-<h2>Get all pending devices</h2>
-
-<ul class="nav nav-tabs">
-  <li class="curl active"><a href="#get-all-pending-devices-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li class="javascript"><a href="#get-all-pending-devices-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li class="ruby"><a href="#get-all-pending-devices-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="get-all-pending-devices-curl">
-    <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/devices?pending=true \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="get-all-pending-devices-javascript">
-    <div class="preview">
-        <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="get-all-pending-devices-ruby">
-    <div class="preview">
-        <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<p>
-In this example we get one pending resource related to a rolling shutter that has to
-reach the aperture level of <code>100%</code>. The physical device aperture is at
-<code>28%</code> when the request is executed.
-</p>
-
-<div class="preview"><pre><code>[{
-  "uri": "http://api.lelylan.com/devices/4dece6f3d033a9b9a90000a1",
-  "id": "4dece6f3d033a9b9a90000a1",
-  "name": "Rolling shutter",
-  "pending": true,
-  "physical": { "uri": "http://arduino.house.com/5042205c70eda61" },
-  "properties": [{
-    "uri": "http://api.lelylan.com/properties/4decdd07d033a95e25000046",
-    "id": "4decdd07d033a95e25000046",
-    "value": "100",
-    "physical": "28"
-  }],
-  "created_at": "2012-09-01T16:00:32Z",
-  "updated_at": "2012-09-01T16:00:32Z"
-}]</code></pre></div>
-
-</br>
-<h2>Set device as pending</h2>
-
-<p>Update the aperture <code>level</code> to <code>46%</code> and set the pending status
-to <code>true</code>.
-
-<ul class="nav nav-tabs">
-  <li class="curl active"><a href="#update-pending-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li class="javascript"><a href="#update-pending-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li class="ruby"><a href="#update-pending-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="update-pending-device-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "pending": true,
-          "properties": [{
-            "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-            "physical": "46"
-          }]
-         }'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-pending-device-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-pending-device-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<p>
-<span class="label notice">Notice</span>
-The pending resource makes sense when a device is connected to a
-<a href="/api/devices/physical/">physical device</a> as its main goal is to reflect
-the changes of the physical world. Anyway, you can easily simulate the physical world
-setting the <code>physical</code> property whenever you need it.
-</p>
-
-<h4>Example body response</h4>
-
-<p>
-See <a href="#device-representation">pending representation</a> for body response.
-</p>
-
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="status">Device status explained</a></h1>
-
-<p>
-Sometimes properties are not enough to describe the device status.
-Think at a roller shutter for example. It has the property <code>status</code>
-that accepts the values <code>open</code> and <code>close</code>. Now think at
-what happens when a roller shutter is opening. It is neither open or close, but just
-opening. To have a complete control over the device at every moment of its life use the
-status resource.
-</p>
-
-<p>
-Right now this service is not available on server side. To get the device status you must
-use one of the existing <a href="/community/clients/">javascript libraries</a>.
-This decision is due to performance motivation and to the fact that the status information
-is a client visualization tasks.
-</p>
-
-<ul class="nav nav-tabs">
-  <li class="active" data-toggle="tab" class="javascript"><a href="#get-status-javascript">Javascript</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="get-status-javascript">
-    <div class="preview">
-      <pre><code>device = Device.find(uri);
-status = device.status();</code></pre>
-    </div>
-  </div>
-</div>
-
-<p>
-In this example we show how to get the device status. Just find the device through
-its id and call the <code>status()</code> method. See the
-<a href="/api/types/statuses/#status-representation">status representation</a> to
-get an idea of its structure.
-</p>
-
-<p>
-<span class="label notice">Notice</span>
-If you think that this functionality must be present in the server side
-<a href="/community/support/">write us</a> your use cases and why you need it.
-We are open to discussions.
 </p>
 
 </article>

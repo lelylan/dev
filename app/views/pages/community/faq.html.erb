@@ -5,7 +5,10 @@
 <table>
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#devices-vs-physical">Devices vs Physical Devices</a></td></tr>
+    <tr><td>&raquo; <a href="#devices-and-physicals">Devices and Physical Devices</a></td></tr>
+    <tr><td>&raquo; <a href="#value-and-physical-value">Value and Physical value</a></td></tr>
+    <tr><td>&raquo; <a href="#pending-devices">Pending devices</a></td></tr>
+    <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
     <tr><td>&raquo; <a href="#signature-header">Signature header</a></td></tr>
   </tbody>
 </table>
@@ -16,7 +19,7 @@
 <p>
 If you think we are missing a clear description about any concept related to Lelylan, please
 <a href="http://twitter.com/#!/lelylan">tweet</a> or
-<a href="mailto:touch@lelylan.com">mail</a> us. We are looking forward to hear your doubts.
+<a href="mailto:touch@lelylan.com">mail</a> us. We are looking forward to answer at your questons.
 </p>
 
 </article>
@@ -25,7 +28,7 @@ If you think we are missing a clear description about any concept related to Lel
 
 <article>
 
-<h2 class="call"><a name="devices-vs-physical">Differences between devices and physical devices</a></h2>
+<h2 class="call"><a name="devices-and-physicals">Differences between devices and physical devices</a></h2>
 
 <p>
 Sometimes you could be confused between <a href="/api/devices">devices</a> and
@@ -43,6 +46,308 @@ Sometimes you could be confused between <a href="/api/devices">devices</a> and
   to keep the device updated in realtime.
   </li>
 </ul>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="value-and-physical-value">Value, physical value and pending status</a></h2>
+
+<p>
+  Sometimes can be tricky to understand how to update a device property. Here we explain
+  the available parameters and who they works.
+</p>
+
+<ul>
+  <li>
+  <code>value</code> - Used to update your device property value, a request is forwarded to
+  to the physical device if any connected. It represents the desired value from the user.
+  </li>
+  <li>
+  <code>physical_value</code> - Used from the physical device to reflect the property value
+  changes happening in the real world.
+  </li>
+  <li>
+  <code>pending</code> - Between the moment the desired <code>value</code> is set and
+  the <code>physical_value</code> is updated from the physical device, the property
+  is pending. Lelylan automatically sets the pending value following a simple set of rules
+  we'll describe next. If you do not agree with them, simply override the defaults by
+  setting the pending value to <code>true</code> or <code>false</code>.
+  </li>
+</ul>
+
+<h4>Example Requests</h4>
+
+<p>Supposing we have a roller shutter. This requests sets the desired <code>value</code> to
+<code>100</code> meaning that it wants fully open the roller shutter, and sets the
+<code>physical_value</code> to <code>5</code> meaning that right now it's open for the 5%.
+It also sets the <code>pending</code> status to <code>true</code>.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-properties-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
+    -H 'Authorization: Bearer &lt;token&gt;' \
+    -H 'Content-Type: application/json' \
+    -d '{
+          "properties": [{
+            "uri": "http://api.lelylan.com/properties/&lt;level&gt;",
+            "value": "100" "physical_value": "5", "pending": true }
+          ]
+        }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
+</div>
+
+<p class="notice">
+<span class="label">Notice</span>
+Lelylan follows some basic rules to automatically set the pending status when a property
+changes (makes Lelylan easier to learn for entry level users).
+<a href="pending-device">Learn more about</a>
+</p>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="pending-devices">Pending devices</a></h2>
+
+<p>
+A physical device does not change instantaneously when you update the
+device <a href="/api/devices#update-properties">properties</a> or when you
+<a href="/api/devices#update-properties">execute a function</a>. Think at roller shutter. From
+the moment you send the request to open it and the moment it's physically open, a few seconds
+are needed. During this period of time the device is defined as <strong>pending</strong>.
+</p>
+
+<p>
+  Lelylan understands if a device is pending through its properties. In other words if a
+  properties is pending, the whole device is pending. To better understand how the
+  pending status is defined you first need to understand how a property can be updated.
+</p>
+
+<ul>
+  <li>
+  <code>value</code> - Used to update your device property value, a request is forwarded to
+  to the physical device if any connected. It represents the desired value from the user.
+  </li>
+  <li>
+  <code>physical_value</code> - Used from the physical device to reflect the property value
+  changes happening in the real world.
+  </li>
+  <li>
+  <code>pending</code> - Between the moment the desired <code>value</code> is set and
+  the <code>physical_value</code> is updated from the physical device, the property
+  is pending. Lelylan automatically sets the pending value following a simple set of rules
+  we'll describe next. If you do not agree with them, simply override the defaults by
+  setting the pending value to <code>true</code> or <code>false</code>.
+  </li>
+</ul>
+
+<p class="notice">
+<span class="label">Notice</span>
+Lelylan automatically define the pending status only for devices connected to
+the physical world, otherwise the pending status is always <code>false</code>.
+</p>
+
+<h4>Automatic pending definitions</h4>
+
+<p>
+Lelylan automatically sets the pending value when changes happen. To better understand how
+those rules work we make some examples based on a roller shutter characterized by the
+property <code>level</code>, which indicates how much it's open through a range that goes from
+<code>0</code> to <code>100</code>.
+</p>
+
+<br/>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <td style="width: 100px">
+        <strong>Rule 1</strong>
+      </td>
+      <td>
+        <strong>Set the desired value (from the web)</strong></br>
+        You decide to open the roller shutter with your mobile app setting its level value
+        to 100. The pending status is set to true until the physical device doesn't apply
+        the desired changes.
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="info">Initial state</span></td>
+      <td><code>{ "value": "0", "physical_value": "0", "pending": false }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Request</span></td>
+      <td><code>{ "value": "100" }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Final state</span></td>
+      <td><code>{ "value": "100", "physical_value": "0", "pending": true }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Pending</span></td>
+      <td>
+        Lelylan sets the pending status to <code>true</code>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="notice">
+<span class="label">Notice</span>
+If the request was coming from the physical device, Lelylan would have set the pending status
+to <code>false</code> because any request coming from the physical device when a property is not
+already pending is considered as one coming from a physical interaction.
+</p>
+
+<br/>
+<br/>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <td style="width: 100px">
+        <strong>Rule 2</strong>
+      </td>
+      <td>
+        <strong>Sets the physical value with the not final value (from physical device)</strong></br>
+        The physical device is opening the rolling shutter but it is at 50% of the task.
+        It sends an updated to Lelylan, but as this isn't the final value, the pending status
+        is <code>true</code>.
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="info">Initial state</span></td>
+      <td><code>{ "value": "100", "physical_value": "0", "pending": true }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Request</span></td>
+      <td><code>{ "physical_value": "50" }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Final state</span></td>
+      <td><code>{ "value": "100", "physical_value": "50", "pending": true }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Pending</span></td>
+      <td>Lelylan sets pending to <code>true</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <td style="width: 100px">
+        <strong>Rule 3</strong>
+      </td>
+      <td>
+        <strong>Set the final physical value (from physical device)</strong></br>
+        The physical device fully opens the rolling shutter. It sends the final physical value
+        to Lelylan and as it matches with the desired value the pending status is <code>false</code>.
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="info">Initial state</span></td>
+      <td><code>{ "value": "100", "physical_value": "50", "pending": true }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Request</span></td>
+      <td><code>{ "physical_value": "100" }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Final state</span></td>
+      <td><code>{ "value": "100", "physical_value": "100", "pending": false }</code></td>
+    </tr>
+    <tr>
+      <td><span class="info">Pending</span></td>
+      <td>Lelylan sets pending to <code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<p class="notice">
+<span class="label">Notice</span>
+If you want to force the pending status to a specific value
+<a href="/api/devices#update-properties">set the one you want</a>
+using the <code>property.pending</code> param.
+</p>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="device-status">Device status explained</a></h2>
+
+<p>
+Sometimes properties are not enough to describe the device status.
+Think at a roller shutter for example. It has the property <code>status</code>
+that accepts the values <code>open</code> and <code>close</code>. Now think at
+what happens when a roller shutter is opening. It is neither open or close, but just
+opening. To have a complete control over the device at every moment of its life use the
+status resource.
+</p>
+
+<p>
+Right now this service is not available on server side. To get the device status you must
+use one of the existing <a href="/community/clients/">Javascript libraries</a>.
+This decision is due to performance motivation and to the fact that the status information
+is a client visualization tasks.
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active" data-toggle="tab" class="javascript"><a href="#get-status-javascript">Javascript</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-status-javascript">
+    <div class="preview">
+      <pre><code>device = Device.find(uri);
+status = device.status();</code></pre>
+    </div>
+  </div>
+</div>
+
+<p>
+In this example we show how to get the device status. Just find the device through
+its id and call the <code>status()</code> method. See the
+<a href="/api/types/statuses/#status-representation">status representation</a> to
+get an idea of its structure.
+</p>
+
+<p class="notice">
+<span class="label">Notice</span>
+If you think that this functionality must be present in the server side
+<a href="/community/support/">write us</a> your use cases and why you need it.
+We are open to discussions.
+</p>
 
 </article>
 

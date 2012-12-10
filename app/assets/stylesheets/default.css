@@ -104,7 +104,7 @@ body.description #section h3.call a {padding-top:19px;}
 body.description #section h4{padding-top: 10px;}
 body.description #section h2 .nested{margin-left: 10px; font-size: 16px;}
 
-table .parameter{width: 25%;}
+table .parameter{width: 30%;}
 table .extra{width: 30% !important;}
 table .nested{padding-left: 20px;}
 table .parameter span{font-weight: bold;}
@@ -146,3 +146,6 @@ aside.menu {position:fixed !important; margin-left:270px;}
 aside.menu td.inside {padding-left:22px;}
 dl dd{line-height: 1.7em;}
 article div.pros-cons div {padding-bottom: 8px;}
+#section p.notice{border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px 10px; background-color:#F6F6F6}
+
+

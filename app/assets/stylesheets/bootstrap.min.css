@@ -72,7 +72,7 @@ dl dd{margin-left:0px;}
 dl div{margin-left: 15px;}
 dl span {font-weight: bold}
 
-.label{padding:1px 3px 2px;font-size:9.75px;font-weight:bold;color:#ffffff;text-transform:uppercase;white-space:nowrap;background-color:#bfbfbf;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;text-shadow:none;}.label.important{background-color:#c43c35;}
+.label{padding:1px 3px 2px;font-size:11px;font-weight:bold;color:#ffffff;text-transform:uppercase;white-space:nowrap;background-color:#bfbfbf;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;text-shadow:none;}.label.important{background-color:#c43c35;}
 .label.warning{background-color:#f89406;}
 .label.fail{background-color:red;}
 .label.success{background-color:#46a546;}

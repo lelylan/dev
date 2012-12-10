@@ -14,14 +14,10 @@
 <h1 class="call"><a name="histories"><%= title %></a></h1>
 
 <p>
-Whenever a device changes its properties a new history resource is created.
-This happens in different ways, like executing a function or interacting with the
-physical world.
-</p>
-
-<p>
-This resource saves the changed device properties and can be used to extract usage
-patterns to improve the way you live your house.
+When a device  <a href="/api/devices#update-properties">updates its properties</a> or
+<a href="/api/devices#update-properties">executes a function</a> a new history resource
+is created. This resource saves the changed device properties and can be used to extract
+usage patterns to improve the way people live their house.
 </p>
 
 </article>
@@ -98,8 +94,10 @@ patterns to improve the way you live your house.
   "created_at": "2012-09-01T17:42:34Z",
   "properties": [{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+    "id": "50420c7e267ff51000000001",
     "value": "100",
-    "physical": "50"
+    "physical_value": "50",
+    "pending": true
   }]
 }</code></pre></div>
 
@@ -113,10 +111,16 @@ patterns to improve the way you live your house.
   <div>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>value</span> - Changed property value.</dd>
-    <dd><span>physical</span> - Changed physical property value.
-    <a href="/api/devices/#pending">Learn more about</a></dd>
+    <dd><span>physical_value</span> - Physical property value. <a href="/community/faq#value-and-physical-value">Learn more about</a>.</dd>
+    <dd><span>pending</span> - Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
+
+<p class="notice">
+<span class="label">Notice</span>
+When a device updates its properties a snapshot of all its properties is made, also the
+ones that has not been updated. This makes easy to recreate the previous device statuses.
+</p>
 
 </article>
 
@@ -141,7 +145,7 @@ patterns to improve the way you live your house.
     <tr>
       <td class="parameter">
         <span>device</span>
-        <span class="info">required</span>
+        <span class="info">optional</span>
       </td>
       <td>
         The device URI of the desired history resources.
@@ -167,11 +171,21 @@ patterns to improve the way you live your house.
     </tr>
     <tr>
       <td class="parameter">
-        <span>properties[physical]</span>
+        <span>properties[physical_value]</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical value to search. <a href="/api/devices/#pending">Learn more about</a>
+        Physical value to search. <a href="/community/faq#value-and-physical-value">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties[pending]</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Pending property status to search. <a href="/community/faq#pending-devices">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
     <tr>
