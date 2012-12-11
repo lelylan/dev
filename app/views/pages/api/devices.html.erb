@@ -13,7 +13,6 @@
     <tr><td>&raquo; <a href="#delete-a-device">Delete a device</a></td></tr>
     <tr><td>&raquo; <a href="#update-properties">Update properties</a></td></tr>
     <tr><td>&raquo; <a href="#execute-a-function">Execute a function</a></td></tr>
-    <tr><td>&raquo; <a href="#update-physical-access">Update physical access token</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -108,8 +107,6 @@ For example creating a dimmer lets the device inherit the <em>status</em>
   "id": "5042344b95fc441000000001",
   "name": "Closet dimmer",
   "type": { "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d" },
-  "created_at": "2012-09-01T16:00:32Z",
-  "updated_at": "2012-09-01T16:00:32Z",
   "physical": { "uri": "http://arduino.house.com/5042205c70eda61" },
   "properties": [{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
@@ -124,6 +121,8 @@ For example creating a dimmer lets the device inherit the <em>status</em>
     "physical_value": "100",
     "pending": false
   }],
+  "created_at": "2012-09-01T16:00:32Z",
+  "updated_at": "2012-09-01T16:00:32Z"
 }</code></pre></div>
 
 <h4>Body Response explained</h4>
@@ -515,15 +514,6 @@ Update a device identified from its ID and returns extended information for it.
       </td>
       <td>
         Device name.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
-        <span>type</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Type URI. <a href="/api/types/">Learn more about</a>.
       </td>
     </tr>
     <tr>
@@ -947,127 +937,6 @@ to be sent from the user.
 <%= render 'shared/content/physical_not_physical' %>
 
 <h4>Example body response</h4>
-<p>
-  See <a href="/api/devices/#device-representation">device representation</a> for body response.
-</p>
-
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="update-physical-access">PUT /devices/:id/accesses</a></h1>
-
-<p>
-Authorize the <a href="/api/physicals/">physical device</a> to send updates the device
-identified from its ID. This service sends the device URI and an access token as required
-from the <a href="/api/physicals/#update-physical-configuration">physical device API</a>.
-
-<p>
-Keep in mind a couple of important things.
-</p>
-
-<ul>
-  <li>This service works only if the device has a
-  <a href="#device-representation">physical URI</a> connection.</li>
-  <li>To make this service work you and the physical device must be connected to internet.</li>
-  <li>The generated token is authorized to access only the
-  <a href="/api/oauth#filtering-resources">device identified from its ID</a>.</li>
-  <li>This service must be used to let the physical device
-  <a href="/api/physicals/#update-device-properties">send updates to Lelylan</a>.</li>
-</ul>
-
-<h4>Resource URL</h4>
-<div class="preview">
-  <pre><code class="no-highlight">PUT  http://api.lelylan.com/devices/:id/accesses</code></pre>
-</div>
-
-<h4>Parameters</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>id</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The ID of the desired device.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Example Request</h4>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#update-physical-access-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-physical-access-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-physical-access-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="update-physical-access-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/accesses \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Type: application/json'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-access-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-access-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<p>
-When making the request, a new one is automatically sent to the physical device URI with
-the device uri and with the new access token.
-<a href="/api/physicals/#update-physical-configuration">Learn more about</a>.
-</p>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#update-physical-access-sent-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-physical-access-sent-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-physical-access-sent-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="update-physical-access-sent-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://arduino.house.com/5042205c70eda61 \
-    -H 'Content-Type: application/json' \
-    -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
-    -d '{
-          "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
-          "device": "http://api.lelylan.com/devices/5042344b95fc441000000001",
-          "access_token": "d1eca7d40ab4915291b9aa0a859ecaab69bbd6829635a68dd6b7a3952de93f77"
-        }'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-access-sent-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-access-sent-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<h4>Example header response</h4>
-
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
-
-<h4>Example body response</h4>
-
 <p>
   See <a href="#device-representation">device representation</a> for body response.
 </p>

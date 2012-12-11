@@ -65,8 +65,8 @@ Activate a device and returns extended information for it.
 
 <p class="notice">
 <span class="label">Notice</span>
-When you create a device, it's yours by default. This means that to let others own that same
-device, you must first <a href="#deactivate-a-device">deactivate</a> it.
+If you create a device you own it. To let others own that same
+device first <a href="#deactivate-a-device">deactivate</a> it.
 </p>
 
 <h4>Resource URL</h4>
@@ -122,13 +122,17 @@ device, you must first <a href="#deactivate-a-device">deactivate</a> it.
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
-<h4>Example response</h4>
-
 <p>
   See <a href="/api/devices#device-representation">device representation</a> for body response.
 </p>
 
-<h4>Example response when a device is already activated</h4>
+<h2>What if the device is already activated?</h2>
+
+<p>
+Trying to activate a device already activate will return a not valid response.
+</p>
+
+<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 422 Not Valid</code></pre></div>
 
 <div class="preview"><pre><code>{
   "status": "422",
@@ -136,7 +140,7 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
   "request": "http://api.lelylan.com/activations",
   "error": {
     "code": "notifications.resource.already_activated",
-    "description": "Resource is already activated",
+    "description": "Resource already activated",
     "body": { "activation_code": "3cd6360a163b112c5eb910967c5866f77f019694" }
   }
 }</code></pre></div>
@@ -147,11 +151,11 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
 
 <article>
 
-<h1 class="call"><a name="deactivate-a-device">DELETE /activations/:id</a></h1>
+<h1 class="call"><a name="deactivate-a-device">DELETE /activations/:activation_code</a></h1>
 
 <p>
-Deactivate a device identified from its ID and returns extended information for it.
-When a device is deactivated anyone has the activation code can claim its ownership.
+Deactivate a device identified from its activation code and returns extended information for it.
+When a device is deactivated, anyone owning the activation code can claim the device ownership.
 Until that moment the previous owner remains.
 </p>
 
