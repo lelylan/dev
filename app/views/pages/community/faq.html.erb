@@ -31,19 +31,20 @@ If you think we are missing a clear description about any concept related to Lel
 <h2 class="call"><a name="devices-and-physicals">Differences between devices and physical devices</a></h2>
 
 <p>
-Sometimes you could be confused between <a href="/api/devices">devices</a> and
-<a href="/api/physicals">physical devices</a> (aka physicals).
+The differences between a device and a physical device (aka physicals) isn't always clear.
+Here we try to make concepts clear.
 
 <ul>
   <li>
-  <strong>Device</strong>. Resource defined in Lelylan as virtual representation of an object.
-  A device can be connected to the physical world through the physical param and only if this
-  connection exists all commands sent to the device are forwarded to the physical world.
+  <strong><a href="/api/devices">Device</a></strong>. Is the resource defined in Lelylan as virtual
+  representation of any physical object. A device can be connected to the physical world through
+  the <code>physical</code> param and if this connection exists all commands sent to the device
+  are forwarded to the physical device.
   </li>
   <li>
-  <strong>Physical device</strong>. The physical object you interact with in the real world.
-  It receives all commands from the device it is connected to and sends the realtime updates
-  to keep the device updated in realtime.
+  <strong><a href="/api/physicals">Physical device</a></strong>. Is the physical object you
+  interact with in the real world. It receives all commands from the device it is connected
+  to and sends it the realtime updates to keep the device updated during time.
   </li>
 </ul>
 
@@ -54,34 +55,30 @@ Sometimes you could be confused between <a href="/api/devices">devices</a> and
 <h2 class="call"><a name="value-and-physical-value">Value, physical value and pending status</a></h2>
 
 <p>
-  Sometimes can be tricky to understand how to update a device property. Here we explain
-  the available parameters and who they works.
+  A device property can be updated through three params.
 </p>
 
 <ul>
   <li>
-  <code>value</code> - Used to update your device property value, a request is forwarded to
-  to the physical device if any connected. It represents the desired value from the user.
+  <code>value</code> - Represents the desired value for a device property.
   </li>
   <li>
-  <code>physical_value</code> - Used from the physical device to reflect the property value
-  changes happening in the real world.
+  <code>physical_value</code> - Represents the property value in the physical world.
   </li>
   <li>
   <code>pending</code> - Between the moment the desired <code>value</code> is set and
   the <code>physical_value</code> is updated from the physical device, the property
-  is pending. Lelylan automatically sets the pending value following a simple set of rules
-  we'll describe next. If you do not agree with them, simply override the defaults by
-  setting the pending value to <code>true</code> or <code>false</code>.
+  is pending. Setting the pending value to <code>true</code> or <code>false</code>
+  let you knwo if the property is pending.
   </li>
 </ul>
 
 <h4>Example Requests</h4>
 
-<p>Supposing we have a roller shutter. This requests sets the desired <code>value</code> to
-<code>100</code> meaning that it wants fully open the roller shutter, and sets the
-<code>physical_value</code> to <code>5</code> meaning that right now it's open for the 5%.
-It also sets the <code>pending</code> status to <code>true</code>.
+<p>Suppose we have a roller shutter. This requests sets the desired <code>value</code> to
+<code>100</code> meaning that we wants it fully open, and it sets the <code>physical_value</code>
+to <code>5</code> meaning that right now it's open for the 5%. It also sets the <code>pending</code>
+status to <code>true</code> as the request is under execution.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -116,9 +113,9 @@ It also sets the <code>pending</code> status to <code>true</code>.
 
 <p class="notice">
 <span class="label">Notice</span>
-Lelylan follows some basic rules to automatically set the pending status when a property
-changes (makes Lelylan easier to learn for entry level users).
-<a href="pending-device">Learn more about</a>
+Lelylan automatically sets the pending value following a <a href="#pending-devices">
+simple set of rules</a>. Anyway, the physical devices should always set the pending
+status at any request to avaid inconsistencies.
 </p>
 
 </article>
