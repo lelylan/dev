@@ -91,17 +91,18 @@ moment of its life is to use the status API.
   "uri": "http://api.lelylan.com/statuses/5042176370eda61200000004",
   "id": "5042176370eda61200000004",
   "name": "Setting intensity",
-  "pending": true,
   "created_at": "2012-09-01T14:10:43Z",
   "updated_at": "2012-09-01T14:10:43Z",
   "properties":[{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-    "values": ["on"],
-    "range": null
+    "id": "50420c7e267ff51000000001",
+    "value_match": ["on"],
+    "pending": false
   }, {
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
-    "values": null,
-    "range": { "min": "0","max": "100" }
+    "id": "50420c7e267ff51300000001",
+    "value_match": ["0..100"],
+    "pending": true
   }]
 }</code></pre>
 </div>
@@ -112,35 +113,33 @@ moment of its life is to use the status API.
   <dd><span>uri</span> - Status URI.</dd>
   <dd><span>id</span> - Status ID.</dd>
   <dd><span>name</span> - Status name.</dd>
-  <dd><span>pending</span> - Pending status.</dd>
   <dd><span>properties</span> - List of properties that affect the status.</dd>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
-    <dd><span>values</span> - List of matching values.</dd>
-    <dd><span>range</span> - Matching range based on <code>min</code> and <code>max</code>
-      values (when min and max are not defined range is <code>null</code>).</dd>
+    <dd><span>id</span> - Property ID.</dd>
+    <dd><span>value_match</span> - List of matching values (specific values or range of values).</dd>
+    <dd><span>pending</span> - Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
 
 <br/>
 
-<h1><a name="connections">How do I use the properties connections?</a></h1>
+<h1><a name="connections">How do I use the matching values?</a></h1>
 
 <p>
 A status is based on its properties. To understand when a status match to a device
-status in a specific moment of its life check the following rules.
+in a specific moment of its life you need to check two things.
 </p>
 
 <ul>
-  <li>The property value is included into the status property <code>values</code> list?</li>
-  <li>The property value is included into the <code>range</code> defined by its min and end max value?</li>
-  <li>The pending value is the same as the device pending value?</li>
+  <li>If the device property <code>value</code> is included into the <code>value_match</code> list.</li>
+  <li>If the device property <code>pending</code> status is the same as the <code>pending</code> value.</li>
 </ul>
 
 <p class="notice">
 <span class="label">Notice</span>
-Lelylan does not offer a server side service to get the device status. Learn how to get
-it through client side <a href="/api/devices/#status">libraries</a>.
+Lelylan does not offer a server side service to get back the device status as this is a
+client side specific task. <a href="/community/faq/#device-status">Learn more about</a>.
 </p>
 
 </article>
@@ -270,15 +269,6 @@ GET http://api.lelylan.com/statuses/public</code></pre>
     </tr>
     <tr>
       <td class="parameter">
-        <span>pending</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-          Pending value. <a href="/api/devices/#pending">Learn more about</a>.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
         <span>properties</span>
         <span class="info">optional</span>
       </td>
@@ -297,31 +287,22 @@ GET http://api.lelylan.com/statuses/public</code></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.value</span>
+        <span>&raquo; property.value_match</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of matching values.
+        List of matching values and ranges.
       </td>
     </tr>
     <tr>
-      <td class="parameter nested extra">
-        <span>&raquo; property.range.min</span>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Minimum value on range definition.
+        Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
       </td>
-    </tr>
-    <tr>
-      <td class="parameter nested extra">
-        <span>&raquo; property.range.max</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Maximum value on range definition.
-      </td>
-    </tr>
   </tbody>
 </table>
 
@@ -340,14 +321,11 @@ GET http://api.lelylan.com/statuses/public</code></pre>
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
-           "name": "Setting intensity",
-           "pending": true,
+           "name": "Max intensity",
            "properties": [{
-              "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
-              "values": ["on"]
-            },{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-              "range": { "min": "0", "max": "100" }
+              "pending": false
+              "value_match": ["100"]
             }]
          }'</code></pre>
     </div>
@@ -416,15 +394,6 @@ Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre
     </tr>
     <tr>
       <td class="parameter">
-        <span>pending</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-          Pending value. <a href="/api/devices/#pending">Learn more about</a>.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
         <span>properties</span>
         <span class="info">optional</span>
       </td>
@@ -443,29 +412,21 @@ Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.value</span>
+        <span>&raquo; property.value_match</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of matching values.
+        List of matching values and ranges.
       </td>
     </tr>
     <tr>
-      <td class="parameter nested extra">
-        <span>&raquo; property.range.min</span>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Minimum value on range definition.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested extra">
-        <span>&raquo; property.range.max</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Maximum value on range definition.
+        Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
   </tbody>
@@ -488,11 +449,8 @@ Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre
            "name": "Lowering intensity",
            "pending": true,
            "properties": [{
-              "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
-              "values": ["on"]
-            },{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-              "range": { "min": "0", "max": "25" }
+              "value_match": ['0..10']
             }]
          }'</code></pre>
     </div>
@@ -511,7 +469,7 @@ Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre
 
 <p class="notice">
 <span class="label">Notice</span>
-When updating <code>properties</code> all previous connected properties are replaced.
+When updating the <code>properties</code> field all previous connected properties are replaced.
 </p>
 
 <h4>Example header response</h4>
