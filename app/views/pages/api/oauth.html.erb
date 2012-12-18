@@ -28,8 +28,6 @@ OAuth lets users grant the access to the desired resources to third party applic
 giving them the possibility to enable and disable those accesses whenever they want.
 </p>
 
-<%= image_tag('oauth.png', class: 'img-rounded') %>
-
 </article>
 
 </br>
@@ -258,7 +256,8 @@ Get the access token (remember to basic authenticate with client id and client s
 <p class="notice">
 <span class="label">Notice</span>
 Lelylan cares about applications using this flow and can block it whenever
-the security for the final user is compromised.
+the security for the final user is compromised. If using this flow in production
+<a href="/community/support">contact us</a>.
 </p>
 
 </article>
@@ -356,57 +355,184 @@ When no scopes are defined <code>user</code> is the default one.
 <table class="zebra-striped">
   <thead>
     <tr>
-      <th>SCOPE</th>
-      <th>DESCRIPTION</th>
+      <th style="width:260px;">SCOPE</th>
+      <th>SERVICES</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>resources</strong></td>
-      <td>Read and write access to resources (devices, locations and types).</td>
-    </tr>
-    <tr>
-      <td><strong>resource-read</strong></td>
-      <td>Read access to your resources (devices, locations and types).</td>
-    </tr>
-    <tr>
-      <td><strong>devices</strong></td>
-      <td>Read, control and write access to your devices.</td>
-    </tr>
-    <tr>
-      <td><strong>devices-control</strong></td>
-      <td>Read and control access to your devices.</td>
-    </tr>
-    <tr>
-      <td><strong>devices-read</strong></td>
-      <td>Read access to your devices.</td>
-    </tr>
-    <tr>
-      <td><strong>types</strong></td>
-      <td>Read and write access to your types.</td>
-    </tr>
-    <tr>
-      <td><strong>types-read</strong></td>
-      <td>Read access to your types.</td>
-    </tr>
-    <tr>
-      <td><strong>locations</strong></td>
-      <td>Read and write access to your locations.</td>
-    </tr>
-    <tr>
-      <td><strong>locations-read</strong></td>
-      <td>Read access to your locations.</td>
-    </tr>
-    <tr>
-      <td><strong>privates</strong></td>
       <td>
-        Read access to the <a href="/api/devices/#get-a-device-private-info">private information</a>
-        of your devices.
+        <code>resources</code>
+        <span class="info">Full access to owned resources.</span>
+        <span class="info">The <a href="/api/devices/#get-a-device-private-info">private</a> service is not included.</span>
+      </td>
+      <td><span class="label">all services</span></td>
+    </tr>
+    <tr>
+      <td>
+        <code>resources-read</code>
+        <span class="info">Read access to owned resources.</span>
+        <span class="info">The <a href="/api/devices/#get-a-device-private-info">private</a> service is not included.</span>
+      </td>
+      <td><span class="label">all read only services</span></td>
+    </tr>
+    <tr>
+      <td>
+        <code>devices</code>
+        <span class="info">Read, control and write access to owned devices.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/devices#get-a-device">get a device</a></span>
+        <span class="label link"><a href="/api/devices#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="/api/devices#create-a-device">create a device</a></span>
+        <span class="label link"><a href="/api/devices#update-a-device">update a device</a></span>
+        <span class="label link"><a href="/api/devices#delete-a-device">delete a device</a></span>
+        <span class="label link"><a href="/api/devices#update-properties">update properties</a></span>
+        <span class="label link"><a href="/api/devices#execute-a-function">execute a function</a></span>
+        <span class="label link"><a href="#activate-a-device">activate a device</a></span>
+        <span class="label link"><a href="#deactivate-a-device">deactivate a device</a></span>
       </td>
     </tr>
     <tr>
-      <td><strong>user</strong></td>
-      <td>Read access to your profile (GET /me).</td>
+      <td>
+        <code>devices-control</code>
+        <span class="info">Read and control access to owned devices.</span>
+        </td>
+      <td>
+        <span class="label link"><a href="/api/devices#get-a-device">get a device</a></span>
+        <span class="label link"><a href="/api/devices#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="/api/devices#update-a-device">update a device</a></span>
+        <span class="label link"><a href="/api/devices#update-properties">update properties</a></span>
+        <span class="label link"><a href="/api/devices#execute-a-function">execute a function</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>devices-read</code>
+        <span class="info">Read access to owned devices.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/devices#get-a-device">get a device</a></span>
+        <span class="label link"><a href="/api/devices#get-all-devices">get all devices</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>consumptions</code>
+        <span class="info">Read and write access to owned <br/> consumptions</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/devices/consumptions#get-a-consumption">Get a consumption</a></span>
+        <span class="label link"><a href="/api/devices/consumptions#get-all-consumptions">Get all consumptions</a></span>
+        <span class="label link"><a href="/api/devices/consumptions#create-a-consumption">Create a consumption</a></span>
+        <span class="label link"><a href="/api/devices/consumptions#update-a-consumption">Update a consumption</a></span>
+        <span class="label link"><a href="/api/devices/consumptions#delete-a-consumption">Delete a consumption</a></span>
+      </td>
+    </tr>
+    <tr>
+       <td>
+        <code>consumptions-read</code>
+        <span class="info">Read access to owned consumptions</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/devices/consumptions#get-a-consumption">Get a consumption</a></span>
+        <span class="label link"><a href="/api/devices/consumptions#get-all-consumptions">Get all consumptions</a></span>
+      </td>
+    </tr>
+    <tr>
+       <td>
+        <code>histories-read</code>
+        <span class="info">Read access to owned histories</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/devices/histories#get-a-history">Get a history</a></span>
+        <span class="label link"><a href="/api/devices/histories#get-all-histories">Get all histories</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>types</code>
+        <span class="info">Read and write access to owned types.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/types#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/api/types#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/api/types#create-a-type">Create a type</a></span>
+        <span class="label link"><a href="/api/types#update-a-type">Update a type</a></span>
+        <span class="label link"><a href="/api/types#delete-a-type">Delete a type</a></span>
+        <span class="label link"><a href="/api/types/properties/#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/api/types/properties/#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/api/types/properties/#create-a-property">Create a property</a></span>
+        <span class="label link"><a href="/api/types/properties/#update-a-property">Update a property</a></span>
+        <span class="label link"><a href="/api/types/properties/#delete-a-property">Delete a property</a></span>
+        <span class="label link"><a href="/api/types/functions#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/api/types/functions#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/api/types/functions#create-a-function">Create a function</a></span>
+        <span class="label link"><a href="/api/types/functions#update-a-function">Update a function</a></span>
+        <span class="label link"><a href="/api/types/functions#delete-a-function">Delete a function</a></span>
+        <span class="label link"><a href="/api/types/statuses#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/api/types/statuses#get-all-statuses">Get all statuses</a></span>
+        <span class="label link"><a href="/api/types/statuses#create-a-status">Create a status</a></span>
+        <span class="label link"><a href="/api/types/statuses#update-a-status">Update a status</a></span>
+        <span class="label link"><a href="/api/types/statuses#delete-a-status">Delete a status</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>types-read</code>
+        <span class="info">Read and write access to owned types.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/types#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/api/types#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/api/types/properties/#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/api/types/properties/#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/api/types/functions#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/api/types/functions#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/api/types/statuses#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/api/types/statuses#get-all-statuses">Get all statuses</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>locations</code>
+        <span class="info">Read and write access to owned locations</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/locations#get-a-location">Get a location</a></span>
+        <span class="label link"><a href="/api/locations#get-all-locations">Get all locations</a></span>
+        <span class="label link"><a href="/api/locations#create-a-location">Create a location</a></span>
+        <span class="label link"><a href="/api/locations#update-a-location">Update a location</a></span>
+        <span class="label link"><a href="/api/locations#delete-a-location">Delete a location</a></span>
+      </td>
+    </tr>
+    <tr>
+       <td>
+        <code>locations-read</code>
+        <span class="info">Read access to owned locations</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/locations#get-a-location">Get a location</a></span>
+        <span class="label link"><a href="/api/locations#get-all-locations">Get all locations</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>privates</code>
+        <span class="info">Access to the owned devices private info.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/api/devices/#get-a-device-private-info">Get a device private info</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>user</code>
+        <span class="info">Read access to user profile</span>
+      </td>
+      <td>
+        <span class="label">Get /me</span>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -460,7 +586,7 @@ authorization is needed).
 <p>
 When authorizing a third party application an access token expires in 2 hours.
 After this period of time a new token must be <a href="#refresh-access-token">
-refreshed</a>. It's all about security and it's a good thing.
+refreshed</a>.
 </p>
 
 <%= image_tag('oauth-expire.png', class: 'img-polaroid') %>
@@ -479,7 +605,7 @@ useful. Simply uncheck the <strong>Expiring token</strong> checkbox.
 <h1 class="call"><a name="more-information">More information</a></h1>
 
 <p>
-It can be a little tricky to get started with OAuth. Here are a few links that
+It can be a little tricky to get started with OAuth 2. Here are a few links that
 might be of help.
 </p>
 

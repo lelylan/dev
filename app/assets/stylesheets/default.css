@@ -110,7 +110,7 @@ table .nested{padding-left: 20px;}
 table .parameter span{font-weight: bold;}
 table .nested .info{padding-left: 10px;}
 table span.info{display: block; font-weight: normal; color: #888;}
-table span.info a{color: #FF7600;}
+/*table span.info a{color: #FF7600;}*/
 table a.bigger{font-size:15px;}
 
 #section aside{position:absolute; left: 720px; width:220px;}
