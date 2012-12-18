@@ -7,12 +7,9 @@
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#physical-overview">Overview</a></td></tr>
     <tr><td>&raquo; <a href="#hardware-solutions">Hardware solutions</a></td></tr>
-    <tr><td>&raquo; <a href="#physical-devices-api">Physical devices API</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#update-physical-configuration">Update physical configuration</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#update-physical-properties">Update physical properties</a></td></tr>
-    <tr><td class="inside">&raquo; <a href="#update-device-properties">Update device properties</a></td></tr>
+    <tr><td>&raquo; <a href="#receiving-property-updates">Receiving property updates</a></td></tr>
+    <tr><td>&raquo; <a href="#sending-updates-to-lelylan">Sending updates to Lelylan</a></td></tr>
     <tr><td>&raquo; <a href="#physical-devices-communication">Physical devices communication</a></td></tr>
-    <tr><td>&raquo; <a href="#how-to-use-physical">How to use a physical device</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -22,7 +19,7 @@
 <p>
 Physical devices are the real objects you physically interact with everyday of your life
 like lights, appliances, alarms and more. To enable the communication between Lelylan
-and the physical devices, they should provide a simple set of web services.
+and physical devices they should provide a simple set of web services.
 <p>
 
 <p>
@@ -147,163 +144,22 @@ and <strong>budget</strong>.
 
 <article>
 
-<h1 class="call"><a name="physical-devices-api">Physical Devices API</a></h1>
+<h1 class="call"><a name="receiving-property-updates">Receiving property updates</a></h1>
 
 <p>
-The physical devices API let you to connect any device to the web. We worked a lot on making
-them simple and they basically do one thing: they describe how a physical device can receive
-and send property updates from/to Lelylan in a secure way.
-</p>
-
-</article>
-
-<article>
-
-<h2 class="call"><a name="update-physical-configuration">Update physical configuration</a></h2>
-
-<p>
-Configure the physical device identified by its URI and returns extended information for it.
-The configuration consists on saving two parameters.
-</p>
-
-<ul>
-  <li>
-  <strong>Device URI</strong>. Matching <a href="/api/devices#get-a-device">device</a> URI
-  where the physical device sends the physical changes.
-  </li>
-  <li>
-  <strong>Access Token</strong>. Access token needed to authorize the physical requests
-  to the device URI.
-  </li>
-</ul>
-
-<p>
-This service is called by the <a href="/api/devices#configure-physical-accesses">device access
-service</a>, which will generate the access token and send the device URI to the physical.
-</p>
-
-<h4>Resource URL</h4>
-
-<div class="preview">
-<pre><code class="no-highlight">PUT http://arduino.house.com/physical-id</code></pre>
-</div>
-
-<h4>Headers</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>X-Physical-Signature</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The message signature. To verify that the payload you received comes from lelylan, you
-        must verify the "X-Physical-Signature" header. This is a SHA-1-signed hexadecimal digest
-        using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
-        the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Body Parameters</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>nonce</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Random unique identifier to avoid replay attacks.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
-        <span>device</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Matching <a href="/api/devices#get-a-device">device</a> URI.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
-        <span>access_token</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Access token to access the matching <a href="/api/devices#get-a-device">device</a>.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Example Request</h4>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#update-physical-configuration-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-physical-configuration-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-physical-configuration-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="update-physical-configuration-curl">
-    <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT http://arduino.house.com/physical-id \
-    -H 'Content-Type: application/json' \
-    -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
-    -d '{
-          "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
-          "device": "http://api.lelylan.com/devices/device-id",
-          "access_token": "d1eca7d40ab4915291b9aa0a859ecaab69bbd6829635a68dd6b7a3952de93f77"
-        }'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-configuration-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-configuration-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<h4>Example header response</h4>
-
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
-
-<h4 id="physical-device-representation">Example body response</h4>
-
-<p>Response body is empty.</p>
-
-</article>
-
-</br>
-
-<article>
-
-<h2 class="call"><a name="update-physical-properties">Update physical properties</a></h2>
-
-<p>
-Update the physical device identified by its URI and returns extended information for it. </br>
-This service is called from Lelylan when a device changes its
+The physical devices API let you to connect any physical device to Lelylan by describing
+how it can receive updates when a device changes its
 <a href="/api/devices#update-properties">properties</a> or
 <a href="/api/devices#update-properties">executes a function</a>.
-
 </p>
 
-<h4>Resource URL</h4>
+<h4>Example Resource URL</h4>
+
 <div class="preview">
 <pre><code class="no-highlight">PUT http://arduino.house.com/physical-id</code></pre>
 </div>
 
-<h4>Headers</h4>
+<h4>Sent Headers</h4>
 
 <table class="zebra-striped">
   <tbody>
@@ -313,8 +169,8 @@ This service is called from Lelylan when a device changes its
         <span class="info">required</span>
       </td>
       <td>
-        The message signature. To verify that the payload you received comes from lelylan, you
-        must verify the "X-Physical-Signature" header. This is a SHA-1-signed hexadecimal digest
+        The message signature. To verify that the payload you received comes from lelylan you
+        must verify the "X-Physical-Signature" header. This is a SHA-1 signed hexadecimal digest
         using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
         the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
       </td>
@@ -322,7 +178,7 @@ This service is called from Lelylan when a device changes its
   </tbody>
 </table>
 
-<h4>Body Parameters</h4>
+<h4>Sent Params</h4>
 
 <table class="zebra-striped">
   <tbody>
@@ -368,13 +224,19 @@ This service is called from Lelylan when a device changes its
         <span class="info">required</span>
       </td>
       <td>
-        Physical property value.
+        Desired property value.
       </td>
     </tr>
   </tbody>
 </table>
 
 <h4>Example Request</h4>
+
+<p>
+When the user changes the <a href="/api/devices#update-properties">device properties</a> or
+<a href="/api/devices#update-properties">executes a function</a> a request to the connected
+physical device is forwarded.
+</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-physical-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -411,33 +273,48 @@ This service is called from Lelylan when a device changes its
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 202 OK</code></pre></div>
-
-<h4 id="physical-device-representation">Body response empty</h4>
+<div class="preview"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
 
 <p>
-Lelylan does not wait for the response body because the communication is async. The physical
-device will update <a name="update-device-properties">Lelylan device properties</a> once the
-physical changes are applied</p>
+Lelylan ignores the response body. The physical device should return a
+<a href="https://tools.ietf.org/html/rfc2616#section-10.2.3">202 response</a>
+to notify the fact that the request has been Accepted. Once the physical updates are
+applied it updates the <a href="update-device-properties">device properties</a> in Lelylan.
+</p>
+
 </article>
 
 </br>
 
 <article>
 
-<h1 class="call"><a name="update-device-properties">Update device properties on Lelylan</a></h1>
+<h1 class="call"><a name="sending-updates-to-lelylan">Sending updates to Lelylan</a></h1>
 
 <p>
-Once the physical device saves the device uri and the related access token it's easy to update
-Lelylan. Just use the <a href="/api/devices#update-properties">properties service</a> with few
-slightly changes due to the fact physical devices do not have to use HTTPS.
+The physical device can access to a restricted set of Lelylan services.
 </p>
 
 <ul>
   <li>
-  <strong>nonce</strong>. Every request must contain a nonce. A nonce is a unique string between
-  all requests coming from the physical device and it is used to avoid replay attacks.
+  <strong><a href="/api/devices#update-properties">Update device properties</a></strong>
   </li>
+  <li>
+  <strong><a href="/api/devices#execute-a-function">Execute a device function</a></strong>
+  </li>
+  <li>
+  <strong><a href="/api/devices#update-a-device">Update a device</a></strong>
+  </li>
+    <li>
+  <strong><a href="/api/devices/consumptions#create-a-consumption">Create a consumption</a></strong>
+  </li>
+</ul>
+
+<p>
+Due to the fact that a secure channel is not guaranteed for a physical device, OAuth2 tokens
+can't be used. To make the communication safe every request needs to have two extra params.
+</p>
+
+<ul>
   <li>
   <strong>X-Physical-Signature</strong>. Every request must contain the X-Physical-Signature
   header which is the message signature used from Lelylan to verify that the payload comes from
@@ -445,14 +322,17 @@ slightly changes due to the fact physical devices do not have to use HTTPS.
   <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
   the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
   </li>
+  <li>
+  <strong>nonce</strong>. Every request must contain a nonce. A nonce is a unique string between
+  all requests coming from the physical device and Lelylan. It is used to avoid replay attacks.
+  </li>
 </ul>
 
-<p class="notice">
-<span class="label">Notice</span>
-The device <code>secret</code> must be stored in the physical device.
-</p>
-
 <h4>Example Request</h4>
+
+<p>
+Most of the time the physical device updates device properties in Lelylan. Here an example.
+</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -464,15 +344,15 @@ The device <code>secret</code> must be stored in the physical device.
   <div class="tab-pane active" id="update-device-properties-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt; \
-    -H 'Authorization: Bearer &lt;token&gt;' \
     -H 'X-Physical-Signature: &lt;signature&gt;' \
     -H 'Content-Type: application/json' \
     -d '{
           "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
           "properties": [{
             "uri": "http://api.lelylan.com/properties/status-id",
-            "id": "status-id",
-            "value": "on" }]
+            "value": "on",
+            "pending: false
+          }]
         }'</code></pre>
     </div>
   </div>
@@ -488,6 +368,11 @@ The device <code>secret</code> must be stored in the physical device.
   </div>
 </div>
 
+<p class="notice">
+<span class="label">Notice</span>
+The device <code>secret</code> and the device <code>uri</code> must be stored in the physical device.
+</p>
+
 </article>
 
 <br/><br/>
@@ -497,264 +382,36 @@ The device <code>secret</code> must be stored in the physical device.
 <h1 class="call"><a name="physical-devices-communication">Physical devices communication flows</a></h1>
 
 <p>
-Physical devices must be accessible from the Internet in order to be used from Lelylan.
+Physical devices must be accessible from the Internet in order to be used by Lelylan.
 The common solution is to associate a URI to the physical device and directly
 communicate with it. Anyway other solutions based on communication protocols like
-<a href="http://mqtt.org/">MQTT</a> and
-<a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a> are suggested.
-Each approach has some pros and cons we discuss below.
+<a href="http://mqtt.org/">MQTT</a> and <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
+can simplify a lot the developer life.
 </p>
 
-<h2 class="call"><a name="physical-direct">Direct URI</a></h2>
+<ul>
+  <li>
+  <strong><a name="physical-direct">Direct URI</a></strong> -
+  The physical device is directly accessible through a URI. Use a static
+  IP Address or create a Tunnel using solutions like
+  <a href="http://progrium.com/localtunnel/">Local Tunnel</a>,
+  <a href="https://forwardhq.com/">Forward</a> or
+  <a href="http://tunnlr.com/">Tunnlr</a>).
+  </li>
 
-<p>
-Your physical device is directly accessible through a URI. To make it possible you need a Static
-IP Address or a Tunnel (using solutions like
-<a href="http://progrium.com/localtunnel/">Local Tunnel</a>,
-<a href="https://forwardhq.com/">Forward</a> or
-<a href="http://tunnlr.com/">Tunnlr</a>).
-</p>
+  <li>
+  <strong><a name="physical-websocket">WebSocket</a></strong> -
+  <span class="label warning">todo</span>
+  The physical device is connected to a <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
+  server as a client. The WebSocket server keeps the connection open and pushes all requests.
+  </li>
 
-<table class="zebra-striped">
-  <thead>
-    <tr>
-      <td><strong>FEATURES DESCRIPTION</strong></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Easy to use during the prototyping phase.
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Needs a static IP address or a Tunnel.
-      </td>
-      <td>
-        <span class="label fail">cons</span>
-      </td>
-    </tr>
-    <tr class="last-row">
-      <td>
-        Can't move a device to different houses when using a static IP address.
-      </td>
-      <td>
-        <span class="label fail">cons</span>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 class="call"><a name="physical-websocket">WebSocket</a></h2>
-
-<p>
-Your physical device is connected to a <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
-server as a client. The WebSocket server keeps the connection open with the physical devices
-and no static IP address is needed.
-</p>
-
-<table class="zebra-striped">
-  <thead>
-    <tr>
-      <td><strong>FEATURES DESCRIPTION</strong></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Easy to use with the <a href="/api/physicals/nodes#websocket">WebSocket Physical Node</a>.
-        <span class="label">coming soon</span>
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Doesn't need a static IP address or a Tunnel.
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Can move physical devices everywhere (it has a unique associated URI).
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr class="last-row">
-      <td>
-        Complex protocol if compared to MQTT.
-      </td>
-      <td>
-        <span class="label fail">cons</span>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 class="call"><a name="physical-mqtt">MQTT</a></h2>
-
-<p>
-Your physical device is connected to a <a href="http://mqtt.org/">MQTT</a> server as a client.
-The MQTT server keeps the connection open with the physical devices and no static IP address
-is needed.
-</p>
-
-<table class="zebra-striped">
-  <thead>
-    <tr>
-      <td><strong>FEATURES DESCRIPTION</strong></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        Easy to use with the <a href="/api/physicals/nodes#mqtt">MQTT Physical Node</a>.
-        <span class="label">coming soon</span>
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Doesn't need a static IP address or a Tunnel.
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Can move physical devices everywhere (it has a unique associated URI).
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Lightweight protocol if compared to WebSocket.
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-    <tr class="last-row">
-      <td>
-        Protocol created for the communication between devices and the Internet.
-      </td>
-      <td>
-        <span class="label success">pros</span>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-</article>
-
-</br>
-
-<article>
-
-<h1 class="call"><a name="how-to-use-physical">How to use a physical device</a></h1>
-
-<p>
-Once the physical device implements the required services you can use it with Lelylan
-by following few simple steps. For our examples we suppose to have a physical device
-accessible trough the URI <code>http://arduino.house.com/5042205c70eda61</code>.
-</p>
-
-<h4>Step 1 - Let Lelylan access the physical devices</h4>
-
-<p>
-The first thing to do is to <a href="/api/devices#create-a-device">create a device</a> with
-the physical URI. When this is done, Lelylan will automatically update the physical device
-when <a href="/api/devices/#update-properties">properties are updated</a> and
-<a href="/api/devices/#execute-a-function">functions are executed</a>.
-</p>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#create-a-device-with-physical-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#create-a-device-with-physical-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-a-device-with-physical-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li>
+  <strong><a name="physical-mqtt">MQTT</a></strong> -
+  <span class="label warning">todo</span>
+  The physical device is connected to a <a href="http://mqtt.org/">MQTT</a> server as a client.
+  The MQTT server keeps the connection open and pushes all requests.
+  </li>
 </ul>
 
-<div class="tab-content">
-  <div class="tab-pane active" id="create-a-device-with-physical-curl">
-    <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/devices \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "name": "Light",
-          "type": "http://api.lelylan.com/types/&lt;light-id&gt;",
-          "physical": "http://arduino.house.com/5042205c70eda61"
-        }'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="create-a-device-with-physical-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="create-a-device-with-physical-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
-Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
-
-<h4>Step 2 - Let the physical devices access Lelylan</h4>
-
-<p>
-In the other side the physical device must be able to send the physical world updates to
-Lelylan. To make this happen configure the physical device
-<a href="#update-physical-access">access credentials</a>.
-</p>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#update-physical-access-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-physical-access-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-physical-access-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="update-physical-sent-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/accesses \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Type: application/json'</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-sent-javascript">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-physical-sent-ruby">
-    <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
-  </div>
-</div>
-
-<h4>Step 3 - You are done</h4>
-
-<p>
-Nothing else to do. Now you can control and monitor the physical world using Lelylan.
-</p>
-
 </article>
-

@@ -64,7 +64,6 @@ a.menu:after,.dropdown-toggle:after{width:0;height:0;display:inline-block;conten
 .open .menu-dropdown,.dropdown.open .menu-dropdown,.open .dropdown-menu,.dropdown.open .dropdown-menu{display:block;}
 
 ol{list-style:decimal;}
-li{color:#808080;}
 ul.unstyled{list-style:none;margin-left:0;}
 dl{margin-bottom:18px; font-size: 13px;}dl dt,dl dd{line-height:18px;}
 dl dt{margin-left:0px;}
