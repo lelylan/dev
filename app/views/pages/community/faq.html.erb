@@ -57,13 +57,13 @@ The differences between a device and a physical device (aka physicals) isn't alw
 For a basic control of a device all you need to do is to set the <code>value</code> param,
 but soon or later you'll realize this is not enough. Think at a roller shutter. How can I
 distinguish the actual opening level from the desired one? How can I know when it's finally open?
-To solve those problems Lelylan let you define a property using three params.
+To solve those problems Lelylan let you update a property using three params.
 </p>
 
 <ul>
   <li>
-  <code>value</code> - Represents the property value in a specific moment of its life. It is
-  generally used by the physical device to notify the real property value.
+  <code>value</code> - Represents the property value in the real world. It is
+  generally used by the physical device to notify the physical updates.
   </li>
   <li>
   <code>expected_value</code> - Represents the property value expected from the user. It is
@@ -73,7 +73,7 @@ To solve those problems Lelylan let you define a property using three params.
   <code>pending</code> - Between the moment the desired <code>expected_value</code> is set and
   <code>value</code> is updated to the desired value from the physical device, the property is
   pending. Lelylan automatically sets the pending value following a <a href="#pending-devices">
-  simple set of rules</a>, but also let you override them any moment. Accepted values are
+  simple set of rules</a>, but also let you override them at any moment. Accepted values are
   <code>true</code> or <code>false</code>.
   </li>
 </ul>
@@ -119,8 +119,8 @@ status to <code>true</code> as the request is not completed.
 <p class="notice">
 <span class="label">Notice</span>
 Although Lelylan automatically sets the pending value following a <a href="#pending-devices">
-simple set of rules</a>, the physical devices should always set the pending status at any
-request to avoid inconsistencies.
+simple set of rules</a>, physical devices should set the pending status to avoid inconsistencies
+(best practice).
 </p>
 
 </article>

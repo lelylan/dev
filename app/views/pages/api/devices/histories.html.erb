@@ -91,6 +91,7 @@ usage patterns to improve the way people live their house.
   "uri": "http://api.lelylan.com/histories/5042490a6de0740d00000004",
   "id": "5042490a6de0740d00000004",
   "device": { "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001" },
+  "source": "physical",
   "created_at": "2012-09-01T17:42:34Z",
   "properties": [{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
@@ -107,6 +108,8 @@ usage patterns to improve the way people live their house.
   <dd><span>uri</span> - History URI.</dd>
   <dd><span>id</span> - History ID.</dd>
   <dd><span>device</span> - Changed device URI.</dd>
+  <dd><span>source</span> - History resource created or not from a physical device request (<code>physical</code> if the request comes
+  from the physical device, <code>lelylan</code> otherwise).</dd>
   <dt><span>properties</span> - Changed device properties.</dt>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
@@ -143,6 +146,16 @@ usage patterns to improve the way people live their house.
       </td>
       <td>
         The device URI of the desired history resources.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>source</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        History resource created or not from a physical device request.
+        <span class="info">Valid values: 'physical', 'lelylan'</span>
       </td>
     </tr>
     <tr>
