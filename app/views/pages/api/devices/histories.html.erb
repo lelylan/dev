@@ -16,8 +16,9 @@
 <p>
 When a device <a href="/api/devices#update-properties">updates its properties</a> or
 <a href="/api/devices#update-properties">executes a function</a> a new history resource
-with a snapshot of all device properties is created by Lelylan. This makes it easy to recreate previous
-device statuses and extract usage patterns to improve the way people live their house.
+with a snapshot of all device properties is created by Lelylan, also the ones that has
+not been updated. This makes it easy to recreate previous device status and extract
+usage patterns to improve the way people live their house.
 </p>
 
 </article>
@@ -94,8 +95,8 @@ device statuses and extract usage patterns to improve the way people live their 
   "properties": [{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "id": "50420c7e267ff51000000001",
-    "value": "100",
-    "expected_value": "50",
+    "value": "50",
+    "expected_value": "100",
     "pending": true
   }]
 }</code></pre></div>
@@ -110,16 +111,10 @@ device statuses and extract usage patterns to improve the way people live their 
   <div>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>value</span> - Changed property value.</dd>
-    <dd><span>expected_value</span> - Physical property value. <a href="/community/faq#value-and-physical-value">Learn more about</a>.</dd>
+    <dd><span>expected_value</span> - Expected property value. <a href="/community/faq#value-and-expected-value">Learn more about</a>.</dd>
     <dd><span>pending</span> - Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
-
-<p class="notice">
-<span class="label">Notice</span>
-When a device updates its properties a snapshot of all its properties is made, also the
-ones that has not been updated. This makes easy to recreate the previous device statuses.
-</p>
 
 </article>
 
@@ -174,7 +169,7 @@ ones that has not been updated. This makes easy to recreate the previous device 
         <span class="info">optional</span>
       </td>
       <td>
-        Physical value to search. <a href="/community/faq#value-and-physical-value">Learn more about</a>
+        Expected value to search. <a href="/community/faq#value-and-expected-value">Learn more about</a>
       </td>
     </tr>
     <tr>
