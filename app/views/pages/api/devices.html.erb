@@ -27,15 +27,17 @@ rolling shutters and windows, irrigations, video surveillance, gates, multimedia
 </p>
 
 <p>
-The Device API defines a set of services to create, monitor and control all the devices
-in your house. The final goal is to map every device to a unique URI which provides
-control over it.
+The Device API defines a set of services to monitor and control every existing
+device. Its final goal is to map every device to a unique URI which provides control
+over it.
+</p>
 
-A device is characterized by a <a href="/api/types/">type</a> and from the
+<p>
+Simplifying a device is characterized by a <a href="/api/types/">type</a> and by the
 <a href="/api/types/properties/">properties</a> it inherits from.
-For example creating a dimmer lets the device inherit the <em>status</em>
+For example, when creating a dimmer, the device inherits the <em>status</em>
 (<code>on</code> or <code>off</code>) and the <em>intensity</em> (from <code>
-0</code> to <code>100</code>) values.
+0</code> to <code>100</code>) properties from the dimmer type.
 </p>
 
 </article>
@@ -112,13 +114,13 @@ For example creating a dimmer lets the device inherit the <em>status</em>
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "id": "50420c7e267ff51000000001",
     "value": "on",
-    "physical_value": "on",
+    "expected_value": "on",
     "pending": false
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
     "id": "50420c3a267ff51300000001",
     "value": "100",
-    "physical_value": "100",
+    "expected_value": "100",
     "pending": false
   }],
   "created_at": "2012-09-01T16:00:32Z",
@@ -138,7 +140,7 @@ For example creating a dimmer lets the device inherit the <em>status</em>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>id</span> - Property ID.</dd>
     <dd><span>value</span> - Property value.</dd>
-    <dd><span>physical_value</span> - Physical property value. <a href="/community/faq#value-and-physical-value">Learn more about</a>.</dd>
+    <dd><span>expected_value</span> - Expected property value. <a href="/community/faq#value-and-expected-value">Learn more about</a>.</dd>
     <dd><span>pending</span> - Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
@@ -299,7 +301,7 @@ To access this service you must be using the <a href="/api/oauth#scopes">private
     </tr>
     <tr>
       <td class="parameter">
-        <span>properties[physical_value]</span>
+        <span>properties[expected_value]</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -697,7 +699,7 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.physical_value</span>
+        <span>&raquo; property.expected_value</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -834,7 +836,7 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.physical_value</span>
+        <span>&raquo; property.expected_value</span>
         <span class="info">optional</span>
       </td>
       <td>

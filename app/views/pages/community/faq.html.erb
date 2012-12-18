@@ -6,7 +6,7 @@
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#devices-and-physicals">Devices and Physical Devices</a></td></tr>
-    <tr><td>&raquo; <a href="#value-and-physical-value">Value and Physical value</a></td></tr>
+    <tr><td>&raquo; <a href="#value-and-expected-value">Value and Expected value</a></td></tr>
     <tr><td>&raquo; <a href="#pending-devices">Pending devices</a></td></tr>
     <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
     <tr><td>&raquo; <a href="#signature-header">Signature header</a></td></tr>
@@ -32,19 +32,18 @@ If you think we are missing a clear description about any concept related to Lel
 
 <p>
 The differences between a device and a physical device (aka physicals) isn't always clear.
-Here we try to make concepts clear.
 
 <ul>
   <li>
   <strong><a href="/api/devices">Device</a></strong>. Is the resource defined in Lelylan as virtual
   representation of any physical object. A device can be connected to the physical world through
-  the <code>physical</code> param and if this connection exists all commands sent to the device
+  the <code>physical</code> param and if this connection exists all requests sent to the device
   are forwarded to the physical device.
   </li>
   <li>
   <strong><a href="/api/physicals">Physical device</a></strong>. Is the physical object you
-  interact with in the real world. It receives all commands from the device it is connected
-  to and sends it the realtime updates to keep the device updated during time.
+  interact with in the real world. It receives all requests from the device it is connected
+  to and sends back the realtime updates happening in the physical world.
   </li>
 </ul>
 
@@ -52,33 +51,39 @@ Here we try to make concepts clear.
 
 <article>
 
-<h2 class="call"><a name="value-and-physical-value">Value, physical value and pending status</a></h2>
+<h2 class="call"><a name="value-and-expected-value">Value, expected value and pending status</a></h2>
 
 <p>
-  A device property can be updated through three params.
+For a basic control of a device all you need to do is to set the <code>value</code> param,
+but soon or later you'll realize this is not enough. Think at a roller shutter. How can I
+distinguish the actual opening level from the desired one? How can I know when it's finally open?
+To solve those problems Lelylan let you define a property using three params.
 </p>
 
 <ul>
   <li>
-  <code>value</code> - Represents the desired value for a device property.
+  <code>value</code> - Represents the property value in a specific moment of its life. It is
+  generally used by the physical device to notify the real property value.
   </li>
   <li>
-  <code>physical_value</code> - Represents the property value in the physical world.
+  <code>expected_value</code> - Represents the property value expected from the user. It is
+  generally used by apps that let you control your devices.
   </li>
   <li>
-  <code>pending</code> - Between the moment the desired <code>value</code> is set and
-  the <code>physical_value</code> is updated from the physical device, the property
-  is pending. Setting the pending value to <code>true</code> or <code>false</code>
-  let you knwo if the property is pending.
+  <code>pending</code> - Between the moment the desired <code>expected_value</code> is set and
+  <code>value</code> is updated to the desired value from the physical device, the property is
+  pending. Lelylan automatically sets the pending value following a <a href="#pending-devices">
+  simple set of rules</a>, but also let you override them any moment. Accepted values are
+  <code>true</code> or <code>false</code>.
   </li>
 </ul>
 
 <h4>Example Requests</h4>
 
-<p>Suppose we have a roller shutter. This requests sets the desired <code>value</code> to
-<code>100</code> meaning that we wants it fully open, and it sets the <code>physical_value</code>
-to <code>5</code> meaning that right now it's open for the 5%. It also sets the <code>pending</code>
-status to <code>true</code> as the request is under execution.
+<p>Suppose we have a roller shutter. This requests sets the <code>expected_value</code> to
+<code>100</code> meaning we want it fully open, and it sets the <code>value</code> to
+<code>50</code> meaning that right now it's half open. It also sets the <code>pending</code>
+status to <code>true</code> as the request is not completed.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -94,7 +99,7 @@ status to <code>true</code> as the request is under execution.
     -d '{
           "properties": [{
             "uri": "http://api.lelylan.com/properties/&lt;level&gt;",
-            "value": "100" "physical_value": "5", "pending": true }
+            "expected_value": "100", "value": "50", "pending": true }
           ]
         }'</code></pre>
     </div>
@@ -113,9 +118,9 @@ status to <code>true</code> as the request is under execution.
 
 <p class="notice">
 <span class="label">Notice</span>
-Lelylan automatically sets the pending value following a <a href="#pending-devices">
-simple set of rules</a>. Anyway, the physical devices should always set the pending
-status at any request to avoid inconsistencies.
+Although Lelylan automatically sets the pending value following a <a href="#pending-devices">
+simple set of rules</a>, the physical devices should always set the pending status at any
+request to avoid inconsistencies.
 </p>
 
 </article>
@@ -127,38 +132,32 @@ status at any request to avoid inconsistencies.
 <p>
 When updating device <a href="/api/devices#update-properties">properties</a> or when
 <a href="/api/devices#update-properties">executing a function</a> a physical device
-does not change instantaneously. Think at roller shutter. From the moment you send the
-request to open it and the moment it's physically open, a few seconds are needed.
-During this period of time the device is defined as <strong>pending</strong>.
+does not change instantaneously. From the moment you send a request and the moment
+the request is completed, a few seconds are needed. During this period of time the
+device is defined as <strong>pending</strong>.
 </p>
 
 <p>
-In order to set a device as pending you need to update the pending status of its
-properties. To do this you have two solutions.
+A device is pending when one or more properties are pending. This moves our attention
+to the properties, which have two ways to set its pending status.
 </p>
 
 <ul>
   <li>
-  <strong>Implicit</strong> - Lelylan tries to guess the pending status following some basic rules.
+  <strong>Implicit</strong> - Lelylan tries to guess the pending status following some
+  basic rules.
   </li>
   <li>
-  <strong>Explicit</strong> - Setting the pending value of the property to <code>true</code>
+  <strong>Explicit</strong> - Setting the property pending value to <code>true</code>
   or <code>false</code>
   </li>
 </ul>
 
-<p class="notice">
-<span class="label">Notice</span>
-Lelylan applies those rules only when a device is connected to the physical world
-otherwise the pending status is always set to <code>false</code>.
-</p>
-
-<h4>Implicit pending definitions</h4>
-
 <p>
-To better understand how Lelylan decides if a property is pending or not, we make some examples
-based on a roller shutter characterized by the property <code>level</code>, which indicates
-how much it's open through a range that goes from <code>0</code> to <code>100</code>.
+To better understand how Lelylan decides if a property is pending or not we prepared
+some examples based on a roller shutter characterized by the property <code>level</code>,
+which indicates how much it's open through a range that goes from <code>0</code> to
+<code>100</code>.
 </p>
 
 <br/>
@@ -170,11 +169,11 @@ how much it's open through a range that goes from <code>0</code> to <code>100</c
         <strong>Rule 1</strong>
       </td>
       <td>
-        <strong>Set the value param (usually from the web)</strong></br>
+        <strong>Set the expected value (usually from the web)</strong></br>
         You decide to open the roller shutter with your mobile app setting its level
-        <code>value</code> to 100. The pending status is set to <code>true</code> until
-        the physical device doesn't apply the desired changes by updating the
-        <code>physical_value</code>.
+        <code>expected_value</code> to 100. The pending status is set to <code>true</code>
+        until the physical device doesn't apply the desired changes and updates
+        <code>value</code>.
       </td>
     </tr>
     <tr>
@@ -183,9 +182,9 @@ how much it's open through a range that goes from <code>0</code> to <code>100</c
       </td>
       <td>
         <strong>Sets the physical value with an halfway value (usually from physical device)</strong></br>
-        The physical device is opening the rolling shutter but it is at 50% of the task.
-        It updates the <code>physical_value</code> to 50 and as this isn't the final value,
-        the pending status continue to be <code>true</code>.
+        The physical device is opening the rolling shutter but it's at 50% of the task.
+        It updates <code>value</code> to 50 and as this isn't the final value, the pending
+        status continue to be <code>true</code>.
       </td>
     </tr>
     <tr>
@@ -194,20 +193,30 @@ how much it's open through a range that goes from <code>0</code> to <code>100</c
       </td>
       <td>
         <strong>Set the final physical value (usually from physical device)</strong></br>
-        The physical device fully opens the rolling shutter. It updates the <code>physical_value</code>
-        to 100 matching with the desired <code>value</code> of 100 and setting the pending status to
+        The physical device fully opens the rolling shutter. It updates <code>value</code> to
+        100 matching the desired <code>value</code> of 100 and setting the pending status to
         <code>false</code>.
       </td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">
+        If you feel brave enough check out the
+        <a href="https://gist.github.com/4258925#file-device_properties_spec-rb">pending status specs</a>.
+      </td>
+    </tr>
+  </tfoot>
 </table>
 
-<br/>
+<p>
+</p>
 
 <p class="notice">
 <span class="label">Notice</span>
-If you feel brave enough check out the <a href="https://gist.github.com/4258925">specs</a> related
-to the pending status.
+When a device is not connected to a physical device those rules are not applied and
+the pending status is always set to <code>false</code>. Also, when <code>expected_value</code>
+is set, it's content is copied to <code>value</code> simulating an instantaneous update.
 </p>
 
 </article>
@@ -227,9 +236,9 @@ status resource.
 
 <p>
 Right now this service is not available on server side. To get the device status you must
-use one of the existing <a href="/community/clients/">Javascript libraries</a>.
-This decision is due to performance motivation and to the fact that the status information
-is a client visualization tasks.
+use one of the existing <a href="/community/clients/">Javascript libraries</a>
+<span class="label warning">todo</span>. This decision is due to performance motivation and
+to the fact that the status information is a client visualization tasks.
 </p>
 
 <ul class="nav nav-tabs">
