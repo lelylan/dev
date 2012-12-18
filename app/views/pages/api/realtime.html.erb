@@ -69,8 +69,9 @@ The following table describes the available resources and events you can subscri
 <table class="zebra-striped lowcase">
   <thead>
     <tr>
-      <th style="width: 110px;">RESOURCE</th>
-      <th style="width: 150px;">EVENT</th>
+      <th style="width: 95px;">RESOURCE</th>
+      <th style="width: 115px;">EVENT</th>
+      <th style="width: 100px;">RECEIVED DATA</th>
       <th>DESCRIPTION</th>
     </tr>
   </thead>
@@ -80,22 +81,15 @@ The following table describes the available resources and events you can subscri
         <code>devices</code>
       </td>
       <td>
-        <code>property-updated</code>
+        <code>property-update</code>
       </td>
       <td>
-        Receive notifications when a device changes its properties.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>devices</code>
+        <a href="/api/devices#device-representation">Device</a>
       </td>
       <td>
-        <code>consumption-created</code>
-      </td>
-      <td>
-        Receive notifications when a <a href="/api/devices/consumptions#create-a-consumption">
-        device consumption is created</a>.
+        Receive a notification when a device
+        <a href="/api/devices#update-properties">updates its properties</a> or
+        <a href="/api/devices#execute-a-function">executes a function</a>.
       </td>
     </tr>
     <tr>
@@ -103,7 +97,10 @@ The following table describes the available resources and events you can subscri
         <code>devices</code>
       </td>
       <td>
-        <code>created</code>
+        <code>create</code>
+      </td>
+      <td>
+        <a href="/api/devices#device-representation">Device</a>
       </td>
       <td>
         Receive a notification when a <a href="/api/devices#create-a-device">device is created</a>.
@@ -114,7 +111,10 @@ The following table describes the available resources and events you can subscri
         <code>devices</code>
       </td>
       <td>
-        <code>updated</code>
+        <code>update</code>
+      </td>
+      <td>
+        <a href="/api/devices#device-representation">Device</a>
       </td>
       <td>
         Receive a notification when a <a href="/api/devices#update-a-device">device is update</a>.
@@ -125,7 +125,10 @@ The following table describes the available resources and events you can subscri
         <code>devices</code>
       </td>
       <td>
-        <code>deleted</code>
+        <code>destroy</code>
+      </td>
+      <td>
+        <a href="/api/devices#device-representation">Device</a>
       </td>
       <td>
         Receive a notification when a <a href="/api/devices#delete-a-device">device is deleted</a>.
@@ -136,8 +139,11 @@ The following table describes the available resources and events you can subscri
         <code>locations</code>
       </td>
       <td>
-        <code>created</code>
+        <code>create</code>
       </td>
+      <td>
+        <a href="/api/locations#location-representation">Location</a>
+        </td>
       <td>
         Receive a notification when a <a href="/api/locations#create-a-location">location is created</a>.
       </td>
@@ -147,8 +153,11 @@ The following table describes the available resources and events you can subscri
         <code>locations</code>
       </td>
       <td>
-        <code>updated</code>
+        <code>update</code>
       </td>
+      <td>
+        <a href="/api/locations#location-representation">Location</a>
+        </td>
       <td>
         Receive a notification when a <a href="/api/locations#update-a-location">location is update</a>.
       </td>
@@ -158,10 +167,28 @@ The following table describes the available resources and events you can subscri
         <code>locations</code>
       </td>
       <td>
-        <code>deleted</code>
+        <code>destroy</code>
       </td>
       <td>
+        <a href="/api/locations#location-representation">Location</a>
+        </td>
+      <td>
         Receive a notification when a <a href="/api/locations#delete-a-location">location is deleted</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>consumptions</code>
+      </td>
+      <td>
+        <code>create</code>
+      </td>
+      <td>
+        <a href="/api/devices/consumptions#consumption-representation">Consumption</a>
+        </td>
+      <td>
+        Receive a notification when a <a href="/api/devices/consumptions#create-a-consumption">
+        consumption is created</a>.
       </td>
     </tr>
   </tbody>
@@ -188,7 +215,7 @@ The following table describes the available resources and events you can subscri
      -H 'Content-Type: application/json' \
      -d '{
           "resource": "device",
-          "event": "property-updated",
+          "event": "property-update",
           "callback_uri": "http://callback.com/lelylan"
         }'</code></pre>
     </div>
@@ -221,7 +248,7 @@ to the callback URL defined in the subscription.
 <div class="preview"><pre><code>{
   "nonce": "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
   "resource": "devices",
-  "event": "created",
+  "event": "create",
   "data": {
      "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
      "id": "5042344b95fc441000000001",
@@ -247,12 +274,8 @@ to the callback URL defined in the subscription.
   <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
   <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
   <dd><span>data</span> - Notified resource representation.
-  This representation is consistent with the
-  <a href="/api/devices#device-representation">device</a>,
-  <a href="/api/locations#location-representation">location</a> and
-  <a href="/api/devices/consumptions#consumption-representation">consumption</a> representation.
-  The only <em>exception</em> is related to the property-updated event which posts only the
-  updated properties and not the entire device representation. Keep this difference in mind.
+  See the received data column in <a href="#subscriptions">subscription table</a>
+  to know which resource representation is notified based on the subscribed event.
   </dd>
 </dl>
 
@@ -351,7 +374,7 @@ payload as message. <a href="/community/faq#signature-header">Learn more about</
   "id": "508acdffd033a9ea77000026",
   "client": { "uri": "http://people.lelylan.com/oauth/applications/508acdffd033a9ea77025" },
   "resource": "devices",
-  "event": "property-updated",
+  "event": "property-update",
   "callback_uri": "http://callback.com/lelylan",
   "created_at": "2012-10-26T17:53:03Z",
   "updated_at": "2012-10-26T17:53:03Z"
@@ -517,7 +540,7 @@ Create a subscription and returns extended information for it.
     -H 'Content-Type: application/json' \
     -d '{
           "resource": "devices",
-          "event": "property-updated",
+          "event": "property-update",
           "callback_uri": "http://callback.com/lelylan"
         }'</code></pre>
     </div>
@@ -618,7 +641,7 @@ Update a subscription identified from its ID and returns extended information fo
     <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
      -u &lt;client_id&gt;:&lt;client_secret&gt; \
      -H 'Content-Type: application/json' \
-     -d '{ "resource": "locations", "event": "created" }'</code></pre>
+     -d '{ "resource": "locations", "event": "create" }'</code></pre>
   </div>
   <div class="tab-pane" id="update-a-subscription-javascript">
     <div class="preview">
