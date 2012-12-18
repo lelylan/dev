@@ -36,7 +36,7 @@ header nav a{color:#fafafa;text-shadow:none;text-decoration:none; padding:5px 0;
 .errors ul{margin:0}
 
 h2{font:20px arial,lucida,helvetica,arial,sans-serif;font-weight:normal}
-pre,code{font-size:12px;line-height:18px;font-family:Monaco,Consolas,"Lucida Console",monospace;color:#000;margin:0;padding:0}
+pre,code{font-size:12px;line-height:18px;font-family:Monaco,Consolas,"Lucida Console",monospace;color:#333;margin:0;padding:0}
 /*pre{margin:0 0 10px 15px;background:transparent;}*/
 pre{padding:5px 0 5px 5px;background:#f6f6f6;border:1px solid #ddd;}
 div.pill-content pre{border-top:none; margin-bottom: 20px;}
@@ -146,6 +146,4 @@ aside.menu {position:fixed !important; margin-left:270px;}
 aside.menu td.inside {padding-left:22px;}
 dl dd{line-height: 1.7em;}
 article div.pros-cons div {padding-bottom: 8px;}
-#section p.notice{border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px 10px; background-color:#F6F6F6}
-
-
+#section p.notice{border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px 10px; background-color:#FFFFF0}

@@ -160,63 +160,40 @@ which indicates how much it's open through a range that goes from <code>0</code>
 <code>100</code>.
 </p>
 
-<br/>
 
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td style="width: 85px">
-        <strong>Rule 1</strong>
-      </td>
-      <td>
-        <strong>Set the expected value (usually from the web)</strong></br>
-        You decide to open the roller shutter with your mobile app setting its level
-        <code>expected_value</code> to 100. The pending status is set to <code>true</code>
-        until the physical device doesn't apply the desired changes and updates
-        <code>value</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Rule 2</strong>
-      </td>
-      <td>
-        <strong>Sets the physical value with an halfway value (usually from physical device)</strong></br>
-        The physical device is opening the rolling shutter but it's at 50% of the task.
-        It updates <code>value</code> to 50 and as this isn't the final value, the pending
-        status continue to be <code>true</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Rule 3</strong>
-      </td>
-      <td>
-        <strong>Set the final physical value (usually from physical device)</strong></br>
-        The physical device fully opens the rolling shutter. It updates <code>value</code> to
-        100 matching the desired <code>value</code> of 100 and setting the pending status to
-        <code>false</code>.
-      </td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2">
-        If you feel brave enough check out the
-        <a href="https://gist.github.com/4258925#file-device_properties_spec-rb">pending status specs</a>.
-      </td>
-    </tr>
-  </tfoot>
-</table>
+<ul>
+  <li>
+  <strong>Rule 1 - Set the expected value (usually from the web)</strong>
+  - You decide to open the roller shutter with your mobile app setting its level
+  <code>expected_value</code> to 100. The pending status is set to <code>true</code>
+  until the physical device doesn't apply the desired changes and updates
+  <code>value</code>.
+  </li>
+  <li>
+  <strong>Rule 2 - Sets an halfway value (usually from physical device)</strong>
+  - The physical device is opening the rolling shutter but it's at 50% of the task.
+  It updates <code>value</code> to 50 and as this isn't the <code>expected_value</code>,
+  the pending status continue to be <code>true</code>.
+  </li>
+  <li>
+  <strong>Rule 3 - Set the final value (usually from physical device)</strong>
+  - The physical device fully opens the rolling shutter. It updates <code>value</code> to
+  100 matching the <code>expected_value</code> of 100 and setting the pending status to
+  <code>false</code>.
+  </li>
+</ul>
 
 <p>
+If you feel brave enough check out the
+<a href="https://gist.github.com/4258925#file-device_properties_spec-rb">pending status specs</a>
+to have a complete vision of how a pending status is automatically defined by Lelylan
 </p>
 
 <p class="notice">
 <span class="label">Notice</span>
 When a device is not connected to a physical device those rules are not applied and
 the pending status is always set to <code>false</code>. Also, when <code>expected_value</code>
-is set, it's content is copied to <code>value</code> simulating an instantaneous update.
+is set, it's copied into <code>value</code> simulating an instantaneous update.
 </p>
 
 </article>
