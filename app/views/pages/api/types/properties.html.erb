@@ -88,8 +88,8 @@ a dimmer, the temperature in a cooling system or the volume in a television.
   "uri": "http://api.lelylan.com/properties/5041e9e9230de31300000001",
   "id": "5041e9e9230de31300000001",
   "name":" Intensity",
+  "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"},
   "default": "0",
-  "values": ["0","20","40","60","80","100"],
   "created_at": "2012-09-01T10:56:41Z",
   "updated_at": "2012-09-01T10:56:41Z"
 }</code></pre></div>
@@ -100,15 +100,9 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 <dd><span>uri</span> - Property URI.</dd>
 <dd><span>id</span> - Property ID.</dd>
 <dd><span>name</span> - Property name.</dd>
-<dd><span>default</span> - Default property value assigned to the device when created.</dd>
-<dt><span>values</span> - Suggested property values.</dt>
+<dt><span>suggested</span> - List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.</dt>
+<dd><span>default</span> - Default property value assigned when the device is created.</dd>
 </dl>
-
-<p class="notice">
-<span class="label">Notice</span>
-<code>values</code> can be useful to automatically build a UI that suggests to the user the possible
-property values. No validations on this list are applied when device properties changes.
-</p>
 
 </article>
 
@@ -244,11 +238,11 @@ GET http://api.lelylan.com/properties/public</code></pre>
     </tr>
     <tr>
       <td class="parameter">
-        <span>values</span>
+        <span>suggested</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Suggested property values.
+        List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -271,7 +265,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
      -d '{
            "name": "Intensity",
            "default": "0",
-           "values": ["0","20","40","60","80","100"]
+           "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
          }'</code></pre>
     </div>
   </div>
@@ -349,11 +343,11 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
     </tr>
     <tr>
       <td class="parameter">
-        <span>values</span>
+        <span>suggested</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Suggested property values.
+        List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.
       </td>
     </tr>
   </tbody>

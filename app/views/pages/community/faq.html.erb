@@ -9,6 +9,7 @@
     <tr><td>&raquo; <a href="#value-and-expected-value">Value and Expected value</a></td></tr>
     <tr><td>&raquo; <a href="#pending-devices">Pending devices</a></td></tr>
     <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
+    <tr><td>&raquo; <a href="#suggested-values">Suggested values</a></td></tr>
     <tr><td>&raquo; <a href="#signature-header">Signature header</a></td></tr>
   </tbody>
 </table>
@@ -167,7 +168,6 @@ which indicates how much it's open through a range that goes from <code>0</code>
 <code>100</code>.
 </p>
 
-
 <ul>
   <li>
   <strong>Rule 1 - Set the expected value (usually from the web)</strong>
@@ -256,6 +256,49 @@ We are open to discussions.
 
 <article>
 
+<h2 class="call"><a name="suggested-values">Suggested values</a></h2>
+
+<p>
+The field <code>suggested</code> represents a list of value/description pairs where
+<code>value</code> is the value used to update the
+<a href="/api/devices#update-properties">device properties</a> while
+the <code>description</code> is a friendly description of the value.
+Below you can see an example
+where the values <code>on</code> and <code>off</code> are the values sent to the device
+properties while <code>On</code> and <code>Off</code> are the respective descriptions.
+</p>
+
+<div class="preview"><pre><code class="ruby"># list of suggested pair => { "value": "description", "value": "description", ...
+"suggested": { "on": "On", "off": "Off" }</code></pre></div>
+
+<br>
+
+<p>
+Populating the <code>suggested</code> list requires some extra work but give you two advantages.
+</p>
+
+<ul>
+  <li>
+  <strong>Uniformity</strong> -
+  A clear interfaces to access to the physical devices is something we need. Using the
+  <code>suggested</code> field lets you define which values are accepted.
+  </li>
+  <li>
+  <strong>User interfaces</strong> -
+  Makes it easy to generate UI used for the control of devices.
+  </li>
+</ul>
+
+<p class="notice">
+<span class="label">notice</span> As the name indicate the <code>suggested</code> list
+isn't something strict to follow, meaning that a device can receive any value. Anyway,
+is a good practice to use it whenever possible.
+</p>
+
+</article>
+
+<article>
+
 <h2 class="call"><a name="signature-header">Signature header</a></h2>
 
 <p>
@@ -270,6 +313,9 @@ between all requests) and a <strong>signature</strong> which proves the message 
 from us. A signature is made by an SHA-1-signed hexadecimal digest using a secret as key and
 the payload as message.
 </p>
+
+
+
 
 <h4>Signature check example</h4>
 
