@@ -66,11 +66,11 @@ To solve those problems Lelylan let you update a property using three params.
   generally used by the physical device to notify the physical updates.
   </li>
   <li>
-  <code>expected_value</code> - Represents the property value expected from the user. It is
+  <code>expected</code> - Represents the property value expected from the user. It is
   generally used by apps that let you control your devices.
   </li>
   <li>
-  <code>pending</code> - Between the moment the desired <code>expected_value</code> is set and
+  <code>pending</code> - Between the moment the desired <code>expected</code> is set and
   <code>value</code> is updated to the desired value from the physical device, the property is
   pending. Lelylan automatically sets the pending value following a <a href="#pending-devices">
   simple set of rules</a>, but also let you override them at any moment. Accepted values are
@@ -80,7 +80,7 @@ To solve those problems Lelylan let you update a property using three params.
 
 <h4>Example Requests</h4>
 
-<p>Suppose we have a roller shutter. This requests sets the <code>expected_value</code> to
+<p>Suppose we have a roller shutter. This requests sets the <code>expected</code> to
 <code>100</code> meaning we want it fully open, and it sets the <code>value</code> to
 <code>50</code> meaning that right now it's half open. It also sets the <code>pending</code>
 status to <code>true</code> as the request is not completed.
@@ -99,7 +99,7 @@ status to <code>true</code> as the request is not completed.
     -d '{
           "properties": [{
             "uri": "http://api.lelylan.com/properties/&lt;level&gt;",
-            "expected_value": "100", "value": "50", "pending": true }
+            "expected": "100", "value": "50", "pending": true }
           ]
         }'</code></pre>
     </div>
@@ -126,7 +126,7 @@ simple set of rules</a>, physical devices should set the pending status to avoid
 <p class="notice">
 <span class="label">Notice</span>
 A <a href="/api/physicals#receiving-property-updates">physical device</a> accepts only <code>value</code>
-as param. When using <code>expected_value</code> Lelylan use it to set the
+as param. When using <code>expected</code> Lelylan use it to set the
 <code>value</code> param to send to the physical device.
 </p>
 
@@ -172,20 +172,20 @@ which indicates how much it's open through a range that goes from <code>0</code>
   <li>
   <strong>Rule 1 - Set the expected value (usually from the web)</strong>
   - You decide to open the roller shutter with your mobile app setting its level
-  <code>expected_value</code> to 100. The pending status is set to <code>true</code>
+  <code>expected</code> to 100. The pending status is set to <code>true</code>
   until the physical device doesn't apply the desired changes and updates
   <code>value</code>.
   </li>
   <li>
   <strong>Rule 2 - Sets an halfway value (usually from physical device)</strong>
   - The physical device is opening the rolling shutter but it's at 50% of the task.
-  It updates <code>value</code> to 50 and as this isn't the <code>expected_value</code>,
+  It updates <code>value</code> to 50 and as this isn't the <code>expected</code>,
   the pending status continue to be <code>true</code>.
   </li>
   <li>
   <strong>Rule 3 - Set the final value (usually from physical device)</strong>
   - The physical device fully opens the rolling shutter. It updates <code>value</code> to
-  100 matching the <code>expected_value</code> of 100 and setting the pending status to
+  100 matching the <code>expected</code> of 100 and setting the pending status to
   <code>false</code>.
   </li>
 </ul>
@@ -199,7 +199,7 @@ to have a complete vision of how a pending status is automatically defined by Le
 <p class="notice">
 <span class="label">Notice</span>
 When a device is not connected to a physical device those rules are not applied and
-the pending status is always set to <code>false</code>. Also, when <code>expected_value</code>
+the pending status is always set to <code>false</code>. Also, when <code>expected</code>
 is set, it's copied into <code>value</code> simulating an instantaneous update.
 </p>
 
