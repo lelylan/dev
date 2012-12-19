@@ -71,6 +71,6 @@ Dev::Application.configure do
   # Session store
   config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
 
-  # CDN configuration
+  # CDN settings
   config.action_controller.asset_host = "//#{ENV['FOG_CLOUDFRONT']}.cloudfront.net"
 end
