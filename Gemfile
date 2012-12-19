@@ -15,6 +15,7 @@ group :development, :test do
 end
 
 group :assets do
+  gem 'asset_sync'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
