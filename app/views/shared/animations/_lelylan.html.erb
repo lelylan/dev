@@ -4,44 +4,44 @@
 
           <div class="first-step">
 
-            <a class="btn btn-warning" href="#">Send request to Lelylan &raquo;</a>
+            <a class="btn btn-warning" href="#">Send request&raquo;</a>
 
             <p>
-            A user using a third party application updates the device properties. A request
-            is sent to Lelylan which will apply it. For example the following request turns
-            on a light by setting its status value to on.
+            Using a third party application a user updates the device properties. For example
+            the following request turns on a light by setting its status value to <code>on</code>.
             </p>
 
-            <div class="preview"><pre><code class="no-highlight">PUT https://api.lelylan.com/devices/light-id/properties
-    {
-      "properties": [{
-        "uri": "https://api.lelylan.com/properties/status-id", 
-        "value": "on" 
-      }]
-    }</code></pre></div>
+          <div class="preview unified"><pre><code class="no-highlight">PUT https://api.lelylan.com/devices/&lt;light-id&gt;/properties</code></pre></div>
+            <div class="preview"><pre><code>{
+  "properties": [{
+    "uri": "https://api.lelylan.com/properties/&lt;status-id&gt;",
+    "value": "on"
+  }]
+}</code></pre></div>
 
             </div>
 
             <div class="second-step">
 
-              <a class="btn btn-warning" href="#">Apply Lelylan request &raquo;</a>
+              <a class="btn btn-warning" href="#">Get reatime updates &raquo;</a>
 
               <p>
-              Lelylan receives the request and forwards it to the connected physical device which
-              will execute the request. Lelylan withouth waiting for the physical device to 
-              apply the requested changes (optimistic flow) returns the expected device
-              representation.
+              Lelylan receives the request and forwards it to the connected
+              <a href="/api/physicals">physical device</a>. Lelylan does not wait for
+              the physical device to apply the request and returns the expected device
+              representation (optimistic flow).
               </p>
 
               <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
               <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/devices/light-id",
-  "id": "light-id",
+  "uri": "https://api.lelylan.com/devices/&lt;light-id&gt;",
+  "id": "&lt;light-id&gt;",
   "name": "Connected Light",
-  "type": { "uri": "https://api.lelylan.com/types/light-type-id" },
-  "properties": [{ 
-    "uri": "https://api.lelylan.com/properties/status-id", 
-    "id": "status-id",
+  "type": { "uri": "https://api.lelylan.com/types/&lt;light-type-id&gt;" },
+  "physical": { "uri": "http://arduino.house.com/&lt;physical-light-id/&gt;" },
+  "properties": [{
+    "uri": "https://api.lelylan.com/properties/&lt;status-id&gt;",
+    "id": "&lt;status-id&gt;",
     "value": "on"
   }]
 }</code></pre></div>
@@ -51,20 +51,16 @@
               <div class="third-step">
 
                 <p>
-                Once the request is applied to the physical device Lelylan notifies the third party
-                application through the (upcoming) streaming service if the request has been
-                completed successfully or not sending the changed properties. 
+                Once the request is applied to the physical device Lelylan notifies the third
+                party application through the <a href="/api/realtime">realtime service</a>. For
+                example subscribe to all property updates.
                 </p>
 
-              <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+              <div class="preview unified"><pre><code class="no-highlight">POST http://api.lelylan.com/subscriptions</code></pre></div>
               <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/devices/light-id",
-  "id": "light-id",
-  "properties": [{ 
-    "uri": "https://api.lelylan.com/properties/status-id", 
-    "id": "status-id",
-    "value": "on"
-  }]
+  "resource": "device",
+  "event": "property-update",
+  "callback_uri": "http://example.com/callback"
 }</code></pre></div>
 
               </div>
