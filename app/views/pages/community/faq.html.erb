@@ -10,7 +10,7 @@
     <tr><td>&raquo; <a href="#pending-devices">Pending devices</a></td></tr>
     <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
     <tr><td>&raquo; <a href="#suggested-values">Suggested values</a></td></tr>
-    <tr><td>&raquo; <a href="#signature-header">Signature header</a></td></tr>
+    <tr><td>&raquo; <a href="#signature">Signature</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -306,7 +306,7 @@ is a good practice to use it whenever possible.
 
 <article>
 
-<h2 class="call"><a name="signature-header">Signature header</a></h2>
+<h2 class="call"><a name="signature">Signature</a></h2>
 
 <p>
 When communicating with external services we can't assume an HTTPS connection. This happens
@@ -320,9 +320,6 @@ between all requests) and a <strong>signature</strong> which proves the message 
 from us. A signature is made by an SHA-1-signed hexadecimal digest using a secret as key and
 the payload as message.
 </p>
-
-
-
 
 <h4>Signature check example</h4>
 
@@ -363,5 +360,10 @@ if (signature != verify) throw new(Error)("Invalid X-Physical-Signature");</code
   </div>
 </div>
 
+<p class="notice">
+<span class="label">Notice</span>
+Remember to use the <code>X-Hub-Signature</code> header when using the realtime services
+and to use the <code>X-Physical-Signature</code> header when using the physical services.
+</p>
 </article>
 

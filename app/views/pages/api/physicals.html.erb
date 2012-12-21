@@ -172,7 +172,7 @@ how it can receive updates when a device changes its
         The message signature. To verify that the payload you received comes from lelylan you
         must verify the "X-Physical-Signature" header. This is a SHA-1 signed hexadecimal digest
         using the <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
-        the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
+        the payload as message. <a href="/community/faq#signature">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -276,10 +276,9 @@ physical device is forwarded.
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
 
 <p>
-Lelylan ignores the response body. The physical device should return a
-<a href="https://tools.ietf.org/html/rfc2616#section-10.2.3">202 response</a>
-to notify the fact that the request has been Accepted. Once the physical updates are
-applied it updates the <a href="update-device-properties">device properties</a> in Lelylan.
+Lelylan ignores the response body. When the physical device accepts a requests sends back
+a <a href="https://tools.ietf.org/html/rfc2616#section-10.2.3">202 response</a>. Only once
+the updates are applied <a href="sending-updates-to-lelylan">Lelylan is notified</a>.
 </p>
 
 </article>
@@ -291,7 +290,7 @@ applied it updates the <a href="update-device-properties">device properties</a> 
 <h1 class="call"><a name="sending-updates-to-lelylan">Sending updates to Lelylan</a></h1>
 
 <p>
-The physical device can access to a restricted set of Lelylan services.
+A physical device has access to a restricted set of Lelylan services.
 </p>
 
 <ul>
@@ -320,7 +319,7 @@ can't be used. To make the communication safe every request needs to have two ex
   header which is the message signature used from Lelylan to verify that the payload comes from
   the physical device. This must be a SHA-1-signed hexadecimal digest using the
   <a href="/api/devices#get-a-device-private-info">device secret</a> as key and
-  the payload as message. <a href="/community/faq#signature-header">Learn more about</a>.
+  the payload as message. <a href="/community/faq#signature">Learn more about</a>.
   </li>
   <li>
   <strong>nonce</strong>. Every request must contain a nonce. A nonce is a unique string between
@@ -331,7 +330,7 @@ can't be used. To make the communication safe every request needs to have two ex
 <h4>Example Request</h4>
 
 <p>
-Most of the time the physical device updates device properties in Lelylan. Here an example.
+Most of the time the physical device needs to update the device properties. Here an example.
 </p>
 
 <ul class="nav nav-tabs">

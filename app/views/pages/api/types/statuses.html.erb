@@ -317,7 +317,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-status-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/statuses
+      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/statuses \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
@@ -345,7 +345,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
 <h4>Example header response</h4>
 
 <div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
-Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre></div>
+Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -449,7 +449,7 @@ Location: http://housy.lelylan.com/statuses/5042176370eda61200000004</code></pre
            "name": "Lowering intensity",
            "properties": [{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-              "matches": ['0..10'],
+              "matches": ["0..10"],
               "pending": true
             }]
          }'</code></pre>

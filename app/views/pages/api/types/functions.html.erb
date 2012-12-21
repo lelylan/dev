@@ -94,10 +94,10 @@ your life.
   "updated_at": "2012-09-01T13:42:55Z",
   "properties": [{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-    "value": "on"
+    "expected": "on"
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-    "value": null
+    "expected": "{{user}}"
   }]
 }</code></pre></div>
 
@@ -110,17 +110,19 @@ your life.
   <dd><span>properties</span> - List of properties the function updates.</dd>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
-    <dd><span>value</span> - Value assigned to the device property when the function is
-    executed.
+    <dd><span>expected</span> - Expected value assigned to the device property when the
+    function is executed.
     </dd>
   </div>
 </dl>
 
 <p class="notice">
 <span class="label">Notice</span>
-If <code>value</code> is not set, as convention that property should be filled
-by the user. For example the function 'set intensity' requires the intensity property
-to be filled by the user. For this reason its value should be <code>null</code>.
+When you do not set <code>expected</code> its default is <code>{{user}}</code>.
+This is convention telling you that the value must be filled by the user.
+For example the function 'set intensity' requires the intensity property to
+be filled by the user. For this reason its value should be <code>{{user}}</code>.
+<span class="label warning">to improve</span>
 </p>
 
 </article>
@@ -269,12 +271,12 @@ GET http://api.lelylan.com/functions/public</code></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.value</span>
+        <span>&raquo; property.expected</span>
         <span class="info">optional</span>
         <span class="info">default to null</span>
       </td>
       <td>
-        Value assigned to the device property when the function is executed.<br/>
+        Expected value assigned to the device property when the function is executed.<br/>
       </td>
     </tr>
   </tbody>
@@ -297,7 +299,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
      -d '{
            "name": "Set intensity",
            "properties": [
-             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "value": "on"},
+             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "expected": "on"},
              { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;" }
            ]
          }'</code></pre>
@@ -386,11 +388,11 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.value</span>
+        <span>&raquo; property.expected</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Value assigned to the device property when the function is executed.<br/>
+        Expected value assigned to the device property when the function is executed.<br/>
       </td>
     </tr>
   </tbody>
@@ -413,8 +415,8 @@ curl -X PUT http://api.lelylan.com/functions/504210df70eda60a00000003 \
      -d '{
            "name": "Set intensity to 50%",
            "properties": [
-             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "value": "on"},
-             { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;", "value": "50" }
+             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "expected": "on"},
+             { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;", "expected": "50" }
            ]
          }'</code></pre>
     </div>
