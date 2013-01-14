@@ -28,7 +28,6 @@ rolling shutters and windows, irrigations, video surveillance, gates, multimedia
 
 <p>
 The Device API defines a set of services to monitor and control every existing
-OTS
 device. Its final goal is to map every device to a unique URI which provides control
 over it.
 </p>
@@ -718,7 +717,7 @@ Update a device identified from its ID and returns extended information for it.
         <span class="info">optional</span>
       </td>
       <td>
-        Expected property value. <a href="/community/faq#value-and-expected-value">Learn more about</a>
+        Expected property value. <a href="/community/faq#value-and-expected-value">Learn more about</a>.
       </td>
     </tr>
     <tr>
@@ -727,7 +726,7 @@ Update a device identified from its ID and returns extended information for it.
         <span class="info">optional</span>
       </td>
       <td>
-        Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>
+        Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -757,17 +756,17 @@ Update a device identified from its ID and returns extended information for it.
 <div class="tab-content">
   <div class="tab-pane active" id="update-properties-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "properties": [{
-            "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-            "value": "on"
-          },{
-            "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-            "value": "50" }
-          ]
-        }'</code></pre>
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "properties": [{
+             "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+             "value": "on"
+           },{
+             "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+             "value": "50" }
+           ]
+         }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-properties-javascript">
@@ -897,9 +896,9 @@ Update a device identified from its ID and returns extended information for it.
 <div class="tab-content">
   <div class="tab-pane active" id="execute-a-function-i-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/functions \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{ "function": "http://api.lelylan.com/functions/&lt;turn-on&gt;" }'</code></pre>
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{ "function": "http://api.lelylan.com/functions/&lt;turn-on&gt;" }'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="execute-a-function-i-javascript">
@@ -931,15 +930,15 @@ to be sent from the user.
     <div class="preview">
       <div class="preview">
         <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/functions \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "function": "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
-          "properties": [{
-            "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-            "value": "90" }
-          ]
-        }'</code></pre>
+     -H 'Authorization: Bearer &lt;token&gt;' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "function": "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
+           "properties": [{
+             "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
+             "value": "90" }
+           ]
+         }'</code></pre>
       </div>
     </div>
   </div>
