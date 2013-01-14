@@ -97,7 +97,7 @@ your life.
     "expected": "on"
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-    "expected": "{{user}}"
+    "expected": "{{100}}"
   }]
 }</code></pre></div>
 
@@ -111,19 +111,10 @@ your life.
   <div>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>expected</span> - Expected value assigned to the device property when the
-    function is executed.
+    function is executed. <a href="/community/faq#function-conventions">Learn more about</a>.
     </dd>
   </div>
 </dl>
-
-<p class="notice">
-<span class="label">Notice</span>
-When you do not set <code>expected</code> its default is <code>{{user}}</code>.
-This is convention telling you that the value must be filled by the user.
-For example the function 'set intensity' requires the intensity property to
-be filled by the user. For this reason its value should be <code>{{user}}</code>.
-<span class="label warning">to improve</span>
-</p>
 
 </article>
 
@@ -272,11 +263,12 @@ GET http://api.lelylan.com/functions/public</code></pre>
     <tr>
       <td class="parameter nested">
         <span>&raquo; property.expected</span>
+        <span class="info">default to <code>{{}}</code></span>
         <span class="info">optional</span>
-        <span class="info">default to null</span>
       </td>
       <td>
-        Expected value assigned to the device property when the function is executed.<br/>
+        Expected value assigned to the device property when the function is executed.
+        <a href="/community/faq#function-conventions">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -392,7 +384,8 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Expected value assigned to the device property when the function is executed.<br/>
+        Expected value assigned to the device property when the function is executed.
+        <a href="/community/faq#function-conventions">Learn more about</a>.
       </td>
     </tr>
   </tbody>

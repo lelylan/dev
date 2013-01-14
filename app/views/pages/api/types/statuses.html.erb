@@ -96,12 +96,12 @@ moment of its life is to use the status API.
   "properties":[{
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "id": "50420c7e267ff51000000001",
-    "matches": ["on"],
+    "value": ["on"],
     "pending": false
   }, {
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
     "id": "50420c7e267ff51300000001",
-    "matches": ["0..100"],
+    "value": ["0..100"],
     "pending": true
   }]
 }</code></pre>
@@ -117,7 +117,7 @@ moment of its life is to use the status API.
   <div>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>id</span> - Property ID.</dd>
-    <dd><span>matches</span> - List of matching values (specific values or range of values).</dd>
+    <dd><span>value</span> - List of matching values. It accepts specific values or range of values.</dd>
     <dd><span>pending</span> - Property pending status. <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
@@ -132,7 +132,7 @@ in a specific moment of its life you need to check two things.
 </p>
 
 <ul>
-  <li>If the device property <code>value</code> is included into the <code>matches</code> list.</li>
+  <li>If the device property <code>value</code> is included into the status <code>value</code> list.</li>
   <li>If the device property <code>pending</code> status is the same as the <code>pending</code> value.</li>
 </ul>
 
@@ -287,7 +287,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.matches</span>
+        <span>&raquo; property.value</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -324,7 +324,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
            "name": "Max intensity",
            "properties": [{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-              "matches": ["100"],
+              "value": ["100"],
               "pending": false
             }]
          }'</code></pre>
@@ -412,7 +412,7 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.matches</span>
+        <span>&raquo; property.value</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -449,7 +449,7 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
            "name": "Lowering intensity",
            "properties": [{
               "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-              "matches": ["0..10"],
+              "value": ["0..10"],
               "pending": true
             }]
          }'</code></pre>

@@ -10,6 +10,7 @@
     <tr><td>&raquo; <a href="#pending-devices">Pending devices</a></td></tr>
     <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
     <tr><td>&raquo; <a href="#suggested-values">Suggested values</a></td></tr>
+    <tr><td>&raquo; <a href="#function-conventions">Function conventions</a></td></tr>
     <tr><td>&raquo; <a href="#signature">Signature</a></td></tr>
   </tbody>
 </table>
@@ -308,6 +309,27 @@ is a good practice to use it whenever possible.
 
 <article>
 
+<h2 class="call"><a name="function-conventions">Function conventions</a></h2>
+
+<p>
+Functions are used to automatically set the properties <code>expected</code> value.
+For example the function 'turn on' sets the property <code>status</code> to <code>on</code>.
+Anyway, sometimes you don't need to set a predefined value. Think at a dimmer where you want
+to set its intensity. In that case the expected intensity must be set from the user.
+<p>
+
+<p>
+For this reason when you do not set <code>expected</code> its default is <code>{{}}</code>.
+This is a convention telling you (UI) that the value must be filled by the user. If
+you want to set a default value by default, you can do it by putting it inside the brackets.
+Supposing you want to intensity value of a light be 100% if the user does not set it, set
+<code>expected</code> to <code>{{100}}</code>.
+</p>
+
+</article>
+
+<article>
+
 <h2 class="call"><a name="signature">Signature</a></h2>
 
 <p>
@@ -366,17 +388,15 @@ if (signature != verify) throw new(Error)("Invalid X-Physical-Signature");</code
       <pre><code class="cpp">// Download the library from https://github.com/Phoul/cryptosuite
 #include "sha1.h"
 
-String secret = DEVICE_SECRET;
+String payload;
 String signature;
 String verify;
-String payload;
 
 // Device secret in hex
 // 0ca70cc411e9e9de25b47b3e76b8a1932ae48bee6e6fa8808b534994dff5045d
 uint8_t secret[]={
-  0x0c,0xa7,0x0c,0xc4,0x11,0xe9,0xe9,0xde,0x25,0xb4,0x7b,
-  0x3e,0x76,0xb8,0xa1,0x93,0x2a,0xe4,0x8b,0xee,0x6e,0x6f,
-  0xa8,0x80,0x8b,0x53,0x49,0x94,0xdf,0xf5,0x04,0x5d
+  0x0c,0xa7,0x0c,0xc4,0x11,0xe9,0xe9,0xde,0x25,0xb4,0x7b,0x3e,0x76,0xb8,0xa1,0x93,
+  0x2a,0xe4,0x8b,0xee,0x6e,0x6f,0xa8,0x80,0x8b,0x53,0x49,0x94,0xdf,0xf5,0x04,0x5d
 };
 
 // Convert the Hash into the final String
@@ -408,10 +428,10 @@ void loop() {
   </div>
 </div>
 
-
 <p class="notice">
 <span class="label">Notice</span>
 Remember to use the <code>X-Hub-Signature</code> header when using the realtime services
 and to use the <code>X-Physical-Signature</code> header when using the physical services.
 </p>
+
 </article>
