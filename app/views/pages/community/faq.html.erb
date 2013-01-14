@@ -328,6 +328,7 @@ the payload as message.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#verify-payload-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#verify-payload-arduino" data-toggle="tab" class="arduino">Arduino</a></li>
 </ul>
 
 <div class="tab-content">
@@ -345,7 +346,7 @@ verify = OpenSSL::HMAC.hexdigest(digest, client_secret, payload.to_json.to_s)
 raise InvalidSignature, "Invalid X-Physical-Signature" if signature != verify</code></pre>
     </div>
   </div>
-    <div class="tab-pane active" id="verify-payload-javascript">
+  <div class="tab-pane active" id="verify-payload-javascript">
     <div class="preview">
       <pre><code>var crypto = require('crypto');
 
@@ -360,7 +361,53 @@ verify = digest.digest('hex')
 if (signature != verify) throw new(Error)("Invalid X-Physical-Signature");</code></pre>
     </div>
   </div>
+  <div class="tab-pane" id="verify-payload-arduino">
+    <div class="preview">
+      <pre><code class="cpp">// Download the library from https://github.com/Phoul/cryptosuite
+#include "sha1.h"
+
+String secret = DEVICE_SECRET;
+String signature;
+String verify;
+String payload;
+
+// Device secret in hex
+// 0ca70cc411e9e9de25b47b3e76b8a1932ae48bee6e6fa8808b534994dff5045d
+uint8_t secret[]={
+  0x0c,0xa7,0x0c,0xc4,0x11,0xe9,0xe9,0xde,0x25,0xb4,0x7b,
+  0x3e,0x76,0xb8,0xa1,0x93,0x2a,0xe4,0x8b,0xee,0x6e,0x6f,
+  0xa8,0x80,0x8b,0x53,0x49,0x94,0xdf,0xf5,0x04,0x5d
+};
+
+// Convert the Hash into the final String
+String convertHash(uint8_t* hash) {
+  String returnString; int i;
+  for (i=0; i<20; i++) {
+    returnString += ("0123456789abcdef"[hash[i]>>4]);
+    returnString += ("0123456789abcdef"[hash[i]&0xf]);
+  }
+  return returnString;
+}
+
+void setup() {
+  Serial.begin(57600);
+}
+
+void loop() {
+
+  payload = REQUEST_PAYLOAD;
+  signature = REQUEST_SIGNATURE;
+
+  Sha1.initHmac(secret, 32);
+  Sha1.print(payload);
+  verify = convertHash(Sha1.resultHmac());
+
+  Serial.println(signature, verify);
+}</code></pre>
+    </div>
+  </div>
 </div>
+
 
 <p class="notice">
 <span class="label">Notice</span>
@@ -368,4 +415,3 @@ Remember to use the <code>X-Hub-Signature</code> header when using the realtime 
 and to use the <code>X-Physical-Signature</code> header when using the physical services.
 </p>
 </article>
-

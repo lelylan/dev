@@ -1,7 +1,7 @@
 // code highlight
 $(function () { hljs.initHighlightingOnLoad(); })
 
-// language examples selection (ruby, js, curl, tc.)
+// language examples selection (ruby, javascript, curl, etc.)
 $(function () {
 
   set_language_from_fragment()
@@ -20,7 +20,7 @@ $(function () {
     return $.cookie('lelylan_dev_language');
   }
 
-  // Viasualize the documentation through the selected language
+  // Visualize the documentation through the selected language
   function set_language(language) {
     // show all code examples
     $('#language').val(language);
