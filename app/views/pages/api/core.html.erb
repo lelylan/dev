@@ -6,6 +6,7 @@
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#response-formats">Response formats</a></td></tr>
+    <tr><td>&raquo; <a href="#cors">CORS</a></td></tr>
     <tr><td>&raquo; <a href="#public-resources">Public resources</a></td></tr>
     <tr><td>&raquo; <a href="#pagination">Infinite scrolling pagination</a></td></tr>
     <tr><td>&raquo; <a href="#time-formats">Accepted time formats</a></td></tr>
@@ -26,8 +27,7 @@
 <h1 class="call"><a name="response-formats">Response formats</a></h1>
 
 <p>
-  Right now Lelylan returns only JSON. To define the format you can set the URI suffix
-  or the Content-Type header.
+  Lelylan responds only with JSON representations.
 </p>
 
 <br/>
@@ -49,11 +49,27 @@
   </tbody>
 </table>
 
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="cors">CORS</a></h1>
+
 <p>
-  To enable cross site requests we offer JSONP. To use it add <code>callback=method</code>
-  parameter to your request and Lelylan will respond with <code>method(json-representation)</code>.
-  In this case the returned Content-Type is <code>application/javascript</code>.
+  Lelylan supports <a href="http://www.html5rocks.com/en/tutorials/cors/">CORS</a>
+  (Cross Origin Resource Sharing) for AJAX requests. CORS allows cross-domain communication
+  from the browser. By building on top of the XmlHttpRequest object, CORS allows developers
+  to work with the same idioms as same-domain requests. Here a complete list of
+  <a href="http://caniuse.com/cors">browsers supporting CORS</a>.
 </p>
+
+<p>
+  Lelylan does not support JSON-P as CORS is a more complete solution. If you think
+  JSON-P must be implemented <a href="/community/support/">write us</a>.
+</p>
+
 </article>
 
 <br/>
