@@ -246,9 +246,10 @@ to the callback URL defined in the subscription.
 <h4 id="payload-representation">Payload example</h4>
 
 <div class="preview"><pre><code>{
-  "nonce": "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
+  "subscription": { "id": "50f54f5f5e74ef2873000006" },
   "resource": "devices",
   "event": "create",
+  "nonce": "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
   "data": {
      "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
      "id": "5042344b95fc441000000001",
@@ -270,9 +271,10 @@ to the callback URL defined in the subscription.
 <h4>Payload explained</h4>
 
 <dl>
-  <dd><span>nonce</span> - Random unique identifier to avoid replay attacks.</dd>
+  <dd><span>subscription.id</span> - Subscription ID firing the notification</dd>
   <dd><span>resource</span> - Notified resource. See <a href="#subscriptions">available resources</a>.</dd>
   <dd><span>event</span> - Notified event. See <a href="#subscriptions">available events</a>.</dd>
+  <dd><span>nonce</span> - Random unique identifier to avoid replay attacks.</dd>
   <dd><span>data</span> - Notified resource representation.
   See the received data column in <a href="#subscriptions">subscription table</a>
   to know which resource representation is notified based on the subscribed event.
