@@ -93,24 +93,32 @@ device first <a href="#deactivate-a-device">deactivate</a> it.
 <h4>Example Request</h4>
 
 <ul class="nav nav-tabs">
-  <li class=" active"><a href="#create-an-instantaneous-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#create-an-instantaneous-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-an-instantaneous-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class=" active"><a href="#activate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#activate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#activate-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#activate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="create-an-instantaneous-consumption-curl">
+  <div class="tab-pane active" id="activate-a-device-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X POST http://api.lelylan.com/activations \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
-     -d '{ "activation_code": "3a9e8732e30c7c06031ad28fd5310425bca3d9bc" }'</code></pre></div>
+     -d '{ "activation_code": "&lt;activation-code&gt;" }'</code></pre></div>
   </div>
-  <div class="tab-pane" id="create-an-instantaneous-consumption-javascript">
+  <div class="tab-pane" id="activate-a-device-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'activation_code': activationCode };
+Lelylan.Device.activate(params, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="activate-a-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-an-instantaneous-consumption-ruby">
+  <div class="tab-pane" id="activate-a-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -183,24 +191,31 @@ Until that moment the previous owner remains.
 <h4>Example Request</h4>
 
 <ul class="nav nav-tabs">
-  <li class="curl active"><a href="#delete-a-consumption-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li class="javascript"><a href="#delete-a-consumption-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li class="ruby"><a href="#delete-a-consumption-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class="curl active"><a href="#deactivate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class="node"><a href="#deactivate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li class="javascript"><a href="#deactivate-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class="ruby"><a href="#deactivate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="delete-a-consumption-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/activations/3a9e8732e30c7c631ad8fd51425bca3d9bc \
+  <div class="tab-pane active" id="deactivate-a-device-curl">
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/activations/&lt;activation-code&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-consumption-javascript">
+  <div class="tab-pane" id="deactivate-a-device-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.deactivate(activationCode, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="deactivate-a-device-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-consumption-ruby">
+  <div class="tab-pane" id="deactivate-a-device-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
