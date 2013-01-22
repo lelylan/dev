@@ -32,7 +32,7 @@ $(function () {
 
   // If there is the name of the language in the fragment it is set as default
   function set_language_from_fragment() {
-    var languages = ['curl', 'javascript', 'ruby'];
+    var languages = ['curl', 'node', 'javascript', 'ruby'];
     for (var i=0; i < languages.length; i++) {
       language = languages[i];
       if (fragment_contains(language)) {

@@ -376,9 +376,9 @@ var secret    = CLIENT_SECRET,
     signature = request.headers('X-Physical-Signature'),
     payload   = request.body();
 
-digest = crypto.createHmac("sha1", secret);
+var digest = crypto.createHmac("sha1", secret);
 digest.update(JSON.stringify(payload));
-verify = digest.digest('hex')
+var verify = digest.digest('hex')
 
 if (signature != verify) throw new(Error)("Invalid X-Physical-Signature");</code></pre>
     </div>

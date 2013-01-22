@@ -75,6 +75,7 @@ For example, when creating a dimmer, the device inherits the <em>status</em>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -82,8 +83,14 @@ For example, when creating a dimmer, the device inherits the <em>status</em>
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-device-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/devices/5042344b95fc441000000001 \
-    -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/devices/&lt;id&gt; \
+     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-device-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.find(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-device-javascript">
@@ -191,24 +198,31 @@ To access this service you must use the <a href="/api/oauth#scopes">privates sco
 <h4>Example Request</h4>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#get-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class="active"><a href="#get-a-device-private-info-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-device-private-info-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-device-private-info-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-device-private-info-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="get-a-device-curl">
+  <div class="tab-pane active" id="get-a-device-private-info-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/devices/5042344b95fc441000000001/privates \
+      <pre><code class="no-highlight">curl http://api.lelylan.com/devices/&lt;id&gt;/privates \
     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-device-javascript">
+  <div class="tab-pane" id="get-a-device-private-info-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.privates(id, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-device-private-info-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-device-ruby">
+  <div class="tab-pane" id="get-a-device-private-info-ruby">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -355,6 +369,7 @@ To access this service you must use the <a href="/api/oauth#scopes">privates sco
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-devices-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-devices-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-devices-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-devices-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -363,6 +378,12 @@ To access this service you must use the <a href="/api/oauth#scopes">privates sco
   <div class="tab-pane active" id="get-all-devices-curl">
     <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices?properties[value]=on \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
+  </div>
+  <div class="tab-pane" id="get-all-devices-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.all({ 'properties[value]': 'on' }, callback);</code></pre>
+    </div>
   </div>
   <div class="tab-pane" id="get-all-devices-javascript">
     <div class="preview">
@@ -449,6 +470,7 @@ To access this service you must use the <a href="/api/oauth#scopes">privates sco
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -464,6 +486,17 @@ To access this service you must use the <a href="/api/oauth#scopes">privates sco
            "type": "http://api.lelylan.com/types/5042310470eda60a0000000d",
            "physical": "http://arduino.house.com/5042205c70eda61"
          }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-device-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'name': 'Closet dimmer',
+  'type': 'http://api.lelylan.com/types/5042310470eda60a0000000d',
+  'physical': 'http://arduino.house.com/5042205c70eda61' };
+
+Lelylan.Device.create(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-device-javascript">
@@ -548,16 +581,24 @@ Update a device identified from its ID and returns extended information for it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-device-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001 \
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{ "name": "Zigbee closet dimmer" }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-device-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'name': 'Zigbee closet dimmer' };
+Lelylan.Device.update(id, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-device-javascript">
@@ -619,15 +660,22 @@ Update a device identified from its ID and returns extended information for it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#delete-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-device-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/devices/5042344b95fc441000000001 \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/devices/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Length: 0'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-device-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.delete(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-device-javascript">
@@ -749,24 +797,39 @@ Update a device identified from its ID and returns extended information for it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-properties-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt;/properties \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
            "properties": [{
-             "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+             "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
              "value": "on"
            },{
-             "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+             "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
              "value": "50" }
            ]
          }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'properties': [{
+    'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
+    'value': 'on' },{
+    'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+    'value': '50' }]
+};
+
+Lelylan.Device.properties(id, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-properties-javascript">
@@ -889,16 +952,24 @@ Update a device identified from its ID and returns extended information for it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#execute-a-function-i-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#execute-a-function-i-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#execute-a-function-i-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#execute-a-function-i-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="execute-a-function-i-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/functions \
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt;/functions \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{ "function": "http://api.lelylan.com/functions/&lt;turn-on&gt;" }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="execute-a-function-i-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'function': 'http://api.lelylan.com/functions/&lt;turn-on&gt;' };
+Lelylan.Device.execute(id, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="execute-a-function-i-javascript">
@@ -921,6 +992,7 @@ to be sent from the user.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#execute-a-function-ii-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#execute-a-function-ii-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#execute-a-function-ii-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#execute-a-function-ii-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -929,17 +1001,30 @@ to be sent from the user.
   <div class="tab-pane active" id="execute-a-function-ii-curl">
     <div class="preview">
       <div class="preview">
-        <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/functions \
+        <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt;/functions \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
-           "function": "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
-           "properties": [{
-             "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
-             "value": "90" }
+           'function': 'http://api.lelylan.com/functions/&lt;set-intensity&gt;'
+           'properties': [{
+             'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+             'value': '90' }
            ]
          }'</code></pre>
       </div>
+    </div>
+  </div>
+  <div class="tab-pane" id="execute-a-function-ii-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  "function": "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
+  "properties": [{
+    "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
+    "value": "90" }]
+};
+
+Lelylan.Device.execute(id, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="execute-a-function-ii-javascript">
