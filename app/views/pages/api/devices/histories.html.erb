@@ -64,18 +64,25 @@ For this reason treat them as highly temporary.
 
   <ul class="nav nav-tabs">
     <li class="active"><a href="#get-a-history-curl" data-toggle="tab" class="curl">Curl</a></li>
-    <li><a href="#get-a-history-js" data-toggle="tab" class="javascript">Javascript</a></li>
+    <li><a href="#get-a-history-node" data-toggle="tab" class="node">Node.js</a></li>
+    <li><a href="#get-a-history-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
     <li><a href="#get-a-history-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
   </ul>
 
   <div class="tab-content">
     <div class="tab-pane active" id="get-a-history-curl">
       <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/histories/5042490a6de0740d00000004 \
+        <pre><code class="no-highlight">curl http://api.lelylan.com/histories/&lt;id&gt; \
 -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
       </div>
     </div>
-    <div class="tab-pane" id="get-a-history-js">
+    <div class="tab-pane" id="get-a-history-node">
+      <div class="preview">
+        <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.History.find(id, callback);</code></pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="get-a-history-javascript">
       <div class="preview">
         <pre><code># todo</code></pre>
       </div>
@@ -130,7 +137,7 @@ For this reason treat them as highly temporary.
 <br/>
 
 <article>
-<h1 class="call"><a name="get-all-histories">GET /devices/:id/histories</a></h1>
+<h1 class="call"><a name="get-all-histories">GET /histories</a></h1>
 
 <p>
   Returns a list of history resources related to owned devices.
@@ -245,7 +252,8 @@ For this reason treat them as highly temporary.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-histories-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-all-histories-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-histories-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-histories-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-histories-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
@@ -256,7 +264,14 @@ For this reason treat them as highly temporary.
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-histories-js">
+  <div class="tab-pane" id="get-all-histories-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'from': '2012-07-03 12:45:29Z' };
+Lelylan.History.create(params, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-histories-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
