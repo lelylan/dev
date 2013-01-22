@@ -59,17 +59,24 @@ moment of its life is to use the status API.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-status-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-status-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/statuses/&lt;id&gt;</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-status-js">
+  <div class="tab-pane" id="get-a-status-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Status.find(id, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-status-javascript">
     <div class="preview">
         <pre><code># todo</code></pre>
     </div>
@@ -198,7 +205,8 @@ GET http://api.lelylan.com/statuses/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-statuses-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-all-statuses-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-statuses-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-statuses-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-statuses-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
@@ -208,7 +216,13 @@ GET http://api.lelylan.com/statuses/public</code></pre>
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-statuses-js">
+  <div class="tab-pane" id="get-all-statuses-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Status.all({}, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-statuses-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -310,7 +324,8 @@ GET http://api.lelylan.com/statuses/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#create-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#create-a-status-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
@@ -330,7 +345,21 @@ GET http://api.lelylan.com/statuses/public</code></pre>
          }'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-status-js">
+  <div class="tab-pane" id="create-a-status-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'name': 'Max intensity',
+  'properties': [{
+    'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+    'value': ['100'],
+    'pending': false
+  }]};
+
+Lelylan.Status.create(params, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-status-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -436,7 +465,8 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-a-status-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
@@ -455,7 +485,21 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
          }'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-status-js">
+  <div class="tab-pane" id="update-a-status-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = {
+  'name': 'Lowering intensity',
+  'properties': [{
+    'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+    'value': ['0..10'],
+    'pending': true
+  }]};
+
+Lelylan.Status.update(id, params, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-status-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -520,27 +564,34 @@ Connected properties are not deleted.
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#delete-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#delete-a-status-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#delete-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#delete-a-status-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#delete-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-status-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/statuses/5042176370eda61200000004 \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/statuses/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Length: 0'</code></pre>
+    </div>
   </div>
-</div>
-<div class="tab-pane" id="delete-a-status-js">
-  <div class="preview">
+  <div class="tab-pane" id="delete-a-status-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Status.delete(id, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-status-javascript">
+    <div class="preview">
       <pre><code># todo</code></pre>
+    </div>
   </div>
-</div>
-<div class="tab-pane" id="delete-a-status-ruby">
-  <div class="preview">
+  <div class="tab-pane" id="delete-a-status-ruby">
+    <div class="preview">
       <pre><code># todo</code></pre>
+    </div>
   </div>
-</div>
 </div>
 
 <h4>Example header response</h4>
