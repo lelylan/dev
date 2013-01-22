@@ -342,6 +342,7 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -350,7 +351,14 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
   <div class="tab-pane active" id="get-a-subscription-curl">
     <div class="preview">
     <pre><code class="no-highlight">curl http://api.lelylan.com/subscriptions/50427cef14a0d61200000001 \
-     -u &lt;client_id&gt;:&lt;client_secret&gt;</code></pre>
+     -u &lt;client-id&gt;:&lt;client-secret&gt;</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-subscription-node">
+    <div class="preview">
+      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
+Lelylan = require('lelylan-node')(credentials);
+Lelylan.Subscription.find(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-subscription-javascript">
@@ -438,6 +446,7 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-subscriptions-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-subscriptions-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-subscriptions-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-subscriptions-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -445,7 +454,14 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-subscriptions-curl">
     <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/subscriptions \
-     -u &lt;client_id&gt;:&lt;client_secret&gt;</code></pre></code></pre></div>
+     -u &lt;client-id&gt;:&lt;client-secret&gt;</code></pre></code></pre></div>
+  </div>
+  <div class="tab-pane" id="get-all-subscriptions-node">
+    <div class="preview">
+      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
+Lelylan = require('lelylan-node')(credentials);
+Lelylan.Subscription.all({}, callback);</code></pre>
+    </div>
   </div>
   <div class="tab-pane" id="get-all-subscriptions-javascript">
     <div class="preview">
@@ -530,6 +546,7 @@ Create a subscription and returns extended information for it.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -538,13 +555,25 @@ Create a subscription and returns extended information for it.
   <div class="tab-pane active" id="create-a-subscription-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/subscriptions \
-    -u &lt;client_id&gt;:&lt;client_secret&gt; \
+    -u &lt;client-id&gt;:&lt;client-secret&gt; \
     -H 'Content-Type: application/json' \
     -d '{
           "resource": "devices",
           "event": "property-update",
           "callback_uri": "http://callback.com/lelylan"
         }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-subscription-node">
+    <div class="preview">
+      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
+Lelylan = require('lelylan-node')(credentials);
+params = {
+  "resource": "devices",
+  "event": "property-update",
+  "callback_uri": "http://callback.com/lelylan" };
+
+Lelylan.Subscription.create(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-subscription-javascript">
@@ -634,16 +663,25 @@ Update a subscription identified from its ID and returns extended information fo
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-subscription-curl">
-    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
-     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/&lt;id&gt; \
+     -u &lt;client-id&gt;:&lt;client-secret&gt; \
      -H 'Content-Type: application/json' \
      -d '{ "resource": "locations", "event": "create" }'</code></pre>
+  </div>
+  <div class="tab-pane" id="update-a-subscription-node">
+    <div class="preview">
+      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
+Lelylan = require('lelylan-node')(credentials);
+params  = { 'resource': 'locations', 'event': 'create' };
+Lelylan.Subscription.update(id, params, callback);</code></pre>
+    </div>
   </div>
   <div class="tab-pane" id="update-a-subscription-javascript">
     <div class="preview">
@@ -704,6 +742,7 @@ Delete a subscription identified from its ID and returns extended information fo
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#delete-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -711,20 +750,27 @@ Delete a subscription identified from its ID and returns extended information fo
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-subscription-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/subscriptions/50427d5914a0d60a00000001 \
-     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -u &lt;client-id&gt;:&lt;client-secret&gt; \
      -H 'Content-Length: 0'</code></pre>
+    </div>
   </div>
-</div>
-<div class="tab-pane" id="delete-a-subscription-javascript">
-  <div class="preview">
+  <div class="tab-pane" id="delete-a-subscription-node">
+    <div class="preview">
+      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
+Lelylan = require('lelylan-node')(credentials);
+Lelylan.Subscription.delete(id, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-subscription-javascript">
+    <div class="preview">
       <pre><code># todo</code></pre>
+    </div>
   </div>
-</div>
-<div class="tab-pane" id="delete-a-subscription-ruby">
-  <div class="preview">
+  <div class="tab-pane" id="delete-a-subscription-ruby">
+    <div class="preview">
       <pre><code># todo</code></pre>
+    </div>
   </div>
-</div>
 </div>
 
 <h4>Example header response</h4>

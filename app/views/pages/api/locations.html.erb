@@ -57,6 +57,7 @@ identifies three types of locations usually organized in a hierarchical structur
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -64,8 +65,14 @@ identifies three types of locations usually organized in a hierarchical structur
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-location-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/locations/50427cef14a0d61200000001 \
+      <pre><code class="no-highlight">curl http://api.lelylan.com/locations/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-location-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.find(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-javascript">
@@ -220,6 +227,7 @@ List of available location types. No other type values are accepted right now.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-locations-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-locations-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-locations-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-locations-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -228,6 +236,12 @@ List of available location types. No other type values are accepted right now.
   <div class="tab-pane active" id="get-all-locations-curl">
     <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/locations \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
+  </div>
+  <div class="tab-pane" id="get-all-locations-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.all({}, callback);</code></pre>
+    </div>
   </div>
   <div class="tab-pane" id="get-all-locations-javascript">
     <div class="preview">
@@ -330,6 +344,7 @@ List of available location types. No other type values are accepted right now.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -346,6 +361,18 @@ List of available location types. No other type values are accepted right now.
           "type": "room",
           "devices": ["http://api.lelylan.com/devices/50427de78f76ad1000000001"]
         }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-location-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'into': 'http://api.lelylan.com/locations/50427d2414a0d61200000002',
+  'name': 'Bedroom',
+  'type': 'room',
+  'devices': ['http://api.lelylan.com/devices/50427de78f76ad1000000001'] };
+
+Lelylan.Location.create(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-location-javascript">
@@ -453,16 +480,24 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-location-curl">
-    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/locations/50427d5914a0d60a00000001 \
+    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/locations/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{ "name": "Babies bedroom" }'</code></pre>
+  </div>
+  <div class="tab-pane" id="update-a-location-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'name': 'Babies bedroom' };
+Lelylan.Location.update(id, params, callback);</code></pre>
+    </div>
   </div>
   <div class="tab-pane" id="update-a-location-javascript">
     <div class="preview">
@@ -530,15 +565,22 @@ Connected devices are not deleted.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#delete-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-location-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/locations/50427d5914a0d60a00000001 \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/locations/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Length: 0'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-location-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.delete(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-javascript">
