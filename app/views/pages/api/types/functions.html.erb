@@ -58,6 +58,7 @@ your life.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -65,7 +66,13 @@ your life.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-function-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
+      <pre><code class="no-highlight">curl http://api.lelylan.com/functions/&lt;id&gt;</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-function-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Function.find(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-function-javascript">
@@ -172,6 +179,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#get-all-funcitons-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-functions-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-funcitons-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-funcitons-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -180,6 +188,12 @@ GET http://api.lelylan.com/functions/public</code></pre>
   <div class="tab-pane active" id="get-all-funcitons-curl">
     <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/functions \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-functions-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Function.all({}, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-funcitons-javascript">
@@ -278,6 +292,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -289,12 +304,25 @@ GET http://api.lelylan.com/functions/public</code></pre>
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
-           "name": "Set intensity",
-           "properties": [
-             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "expected": "on"},
-             { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;" }
-           ]
+          "name": "Set intensity",
+          "properties": [
+            { "uri": "http://api.lelylan.com/properties/&lt;status&gt;", "expected": "on" },
+            { "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;", "expected": "{{90}}" }
+          ]
          }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-function-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'name': 'Set intensity',
+  'properties': [
+    { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;', 'expected': 'on'},
+    { 'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;', 'expected': '{{100}}' }
+  ]};
+
+Lelylan.Function.create(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-function-javascript">
@@ -395,6 +423,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -402,16 +431,29 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-function-curl">
     <div class="preview"><pre><code class="no-highlight">
-curl -X PUT http://api.lelylan.com/functions/504210df70eda60a00000003 \
+curl -X PUT http://api.lelylan.com/functions/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
            "name": "Set intensity to 50%",
            "properties": [
-             { "uri": "http://api.lelylan.com/properties/&lt;status-id&gt;", "expected": "on"},
-             { "uri": "http://api.lelylan.com/properties/&lt;intensity-id&gt;", "expected": "50" }
+             { "uri": "http://api.lelylan.com/properties/&lt;status&gt;", "expected": "on"},
+             { "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;", "expected": "50" }
            ]
          }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-function-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = {
+  'name': 'Set intensity to 50%',
+  'properties': [
+    { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;', 'expected': 'on'},
+    { 'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;', 'expected': '50' }
+  ]};
+
+Lelylan.Function.update(id, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-function-javascript">
@@ -479,27 +521,34 @@ Connected properties are not deleted.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#delete-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-function-curl">
-      <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/functions/504210df70eda60a00000003 \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/functions/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Length: 0'</code></pre>
+    </div>
   </div>
-</div>
-<div class="tab-pane" id="delete-a-function-javascript">
-  <div class="preview">
-        <pre><code># todo</code></pre>
+  <div class="tab-pane" id="delete-a-function-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Function.delete(id, callback);</code></pre>
+    </div>
   </div>
-</div>
-<div class="tab-pane" id="delete-a-function-ruby">
-  <div class="preview">
-        <pre><code># todo</code></pre>
+  <div class="tab-pane" id="delete-a-function-javascript">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
   </div>
-</div>
+  <div class="tab-pane" id="delete-a-function-ruby">
+    <div class="preview">
+      <pre><code># todo</code></pre>
+    </div>
+  </div>
 </div>
 
 <h4>Example header response</h4>

@@ -56,6 +56,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-property-node" data-toggle="tab" class="node">Node</a></li>
   <li><a href="#get-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -63,7 +64,13 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-property-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/properties/&lt;id&gt;</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-property-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Property.find(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-property-javascript">
@@ -160,6 +167,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-properties-node" data-toggle="tab" class="node">Node</a></li>
   <li><a href="#get-all-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -168,6 +176,12 @@ GET http://api.lelylan.com/properties/public</code></pre>
   <div class="tab-pane active" id="get-all-properties-curl">
     <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/properties \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-properties-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Property.all({}, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-properties-javascript">
@@ -252,6 +266,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -267,6 +282,17 @@ GET http://api.lelylan.com/properties/public</code></pre>
            "default": "0",
            "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
          }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-property-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'name': 'Intensity',
+  'default': '0',
+  'suggested': {'0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max'}};
+
+Lelylan.Property.create(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-property-javascript">
@@ -357,16 +383,24 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/properties/5041e9e9230de31300000001 \
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/properties/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt' \
      -H 'Content-Type: application/json' \
      -d '{ "default": "100" }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-property-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'default': '100' };
+Lelylan.Property.update(id, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-property-javascript">
@@ -428,15 +462,22 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#delete-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li class=""><a href="#delete-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
   <li class=""><a href="#delete-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li class=""><a href="#delete-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/5041e9e9230de31300000001 \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt' \
      -H 'Content-Length: 0'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-property-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Property.delete(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-property-javascript">

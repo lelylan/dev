@@ -89,14 +89,21 @@ type identified from its ID.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-type-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/types/5042234270eda61200000006</code></pre>
+        <pre><code class="no-highlight">curl http://api.lelylan.com/types/&lt;id&gt;</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-type-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Type.find(id, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-type-js">
@@ -250,7 +257,8 @@ GET http://api.lelylan.com/types/public</code></pre>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-types-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-all-types-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-types-node" data-toggle="tab" class="node"> Node.js</a></li>
+  <li><a href="#get-all-types-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-all-types-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
@@ -258,6 +266,12 @@ GET http://api.lelylan.com/types/public</code></pre>
   <div class="tab-pane active" id="get-all-types-curl">
     <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/types \
      -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
+  </div>
+  <div class="tab-pane" id="get-all-types-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+Lelylan.Type.all({}, callback);</code></pre>
+    </div>
   </div>
   <div class="tab-pane" id="get-all-types-js">
     <div class="preview">
@@ -373,7 +387,8 @@ In this example the resource IDs are identified from friendly names.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#create-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#create-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#create-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#create-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
@@ -400,7 +415,28 @@ In this example the resource IDs are identified from friendly names.
          }'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-type-js">
+  <div class="tab-pane" id="create-a-type-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params = {
+  'name': 'Dimmer',
+  'properties': [
+    'http://api.lelylan.com/properties/&lt;status&gt;',
+    'http://api.lelylan.com/properties/&lt;intensity&gt;'
+  ],
+  'functions': [
+    'http://api.lelylan.com/functions/&lt;turn-on&gt;',
+    'http://api.lelylan.com/functions/&lt;turn-off&gt;',
+    'http://api.lelylan.com/functions/&lt;set-intensity&gt;'
+  ],
+  'statuses': [
+    'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;'
+  ]};
+
+Lelylan.Type.create(params, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-type-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -499,19 +535,27 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-type-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/types/5042234270eda61200000006 \
+    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/types/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{ "name": "Dimmer RBG" }'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-type-js">
+  <div class="tab-pane" id="update-a-type-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+params  = { 'name': 'Dimmer RBG' };
+Lelylan.Type.update(id, params, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-type-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
@@ -577,18 +621,25 @@ all previous connected resources are replaced.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li class=""><a href="#delete-a-type-js" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class=""><a href="#delete-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li class=""><a href="#delete-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li class=""><a href="#delete-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-type-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/types/5042234270eda61200000006 \
+    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/types/&lt;id&gt; \
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Length: 0'</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-type-js">
+  <div class="tab-pane" id="delete-a-type-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Type.delete(id, callback);</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-type-javascript">
     <div class="preview">
       <pre><code># todo</code></pre>
     </div>
