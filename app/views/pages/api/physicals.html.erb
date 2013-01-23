@@ -248,7 +248,7 @@ physical device is forwarded.
 <div class="tab-content">
   <div class="tab-pane active" id="update-physical-device-properties-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT http://arduino.house.com/physical-id \
+      <pre><code class="no-highlight">curl -X PUT http://arduino.house.com/&lt;physical-id&gt; \
     -H 'Content-Type: application/json' \
     -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
     -d '{
@@ -262,7 +262,8 @@ physical device is forwarded.
   </div>
   <div class="tab-pane" id="update-physical-device-properties-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+uri = 'http://arduino.house.com/&lt;physical-id&gt;';
 params = {
   'properties': [{
     'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
@@ -348,6 +349,7 @@ Most of the time the physical device needs to update the device properties. Here
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-device-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -355,17 +357,31 @@ Most of the time the physical device needs to update the device properties. Here
 <div class="tab-content">
   <div class="tab-pane active" id="update-device-properties-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt; \
+      <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt;/properties \
     -H 'X-Physical-Signature: &lt;signature&gt;' \
     -H 'Content-Type: application/json' \
     -d '{
           "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
           "properties": [{
-            "uri": "http://api.lelylan.com/properties/status-id",
+            "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
             "value": "on",
-            "pending: false
+            "pending": false
           }]
         }'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')();
+uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties';
+params = {
+  'properties': [{
+    'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
+    'value': 'on',
+    'pending': false
+  }]};
+
+Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-device-properties-javascript">
