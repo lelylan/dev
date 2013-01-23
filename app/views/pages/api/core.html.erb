@@ -321,6 +321,7 @@ Returns extended information for the authenticated user.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-user-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-user-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-user-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
   <li><a href="#get-a-user-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
@@ -330,6 +331,12 @@ Returns extended information for the authenticated user.
     <div class="preview">
       <pre><code class="no-highlight">curl http://api.lelylan.com/me \
     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-user-node">
+    <div class="preview">
+      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Profile.me(callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-user-javascript">
