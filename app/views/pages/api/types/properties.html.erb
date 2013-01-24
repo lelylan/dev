@@ -69,8 +69,8 @@ a dimmer, the temperature in a cooling system or the volume in a television.
   </div>
   <div class="tab-pane" id="get-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')();
-Lelylan.Property.find(id, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+Lelylan.Property.find('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-property-javascript">
@@ -180,8 +180,9 @@ GET http://api.lelylan.com/properties/public</code></pre>
   </div>
   <div class="tab-pane" id="get-all-properties-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')();
-Lelylan.Property.all({}, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+Lelylan.Property.all({}, callback); // owned resources
+Lelylan.Property.public({}, callback); // all existing resources</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-properties-javascript">
@@ -286,11 +287,11 @@ Lelylan.Property.all({}, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-params = {
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+var params = {
   'name': 'Intensity',
   'default': '0',
-  'suggested': {'0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max'}};
+  'suggested': { '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
 
 Lelylan.Property.create(params, callback);</code></pre>
     </div>
@@ -398,9 +399,9 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
   </div>
   <div class="tab-pane" id="update-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-params  = { 'default': '100' };
-Lelylan.Property.update(id, params, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+var params = { 'default': '100' };
+Lelylan.Property.update('id', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-property-javascript">
@@ -476,8 +477,8 @@ Lelylan.Property.update(id, params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Property.delete(id, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Property.delete('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-property-javascript">

@@ -356,9 +356,9 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
   </div>
   <div class="tab-pane" id="get-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
-Lelylan = require('lelylan-node')(credentials);
-Lelylan.Subscription.find(id, callback);</code></pre>
+      <pre><code class="javascript">var credentials = { client: { id: 'client-id', secret: 'client-secret' } };
+var Lelylan = require('lelylan-node')(credentials);
+Lelylan.Subscription.find('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-subscription-javascript">
@@ -458,8 +458,8 @@ Lelylan.Subscription.find(id, callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-all-subscriptions-node">
     <div class="preview">
-      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
-Lelylan = require('lelylan-node')(credentials);
+      <pre><code class="javascript">var credentials = { client: { id: 'client-id', secret: 'client-secret' } };
+var Lelylan = require('lelylan-node')(credentials);
 Lelylan.Subscription.all({}, callback);</code></pre>
     </div>
   </div>
@@ -567,12 +567,12 @@ Create a subscription and returns extended information for it.
   </div>
   <div class="tab-pane" id="create-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
-Lelylan = require('lelylan-node')(credentials);
-params = {
-  "resource": "devices",
-  "event": "property-update",
-  "callback_uri": "http://callback.com/lelylan" };
+      <pre><code class="javascript">var credentials = { client: { id: 'client-id', secret: 'client-secret' } };
+var Lelylan = require('lelylan-node')(credentials);
+var params = {
+  'resource': 'devices',
+  'event': 'property-update',
+  'callback_uri': 'http://callback.com/lelylan' };
 
 Lelylan.Subscription.create(params, callback);</code></pre>
     </div>
@@ -678,10 +678,10 @@ Update a subscription identified from its ID and returns extended information fo
   </div>
   <div class="tab-pane" id="update-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
-Lelylan = require('lelylan-node')(credentials);
-params  = { 'resource': 'locations', 'event': 'create' };
-Lelylan.Subscription.update(id, params, callback);</code></pre>
+      <pre><code class="javascript">var credentials = { client: { id: 'client-id', secret: 'client-secret' } };
+var Lelylan = require('lelylan-node')(credentials);
+var params = { 'resource': 'locations', 'event': 'create' };
+Lelylan.Subscription.update('id', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-subscription-javascript">
@@ -757,9 +757,9 @@ Delete a subscription identified from its ID and returns extended information fo
   </div>
   <div class="tab-pane" id="delete-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">credentials = { client: { id: clientID, secret: clientSecret } };
-Lelylan = require('lelylan-node')(credentials);
-Lelylan.Subscription.delete(id, callback);</code></pre>
+      <pre><code class="javascript">var credentials = { client: { id: 'client-id', secret: 'client-secret' } };
+var Lelylan = require('lelylan-node')(credentials);
+Lelylan.Subscription.delete('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-subscription-javascript">

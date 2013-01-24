@@ -123,8 +123,8 @@ type identified from its ID.
   </div>
   <div class="tab-pane" id="get-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')();
-Lelylan.Type.find(id, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+Lelylan.Type.find('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-type-js">
@@ -290,8 +290,9 @@ GET http://api.lelylan.com/types/public</code></pre>
   </div>
   <div class="tab-pane" id="get-all-types-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')();
-Lelylan.Type.all({}, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+Lelylan.Type.all({}, callback); // owned resources
+Lelylan.Type.public({}, callback); // all existing resources</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-types-js">
@@ -438,21 +439,18 @@ In this example the resource IDs are identified from friendly names.
   </div>
   <div class="tab-pane" id="create-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-params = {
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+var params = {
   'name': 'Dimmer',
-  'properties': [
-    'http://api.lelylan.com/properties/&lt;status&gt;',
-    'http://api.lelylan.com/properties/&lt;intensity&gt;'
-  ],
-  'functions': [
-    'http://api.lelylan.com/functions/&lt;turn-on&gt;',
-    'http://api.lelylan.com/functions/&lt;turn-off&gt;',
-    'http://api.lelylan.com/functions/&lt;set-intensity&gt;'
-  ],
-  'statuses': [
-    'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;'
-  ]};
+  'properties':
+    [ 'http://api.lelylan.com/properties/&lt;status&gt;',
+      'http://api.lelylan.com/properties/&lt;intensity&gt;' ],
+  'functions':
+    [ 'http://api.lelylan.com/functions/&lt;turn-on&gt;',
+      'http://api.lelylan.com/functions/&lt;turn-off&gt;',
+      'http://api.lelylan.com/functions/&lt;set-intensity&gt;' ],
+  'statuses':
+    [ 'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;' ] };
 
 Lelylan.Type.create(params, callback);</code></pre>
     </div>
@@ -571,9 +569,9 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
   </div>
   <div class="tab-pane" id="update-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-params  = { 'name': 'Dimmer RBG' };
-Lelylan.Type.update(id, params, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+var params = { 'name': 'Dimmer RBG' };
+Lelylan.Type.update('id', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-type-javascript">
@@ -656,8 +654,8 @@ all previous connected resources are replaced.
   </div>
   <div class="tab-pane" id="delete-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Type.delete(id, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Type.delete('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-type-javascript">

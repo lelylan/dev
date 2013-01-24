@@ -71,8 +71,8 @@ identifies three types of locations usually organized in a hierarchical structur
   </div>
   <div class="tab-pane" id="get-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.find(id, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.find('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-javascript">
@@ -239,7 +239,7 @@ List of available location types. No other type values are accepted right now.
   </div>
   <div class="tab-pane" id="get-all-locations-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Location.all({}, callback);</code></pre>
     </div>
   </div>
@@ -365,8 +365,8 @@ Lelylan.Location.all({}, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-params = {
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+var params = {
   'into': 'http://api.lelylan.com/locations/50427d2414a0d61200000002',
   'name': 'Bedroom',
   'type': 'room',
@@ -494,9 +494,9 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
   </div>
   <div class="tab-pane" id="update-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-params  = { 'name': 'Babies bedroom' };
-Lelylan.Location.update(id, params, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+var params = { 'name': 'Babies bedroom' };
+Lelylan.Location.update('id', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-location-javascript">
@@ -579,8 +579,8 @@ Connected devices are not deleted.
   </div>
   <div class="tab-pane" id="delete-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.delete(id, callback);</code></pre>
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.delete('id', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-javascript">

@@ -262,13 +262,14 @@ physical device is forwarded.
   </div>
   <div class="tab-pane" id="update-physical-device-properties-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')();
-uri = 'http://arduino.house.com/&lt;physical-id&gt;';
-params = {
-  'properties': [{
-    'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
-    'id': 'status-id',
-    'value': 'on' }]};
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+var uri = 'http://arduino.house.com/id'; // physical device URI
+var secret = 'device-secret'; // get it using /devices/:id/privates
+var params = {
+  'properties':
+    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
+        'id': 'status',
+        'value': 'on' } ] };
 
 Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
     </div>
@@ -372,14 +373,14 @@ Most of the time the physical device needs to update the device properties. Here
   </div>
   <div class="tab-pane" id="update-device-properties-node">
     <div class="preview">
-      <pre><code class="javascript">Lelylan = require('lelylan-node')();
-uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties';
-params = {
-  'properties': [{
-    'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
-    'value': 'on',
-    'pending': false
-  }]};
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+var uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties'; // device property service
+var secret = 'device-secret'; // get it using /devices/:id/privates
+var params = {
+  'properties':
+    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
+        'value': 'on',
+        'pending': false } ] };
 
 Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
     </div>
