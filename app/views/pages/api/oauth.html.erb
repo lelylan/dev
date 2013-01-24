@@ -107,10 +107,10 @@ Redirect the user to the authorization endpoint.
     </div>
   </div>
   <div class="tab-pane" id="authorization-code-first-step-node">
-    <div class="preview"><pre><code class="javascript">var credentials = { client:
-  { id: '&lt;client-id&gt;',
-    secret: '&lt;client-secret&gt;',
-    site: 'http://people.lelylan.com' } };
+    <div class="preview"><pre><code class="javascript">var credentials = {
+  clientID: '&lt;client-id&gt;',
+  clientSecret: '&lt;client-secret&gt;',
+  site: 'http://people.lelylan.com' };
 
 var OAuth2 = require('simple-oauth2')(credentials);
 
@@ -175,7 +175,7 @@ Get the access token (remember to basic authenticate with client id and client s
 <div class="tab-content">
   <div class="tab-pane active" id="authorization-code-second-step-curl">
     <div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
-     -u  &lt;client_id&gt;:&lt;client_secret&gt; \
+     -u  &lt;client-id&gt;:&lt;client-secret&gt; \
      -d 'grant_type=authorization_code' \
      -d 'code=&lt;code&gt;' \
      -d 'redirect_uri=&lt;redirect_uri&gt;'</code></pre>
@@ -245,7 +245,7 @@ The flow starts redirecting the user to the authorization endpoint.
 
 <div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
        response_type=&lt;token&gt;&
-       client_id=&lt;client_id&gt;&
+       client_id=&lt;client-id&gt;&
        redirect_uri=&lt;redirect_uri&gt;&
        scope=&lt;scope&gt;&
        state=&lt;state&gt;</code></pre>
@@ -292,7 +292,7 @@ to the authorization page to get a new access token.
 
 <article>
 
-<h2><a name="password-credentials">Password Credentials</a></h2>
+<h2 class="call"><a name="password-credentials">Password Credentials</a></h2>
 
 <p>
 This flow is suitable when the resource owner has a trust relationship
@@ -316,7 +316,7 @@ Get the access token (remember to basic authenticate with client id and client s
   <div class="tab-pane active" id="password-credentials-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
-     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -u &lt;client-id&gt;:&lt;client-secret&gt; \
      -d 'grant_type=password' \
      -d 'username=&lt;email&gt;' \
      -d 'password=&lt;password&gt;' \
@@ -326,8 +326,10 @@ Get the access token (remember to basic authenticate with client id and client s
   <div class="tab-pane" id="password-credentials-node">
     <div class="preview">
       <pre><code class="javascript">var token;
-var credentials = { client:
-  { id: '&lt;client-id&gt;', secret: '&lt;client-secret&gt;', site: 'http://people.lelylan.com' } };
+var credentials = {
+  clientID: '&lt;client-id&gt;',
+  clientSecret: '&lt;client-secret&gt;',
+  site: 'http://people.lelylan.com' };
 
 var OAuth2 = require('simple-oauth2')(credentials);
 OAuth2.Password.getToken({
@@ -410,7 +412,7 @@ use the refresh token you previously received together with the access token.
   <div class="tab-pane active" id="refresh-access-token-curl">
     <div class="preview">
       <pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
-     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+     -u &lt;client-id&gt;:&lt;client-secret&gt; \
      -d 'grant_type=refresh_token' \
      -d 'refresh_token=&lt;refresh-token&gt;'</code></pre>
     </div>
@@ -419,7 +421,7 @@ use the refresh token you previously received together with the access token.
     <div class="preview">
       <pre><code class="javascript">if (token.expired()) {
   token.refresh(function(error, result) {
-    if (error) console.log(Refresh Token Error);
+    if (error) console.log('Refresh Token Error');
     console.log('Access Token Refreshed');
     token = result;
   });
