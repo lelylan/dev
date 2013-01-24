@@ -4,45 +4,54 @@ $(function () { hljs.initHighlightingOnLoad(); })
 // language examples selection (ruby, javascript, curl, etc.)
 $(function () {
 
-  set_language_from_fragment()
-  set_language(find_or_create_language());
+  var initLanguage = function() {
+    var language;
 
-  // Change language through the select
+    // search in the fragment
+    if (window.location.hash.match(/curl/))       language = 'curl';
+    if (window.location.hash.match(/ruby/))       language = 'ruby';
+    if (window.location.hash.match(/node/))       language = 'node';
+    if (window.location.hash.match(/javascript/)) language = 'javascript';
+    console.log('Fragment Language', language);
+
+    // search in the cookie
+    if (!language) language = $.cookie('lelylan-dev-language');
+    console.log('Cookie language', language);
+
+    // set a default
+    if (!language) language = 'curl';
+    console.log('Final Language', language);
+
+    // set language on cookies
+    $.cookie('lelylan-dev-language', language);
+
+    // show the selected language examples
+    $('#language').val(language);
+
+    // set the menu to the actual language
+    $('#language').val(language);
+
+    // show all code examples for the actual language
+    $('.nav-tabs a.' + language).tab('show');
+    console.log('.nav-tabs a.' + language);
+  }
+
   $('#language').change(function () {
+    // check the selected language
     var language = $("#language option:selected").first().attr('value');
-    set_language(language);
+
+    // set language on cookies
+    $.cookie('lelylan-dev-language', language);
+
+    // show all code examples for the actual language
+    $('.nav-tabs a.' + language).tab('show');
+    console.log('.nav-tabs a.' + language);
+
+    // set the language on the browser url
+    var path = window.location.pathname;
+    window.history.pushState(null, path, path + '#' + language);
   })
 
-  // Retrieve the language set on the cookies or set the new one
-  function find_or_create_language() {
-    var language = $.cookie('lelylan_dev_language');
-    if (language == null) { $.cookie('lelylan_dev_language', 'curl'); }
-    return $.cookie('lelylan_dev_language');
-  }
 
-  // Visualize the documentation through the selected language
-  function set_language(language) {
-    // show all code examples
-    $('#language').val(language);
-    // set the select menu
-    $('.nav-tabs a.' + language).tab('show');
-    // set the language as the default one
-    $.cookie('lelylan_dev_language', language);
-  }
-
-  // If there is the name of the language in the fragment it is set as default
-  function set_language_from_fragment() {
-    var languages = ['curl', 'node', 'javascript', 'ruby'];
-    for (var i=0; i < languages.length; i++) {
-      language = languages[i];
-      if (fragment_contains(language)) {
-        $.cookie('lelylan_dev_language', language);
-      }
-    }
-  }
-
-  // return true if a language is into the fragment
-  function fragment_contains(language) {
-    return (window.location.hash.indexOf(language) != -1)
-  }
+  initLanguage();
 });

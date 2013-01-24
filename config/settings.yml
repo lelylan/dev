@@ -32,6 +32,7 @@ titles:
 code_pages:
   - api/core
   - api/devices
+  - api/devices/activations
   - api/devices/consumptions
   - api/devices/histories
   - api/types
@@ -41,3 +42,4 @@ code_pages:
   - api/locations
   - api/realtime
   - api/physicals
+  - api/oauth
