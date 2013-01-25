@@ -134,7 +134,7 @@ Lelylan.Type.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-type-ruby">
     <div class="preview">
-        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+        <pre><code class="ruby">lelylan = Lelylan::Client.new
 type = lelylan.type('&lt;id&gt;')</code></pre>
     </div>
   </div>
@@ -291,8 +291,10 @@ GET http://api.lelylan.com/types/public</code></pre>
   </div>
   <div class="tab-pane" id="get-all-types-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Type.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
 Lelylan.Type.public({}, callback); // all existing resources</code></pre>
     </div>
   </div>
@@ -305,6 +307,8 @@ Lelylan.Type.public({}, callback); // all existing resources</code></pre>
     <div class="preview">
       <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
 types = lelylan.types # owned resources
+
+lelylan = Lelylan::Client.new
 types = lelylan.public_types # all existing resources</code></pre>
     </div>
   </div>

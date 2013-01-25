@@ -82,7 +82,7 @@ Lelylan.Function.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-function-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre><code class="ruby">lelylan = Lelylan::Client.new
 function = lelylan.function('&lt;id&gt;')</code></pre>
     </div>
   </div>
@@ -193,8 +193,10 @@ GET http://api.lelylan.com/functions/public</code></pre>
   </div>
   <div class="tab-pane" id="get-all-functions-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Function.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
 Lelylan.Function.public({}, callback); // all existing resources</code></pre>
     </div>
   </div>
@@ -207,6 +209,8 @@ Lelylan.Function.public({}, callback); // all existing resources</code></pre>
     <div class="preview">
       <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
 functions = lelylan.functions # owned resources
+
+lelylan = Lelylan::Client.new
 functions = lelylan.public_functions # all existing resources</code></pre>
     </div>
   </div>

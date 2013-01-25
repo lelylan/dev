@@ -83,7 +83,7 @@ Lelylan.Status.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-status-ruby">
     <div class="preview">
-        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+        <pre><code class="ruby">lelylan = Lelylan::Client.new
 status = lelylan.status('&lt;id&gt;')</code></pre>
     </div>
   </div>
@@ -219,8 +219,10 @@ GET http://api.lelylan.com/statuses/public</code></pre>
   </div>
   <div class="tab-pane" id="get-all-statuses-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Status.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
 Lelylan.Status.public({}, callback); // all existing resources</code></pre>
     </div>
   </div>
@@ -233,6 +235,8 @@ Lelylan.Status.public({}, callback); // all existing resources</code></pre>
     <div class="preview">
       <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
 statuses = lelylan.statuses # owned resources
+
+lelylan = Lelylan::Client.new
 statuses = lelylan.public_statuses # all existing resources</code></pre>
     </div>
   </div>

@@ -80,7 +80,7 @@ Lelylan.Property.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-property-ruby">
     <div class="preview">
-        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+        <pre><code class="ruby">lelylan = Lelylan::Client.new
 property = lelylan.property('&lt;id&gt;')</code></pre>
     </div>
   </div>
@@ -181,8 +181,10 @@ GET http://api.lelylan.com/properties/public</code></pre>
   </div>
   <div class="tab-pane" id="get-all-properties-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
+      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Property.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
 Lelylan.Property.public({}, callback); // all existing resources</code></pre>
     </div>
   </div>
@@ -195,6 +197,8 @@ Lelylan.Property.public({}, callback); // all existing resources</code></pre>
     <div class="preview">
       <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
 properties = lelylan.properties # owned resources
+
+lelylan = Lelylan::Client.new
 properties = lelylan.public_properties # all existing resources</code></pre>
     </div>
   </div>
