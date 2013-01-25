@@ -90,7 +90,7 @@ Lelylan.History.find('id', callback);</code></pre>
     <div class="tab-pane" id="get-a-history-ruby">
       <div class="preview">
         <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-history = Lelylan.history('&lt;id&gt;')</code></pre>
+history = lelylan.history('&lt;id&gt;')</code></pre>
       </div>
     </div>
   </div>
@@ -280,7 +280,7 @@ Lelylan.History.create(params, callback);</code></pre>
   <div class="tab-pane" id="get-all-histories-ruby">
     <div class="preview">
       <pre><code>lelylan = Lelylan::Client.new(token: token)
-histories = Lelylan.histories</code></pre>
+histories = lelylan.histories</code></pre>
     </div>
   </div>
 </div>

@@ -134,7 +134,8 @@ Lelylan.Type.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-type-ruby">
     <div class="preview">
-        <pre><code># todo</code></pre>
+        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+type = lelylan.type('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -302,7 +303,9 @@ Lelylan.Type.public({}, callback); // all existing resources</code></pre>
   </div>
   <div class="tab-pane" id="get-all-types-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+types = lelylan.types # owned resources
+types = lelylan.public_types # all existing resources</code></pre>
     </div>
   </div>
 </div>
@@ -350,7 +353,7 @@ Create a type and returns extended information for it.
 
 <h4>Resource URL</h4>
 <div class="preview">
-        <pre><code class="no-highlight">POST http://api.lelylan.com/types</code></pre>
+  <pre><code class="no-highlight">POST http://api.lelylan.com/types</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -462,7 +465,20 @@ Lelylan.Type.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-type-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Dimmer',
+  properties:
+    [ 'http://api.lelylan.com/properties/&lt;status&gt;',
+      'http://api.lelylan.com/properties/&lt;intensity&gt;' ],
+  functions:
+    [ 'http://api.lelylan.com/functions/&lt;turn-on&gt;',
+      'http://api.lelylan.com/functions/&lt;turn-off&gt;',
+      'http://api.lelylan.com/functions/&lt;set-intensity&gt;' ],
+  statuses:
+    [ 'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;' ] }
+
+type = lelylan.create_type(params)</code></pre>
     </div>
   </div>
 </div>
@@ -581,7 +597,9 @@ Lelylan.Type.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-type-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = { name: 'Dimmer RBG' }
+type = lelylan.update_type('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -665,7 +683,8 @@ Lelylan.Type.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-type-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+type = lelylan.delete_type('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
