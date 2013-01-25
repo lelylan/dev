@@ -120,7 +120,9 @@ Lelylan.Device.activate(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="activate-a-device-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = { activation_code: 'activation-code' }
+device = Lelylan.activate_device(params)</code></pre>
     </div>
   </div>
 </div>
@@ -217,7 +219,8 @@ Lelylan.Device.deactivate('activation-code', callback);</code></pre>
   </div>
   <div class="tab-pane" id="deactivate-a-device-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+device = Lelylan.deactivate_device('&lt;activation-code&gt;')</code></pre>
     </div>
   </div>
 </div>

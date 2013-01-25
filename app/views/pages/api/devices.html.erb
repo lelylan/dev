@@ -100,7 +100,8 @@ Lelylan.Device.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-device-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+device = Lelylan.device('&lt;id&gt;');</code></pre>
     </div>
   </div>
 </div>
@@ -230,7 +231,8 @@ Lelylan.Device.privates('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-device-private-info-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+device = Lelylan.device_privates('&lt;id&gt;');</code></pre>
     </div>
   </div>
 </div>
@@ -398,7 +400,8 @@ Lelylan.Device.all({ 'properties[value]': 'on' }, callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-all-devices-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+devices = Lelylan.devices('properties[value]' =&gt; 'on');</code></pre>
     </div>
   </div>
 </div>
@@ -503,7 +506,7 @@ var params = {
   'type': 'http://api.lelylan.com/types/5042310470eda60a0000000d',
   'physical': 'http://arduino.house.com/5042205c70eda61' };
 
-Lelylan.Device.create(params, callback);</code></pre>
+device = Lelylan.Device.create(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-device-javascript">
@@ -513,7 +516,13 @@ Lelylan.Device.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-device-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Closet dimmer',
+  type: 'http://api.lelylan.com/types/5042310470eda60a0000000d',
+  physical: 'http://arduino.house.com/5042205c70eda61' }
+
+device = Lelylan.create_device(params)</code></pre>
     </div>
   </div>
 </div>
@@ -615,7 +624,10 @@ Lelylan.Device.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-device-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = { 'name': 'Zigbee closet dimmer' }
+
+device = Lelylan.update_device('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -692,7 +704,8 @@ Lelylan.Device.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-device-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+device = Lelylan.delete_device('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -845,7 +858,15 @@ Lelylan.Device.properties('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+        value: 'on' },
+      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+        value: '50' } ] };
+
+device = Lelylan.device_properties('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -985,7 +1006,9 @@ Lelylan.Device.execute('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="execute-a-function-i-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = { function: 'http://api.lelylan.com/functions/&lt;turn-on&gt;' }
+device = Lelylan.execute('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -1039,7 +1062,14 @@ Lelylan.Device.execute('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="execute-a-function-ii-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  function: 'http://api.lelylan.com/functions/&lt;set-intensity&gt;',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+        value: '90' } ] };
+
+device = Lelylan.execute('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
