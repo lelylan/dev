@@ -281,7 +281,16 @@ Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-physical-device-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+uri = 'http://arduino.house.com/id' # physical device URI
+secret = 'device-secret' # get it using /devices/:id/privates
+params = {
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+        id: 'status',
+        value: 'on' } ] }
+
+response = lelylan.physical_properties(uri, secret, params)</code></pre>
     </div>
   </div>
 </div>
@@ -392,7 +401,16 @@ Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-device-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties' # device property service
+secret = 'device-secret' # get it using /devices/:id/privates
+params = {
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+        value: 'on',
+        pending: false } ] }
+
+response = lelylan.physical_properties(uri, secret, params)</code></pre>
     </div>
   </div>
 </div>

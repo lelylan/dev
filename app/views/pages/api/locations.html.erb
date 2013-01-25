@@ -82,7 +82,8 @@ Lelylan.Location.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-location-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+location = lelylan.location('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -250,8 +251,8 @@ Lelylan.Location.all({}, callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-all-locations-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
-    </div>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+locations = lelylan.locations</div>
   </div>
 </div>
 
@@ -382,7 +383,14 @@ Lelylan.Location.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-location-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  into: 'http://api.lelylan.com/locations/50427d2414a0d61200000002',
+  name: 'Bedroom',
+  type: 'room',
+  devices: ['http://api.lelylan.com/devices/50427de78f76ad1000000001'] }
+
+location = lelylan.create_location(params)</code></pre>
     </div>
   </div>
 </div>
@@ -506,7 +514,9 @@ Lelylan.Location.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-location-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = { name: 'Babies bedroom' }
+location = lelylan.update_location('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -590,7 +600,8 @@ Lelylan.Location.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-location-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+location = lelylan.delete_location('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>

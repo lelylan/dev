@@ -368,7 +368,8 @@ Lelylan.Subscription.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-subscription-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
+subscription = lelylan.subscription('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -470,7 +471,8 @@ Lelylan.Subscription.all({}, callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-all-subscriptions-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
+subscriptions = lelylan.subscriptions</code></pre>
     </div>
   </div>
 </div>
@@ -567,7 +569,7 @@ Create a subscription and returns extended information for it.
   </div>
   <div class="tab-pane" id="create-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { client: { id: 'client-id', secret: 'client-secret' } };
+      <pre><code class="javascript">var credentials = { clientID 'client-id', clientSecret: 'client-secret' } };
 var Lelylan = require('lelylan-node')(credentials);
 var params = {
   'resource': 'devices',
@@ -584,7 +586,13 @@ Lelylan.Subscription.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-subscription-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
+params = {
+  resource: 'devices',
+  event: 'property-update',
+  callback_uri: 'http://callback.com/lelylan' }
+
+subscription = lelylan.create_subscription(params)</code></pre>
     </div>
   </div>
 </div>
@@ -691,7 +699,9 @@ Lelylan.Subscription.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-subscription-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
+params = { resource: 'locations', event: 'create' }
+subscription = lelylan.update_subscription('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -769,7 +779,8 @@ Lelylan.Subscription.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-subscription-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
+subscription = lelylan.delete_subscription('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
