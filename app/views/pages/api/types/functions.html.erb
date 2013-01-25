@@ -82,7 +82,8 @@ Lelylan.Function.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-function-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+function = lelylan.function('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -204,7 +205,9 @@ Lelylan.Function.public({}, callback); // all existing resources</code></pre>
   </div>
   <div class="tab-pane" id="get-all-funcitons-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+functions = lelylan.functions # owned resources
+functions = lelylan.public_functions # all existing resources</code></pre>
     </div>
   </div>
 </div>
@@ -224,9 +227,8 @@ Lelylan.Function.public({}, callback); // all existing resources</code></pre>
 <p>
   See <a href="#function-representation">function representation</a> for body response.
 </p>
+
 </article>
-
-
 
 <br/>
 
@@ -332,7 +334,14 @@ Lelylan.Function.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-function-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Set intensity',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '{{100}}' } ] }
+
+function = lelylan.create_function(params)</code></pre>
     </div>
   </div>
 </div>
@@ -462,7 +471,14 @@ Lelylan.Function.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-function-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Set intensity to 50%',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '50' } ] }
+
+function = lelylan.update_function('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -545,7 +561,8 @@ Lelylan.Function.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-function-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+function = lelylan.delete_function('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>

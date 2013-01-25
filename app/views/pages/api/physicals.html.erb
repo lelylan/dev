@@ -248,7 +248,7 @@ physical device is forwarded.
 <div class="tab-content">
   <div class="tab-pane active" id="update-physical-device-properties-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT http://arduino.house.com/&lt;physical-id&gt; \
+      <pre><code class="no-highlight">curl -X PUT &lt;physical-device-uri&gt; \
     -H 'Content-Type: application/json' \
     -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
     -d '{
@@ -263,8 +263,8 @@ physical device is forwarded.
   <div class="tab-pane" id="update-physical-device-properties-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-var uri = 'http://arduino.house.com/id'; // physical device URI
-var secret = 'device-secret'; // get it using /devices/:id/privates
+var uri = '&lt;physical-device-uri&gt;'; // physical device URI
+var secret = '&lt;device-secret&gt;'; // get it using /devices/:id/privates
 var params = {
   'properties':
     [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
@@ -281,7 +281,16 @@ Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-physical-device-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new
+uri = '&lt;physical-device-uri&gt;' # physical device URI
+secret = '&lt;device-secret&gt;' # get it using /devices/:id/privates
+params = {
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+        id: 'status',
+        value: 'on' } ] }
+
+response = lelylan.physical_properties(uri, secret, params)</code></pre>
     </div>
   </div>
 </div>
@@ -375,7 +384,7 @@ Most of the time the physical device needs to update the device properties. Here
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')();
 var uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties'; // device property service
-var secret = 'device-secret'; // get it using /devices/:id/privates
+var secret = '&lt;device-secret&gt;'; // get it using /devices/:id/privates
 var params = {
   'properties':
     [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
@@ -392,7 +401,16 @@ Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-device-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new
+uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties' # device property service
+secret = '&lt;device-secret&gt;' # get it using /devices/:id/privates
+params = {
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+        value: 'on',
+        pending: false } ] }
+
+response = lelylan.physical_properties(uri, secret, params)</code></pre>
     </div>
   </div>
 </div>

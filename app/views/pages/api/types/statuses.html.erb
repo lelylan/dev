@@ -83,7 +83,8 @@ Lelylan.Status.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-status-ruby">
     <div class="preview">
-        <pre><code># todo</code></pre>
+        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+status = lelylan.status('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -230,7 +231,9 @@ Lelylan.Status.public({}, callback); // all existing resources</code></pre>
   </div>
   <div class="tab-pane" id="get-all-statuses-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+statuses = lelylan.statuses # owned resources
+statuses = lelylan.public_statuses # all existing resources</code></pre>
     </div>
   </div>
 </div>
@@ -366,7 +369,15 @@ Lelylan.Status.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-status-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Max intensity',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+        value: ['100'],
+        pending: false } ] }
+
+status = lelylan.create_status(params)</code></pre>
     </div>
   </div>
 </div>
@@ -505,7 +516,15 @@ Lelylan.Status.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-status-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Lowering intensity',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+        value: ['0..10'],
+        pending: true } ] }
+
+status = lelylan.update_status('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -588,7 +607,8 @@ Lelylan.Status.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-status-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+status = lelylan.delete_status('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>

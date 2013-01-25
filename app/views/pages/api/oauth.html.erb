@@ -132,7 +132,20 @@ var authorization_uri = OAuth2.AuthCode.authorizeURL({
   </div>
   <div class="tab-pane" id="authorization-code-first-step-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">oauth = OAuth2::Client.new(
+  '&lt;client-id&gt;',
+  '&lt;client-secret&gt;',
+  site: 'http://people.lelylan.com' )
+
+oauth.auth_code.authorize_url(
+  redirect_uri: '&lt;callback-uri&gt;',
+  scope: '&lt;scopes&gt;' )
+#
+# =&gt; http://people.lelylan.com/oauth/authorize?
+#      redirect_uri=&lt;callback-uri&gt;&
+#      scope=&lt;scopes&gt;&
+#      response_type=code&
+#      client_id=&lt;client-id&gt;</code></pre>
     </div>
   </div>
 </div>
@@ -182,14 +195,9 @@ Get the access token (remember to basic authenticate with client id and client s
     </div>
   </div>
   <div class="tab-pane" id="authorization-code-second-step-node">
-    <div class="preview"><pre><code class="javascript">var code = '&lt;code&gt;';
+    <div class="preview"><pre><code class="javascript">OAuth2.AuthCode.getToken({ code: '&lt;code&gt;', redirect_uri: '&lt;redirect-uri&gt;' }, saveToken);
+
 var token;
-
-OAuth2.AuthCode.getToken({
-  code: 'e561a42b76ed6ab453bb55b800d8107aa55c9c4a11e84ae1250dc5a63f0b82f9',
-  redirect_uri: 'http://lelylan.com/callback'
-}, saveToken);
-
 var saveToken = function(error, result) {
   if (error) console.log('Access Token Error', error.message);
   token = OAuth2.AccessToken.create(result);
@@ -204,7 +212,7 @@ var saveToken = function(error, result) {
   </div>
   <div class="tab-pane" id="authorization-code-second-step-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">token = oauth.auth_code.get_token('&lt;code&gt;', redirect_uri: '&lt;redirect-uri&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -351,7 +359,13 @@ var saveToken = function(error, result) {
   </div>
   <div class="tab-pane" id="password-credentials-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">oauth = OAuth2::Client.new(
+  '&lt;client-id&gt;',
+  '&lt;client-secret&gt;',
+  site: 'http://people.lelylan.com' )
+
+token = oauth.password.get_token('&lt;email&gt;', '&lt;password&gt;')
+</code></pre>
     </div>
   </div>
 </div>
@@ -435,7 +449,7 @@ use the refresh token you previously received together with the access token.
   </div>
   <div class="tab-pane" id="refresh-access-token-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">token = token.refresh! if token.expired?</code></pre>
     </div>
   </div>
 </div>

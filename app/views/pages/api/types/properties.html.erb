@@ -80,7 +80,8 @@ Lelylan.Property.find('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-property-ruby">
     <div class="preview">
-        <pre><code># todo</code></pre>
+        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+property = lelylan.property('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
@@ -192,7 +193,9 @@ Lelylan.Property.public({}, callback); // all existing resources</code></pre>
   </div>
   <div class="tab-pane" id="get-all-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+properties = lelylan.properties # owned resources
+properties = lelylan.public_properties # all existing resources</code></pre>
     </div>
   </div>
 </div>
@@ -303,7 +306,13 @@ Lelylan.Property.create(params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="create-a-property-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Intensity',
+  default: '0',
+  suggested: {'0' => 'Min', '25' => 'Low', '50' => 'Half', '75' => 'High', '100' => 'Max' }}
+
+property = lelylan.create_property(params)</code></pre>
     </div>
   </div>
 </div>
@@ -411,7 +420,9 @@ Lelylan.Property.update('id', params, callback);</code></pre>
   </div>
   <div class="tab-pane" id="update-a-property-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+params = { default: '100' };
+property = lelylan.update_property('&lt;id&gt;', params)</code></pre>
     </div>
   </div>
 </div>
@@ -488,7 +499,8 @@ Lelylan.Property.delete('id', callback);</code></pre>
   </div>
   <div class="tab-pane" id="delete-a-property-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+property = lelylan.delete_property('&lt;id&gt;')</code></pre>
     </div>
   </div>
 </div>
