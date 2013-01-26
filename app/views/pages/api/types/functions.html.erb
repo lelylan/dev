@@ -72,7 +72,7 @@ your life.
   <div class="tab-pane" id="get-a-function-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-Lelylan.Function.find('id', callback);</code></pre>
+Lelylan.Function.find('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-function-javascript">
@@ -323,10 +323,10 @@ functions = lelylan.public_functions # all existing resources</code></pre>
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'name': 'Set intensity',
-  'properties':
-    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;', 'expected': 'on'},
-      { 'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;', 'expected': '{{100}}' } ] };
+  name: 'Set intensity',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '{{100}}' } ] };
 
 Lelylan.Function.create(params, callback);</code></pre>
     </div>
@@ -460,12 +460,12 @@ curl -X PUT http://api.lelylan.com/functions/&lt;id&gt; \
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'name': 'Set intensity to 50%',
-  'properties':
-    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;', 'expected': 'on'},
-      { 'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;', 'expected': '50' } ] };
+  name: 'Set intensity to 50%',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '50' } ] };
 
-Lelylan.Function.update('id', params, callback);</code></pre>
+Lelylan.Function.update('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-function-javascript">
@@ -555,7 +555,7 @@ Connected properties are not deleted.
   <div class="tab-pane" id="delete-a-function-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Function.delete('id', callback);</code></pre>
+Lelylan.Function.delete('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-function-javascript">

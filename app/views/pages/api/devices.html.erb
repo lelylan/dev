@@ -90,7 +90,7 @@ For example, when creating a dimmer, the device inherits the <em>status</em>
   <div class="tab-pane" id="get-a-device-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.find('id', callback);</code></pre>
+Lelylan.Device.find('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-device-javascript">
@@ -221,7 +221,7 @@ To access this service you must use the <a href="/api/oauth#scopes">privates sco
   <div class="tab-pane" id="get-a-device-private-info-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.privates('id', callback);</code></pre>
+Lelylan.Device.privates('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-device-private-info-javascript">
@@ -502,9 +502,9 @@ devices = lelylan.devices('properties[value]' =&gt; 'on')</code></pre>
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'name': 'Closet dimmer',
-  'type': 'http://api.lelylan.com/types/&lt;id&gt;',
-  'physical': '&lt;physical-device-uri&gt;' };
+  name: 'Closet dimmer',
+  type: 'http://api.lelylan.com/types/&lt;id&gt;',
+  physical: '&lt;physical-device-uri&gt;' };
 
 device = Lelylan.Device.create(params, callback);</code></pre>
     </div>
@@ -613,8 +613,9 @@ Update a device identified from its ID and returns extended information for it.
   <div class="tab-pane" id="update-a-device-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-var params = { 'name': 'Zigbee closet dimmer' };
-Lelylan.Device.update('id', params, callback);</code></pre>
+var params = { name: 'Zigbee closet dimmer' };
+
+Lelylan.Device.update('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-device-javascript">
@@ -694,7 +695,7 @@ device = lelylan.update_device('&lt;id&gt;', params)</code></pre>
   <div class="tab-pane" id="delete-a-device-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.delete('id', callback);</code></pre>
+Lelylan.Device.delete('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-device-javascript">
@@ -842,13 +843,13 @@ device = lelylan.delete_device('&lt;id&gt;')</code></pre>
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'properties':
-    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
-        'value': 'on' },
-      { 'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
-        'value': '50' } ] };
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+        value: 'on' },
+      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+        value: '50' } ] };
 
-Lelylan.Device.properties('id', params, callback);</code></pre>
+Lelylan.Device.properties('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-properties-javascript">
@@ -995,8 +996,8 @@ device = lelylan.device_properties('&lt;id&gt;', params)</code></pre>
   <div class="tab-pane" id="execute-a-function-i-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-var params = { 'function': 'http://api.lelylan.com/functions/&lt;turn-on&gt;' };
-Lelylan.Device.execute('id', params, callback);</code></pre>
+var params = { function: 'http://api.lelylan.com/functions/&lt;turn-on&gt;' };
+Lelylan.Device.execute('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="execute-a-function-i-javascript">
@@ -1034,10 +1035,10 @@ to be sent from the user.
      -H 'Authorization: Bearer &lt;token&gt;' \
      -H 'Content-Type: application/json' \
      -d '{
-           'function': 'http://api.lelylan.com/functions/&lt;set-intensity&gt;'
-           'properties': [{
-             'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
-             'value': '90' }
+           "function": "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
+           "properties": [{
+             "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;",
+             "value": "90" }
            ]
          }'</code></pre>
       </div>
@@ -1047,12 +1048,12 @@ to be sent from the user.
     <div class="preview">
       <pre><code class='javascript'>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'function': 'http://api.lelylan.com/functions/&lt;set-intensity&gt;',
-  'properties':
-    [ { 'uri': 'http://api.lelylan.com/properties/&lt;intensity&gt;',
-        'value': '90' } ] };
+  function: 'http://api.lelylan.com/functions/&lt;set-intensity&gt;',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;',
+        value: '90' } ] };
 
-Lelylan.Device.execute('id', params, callback);</code></pre>
+Lelylan.Device.execute('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="execute-a-function-ii-javascript">

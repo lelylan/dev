@@ -79,7 +79,7 @@ For this reason treat them as highly temporary.
     <div class="tab-pane" id="get-a-history-node">
       <div class="preview">
         <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.History.find('id', callback);</code></pre>
+Lelylan.History.find('&lt;id&gt;', callback);</code></pre>
       </div>
     </div>
     <div class="tab-pane" id="get-a-history-javascript">
@@ -269,7 +269,7 @@ history = lelylan.history('&lt;id&gt;')</code></pre>
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = { 'from': '2012-07-03 12:45:29Z' };
-Lelylan.History.create(params, callback);</code></pre>
+Lelylan.History.all(params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-histories-javascript">

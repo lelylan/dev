@@ -328,7 +328,7 @@ Get the access token (remember to basic authenticate with client id and client s
      -d 'grant_type=password' \
      -d 'username=&lt;email&gt;' \
      -d 'password=&lt;password&gt;' \
-     -d 'scope=&lt;scope&gt;</code></pre>
+     -d 'scope=&lt;scopes&gt;</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="password-credentials-node">
@@ -343,7 +343,7 @@ var OAuth2 = require('simple-oauth2')(credentials);
 OAuth2.Password.getToken({
   username: '&lt;username&gt;',
   password: '&lt;password&gt;',
-  scope: '&lt;scope&gt;'
+  scope: '&lt;scopes&gt;'
 }, saveToken);
 
 var saveToken = function(error, result) {
@@ -364,7 +364,7 @@ var saveToken = function(error, result) {
   '&lt;client-secret&gt;',
   site: 'http://people.lelylan.com' )
 
-token = oauth.password.get_token('&lt;email&gt;', '&lt;password&gt;')
+token = oauth.password.get_token('&lt;email&gt;', '&lt;password&gt;', scopes: '&lt;scopes&gt;')
 </code></pre>
     </div>
   </div>
@@ -786,6 +786,12 @@ might be of help.
 
 <ul>
   <li>
+  <a href="http://github.com/intridea/oauth2" class="bigger">Ruby OAuth2 Gem</a>
+  </li>
+  <li>
+  <a href="andreareginato.github.com/simple-oauth2" class="bigger">Node Simple Oauth2</a>
+  </li>
+  <li>
   <a href="https://developers.google.com/accounts/docs/OAuth2" class="bigger">Google</a>
   </li>
   <li>
@@ -796,9 +802,6 @@ might be of help.
   </li>
   <li>
   <a href="http://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
-  </li>
-  <li>
-  <a href="http://github.com/intridea/oauth2" class="bigger">OAuth2 Gem</a>
   </li>
   <li>
   <a href="/community/clients/" class="bigger">Lelylan Client Libraries</a>

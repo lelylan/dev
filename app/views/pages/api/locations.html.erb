@@ -72,7 +72,7 @@ identifies three types of locations usually organized in a hierarchical structur
   <div class="tab-pane" id="get-a-location-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.find('id', callback);</code></pre>
+Lelylan.Location.find('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-javascript">
@@ -369,10 +369,10 @@ locations = lelylan.locations</code></pre>
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'into': 'http://api.lelylan.com/locations/&lt;id&gt;',
-  'name': 'Bedroom',
-  'type': 'room',
-  'devices': ['http://api.lelylan.com/devices/&lt;id&gt;'] };
+  into: 'http://api.lelylan.com/locations/&lt;id&gt;',
+  name: 'Bedroom',
+  type: 'room',
+  devices: ['http://api.lelylan.com/devices/&lt;id&gt;'] };
 
 Lelylan.Location.create(params, callback);</code></pre>
     </div>
@@ -504,8 +504,8 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
   <div class="tab-pane" id="update-a-location-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-var params = { 'name': 'Babies bedroom' };
-Lelylan.Location.update('id', params, callback);</code></pre>
+var params = { name: 'Babies bedroom' };
+Lelylan.Location.update('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-location-javascript">
@@ -591,7 +591,7 @@ Connected devices are not deleted.
   <div class="tab-pane" id="delete-a-location-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.delete('id', callback);</code></pre>
+Lelylan.Location.delete('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-javascript">

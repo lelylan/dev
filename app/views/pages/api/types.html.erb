@@ -124,7 +124,7 @@ type identified from its ID.
   <div class="tab-pane" id="get-a-type-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-Lelylan.Type.find('id', callback);</code></pre>
+Lelylan.Type.find('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-type-js">
@@ -448,15 +448,15 @@ In this example the resource IDs are identified from friendly names.
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'name': 'Dimmer',
-  'properties':
+  name: 'Dimmer',
+  properties:
     [ 'http://api.lelylan.com/properties/&lt;status&gt;',
       'http://api.lelylan.com/properties/&lt;intensity&gt;' ],
-  'functions':
+  functions:
     [ 'http://api.lelylan.com/functions/&lt;turn-on&gt;',
       'http://api.lelylan.com/functions/&lt;turn-off&gt;',
       'http://api.lelylan.com/functions/&lt;set-intensity&gt;' ],
-  'statuses':
+  statuses:
     [ 'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;' ] };
 
 Lelylan.Type.create(params, callback);</code></pre>
@@ -590,8 +590,8 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
   <div class="tab-pane" id="update-a-type-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-var params = { 'name': 'Dimmer RBG' };
-Lelylan.Type.update('id', params, callback);</code></pre>
+var params = { name: 'Dimmer RBG' };
+Lelylan.Type.update('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-type-javascript">
@@ -677,7 +677,7 @@ all previous connected resources are replaced.
   <div class="tab-pane" id="delete-a-type-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Type.delete('id', callback);</code></pre>
+Lelylan.Type.delete('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-type-javascript">

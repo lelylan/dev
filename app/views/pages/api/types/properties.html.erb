@@ -70,7 +70,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
   <div class="tab-pane" id="get-a-property-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-Lelylan.Property.find('id', callback);</code></pre>
+Lelylan.Property.find('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-property-javascript">
@@ -296,9 +296,9 @@ properties = lelylan.public_properties # all existing resources</code></pre>
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  'name': 'Intensity',
-  'default': '0',
-  'suggested': { '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
+  name: 'Intensity',
+  default: '0',
+  suggested: { '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
 
 Lelylan.Property.create(params, callback);</code></pre>
     </div>
@@ -413,8 +413,8 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
   <div class="tab-pane" id="update-a-property-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-var params = { 'default': '100' };
-Lelylan.Property.update('id', params, callback);</code></pre>
+var params = { default: '100' };
+Lelylan.Property.update('&lt;id&gt;', params, callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-property-javascript">
@@ -493,7 +493,7 @@ property = lelylan.update_property('&lt;id&gt;', params)</code></pre>
   <div class="tab-pane" id="delete-a-property-node">
     <div class="preview">
       <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Property.delete('id', callback);</code></pre>
+Lelylan.Property.delete('&lt;id&gt;', callback);</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-property-javascript">
