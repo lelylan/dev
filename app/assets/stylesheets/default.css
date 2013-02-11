@@ -36,12 +36,12 @@ header nav a{color:#fafafa;text-shadow:none;text-decoration:none; padding:5px 0;
 .errors ul{margin:0}
 
 h2{font:20px arial,lucida,helvetica,arial,sans-serif;font-weight:normal}
-pre,code{font-size:12px;line-height:18px;font-family:Monaco,Consolas,"Lucida Console",monospace;color:#222222;margin:0;padding:0}
+pre,code,xmp{font-size:12px;line-height:18px;font-family:Monaco,Consolas,"Lucida Console",monospace;color:#222222;margin:0;padding:0}
 /*pre{margin:0 0 10px 15px;background:transparent;}*/
 pre{padding:5px 0 5px 5px;background:#f6f6f6;border:1px solid #ddd;}
 div.pill-content pre{border-top:none; margin-bottom: 20px;}
 div.animate pre{background:transparent;border:none;}
-pre code{background:transparent}
+pre code,xmp{background:transparent}
 p{margin:7px 0 14px 0;line-height:1.7em}
 iframe{margin:10px 0}
 

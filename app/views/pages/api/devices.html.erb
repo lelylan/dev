@@ -83,24 +83,35 @@ For example, when creating a dimmer, the device inherits the <em>status</em>
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-device-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/devices/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+      <pre><xmp>curl http://api.lelylan.com/devices/<id> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-device-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.find('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp class="lang-js">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.find('<id>', callback);</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-device-javascript">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp class="lang-html"><html ng-app="lelylan">
+  <body>
+    <div ng-controller="LelylanController">{{device}}</div>
+    <script>
+      function LelylanController($scope, Device) {
+        $scope.device = Device.get({ id: '<id>' });
+      }
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+    <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"></script>
+  </body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-device-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><code class="lang-rb">lelylan = Lelylan::Client.new(token: token)
 device = lelylan.device('&lt;id&gt;')</code></pre>
     </div>
   </div>

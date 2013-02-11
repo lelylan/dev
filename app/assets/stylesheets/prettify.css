@@ -1,0 +1,3 @@
+/*.hemisu-comment,pre .comment,pre .xml .doctype,pre .html .doctype{color:#999}.hemisu-accent1,pre .number,pre .ruby .keyword{color:#538192}.hemisu-accent2,pre .string,pre .regexp,pre .xml .value,pre .html .value{color:#F05}.hemisu-accent3,pre .keyword,pre .title,pre .constant,pre .xml .tag,pre .html .tag,pre .css .rules .attribute{color:#f05}.hemisu-accent4{color:#503d15} */
+.pln{color:#111}@media screen{.str{color:#F05}.kwd{color:#111}.com{color:#999}.typ{color:#F05}.lit{color:#111}.pun,.opn,.clo{color:#111}.tag{color:#111}.atn{color:#111}.atv{color:#111}.dec,.var{color:#606}.fun{color:red}}
+pre code, pre xmp{display:block;color:#111;font-family:Monaco, Consolas, monospace;font-size:12px;line-height:1.5;padding:5px}

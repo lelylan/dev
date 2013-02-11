@@ -1,5 +1,5 @@
 // code highlight
-$(function () { hljs.initHighlightingOnLoad(); })
+addEventListener('load', function (event) { prettyPrint() }, false);
 
 // language examples selection (ruby, javascript, curl, etc.)
 $(function () {
