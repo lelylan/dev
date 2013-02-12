@@ -141,7 +141,7 @@
   with the last fetched resource <code>URI</code>.
 </p>
 
-<div class="preview"><pre><code class="no-highlight">curl -L http://api.lelylan.com/devices.json?
+<div class="preview"><pre><code>curl -L http://api.lelylan.com/devices.json?
 start=http://api.lelylan.com/devices/4dcb9ea9000d</code></pre>
 </code></pre></div>
 
@@ -164,7 +164,7 @@ The following examples describe the same time using two different accepted forma
 </p>
 
 <div class="preview">
-  <pre><code class="no-highlight">2012-07-03 12:45:29Z        # ISO 8601
+  <pre><code>2012-07-03 12:45:29Z        # ISO 8601
 2012-07-03 14:45:29 +0200   # UTC local time with offset "+hh:mm"</code></pre>
 </div>
 </article>
@@ -177,7 +177,7 @@ The following examples describe the same time using two different accepted forma
 
 <h2><a name="401">401 - Unauthorized</a></h2>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 401 Unauthorized</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 401 Unauthorized</code></pre></div>
 
 <div class="preview"><pre><code>{
   "status": 401,
@@ -191,7 +191,7 @@ The following examples describe the same time using two different accepted forma
 
 <h2><a name="404">404 - Not Found</a></h2>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 404 Not Found</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 404 Not Found</code></pre></div>
 
 <div class="preview"><pre><code>{
   "status": 404,
@@ -206,7 +206,7 @@ The following examples describe the same time using two different accepted forma
 
 <h2><a name="422">422 - Not Valid</a></h2>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 422 Not Valid</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 422 Not Valid</code></pre></div>
 
 <div class="preview"><pre><code>{
   "status": 422,
@@ -258,7 +258,7 @@ X-RateLimit-Remaining: 0</code></pre></div>
 
 <p>
 Please <a href="mailto:touch@lelylan.com">contact us</a> to request white listed access for
-your application.
+Lelylan API.
 </p>
 
 </article>
@@ -322,39 +322,50 @@ Returns extended information for the authenticated user.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-user-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-a-user-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-a-user-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-a-user-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-user-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-user-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/me \
-    -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+      <pre><xmp>curl http://api.lelylan.com/me \
+    -H 'Authorization: Bearer <token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-user-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Profile.me(callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Profile.me(callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-user-javascript">
+  <div class="tab-pane" id="get-a-user-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{profile}}</div>
+  <script>
+    function LelylanController($scope, Profile) {
+      $scope.profile = Profile.get();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-user-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-profile = lelylan.me</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+profile = lelylan.me</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="device-representation">Example body response</h4>
 

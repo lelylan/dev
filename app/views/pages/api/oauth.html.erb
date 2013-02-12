@@ -92,60 +92,61 @@ Redirect the user to the authorization endpoint.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#authorization-code-first-step-curl" data-toggle="tab" class="curl">Manual</a></li>
   <li><a href="#authorization-code-first-step-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#authorization-code-first-step-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#authorization-code-first-step-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#authorization-code-first-step-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="authorization-code-first-step-curl">
-    <div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
-       response_type=&lt;code&gt;&
-       client_id=&lt;client-id&gt;&
-       redirect_uri=&lt;redirect-uri&gt;&
-       scope=&lt;scope&gt;&
-       state=&lt;state&gt;</code></pre>
+    <div class="preview">
+      <pre><xmp>http://people.lelylan.com/oauth/authorization?
+       response_type=<code>&
+       client_id=<client-id>&
+       redirect_uri=<redirect-uri>&
+       scope=<scope>&
+       state=<state></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="authorization-code-first-step-node">
-    <div class="preview"><pre><code class="javascript">var credentials = {
-  clientID: '&lt;client-id&gt;',
-  clientSecret: '&lt;client-secret&gt;',
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var credentials = {
+  clientID: '<client-id>',
+  clientSecret: '<client-secret>',
   site: 'http://people.lelylan.com' };
 
 var OAuth2 = require('simple-oauth2')(credentials);
 
 var authorization_uri = OAuth2.AuthCode.authorizeURL({
-  redirect_uri: '&lt;callback-uri&gt;',
-  scope: '&lt;scopes&gt;' });
+  redirect_uri: '<callback-uri>',
+  scope: '<scopes>' });
 
-// =&gt; http://people.lelylan.com/oauth/authorize?
-//      redirect_uri=&lt;callback-uri&gt;&
-//      scope=&lt;scopes&gt;&
+// => http://people.lelylan.com/oauth/authorize?
+//      redirect_uri=<callback-uri>&
+//      scope=<scopes>&
 //      response_type=code&
-//      client_id=&lt;client-id&gt;</code></pre>
+//      client_id=<client-id></xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="authorization-code-first-step-javascript">
+  <div class="tab-pane" id="authorization-code-first-step-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint">// This flow is not available in AngularJS.
+// To authenticate an AngularJS app use the <a href="#implicit-grant" class="nocode">Implicit Grant flow</a></pre>
     </div>
   </div>
   <div class="tab-pane" id="authorization-code-first-step-ruby">
     <div class="preview">
-      <pre><code class="ruby">oauth = OAuth2::Client.new(
-  '&lt;client-id&gt;',
-  '&lt;client-secret&gt;',
+      <pre class="prettyprint"><xmp>oauth = OAuth2::Client.new(
+  '<client-id>',
+  '<client-secret>',
   site: 'http://people.lelylan.com' )
 
-oauth.auth_code.authorize_url(
-  redirect_uri: '&lt;callback-uri&gt;',
-  scope: '&lt;scopes&gt;' )
-#
-# =&gt; http://people.lelylan.com/oauth/authorize?
-#      redirect_uri=&lt;callback-uri&gt;&
-#      scope=&lt;scopes&gt;&
+oauth.auth_code.authorize_url(redirect_uri: '<callback-uri>', scope: '<scopes>' )
+
+# => http://people.lelylan.com/oauth/authorize?
+#      redirect_uri=<callback-uri>&
+#      scope=<scopes>&
 #      response_type=code&
-#      client_id=&lt;client-id&gt;</code></pre>
+#      client_id=<client-id></xmp></pre>
     </div>
   </div>
 </div>
@@ -170,7 +171,7 @@ and appends the authorization code in the query string. This code will be used t
 the final access token.
 </p>
 
-<div class="preview"><pre><code class="no-highlight">http://example.com/redirect-uri?code=code&state=state</code></pre></div>
+<div class="preview"><pre><code>http://example.com/redirect-uri?code=code&state=state</code></pre></div>
 
 <h3><a name="authorization-code-access-token">2. Get the access token</a></h3>
 
@@ -181,38 +182,41 @@ Get the access token (remember to basic authenticate with client id and client s
 <ul class="nav nav-tabs">
   <li class="active"><a href="#authorization-code-second-step-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#authorization-code-second-step-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#authorization-code-second-step-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#authorization-code-second-step-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#authorization-code-second-step-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="authorization-code-second-step-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
-     -u  &lt;client-id&gt;:&lt;client-secret&gt; \
+    <div class="preview">
+      <pre><xmp>curl -X POST http://people.lelylan.com/oauth/token \
+     -u  <client-id>:<client-secret> \
      -d 'grant_type=authorization_code' \
-     -d 'code=&lt;code&gt;' \
-     -d 'redirect_uri=&lt;redirect_uri&gt;'</code></pre>
+     -d 'code=<code>' \
+     -d 'redirect_uri=<redirect_uri>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="authorization-code-second-step-node">
-    <div class="preview"><pre><code class="javascript">OAuth2.AuthCode.getToken({ code: '&lt;code&gt;', redirect_uri: '&lt;redirect-uri&gt;' }, saveToken);
+    <div class="preview">
+      <pre class="prettyprint"><xmp>OAuth2.AuthCode.getToken({ code: '<code>', redirect_uri: '<redirect-uri>' }, saveToken);
 
 var token;
 var saveToken = function(error, result) {
   if (error) console.log('Access Token Error', error.message);
   token = OAuth2.AccessToken.create(result);
   console.log('Access Token successfully saved');
-});</code></pre>
+});</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="authorization-code-second-step-javascript">
+  <div class="tab-pane" id="authorization-code-second-step-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint">// This flow is not available in AngularJS.
+// To authenticate an AngularJS app use the <a href="#implicit-grant" class="nocode">Implicit Grant Flow</a></pre>
     </div>
   </div>
   <div class="tab-pane" id="authorization-code-second-step-ruby">
     <div class="preview">
-      <pre><code class="ruby">token = oauth.auth_code.get_token('&lt;code&gt;', redirect_uri: '&lt;redirect-uri&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>token = oauth.auth_code.get_token('<code>', redirect_uri: '<redirect-uri>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -230,7 +234,7 @@ var saveToken = function(error, result) {
   Application URI where the user is redirected after authorization.</dd>
 </dl>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <div class="preview"><pre><code>{
   "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
@@ -251,12 +255,63 @@ over time (it includes Actionscript, Silverlight and similar).
 The flow starts redirecting the user to the authorization endpoint.
 <p>
 
-<div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
-       response_type=&lt;token&gt;&
-       client_id=&lt;client-id&gt;&
-       redirect_uri=&lt;redirect_uri&gt;&
-       scope=&lt;scope&gt;&
-       state=&lt;state&gt;</code></pre>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#implicit-grant-curl" data-toggle="tab" class="curl">Manual</a></li>
+  <li><a href="#implicit-grant-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#implicit-grant-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#implicit-grant-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="implicit-grant-curl">
+    <div class="preview"><pre><xmp>http://people.lelylan.com/oauth/authorization?
+       response_type=<token>&
+       client_id=<client-id>&
+       redirect_uri=<redirect-uri>&
+       scope=<scope>&
+       state=<state></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-node">
+    <div class="preview">
+      <pre class="prettyprint">// This flow is not available in Node.js.
+// To authenticate a Node app use the <a href="#authorization-code" class="nocode">Authorization Code Flow</a></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller = "LoginController">
+    <login client   = "{{oauth.client}}"
+           redirect = "{{oauth.redirect}}"
+           scope    = "{{oauth.scope}}"
+           state    = "{{oauth.state}}"></login>
+  </div>
+
+  <script>
+    function LoginController($scope) {
+      $scope.credentials = {
+        client:   '<client-id>',
+        redirect: '<redirect-uri>',
+        scope:    '<scope>',
+        state:    '<state>' };
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan-oauth2.min.js"/></script>
+</body>
+</html></xmp></pre>
+      </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-ruby">
+    <div class="preview">
+      <pre class="prettyprint">// This flow is not available in Ruby.
+// To authenticate a Ruby app use the <a href="#authorization-code" class="nocode">Authorization Code Flow</a></pre>
+    </div>
+  </div>
 </div>
 
 <dl>
@@ -278,7 +333,7 @@ If the user grants the access, Lelylan redirects the user to <code>redirect_uri<
 and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment URI</a>.
 </p>
 
-<div class="preview"><pre><code class="no-highlight">http://example.com/redirect-uri#
+<div class="preview"><pre><code>http://example.com/redirect-uri#
        access_token=1146eeea7054e3fc39aebb0f3820742981c65e243a2fa85174ce98b564XXXXX&
        token_type=bearer&
        expires_in=7200&
@@ -316,56 +371,57 @@ Get the access token (remember to basic authenticate with client id and client s
 <ul class="nav nav-tabs">
   <li class="active"><a href="#password-credentials-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#password-credentials-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#password-credentials-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#password-credentials-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#password-credentials-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="password-credentials-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
-     -u &lt;client-id&gt;:&lt;client-secret&gt; \
+      <pre><xmp>curl -X POST http://people.lelylan.com/oauth/token \
+     -u <client-id>:<client-secret> \
      -d 'grant_type=password' \
-     -d 'username=&lt;email&gt;' \
-     -d 'password=&lt;password&gt;' \
-     -d 'scope=&lt;scopes&gt;</code></pre>
+     -d 'username=<email>' \
+     -d 'password=<password>' \
+     -d 'scope=<scopes></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="password-credentials-node">
     <div class="preview">
-      <pre><code class="javascript">var token;
+      <pre class="prettyprint"><xmp>var token;
 var credentials = {
-  clientID: '&lt;client-id&gt;',
-  clientSecret: '&lt;client-secret&gt;',
+  clientID: '<client-id>',
+  clientSecret: '<client-secret>',
   site: 'http://people.lelylan.com' };
 
 var OAuth2 = require('simple-oauth2')(credentials);
 OAuth2.Password.getToken({
-  username: '&lt;username&gt;',
-  password: '&lt;password&gt;',
-  scope: '&lt;scopes&gt;'
+  username: '<username>',
+  password: '<password>',
+  scope: '<scopes>'
 }, saveToken);
 
 var saveToken = function(error, result) {
   if (error) console.log('Access Token Error', error.message);
   token = OAuth2.AccessToken.create(result);
   console.log('Access Token successfully saved');
-});</code></pre></div>
+});</xmp></pre></div>
   </div>
-  <div class="tab-pane" id="password-credentials-javascript">
+  <div class="tab-pane" id="password-credentials-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint">// This flow is not available in AngularJS.
+// To authenticate an AngularJS app use the <a href="#implicit-grant" class="nocode">Implicit Grant Flow</a></pre>
     </div>
   </div>
   <div class="tab-pane" id="password-credentials-ruby">
     <div class="preview">
-      <pre><code class="ruby">oauth = OAuth2::Client.new(
-  '&lt;client-id&gt;',
-  '&lt;client-secret&gt;',
+      <pre class="prettyprint"><xmp>oauth = OAuth2::Client.new(
+  '<client-id>',
+  '<client-secret>',
   site: 'http://people.lelylan.com' )
 
-token = oauth.password.get_token('&lt;email&gt;', '&lt;password&gt;', scopes: '&lt;scopes&gt;')
-</code></pre>
+token = oauth.password.get_token('<email>', '<password>', scopes: '<scopes>')
+</xmp></pre>
     </div>
   </div>
 </div>
@@ -385,7 +441,7 @@ token = oauth.password.get_token('&lt;email&gt;', '&lt;password&gt;', scopes: '&
   Application privileges. <a href="#scopes">Learn more about</a>.</dd>
 </dl>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <div class="preview"><pre><code>{
   "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
@@ -418,38 +474,32 @@ use the refresh token you previously received together with the access token.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#refresh-access-token-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#refresh-access-token-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#refresh-access-token-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#refresh-access-token-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#refresh-access-token-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="refresh-access-token-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://people.lelylan.com/oauth/token \
-     -u &lt;client-id&gt;:&lt;client-secret&gt; \
+      <pre><xmp>curl -X POST http://people.lelylan.com/oauth/token \
+     -u <client-id>:<client-secret> \
      -d 'grant_type=refresh_token' \
-     -d 'refresh_token=&lt;refresh-token&gt;'</code></pre>
+     -d 'refresh_token=<refresh-token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="refresh-access-token-node">
     <div class="preview">
-      <pre><code class="javascript">if (token.expired()) {
-  token.refresh(function(error, result) {
-    if (error) console.log('Refresh Token Error');
-    console.log('Access Token Refreshed');
-    token = result;
-  });
-};</code></pre>
+      <pre class="prettyprint">// The access token is automatically refreshed by the Node.js Client.</pre>
     </div>
   </div>
-  <div class="tab-pane" id="refresh-access-token-javascript">
+  <div class="tab-pane" id="refresh-access-token-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint">// The access token is automatically refreshed by AngularJS components.</pre>
     </div>
   </div>
   <div class="tab-pane" id="refresh-access-token-ruby">
     <div class="preview">
-      <pre><code class="ruby">token = token.refresh! if token.expired?</code></pre>
+      <pre class="prettyprint">// The access token is automatically refreshed by the Ruby Client.</pre>
     </div>
   </div>
 </div>
@@ -465,7 +515,7 @@ use the refresh token you previously received together with the access token.
   Refresh token code (from previous access token request).</dd>
 </dl>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <div class="preview"><pre><code>{
   "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
@@ -493,24 +543,17 @@ Once you have the access token you can access the API in different ways.
 
 <p><strong>Authorization header</strong></p>
 
-<div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices.json
-     -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+<div class="preview"><pre><xmp>curl http://api.lelylan.com/devices.json -H "Authorization: Bearer <access-token>"</xmp></pre>
 </div>
 
 <p><strong>Query string access_token param</strong></p>
 
-<div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices?access_token=&lt;token&gt;</code></pre></div>
+<div class="preview"><pre><xmp>curl http://api.lelylan.com/devices?access_token=<access-token></xmp></pre></div>
 
 <p><strong>Body access_token param</strong></p>
 
-<div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/devices
-     -X POST -d 'access_token=&lt;token&gt;'</code></pre>
+<div class="preview"><pre><xmp>curl http://api.lelylan.com/devices -X POST -d 'access_token=<access-token>'</xmp></pre>
 </div>
-
-<p class="notice">
-<span class="label">Notice</span>
-Public services does not need an access token.
-</p>
 
 </article>
 
@@ -720,7 +763,7 @@ access for all devices. You can specify multiple scopes by separating them with 
 (encoded as a <code>+</code>).
 <p>
 
-<div class="preview"><pre><code class="no-highlight">http://people.lelylan.com/oauth/authorization?
+<div class="preview"><pre><code>http://people.lelylan.com/oauth/authorization?
         response_type=code&
         client_id=client_id&
         redirect_uri=redirect_uri&
@@ -759,16 +802,10 @@ authorization is needed).
 <h1 class="call"><a name="expiring-token">Expiring token</a></h1>
 
 <p>
-When authorizing a third party application an access token expires in 2 hours.
-After this period of time a new token must be <a href="#refresh-access-token">
-refreshed</a>.
-</p>
-
-<%= image_tag('oauth-expire.png', class: 'img-polaroid') %>
-
-<p>
-Anyway, when developing your applications a not expiring token could be something
-useful. Simply uncheck the <strong>Expiring token</strong> checkbox.
+When authorizing a third party application an access token expires in 2 hours (for
+security reasons). Anyway, when developing your applications a not expiring token could
+be something useful. To have it, simply uncheck the <strong>Expiring token</strong> checkbox
+on the authorization page.
 </p>
 
 </article>
@@ -789,7 +826,7 @@ might be of help.
   <a href="http://github.com/intridea/oauth2" class="bigger">Ruby OAuth2 Gem</a>
   </li>
   <li>
-  <a href="andreareginato.github.com/simple-oauth2" class="bigger">Node Simple Oauth2</a>
+  <a href="http://andreareginato.github.com/simple-oauth2" class="bigger">Node Simple Oauth2</a>
   </li>
   <li>
   <a href="https://developers.google.com/accounts/docs/OAuth2" class="bigger">Google</a>

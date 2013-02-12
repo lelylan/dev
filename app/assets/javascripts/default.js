@@ -1,26 +1,23 @@
 // code highlight
 addEventListener('load', function (event) { prettyPrint() }, false);
 
-// language examples selection (ruby, javascript, curl, etc.)
+// language examples selection (ruby, angular, curl, etc.)
 $(function () {
 
   var initLanguage = function() {
     var language;
 
     // search in the fragment
-    if (window.location.hash.match(/curl/))       language = 'curl';
-    if (window.location.hash.match(/ruby/))       language = 'ruby';
-    if (window.location.hash.match(/node/))       language = 'node';
-    if (window.location.hash.match(/javascript/)) language = 'javascript';
-    console.log('Fragment Language', language);
+    if (window.location.hash.match(/curl/))    language = 'curl';
+    if (window.location.hash.match(/node/))    language = 'node';
+    if (window.location.hash.match(/angular/)) language = 'angular';
+    if (window.location.hash.match(/ruby/))    language = 'ruby';
 
     // search in the cookie
     if (!language) language = $.cookie('lelylan-dev-language');
-    console.log('Cookie language', language);
 
     // set a default
     if (!language) language = 'curl';
-    console.log('Final Language', language);
 
     // set language on cookies
     $.cookie('lelylan-dev-language', language);
