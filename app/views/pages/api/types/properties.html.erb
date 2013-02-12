@@ -33,7 +33,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">GET http://api.lelylan.com/properties/:id</code></pre>
+  <pre><code>GET http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -57,38 +57,49 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-a-property-node" data-toggle="tab" class="node">Node</a></li>
-  <li><a href="#get-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-property-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-a-property-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-property-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/properties/&lt;id&gt;</code></pre>
+        <pre><xmp>curl http://api.lelylan.com/properties/<id></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-Lelylan.Property.find('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Property.find('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-property-javascript">
+  <div class="tab-pane" id="get-a-property-angular">
     <div class="preview">
-        <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.property = Property.get({ id: '<id>' });
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-property-ruby">
     <div class="preview">
-        <pre><code class="ruby">lelylan = Lelylan::Client.new
-property = lelylan.property('&lt;id&gt;')</code></pre>
+        <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+property = lelylan.property('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="property-representation">Example body response</h4>
 
@@ -124,8 +135,8 @@ property = lelylan.property('&lt;id&gt;')</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight"># created properties
-GET http://api.lelylan.com/properties</code><code class="no-highlight"># all properties
+<pre><code># created properties
+GET http://api.lelylan.com/properties</code><code># all properties
 GET http://api.lelylan.com/properties/public</code></pre>
 </div>
 
@@ -169,48 +180,63 @@ GET http://api.lelylan.com/properties/public</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-all-properties-node" data-toggle="tab" class="node">Node</a></li>
-  <li><a href="#get-all-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-all-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-properties-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-all-properties-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-properties-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/properties \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/properties \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-properties-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Property.all({}, callback); // owned resources
 
 var Lelylan = require('lelylan-node')();
-Lelylan.Property.public({}, callback); // all existing resources</code></pre>
+Lelylan.Property.public({}, callback); // all existing resources</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-properties-javascript">
+  <div class="tab-pane" id="get-all-properties-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="property in owned">{{property}}</div>
+    <div ng-repeat="property in public">{{property}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.owned  = Property.query();   // owned resources
+      $scope.public = Property.public();  // all existing resources
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-properties-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 properties = lelylan.properties # owned resources
 
 lelylan = Lelylan::Client.new
-properties = lelylan.public_properties # all existing resources</code></pre>
+properties = lelylan.public_properties # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
-<div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code>[
   { # property representation },
   { # property representation },
   ...
@@ -233,7 +259,7 @@ properties = lelylan.public_properties # all existing resources</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  http://api.lelylan.com/properties</code></pre>
+<pre><code>POST  http://api.lelylan.com/properties</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -275,55 +301,73 @@ properties = lelylan.public_properties # all existing resources</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#create-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#create-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-property-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#create-a-property-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-property-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/properties \
-     -H 'Authorization: Bearer &lt;token&gt' \
+      <pre><xmp>curl -X POST http://api.lelylan.com/properties \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
            "name": "Intensity",
            "default": "0",
            "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
-         }'</code></pre>
+         }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   name: 'Intensity',
   default: '0',
   suggested: { '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
 
-Lelylan.Property.create(params, callback);</code></pre>
+Lelylan.Property.create(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-property-javascript">
+  <div class="tab-pane" id="create-a-property-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      var params = {
+        name: 'Intensity',
+        default: '0',
+        suggested: {
+          '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
+
+      $scope.property = new Property(params);
+      $scope.property.$save();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-property-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
   name: 'Intensity',
   default: '0',
   suggested: {'0' => 'Min', '25' => 'Low', '50' => 'Half', '75' => 'High', '100' => 'Max' }}
 
-property = lelylan.create_property(params)</code></pre>
+property = lelylan.create_property(params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
 </div>
 
@@ -347,7 +391,7 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  http://api.lelylan.com/properties/:id</code></pre>
+<pre><code>PUT  http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -398,42 +442,55 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-property-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#update-a-property-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/properties/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt' \
+    <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/properties/<id> \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
-     -d '{ "default": "100" }'</code></pre>
+     -d '{ "default": "100" }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = { default: '100' };
-Lelylan.Property.update('&lt;id&gt;', params, callback);</code></pre>
+Lelylan.Property.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-property-javascript">
+  <div class="tab-pane" id="update-a-property-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.property = Property.get({ id: '<id>' });
+      $scope.property.default = '100';
+      $scope.property.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-property-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { default: '100' };
-property = lelylan.update_property('&lt;id&gt;', params)</code></pre>
+property = lelylan.update_property('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -455,7 +512,7 @@ property = lelylan.update_property('&lt;id&gt;', params)</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE http://api.lelylan.com/properties/:id</code></pre>
+<pre><code>DELETE http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -479,39 +536,51 @@ property = lelylan.update_property('&lt;id&gt;', params)</code></pre>
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#delete-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li class=""><a href="#delete-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li class=""><a href="#delete-a-property-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li class=""><a href="#delete-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class=""><a href="#delete-a-property-angular" data-toggle="tab">AngularJS</a></li>
+  <li class=""><a href="#delete-a-property-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-property-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/properties/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt' \
-     -H 'Content-Length: 0'</code></pre>
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/properties/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Length: 0'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-property-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Property.delete('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Property.delete('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-property-javascript">
+  <div class="tab-pane" id="delete-a-property-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.property = Property.get({ id: '<id>' });
+      $scope.property.$delete();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-property-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-property = lelylan.delete_property('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+property = lelylan.delete_property('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
