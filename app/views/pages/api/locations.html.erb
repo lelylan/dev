@@ -260,13 +260,11 @@ Lelylan.Location.all({}, callback);</xmp></pre>
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
   <div ng-controller="LelylanController">
-    <div ng-repeat="location in owned">{{location}}</div>
-    <div ng-repeat="location in public">{{location}}</div>
+    <div ng-repeat="location in locations">{{location}}</div>
   </div>
   <script>
     function LelylanController($scope, Location) {
-      $scope.owned  = Location.query();   // owned resources
-      $scope.public = Location.public();  // all existing resources
+      $scope.locations = Location.query();   // owned resources
     }
   </script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>

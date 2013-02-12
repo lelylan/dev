@@ -420,7 +420,9 @@ Lelylan.Device.all({ 'properties[value]': 'on' }, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <div ng-controller="LelylanController" ng-repeat="device in devices">{{device}}</div>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="device in devices">{{device}}</div>
+  </div>
   <script>
     function LelylanController($scope, Device) {
       $scope.device = Device.query({ 'properties[value]': 'on' });

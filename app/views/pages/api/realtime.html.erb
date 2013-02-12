@@ -210,8 +210,8 @@ The following table describes the available resources and events you can subscri
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-subscription-example-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/subscriptions \
-     -u &lt;client_id&gt;:&lt;client_secret&gt; \
+      <pre><code>curl -X POST http://api.lelylan.com/subscriptions \
+     -u <client_id>:<client_secret> \
      -H 'Content-Type: application/json' \
      -d '{
           "resource": "device",
@@ -319,7 +319,7 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET http://api.lelylan.com/subscriptions/:id</code></pre>
+<pre><code>GET http://api.lelylan.com/subscriptions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -343,41 +343,55 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-subscription-angular" data-toggle="tab">Angular</a></li>
+  <li><a href="#get-a-subscription-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-subscription-curl">
     <div class="preview">
-    <pre><code class="no-highlight">curl http://api.lelylan.com/subscriptions/&lt;id&gt; \
-     -u &lt;client-id&gt;:&lt;client-secret&gt;</code></pre>
+    <pre><xmp>curl http://api.lelylan.com/subscriptions/<id> \
+     -u <client-id>:<client-secret></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { clientID: '&lt;client-id&gt;', clientSecret: '&lt;client-secret&gt;' };
+      <pre class="prettyprint"><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
 var Lelylan = require('lelylan-node')(credentials);
 
-Lelylan.Subscription.find('&lt;id&gt;', callback);</code></pre>
+Lelylan.Subscription.find('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-subscription-javascript">
+  <div class="tab-pane" id="get-a-subscription-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{subscription}}</div>
+  <script>
+    function LelylanController($scope, BasicAuth, Subscription) {
+      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      BasicAuth.set(credentials);
+
+      $scope.subscription = Subscription.get({ id: '<id>' });
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-subscription-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
-subscription = lelylan.subscription('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
+subscription = lelylan.subscription('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="subscription-representation">Example body response</h4>
 
@@ -416,7 +430,7 @@ subscription = lelylan.subscription('&lt;id&gt;')</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET http://api.lelylan.com/subscriptions</code></pre>
+<pre><code>GET http://api.lelylan.com/subscriptions</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -449,43 +463,59 @@ subscription = lelylan.subscription('&lt;id&gt;')</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-subscriptions-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-all-subscriptions-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-all-subscriptions-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-all-subscriptions-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-subscriptions-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-all-subscriptions-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-subscriptions-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/subscriptions \
-     -u &lt;client-id&gt;:&lt;client-secret&gt;</code></pre></code></pre></div>
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/subscriptions \
+     -u <client-id>:<client-secret></xmp></pre></xmp></pre></div>
   </div>
   <div class="tab-pane" id="get-all-subscriptions-node">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { clientID: '&lt;client-id&gt;', clientSecret: '&lt;client-secret&gt;' };
+      <pre class="prettyprint"><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
 var Lelylan = require('lelylan-node')(credentials);
 
-Lelylan.Subscription.all({}, callback);</code></pre>
+Lelylan.Subscription.all({}, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-subscriptions-javascript">
+  <div class="tab-pane" id="get-all-subscriptions-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="subscription in subscriptions">{{subscription}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, BasicAuth, Subscription) {
+      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      BasicAuth.set(credentials);
+
+      $scope.subscriptions = Subscription.query();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-subscriptions-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
-subscriptions = lelylan.subscriptions</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
+subscriptions = lelylan.subscriptions</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
-<div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code>[
   { # subscription representation },
   { # subscription representation },
   ...
@@ -509,7 +539,7 @@ Create a subscription and returns extended information for it.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  http://api.lelylan.com/subscriptions</code></pre>
+<pre><code>POST  http://api.lelylan.com/subscriptions</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -552,57 +582,77 @@ Create a subscription and returns extended information for it.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#create-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#create-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-subscription-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#create-a-subscription-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-subscription-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/subscriptions \
-    -u &lt;client-id&gt;:&lt;client-secret&gt; \
+      <pre><xmp>curl -X POST http://api.lelylan.com/subscriptions \
+    -u <client-id>:<client-secret> \
     -H 'Content-Type: application/json' \
     -d '{
-          "resource": "&lt;resource&gt;",
-          "event": "&lt;event&gt;",
-          "callback_uri": "&lt;callback-uri&gt;"
-        }'</code></pre>
+          "resource": "<resource>",
+          "event": "<event>",
+          "callback_uri": "<callback-uri>"
+        }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { clientID: '&lt;client-id&gt;', clientSecret: '&lt;client-secret&gt;' };
+      <pre class="prettyprint"><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
 var Lelylan = require('lelylan-node')(credentials);
 
 var params = {
-  resource: '&lt;resource&gt;',
-  event: '&lt;event&gt;',
-  callback_uri: '&lt;callback-uri&gt;' };
+  resource: '<resource>',
+  event: '<event>',
+  callback_uri: '<callback-uri>' };
 
-Lelylan.Subscription.create(params, callback);</code></pre>
+Lelylan.Subscription.create(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-subscription-javascript">
+  <div class="tab-pane" id="create-a-subscription-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{subscription}}</div>
+  <script>
+    function LelylanController($scope, BasicAuth, Subscription) {
+      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      BasicAuth.set(credentials);
+
+      var params = {
+        resource: '<resource>',
+        event: '<event>',
+        callback_uri: '<callback-uri>' };
+
+      $scope.subscription = new Subscription(params);
+      $scope.subscription.$save();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-subscription-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
 params = {
-  resource: '&lt;resource&gt;',
-  event: '&lt;event&gt;',
-  callback_uri: '&lt;callback-uri&gt;' }
+  resource: '<resource>',
+  event: '<event>',
+  callback_uri: '<callback-uri>' }
 
-subscription = lelylan.create_subscription(params)</code></pre>
+subscription = lelylan.create_subscription(params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></pre></div>
 
 <h4>Example body response</h4>
@@ -625,7 +675,7 @@ Update a subscription identified from its ID and returns extended information fo
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  http://api.lelylan.com/subscriptions/:id</code></pre>
+<pre><code>PUT  http://api.lelylan.com/subscriptions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -676,44 +726,61 @@ Update a subscription identified from its ID and returns extended information fo
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-subscription-angular" data-toggle="tab">Angular</a></li>
+  <li><a href="#update-a-subscription-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-subscription-curl">
-    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/subscriptions/&lt;id&gt; \
-     -u &lt;client-id&gt;:&lt;client-secret&gt; \
+    <pre><xmp>curl -X PUT http://api.lelylan.com/subscriptions/<id> \
+     -u <client-id>:<client-secret> \
      -H 'Content-Type: application/json' \
-     -d '{ "resource": "&lt;resource&gt;" }'</code></pre>
+     -d '{ "resource": "<resource>" }'</xmp></pre>
   </div>
   <div class="tab-pane" id="update-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { clientID: '&lt;client-id&gt;', clientSecret: '&lt;client-secret&gt;' };
+      <pre class="prettyprint"><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
 var Lelylan = require('lelylan-node')(credentials);
-var params = { resource: '&lt;resource&gt;' };
+var params = { resource: 'devices' };
 
-Lelylan.Subscription.update('&lt;id&gt;', params, callback);</code></pre>
+Lelylan.Subscription.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-subscription-javascript">
+  <div class="tab-pane" id="update-a-subscription-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{subscription}}</div>
+  <script>
+    function LelylanController($scope, BasicAuth, Subscription) {
+      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      BasicAuth.set(credentials);
+
+      var params = { resource: 'devices' };
+      $scope.subscription = Subscription.get({ id: '<id>' });
+      $scope.subscription.resource = params.resource;
+      $scope.subscription.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-subscription-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
-params = { resource: '&lt;resource&gt;' }
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
+params = { resource: 'devices' }
 
-subscription = lelylan.update_subscription('&lt;id&gt;', params)</code></pre>
+subscription = lelylan.update_subscription('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -735,7 +802,7 @@ Delete a subscription identified from its ID and returns extended information fo
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE  http://api.lelylan.com/subscriptions/:id</code></pre>
+<pre><code>DELETE  http://api.lelylan.com/subscriptions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -759,42 +826,57 @@ Delete a subscription identified from its ID and returns extended information fo
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-subscription-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#delete-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#delete-a-subscription-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#delete-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-subscription-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#delete-a-subscription-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-subscription-curl">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { clientID: '&lt;client-id&gt;', clientSecret: '&lt;client-secret&gt;' };
-     -u &lt;client-id&gt;:&lt;client-secret&gt; \
-     -H 'Content-Length: 0'</code></pre>
+      <pre><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
+     -u <client-id>:<client-secret> \
+     -H 'Content-Length: 0'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-subscription-node">
     <div class="preview">
-      <pre><code class="javascript">var credentials = { clientID: 'client-id', clientSecret: 'client-secret' };
+      <pre class="prettyprint"><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
 var Lelylan = require('lelylan-node')(credentials);
 
-Lelylan.Subscription.delete('&lt;id&gt;', callback);</code></pre>
+Lelylan.Subscription.delete('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-subscription-javascript">
+  <div class="tab-pane" id="delete-a-subscription-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{subscription}}</div>
+  <script>
+    function LelylanController($scope, BasicAuth, Subscription) {
+      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      BasicAuth.set(credentials);
+
+      $scope.subscription = Subscription.get({ id: '<id>' });
+      $scope.subscription.$delete();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-subscription-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(client_id: '&lt;client-id&gt;', client_secret: '&lt;client-secret&gt;')
-subscription = lelylan.delete_subscription('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
+subscription = lelylan.delete_subscription('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 

@@ -287,11 +287,13 @@ Lelylan.History.all(params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <div ng-controller="LelylanController" ng-repeat="history in histories">{{device}}</div>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="history in histories">{{history}}</div>
+  </div>
   <script>
     function LelylanController($scope, History) {
       var params = { 'from': '2012-07-03 12:45:29Z' };
-      $scope.devices = History.query(params);
+      $scope.histories = History.query(params);
     }
   </script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
