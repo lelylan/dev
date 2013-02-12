@@ -13,13 +13,11 @@
           the request to the connected physical device URI to update its properties.
           </p>
 
-          <div class="preview unified"><pre><code class="no-highlight">PUT http://arduino.house.com/&lt;physical-light-id/&gt;</code></pre></div>
-          <div class="preview"><pre><code>{
-  "properties": [{
-    "uri": "http://api.lelylan.com/properties/&lt;status-id&gt",
-    "id": "status-id", "value": "on"
-  }]
-}</code></pre></div>
+          <div class="preview unified"><pre><xmp>PUT http://arduino.house.com/<physical-light></xmp></pre></div>
+          <div class="preview"><pre><xmp>{ "properties":
+  [ { "uri": "http://api.lelylan.com/properties/<status>",
+      "id": "<status>",
+      "value": "on" } ] }</xmp></pre></div>
 
         </div>
 
@@ -32,7 +30,7 @@
           This lets Lelylan know that the request has been accepted.
           </p>
 
-          <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
+          <div class="preview"><pre><xmp>HTTP/1.1 202 Accepted</xmp></pre></div>
 
           <p>
           At this point the physical device applies the request using the desired
@@ -47,13 +45,12 @@
           When the physical device applies the desired changes in the physical world
           it should notify Lelylan about the changes.
           </p>
-          <div class="preview unified"><pre><code class="no-highlight">PUT http://api.lelylan.com/devices/:ligt-id/properties</code></pre></div>
-          <div class="preview"><pre><code>{
-  "properties": [{
-    "uri": "http://api.lelylan.com/properties/:status-id",
-    "value": "on"
-  }]
-}</code></pre></div>
+
+          <div class="preview unified"><pre><xmp>PUT http://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
+
+          <div class="preview"><pre><xmp>{ "properties":
+  [ { "uri": "http://api.lelylan.com/properties/<status>",
+      "value": "on" } ] }</xmp></pre></div>
 
           <p>
           As the whole physical communication flow is asynchronous, subscribe to the

@@ -4,20 +4,17 @@
 
           <div class="first-step">
 
-            <a class="btn btn-warning" href="#">Send request&raquo;</a>
+            <a class="btn btn-warning" href="#">Send request &raquo;</a>
 
             <p>
             Using a third party application a user updates the device properties. For example
             the following request turns on a light by setting its status value to <code>on</code>.
             </p>
 
-          <div class="preview unified"><pre><code class="no-highlight">PUT https://api.lelylan.com/devices/&lt;light-id&gt;/properties</code></pre></div>
-            <div class="preview"><pre><code>{
-  "properties": [{
-    "uri": "https://api.lelylan.com/properties/&lt;status-id&gt;",
-    "value": "on"
-  }]
-}</code></pre></div>
+          <div class="preview unified"><pre><xmp>PUT https://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
+            <div class="preview"><pre><xmp>{ "properties":
+  [ { "uri": "https://api.lelylan.com/properties/<status>",
+      "value": "on" } ] }</xmp></pre></div>
 
             </div>
 
@@ -32,19 +29,19 @@
               representation (optimistic flow).
               </p>
 
-              <div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
-              <div class="preview"><pre><code>{
-  "uri": "https://api.lelylan.com/devices/&lt;light-id&gt;",
-  "id": "&lt;light-id&gt;",
+              <div class="preview unified"><pre><xmp>HTTP/1.1 202 Accepted</xmp></pre></div>
+              <div class="preview"><pre><xmp>{
+  "uri": "https://api.lelylan.com/devices/<light-id>",
+  "id": "<light-id>",
   "name": "Connected Light",
-  "type": { "uri": "https://api.lelylan.com/types/&lt;light-type-id&gt;" },
-  "physical": { "uri": "http://arduino.house.com/&lt;physical-light-id/&gt;" },
+  "type": { "uri": "https://api.lelylan.com/types/<light-type-id>" },
+  "physical": { "uri": "http://arduino.house.com/<physical-light-id>" },
   "properties": [{
-    "uri": "https://api.lelylan.com/properties/&lt;status-id&gt;",
-    "id": "&lt;status-id&gt;",
+    "uri": "https://api.lelylan.com/properties/<status-id>",
+    "id": "<status-id>",
     "value": "on"
   }]
-}</code></pre></div>
+}</xmp></pre></div>
 
               </div>
 
@@ -56,12 +53,10 @@
                 example subscribe to all property updates.
                 </p>
 
-              <div class="preview unified"><pre><code class="no-highlight">POST http://api.lelylan.com/subscriptions</code></pre></div>
-              <div class="preview"><pre><code>{
-  "resource": "device",
+              <div class="preview unified"><pre><xmp>POST http://api.lelylan.com/subscriptions</xmp></pre></div>
+              <div class="preview"><pre><xmp>{ "resource": "device",
   "event": "property-update",
-  "callback_uri": "http://example.com/callback"
-}</code></pre></div>
+  "callback_uri": "http://example.com/callback" }</xmp></pre></div>
 
               </div>
 
