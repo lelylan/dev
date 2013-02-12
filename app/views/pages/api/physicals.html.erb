@@ -156,7 +156,7 @@ how it can receive updates when a device changes its
 <h4>Example Resource URL</h4>
 
 <div class="preview">
-<pre><code class="no-highlight">PUT http://arduino.house.com/physical-id</code></pre>
+<pre><code>PUT http://arduino.house.com/physical-id</code></pre>
 </div>
 
 <h4>Sent Headers</h4>
@@ -241,63 +241,85 @@ physical device is forwarded.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-physical-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-physical-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-physical-device-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-physical-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-physical-device-properties-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#update-physical-device-properties-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-physical-device-properties-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT &lt;physical-device-uri&gt; \
+      <pre><xmp>curl -X PUT <physical-device-uri> \
     -H 'Content-Type: application/json' \
     -H 'X-Physical-Signature: 6e3f998e7f7bf27b8fa6ff426b0a980465aa8468' \
     -d '{
           "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
           "properties": [{
-            "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
+            "uri": "http://api.lelylan.com/properties/<status>",
             "id": "status-id",
             "value": "on" }]
-        }'</code></pre>
+        }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-physical-device-properties-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-var uri = '&lt;physical-device-uri&gt;'; // physical device URI
-var secret = '&lt;device-secret&gt;'; // get it using /devices/:id/privates
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+var uri = '<physical-device-uri>'; // physical device URI
+var secret = '<device-secret>';    // get it using /devices/:id/privates
 var params = {
   'properties':
-    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
+    [ { 'uri': 'http://api.lelylan.com/properties/<status>',
         'id': 'status',
         'value': 'on' } ] };
 
-Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
+Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-physical-device-properties-javascript">
+  <div class="tab-pane" id="update-physical-device-properties-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, $resource) {
+      var uri = '<physical-device-uri>'; // physical device URI
+      var secret = '<device-secret>';    // get it using /devices/:id/privates
+      var params = {
+        'properties':
+          [ { 'uri': 'http://api.lelylan.com/properties/<status>',
+              'id': 'status',
+              'value': 'on' } ] };
+
+      // TODO: the signature and the nonce are missing
+      Physical = $resource(uri, {}, { update: { method: 'PUT' } });
+      $scope.physical = new Physical(params);
+      $scope.physical.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-physical-device-properties-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new
-uri = '&lt;physical-device-uri&gt;' # physical device URI
-secret = '&lt;device-secret&gt;' # get it using /devices/:id/privates
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+uri = '<physical-device-uri>' # physical device URI
+secret = '<device-secret>'    # get it using /devices/:id/privates
 params = {
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+    [ { uri: 'http://api.lelylan.com/properties/<status>',
         id: 'status',
         value: 'on' } ] }
 
-response = lelylan.physical_properties(uri, secret, params)</code></pre>
+response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 202 Accepted</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 202 Accepted</code></pre></div>
 
 <p>
 Lelylan ignores the response body. When the physical device accepts a requests sends back
@@ -360,57 +382,79 @@ Most of the time the physical device needs to update the device properties. Here
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-device-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-device-properties-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#update-device-properties-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-device-properties-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/&lt;id&gt;/properties \
-    -H 'X-Physical-Signature: &lt;signature&gt;' \
+      <pre><xmp>curl -X PUT http://api.lelylan.com/devices/<id>/properties \
+    -H 'X-Physical-Signature: <signature>' \
     -H 'Content-Type: application/json' \
     -d '{
           "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
           "properties": [{
-            "uri": "http://api.lelylan.com/properties/&lt;status&gt;",
+            "uri": "http://api.lelylan.com/properties/<status>",
             "value": "on",
             "pending": false
           }]
-        }'</code></pre>
+        }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-device-properties-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-var uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties'; // device property service
-var secret = '&lt;device-secret&gt;'; // get it using /devices/:id/privates
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+var uri = 'http://api.lelylan.com/devices/<id>/properties'; // device property API
+var secret = '<device-secret>'; // get it using /devices/:id/privates
 var params = {
   'properties':
-    [ { 'uri': 'http://api.lelylan.com/properties/&lt;status&gt;',
+    [ { 'uri': 'http://api.lelylan.com/properties/<status>',
         'value': 'on',
         'pending': false } ] };
 
-Lelylan.Physical.properties(uri, secret, params, callback);</code></pre>
+Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-device-properties-javascript">
+  <div class="tab-pane" id="update-device-properties-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, $resource) {
+      var uri = 'http://api.lelylan.com/devices/<id>/properties'; // device property API
+      var secret = '<device-secret>'; // get it using /devices/:id/privates
+      var params = {
+        'properties':
+          [ { 'uri': 'http://api.lelylan.com/properties/<status>',
+              'value': 'on',
+              'pending': false } ] };
+
+      // TODO: the signature and the nonce are missing
+      Physical = $resource(uri, {}, { update: { method: 'PUT' } });
+      $scope.physical = new Physical(params);
+      $scope.physical.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-device-properties-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new
-uri = 'http://api.lelylan.com/devices/&lt;id&gt;/properties' # device property service
-secret = '&lt;device-secret&gt;' # get it using /devices/:id/privates
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+uri = 'http://api.lelylan.com/devices/<id>/properties' # device property API
+secret = '<device-secret>' # get it using /devices/:id/privates
 params = {
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;',
+    [ { uri: 'http://api.lelylan.com/properties/<status>',
         value: 'on',
         pending: false } ] }
 
-response = lelylan.physical_properties(uri, secret, params)</code></pre>
+response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>
