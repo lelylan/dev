@@ -41,7 +41,7 @@ For this reason treat them as highly temporary.
 
   <h4>Resource URL</h4>
   <div class="preview">
-  <pre><code class="no-highlight">GET http://api.lelylan.com/histories/:id</code></pre>
+  <pre><code>GET http://api.lelylan.com/histories/:id</code></pre>
   </div>
 
   <h4>Parameters</h4>
@@ -65,39 +65,50 @@ For this reason treat them as highly temporary.
   <ul class="nav nav-tabs">
     <li class="active"><a href="#get-a-history-curl" data-toggle="tab" class="curl">Curl</a></li>
     <li><a href="#get-a-history-node" data-toggle="tab" class="node">Node.js</a></li>
-    <li><a href="#get-a-history-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+    <li><a href="#get-a-history-angular" data-toggle="tab" class="angular">AngularJS</a></li>
     <li><a href="#get-a-history-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
   </ul>
 
   <div class="tab-content">
     <div class="tab-pane active" id="get-a-history-curl">
       <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/histories/&lt;id&gt; \
--H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+        <pre><xmp>curl http://api.lelylan.com/histories/<id> \
+-H 'Authorization: Bearer <token>'</xmp></pre>
       </div>
     </div>
     <div class="tab-pane" id="get-a-history-node">
       <div class="preview">
-        <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.History.find('&lt;id&gt;', callback);</code></pre>
+        <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.History.find('<id>', callback);</xmp></pre>
       </div>
     </div>
-    <div class="tab-pane" id="get-a-history-javascript">
+    <div class="tab-pane" id="get-a-history-angular">
       <div class="preview">
-        <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{history}}</div>
+  <script>
+    function LelylanController($scope, History) {
+      $scope.history = History.get({ id: '<id>' });
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
       </div>
     </div>
     <div class="tab-pane" id="get-a-history-ruby">
       <div class="preview">
-        <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-history = lelylan.history('&lt;id&gt;')</code></pre>
+        <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+history = lelylan.history('<id>')</xmp></pre>
       </div>
     </div>
   </div>
 
   <h4>Example header response</h4>
 
-  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
   <h4 id="history-representation">Example body response</h4>
 
@@ -146,7 +157,7 @@ history = lelylan.history('&lt;id&gt;')</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET http://api.lelylan.com/histories</code></pre>
+<pre><code>GET http://api.lelylan.com/histories</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -254,44 +265,56 @@ history = lelylan.history('&lt;id&gt;')</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-histories-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-all-histories-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-all-histories-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#get-all-histories-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-histories-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-histories-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/histories?from=2012-07-03 12:45:29Z \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+      <pre><xmp>curl http://api.lelylan.com/histories?from=2012-07-03+12:45:29Z \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-histories-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = { 'from': '2012-07-03 12:45:29Z' };
-Lelylan.History.all(params, callback);</code></pre>
+Lelylan.History.all(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-histories-javascript">
+  <div class="tab-pane" id="get-all-histories-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController" ng-repeat="history in histories">{{device}}</div>
+  <script>
+    function LelylanController($scope, History) {
+      var params = { 'from': '2012-07-03 12:45:29Z' };
+      $scope.devices = History.query(params);
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-histories-ruby">
     <div class="preview">
-      <pre><code>lelylan = Lelylan::Client.new(token: token)
-histories = lelylan.histories</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+histories = lelylan.histories</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="history-representation">Example body response</h4>
 
-<div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code>[
   { # device history representation },
   { # device history representation },
   ...

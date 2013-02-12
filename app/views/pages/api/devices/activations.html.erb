@@ -71,7 +71,7 @@ device first <a href="#deactivate-a-device">deactivate</a> it.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  http://api.lelylan.com/activations</code></pre>
+<pre><code>POST  http://api.lelylan.com/activations</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -95,41 +95,54 @@ device first <a href="#deactivate-a-device">deactivate</a> it.
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#activate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#activate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#activate-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#activate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#activate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="activate-a-device-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X POST http://api.lelylan.com/activations \
-     -H 'Authorization: Bearer &lt;token&gt;' \
+    <div class="preview"><pre><xmp>curl -X POST http://api.lelylan.com/activations \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
-     -d '{ "activation_code": "&lt;activation-code&gt;" }'</code></pre></div>
+     -d '{ "activation_code": "<activation-code>" }'</xmp></pre></div>
   </div>
   <div class="tab-pane" id="activate-a-device-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-var params = { activation_code: '&lt;activation-code&gt;' };
-Lelylan.Device.activate(params, callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = { activation_code: '<activation-code>' };
+Lelylan.Device.activate(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="activate-a-device-javascript">
+  <div class="tab-pane" id="activate-a-device-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{activated}}</div>
+  <script>
+    function LelylanController($scope, Activation) {
+      var params = { activation_code: '<activation-code>' };
+      $scope.activated = new Activation(params);
+      $scope.activated.$execute();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="activate-a-device-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-params = { activation_code: '&lt;activation-code&gt;' }
-device = lelylan.activate_device(params)</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = { activation_code: '<activation-code>' }
+device = lelylan.activate_device(params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
 <p>
@@ -142,7 +155,7 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
 Trying to activate a device already activate will return a not valid response.
 </p>
 
-<div class="preview unified"><pre><code class="no-highlight">HTTP/1.1 422 Not Valid</code></pre></div>
+<div class="preview unified"><pre><code>HTTP/1.1 422 Not Valid</code></pre></div>
 
 <div class="preview"><pre><code>{
   "status": "422",
@@ -171,7 +184,7 @@ Until that moment the previous owner remains.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE https://api.lelylan.com/activations/:activation-code</code></pre>
+<pre><code>DELETE https://api.lelylan.com/activations/:activation-code</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -195,39 +208,52 @@ Until that moment the previous owner remains.
 <ul class="nav nav-tabs">
   <li class="curl active"><a href="#deactivate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li class="node"><a href="#deactivate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li class="javascript"><a href="#deactivate-a-device-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li class="javascript"><a href="#deactivate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li class="ruby"><a href="#deactivate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="deactivate-a-device-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/activations/&lt;activation-code&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Length: 0'</code></pre>
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/activations/<activation-code> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Length: 0'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="deactivate-a-device-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.deactivate('&lt;activation-code&gt;', callback);</code></pre>
+      <pre><xmp class="prettyprint">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.deactivate('<activation-code>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="deactivate-a-device-javascript">
+  <div class="tab-pane" id="deactivate-a-device-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{deactivated}}</div>
+  <script>
+    function LelylanController($scope, Device) {
+      var params = { activation_code: '<activation-code>' };
+      $scope.deactivated = new Deactivation(params);
+      $scope.deactivated.$execute();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="deactivate-a-device-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-device = lelylan.deactivate_device('&lt;activation-code&gt;')</code></pre>
+      <pre><xmp class="prettyprint">lelylan = Lelylan::Client.new(token: token)
+device = lelylan.deactivate_device('<activation-code>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
