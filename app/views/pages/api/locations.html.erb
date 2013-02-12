@@ -34,7 +34,7 @@ identifies three types of locations usually organized in a hierarchical structur
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET http://api.lelylan.com/locations/:id</code></pre>
+<pre><code>GET http://api.lelylan.com/locations/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -58,39 +58,50 @@ identifies three types of locations usually organized in a hierarchical structur
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-location-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-a-location-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-location-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/locations/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+      <pre><code>curl http://api.lelylan.com/locations/<id> \
+     -H 'Authorization: Bearer <token>'</code></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.find('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><code>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.find('<id>', callback);</code></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-location-javascript">
+  <div class="tab-pane" id="get-a-location-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{location}}</div>
+  <script>
+    function LelylanController($scope, Location) {
+      $scope.location = Location.get({ id: '<id>' });
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-location-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-location = lelylan.location('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><code>lelylan = Lelylan::Client.new(token: token)
+location = lelylan.location('<id>')</code></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="location-representation">Example body response</h4>
 
@@ -196,7 +207,7 @@ List of available location types. No other type values are accepted right now.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET http://api.lelylan.com/locations</code></pre>
+<pre><code>GET http://api.lelylan.com/locations</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -229,41 +240,56 @@ List of available location types. No other type values are accepted right now.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-locations-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-all-locations-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-all-locations-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-all-locations-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-locations-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-all-locations-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-locations-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/locations \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/locations \
+     -H 'Authorization: Bearer <token>'</xmp></pre></div>
   </div>
   <div class="tab-pane" id="get-all-locations-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.all({}, callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.all({}, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-locations-javascript">
+  <div class="tab-pane" id="get-all-locations-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="location in owned">{{location}}</div>
+    <div ng-repeat="location in public">{{location}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Location) {
+      $scope.owned  = Location.query();   // owned resources
+      $scope.public = Location.public();  // all existing resources
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-locations-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-locations = lelylan.locations</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+locations = lelylan.locations</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
-<div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code>[
   { # location representation },
   { # location representation },
   ...
@@ -286,7 +312,7 @@ locations = lelylan.locations</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST  http://api.lelylan.com/locations</code></pre>
+<pre><code>POST  http://api.lelylan.com/locations</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -347,58 +373,76 @@ locations = lelylan.locations</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#create-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#create-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-location-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#create-a-location-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-location-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/locations \
-    -H 'Authorization: Bearer &lt;token&gt;' \
+      <pre><xmp>curl -X POST http://api.lelylan.com/locations \
+    -H 'Authorization: Bearer <token>' \
     -H 'Content-Type: application/json' \
     -d '{
-          "into": "http://api.lelylan.com/locations/&lt;id&gt;",
+          "into": "http://api.lelylan.com/locations/<id>",
           "name": "Bedroom",
           "type": "room",
-          "devices": ["http://api.lelylan.com/devices/&lt;id&gt;"]
-        }'</code></pre>
+          "devices": ["http://api.lelylan.com/devices/<id>"]
+        }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  into: 'http://api.lelylan.com/locations/&lt;id&gt;',
+  into: 'http://api.lelylan.com/locations/<id>',
   name: 'Bedroom',
   type: 'room',
-  devices: ['http://api.lelylan.com/devices/&lt;id&gt;'] };
+  devices: ['http://api.lelylan.com/devices/<id>'] };
 
-Lelylan.Location.create(params, callback);</code></pre>
+Lelylan.Location.create(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-location-javascript">
+  <div class="tab-pane" id="create-a-location-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{location}}</div>
+  <script>
+    function LelylanController($scope, Location) {
+      var params = {
+        into: 'http://api.lelylan.com/locations/<id>',
+        name: 'Bedroom',
+        type: 'room',
+        devices: ['http://api.lelylan.com/devices/<id>'] };
+
+      $scope.location = new Location(params);
+      $scope.location.$save();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-location-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
-  into: 'http://api.lelylan.com/locations/&lt;id&gt;',
+  into: 'http://api.lelylan.com/locations/<id>',
   name: 'Bedroom',
   type: 'room',
-  devices: ['http://api.lelylan.com/devices/&lt;id&gt;'] }
+  devices: ['http://api.lelylan.com/devices/<id>'] }
 
-location = lelylan.create_location(params)</code></pre>
+location = lelylan.create_location(params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre></div>
 
 <h4>Example body response</h4>
@@ -421,7 +465,7 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  http://api.lelylan.com/locations/:id</code></pre>
+<pre><code>PUT  http://api.lelylan.com/locations/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -490,34 +534,48 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-location-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#update-a-location-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-location-curl">
-    <pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/locations/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
+    <pre><xmp>curl -X PUT http://api.lelylan.com/locations/<id> \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
-     -d '{ "name": "Babies bedroom" }'</code></pre>
+     -d '{ "name": "Babies bedroom" }'</xmp></pre>
   </div>
   <div class="tab-pane" id="update-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = { name: 'Babies bedroom' };
-Lelylan.Location.update('&lt;id&gt;', params, callback);</code></pre>
+Lelylan.Location.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-location-javascript">
+  <div class="tab-pane" id="update-a-location-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{location}}</div>
+  <script>
+    function LelylanController($scope, Location) {
+      var params = { name: 'Babies bedroom' };
+      $scope.location = Location.get({ id: '<id>' });
+      $scope.location.name = params.name;
+      $scope.location.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-location-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { name: 'Babies bedroom' }
-location = lelylan.update_location('&lt;id&gt;', params)</code></pre>
+location = lelylan.update_location('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -529,7 +587,7 @@ When updating <code>devices</code> or <code>locations</code> all previous connec
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -553,7 +611,7 @@ Connected devices are not deleted.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE  http://api.lelylan.com/locations/:id</code></pre>
+<pre><code>DELETE  http://api.lelylan.com/locations/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -577,39 +635,51 @@ Connected devices are not deleted.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-location-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#delete-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#delete-a-location-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#delete-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-location-angular" data-toggle="tab">Angular</a></li>
+  <li><a href="#delete-a-location-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-location-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/locations/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Length: 0'</code></pre>
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/locations/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Length: 0'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Location.delete('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Location.delete('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-location-javascript">
+  <div class="tab-pane" id="delete-a-location-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{location}}</div>
+  <script>
+    function LelylanController($scope, Location) {
+      $scope.location = Location.get({ id: '<id>' });
+      $scope.location.$delete();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-location-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-location = lelylan.delete_location('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+location = lelylan.delete_location('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
