@@ -35,7 +35,7 @@ your life.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">GET http://api.lelylan.com/functions/:id</code></pre>
+<pre><code>GET http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -59,38 +59,49 @@ your life.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-function-angular" data-toggle="tab">Angular</a></li>
+  <li><a href="#get-a-function-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-function-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl http://api.lelylan.com/functions/&lt;id&gt;</code></pre>
+      <pre><xmp>curl http://api.lelylan.com/functions/<id></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-function-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-Lelylan.Function.find('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Function.find('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-function-javascript">
+  <div class="tab-pane" id="get-a-function-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      $scope.function = Function.get({ id: '<id>' });
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-function-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new
-function = lelylan.function('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+function = lelylan.function('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="function-representation">Example body response</h4>
 
@@ -136,8 +147,8 @@ function = lelylan.function('&lt;id&gt;')</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight"># created functions
-GET http://api.lelylan.com/functions</code><code class="no-highlight"># all functions
+<pre><code># created functions
+GET http://api.lelylan.com/functions</code><code># all functions
 GET http://api.lelylan.com/functions/public</code></pre>
 </div>
 
@@ -181,48 +192,63 @@ GET http://api.lelylan.com/functions/public</code></pre>
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#get-all-funcitons-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-all-functions-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-all-funcitons-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-all-funcitons-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-funcitons-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-all-funcitons-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-funcitons-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/functions \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre>
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/functions \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-functions-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Function.all({}, callback); // owned resources
 
 var Lelylan = require('lelylan-node')();
-Lelylan.Function.public({}, callback); // all existing resources</code></pre>
+Lelylan.Function.public({}, callback); // all existing resources</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-funcitons-javascript">
+  <div class="tab-pane" id="get-all-funcitons-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="function in owned">{{function}}</div>
+    <div ng-repeat="function in public">{{function}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Function) {
+      $scope.owned  = Function.query();   // owned resources
+      $scope.public = Function.public();  // all existing resources
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-funcitons-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 functions = lelylan.functions # owned resources
 
 lelylan = Lelylan::Client.new
-functions = lelylan.public_functions # all existing resources</code></pre>
+functions = lelylan.public_functions # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
-<div class="preview highlight"><pre><code class="no-highlight">[
+<div class="preview highlight"><pre><code>[
   { # function representation },
   { # function representation },
   ...
@@ -246,7 +272,7 @@ functions = lelylan.public_functions # all existing resources</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">POST http://api.lelylan.com/functions</code></pre>
+<pre><code>POST http://api.lelylan.com/functions</code></pre>
 </div>
 </div>
 
@@ -300,59 +326,77 @@ functions = lelylan.public_functions # all existing resources</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#create-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#create-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-function-angular" data-toggle="tab">Angular</a></li>
+  <li><a href="#create-a-function-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-function-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/functions \
-     -H 'Authorization: Bearer &lt;token&gt;' \
+      <pre><xmp>curl -X POST http://api.lelylan.com/functions \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
           "name": "Set intensity",
           "properties": [
-            { "uri": "http://api.lelylan.com/properties/&lt;status&gt;", "expected": "on" },
-            { "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;", "expected": "{{90}}" }
+            { "uri": "http://api.lelylan.com/properties/<status>", "expected": "on" },
+            { "uri": "http://api.lelylan.com/properties/<intensity>", "expected": "{{90}}" }
           ]
-         }'</code></pre>
+         }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-function-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   name: 'Set intensity',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '{{100}}' } ] };
+    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '{{100}}' } ] };
 
-Lelylan.Function.create(params, callback);</code></pre>
+Lelylan.Function.create(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-function-javascript">
+  <div class="tab-pane" id="create-a-function-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      var params = {
+        name: 'Set intensity',
+        properties: [
+          { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
+          { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '{{100}}' } ] };
+
+      $scope.function = new Function(params);
+      $scope.function.$save();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-function-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
   name: 'Set intensity',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '{{100}}' } ] }
+    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '{{100}}' } ] }
 
-function = lelylan.create_function(params)</code></pre>
+function = lelylan.create_function(params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 </div>
 
@@ -376,7 +420,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  http://api.lelylan.com/functions/:id</code></pre>
+<pre><code>PUT  http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -437,52 +481,72 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-function-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#update-a-function-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-function-curl">
-    <div class="preview"><pre><code class="no-highlight">
-curl -X PUT http://api.lelylan.com/functions/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
+    <div class="preview"><pre><xmp>
+curl -X PUT http://api.lelylan.com/functions/<id> \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
            "name": "Set intensity to 50%",
            "properties": [
-             { "uri": "http://api.lelylan.com/properties/&lt;status&gt;", "expected": "on"},
-             { "uri": "http://api.lelylan.com/properties/&lt;intensity&gt;", "expected": "50" }
+             { "uri": "http://api.lelylan.com/properties/<status>", "expected": "on"},
+             { "uri": "http://api.lelylan.com/properties/<intensity>", "expected": "50" }
            ]
-         }'</code></pre>
+         }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-function-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   name: 'Set intensity to 50%',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '50' } ] };
+    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] };
 
-Lelylan.Function.update('&lt;id&gt;', params, callback);</code></pre>
+Lelylan.Function.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-function-javascript">
+  <div class="tab-pane" id="update-a-function-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      var params = {
+        name: 'Set intensity to 50%',
+        properties:
+          [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
+            { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] };
+
+      $scope.function = Function.get({ id: '<id>' });
+      $scope.function.name = params.name;
+      $scope.function.properties = params.properties;
+      $scope.function.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-function-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
   name: 'Set intensity to 50%',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/&lt;status&gt;', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/&lt;intensity&gt;', expected: '50' } ] }
+    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
+      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] }
 
-function = lelylan.update_function('&lt;id&gt;', params)</code></pre>
+function = lelylan.update_function('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -494,7 +558,7 @@ When updating <code>properties</code> all previous connected properties are repl
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -517,7 +581,7 @@ Connected properties are not deleted.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">DELETE http://api.lelylan.com/functions/:id</code></pre>
+  <pre><code>DELETE http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -541,39 +605,51 @@ Connected properties are not deleted.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#delete-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#delete-a-function-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#delete-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-function-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#delete-a-function-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-function-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/functions/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Length: 0'</code></pre>
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/functions/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Length: 0'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-function-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Function.delete('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Function.delete('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-function-javascript">
+  <div class="tab-pane" id="delete-a-function-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      $scope.function = Function.get({ id: '<id>' });
+      $scope.function.$delete();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-function-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-function = lelylan.delete_function('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+function = lelylan.delete_function('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
