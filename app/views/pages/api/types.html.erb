@@ -87,7 +87,7 @@ type identified from its ID.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">GET http://api.lelylan.com/types/:id</code></pre>
+  <pre><code>GET http://api.lelylan.com/types/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -111,38 +111,49 @@ type identified from its ID.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-a-type-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-a-type-curl">
     <div class="preview">
-        <pre><code class="no-highlight">curl http://api.lelylan.com/types/&lt;id&gt;</code></pre>
+        <pre><xmp>curl http://api.lelylan.com/types/<id></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')();
-Lelylan.Type.find('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Type.find('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-a-type-js">
+  <div class="tab-pane" id="get-a-type-angular">
     <div class="preview">
-        <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.type = Type.get({ id: '<id>' });
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-a-type-ruby">
     <div class="preview">
-        <pre><code class="ruby">lelylan = Lelylan::Client.new
-type = lelylan.type('&lt;id&gt;')</code></pre>
+        <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+type = lelylan.type('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-  <div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="type-representation">Example body response</h4>
 
@@ -235,8 +246,8 @@ type = lelylan.type('&lt;id&gt;')</code></pre>
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight"># owned types
-GET http://api.lelylan.com/types</code><code class="no-highlight"># all types
+<pre><code># owned types
+GET http://api.lelylan.com/types</code><code># all types
 GET http://api.lelylan.com/types/public</code></pre>
 </div>
 
@@ -280,43 +291,58 @@ GET http://api.lelylan.com/types/public</code></pre>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-types-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#get-all-types-node" data-toggle="tab" class="node"> Node.js</a></li>
-  <li><a href="#get-all-types-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#get-all-types-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-types-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#get-all-types-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-types-curl">
-    <div class="preview"><pre><code class="no-highlight">curl http://api.lelylan.com/types \
-     -H 'Authorization: Bearer &lt;token&gt;'</code></pre></div>
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/types \
+     -H 'Authorization: Bearer <token>'</xmp></pre></div>
   </div>
   <div class="tab-pane" id="get-all-types-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 Lelylan.Type.all({}, callback); // owned resources
 
 var Lelylan = require('lelylan-node')();
-Lelylan.Type.public({}, callback); // all existing resources</code></pre>
+Lelylan.Type.public({}, callback); // all existing resources</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="get-all-types-js">
+  <div class="tab-pane" id="get-all-types-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">
+    <div ng-repeat="type in owned">{{type}}</div>
+    <div ng-repeat="type in public">{{type}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.owned  = Type.query();   // owned resources
+      $scope.public = Type.public();  // all existing resources
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-types-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 types = lelylan.types # owned resources
 
 lelylan = Lelylan::Client.new
-types = lelylan.public_types # all existing resources</code></pre>
+types = lelylan.public_types # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -357,7 +383,7 @@ Create a type and returns extended information for it.
 
 <h4>Resource URL</h4>
 <div class="preview">
-  <pre><code class="no-highlight">POST http://api.lelylan.com/types</code></pre>
+  <pre><code>POST http://api.lelylan.com/types</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -417,79 +443,103 @@ In this example the resource IDs are identified from friendly names.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#create-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#create-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#create-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-type-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#create-a-type-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-type-curl">
     <div class="preview">
-      <pre><code class="no-highlight">curl -X POST http://api.lelylan.com/types \
-     -H 'Authorization: Bearer &lt;token&gt;' \
+      <pre><xmp>curl -X POST http://api.lelylan.com/types \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
            "name": "Dimmer",
            "properties": [
-             "http://api.lelylan.com/properties/&lt;status&gt;",
-             "http://api.lelylan.com/properties/&lt;intensity&gt;"
+             "http://api.lelylan.com/properties/<status>",
+             "http://api.lelylan.com/properties/<intensity>"
            ],
            "functions": [
-             "http://api.lelylan.com/functions/&lt;turn-on&gt;",
-             "http://api.lelylan.com/functions/&lt;turn-off&gt;",
-             "http://api.lelylan.com/functions/&lt;set-intensity&gt;"
+             "http://api.lelylan.com/functions/<turn-on>",
+             "http://api.lelylan.com/functions/<turn-off>",
+             "http://api.lelylan.com/functions/<set-intensity>"
            ],
            "statuses": [
-             "http://api.lelylan.com/statuses/&lt;setting-intensity&gt;"
+             "http://api.lelylan.com/statuses/<setting-intensity>"
            ]
-         }'</code></pre>
+         }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   name: 'Dimmer',
   properties:
-    [ 'http://api.lelylan.com/properties/&lt;status&gt;',
-      'http://api.lelylan.com/properties/&lt;intensity&gt;' ],
+    [ 'http://api.lelylan.com/properties/<status>',
+      'http://api.lelylan.com/properties/<intensity>' ],
   functions:
-    [ 'http://api.lelylan.com/functions/&lt;turn-on&gt;',
-      'http://api.lelylan.com/functions/&lt;turn-off&gt;',
-      'http://api.lelylan.com/functions/&lt;set-intensity&gt;' ],
+    [ 'http://api.lelylan.com/functions/<turn-on>',
+      'http://api.lelylan.com/functions/<turn-off>',
+      'http://api.lelylan.com/functions/<set-intensity>' ],
   statuses:
-    [ 'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;' ] };
+    [ 'http://api.lelylan.com/statuses/<setting-intensity>' ] };
 
-Lelylan.Type.create(params, callback);</code></pre>
+Lelylan.Type.create(params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="create-a-type-javascript">
+  <div class="tab-pane" id="create-a-type-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      var params = {
+        name: 'Dimmer',
+        properties:
+          [ 'http://api.lelylan.com/properties/<status>',
+            'http://api.lelylan.com/properties/<intensity>' ],
+        functions:
+          [ 'http://api.lelylan.com/functions/<turn-on>',
+            'http://api.lelylan.com/functions/<turn-off>',
+            'http://api.lelylan.com/functions/<set-intensity>' ],
+        statuses:
+          [ 'http://api.lelylan.com/statuses/<setting-intensity>' ] };
+
+      $scope.type = new Type(params);
+      $scope.type.$save();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="create-a-type-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
   name: 'Dimmer',
   properties:
-    [ 'http://api.lelylan.com/properties/&lt;status&gt;',
-      'http://api.lelylan.com/properties/&lt;intensity&gt;' ],
+    [ 'http://api.lelylan.com/properties/<status>',
+      'http://api.lelylan.com/properties/<intensity>' ],
   functions:
-    [ 'http://api.lelylan.com/functions/&lt;turn-on&gt;',
-      'http://api.lelylan.com/functions/&lt;turn-off&gt;',
-      'http://api.lelylan.com/functions/&lt;set-intensity&gt;' ],
+    [ 'http://api.lelylan.com/functions/<turn-on>',
+      'http://api.lelylan.com/functions/<turn-off>',
+      'http://api.lelylan.com/functions/<set-intensity>' ],
   statuses:
-    [ 'http://api.lelylan.com/statuses/&lt;setting-intensity&gt;' ] }
+    [ 'http://api.lelylan.com/statuses/<setting-intensity>' ] }
 
-type = lelylan.create_type(params)</code></pre>
+type = lelylan.create_type(params)</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 201 Created
+<div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></div>
 
 <h4>Example body response</h4>
@@ -512,7 +562,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">PUT  http://api.lelylan.com/types/:id</code></pre>
+<pre><code>PUT  http://api.lelylan.com/types/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -575,35 +625,48 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li><a href="#update-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li><a href="#update-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-type-angular" data-toggle="tab">AngularJS</a></li>
+  <li><a href="#update-a-type-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-a-type-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/types/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
+    <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/types/<id> \
+     -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
-     -d '{ "name": "Dimmer RBG" }'</code></pre>
+     -d '{ "name": "Dimmer RBG" }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = { name: 'Dimmer RBG' };
-Lelylan.Type.update('&lt;id&gt;', params, callback);</code></pre>
+Lelylan.Type.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-a-type-javascript">
+  <div class="tab-pane" id="update-a-type-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.type = Type.get({ id: '<id>' });
+      $scope.type.name = 'Dimmer RBG';
+      $scope.type.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-type-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { name: 'Dimmer RBG' }
-type = lelylan.update_type('&lt;id&gt;', params)</code></pre>
+type = lelylan.update_type('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -616,7 +679,7 @@ all previous connected resources are replaced.
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
@@ -639,7 +702,7 @@ all previous connected resources are replaced.
 
 <h4>Resource URL</h4>
 <div class="preview">
-<pre><code class="no-highlight">DELETE http://api.lelylan.com/types/:id</code></pre>
+<pre><code>DELETE http://api.lelylan.com/types/:id</code></pre>
 </div>
 
 <h4>Parameters</h4>
@@ -663,39 +726,51 @@ all previous connected resources are replaced.
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
   <li class=""><a href="#delete-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li class=""><a href="#delete-a-type-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
-  <li class=""><a href="#delete-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class=""><a href="#delete-a-type-angular" data-toggle="tab">AngularJS</a></li>
+  <li class=""><a href="#delete-a-type-ruby" data-toggle="tab">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-type-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X DELETE http://api.lelylan.com/types/&lt;id&gt; \
-     -H 'Authorization: Bearer &lt;token&gt;' \
-     -H 'Content-Length: 0'</code></pre>
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/types/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Length: 0'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-type-node">
     <div class="preview">
-      <pre><code class="javascript">var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Type.delete('&lt;id&gt;', callback);</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Type.delete('<id>', callback);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="delete-a-type-javascript">
+  <div class="tab-pane" id="delete-a-type-angular">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.type = Type.get({ id: '<id>' });
+      $scope.type.$delete();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-type-ruby">
     <div class="preview">
-      <pre><code class="ruby">lelylan = Lelylan::Client.new(token: token)
-type = lelylan.delete_type('&lt;id&gt;')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+type = lelylan.delete_type('<id>')</xmp></pre>
     </div>
   </div>
 </div>
 
 <h4>Example header response</h4>
 
-<div class="preview"><pre><code class="no-highlight">HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4>Example body response</h4>
 
