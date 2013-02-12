@@ -651,8 +651,9 @@ Lelylan.Type.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{type}}</div>
   <script>
     function LelylanController($scope, Type) {
+      var params = { name: 'Dimmer RBG' };
       $scope.type = Type.get({ id: '<id>' });
-      $scope.type.name = 'Dimmer RBG';
+      $scope.type.name = params.name;
       $scope.type.$update();
     }
   </script>
