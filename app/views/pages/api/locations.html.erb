@@ -79,14 +79,18 @@ Lelylan.Location.find('<id>', callback);</code></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{location}}</div>
   <script>
     function LelylanController($scope, Location) {
       $scope.location = Location.get({ id: '<id>' });
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -259,6 +263,7 @@ Lelylan.Location.all({}, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
     <div ng-repeat="location in locations">{{location}}</div>
   </div>
@@ -267,8 +272,11 @@ Lelylan.Location.all({}, callback);</xmp></pre>
       $scope.locations = Location.query();   // owned resources
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -405,6 +413,7 @@ Lelylan.Location.create(params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{location}}</div>
   <script>
     function LelylanController($scope, Location) {
@@ -418,8 +427,11 @@ Lelylan.Location.create(params, callback);</xmp></pre>
       $scope.location.$save();
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -554,6 +566,7 @@ Lelylan.Location.update('<id>', params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{location}}</div>
   <script>
     function LelylanController($scope, Location) {
@@ -563,8 +576,11 @@ Lelylan.Location.update('<id>', params, callback);</xmp></pre>
       $scope.location.$update();
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -654,6 +670,7 @@ Lelylan.Location.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{location}}</div>
   <script>
     function LelylanController($scope, Location) {
@@ -661,8 +678,11 @@ Lelylan.Location.delete('<id>', callback);</xmp></pre>
       $scope.location.$delete();
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>

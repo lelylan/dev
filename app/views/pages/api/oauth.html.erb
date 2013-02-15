@@ -292,16 +292,18 @@ The flow starts redirecting the user to the authorization endpoint.
 
   <script>
     function LoginController($scope) {
-      $scope.credentials = {
+      $scope.oauth = {
         client:   '<client-id>',
         redirect: '<redirect-uri>',
         scope:    '<scope>',
         state:    '<state>' };
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan-oauth2.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
       </div>

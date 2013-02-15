@@ -86,14 +86,18 @@ Lelylan.History.find('<id>', callback);</xmp></pre>
       <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{history}}</div>
   <script>
     function LelylanController($scope, History) {
       $scope.history = History.get({ id: '<id>' });
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
       </div>
@@ -287,6 +291,7 @@ Lelylan.History.all(params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
     <div ng-repeat="history in histories">{{history}}</div>
   </div>
@@ -296,8 +301,11 @@ Lelylan.History.all(params, callback);</xmp></pre>
       $scope.histories = History.query(params);
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>

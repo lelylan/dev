@@ -344,6 +344,7 @@ Lelylan.Profile.me(callback);</xmp></pre>
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <head></head>
 <body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{profile}}</div>
   <script>
     function LelylanController($scope, Profile) {
@@ -352,8 +353,9 @@ Lelylan.Profile.me(callback);</xmp></pre>
   </script>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resources.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
