@@ -28,7 +28,7 @@ h2{font:60px "agb","helvetica neue",helvetica,arial,sans-serif;line-height:64px;
 header.heading{padding:10px;background:#f4f4f4;background:-webkit-gradient(linear,left top,left bottom,from(#f4f4f4),to(#e8e8e8));background:-moz-linear-gradient(top,#f4f4f4,#e8e8e8);background:linear-gradient(top,#f4f4f4,#e8e8e8);border-bottom:1px solid #d1d1d1;text-align:center;}
 header.heading h2{line-height:35px;font-size:30px}
 header nav{border-bottom:1px solid #00979D;background:#00979D;background:-webkit-gradient(linear,left top,left bottom,from(#01a4aa),to(#00979D));background:-moz-linear-gradient(top,#01a4aa,#00979D);background:linear-gradient(top,#01a4aa,#00979D);color:#777;}
-header nav{display:block;overflow:hidden;padding:15px 0 12px 290px;border-top:1px solid #00979D;}
+header nav{display:block;overflow:hidden;padding:15px 0 12px 345px;border-top:1px solid #00979D;}
 header nav a{color:#fafafa;text-shadow:none;text-decoration:none; padding:5px 0;}
 .flash{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:15px 0 10px 0;padding:5px 10px;color:#151616;font-size:15px;text-shadow:0 1px 0 rgba(255,255,255,0.50);-moz-box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30);box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30),0 1px 0 rgba(0,0,0,0.20);background:#eef6fd;}
 .flash.error{background:#ffc}
@@ -69,7 +69,7 @@ iframe{margin:10px 0}
 #nav #search:after{content:"";position:absolute;right:0;top:-5px;bottom:-5px;width:20px;background:-webkit-gradient(linear,left top,right top,from(rgba(244,244,244,0.30)),to(#f4f4f4))}
 
 #section{position:absolute;top:0;left:270px;bottom:0;right:0;background:#fff;padding:16px 35px;font:15px "helvetica neue",helvetica,arial,sans-serif;overflow:auto;-webkit-overflow-scrolling:touch;}
-#section p,#section hr,#section h2,#section h3,#section ul,#section ol{max-width:660px}
+#section p,#section hr,#section h2,#section h3,#section ul,#section ol{max-width:720px}
 #section h1{margin:10px 0 20px 0; font-weight:normal}
 #section h2{font-size:28px;margin:25px 0 10px 0;line-height:1.4em;}
 #section h3{margin:15px 0 10px 0;font-weight:normal; font-size:20px;}
@@ -86,7 +86,7 @@ iframe{margin:10px 0}
 select#language{margin-left:10px;}
 body.index #section h2{font:20px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;border-bottom:1px solid #e8e8e8;padding:0 0 5px 0;margin:15px 150px 20px 0}
 body.index #section article{overflow:hidden;max-width:750px;}
-body.index #section article div{width:200px;height:50px;float:left;margin:0 30px 30px 0;}
+body.index #section article div{width:220px;height:50px;float:left;margin:0 30px 30px 0;}
 body.index #section article div h3{font:18px arial,lucida,helvetica,arial,sans-serif;font-weight:normal;margin:5px 0}
 body.index #section article div span{line-height:1.3em;display:block;opacity:.7}
 
@@ -95,7 +95,7 @@ body.api #section h2:first-child{margin-top:0}
 body.api #section h3{padding:3px 5px;margin:10px 0;border-bottom:1px solid #e0e0e0}
 
 body.description #section{padding:25px 35px;}
-body.description #section article{max-width:660px;}
+body.description #section article{max-width:720px;}
 body.description #section h1.call{font-size: 36px;}
 body.description #section h1.call {margin:0; margin-bottom: 20px;}
 body.description #section h1.call a {padding-top:25px;}
@@ -117,8 +117,8 @@ table a.bigger{font-size:15px;}
 #section aside h3{margin-top: 3px;}
 #section aside p.message{font-size: 13px;}
 
-.animation {max-width:625px;background-color: #eee;padding:0 15px 10px 10px;border:1px solid #ccc;margin-bottom:15px;}
-.animation .canvas {position:relative;width:630px;height:40px;margin:20px 0;}
+.animation {max-width:685px;background-color: #eee;padding:0 15px 10px 10px;border:1px solid #ccc;margin-bottom:15px;}
+.animation .canvas {position:relative;width:690px;height:40px;margin:20px 0;}
 .animation .btn-warning {font-size:15px; margin-left:5px;}
 .animation h3 {display:inline;}
 .animation pre {margin-left:4px;}
@@ -142,7 +142,7 @@ body.pages-index .more{float:right;margin:0;padding:10px 30px 15px 0;font-size:1
 .upcase { text-transform:uppercase; }
 article.comments {margin-top: 60px; padding-top: 10px; border-top: solid 1px; border-color: #DADADA;}
 aside table td {line-height: 15px;}
-aside.menu {position:fixed !important; margin-left:270px;}
+aside.menu {position:fixed !important; margin-left:330px;}
 aside.menu td.inside {padding-left:22px;}
 dl dd{line-height: 1.7em;}
 article div.pros-cons div {padding-bottom: 8px;}

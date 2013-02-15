@@ -342,6 +342,7 @@ Lelylan.Profile.me(callback);</xmp></pre>
   <div class="tab-pane" id="get-a-user-angular">
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<head></head>
 <body>
   <div ng-controller="LelylanController">{{profile}}</div>
   <script>
@@ -349,8 +350,10 @@ Lelylan.Profile.me(callback);</xmp></pre>
       $scope.profile = Profile.get();
     }
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"/></script>
-  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resources.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"></script>
 </body>
 </html></xmp></pre>
     </div>

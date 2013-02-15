@@ -5,21 +5,21 @@ Site.animation = (function() {
 
   me.init = function(container_id) {
 
-    // Page structure 
+    // Page structure
     var container = $(container_id),
         canvas    = container.find('.canvas'),
         paper     = Raphael(canvas.attr('id'));
 
     // Lines visualization settings
     var path_attr   = {"stroke-width": 2, stroke: "#ddd"},
-        first_line  = paper.path("M18 20L292 20").attr(path_attr),
-        second_line = paper.path("M308 20L610 20").attr(path_attr);
+        first_line  = paper.path("M18 20L322 20").attr(path_attr),
+        second_line = paper.path("M338 20L670 20").attr(path_attr);
 
     // Circle visualization settings
     var circle_attr   = {stroke: "none", fill: "#ddd"},
         first_circle  = paper.circle(15, 20, 10).attr(circle_attr);
-        second_circle = paper.circle(300, 20, 10).attr(circle_attr);
-        third_circle  = paper.circle(615, 20, 10).attr(circle_attr);
+        second_circle = paper.circle(330, 20, 10).attr(circle_attr);
+        third_circle  = paper.circle(675, 20, 10).attr(circle_attr);
 
     // Moving circle visualization settings
     var moving_circle_attr = {stroke: "#FF7600", "stroke-width": 4},
@@ -75,20 +75,20 @@ Site.animation = (function() {
       function go_to_first_step(e) {
         moving_circle.attr({cx: 15});
         setTimeout(fade(first_circle, '.first-step'), 0);
-        e.preventDefault();       
+        e.preventDefault();
       }
 
       // Animation to second position
       function go_to_second_step(e) {
         moving_circle.attr({cx: 15});
-        animate(300, second_circle, '.second-step', 0);
+        animate(330, second_circle, '.second-step', 0);
         e.preventDefault();
       }
 
       // Animation to third position
       function go_to_third_step(e) {
         moving_circle.attr({cx: 300});
-        animate(615, third_circle, '.third-step', 0);
+        animate(675, third_circle, '.third-step', 0);
         e.preventDefault();
       }
 
