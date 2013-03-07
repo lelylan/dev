@@ -99,7 +99,7 @@ Redirect the user to the authorization endpoint.
 <div class="tab-content">
   <div class="tab-pane active" id="authorization-code-first-step-curl">
     <div class="preview">
-      <pre><xmp>http://people.lelylan.com/oauth/authorization?
+      <pre><xmp>http://people.lelylan.com/oauth/authorize?
        response_type=<code>&
        client_id=<client-id>&
        redirect_uri=<redirect-uri>&
@@ -265,7 +265,7 @@ The flow starts redirecting the user to the authorization endpoint.
 
 <div class="tab-content">
   <div class="tab-pane active" id="implicit-grant-curl">
-    <div class="preview"><pre><xmp>http://people.lelylan.com/oauth/authorization?
+    <div class="preview"><pre><xmp>http://people.lelylan.com/oauth/authorize?
        response_type=<token>&
        client_id=<client-id>&
        redirect_uri=<redirect-uri>&
@@ -765,7 +765,7 @@ access for all devices. You can specify multiple scopes by separating them with 
 (encoded as a <code>+</code>).
 <p>
 
-<div class="preview"><pre><code>http://people.lelylan.com/oauth/authorization?
+<div class="preview"><pre><code>http://people.lelylan.com/oauth/authorize?
         response_type=code&
         client_id=client_id&
         redirect_uri=redirect_uri&
