@@ -770,9 +770,10 @@ Lelylan.Subscription.update('<id>', params, callback);</xmp></pre>
       BasicAuth.set(credentials);
 
       var params = { resource: 'devices' };
-      $scope.subscription = Subscription.get({ id: '<id>' });
-      $scope.subscription.resource = params.resource;
-      $scope.subscription.$update();
+      $scope.subscription = Subscription.get({ id: '<id>' }, function() {
+        $scope.subscription.resource = params.resource;
+        $scope.subscription.$update();
+      });
     }
   </script>
 
@@ -873,8 +874,9 @@ Lelylan.Subscription.delete('<id>', callback);</xmp></pre>
       var credentials = { id: '<client-id>', secret: '<client-secret>' };
       BasicAuth.set(credentials);
 
-      $scope.subscription = Subscription.get({ id: '<id>' });
-      $scope.subscription.$delete();
+      $scope.subscription = Subscription.get({ id: '<id>' }, function() {
+        $scope.subscription.$delete();
+      });
     }
   </script>
 

@@ -538,10 +538,11 @@ Lelylan.Function.update('<id>', params, callback);</xmp></pre>
           [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
             { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] };
 
-      $scope.function = Function.get({ id: '<id>' });
-      $scope.function.name = params.name;
-      $scope.function.properties = params.properties;
-      $scope.function.$update();
+      $scope.function = Function.get({ id: '<id>' }, function() {
+        $scope.function.name = params.name;
+        $scope.function.properties = params.properties;
+        $scope.function.$update();
+      });
     }
   </script>
 
@@ -646,8 +647,9 @@ Lelylan.Function.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{function}}</div>
   <script>
     function LelylanController($scope, Function) {
-      $scope.function = Function.get({ id: '<id>' });
-      $scope.function.$delete();
+      $scope.function = Function.get({ id: '<id>' }, function() {
+        $scope.function.$delete();
+      });
     }
   </script>
 

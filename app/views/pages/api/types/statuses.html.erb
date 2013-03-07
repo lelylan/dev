@@ -585,11 +585,11 @@ Lelylan.Status.update('<id>', params, callback);</xmp></pre>
               value: ['0..10'],
               pending: true } ] };
 
-      $scope.status = Status.get({ id: '<id>' });
-      $scope.status.name = params.name;
-      $scope.status.properties = params.properties;
-
-      $scope.status.$update();
+      $scope.status = Status.get({ id: '<id>' }, function() {
+        $scope.status.name = params.name;
+        $scope.status.properties = params.properties;
+        $scope.status.$update();
+      });
     }
   </script>
 
@@ -695,8 +695,9 @@ Lelylan.Status.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{status}}</div>
   <script>
     function LelylanController($scope, Status) {
-      $scope.status = Status.get({ id: '<id>' });
-      $scope.status.$delete();
+      $scope.status = Status.get({ id: '<id>' }, function() {
+        $scope.status.$delete();
+      });
     }
   </script>
 
