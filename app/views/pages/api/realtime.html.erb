@@ -369,7 +369,7 @@ Lelylan.Subscription.find('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
       BasicAuth.set(credentials);
 
       $scope.subscription = Subscription.get({ id: '<id>' });
@@ -492,7 +492,7 @@ Lelylan.Subscription.all({}, callback);</xmp></pre>
   </div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
       BasicAuth.set(credentials);
 
       $scope.subscriptions = Subscription.query();
@@ -625,7 +625,7 @@ Lelylan.Subscription.create(params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
       BasicAuth.set(credentials);
 
       var params = {
@@ -762,7 +762,7 @@ Lelylan.Subscription.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
       BasicAuth.set(credentials);
 
       var params = { resource: 'devices' };
@@ -866,7 +866,7 @@ Lelylan.Subscription.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { id: '<client-id>', secret: '<client-secret>' };
+      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
       BasicAuth.set(credentials);
 
       $scope.subscription = Subscription.get({ id: '<id>' }, function() {
