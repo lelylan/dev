@@ -481,10 +481,11 @@ Lelylan.Property.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{property}}</div>
   <script>
     function LelylanController($scope, Property) {
+      var params = { default: '100' };
       $scope.property = Property.get({ id: '<id>' }, function() {
-        $scope.property.default = '100';
+        $scope.property.default = params.default;
         $scope.property.$update();
-      };
+      });
     }
   </script>
 

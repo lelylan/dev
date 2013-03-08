@@ -210,14 +210,14 @@ The following table describes the available resources and events you can subscri
 <div class="tab-content">
   <div class="tab-pane active" id="create-a-subscription-example-curl">
     <div class="preview">
-      <pre><code>curl -X POST http://api.lelylan.com/subscriptions \
+      <pre><xmp>curl -X POST http://api.lelylan.com/subscriptions \
      -u <client-id>:<client-secret> \
      -H 'Content-Type: application/json' \
      -d '{
           "resource": "device",
           "event": "property-update",
           "callback_uri": "http://callback.com/lelylan"
-        }'</code></pre>
+        }'</xmp></pre>
     </div>
   </div>
 </div>
@@ -366,7 +366,6 @@ Lelylan.Subscription.find('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
@@ -488,7 +487,6 @@ Lelylan.Subscription.all({}, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
     <div ng-repeat="subscription in subscriptions">{{subscription}}</div>
   </div>
@@ -624,7 +622,6 @@ Lelylan.Subscription.create(params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
@@ -762,7 +759,6 @@ Lelylan.Subscription.update('<id>', params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
@@ -867,7 +863,6 @@ Lelylan.Subscription.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp><html ng-app="lelylan">
 <body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
     function LelylanController($scope, BasicAuth, Subscription) {
