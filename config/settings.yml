@@ -6,8 +6,8 @@ index_pages:
 titles:
   'start': Getting Started
   'start/introduction': Introduction
-  'start/first-app': Build your First App
-  'start/first-physical': Connect your First Device
+  'start/app': Building Apps for the Connected Home
+  'start/physical': Connect your First Device
   'start/tutorials': Tutorials & Articles
   'start/showcases': Showcases
   'api': Lelylan API
