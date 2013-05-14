@@ -8,13 +8,16 @@
 
             <p>
             Using a third party application a user updates the device properties. For example
-            the following request turns on a light by setting its status value to <code>on</code>.
+            the following request turns on a light by setting its <code>status</code> to <code>on</code>.
             </p>
 
-          <div class="preview unified"><pre><xmp>PUT https://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
-            <div class="preview"><pre><xmp>{ "properties":
-  [ { "uri": "https://api.lelylan.com/properties/<status>",
-      "value": "on" } ] }</xmp></pre></div>
+          <div class="preview unified"><pre><xmp>PUT http://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
+            <div class="preview"><pre><xmp>{
+  "properties": [{
+    "id": "<status-id>",
+    "value": "on"
+  }]
+}</xmp></pre></div>
 
             </div>
 
@@ -26,20 +29,21 @@
               Lelylan receives the request and forwards it to the connected
               <a href="/api/physicals">physical device</a>. Lelylan does not wait for
               the physical device to apply the request and returns the expected device
-              representation (optimistic flow).
+              representation.
               </p>
 
               <div class="preview unified"><pre><xmp>HTTP/1.1 202 Accepted</xmp></pre></div>
               <div class="preview"><pre><xmp>{
-  "uri": "https://api.lelylan.com/devices/<light-id>",
   "id": "<light-id>",
+  "uri": "http://api.lelylan.com/devices/<light-id>",
   "name": "Connected Light",
-  "type": { "uri": "https://api.lelylan.com/types/<light-type-id>" },
+  "type": { "id": "<light-type-id>", "uri": "http://api.lelylan.com/types/<light-type-id>" },
   "physical": { "uri": "http://arduino.house.com/<physical-light-id>" },
   "properties": [{
-    "uri": "https://api.lelylan.com/properties/<status-id>",
     "id": "<status-id>",
+    "uri": "http://api.lelylan.com/properties/<status-id>",
     "value": "on"
+    "expected": "on"
   }]
 }</xmp></pre></div>
 
@@ -49,8 +53,7 @@
 
                 <p>
                 Once the request is applied to the physical device Lelylan notifies the third
-                party application through the <a href="/api/realtime">realtime service</a>. For
-                example subscribe to all property updates.
+                party application through the <a href="/api/realtime">realtime service</a>.
                 </p>
 
               <div class="preview unified"><pre><xmp>POST http://api.lelylan.com/subscriptions</xmp></pre></div>
