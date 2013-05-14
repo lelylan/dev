@@ -27,17 +27,35 @@ rolling shutters and windows, irrigations, video surveillance, gates, multimedia
 </p>
 
 <p>
-The Device API defines a set of services to monitor and control every existing
-device. Its final goal is to map every device to a unique URI which provides control
-over it.
+The Devices API defines a set of services to monitor and control any device with the
+final goal of mapping every device to a unique URI which provides control over it.
 </p>
 
 <p>
-Simplifying a device is characterized by a <a href="/api/types/">type</a> and by the
-<a href="/api/types/properties/">properties</a> it inherits from.
-For example, when creating a dimmer, the device inherits the <em>status</em>
-(<code>on</code> or <code>off</code>) and the <em>intensity</em> (from <code>
-0</code> to <code>100</code>) properties from the dimmer type.
+Simplifying, a device is characterized by a <a href="/api/types/">type</a> and the
+<a href="/api/types/properties/">properties</a> it inherits from. For example, when
+creating a basic light, the device inherits the <em>status</em>
+(<code>on</code> or <code>off</code>) property from the basic light type.
+</p>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="devices-dashboard">Getting started</a></h2>
+
+<p>
+  If you want to start playing with the Devices API the suggested solution is to use
+  <a href="http://d.lelylan.com">Lelylan Dashboard</a>. It gives you everything you
+  need to create, monitor, connect and simulate any device.
+</p>
+
+<a href="http://d.lelylan.com">
+<%= image_tag('devices-dashboard-ng.png', class: 'img-polaroid') %>
+</a>
+
+<p>
+  Lelylan Dashboard is available on <a href="https://github.com/lelylan/devices-dashboard-ng/">Github</a>.
 </p>
 
 </article>
@@ -105,9 +123,9 @@ Lelylan.Device.find('<id>', callback);</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -130,26 +148,41 @@ device = lelylan.device('<id>')</xmp></pre>
 <div class="preview"><pre><code>{
   "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
   "id": "5042344b95fc441000000001",
-  "name": "Closet dimmer",
-  "type": { "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d" },
+  "name": "Light",
+  "type": {
+    "id": "5042310470eda60a0000000d",
+    "uri": "http://api.lelylan.com/types/5042310470eda60a0000000d"
+  },
+  "categories": ["lights"],
   "physical": { "uri": "http://arduino.house.com/5042205c70eda61" },
+  "pending": false,
   "properties": [{
-    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-    "id": "50420c7e267ff51000000001",
-    "value": "on",
-    "expected": "on",
+    "uri": "http://api.lelylan.com/properties/518be5a700045e1521000001",
+    "id": "518be5a700045e1521000001",
+    "value": "off",
+    "expected": "off",
     "pending": false,
-    "suggested": {"on": "On", "off": "Off"}
+    "accepted": null
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
     "id": "50420c3a267ff51300000001",
     "value": "100",
     "expected": "100",
     "pending": false,
-    "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
+    "accepted": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
   }],
-  "created_at": "2012-09-01T16:00:32Z",
-  "updated_at": "2012-09-01T16:00:32Z"
+  "owner": {
+    "id": "5036227a4f1b030200000001",
+    "uri": "http://api.lelylan.com/people/5036227a4f1b030200000001"
+  },
+  "maker": {
+    "id": "5036227a4f1b030200000001",
+    "uri": "http://api.lelylan.com/people/5036227a4f1b030200000001"
+  },
+  "activated": true,
+  "created_at": "2013-05-13T14:22:11Z",
+  "updated_at": "2013-05-13T16:41:57Z",
+  "updated_from": "Alice"
 }</code></pre></div>
 
 <h4>Body Response explained</h4>
@@ -158,7 +191,7 @@ device = lelylan.device('<id>')</xmp></pre>
   <dd><span>uri</span> - Device URI.</dd>
   <dd><span>id</span> - Device ID.</dd>
   <dd><span>name</span> - Device name.</dd>
-  <dd><span>type</span> - Device type. <a href="/api/types">Learn more about</a>.</dd>
+  <dd><span>type</span> - Device type ID and URI. <a href="/api/types">Learn more about</a>.</dd>
   <dd><span>physical</span> - Connected physical device URI.
   <a href="/api/physicals">Learn more about</a>.</dd>
   <dt><span>properties</span> - Device properties.</dt>
@@ -170,9 +203,13 @@ device = lelylan.device('<id>')</xmp></pre>
     <a href="/community/faq#value-and-expected-value">Learn more about</a>.</dd>
     <dd><span>pending</span> - Property pending status.
     <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
-    <dt><span>suggested</span> - List of suggested values.
-    <a href="/community/faq#suggested-values">Learn more about</a>.</dt>
+    <dt><span>accepted</span> - List of accepted values.
+    <a href="/community/faq#accepted-values">Learn more about</a>.</dt>
   </div>
+  <dd><span>owner</span> - Device owner.</dd>
+  <dd><span>maker</span> - Device creator.</dd>
+  <dd><span>activated</span> - Device activation status. <a href="/api/devices/activations">Learn more about</a>.</dd>
+
 </dl>
 
 </article>
@@ -185,15 +222,17 @@ device = lelylan.device('<id>')</xmp></pre>
 
 <p>
 Returns private information for a given device identified from its ID.
+</p>
 
+<p>
 For security reasons the <a href="#device-representation">device representation</a> does not
 show some sensitive information like the device secret and the activation code. The only way to
-get them is to use the private service described in this section.
+get them is to use the private service described here.
 </p>
 
 <p class="notice">
 <span class="label">Notice</span>
-To access this service you must use the <a href="/api/oauth#scopes">privates scope</a>.
+To access this service you must use the <a href="/api/oauth#scopes">privates</a> scope.
 </p>
 
 <h4>Resource URL</h4>
@@ -251,9 +290,9 @@ Lelylan.Device.privates('<id>', callback);</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -327,7 +366,7 @@ device = lelylan.device_privates('<id>');</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Type URI to search.
+        Type ID to search.
       </td>
     </tr>
     <tr>
@@ -336,16 +375,16 @@ device = lelylan.device_privates('<id>');</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical device URI to search. <a href="/api/physicals">Learn more about</a>
+        Physical device URI to search.
       </td>
     </tr>
     <tr>
       <td class="parameter">
-        <span>properties[uri]</span>
+        <span>properties[id]</span>
         <span class="info">optional</span>
       </td>
       <td>
-        Property URI to search.
+        Property ID to search.
       </td>
     </tr>
     <tr>
@@ -414,14 +453,14 @@ device = lelylan.device_privates('<id>');</xmp></pre>
 <div class="tab-content">
   <div class="tab-pane active" id="get-all-devices-curl">
     <div class="preview">
-      <pre><xmp>curl http://api.lelylan.com/devices?properties[value]=on \
+      <pre><xmp>curl http://api.lelylan.com/devices?name=light \
      -H 'Authorization: Bearer <token>'</xmp></pre>
      </div>
   </div>
   <div class="tab-pane" id="get-all-devices-node">
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.all({ 'properties[value]': 'on' }, callback);</xmp></pre>
+Lelylan.Device.all({ 'name': 'light' }, callback);</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="get-all-devices-angular">
@@ -434,13 +473,13 @@ Lelylan.Device.all({ 'properties[value]': 'on' }, callback);</xmp></pre>
   </div>
   <script>
     function LelylanController($scope, Device) {
-      $scope.devices = Device.query({ 'properties[value]': 'on' });
+      $scope.devices = Device.query({ 'name': 'light' });
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -449,7 +488,7 @@ Lelylan.Device.all({ 'properties[value]': 'on' }, callback);</xmp></pre>
   <div class="tab-pane" id="get-all-devices-ruby">
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-devices = lelylan.devices('properties[value]' => 'on')</xmp></pre>
+devices = lelylan.devices(name: 'light')</xmp></pre>
     </div>
   </div>
 </div>
@@ -503,17 +542,17 @@ devices = lelylan.devices('properties[value]' => 'on')</xmp></pre>
     </tr>
     <tr>
       <td class="parameter">
-        <span>type</span>
+        <span>type.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Type URI. See <a href="/api/types#available-types">available types</a> and
-        <a href="/api/types/">learn more about</a>.
+        Type ID. Check out <a href="http://t.lelylan.com">available types</a> or
+        <a href="/api/types/">create</a> a new one.
       </td>
     </tr>
     <tr>
       <td class="parameter">
-        <span>physical</span>
+        <span>physical.uri</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -541,8 +580,8 @@ devices = lelylan.devices('properties[value]' => 'on')</xmp></pre>
      -H 'Content-Type: application/json' \
      -d '{
            "name": "Closet dimmer",
-           "type": "http://api.lelylan.com/types/<id>",
-           "physical": "<physical-device-uri>"
+           "type": { "id": "<id>" },
+           "physical": { "uri": "<physical-device-uri>" }
          }'</xmp></pre>
     </div>
   </div>
@@ -551,8 +590,8 @@ devices = lelylan.devices('properties[value]' => 'on')</xmp></pre>
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   name: 'Closet dimmer',
-  type: 'http://api.lelylan.com/types/<id>',
-  physical: '<physical-device-uri>' };
+  type: { id: '<id>' },
+  physical: { uri: '<physical-device-uri>' } };
 
 device = Lelylan.Device.create(params, callback);</xmp></pre>
     </div>
@@ -567,17 +606,17 @@ device = Lelylan.Device.create(params, callback);</xmp></pre>
     function LelylanController($scope, Device) {
       var params = {
         name: 'Closet dimmer',
-        type: 'http://api.lelylan.com/types/<id>',
-        physical: '<physical-device-uri>' };
+        type: { id: '<id>' },
+        physical: { uri: '<physical-device-uri>' } };
 
       $scope.device = new Device(params);
       $scope.device.$save();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -588,8 +627,8 @@ device = Lelylan.Device.create(params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
   name: 'Closet dimmer',
-  type: 'http://api.lelylan.com/types/<id>',
-  physical: '<physical-device-uri>' }
+  type: { id: '<id>' },
+  physical: { uri: '<physical-device-uri>' } };
 
 device = lelylan.create_device(params)</xmp></pre>
     </div>
@@ -620,7 +659,7 @@ Update a device identified from its ID and returns extended information for it.
 </p>
 
 <p class="notice">
-<span class="label">notice</span> Right now the device type can not be updated.
+<span class="label">notice</span> The device type can't be updated.
 </p>
 
 <h4>Resource URL</h4>
@@ -652,7 +691,7 @@ Update a device identified from its ID and returns extended information for it.
     </tr>
     <tr>
       <td class="parameter">
-        <span>physical</span>
+        <span>physical.uri</span>
         <span class="info">optional</span>
       </td>
       <td>
@@ -695,17 +734,15 @@ Lelylan.Device.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      var params = { name: 'Zigbee closet dimmer' };
-      $scope.device = Device.get({ id: '<id>' }, function() {
-        $scope.device.name = params.name;
-        $scope.device.$update();
-      });
+      var params = { id: scope.device.id, name: 'Zigbee closet dimmer' };
+      $scope.device = new Device(params);
+      $scope.device.$update();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -794,15 +831,14 @@ Lelylan.Device.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      $scope.device = Device.get({ id: '<id>' }, function() {
-        $scope.device.$delete();
-      });
+      $scope.device = new Device({ id: '<id>' });
+      $scope.device.$delete();
     };
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -869,11 +905,11 @@ device = lelylan.delete_device('<id>')</xmp></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Property URI.
+        Property ID.
       </td>
     </tr>
     <tr>
@@ -906,11 +942,11 @@ device = lelylan.delete_device('<id>')</xmp></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.suggested</span>
+        <span>&raquo; property.accepted</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.
+        List of accepted values. <a href="/community/faq#accepted-values">Learn more about</a>.
         <span class="info">Valid values: JSON objects.</span>
       </td>
     </tr>
@@ -935,10 +971,10 @@ device = lelylan.delete_device('<id>')</xmp></pre>
      -H 'Content-Type: application/json' \
      -d '{
            "properties": [{
-             "uri": "http://api.lelylan.com/properties/<status>",
+             "id": "<status>",
              "value": "on"
            },{
-             "uri": "http://api.lelylan.com/properties/<intensity>",
+             "id": "<intensity>",
              "value": "50" }
            ]
          }'</xmp></pre>
@@ -949,18 +985,12 @@ device = lelylan.delete_device('<id>')</xmp></pre>
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<status>',
+    [ { id: '<status>',
         value: 'on' },
-      { uri: 'http://api.lelylan.com/properties/<intensity>',
+      { id: '<intensity>',
         value: '50' } ] };
 
 Lelylan.Device.properties('<id>', params, callback);</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="update-properties-javascript">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.find('<id>', callback);</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-properties-angular">
@@ -973,21 +1003,19 @@ Lelylan.Device.find('<id>', callback);</xmp></pre>
     function LelylanController($scope, Device) {
     var params = {
       properties:
-        [ { uri: 'http://api.lelylan.com/properties/<status>',
+        [ { id: '<status>',
             value: 'on' },
-          { uri: 'http://api.lelylan.com/properties/<intensity>',
+          { id: '<intensity>',
             value: '50' } ] };
 
-      $scope.device = Device.get({ id: '<id>' }, function() {
-        $scope.device.properties = params.properties;
-        $scope.device.$properties();
-      });
+      $scope.device = new Device({ id: '<id>', properties: params.properties});
+      $scope.device.$properties();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -998,9 +1026,9 @@ Lelylan.Device.find('<id>', callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<status>',
+    [ { id: '<status>',
         value: 'on' },
-      { uri: 'http://api.lelylan.com/properties/<intensity>',
+      { id: '<intensity>',
         value: '50' } ] }
 
 device = lelylan.device_properties('<id>', params)</xmp></pre>
@@ -1055,7 +1083,7 @@ device = lelylan.device_properties('<id>', params)</xmp></pre>
         <span class="info">required</span>
       </td>
       <td>
-        Function URI to execute.
+        Function ID to execute.
       </td>
     </tr>
     <tr>
@@ -1069,11 +1097,11 @@ device = lelylan.device_properties('<id>', params)</xmp></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Property URI.
+        Property ID.
       </td>
     </tr>
     <tr>
@@ -1132,7 +1160,7 @@ device = lelylan.device_properties('<id>', params)</xmp></pre>
   <div class="tab-pane" id="execute-a-function-i-node">
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-var params = { function: 'http://api.lelylan.com/functions/<turn-on>' };
+var params = { function: '<turn-on>' };
 
 Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
     </div>
@@ -1145,17 +1173,15 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      var params = { function: 'http://api.lelylan.com/functions/<turn-on>' };
-      $scope.device = Device.get({ id: '<id>' }, function(){
-        $scope.device.function = params.function;
-        $scope.device.$execute();
-      });
+      var params = { function: '<turn-on>' };
+      $scope.device = new Device({ id: '<id>', function: params.function});
+      $scope.device.$execute();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -1164,7 +1190,7 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
   <div class="tab-pane" id="execute-a-function-i-ruby">
     <div class="preview">
       <pre class="prettyprint"><>lelylan = Lelylan::Client.new(token: token)
-params = { function: 'http://api.lelylan.com/functions/<turn-on>' }
+params = { function: '<turn-on>' }
 
 device = lelylan.execute('<id>', params)</xmp></pre>
     </div>
@@ -1192,9 +1218,9 @@ to be sent from the user.
      -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
-           "function": "http://api.lelylan.com/functions/<set-intensity>"
+           "function": "<set-intensity>"
            "properties": [{
-             "uri": "http://api.lelylan.com/properties/<intensity>",
+             "id": "<intensity>",
              "value": "90" }
            ]
          }'</xmp></pre>
@@ -1205,9 +1231,9 @@ to be sent from the user.
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  function: 'http://api.lelylan.com/functions/<set-intensity>',
+  function: '<set-intensity>',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<intensity>',
+    [ { id: '<intensity>',
         value: '90' } ] };
 
 Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
@@ -1222,22 +1248,19 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Device) {
     var params = {
-      function: 'http://api.lelylan.com/functions/<set-intensity>',
+      function: '<set-intensity>',
       properties:
-        [ { uri: 'http://api.lelylan.com/properties/<intensity>',
+        [ { id: '<intensity>',
             value: '90' } ] };
 
-      $scope.device = Device.get({ id: '<id>' }, function() {
-        $scope.device.function   = params.function;
-        $scope.device.properties = params.properties;
-        $scope.device.$execute();
-      });
+      $scope.device = new Device({ id: '<id>', function: params.function, properties: params.params});
+      $scope.device.$execute();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
