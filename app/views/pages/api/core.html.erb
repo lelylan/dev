@@ -5,22 +5,92 @@
 <table>
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
+    <tr><td>&raquo; <a href="#rest">REST interface</a></td></tr>
     <tr><td>&raquo; <a href="#response-formats">Response formats</a></td></tr>
     <tr><td>&raquo; <a href="#cors">CORS</a></td></tr>
     <tr><td>&raquo; <a href="#public-resources">Public resources</a></td></tr>
-    <tr><td>&raquo; <a href="#pagination">Infinite scrolling pagination</a></td></tr>
-    <tr><td>&raquo; <a href="#time-formats">Accepted time formats</a></td></tr>
-    <tr><td>&raquo; <a href="#errors">Errors response</a></td></tr>
+    <tr><td>&raquo; <a href="#errors">Error responses</a></td></tr>
     <tr><td>&raquo; <a href="#rate-limit">Rate limit</a></td></tr>
     <tr><td>&raquo; <a href="#http-caching">HTTP caching</a></td></tr>
+    <tr><td>&raquo; <a href="#pagination">Infinite scrolling pagination</a></td></tr>
+    <tr><td>&raquo; <a href="#time-formats">Accepted time formats</a></td></tr>
     <tr><td>&raquo; <a href="#verbs">HTTP verbs limitations</a></td></tr>
     <tr><td>&raquo; <a href="#user-profile">User profile</a></td></tr>
-    <tr><td>&raquo; <a href="#rest">REST interface</a></td></tr>
   </tbody>
 </table>
 </aside>
 
 </article>
+
+
+<article>
+
+<h1 class="call"><a name="rest">REST interface</a></h1>
+
+<p>
+  Lelylan REST API is built on top of four resources.
+</p>
+
+<br/>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td><a href="/api/devices">Devices</a></td>
+      <td>Describe how to create, monitor, control and simulate a device</td>
+    </tr>
+    <tr>
+      <td><a href="/api/types">Types</a></td>
+      <td>Describe the structure of a device</td>
+    </tr>
+    <tr>
+      <td><a href="/api/locations">Locations</a></td>
+      <td>Describe the places devices live in</td>
+    </tr>
+    <tr>
+      <td><a href="/api/physicals">Physical Devices</a></td>
+      <td>Describe how to connect Lelylan to the physical world</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+Lelylan API attempts to conform to the design principles of Representational
+State Transfer (REST). The basic idea is to define services that look like the
+web, through the definition and the representation of all the resources that interact
+with the house.
+If you are thinking about what a resource is, think at it as
+anything important enough to be referenced as a thing by itself. That said,
+following the REST architecture, Lelylan defined its API following these rules.
+</p>
+
+<br/>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td><strong>Connectedness</strong></td>
+      <td>You can move between resources using the links contained in them</td>
+    </tr>
+    <tr>
+      <td><strong>Addressability</strong></td>
+      <td>Every resource is identified from an address</td>
+    </tr>
+    <tr>
+      <td><strong>Uniform interface</strong></td>
+      <td>The HTTP verb is used to define the action to apply</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+To understand how REST really works we highly suggest you to read
+<a href="http://www.amazon.com/RESTful-Web-Services-Leonard-Richardson/dp/0596529260/">Restful Web Services</a>
+
+
+</article>
+
+<br/>
 
 <article>
 
@@ -131,48 +201,6 @@
 
 <article>
 
-<h1 class="call"><a name="pagination">Infinite scrolling pagination</a></h1>
-
-<p>
-  Sometimes your database will be so large that it's impossible to pre-load it client-side. The solution is to pre-load a segment of the database and then use
-  pagination to load more data. Pagination is better with an infinite
-  scrolling pattern, rather than showing a list of pages.
-  When fetching the next page set the parameter <code>start</code>
-  with the last fetched resource <code>URI</code>.
-</p>
-
-<div class="preview"><pre><code>curl -L http://api.lelylan.com/devices.json?
-start=http://api.lelylan.com/devices/4dcb9ea9000d</code></pre>
-</code></pre></div>
-
-<p>
-The default number of resources per page is 25 and the maximum is 100.
-</p>
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="time-formats">Accepted time formats</a></h1>
-
-<p>
-The preferred time format accepted from time attributes is
-<a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> (for more accepted
-formats check out the <a href="http://ruby-doc.org/core-1.9.3/Time.html">Ruby Time Class</a>).
-The following examples describe the same time using two different accepted formats.
-</p>
-
-<div class="preview">
-  <pre><code>2012-07-03 12:45:29Z        # ISO 8601
-2012-07-03 14:45:29 +0200   # UTC local time with offset "+hh:mm"</code></pre>
-</div>
-</article>
-
-<br/>
-
-<article>
-
 <h1 class="call"><a name="errors">Error responses</a></h1>
 
 <h2><a name="401">401 - Unauthorized</a></h2>
@@ -229,7 +257,7 @@ The following examples describe the same time using two different accepted forma
 </h1>
 
 <p>
-We limit requests to <strong>5000</strong> per day. You can check the returned HTTP headers
+We limit requests to <code>5000</code> per day. You can check the returned HTTP headers
 of any authenticated API request to see your current status.
 </p>
 
@@ -290,6 +318,49 @@ Learn more about
 <a href="https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers#conditional-requests">
 conditional requests</a> to make your app faster.
 </p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="pagination">Infinite scrolling pagination</a></h1>
+
+<p>
+  Sometimes your database will be so large that it's impossible to pre-load it client-side. The solution is to pre-load a segment of the database and then use
+  pagination to load more data. Pagination is better with an infinite
+  scrolling pattern, rather than showing a list of pages.
+  When fetching the next page set the parameter <code>start</code>
+  with the last fetched resource <code>URI</code>.
+</p>
+
+<div class="preview"><pre><code>curl -L http://api.lelylan.com/devices.json?
+start=http://api.lelylan.com/devices/4dcb9ea9000d</code></pre>
+</code></pre></div>
+
+<p>
+The default number of resources per page is 25 and the maximum is 100.
+</p>
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="time-formats">Accepted time formats</a></h1>
+
+<p>
+The preferred time format accepted from time attributes is
+<a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> (for more accepted
+formats check out the <a href="http://ruby-doc.org/core-1.9.3/Time.html">Ruby Time Class</a>).
+The following examples describe the same time using two different accepted formats.
+</p>
+
+<div class="preview">
+  <pre><code>2012-07-03 12:45:29Z        # ISO 8601
+2012-07-03 14:45:29 +0200   # UTC local time with offset "+hh:mm"</code></pre>
+</div>
 
 </article>
 
@@ -384,31 +455,3 @@ profile = lelylan.me</xmp></pre>
 }</code></pre></div>
 
 </article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="rest">REST interface</a></h1>
-
-<p>
-Lelylan API attempts to conform to the design principles of Representational
-State Transfer (REST). The basic idea is to define services that look like the
-web, through the definition and the representation of all the resources that interact
-with the house. If you are thinking about what a resource is, think at it as
-anything important enough to be referenced as a thing by itself. That said,
-following the REST Architecture, Lelylan defined its API following these rules.
-</p>
-
-<ul>
-  <li><strong>Connectedness</strong> - You can move between resources using the links contained in them.</li>
-  <li><strong>Addressability</strong> - Every resource is identified from an address.</li>
-  <li><strong>Uniform interface</strong> - The HTTP verb is used to define the action to apply.</li>
-</ul>
-
-<p>
-To understand how REST really works we highly suggest you to read
-<a href="http://www.amazon.com/RESTful-Web-Services-Leonard-Richardson/dp/0596529260/">Restful Web Services</a>
-
-</article>
-
