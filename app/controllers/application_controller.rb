@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def title
-    Settings.titles[params[:id]] || 'Develop the connected house'
+    Settings.titles[params[:id]] || 'Building the Connected Home'
   end
 
   def index_page?
