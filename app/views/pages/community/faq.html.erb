@@ -37,15 +37,14 @@ The differences between a device and a physical device (aka physicals) isn't alw
 
 <ul>
   <li>
-  <strong><a href="/api/devices">Device</a></strong>. Is the resource defined in Lelylan as virtual
-  representation of any physical object. A device can be connected to the physical world through
-  the <code>physical</code> param and if this connection exists all requests sent to the device
-  are forwarded to the physical device.
+  <strong><a href="/api/devices">Device</a></strong>. Is the resource defined in Lelylan as
+  virtual representation of any object. A device can be connected to the physical world setting
+  the <code>physical</code> param.
   </li>
   <li>
   <strong><a href="/api/physicals">Physical device</a></strong>. Is the physical object you
-  interact with in the real world. It receives all requests from the device it is connected
-  to and sends back the realtime updates happening in the physical world.
+  interact with in the real world. It's the device that receives all requests from the device
+  it is connected to and sends back the realtime updates happening in the physical world.
   </li>
 </ul>
 
@@ -57,7 +56,7 @@ The differences between a device and a physical device (aka physicals) isn't alw
 
 <p>
 A device can be monitored or controlled through the <code>value</code> param. The problem is that
-using only <code>value</code> you can't have a full control of your device's properties. Think at
+using only <code>value</code> you can't have a full control of your device's status. Think at
 a roller shutter. How can I distinguish the actual opening level from the desired one? How can I
 know when it's finally open? To solve those problems Lelylan let you update a property using three
 params.
@@ -70,141 +69,202 @@ params.
   </li>
   <li>
   <code>expected</code> - Represents the property value expected from the user. It is generally
-  used by Apps that let you control your devices.
+  used by the apps that let you control your devices.
   </li>
   <li>
-  <code>pending</code> - Between the moment <code>expected</code> is set and <code>value</code>
-  is updated to the desired value from the physical device, the property is pending. Lelylan
-  automatically sets the pending value following a <a href="#pending-devices">simple set of rules</a>
-  and let you override them when needed. Accepted values are <code>true</code> or <code>false</code>.
+  <code>pending</code> - Between the moment in which the device receives the expected value and the
+  physical device sets it, the property is considered pending. Accepted values are <code>true</code>
+  and <code>false</code>.
   </li>
 </ul>
 
-<h4>Example Requests</h4>
+<h3 class="call"><a name="value-and-expected-value">How do I use it?</a></h3>
 
-<p>Suppose we have a roller shutter. This requests sets the <code>expected</code> to
-<code>100</code> meaning we want it fully open, <code>value</code> to
-<code>50</code> meaning that right now it's half open and <code>pending</code>
-status to <code>true</code> as the request is not completed.
+<p>
+The use cases you need to know are three.
+</p>
+
+<ul>
+  <li>
+  <strong>Third party app sets a new value</strong> - You decide to open the roller shutter with
+  your mobile app setting its <code>expected</code> level to 100 and by setting the pending status
+  to <code>true</code>. The device will be pending until the physical device doesn't apply the
+  desired changes.
+  </li>
+  <li>
+  <strong>Physical device sets some  intermediate value</strong> - The physical device is opening
+  the rolling shutter and it notifies Lelylan that it's half open by setting the device
+  <code>value</code> to 50 and the <code>pending</code> status to <code>true</code> as it didn't
+  end up the desired changes.
+  </li>
+  <li>
+  <strong>Physical device sets the final value</strong> - The physical device fully opens the
+  rolling shutter and it notifies Lelylan by setting the device <code>value</code> to 100. When
+  pending is not defined, it is set <code>false</code> meaning that the request has been resolved.
+  </li>
+</ul>
+
+<p>
+One more thing. When a device is not connected to a physical device the pending status is always set
+to <code>false</code> and when <code>expected</code> is set, it's value is copied into
+<code>value</code> simulating an instantaneous update.
+</p>
+
+
+
+<h4>Example Requests (from third party app)</h4>
+
+<p>Suppose we have a roller shutter. This request sets the <code>expected</code> to
+<code>100</code> meaning we want it fully open, and the <code>pending</code> value to
+<code>true</code> as the request is waiting for the physical device to resolve the request.
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-properties-javascript" data-toggle="tab" class="javascript">Javascript</a></li>
+  <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-properties-curl">
-    <div class="preview"><pre><code class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
-    -H 'Authorization: Bearer &lt;token&gt;' \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "properties": [{
-            "uri": "http://api.lelylan.com/properties/&lt;level&gt;",
-            "expected": "100", "value": "50", "pending": true }
-          ]
-        }'</code></pre>
+    <div class="preview"><pre><xmp class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "properties": [{
+             "id": "<level>",
+             "expected": "100",
+             "pending": true }] }'</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="update-properties-javascript">
+  <div class="tab-pane" id="update-properties-node">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  properties:
+    [{ id: '<level>',
+       expected: '100',
+       pending: true }] };
+
+Lelylan.Device.properties('<id>', params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      var params = {
+        id: '<id>',
+        properties:
+          [{ id: '<level>',
+             expected: '100',
+             pending: true }] };
+
+      $scope.property = new Property(params);
+      $scope.type.$update();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-properties-ruby">
     <div class="preview">
-      <pre><code># todo</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = {
+  properties:
+    [{ id: '<level>',
+       expected: '100',
+       pending: true }] }
+
+device = lelylan.device_properties('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
 
-<p class="notice">
-<span class="label">Notice</span>
-Although Lelylan automatically sets the pending value following a <a href="#pending-devices">
-simple set of rules</a>, physical devices should set the pending status to avoid inconsistencies.
-</p>
+<h4>Example Requests (from Physical Device)</h4>
 
-<p class="notice">
-<span class="label">Notice</span>
-When <code>expected</code> is set, Lelylan forward it to the physical device through the
-<code>value</code> param (a <a href="/api/physicals#receiving-property-updates">physical device</a>
-accepts only <code>value</code> as param, not <code>expected</code>).
-</p>
+<p>Suppose the roller shutter is fully open. This request sets the <code>value</code> to
+<code>100</code> meaning it is it fully open. As the pending <code>pending</code> is not defined,
+its default value is <code>false</code>. This means the request is resolved.
 
-</article>
-
-<article>
-
-<h2 class="call"><a name="pending-devices">Pending devices</a></h2>
-
-<p>
-When updating device <a href="/api/devices#update-properties">properties</a> or when
-<a href="/api/devices#update-properties">executing a function</a> a physical device
-does not change instantaneously. From the moment you send a request and the moment
-the request is completed, a few seconds are needed. During this period of time the
-device is defined as <strong>pending</strong>.
-</p>
-
-<p>
-A device is pending when one or more properties are pending. This moves our attention
-to the properties, which have two ways to set its pending status.
-</p>
-
-<ul>
-  <li>
-  <strong>Implicit</strong> - Lelylan tries to guess the pending status following some
-  basic rules.
-  </li>
-  <li>
-  <strong>Explicit</strong> - Setting the property pending value to <code>true</code>
-  or <code>false</code>
-  </li>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-properties-physical-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-properties-physical-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-properties-physical-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-properties-physical-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
-<h3><a name="implicit-pending-definition">Implicit pending definition</a></h3>
+<div class="tab-content">
+  <div class="tab-pane active" id="update-properties-physical-curl">
+    <div class="preview"><pre><xmp class="no-highlight">curl -X PUT http://api.lelylan.com/devices/5042344b95fc441000000001/properties \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "properties": [{
+             "id": "<level>",
+             "value": "100" }] }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-physical-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  properties:
+    [{ id: '<level>',
+       value: '100' }] };
 
-<p>
-To better understand how Lelylan decides if a property is pending or not we prepared
-some examples based on a roller shutter characterized by the property <code>level</code>,
-which indicates how much it's open through a range that goes from <code>0</code> to
-<code>100</code>.
-</p>
+Lelylan.Device.properties('<id>', params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-physical-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      var params = {
+        id: '<id>',
+        properties:
+          [{ id: '<level>',
+             value: '100' }] };
 
-<ul>
-  <li>
-  <strong>Rule 1 - Set the expected value (usually from the web)</strong>
-  - You decide to open the roller shutter with your mobile app setting its level
-  <code>expected</code> to 100. The pending status is set to <code>true</code>
-  until the physical device doesn't apply the desired changes and updates
-  <code>value</code>.
-  </li>
-  <li>
-  <strong>Rule 2 - Sets an halfway value (usually from physical device)</strong>
-  - The physical device is opening the rolling shutter but it's at 50% of the task.
-  It updates <code>value</code> to 50 and as this isn't the <code>expected</code>,
-  the pending status continue to be <code>true</code>.
-  </li>
-  <li>
-  <strong>Rule 3 - Set the final value (usually from physical device)</strong>
-  - The physical device fully opens the rolling shutter. It updates <code>value</code> to
-  100 matching the <code>expected</code> of 100 and setting the pending status to
-  <code>false</code>.
-  </li>
-</ul>
+      $scope.property = new Property(params);
+      $scope.type.$update();
+    }
+  </script>
 
-<p>
-If you feel brave enough, check out the
-<a href="https://gist.github.com/4258925#file-device_properties_spec-rb">pending status specs</a>
-to have a complete vision of how a pending status is automatically defined by Lelylan.
-</p>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-physical-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = {
+  properties:
+    [{ id: '<level>',
+       value: '100' }] }
 
-<p class="notice">
-<span class="label">Notice</span>
-When a device is not connected to a physical device those rules are not applied and
-the pending status is always set to <code>false</code>. Following the same logic when
-<code>expected</code> is set, it's value is copied into <code>value</code> simulating
-an instantaneous update.
-</p>
+device = lelylan.device_properties('<id>', params)</xmp></pre>
+    </div>
+  </div>
+</div>
 
 </article>
 

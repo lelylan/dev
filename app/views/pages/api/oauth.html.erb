@@ -300,9 +300,9 @@ The flow starts redirecting the user to the authorization endpoint.
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -496,7 +496,7 @@ use the refresh token you previously received together with the access token.
   </div>
   <div class="tab-pane" id="refresh-access-token-angular">
     <div class="preview">
-      <pre class="prettyprint">// The access token is automatically refreshed by AngularJS components.</pre>
+      <pre class="prettyprint">// The access token is automatically refreshed by AngularJS Client.</pre>
     </div>
   </div>
   <div class="tab-pane" id="refresh-access-token-ruby">
@@ -751,7 +751,7 @@ When no scopes are defined <code>user</code> is the default one.
         <span class="info">Read access to user profile</span>
       </td>
       <td>
-        <span class="label">Get /me</span>
+        <span class="label link"><a href="/api/core#user-profile">Get /me</a></span>
       </td>
     </tr>
   </tbody>
@@ -844,6 +844,9 @@ might be of help.
   </li>
   <li>
   <a href="http://github.com/intridea/oauth2" class="bigger">Ruby OAuth2 Gem</a>
+  </li>
+  <li>
+  <a href="lelylan.github.com/oauth2-ng/" class="bigger">Angular OAuth2 Directive</a>
   </li>
   <li>
   <a href="/community/clients/" class="bigger">Lelylan Client Libraries</a>
