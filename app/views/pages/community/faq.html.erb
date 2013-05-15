@@ -6,12 +6,10 @@
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#devices-and-physicals">Devices and Physical Devices</a></td></tr>
-    <tr><td>&raquo; <a href="#value-and-expected-value">Value and Expected value</a></td></tr>
-    <tr><td>&raquo; <a href="#pending-devices">Pending devices</a></td></tr>
+    <tr><td>&raquo; <a href="#value-and-expected-value">Value, expected and pending</a></td></tr>
     <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
     <tr><td>&raquo; <a href="#suggested-values">Suggested values</a></td></tr>
     <tr><td>&raquo; <a href="#function-conventions">Function conventions</a></td></tr>
-    <tr><td>&raquo; <a href="#signature">Signature</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -52,7 +50,7 @@ The differences between a device and a physical device (aka physicals) isn't alw
 
 <article>
 
-<h2 class="call"><a name="value-and-expected-value">Value, expected value and pending status</a></h2>
+<h2 class="call"><a name="value-and-expected-value">Value, expected and pending explained</a></h2>
 
 <p>
 A device can be monitored or controlled through the <code>value</code> param. The problem is that
@@ -282,37 +280,11 @@ status resource.
 </p>
 
 <p>
-Right now this service is not available on server side. To get the device status you must
-use one of the existing <a href="/community/clients/">Javascript libraries</a>
-<span class="label warning">todo</span>. This decision is due to performance motivation and
-to the fact that the status information is a client visualization tasks.
-</p>
-
-<ul class="nav nav-tabs">
-  <li class="active" data-toggle="tab" class="javascript"><a href="#get-status-javascript">Javascript</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="get-status-javascript">
-    <div class="preview">
-      <pre><code>device = Device.find(uri);
-status = device.status();</code></pre>
-    </div>
-  </div>
-</div>
-
-<p>
-In this example we show how to get the device status. Just find the device through
-its id and call the <code>status()</code> method. See the
-<a href="/api/types/statuses/#status-representation">status representation</a> to
-get an idea of its structure.
-</p>
-
-<p class="notice">
-<span class="label">Notice</span>
-If you think that this functionality must be present in the server side
-<a href="/community/support/">write us</a> your use cases and why you need it.
-We are open to discussions.
+Right now this service is not available on server side. This decision is due to performance
+motivation and to the fact that the status information is a client visualization tasks.
+At the moment a basic implementation is available on the AngularJS
+<a href="http://lelylan.github.com/devices-component-ng/">Device component</a>
+where it is used to give a basic description of the device status.
 </p>
 
 </article>
@@ -388,110 +360,3 @@ Supposing you want to intensity value of a light be 100% if the user does not se
 
 </article>
 
-<article>
-
-<h2 class="call"><a name="signature">Signature</a></h2>
-
-<p>
-When communicating with external services we can't assume an HTTPS connection. This happens
-for example when sending a realtime updates to a subscribed third party application or when
-we communicating with the physical world.
-<p>
-
-<p>
-To make those communications secure we need to add a <strong>nonce</strong> (unique string
-between all requests) and a <strong>signature</strong> which proves the message is generated
-from us. A signature is made by an SHA-1-signed hexadecimal digest using a secret as key and
-the payload as message.
-</p>
-
-<h4>Signature check example</h4>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#verify-payload-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#verify-payload-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-  <li><a href="#verify-payload-arduino" data-toggle="tab" class="arduino">Arduino</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane" id="verify-payload-ruby">
-    <div class="preview">
-      <pre><code>require 'openssl'
-
-secret    = CLIENT_SECRET
-signature = request.headers['X-Physical-Signature']
-payload   = request.body
-
-digest = OpenSSL::Digest::Digest.new('sha1')
-verify = OpenSSL::HMAC.hexdigest(digest, client_secret, payload.to_json.to_s)
-
-raise InvalidSignature, "Invalid X-Physical-Signature" if signature != verify</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane active" id="verify-payload-node">
-    <div class="preview">
-      <pre><code>var crypto = require('crypto');
-
-var secret    = CLIENT_SECRET,
-    signature = request.headers('X-Physical-Signature'),
-    payload   = request.body();
-
-var digest = crypto.createHmac("sha1", secret);
-digest.update(JSON.stringify(payload));
-var verify = digest.digest('hex')
-
-if (signature != verify) throw new(Error)("Invalid X-Physical-Signature");</code></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="verify-payload-arduino">
-    <div class="preview">
-      <pre><code class="cpp">// Download the library from https://github.com/Phoul/cryptosuite
-#include "sha1.h"
-
-String payload;
-String signature;
-String verify;
-
-// Device secret in hex
-// 0ca70cc411e9e9de25b47b3e76b8a1932ae48bee6e6fa8808b534994dff5045d
-uint8_t secret[]={
-  0x0c,0xa7,0x0c,0xc4,0x11,0xe9,0xe9,0xde,0x25,0xb4,0x7b,0x3e,0x76,0xb8,0xa1,0x93,
-  0x2a,0xe4,0x8b,0xee,0x6e,0x6f,0xa8,0x80,0x8b,0x53,0x49,0x94,0xdf,0xf5,0x04,0x5d
-};
-
-// Convert the Hash into the final String
-String convertHash(uint8_t* hash) {
-  String returnString; int i;
-  for (i=0; i<20; i++) {
-    returnString += ("0123456789abcdef"[hash[i]>>4]);
-    returnString += ("0123456789abcdef"[hash[i]&0xf]);
-  }
-  return returnString;
-}
-
-void setup() {
-  Serial.begin(57600);
-}
-
-void loop() {
-
-  payload = REQUEST_PAYLOAD;
-  signature = REQUEST_SIGNATURE;
-
-  Sha1.initHmac(secret, 32);
-  Sha1.print(payload);
-  verify = convertHash(Sha1.resultHmac());
-
-  Serial.println(signature, verify);
-}</code></pre>
-    </div>
-  </div>
-</div>
-
-<p class="notice">
-<span class="label">Notice</span>
-Remember to use the <code>X-Hub-Signature</code> header when using the realtime services
-and to use the <code>X-Physical-Signature</code> header when using the physical services.
-</p>
-
-</article>
