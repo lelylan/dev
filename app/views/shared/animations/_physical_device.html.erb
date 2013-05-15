@@ -7,17 +7,14 @@
           <a class="btn btn-warning" href="#">Apply request &raquo;</a>
 
           <p>
-          When you update the device status changing its
-          <a href="/api/devices#update-properties">properties</a> or executing a
-          <a href="/api/devices#execute-a-function">function</a>, Lelylan forward
-          the request to the connected physical device URI to update its properties.
+          When you update a device
+          <a href="/api/devices#update-properties">properties</a> or you execute a
+          <a href="/api/devices#execute-a-function">function</a> using Lelylan, the request
+          is forwarded to the connected physical device URI, sending the properties to update.
           </p>
 
           <div class="preview unified"><pre><xmp>PUT http://arduino.house.com/<physical-light></xmp></pre></div>
-          <div class="preview"><pre><xmp>{ "properties":
-  [ { "uri": "http://api.lelylan.com/properties/<status>",
-      "id": "<status>",
-      "value": "on" } ] }</xmp></pre></div>
+          <div class="preview"><pre><xmp>{ "properties": [{ "id": "<status>", "value": "on" }] }</xmp></pre></div>
 
         </div>
 
@@ -43,18 +40,16 @@
 
           <p>
           When the physical device applies the desired changes in the physical world
-          it should notify Lelylan about the changes.
+          it must notify Lelylan about the changes.
           </p>
 
           <div class="preview unified"><pre><xmp>PUT http://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
 
-          <div class="preview"><pre><xmp>{ "properties":
-  [ { "uri": "http://api.lelylan.com/properties/<status>",
-      "value": "on" } ] }</xmp></pre></div>
+          <div class="preview"><pre><xmp>{ "properties": [{ "id": "<status>", "value": "on" }] }</xmp></pre></div>
 
           <p>
-          As the whole physical communication flow is asynchronous, subscribe to the
-          <a href="/api/realtime">realtime service</a> to have realtime notifications.
+          As the whole physical communication flow is asynchronous, you need to subscribe to the
+          <a href="/api/realtime">realtime service</a> to get realtime notifications.
           </p>
 
         </div>
