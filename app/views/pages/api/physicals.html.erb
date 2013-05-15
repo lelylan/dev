@@ -271,7 +271,9 @@ Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
       var secret = '<secret>';  // see dev.lelylan.com/api/devices#get-a-device-private-info
       var params = { 'properties': [{ 'id': 'status', 'value': 'on' }] };
 
-      var Physical = $resource(uri, {}, {update: { method: 'PUT' }}, {'X-Physical-Secret': secret});
+      var action = { update: { method: 'PUT', headers: { 'X-Physical-Secret': secret } } };
+      var Physical = $resource(uri, {}, action);
+
       $scope.physical = new Physical(params);
       $scope.physical.$update();
     }
@@ -408,7 +410,9 @@ Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
       var secret = '<device-secret>'; //see dev.lelylan.com/api/devices#get-a-device-private-info
       var params = { 'properties': [{ 'value': 'on', 'pending': false }] };
 
-      var Physical = $resource(uri, {}, {update: { method: 'PUT' }}, {'X-Physical-Secret': secret});
+      var action = { update: { method: 'PUT', headers: { 'X-Physical-Secret': secret } } };
+      var Physical = $resource(uri, {}, action);
+
       $scope.physical = new Physical(params);
       $scope.physical.$update();
     }

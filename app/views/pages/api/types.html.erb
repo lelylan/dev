@@ -10,6 +10,7 @@
     <tr><td>&raquo; <a href="#create-a-type">Create a type</a></td></tr>
     <tr><td>&raquo; <a href="#update-a-type">Update a type</a></td></tr>
     <tr><td>&raquo; <a href="#delete-a-type">Delete a type</a></td></tr>
+    <tr><td>&raquo; <a href="#categories">Get type categories</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -462,7 +463,7 @@ Create a type and returns extended information for it.
       <span class="info">optional</span>
     </td>
     <td>
-      List of categories. <a href="/api/types/categories/">Learn more about categories</a>.
+      List of categories. <a href="/api/types#categories">See valid categories</a>.
     </td>
   </tr>
   <tr>
@@ -648,7 +649,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
         <span class="info">optional</span>
       </td>
       <td>
-        List of categories. <a href="/api/types/categories">Learn more about categories</a>.
+        List of categories. <a href="/api/types#categories">See valid categories</a>.
       </td>
     </tr>
     <tr>
@@ -848,5 +849,90 @@ type = lelylan.delete_type('<id>')</xmp></pre>
 <p>
   See <a href="#type-representation">type representation</a> for body response.
 </p>
+
+</article>
+
+<br/>
+
+<article>
+
+<h1 class="call"><a name="categories">GET /categories</a></h1>
+
+<p>
+  Returns a list of common categories to associate to your types.
+</p>
+
+<h4>Resource URL</h4>
+<div class="preview">
+<pre><code>GET http://api.lelylan.com/categories</code></pre>
+</div>
+
+<h4>Example Request</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-categories-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-categories-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-categories-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-all-categories-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-categories-curl">
+    <div class="preview">
+      <pre><xmp>curl http://api.lelylan.com/categories \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+     </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Category.all({}, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">
+    <div ng-repeat="category in categories">{{category}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Category) {
+      $scope.categories = Category.query();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+categories = lelylan.categories()</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h4>Example header response</h4>
+
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h4>Example body response</h4>
+
+<div class="preview"><pre><code>[
+  { "name": "lights" },
+  { "name": "locks" },
+  { "name": "thermostats" },
+  { "name": "alarms" },
+  { "name": "meters" },
+  { "name": "cameras" },
+  ...
+]</code></pre></div>
 
 </article>
