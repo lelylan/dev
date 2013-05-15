@@ -6,10 +6,10 @@
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#devices-and-physicals">Devices and Physical Devices</a></td></tr>
-    <tr><td>&raquo; <a href="#value-and-expected-value">Value, expected and pending</a></td></tr>
+    <tr><td>&raquo; <a href="#value-expected-pending">Value, expected and pending</a></td></tr>
     <tr><td>&raquo; <a href="#device-status">Device status</a></td></tr>
-    <tr><td>&raquo; <a href="#suggested-values">Suggested values</a></td></tr>
-    <tr><td>&raquo; <a href="#function-conventions">Function conventions</a></td></tr>
+    <tr><td>&raquo; <a href="#default-status-function">Default status function</a></td></tr>
+    <tr><td>&raquo; <a href="#accepted-values">Accepted values</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -50,7 +50,7 @@ The differences between a device and a physical device (aka physicals) isn't alw
 
 <article>
 
-<h2 class="call"><a name="value-and-expected-value">Value, expected and pending explained</a></h2>
+<h2 class="call"><a name="value-expected-pending">Value, expected and pending explained</a></h2>
 
 <p>
 A device can be monitored or controlled through the <code>value</code> param. The problem is that
@@ -76,7 +76,7 @@ params.
   </li>
 </ul>
 
-<h3 class="call"><a name="value-and-expected-value">How do I use it?</a></h3>
+<h3 class="call"><a name="value-expected-pending">How do I use it?</a></h3>
 
 <p>
 The use cases you need to know are three.
@@ -282,81 +282,64 @@ status resource.
 <p>
 Right now this service is not available on server side. This decision is due to performance
 motivation and to the fact that the status information is a client visualization tasks.
-At the moment a basic implementation is available on the AngularJS
-<a href="http://lelylan.github.com/devices-component-ng/">Device component</a>
-where it is used to give a basic description of the device status.
+A basic implementation is available on the
+<a href="http://lelylan.github.com/devices-component-ng/">AngularJS Device Component</a>
+where it is used to give a main description of the device status.
 </p>
 
 </article>
 
 <article>
 
-<h2 class="call"><a name="suggested-values">Suggested values</a></h2>
+<h2 class="call"><a name="default-status-function">Default status function</a></h2>
 
 <p>
-The field <code>suggested</code> represents a list of value/description pairs where
-<code>value</code> is the value used to update the
-<a href="/api/devices#update-properties">device properties</a> while
-the <code>description</code> is a friendly description of the value.
-Below you can see an example
-where the values <code>on</code> and <code>off</code> are the values sent to the device
-properties while <code>On</code> and <code>Off</code> are the respective descriptions.
+Every status can set a default function. This means that when a device is in a specific
+status we can associate a function and call it. For example when a <code>light is on</code>
+the default function is <code>turn off</code> and when a <code>light is off</code> the default
+function is <code>turn on</code>. See it in action in the <a href="http://try.lelylan.com">Lelylan Demo</a>.
 </p>
 
-<div class="preview"><pre><code class="ruby"># list of suggested pair => { "value": "description", "value": "description", ...
-"suggested": { "on": "On", "off": "Off" }</code></pre></div>
+
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="accepted-values">Accepted values</a></h2>
+
+<p>
+The field <code>accepted</code> represents a list of key/label pairs where
+<code>key</code> is the value used to update the <a href="/api/devices#update-properties">device properties</a>
+and the <code>label</code> is a friendly description of the value.
+Below you can see an example
+where the values <code>on</code> and <code>off</code> are the values sent to the device
+while <code>On</code> and <code>Off</code> are used as descriptions.
+</p>
+
+<div class="preview"><pre><code class="ruby"># list of accepted pair { "key": "label", "key": "label", ... }
+"accepted": { "on": "On", "off": "Off" }</code></pre></div>
 
 <br>
 
 <p>
-Populating the <code>suggested</code> list requires some extra work but give you two advantages.
+Populating the <code>accepted</code> list gives you two main benefits.
 </p>
 
 <ul>
   <li>
-  <strong>Uniformity</strong> -
-  A clear interfaces to access to the physical devices is something we need. Using the
-  <code>suggested</code> field lets you define which values are accepted.
+  <strong>Uniformity</strong> - A clear definition of the values accepted form the device property.
   </li>
   <li>
-  <strong>User interfaces</strong> -
-  Makes it easy to generate UI used for the control of devices.
+  <strong>Presentation</strong> - Better user interface automatic generation.
   </li>
 </ul>
 
 <p>
-One more thing. When creating a device the <code>suggested</code> values are inherited
-by the <a href="/api/types/properties">type properties</a>, but you can change it whenever
+When creating a device, the <code>accepted</code> values are inherited by the
+<a href="/api/types/properties">type properties</a>, but you can change it whenever
 you want on your devices. This is useful in scenarios where a physical device needs to set
-the accepted values (e.g a television setting the channel names).
-</p>
-
-<p class="notice">
-<span class="label">notice</span> As the name indicate the <code>suggested</code> list
-isn't something strict to follow, meaning that a device can receive any value. Anyway,
-is a good practice to use it whenever possible.
+the accepted values (e.g. a television setting the channel names) for every specific device.
 </p>
 
 </article>
-
-<article>
-
-<h2 class="call"><a name="function-conventions">Function conventions</a></h2>
-
-<p>
-Functions are used to automatically set the properties <code>expected</code> value.
-For example the function 'turn on' sets the property <code>status</code> to <code>on</code>.
-Anyway, sometimes you don't need to set a predefined value. Think at a dimmer where you want
-to set its intensity. In that case the expected intensity must be set from the user.
-<p>
-
-<p>
-For this reason when you do not set <code>expected</code> its default is <code>{{}}</code>.
-This is a convention telling you (UI) that the value must be filled by the user. If
-you want to set a default value by default, you can do it by putting it inside the brackets.
-Supposing you want to intensity value of a light be 100% if the user does not set it, set
-<code>expected</code> to <code>{{100}}</code>.
-</p>
-
-</article>
-
