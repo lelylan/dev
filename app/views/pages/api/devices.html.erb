@@ -35,26 +35,27 @@ final goal of mapping every device to a unique URI which provides control over i
 Simplifying, a device is characterized by a <a href="/api/types/">type</a> and the
 <a href="/api/types/properties/">properties</a> it inherits from. For example, when
 creating a basic light, the device inherits the <em>status</em>
-(<code>on</code> or <code>off</code>) property from the basic light type.
+(<code>on</code> or <code>off</code>) property from it.
 </p>
 
 </article>
 
 <article>
 
-<h2 class="call"><a name="devices-dashboard">Getting started</a></h2>
+<h2 class="call"><a name="start">Getting Started</a></h2>
 
 <p>
-  If you want to start playing with the Devices API the suggested solution is to use
-  <a href="http://d.lelylan.com">Lelylan Dashboard</a>. It gives you everything you
-  need to create, monitor, connect and simulate any device.
+  The simplest way to get started with the Devices API is to use <a href="http://d.lelylan.com">Lelylan Dashboard</a>.
+  It gives you everything you need to create, monitor, connect and simulate any device.
 </p>
 
 <a href="http://d.lelylan.com">
 <%= image_tag('devices-dashboard-ng.png', class: 'img-polaroid') %>
 </a>
 
-<p>
+
+<p class="notice">
+<span class="label">Notice</span>
   Lelylan Dashboard is available on <a href="https://github.com/lelylan/devices-dashboard-ng/">Github</a>.
 </p>
 
@@ -194,6 +195,7 @@ device = lelylan.device('<id>')</xmp></pre>
   <dd><span>type</span> - Device type ID and URI. <a href="/api/types">Learn more about</a>.</dd>
   <dd><span>physical</span> - Connected physical device URI.
   <a href="/api/physicals">Learn more about</a>.</dd>
+  <dd><span>categories</span> - Device categories.</dd>
   <dt><span>properties</span> - Device properties.</dt>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
@@ -423,7 +425,7 @@ device = lelylan.device_privates('<id>');</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        URI of the last fetched record.
+        ID of the last fetched record.
         Learn more about <a href="/api/core/#pagination">pagination</a>.
       </td>
     </tr>
@@ -734,8 +736,8 @@ Lelylan.Device.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      var params = { id: scope.device.id, name: 'Zigbee closet dimmer' };
-      $scope.device = new Device(params);
+      var params = { name: 'Zigbee closet dimmer' };
+      $scope.device = new Device({ id: '<id>', name: params.name });
       $scope.device.$update();
     }
   </script>

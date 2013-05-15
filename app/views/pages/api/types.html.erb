@@ -23,12 +23,10 @@ In its simplest form every type can be defined as the combination of three key e
 </p>
 
 <ul>
-  <li><a href="/api/types/properties/">Properties</a>: what vary during time.</li>
-  <li><a href="/api/types/functions/">Functions</a>: what a device can do.</li>
-  <li><a href="/api/types/statuses/">Statuses</a>: what a device is in a specific time of its life.</li>
+  <li><a href="/api/types/properties/">Properties</a> - what vary during time.</li>
+  <li><a href="/api/types/functions/">Functions</a> - what a device can do.</li>
+  <li><a href="/api/types/statuses/">Statuses</a> - what a device is in a specific time of its life.</li>
 </ul>
-
-<br/>
 
 <p>
 Here an example describing a simplified dimmer type.
@@ -38,38 +36,51 @@ Here an example describing a simplified dimmer type.
   <tbody>
     <tr><td><strong>Properties</strong></td><td>stauts, intensity</td></tr>
     <tr><td><strong>Functions</strong></td><td>turn on, turn off, set intensity</td></tr>
-    <tr><td><strong>Statuses</strong></td><td>On, Off, low intensity, high intensity</td></tr>
+    <tr><td><strong>Statuses</strong></td><td>light on, light off</td></tr>
   </tbody>
 </table>
 
+</article>
+
+<article>
+
+<h2 class="call"><a name="start">Getting Started</a></h2>
+
 <p>
-It can be a little tricky to get started with types. When you first see its
-json structure it appears to be quite complex. If this is the case first read the
+The simplest way to get started with the Types API is to use <a href="http://t.lelylan.com">Lelylan Types</a>.
+It gives you everything you need to find, define and discuss any device structure in an open
+and collaborative way.
+</p>
+
+<a href="http://t.lelylan.com">
+<%= image_tag('types-dashboard-ng.png', class: 'img-polaroid') %>
+</a>
+
+<p class="notice">
+<span class="label">Notice</span>
+  Lelylan Types is available on <a href="https://github.com/lelylan/types-dashboard-ng/">Github</a>.
+</p>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="need">Do I need to learn the Types API?</a></h2>
+
+<p>
+<strong>Not really</strong>. If all you need is to search or define a device type just use
+<a href="http://t.lelylan.com">Lelylan Types</a>.
+</p>
+
+<p>
+But, if you want to fully understand how a device works, this is the right place
+where to start. It will be a little tricky to get started with types at first. When you
+will see its json structure it will appear to be quite complex, but it's not.
+It simply combines three resources:
 <a href="/api/types/properties/">properties</a>,
 <a href="/api/types/functions/">functions</a> and
-<a href="/api/types/statuses/">statuses</a> docs.
+<a href="/api/types/statuses/">statuses</a>.
 </p>
-
-<br/>
-
-<h3 class="call"><a name="available-types">Available Types</a></h3>
-
-<p>
-<span class="label warning">Temporary</span>
-When creating a device you'll need to choose a type from which the device inherits
-its properties. We are creating a list of preset types and of course you can create
-your own, but for simple prototypes we suggest you to use the following basic light.
-</p>
-
-<table>
-  <tbody>
-    <tr><td><strong>Description</strong></td><td>Basic Light</td></tr>
-    <tr><td><strong>URI</strong></td><td>http://api.lelylan.com/types/50ffa785a90db269f2000002</td></tr>
-    <tr><td><strong>Properties</strong></td><td>status</td></tr>
-    <tr><td><strong>Functions</strong></td><td>turn on, turn off</td></tr>
-  </tbody>
-</table>
-
 
 </article>
 
@@ -139,9 +150,9 @@ Lelylan.Type.find('<id>', callback);</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -162,65 +173,92 @@ type = lelylan.type('<id>')</xmp></pre>
 <h4 id="type-representation">Example body response</h4>
 
 <div class="preview highlight"><pre><code>{
-  "uri": "http://api.lelylan.com/types/5042234270eda61200000006",
   "id": "5042234270eda61200000006",
-  "name": "Dimmer",
+  "uri": "http://api.lelylan.com/types/5042234270eda61200000006",
+  "name": "Connected Light",
+  "description": "Define a *basic* light structure",
+  "categories": ["lights"],
+  "owner": {
+    "id": "5036227a4f1b030200000001",
+    "uri": "http://api.lelylan.com/people/5036227a4f1b030200000001"
+  },
   "created_at": "2012-09-01T15:01:22Z",
   "updated_at": "2012-09-01T15:01:22Z",
   "properties": [{
-    "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-    "id": "50420c3a267ff51300000001",
-    "name": "Intensity",
-    "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"},
-    "default": "0",
-  }, {
-    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-    "id": "50420c7e267ff51000000001",
     "name": "Status",
-    "suggested": {"on": "On", "off": "Off"},
-    "default": "off",
+    "id": "50420c3a267ff51300000001",
+    "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+    "type": "text",
+    "default": "0",
+    "accepted": { "on": "On", "off": "Off" },
+  }, {
+    "name": "Intensity",
+    "id": "518be8b100045e99cc000004",
+    "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
+    "type": "range",
+    "range": { "min": "0", "max": "100", "step": "1" }
+    "default": "50",
+    "accepted": null,
   }],
   "functions": [{
-    "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003",
-    "id": "5042205c70eda61000000003",
-    "name": "Set intensity",
-    "properties": [{
-      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-      "value": "on"
-    }, {
-      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-      "value": "{{100}}"
-    }]
-  }, {
-    "uri": "http://api.lelylan.com/functions/5042209370eda61000000005",
-    "id": "5042209370eda61000000005",
     "name": "Turn on",
+    "id": "5042205c70eda61000000003",
+    "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003",
     "properties": [{
-      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-      "value": "on"
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "expected": "on",
+      "pending": true
     }]
   }, {
-    "uri": "http://api.lelylan.com/functions/504220c470eda60d00000004",
-    "id": "504220c470eda60d00000004",
     "name": "Turn off",
+    "uri": "http://api.lelylan.com/functions/5042209370eda61000000004",
+    "id": "5042209370eda61000000004",
     "properties": [{
-      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-      "value": "off"
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "expected": "off",
+      "pending": true
+    }]
+  }, {
+    "name": "Set intensity",
+    "uri": "http://api.lelylan.com/functions/504220c470eda60d00000005",
+    "id": "504220c470eda60d00000005",
+    "properties": [{
+      "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
+      "id": "518be8b100045e99cc000004",
+      "expected": null,
+      "pending": true
     }]
   }],
   "statuses": [{
-    "uri": "http://api.lelylan.com/statuses/50421dbd70eda60a0000000b",
-    "id": "50421dbd70eda60a0000000b",
-    "name": "Setting intensity",
+    "name": "Light is On",
+    "id": "518bea2500045e99cc000009",
+    "uri": "http://api.lelylan.com/statuses/518bea2500045e99cc000009",
+    "function": {
+      "id": "5042209370eda61000000004",
+      "uri": "http://api.lelylan.com/functions/5042209370eda61000000004"
+    },
     "properties": [{
-      "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-      "values": ["on"],
-      "pending": false
-    }, {
+      "id": "50420c3a267ff51300000001",
       "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-      "values": ["1..100"],
-      "pending": true
-    }]
+      "pending": false,
+      "values": ["on"]
+    }],
+  }, {
+    "name": "Light is Off",
+    "id": "518bea3100045e99cc00000b",
+    "uri": "http://api.lelylan.com/statuses/518bea3100045e99cc00000b",
+    "function": {
+      "id": "5042205c70eda61000000003",
+      "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003"
+    },
+    "properties": [{
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "pending": false,
+      "values": ["off"]
+    }],
   }]
 }</code></pre></div>
 
@@ -230,12 +268,12 @@ type = lelylan.type('<id>')</xmp></pre>
   <dd><span>id</span> - Type ID.</dd>
   <dd><span>uri</span> - Type URI.</dd>
   <dd><span>name</span> - Type name.</dd>
-  <dd><span>properties</span> - Type properties.
-  <a href="/api/types/properties/">Learn more about</a>.</dd>
-  <dd><span>functions</span> - Type functions.
-  <a href="/api/types/functions/">Learn more about</a>.</dd>
-  <dd><span>statuses</span> - Type statuses.
-  <a href="/api/types/statuses/">Learn more about</a>.</dd>
+  <dd><span>description</span> - Type description.</dd>
+  <dd><span>categories</span> - Type categories.</dd>
+  <dd><span>owner</span> - Type creator.</dd>
+  <dd><span>properties</span> - See <a href="/api/types/properties#property-representation">property representation</a>.</dd>
+  <dd><span>functions</span> - See <a href="/api/types/functions#function-representation">function representation</a>.</dd>
+  <dd><span>statuses</span> - See <a href="/api/types/statuses#status-representation">status representation</a>.</dd>
 </dl>
 
 </article>
@@ -274,7 +312,7 @@ GET http://api.lelylan.com/types/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -329,9 +367,9 @@ Lelylan.Type.public({}, callback); // all existing resources</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -358,13 +396,15 @@ types = lelylan.public_types # all existing resources</xmp></pre>
   {
     "uri": "http://api.lelylan.com/types/5042223470eda60d00000005",
     "id": "5042223470eda60d00000005",
-    "name": "Dimmer",
+    "name": "Light",
+    "categories": ["lights"],
     "created_at": "2012-09-01T14:56:52Z",
     "updated_at": "2012-09-01T14:56:52Z"
   }, {
     "uri": "http://api.lelylan.com/types/5042229270eda61200000005",
     "id": "5042229270eda61200000005",
-    "name": "Light",
+    "name": "Basic Light",
+    "categories": ["lights"],
     "created_at": "2012-09-01T14:58:26Z",
     "updated_at": "2012-09-01T14:58:26Z"
   }, ...
@@ -374,7 +414,7 @@ types = lelylan.public_types # all existing resources</xmp></pre>
 <span class="label">notice</span>
 Due to the type complexity structure the type representation is a simplified version of
 its <a href="#type-representation">standard representation</a>. Most of the time having
-the name will be enough.
+the name and the category will be enough.
 </p>
 
 </article>
@@ -410,11 +450,29 @@ Create a type and returns extended information for it.
   </tr>
   <tr>
     <td class="parameter">
+      <span>description</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      Type description.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>categories</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of categories. <a href="/api/types/categories/">Learn more about categories</a>.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
       <span>properties</span>
       <span class="info">optional</span>
     </td>
     <td>
-      List of property URIs.
+      List of property IDs.
       <a href="/api/types/properties/">Learn more about properties</a>.
     </td>
   </tr>
@@ -424,7 +482,7 @@ Create a type and returns extended information for it.
       <span class="info">optional</span>
     </td>
     <td>
-      List of function URIs.
+      List of function IDs.
       <a href="/api/types/functions/">Learn more about functions</a>.
     </td>
   </tr>
@@ -434,7 +492,7 @@ Create a type and returns extended information for it.
       <span class="info">optional</span>
     </td>
     <td>
-      List of status URIs.
+      List of status IDs.
       <a href="/api/types/statuses/">Learn more about statuses</a>.
     </td>
   </tr>
@@ -462,19 +520,11 @@ In this example the resource IDs are identified from friendly names.
      -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
-           "name": "Dimmer",
-           "properties": [
-             "http://api.lelylan.com/properties/<status>",
-             "http://api.lelylan.com/properties/<intensity>"
-           ],
-           "functions": [
-             "http://api.lelylan.com/functions/<turn-on>",
-             "http://api.lelylan.com/functions/<turn-off>",
-             "http://api.lelylan.com/functions/<set-intensity>"
-           ],
-           "statuses": [
-             "http://api.lelylan.com/statuses/<setting-intensity>"
-           ]
+           "name": "Light",
+           "categories": ["lights"],
+           "properties": [ "<status>", "<intensity>" ],
+           "functions": [ "<turn-on>", "<turn-off>", "<set-intensity>" ],
+           "statuses": [ "<light-on>", "<light-off>" ]
          }'</xmp></pre>
     </div>
   </div>
@@ -482,16 +532,11 @@ In this example the resource IDs are identified from friendly names.
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  name: 'Dimmer',
-  properties:
-    [ 'http://api.lelylan.com/properties/<status>',
-      'http://api.lelylan.com/properties/<intensity>' ],
-  functions:
-    [ 'http://api.lelylan.com/functions/<turn-on>',
-      'http://api.lelylan.com/functions/<turn-off>',
-      'http://api.lelylan.com/functions/<set-intensity>' ],
-  statuses:
-    [ 'http://api.lelylan.com/statuses/<setting-intensity>' ] };
+  name: 'Light',
+  categories: [ 'lights' ],
+  properties: [ '<status>', '<intensity>' ],
+  functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+  statuses: [ '<light-on>', '<light-off>' ] };
 
 Lelylan.Type.create(params, callback);</xmp></pre>
     </div>
@@ -505,25 +550,20 @@ Lelylan.Type.create(params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Type) {
       var params = {
-        name: 'Dimmer',
-        properties:
-          [ 'http://api.lelylan.com/properties/<status>',
-            'http://api.lelylan.com/properties/<intensity>' ],
-        functions:
-          [ 'http://api.lelylan.com/functions/<turn-on>',
-            'http://api.lelylan.com/functions/<turn-off>',
-            'http://api.lelylan.com/functions/<set-intensity>' ],
-        statuses:
-          [ 'http://api.lelylan.com/statuses/<setting-intensity>' ] };
+        name: 'Light',
+        categories: [ 'lights' ],
+        properties: [ '<status>', '<intensity>' ],
+        functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+        statuses: [ '<light-on>', '<light-off>' ] };
 
       $scope.type = new Type(params);
       $scope.type.$save();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -533,16 +573,11 @@ Lelylan.Type.create(params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
-  name: 'Dimmer',
-  properties:
-    [ 'http://api.lelylan.com/properties/<status>',
-      'http://api.lelylan.com/properties/<intensity>' ],
-  functions:
-    [ 'http://api.lelylan.com/functions/<turn-on>',
-      'http://api.lelylan.com/functions/<turn-off>',
-      'http://api.lelylan.com/functions/<set-intensity>' ],
-  statuses:
-    [ 'http://api.lelylan.com/statuses/<setting-intensity>' ] }
+  name: 'Light',
+  categories: [ 'lights' ],
+  properties: [ '<status>', '<intensity>' ],
+  functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+  statuses: [ '<light-on>', '<light-off>' ] };
 
 type = lelylan.create_type(params)</xmp></pre>
     </div>
@@ -601,11 +636,29 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
     </tr>
     <tr>
       <td class="parameter">
+        <span>description</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Type description.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>categories</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of categories. <a href="/api/types/categories">Learn more about categories</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
         <span>properties</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of property URIs.
+        List of property IDs.
         <a href="/api/types/properties/">Learn more about properties</a>.
       </td>
     </tr>
@@ -615,7 +668,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
         <span class="info">optional</span>
       </td>
       <td>
-        List of function URIs.
+        List of function IDs.
         <a href="/api/types/functions/">Learn more about functions</a>.
       </td>
     </tr>
@@ -625,7 +678,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
         <span class="info">optional</span>
       </td>
       <td>
-        List of status URIs.
+        List of status IDs.
         <a href="/api/types/statuses/">Learn more about statuses</a>.
       </td>
     </tr>
@@ -646,13 +699,13 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
     <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/types/<id> \
      -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
-     -d '{ "name": "Dimmer RBG" }'</xmp></pre>
+     -d '{ "name": "RBG Light" }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-type-node">
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-var params = { name: 'Dimmer RBG' };
+var params = { name: 'RBG Light' };
 Lelylan.Type.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
@@ -664,18 +717,15 @@ Lelylan.Type.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{type}}</div>
   <script>
     function LelylanController($scope, Type) {
-      var params = { name: 'Dimmer RBG' };
-      $scope.type = Type.get({ id: '<id>' }, function() {
-        $scope.type.name = params.name;
-        $scope.type.$update();
-      });
-
+      var params = { name: 'RBG Light' };
+      $scope.type = new Type({ id: '<id>', name: params.name });
+      $scope.type.$update();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -684,7 +734,7 @@ Lelylan.Type.update('<id>', params, callback);</xmp></pre>
   <div class="tab-pane" id="update-a-type-ruby">
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-params = { name: 'Dimmer RBG' }
+params = { name: 'RBG Light' }
 type = lelylan.update_type('<id>', params)</xmp></pre>
     </div>
   </div>
@@ -692,7 +742,7 @@ type = lelylan.update_type('<id>', params)</xmp></pre>
 
 <p class="notice">
 <span class="label">Notice</span>
-When updating a type connection (properties, functions or statuses)
+When updating a type connection (categories, properties, functions and statuses)
 all previous connected resources are replaced.
 </p>
 
@@ -770,15 +820,14 @@ Lelylan.Type.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{type}}</div>
   <script>
     function LelylanController($scope, Type) {
-      $scope.type = Type.get({ id: '<id>' }, function() {
-        $scope.type.$delete();
-      });
+      $scope.type= new Type({ id: '<id>' });
+      $scope.type.$delete();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>

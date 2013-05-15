@@ -328,15 +328,16 @@ conditional requests</a> to make your app faster.
 <h1 class="call"><a name="pagination">Infinite scrolling pagination</a></h1>
 
 <p>
-  Sometimes your database will be so large that it's impossible to pre-load it client-side. The solution is to pre-load a segment of the database and then use
+  Sometimes your database will be so large that it's impossible to pre-load it client-side.
+  The solution is to pre-load a segment of the database and then use
   pagination to load more data. Pagination is better with an infinite
   scrolling pattern, rather than showing a list of pages.
   When fetching the next page set the parameter <code>start</code>
-  with the last fetched resource <code>URI</code>.
+  with the last fetched resource <code>ID</code>.
 </p>
 
 <div class="preview"><pre><code>curl -L http://api.lelylan.com/devices.json?
-start=http://api.lelylan.com/devices/4dcb9ea9000d</code></pre>
+start=5042205c70eda61000000003</code></pre>
 </code></pre></div>
 
 <p>
