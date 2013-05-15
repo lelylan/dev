@@ -542,8 +542,8 @@ Lelylan.Property.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{property}}</div>
   <script>
     function LelylanController($scope, Property) {
-      var params = { default: '100' };
-      $scope.property = new Property({ id: '<id>', default: params.default });
+      var params = { id: '<id>', default: '100' };
+      $scope.property = new Property(params);
       $scope.type.$update();
     }
   </script>
@@ -638,8 +638,8 @@ Lelylan.Property.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{property}}</div>
   <script>
     function LelylanController($scope, Property) {
-      $scope.type= new Type({ id: '<id>' });
-      $scope.type.$delete();
+      $scope.function= new Function({ id: '<id>' });
+      $scope.function.$delete();
     }
   </script>
 

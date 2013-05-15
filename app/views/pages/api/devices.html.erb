@@ -736,8 +736,8 @@ Lelylan.Device.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      var params = { name: 'Zigbee closet dimmer' };
-      $scope.device = new Device({ id: '<id>', name: params.name });
+      var params = { id: '<id>', name: 'Zigbee closet dimmer' };
+      $scope.device = new Device(params);
       $scope.device.$update();
     }
   </script>
@@ -1004,13 +1004,14 @@ Lelylan.Device.properties('<id>', params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Device) {
     var params = {
+      id: '<id>',
       properties:
         [ { id: '<status>',
             value: 'on' },
           { id: '<intensity>',
             value: '50' } ] };
 
-      $scope.device = new Device({ id: '<id>', properties: params.properties});
+      $scope.device = new Device(params);
       $scope.device.$properties();
     }
   </script>
@@ -1250,12 +1251,13 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Device) {
     var params = {
+      id: '<id>',
       function: '<set-intensity>',
       properties:
         [ { id: '<intensity>',
             value: '90' } ] };
 
-      $scope.device = new Device({ id: '<id>', function: params.function, properties: params.params});
+      $scope.device = new Device(params);
       $scope.device.$execute();
     }
   </script>

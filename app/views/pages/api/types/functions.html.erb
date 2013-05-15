@@ -87,9 +87,9 @@ Lelylan.Function.find('<id>', callback);</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -116,11 +116,15 @@ function = lelylan.function('<id>')</xmp></pre>
   "created_at": "2012-09-01T13:42:55Z",
   "updated_at": "2012-09-01T13:42:55Z",
   "properties": [{
+    "id": "50420c7e267ff51000000001",
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "expected": "on"
+    "pending": "true"
   }, {
+    "id": "50420c7e267ff51000000001",
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
-    "expected": "{{100}}"
+    "expected": null
+    "pending": true
   }]
 }</code></pre></div>
 
@@ -132,10 +136,13 @@ function = lelylan.function('<id>')</xmp></pre>
   <dd><span>name</span> - Function name.</dd>
   <dd><span>properties</span> - List of properties the function updates.</dd>
   <div>
+    <dd><span>id</span> - Property ID.</dd>
     <dd><span>uri</span> - Property URI.</dd>
     <dd><span>expected</span> - Expected value assigned to the device property when the
     function is executed. <a href="/community/faq#function-conventions">Learn more about</a>.
     </dd>
+    <dd><span>pending</span> - Property pending setting (always <code>true</code> for function properties).
+    <a href="/community/faq#pending-devices">Learn more about</a>.</dd>
   </div>
 </dl>
 
@@ -175,7 +182,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -231,9 +238,9 @@ Lelylan.Function.public({}, callback); // all existing resources</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -308,21 +315,21 @@ functions = lelylan.public_functions # all existing resources</xmp></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Property URI.
+        Property ID.
       </td>
     </tr>
     <tr>
       <td class="parameter nested">
         <span>&raquo; property.expected</span>
-        <span class="info">default to <code>{{}}</code></span>
         <span class="info">optional</span>
       </td>
       <td>
         Expected value assigned to the device property when the function is executed.
+        Leave it <code>null</code> if the value needs to be fullfilled by the user.
         <a href="/community/faq#function-conventions">Learn more about</a>.
       </td>
     </tr>
@@ -347,8 +354,8 @@ functions = lelylan.public_functions # all existing resources</xmp></pre>
      -d '{
           "name": "Set intensity",
           "properties": [
-            { "uri": "http://api.lelylan.com/properties/<status>", "expected": "on" },
-            { "uri": "http://api.lelylan.com/properties/<intensity>", "expected": "{{90}}" }
+            { "uri": "<status>", "expected": "on" },
+            { "uri": "<intensity>" }
           ]
          }'</xmp></pre>
     </div>
@@ -359,8 +366,8 @@ functions = lelylan.public_functions # all existing resources</xmp></pre>
 var params = {
   name: 'Set intensity',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '{{100}}' } ] };
+    [ { uri: '<status>', expected: 'on'},
+      { uri: '<intensity>' } ] };
 
 Lelylan.Function.create(params, callback);</xmp></pre>
     </div>
@@ -376,17 +383,17 @@ Lelylan.Function.create(params, callback);</xmp></pre>
       var params = {
         name: 'Set intensity',
         properties: [
-          { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
-          { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '{{100}}' } ] };
+          { uri: '<status>', expected: 'on'},
+          { uri: '<intensity>' } ] };
 
       $scope.function = new Function(params);
       $scope.function.$save();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -398,8 +405,8 @@ Lelylan.Function.create(params, callback);</xmp></pre>
 params = {
   name: 'Set intensity',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '{{100}}' } ] }
+    [ { uri: '<status>', expected: 'on'},
+      { uri: '<intensity>' } ] }
 
 function = lelylan.create_function(params)</xmp></pre>
     </div>
@@ -468,11 +475,11 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Property URI.
+        Property ID.
       </td>
     </tr>
     <tr>
@@ -482,6 +489,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
       </td>
       <td>
         Expected value assigned to the device property when the function is executed.
+        Set it to <code>null</code> if the value needs to be fullfilled by the user.
         <a href="/community/faq#function-conventions">Learn more about</a>.
       </td>
     </tr>
@@ -506,8 +514,8 @@ curl -X PUT http://api.lelylan.com/functions/<id> \
      -d '{
            "name": "Set intensity to 50%",
            "properties": [
-             { "uri": "http://api.lelylan.com/properties/<status>", "expected": "on"},
-             { "uri": "http://api.lelylan.com/properties/<intensity>", "expected": "50" }
+             { "uri": "<status>", "expected": "on"},
+             { "uri": "<intensity>", "expected": "50" }
            ]
          }'</xmp></pre>
     </div>
@@ -518,8 +526,8 @@ curl -X PUT http://api.lelylan.com/functions/<id> \
 var params = {
   name: 'Set intensity to 50%',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] };
+    [ { uri: '<status>', expected: 'on'},
+      { uri: '<intensity>', expected: '50' } ] };
 
 Lelylan.Function.update('<id>', params, callback);</xmp></pre>
     </div>
@@ -533,22 +541,20 @@ Lelylan.Function.update('<id>', params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Function) {
       var params = {
+        id: '<id>',
         name: 'Set intensity to 50%',
         properties:
-          [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
-            { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] };
+          [ { uri: '<status>', expected: 'on'},
+            { uri: '<intensity>', expected: '50' } ] };
 
-      $scope.function = Function.get({ id: '<id>' }, function() {
-        $scope.function.name = params.name;
-        $scope.function.properties = params.properties;
-        $scope.function.$update();
-      });
+      $scope.function = new Function(params);
+      $scope.function.$update();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -560,8 +566,8 @@ Lelylan.Function.update('<id>', params, callback);</xmp></pre>
 params = {
   name: 'Set intensity to 50%',
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<status>', expected: 'on'},
-      { uri: 'http://api.lelylan.com/properties/<intensity>', expected: '50' } ] }
+    [ { uri: '<status>', expected: 'on'},
+      { uri: '<intensity>', expected: '50' } ] }
 
 function = lelylan.update_function('<id>', params)</xmp></pre>
     </div>
@@ -647,15 +653,14 @@ Lelylan.Function.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{function}}</div>
   <script>
     function LelylanController($scope, Function) {
-      $scope.function = Function.get({ id: '<id>' }, function() {
-        $scope.function.$delete();
-      });
+      $scope.function= new Function({ id: '<id>' });
+      $scope.function.$delete();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
