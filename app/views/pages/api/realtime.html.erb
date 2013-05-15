@@ -844,9 +844,8 @@ Delete a subscription identified from its ID and returns extended information fo
 <div class="tab-content">
   <div class="tab-pane active" id="delete-a-subscription-curl">
     <div class="preview">
-      <pre><xmp>var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
-     -u <client-id>:<client-secret> \
-     -H 'Content-Length: 0'</xmp></pre>
+      <pre><xmp>curl -X DELETE http://api.lelylan.com/subscriptions/<id>
+     -u <client-id>:<client-secret></xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="delete-a-subscription-node">

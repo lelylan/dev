@@ -210,17 +210,16 @@ Until that moment the previous owner remains.
 <h4>Example Request</h4>
 
 <ul class="nav nav-tabs">
-  <li class="curl active"><a href="#deactivate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li class="node"><a href="#deactivate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li class="javascript"><a href="#deactivate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
-  <li class="ruby"><a href="#deactivate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li class="active"><a href="#deactivate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#deactivate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#deactivate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#deactivate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="deactivate-a-device-curl">
     <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/activations/<activation-code> \
-     -H 'Authorization: Bearer <token>' \
-     -H 'Content-Length: 0'</xmp></pre>
+     -H 'Authorization: Bearer <token>'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="deactivate-a-device-node">

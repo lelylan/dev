@@ -196,15 +196,6 @@ how it can receive updates when a device changes its
   <tbody>
     <tr>
       <td class="parameter">
-        <span>nonce</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Random unique identifier to avoid replay attacks.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
         <span>properties</span>
         <span class="info">optional</span>
       </td>
@@ -255,7 +246,6 @@ physical device is forwarded. Follows a sample request a device must be able to 
      -H 'Content-Type: application/json' \
      -H 'X-Physical-Secret: <secret>' \
      -d '{
-           "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
            "properties": [{ "id": "<status>", "value": "on" }]
          }'</xmp></pre>
     </div>
@@ -335,29 +325,21 @@ A physical device has access to a restricted set of Lelylan APIs.
   <li>
   <strong><a href="/api/devices#update-a-device">Update the device</a></strong>
   </li>
-  <%#<li>%>
-  <%#<strong><a href="/api/devices/consumptions#create-a-consumption">Create a consumption</a></strong>%>
-  <%#</li>%>
 </ul>
 
 <p>
-Every request needs to have two additional params in the header.
+Every request needs to one header param.
 </p>
 
 <ul>
   <li>
-    <strong>X-Physical-Secret</strong>. The <a href="/api/devices#get-a-device-private-info">device secret</a>.
-  </li>
-  <li>
-    <strong>nonce</strong>. Every request must contain a nonce. A nonce is a unique string between
-    all requests coming from the physical device and Lelylan. It is used to avoid replay attacks.
+    <strong>X-Physical-Secret</strong> - the <a href="/api/devices#get-a-device-private-info">device secret</a>.
   </li>
 </ul>
 
 <p>
-  As you can guess the device <code>secret</code> and the device <code>uri</code> to sync must be
-  stored in the physical device in order to make the system work. Follows an example where the
-  device properties are sent from the physical device to sync with Lelylan.
+  When building the physical device, the device <code>secret</code> and the device <code>uri</code>
+  must be stored in the physical device in order to make the communication work.
 </p>
 
 <h4>Example Resource URL</h4>
@@ -376,15 +358,6 @@ Every request needs to have two additional params in the header.
       </td>
       <td>
         The <a href="/api/devices#get-a-device-private-info">device secret</a>.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter">
-        <span>nonce</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Unique code between all requests.
       </td>
     </tr>
   </tbody>
@@ -410,7 +383,6 @@ Most of the time the physical device needs to update the device properties. Here
     -H 'X-Physical-Secret: <secret>' \
     -H 'Content-Type: application/json' \
     -d '{
-          "nonce": "beb11631-070a-484f-9980-5a6fa8469bb5",
           "properties": [{ "value": "on", "pending": false }]
         }'</xmp></pre>
     </div>
