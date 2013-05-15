@@ -88,9 +88,9 @@ Lelylan.Status.find('<id>', callback);</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -111,21 +111,25 @@ status = lelylan.status('<id>')</xmp></pre>
 <h4 id="status-representation">Example body response</h4>
 
 <div class="preview"><pre><code>{
-  "uri": "http://api.lelylan.com/statuses/5042176370eda61200000004",
-  "id": "5042176370eda61200000004",
   "name": "Setting intensity",
+  "id": "5042176370eda61200000004",
+  "uri": "http://api.lelylan.com/statuses/5042176370eda61200000004",
   "created_at": "2012-09-01T14:10:43Z",
   "updated_at": "2012-09-01T14:10:43Z",
+  "function": {
+    "id": "5042205c70eda61000000003",
+    "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003"
+  },
   "properties":[{
-    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "id": "50420c7e267ff51000000001",
-    "value": ["on"],
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
     "pending": false
+    "value": ["on"],
   }, {
-    "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
     "id": "50420c7e267ff51300000001",
-    "value": ["0..100"],
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
     "pending": true
+    "value": ["0..100"],
   }]
 }</code></pre>
 </div>
@@ -133,9 +137,10 @@ status = lelylan.status('<id>')</xmp></pre>
 <h4>Body response explained</h4>
 
 <dl>
-  <dd><span>uri</span> - Status URI.</dd>
-  <dd><span>id</span> - Status ID.</dd>
   <dd><span>name</span> - Status name.</dd>
+  <dd><span>id</span> - Status ID.</dd>
+  <dd><span>uri</span> - Status URI.</dd>
+  <dd><span>function</span> - Default status function. <a href="/community/faq#status-default-function">Learn more about</a></dd>
   <dd><span>properties</span> - List of properties that affect the status.</dd>
   <div>
     <dd><span>uri</span> - Property URI.</dd>
@@ -201,7 +206,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -257,9 +262,9 @@ Lelylan.Status.public({}, callback); // all existing resources</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -334,11 +339,11 @@ statuses = lelylan.public_statuses # all existing resources</xmp></pre>
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Property URI.
+        Property ID.
       </td>
     </tr>
     <tr>
@@ -347,7 +352,7 @@ statuses = lelylan.public_statuses # all existing resources</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        List of matching values and ranges.
+        List of matching values.
       </td>
     </tr>
     <tr>
@@ -378,9 +383,10 @@ statuses = lelylan.public_statuses # all existing resources</xmp></pre>
      -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
-           "name": "Max intensity",
+           "name": "On",
+           "function": {"id": "<turn-off>" },
            "properties": [{
-              "uri": "http://api.lelylan.com/properties/<intensity>",
+              "id": "<intensity>",
               "value": ["100"],
               "pending": false
             }]
@@ -391,9 +397,10 @@ statuses = lelylan.public_statuses # all existing resources</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
-  name: 'Max intensity',
+  name: 'On',
+  function: { id: '<turn-off>' },
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<intensity>',
+    [ { id: '<intensity>',
         value: ['100'],
         pending: false } ] };
 
@@ -409,20 +416,20 @@ Lelylan.Status.create(params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Status) {
       var params = {
-        name: 'Max intensity',
+        name: 'On',
+        function: { id: '<turn-off>' },
         properties:
-          [ { uri: 'http://api.lelylan.com/properties/<intensity>',
-              value: ['100'],
-              pending: false } ] };
+          [ { id: '<status>',
+              value: ['on'] } ] };
 
       $scope.status = new Status(params);
       $scope.status.$save();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -432,9 +439,10 @@ Lelylan.Status.create(params, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = {
-  name: 'Max intensity',
+  name: 'On',
+  function: { id: '<turn-off>' },
   properties:
-    [ { uri: 'http://api.lelylan.com/properties/<intensity>',
+    [ { id: '<intensity>',
         value: ['100'],
         pending: false } ] }
 
@@ -504,11 +512,11 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.id</span>
         <span class="info">required</span>
       </td>
       <td>
-        Property URI.
+        Property ID.
       </td>
     </tr>
     <tr>
@@ -547,26 +555,13 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
     <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/statuses/5042176370eda61200000004 \
      -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
-     -d '{
-           "name": "Lowering intensity",
-           "properties": [{
-              "uri": "http://api.lelylan.com/properties/<intensity>",
-              "value": ["0..10"],
-              "pending": true
-            }]
-         }'</xmp></pre>
+     -d '{ "name": "Light On" }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-a-status-node">
     <div class="preview">
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-var params = {
-  name: 'Lowering intensity',
-  properties:
-    [ { uri: 'http://api.lelylan.com/properties/<intensity>',
-        value: ['0..10'],
-        pending: true } ] };
-
+var params = { name: 'Light On' }
 Lelylan.Status.update('<id>', params, callback);</xmp></pre>
     </div>
   </div>
@@ -578,24 +573,15 @@ Lelylan.Status.update('<id>', params, callback);</xmp></pre>
   <div ng-controller="LelylanController">{{status}}</div>
   <script>
     function LelylanController($scope, Status) {
-      var params = {
-        name: 'Lowering intensity',
-        properties:
-          [ { uri: 'http://api.lelylan.com/properties/<intensity>',
-              value: ['0..10'],
-              pending: true } ] };
-
-      $scope.status = Status.get({ id: '<id>' }, function() {
-        $scope.status.name = params.name;
-        $scope.status.properties = params.properties;
-        $scope.status.$update();
-      });
+      var params = { id: '<id>', name: 'Light On' };
+      $scope.property = new Property(params);
+      $scope.type.$update();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -604,13 +590,7 @@ Lelylan.Status.update('<id>', params, callback);</xmp></pre>
   <div class="tab-pane" id="update-a-status-ruby">
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-params = {
-  name: 'Lowering intensity',
-  properties:
-    [ { uri: 'http://api.lelylan.com/properties/<intensity>',
-        value: ['0..10'],
-        pending: true } ] }
-
+params = { name: 'Light On' }
 status = lelylan.update_status('<id>', params)</xmp></pre>
     </div>
   </div>
@@ -695,15 +675,14 @@ Lelylan.Status.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{status}}</div>
   <script>
     function LelylanController($scope, Status) {
-      $scope.status = Status.get({ id: '<id>' }, function() {
-        $scope.status.$delete();
-      });
+      $scope.status= new Status({ id: '<id>' });
+      $scope.status.$delete();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>

@@ -140,7 +140,7 @@ property = lelylan.property('<id>')</xmp></pre>
 <dd><span>uri</span> - Property URI.</dd>
 <dd><span>id</span> - Property ID.</dd>
 <dd><span>name</span> - Property name.</dd>
-<dd><span>type</span> - Property type. <a href="/api/types/properties#types">See valid property types</a>.</dd>
+<dd><span>type</span> - Property type.</dd>
 <dd><span>range</span> - Accepted range values. Visible only when <code>type</code> is <code>range</code>.</dd>
 <dd><span>default</span> - Default property value assigned when the device is created.</dd>
 <dt><span>accepted</span> - List of accepted values from the property. <a href="/community/faq#accepted-values">Learn more about</a>.</dt>
@@ -306,10 +306,11 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
       <td class="parameter">
         <span>type</span>
         <span class="info">optional</span>
-        <span class="info">default to 'text'</span>
       </td>
       <td>
-        Property type. <a href="/api/types/properties#types">See valid property types</a>.
+        Property type.
+        <span class="info">Valid values: text, number, range, color, password, date, time, datetime, url.</span>
+        <span class="info">Default value: text</span>
       </td>
     </tr>
     <tr>
@@ -476,7 +477,8 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
         <span class="info">optional</span>
       </td>
       <td>
-        Property type. <a href="/api/types/properties#types">See valid property types</a>.
+        Property type.
+        <span class="info">Valid values: text, number, range, color, password, date, time, datetime, url.</span>
       </td>
     </tr>
     <tr>

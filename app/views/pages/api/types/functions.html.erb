@@ -354,8 +354,8 @@ functions = lelylan.public_functions # all existing resources</xmp></pre>
      -d '{
           "name": "Set intensity",
           "properties": [
-            { "uri": "<status>", "expected": "on" },
-            { "uri": "<intensity>" }
+            { "id": "<status>", "expected": "on" },
+            { "id": "<intensity>" }
           ]
          }'</xmp></pre>
     </div>
@@ -366,8 +366,8 @@ functions = lelylan.public_functions # all existing resources</xmp></pre>
 var params = {
   name: 'Set intensity',
   properties:
-    [ { uri: '<status>', expected: 'on'},
-      { uri: '<intensity>' } ] };
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>' } ] };
 
 Lelylan.Function.create(params, callback);</xmp></pre>
     </div>
@@ -383,8 +383,8 @@ Lelylan.Function.create(params, callback);</xmp></pre>
       var params = {
         name: 'Set intensity',
         properties: [
-          { uri: '<status>', expected: 'on'},
-          { uri: '<intensity>' } ] };
+          { id: '<status>', expected: 'on'},
+          { id: '<intensity>' } ] };
 
       $scope.function = new Function(params);
       $scope.function.$save();
@@ -405,8 +405,8 @@ Lelylan.Function.create(params, callback);</xmp></pre>
 params = {
   name: 'Set intensity',
   properties:
-    [ { uri: '<status>', expected: 'on'},
-      { uri: '<intensity>' } ] }
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>' } ] }
 
 function = lelylan.create_function(params)</xmp></pre>
     </div>
@@ -514,8 +514,8 @@ curl -X PUT http://api.lelylan.com/functions/<id> \
      -d '{
            "name": "Set intensity to 50%",
            "properties": [
-             { "uri": "<status>", "expected": "on"},
-             { "uri": "<intensity>", "expected": "50" }
+             { "id": "<status>", "expected": "on"},
+             { "id": "<intensity>", "expected": "50" }
            ]
          }'</xmp></pre>
     </div>
@@ -526,8 +526,8 @@ curl -X PUT http://api.lelylan.com/functions/<id> \
 var params = {
   name: 'Set intensity to 50%',
   properties:
-    [ { uri: '<status>', expected: 'on'},
-      { uri: '<intensity>', expected: '50' } ] };
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>', expected: '50' } ] };
 
 Lelylan.Function.update('<id>', params, callback);</xmp></pre>
     </div>
@@ -544,8 +544,8 @@ Lelylan.Function.update('<id>', params, callback);</xmp></pre>
         id: '<id>',
         name: 'Set intensity to 50%',
         properties:
-          [ { uri: '<status>', expected: 'on'},
-            { uri: '<intensity>', expected: '50' } ] };
+          [ { id: '<status>', expected: 'on'},
+            { id: '<intensity>', expected: '50' } ] };
 
       $scope.function = new Function(params);
       $scope.function.$update();
@@ -566,8 +566,8 @@ Lelylan.Function.update('<id>', params, callback);</xmp></pre>
 params = {
   name: 'Set intensity to 50%',
   properties:
-    [ { uri: '<status>', expected: 'on'},
-      { uri: '<intensity>', expected: '50' } ] }
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>', expected: '50' } ] }
 
 function = lelylan.update_function('<id>', params)</xmp></pre>
     </div>
