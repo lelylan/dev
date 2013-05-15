@@ -85,9 +85,9 @@ Lelylan.Property.find('<id>', callback);</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -103,16 +103,33 @@ property = lelylan.property('<id>')</xmp></pre>
 
 <h4>Example header response</h4>
 
-  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h4 id="property-representation">Example body response</h4>
 
+<p>Light <code>status</code> accepting <code>text</code> values <code>on</code> and <code>off</code></p>
+
 <div class="preview"><pre><code>{
-  "uri": "http://api.lelylan.com/properties/5041e9e9230de31300000001",
-  "id": "5041e9e9230de31300000001",
-  "name":" Intensity",
-  "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"},
+  "name": "Status",
+  "id": "50420c3a267ff51300000001",
+  "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+  "type": "text",
   "default": "0",
+  "accepted": { "on": "On", "off": "Off" },
+  "created_at": "2012-09-01T10:56:41Z",
+  "updated_at": "2012-09-01T10:56:41Z"
+}</code></pre></div>
+
+<p>Light <code>intensity</code> accepting any value between the <code>range</code> that goes from <code>0</code> to <code>100</code> with step <code>1</code></p>
+
+<div class="preview"><pre><code>{
+  "name": "Intensity",
+  "id": "518be8b100045e99cc000004",
+  "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
+  "type": "range",
+  "range": { "min": "0", "max": "100", "step": "1" }
+  "default": "50",
+  "accepted": null,
   "created_at": "2012-09-01T10:56:41Z",
   "updated_at": "2012-09-01T10:56:41Z"
 }</code></pre></div>
@@ -123,8 +140,10 @@ property = lelylan.property('<id>')</xmp></pre>
 <dd><span>uri</span> - Property URI.</dd>
 <dd><span>id</span> - Property ID.</dd>
 <dd><span>name</span> - Property name.</dd>
-<dt><span>suggested</span> - List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.</dt>
+<dd><span>type</span> - Property type. <a href="/api/types/properties#types">See valid property types</a>.</dd>
+<dd><span>range</span> - Accepted range values. Visible only when <code>type</code> is <code>range</code>.</dd>
 <dd><span>default</span> - Default property value assigned when the device is created.</dd>
+<dt><span>accepted</span> - List of accepted values from the property. <a href="/community/faq#accepted-values">Learn more about</a>.</dt>
 </dl>
 
 </article>
@@ -163,7 +182,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        URI of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -219,9 +238,9 @@ Lelylan.Property.public({}, callback); // all existing resources</xmp></pre>
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -285,6 +304,26 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
     </tr>
     <tr>
       <td class="parameter">
+        <span>type</span>
+        <span class="info">optional</span>
+        <span class="info">default to 'text'</span>
+      </td>
+      <td>
+        Property type. <a href="/api/types/properties#types">See valid property types</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>range</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Object containing the <code>min</code>, <code>max</code> and <code>step </code> range values.<br/>
+        Usi it only when <code>type</code> is set to <code>range</code>.</dd>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
         <span>default</span>
         <span class="info">optional</span>
       </td>
@@ -294,11 +333,11 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
     </tr>
     <tr>
       <td class="parameter">
-        <span>suggested</span>
+        <span>accepted</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.
+        List of accepted values. <a href="/community/faq#accepted-values">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -321,8 +360,9 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
      -H 'Content-Type: application/json' \
      -d '{
            "name": "Intensity",
-           "default": "0",
-           "suggested": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
+           "default": "50",
+           "type": "range",
+           "range": {"min": "0", "max": "100", "step": "1"}
          }'</xmp></pre>
     </div>
   </div>
@@ -331,8 +371,9 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
 var params = {
   name: 'Intensity',
-  default: '0',
-  suggested: { '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
+  default: '50',
+  type: 'range',
+  range: {'min': '0', 'max': '100', 'step': '1'} };
 
 Lelylan.Property.create(params, callback);</xmp></pre>
     </div>
@@ -347,18 +388,18 @@ Lelylan.Property.create(params, callback);</xmp></pre>
     function LelylanController($scope, Property) {
       var params = {
         name: 'Intensity',
-        default: '0',
-        suggested: {
-          '0': 'Min', '25': 'Low', '50': 'Half', '75': 'High', '100': 'Max' } };
+        default: '50',
+        type: 'range',
+        range: {'min': '0', 'max': '100', 'step': '1'} };
 
       $scope.property = new Property(params);
       $scope.property.$save();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -367,10 +408,11 @@ Lelylan.Property.create(params, callback);</xmp></pre>
   <div class="tab-pane" id="create-a-property-ruby">
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-params = {
+var params = {
   name: 'Intensity',
-  default: '0',
-  suggested: {'0' => 'Min', '25' => 'Low', '50' => 'Half', '75' => 'High', '100' => 'Max' }}
+  default: '50',
+  type: 'range',
+  range: {'min': '0', 'max': '100', 'step': '1'} };
 
 property = lelylan.create_property(params)</xmp></pre>
     </div>
@@ -430,6 +472,25 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
     </tr>
     <tr>
       <td class="parameter">
+        <span>type</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property type. <a href="/api/types/properties#types">See valid property types</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>range</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Object containing the <code>min</code>, <code>max</code> and <code>step </code> range values.<br/>
+        Usi it only when <code>type</code> is set to <code>range</code>.</dd>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
         <span>default</span>
         <span class="info">optional</span>
       </td>
@@ -439,11 +500,11 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
     </tr>
     <tr>
       <td class="parameter">
-        <span>suggested</span>
+        <span>accepted</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of suggested values. <a href="/community/faq#suggested-values">Learn more about</a>.
+        List of accepted values. <a href="/community/faq#accepted-values">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -482,16 +543,14 @@ Lelylan.Property.update('<id>', params, callback);</xmp></pre>
   <script>
     function LelylanController($scope, Property) {
       var params = { default: '100' };
-      $scope.property = Property.get({ id: '<id>' }, function() {
-        $scope.property.default = params.default;
-        $scope.property.$update();
-      });
+      $scope.property = new Property({ id: '<id>', default: params.default });
+      $scope.type.$update();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
@@ -579,15 +638,14 @@ Lelylan.Property.delete('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{property}}</div>
   <script>
     function LelylanController($scope, Property) {
-      $scope.property = Property.get({ id: '<id>' }, function() {
-        $scope.property.$delete();
-      });
+      $scope.type= new Type({ id: '<id>' });
+      $scope.type.$delete();
     }
   </script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
