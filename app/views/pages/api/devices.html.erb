@@ -1054,6 +1054,12 @@ device = lelylan.device_properties('<id>', params)</xmp></pre>
 
 <h1 class="call"><a name="execute-a-function">PUT /devices/:id/functions</a></h1>
 
+<p class="notice">
+  <span class="label warning">BROKEN</span>
+  We are redefining the function workflow. Until we finish with it use the
+  <a href="#update-properties">properties service</a>.
+</p>
+
 <p>
   Execute a function on a device identified from its ID and returns extended representation
   for it. If a physical device is connected, Lelylan forward the changes to the
