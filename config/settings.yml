@@ -23,7 +23,7 @@ titles:
   'api/locations': Locations
   'api/oauth': OAuth 2.0
   'api/realtime': Realtime
-  'api/physicals': Physical devices
+  'api/physicals': Physical Devices
   'api/physicals/nodes': Physical nodes
   'community': Community
   'community/clients': Client Libraries
