@@ -1,29 +1,30 @@
-<h2><%= Settings.titles['start'] %></h2>
+<nav  id="getting" class="nav">
+<ul>
+  <li>
+    <a href="#" title="">
+      <span  class="icon"><i aria-hidden="true" class="icon-home"></i></span>
+      <span class="highlight">Getting Started</span>
+    </a>
+  </li>
+  <li>
+    <a href="#" title="">
+      <span class="icon"><i aria-hidden="true" class="icon-services"></i></span>
+      <span>Connect your first physical device</span>
+      <span class="label warning">todo</span>
+    </a>
+  </li>
+  <li>
+  <a  href="#" title="">
+    <span  class="icon"><i  aria-hidden="true" class="icon-services"></i></span>
+    <span>Build your first connected home app</span>
+    <span class="label warning">todo</span>
+  </a>
+  </li>
+  <li>
+  <a  href="#" title="">
+    <span  class="icon"><i  aria-hidden="true" class="icon-blog"></i></span>
+    <span>See existing projects</span></a>
+  </li>
+</ul>
+</nav>
 
-<article>
-<div><h3><strong><%= link_to 'Introduction', static_path('start/introduction') %></strong></h3> <span>Introduction to Lelylan</span></div>
-<div><h3><%= link_to 'Connect your first device', static_path('start/physical') %></h3> <span>Control the physical world</span></div>
-<div><h3><%= link_to 'Build your first app', static_path('start/app') %></h3> <span>A mobile app in 15 minutes</span></div>
-<div><h3><%= link_to 'Projects', static_path('start/projects') %></h3> <span>Connected house apps</span></div>
-</article>
-
-<h2><%= Settings.titles['api'] %></h2>
-
-<article>
-<div><h3><%= link_to 'Core concepts', static_path('api/core') %></h3> <span>Shared ideas</span></div>
-<div><h3><%= link_to 'Devices', static_path('api/devices') %></h3> <span>Devices you interact with</span></div>
-<div><h3><%= link_to 'Physical devices', static_path('api/physicals') %></h3> <span>Connect the physical world</span></div>
-<div><h3><%= link_to 'Types', static_path('api/types') %></h3> <span>Identify your device structure</span></div>
-<div><h3><%= link_to 'Locations', static_path('api/locations') %></h3> <span>Places we live in</span></div>
-<div><h3><%= link_to 'Oauth 2', static_path('api/oauth') %></h3> <span>Access to your resource</span></div>
-<div><h3><%= link_to 'Realtime', static_path('api/realtime') %></h3> <span>Get realtime notifications</span></div>
-</article>
-
-<h2><%= Settings.titles['community'] %></h2>
-
-<article>
-<div><h3><%= link_to 'Client libraries', static_path('community/clients') %></h3> <span>Use your favorite language</span></div>
-<div><h3><%= link_to 'Support', static_path('community/support') %></h3> <span>Solve any problems</span></div>
-<div><h3><%= link_to 'FAQ', static_path('community/faq') %></h3> <span>Frequently asked questions</span></div>
-<!--<div><h3><a href="https://lelylan.uservoice.com">Feedback</a></h3> <span>Tell us your ideas</span></div>-->
-</article>
