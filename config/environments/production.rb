@@ -66,7 +66,7 @@ Dev::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Enable single files being compiled in production
-  config.assets.precompile += ['basic.css', 'bootstrap.min.css', 'default.css', 'prettify.css', 'getting-started.css']
+  config.assets.precompile += ['basic.css', 'bootstrap.min.css', 'default.css', 'prettify.css', 'getting-started.css', 'overlay.js']
 
   # Session store
   config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
