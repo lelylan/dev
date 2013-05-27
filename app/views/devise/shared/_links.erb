@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Profile', "#{people_host}/users/edit" %></li>
-  <li><%= link_to 'Authorized Applications', "#{people_host}/oauth/authorized_applications" %></li>
-  <li><%= link_to 'Your Applications', "#{people_host}/oauth/applications" %></li>
-  <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+  <li><%= link_to 'Profile', "#{people_host}" %></li>
+  <li><%= link_to 'Authorized Apps', "#{people_host}/oauth/authorized_applications" %></li>
+  <li><%= link_to 'Your Apps', "#{people_host}/oauth/applications" %></li>
+  <li><%= link_to "Sign out #{current_user.email}", destroy_user_session_path, method: :delete %></li>
 <% else %>
   <li><%= link_to 'Sign in', new_user_session_path  %></li>
   <li><%= link_to 'Forgot your password?', new_password_url(resource_name, people_options) %><li>

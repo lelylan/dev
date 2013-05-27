@@ -4,8 +4,8 @@ index_pages:
   - api
   - community
 titles:
-  'start': Getting Started
-  'start/introduction': Introduction
+  'start': Introducing Lelylan
+  'start/introduction': Getting Started
   'start/app': Building your first app
   'start/physical': Connect your first device
   'start/tutorials': Tutorials & Articles
