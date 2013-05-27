@@ -63,7 +63,7 @@ a, li {
 
 /* Global CSS that are applied for all screen sizes */
 
-.nav ul {
+.nav-intro ul {
 	max-width: 1240px;
 	margin: 0;
 	padding: 0;
@@ -73,11 +73,11 @@ a, li {
   margin-top: 15px;
 }
 
-.nav li span {
+.nav-intro li span {
 	display: inline;
 }
 
-.nav a {
+.nav-intro a {
 	display: block;
 	color: rgba(249, 249, 249, .9);
 	text-decoration: none;
@@ -88,7 +88,7 @@ a, li {
 	transition: color .5s, background .5s, height .5s;
 }
 
-.nav i{
+.nav-intro i{
 	/* Make the font smoother for Chrome */
 	-webkit-transform: translate3d(0, 0, 0);
 	-moz-transform: translate3d(0, 0, 0);
@@ -105,37 +105,37 @@ a, button {
 
 /* Hover effect for the whole navigation to make the hovered item stand out */
 
-.no-touch .nav ul:hover a {
+.no-touch .nav-intro ul:hover a {
 	color: rgba(249, 249, 249, .5);
 }
 
-.no-touch .nav ul:hover a:hover {
+.no-touch .nav-intro ul:hover a:hover {
 	color: rgba(249, 249, 249, 0.99);
 }
 
 /* Adding some background color to the different menu items */
 
-.nav li:nth-child(6n+1) {
+.nav-intro li:nth-child(6n+1) {
 	background: #00979D;
 }
 
-.nav li:nth-child(6n+2) {
+.nav-intro li:nth-child(6n+2) {
 	background: #00979D;
 }
 
-.nav li:nth-child(6n+3) {
+.nav-intro li:nth-child(6n+3) {
 	background: #00979D;
 }
 
-.nav li:nth-child(6n+4) {
+.nav-intro li:nth-child(6n+4) {
 	background: #00979D;
 }
 
-.nav li:nth-child(6n+5) {
+.nav-intro li:nth-child(6n+5) {
 	background: #00979D;
 }
 
-.nav li:nth-child(6n+6) {
+.nav-intro li:nth-child(6n+6) {
 	background: #00979D;
 }
 
@@ -143,11 +143,11 @@ a, button {
 @media (min-width: 50em) {
 
 	/* Transforms the list into a horizontal navigation */
-	.nav li {
+	.nav-intro li {
 		float: left;
     margin: 0 0 1px;
     padding: 20px;
-		width: 100%;
+		width: 675px;
 		text-align: left;
 		-webkit-transition: border .5s;
 		-moz-transition: border .5s;
@@ -156,7 +156,7 @@ a, button {
 		transition: border .5s;
 	}
 
-	.nav a {
+	.nav-intro a {
 		display: block;
 		width: auto;
 	}
@@ -181,7 +181,7 @@ a, button {
 	}
 
 	/* Positioning the icons and preparing for the animation*/
-	.nav i {
+	.nav-intro i {
 		position: relative;
 		display: inline-block;
 		margin: 0 auto;
@@ -203,9 +203,9 @@ a, button {
 	}
 
 	/* Animate the box-shadow to create the effect */
-	.no-touch .nav a:hover i,
-	.no-touch .nav a:active i,
-	.no-touch .nav a:focus i {
+	.no-touch .nav-intro a:hover i,
+	.no-touch .nav-intro a:active i,
+	.no-touch .nav-intro a:focus i {
 		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
 		-webkit-transition: box-shadow .4s ease-in-out;
 		-moz-transition: box-shadow .4s ease-in-out;
@@ -219,14 +219,14 @@ a, button {
 @media (min-width: 50em) and (max-width: 61.250em) {
 
 	/* Size and font adjustments to make it fit into the screen*/
-	.nav ul {
+	.nav-intro ul {
 		font-size: 1.2em;
 	}
 
 }
 
 /* Styling the toggle menu link and hiding it */
-.nav .navtoogle{
+.nav-intro .navtoogle{
     display: none;
     width: 100%;
     padding: 0.5em 0.5em 0.8em;
@@ -248,3 +248,20 @@ a, button {
     font-size: 1.6em;
 }
 
+#section .introduction h1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 32px;
+}
+
+#section .introduction h2 {
+  font-size: 24px !important;
+}
+
+#section .introduction p {
+  color: #888;
+}
+
+.clear {
+  clear: both;
+}
