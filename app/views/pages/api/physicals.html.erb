@@ -11,7 +11,7 @@
     <tr><td class='inside'>&raquo; <a href="#creating-device-resource">Creating the device resource</a></td></tr>
     <tr><td class='inside'>&raquo; <a href="#receiving-property-updates">Receiving updates from Lelylan</a></td></tr>
     <tr><td class='inside'>&raquo; <a href="#sending-property-updates">Sending updates to Lelylan</a></td></tr>
-    <tr><td>&raquo; <a href="#physical-devices-communication">Physical devices access solutions</a></td></tr>
+    <tr><td class='inside'>&raquo; <a href="#physical-device-access">Physical access definition</a></td></tr>
   </tbody>
 </table>
 </aside>
@@ -477,33 +477,14 @@ response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
 
 <article>
 
-<h2 class="call"><a name="set-physical-device-uri">Setting the physical device URI</a></h2>
-
-<p>
-When <a href="#creating-device-resource">creating the device</a> you left the physical device
-field empty. Now that you have implemented the physical device API you need to make the physical
-device reachable through a URI. To make this possible you have
-<a href="#physical-devices-communication">different</a> solutions.
-</p>
-
-<p>
-Once you have the physical device is accessible through a URI, update the device in the dashborad.
-At this point all steps are completed. Try to interact with the device and see what happens.
-</p>
-
-</article>
-
-<br/><br/>
-
-<article>
-
-<h1 class="call"><a name="physical-devices-communication">Physical devices access solutions</a></h1>
+<h2 class="call"><a name="physical-device-access">Physical access definition</a></h2>
 
 <p>
 Physical devices must be accessible from the Internet in order to be used by Lelylan.
 A common solution is to associate a URI to the physical device and directly
 communicate with it. Anyway other solutions based on communication protocols like
-<a href="http://mqtt.org/">MQTT</a> and <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
+<a href="http://mqtt.org/">MQTT</a> and
+<a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
 can simplify a lot the developer life.
 </p>
 
@@ -533,10 +514,10 @@ can simplify a lot the developer life.
 </ul>
 
 <p>
-If you think you can help us in making easier the connection between Lelylan and the physical
-world <a href="http://twitter.com/#!/lelylan">tweet</a> or
-<a href="mailto:touch@lelylan.com">mail</a> us.
-We are continuosly seeking for new projects and collaborations.
+Once the physical device is accessible, set the Physical URI in the device and you are done.
+Now interact with the device using the available functions and see if everything works fine.
 </p>
+
+<%= image_tag('device-component.png', class: 'img-polaroid') %>
 
 </article>
