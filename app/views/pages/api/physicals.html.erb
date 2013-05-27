@@ -178,8 +178,18 @@ Simply click the <a href="http://manage.lelylan.com/new">create device</a> link 
 with a name and the device type you want to create. For the moment leave empty the physical field
 (we'll come back on that <a href="#set-physical-device-uri">later</a>).
 <p>
+<div class="overlay">
+  <div class="ao-item">
+    <div class="ao-preview">
+      <%= image_tag('device-create.png') %>
+      <div class="ao-annotations">
+        <span style="top: 5%; left: 28%; width: 140px;" class="from-right">Create link</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= image_tag('device-create.png', class: 'img-polaroid') %>
+<br/>
 
 <p class="notice">
   <span class="label">notice</span>
@@ -192,13 +202,26 @@ with a name and the device type you want to create. For the moment leave empty t
 </p>
 
 <ul>
-  <li><strong>Device secret</strong> - Secret code used for the communication between Lelylan and the physical device.</li>
-  <li><strong>Device URI</strong> - URI where the physical sends the updates.</li>
   <li><strong>Type link</strong> - Link to the type properties the physical device needs to accept.</li>
+  <li><strong>Device URI</strong> - URI where the physical sends the updates.</li>
+  <li><strong>Device secret</strong> - Secret code used for the communication between Lelylan and the physical device.</li>
 </ul>
 
-<%= image_tag('device-component.png', class: 'img-polaroid') %>
+<div class="overlay" style="margin-left: 190px;">
+  <div class="ao-item">
+    <div class="ao-preview">
+      <%= image_tag('device-component.png') %>
+      <div class="ao-annotations">
+        <span style="top: 7.5%; left: 78%; width: 140px;" class="from-right">Settings link</span>
+        <span style="top: 71%; left: 97%; width: 140px;" class="from-right">Type link</span>
+        <span style="top: 79%; left: -66%; width: 140px;">Device URI</span>
+        <span style="top: 86.5%; left: 97%; width: 140px;" class="from-right">Device secret</span>
+      </div>
+    </div>
+  </div>
+</div>
 
+<br/>
 </article>
 
 <br/>
@@ -516,10 +539,23 @@ can simplify a lot the developer life.
 
 <p>
 Once the physical device is accessible, set the Physical URI in the device and you are done.
-Now interact with the device using the available functions and see if everything works fine.
+Interact with the device component and see if everything works.
 </p>
 
-<%= image_tag('device-component.png', class: 'img-polaroid') %>
+
+<div class="overlay">
+  <div class="ao-item">
+    <div class="ao-preview">
+      <%= image_tag('device-component-update.png') %>
+      <div class="ao-annotations">
+        <span style="top: 12%; left: 78%; width: 140px;" class="from-right">Settings link</span>
+        <span style="top: 68.5%; left: 99%; width: 140px;" class="from-right">Physical URI Field</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
 
 <p class="notice">
 <span class="label">notice</span>
