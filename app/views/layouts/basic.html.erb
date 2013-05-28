@@ -6,7 +6,6 @@
     <%= stylesheet_link_tag 'basic', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
-    <%= render 'shared/services/analytics' %>
   </head>
 
   <body class="pages pages-index">
@@ -38,11 +37,13 @@
     </section>
 
     <footer id="footer">
-    <ul>
-      <li><a href="<%= "#{people_host}/subscriptions/new" %>">Not a member? Ask for an invitation</a></li>
-      <li><a href="http://lelylan.com/blog/">Latest from the Blog</a></li>
-      <li><a href="http://lelylan.com/about/">About Lelylan</a></li>
-    </ul>
+      <ul>
+        <li><a href="<%= "#{people_host}/subscriptions/new" %>">Not a member? Ask for an invitation</a></li>
+        <li><a href="http://lelylan.com/blog/">Latest from the Blog</a></li>
+        <li><a href="http://lelylan.com/about/">About Lelylan</a></li>
+      </ul>
     </footer>
+
+    <%= render 'shared/services/analytics' %>
   </body>
 </html>

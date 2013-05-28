@@ -6,7 +6,6 @@
     <%= stylesheet_link_tag 'bootstrap.min', 'default', 'prettify', 'getting-started', 'overlay', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
-    <%= render 'shared/services/analytics' %>
   </head>
 
   <body class="docs <%= body_style %>">
@@ -32,16 +31,16 @@
 
     <article id="article">
 
-    <nav id="nav">
-    <%= render 'shared/menu' %>
-    </nav>
+      <nav id="nav">
+      <%= render 'shared/menu' %>
+      </nav>
 
-    <section id="section">
-    <%= yield %>
-    <%= render 'shared/services/disqus' %>
-    </section>
-
+      <section id="section">
+        <%= yield %>
+        <%= render 'shared/services/disqus' %>
+      </section>
     </article>
 
+    <%= render 'shared/services/analytics' %>
   </body>
 </html>
