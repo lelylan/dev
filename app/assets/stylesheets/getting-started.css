@@ -110,33 +110,14 @@ a, button {
 }
 
 .no-touch .nav-intro ul:hover a:hover {
-	color: rgba(249, 249, 249, 0.99);
+	color: #00979D;
 }
 
 /* Adding some background color to the different menu items */
 
-.nav-intro li:nth-child(6n+1) {
-	background: #00979D;
-}
-
-.nav-intro li:nth-child(6n+2) {
-	background: #00979D;
-}
-
-.nav-intro li:nth-child(6n+3) {
-	background: #00979D;
-}
-
-.nav-intro li:nth-child(6n+4) {
-	background: #00979D;
-}
-
-.nav-intro li:nth-child(6n+5) {
-	background: #00979D;
-}
-
-.nav-intro li:nth-child(6n+6) {
-	background: #00979D;
+.nav-intro li {
+  background: rgb(245, 245, 245);
+  border: 1px solid #eee;
 }
 
 /* For screen bigger than 800px */
@@ -145,7 +126,7 @@ a, button {
 	/* Transforms the list into a horizontal navigation */
 	.nav-intro li {
 		float: left;
-    margin: 0 0 1px;
+    margin: 0 0 10px;
     padding: 20px;
 		width: 675px;
 		text-align: left;
@@ -177,7 +158,8 @@ a, button {
 		transition: margin .5s;
 	}
 
-  .icon + span.highlight {
+  .icon + span {
+    color: #333;
 	}
 
 	/* Positioning the icons and preparing for the animation*/
@@ -189,7 +171,8 @@ a, button {
 		border-radius: 50%;
 		font-size: 1.4em;
 		box-shadow: 0 0 0 30px transparent;
-		background: rgba(255,255,255,0.1);
+    color: #444;
+		background: rgba(255,255,255,0.5);
 		-webkit-transform: translate3d(0, 0, 0);
 		-moz-transform: translate3d(0, 0, 0);
 		-o-transform: translate3d(0, 0, 0);
@@ -206,7 +189,7 @@ a, button {
 	.no-touch .nav-intro a:hover i,
 	.no-touch .nav-intro a:active i,
 	.no-touch .nav-intro a:focus i {
-		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
+		box-shadow: 0 0 0 0 rgba(255,255,255,0.7);
 		-webkit-transition: box-shadow .4s ease-in-out;
 		-moz-transition: box-shadow .4s ease-in-out;
 		-o-transition: box-shadow .4s ease-in-out;
@@ -256,10 +239,6 @@ a, button {
 
 #section .introduction h2 {
   font-size: 24px !important;
-}
-
-#section .introduction p {
-  color: #888;
 }
 
 .clear {
