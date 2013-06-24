@@ -1,11 +1,111 @@
-<h2><%= Settings.titles['api'] %></h2>
+<div class="introduction">
 
-<article>
-<div><h3><%= link_to 'Core concepts', static_path('api/core') %></h3> <span>Shared ideas</span></div>
-<div><h3><%= link_to 'Devices', static_path('api/devices') %></h3> <span>Devices you interact with</span></div>
-<div><h3><%= link_to 'Physical devices', static_path('api/physicals') %></h3> <span>Connect the physical world</span></div>
-<div><h3><%= link_to 'Types', static_path('api/types') %></h3> <span>Identify your device structure</span></div>
-<div><h3><%= link_to 'Locations', static_path('api/locations') %></h3> <span>Places we live in</span></div>
-<div><h3><%= link_to 'OAuth 2.0', static_path('api/oauth') %></h3> <span>Access to your resource</span></div>
-<div><h3><%= link_to 'Realtime', static_path('api/realtime') %></h3> <span>Get realtime notifications</span></div>
-</article>
+  <h2 class="internal"><%= Settings.titles['api'] %></h2>
+
+  <div>
+    <p>
+      The connected home should be easy and accessible to everyone. Here you can see how turning
+      a light on using Lelylan requires only a few lines of code using your favorite language.
+    </p>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+      <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+      <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+      <li><a href="#update-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="update-properties-curl">
+        <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/devices/<light-id>/properties \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{ "properties": [{ "id": "<status>", "value": "on" }] }'</xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-node">
+          <div class="preview">
+            <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params  = { properties: [{ id: '<status>', value: 'on' }] };
+Lelylan.Device.properties('<light-id>', params, callback);</xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-angular">
+          <div class="preview">
+            <pre class="prettyprint"><xmp><div ng-app="lelylan">
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{device}}</div>
+  <script>
+  function LelylanController($scope, Device) {
+    var params = { id: '<light-id>', properties: [{ id: '<status>', value: 'on' }] };
+    $scope.device = new Device(params);
+    $scope.device.$properties();
+  }
+  </script>
+</div></xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-ruby">
+          <div class="preview">
+            <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params  = { properties: [{ id: '<status>', value: 'on' }] };
+device  = lelylan.device_properties('<light-id>', params)</xmp></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <br>
+
+  <p>Learn how the Lelylan API and build your ideas.</p>
+
+  <nav class="nav-intro">
+    <ul>
+      <li>
+      <a href="/api/devices" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>Devices API <span class="small"> | interacting with the connected home</span></span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/physicals" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>Physical Devices API <span class="small"> | connecting the physical world</span></span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/types" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>Types API <span class="small"> | structuring the connected home</span></span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/locations" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>Locations API <span class="small"> | Places we live in | </span></span>
+          <span class="label">todo</span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/oauth" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>OAuth 2.0 <span class="small"> | Authorizing your resources</span></span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/realtime" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>Realtime API <span class="small"> | Getting realtime notifications</span></span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/core" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span class="highlight">Core Concepts <span class="small"> | shared ideas</span></span>
+      </a>
+      </li>
+    </ul>
+  </nav>
+</div>

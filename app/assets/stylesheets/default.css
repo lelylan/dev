@@ -70,8 +70,8 @@ iframe{margin:10px 0}
 
 #section{position:absolute;top:0;left:270px;bottom:0;right:0;background:#fff;padding:16px 35px;font:15px "helvetica neue",helvetica,arial,sans-serif;overflow:auto;-webkit-overflow-scrolling:touch;}
 #section p,#section hr,#section h2,#section h3,#section ul,#section ol{max-width:720px}
-#section h1{margin:10px 0 20px 0; font-weight:normal}
-#section h2{font-size:28px;margin:25px 0 10px 0;line-height:1.4em;}
+#section h1{margin:10px 0 10px 0; font-weight:normal}
+#section h2{font-size:22px;margin:25px 0 10px 0;line-height:1.4em;}
 #section h3{margin:15px 0 10px 0;font-weight:normal; font-size:20px;}
 #section ul,#section ol{margin:15px 0;line-height:1.7em}
 #section ul.nav-tabs,#section ol.nav-tabs{margin:15px 0 0 0;line-height:1.7em}
@@ -97,7 +97,8 @@ body.api #section h3{padding:3px 5px;margin:10px 0;border-bottom:1px solid #e0e0
 body.description #section{padding:25px 35px;}
 body.description #section article{max-width:720px;}
 body.description #section h1.call{font-size: 36px;}
-body.description #section h1.call {margin:0; margin-bottom: 20px;}
+body.description #section h1.small{font-size: 28px;}
+body.description #section h1.call {margin:0; margin-bottom: 10px;}
 body.description #section h1.call a {padding-top:25px;}
 body.description #section h2.call a {padding-top:25px;}
 body.description #section h3.call a {padding-top:19px;}
@@ -152,4 +153,5 @@ ul.lelylan-preview {padding: 0}
 ul.lelylan-preview li {margin-left: 0; margin-right: 20px;}
 ul.lelylan-preview hr {margin-top: 5px; margin-bottom: 4px;}
 ul.lelylan-preview p {margin: 0 0 0px 10px; font-size: 18px;}
-
+.nav-intro li span.small {font-size: 16px; color: #888;}
+.introduction pre { width: 713px; }
