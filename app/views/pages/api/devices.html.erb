@@ -96,6 +96,7 @@ creating a basic light, the device inherits the <em>status</em>
   <li><a href="#get-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-device-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -135,6 +136,13 @@ Lelylan.Device.find('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 device = lelylan.device('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import devices
+device = get_dev('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -264,6 +272,7 @@ To access this service you must use the <a href="/api/oauth#scopes">privates</a>
   <li><a href="#get-a-device-private-info-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-device-private-info-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-device-private-info-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-device-private-info-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -303,6 +312,13 @@ Lelylan.Device.privates('<id>', callback);</xmp></pre>
     <div class="pre class="prettyprint"view">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 device = lelylan.device_privates('<id>');</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-device-private-info-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import devices
+device = get_dev_privates('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -449,6 +465,7 @@ device = lelylan.device_privates('<id>');</xmp></pre>
   <li><a href="#get-all-devices-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-devices-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-devices-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-devices-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -490,6 +507,13 @@ Lelylan.Device.all({ 'name': 'light' }, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 devices = lelylan.devices(name: 'light')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-devices-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import devices
+devices = get_all_dev({ name: 'light' })</xmp></pre>
     </div>
   </div>
 </div>
@@ -571,6 +595,7 @@ devices = lelylan.devices(name: 'light')</xmp></pre>
   <li><a href="#create-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#create-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-device-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -632,6 +657,18 @@ params = {
   physical: { uri: '<physical-device-uri>' } };
 
 device = lelylan.create_device(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'Closet dimmer',
+  type: { id: '<id>' },
+  physical: { uri: '<physical-device-uri>' } };
+
+from lelylan import devices
+device = create_dev(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -709,6 +746,7 @@ Update a device identified from its ID and returns extended information for it.
   <li><a href="#update-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-device-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -755,6 +793,15 @@ Lelylan.Device.update('<id>', params, callback);</xmp></pre>
 params = { name: 'Zigbee closet dimmer' }
 
 device = lelylan.update_device('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { name: 'Zigbee closet dimmer' }
+
+from lelylan import devices
+device = update_dev('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -809,6 +856,7 @@ device = lelylan.update_device('<id>', params)</xmp></pre>
   <li><a href="#delete-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#delete-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-device-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -848,6 +896,13 @@ Lelylan.Device.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 device = lelylan.delete_device('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import devices
+device = delete_dev('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -962,6 +1017,7 @@ device = lelylan.delete_device('<id>')</xmp></pre>
   <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-properties-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1033,6 +1089,20 @@ params = {
         value: '50' } ] }
 
 device = lelylan.device_properties('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  properties:
+    [ { id: '<status>',
+        value: 'on' },
+      { id: '<intensity>',
+        value: '50' } ] }
+
+from lelylan import devices
+device = update_dev_prop('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -1154,6 +1224,7 @@ device = lelylan.device_properties('<id>', params)</xmp></pre>
   <li><a href="#execute-a-function-i-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#execute-a-function-i-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#execute-a-function-i-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#execute-a-function-i-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1196,10 +1267,19 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="execute-a-function-i-ruby">
     <div class="preview">
-      <pre class="prettyprint"><>lelylan = Lelylan::Client.new(token: token)
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { function: '<turn-on>' }
 
 device = lelylan.execute('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="execute-a-function-i-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { function: '<turn-on>' }
+
+from lelylan import devices
+device = exec_dev_func('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -1215,6 +1295,7 @@ to be sent from the user.
   <li><a href="#execute-a-function-ii-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#execute-a-function-ii-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#execute-a-function-ii-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#execute-a-function-ii-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -1284,6 +1365,19 @@ params = {
         value: '90' } ] };
 
 device = lelylan.execute('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="execute-a-function-ii-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  function: 'http://api.lelylan.com/functions/<set-intentity>',
+  properties:
+    [ { uri: 'http://api.lelylan.com/properties/<intensity>',
+        value: '90' } ] };
+
+from lelylan import devices
+device = exec_dev_func('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>

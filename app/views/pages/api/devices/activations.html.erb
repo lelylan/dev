@@ -97,6 +97,7 @@ device first <a href="#deactivate-a-device">deactivate</a> it.
   <li><a href="#activate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#activate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#activate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#activate-a-device-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -140,6 +141,15 @@ Lelylan.Device.activate(params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { activation_code: '<activation-code>' }
 device = lelylan.activate_device(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="activate-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { activation_code: '<activation-code>' }
+
+from lelylan import activations
+device = activate_dev(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -214,6 +224,7 @@ Until that moment the previous owner remains.
   <li><a href="#deactivate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#deactivate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#deactivate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#deactivate-a-device-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -254,6 +265,15 @@ Lelylan.Device.deactivate('<activation-code>', callback);</xmp></pre>
     <div class="preview">
       <pre><xmp class="prettyprint">lelylan = Lelylan::Client.new(token: token)
 device = lelylan.deactivate_device('<activation-code>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="deactivate-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { activation_code: '<activation-code>' }
+
+from lelylan import activations
+device = deactivate_dev(params)</xmp></pre>
     </div>
   </div>
 </div>

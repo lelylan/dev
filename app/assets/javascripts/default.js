@@ -12,6 +12,7 @@ $(function () {
     if (window.location.hash.match(/node/))    language = 'node';
     if (window.location.hash.match(/angular/)) language = 'angular';
     if (window.location.hash.match(/ruby/))    language = 'ruby';
+    if (window.location.hash.match(/python/))  language = 'python';
 
     // search in the cookie
     if (!language) language = $.cookie('lelylan-dev-language');

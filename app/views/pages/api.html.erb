@@ -13,6 +13,7 @@
       <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
       <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
       <li><a href="#update-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+      <li><a href="#update-properties-python" data-toggle="tab" class="python">Python</a></li>
     </ul>
 
     <div class="tab-content">
@@ -50,6 +51,14 @@ Lelylan.Device.properties('<light-id>', params, callback);</xmp></pre>
             <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params  = { properties: [{ id: '<status>', value: 'on' }] };
 device  = lelylan.device_properties('<light-id>', params)</xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-python">
+          <div class="preview">
+            <pre class="prettyprint"><xmp>from lelylan import oauth, devices
+oauth.set_access_token()
+params = { properties: [{ id: '<status>', value: 'on' }] }
+device = update_dev_prop('<light-id>', params)</xmp></pre>
           </div>
         </div>
       </div>

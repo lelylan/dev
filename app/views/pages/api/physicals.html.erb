@@ -305,6 +305,7 @@ Follows a sample request a device must be able to solve.
   <li><a href="#update-physical-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-physical-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-physical-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-physical-device-properties-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -359,6 +360,16 @@ secret = '<secret>'; # see dev.lelylan.com/api/devices#get-a-device-private-info
 params = { properties: [{ id: '<status>', value: 'on' }] }
 
 response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>uri = '<physical-device-uri>' # physical device URI you want to interact with
+secret = '<secret>'; # see dev.lelylan.com/api/devices#get-a-device-private-info
+params = { properties: [{ id: '<status>', value: 'on' }] }
+
+from lelylan import physical
+response = receive_update(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -424,6 +435,7 @@ Most of the time the physical device needs to update the device properties. Here
   <li><a href="#update-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-device-properties-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -476,6 +488,16 @@ uri = 'http://api.lelylan.com/devices/<id>/properties' # device property API
 secret = '<device-secret>' # see dev.lelylan.com/api/devices#get-a-device-private-info
 params = { properties: [{ id: '<status>', value: 'on', pending: false }] }
 response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>uri = 'http://api.lelylan.com/devices/<id>/properties' # device property API
+secret = '<device-secret>' # see dev.lelylan.com/api/devices#get-a-device-private-info
+params = { properties: [{ id: '<status>', value: 'on', pending: false }] }
+
+from lelylan import physical
+response = receive_update(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>

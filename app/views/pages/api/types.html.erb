@@ -57,18 +57,14 @@ and collaborative way.
 <%= image_tag('types-dashboard-ng.png', class: 'img-polaroid') %>
 </a>
 
-<p>
-  Lelylan Types is available on <a href="https://github.com/lelylan/types-dashboard-ng/">Github</a>.
-</p>
-
 </article>
 
 <article>
 
-<h2 class="call"><a name="need">Do I need to learn the Types API?</a></h2>
+<h2 class="call"><a name="need">Do I really need to learn the Types API?</a></h2>
 
 <p>
-<strong>Not really</strong>. If all you need is to search or define a device type just use
+<strong>No</strong>. If all you need is to search or define a device type just use
 <a href="http://types.lelylan.com">Lelylan Types</a>.
 </p>
 
@@ -124,6 +120,7 @@ type identified from its ID.
   <li><a href="#get-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-type-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -162,6 +159,12 @@ Lelylan.Type.find('<id>', callback);</xmp></pre>
     <div class="preview">
         <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
 type = lelylan.type('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-type-python">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>from lelylan import types
+type = get_type('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -335,6 +338,7 @@ GET http://api.lelylan.com/types/public</code></pre>
   <li><a href="#get-all-types-node" data-toggle="tab" class="node"> Node.js</a></li>
   <li><a href="#get-all-types-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-types-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-types-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -382,6 +386,16 @@ types = lelylan.types # owned resources
 
 lelylan = Lelylan::Client.new
 types = lelylan.public_types # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-types-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import types
+types = get_owned_type() # owned resources
+
+from lelylan import types
+types = get_all_type() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -511,6 +525,7 @@ In this example the resource IDs are identified from friendly names.
   <li><a href="#create-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#create-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-type-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -580,6 +595,20 @@ params = {
   statuses: [ '<light-on>', '<light-off>' ] };
 
 type = lelylan.create_type(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-type-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'Light',
+  categories: [ 'lights' ],
+  properties: [ '<status>', '<intensity>' ],
+  functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+  statuses: [ '<light-on>', '<light-off>' ] };
+
+from lelylan import types
+type = create_type(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -692,6 +721,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
   <li><a href="#update-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-type-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -736,6 +766,15 @@ Lelylan.Type.update('<id>', params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { name: 'RBG Light' }
 type = lelylan.update_type('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-type-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { name: 'RBG Light' }
+
+from lelylan import types
+type = update_type('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -797,6 +836,7 @@ all previous connected resources are replaced.
   <li><a href="#delete-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#delete-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-type-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -838,6 +878,13 @@ Lelylan.Type.delete('<id>', callback);</xmp></pre>
 type = lelylan.delete_type('<id>')</xmp></pre>
     </div>
   </div>
+  <div class="tab-pane" id="delete-a-type-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import types
+type = lelylan.delete_type('<id>')</xmp></pre>
+    </div>
+  </div>
 </div>
 
 <h4>Example header response</h4>
@@ -874,6 +921,7 @@ type = lelylan.delete_type('<id>')</xmp></pre>
   <li><a href="#get-all-categories-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-categories-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-categories-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-categories-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -915,6 +963,12 @@ Lelylan.Category.all({}, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
 categories = lelylan.categories</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>from lelylan import types
+categories = get_type_cat()</xmp></pre>
     </div>
   </div>
 </div>
