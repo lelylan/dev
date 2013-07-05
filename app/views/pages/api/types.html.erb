@@ -165,7 +165,7 @@ type = lelylan.type('<id>')</xmp></pre>
   <div class="tab-pane" id="get-a-type-python">
     <div class="preview">
         <pre class="prettyprint"><xmp>from lelylan import types
-type = get_type('<id>')</xmp></pre>
+type = types.get_type('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -393,10 +393,10 @@ types = lelylan.public_types # all existing resources</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import types
-types = get_owned_type() # owned resources
+types = types.get_owned_type() # owned resources
 
 from lelylan import types
-types = get_all_type() # all existing resources</xmp></pre>
+types = types.get_all_type() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -609,7 +609,7 @@ params = {
   statuses: [ '<light-on>', '<light-off>' ] };
 
 from lelylan import types
-type = create_type(params)</xmp></pre>
+type = types.create_type(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -775,7 +775,7 @@ type = lelylan.update_type('<id>', params)</xmp></pre>
 params = { name: 'RBG Light' }
 
 from lelylan import types
-type = update_type('<id>', params)</xmp></pre>
+type = types.update_type('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -883,7 +883,7 @@ type = lelylan.delete_type('<id>')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import types
-type = lelylan.delete_type('<id>')</xmp></pre>
+type = types.delete_type('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -969,7 +969,7 @@ categories = lelylan.categories</xmp></pre>
   <div class="tab-pane" id="get-all-categories-python">
     <div class="preview">
       <pre class="prettyprint"><xmp>from lelylan import types
-categories = get_type_cat()</xmp></pre>
+categories = types.get_type_cat()</xmp></pre>
     </div>
   </div>
 </div>

@@ -243,7 +243,7 @@ When a user fires an event (for example creating a new device), a POST request i
 to the callback URL defined in the subscription.
 </p>
 
-<h4 id="payload-representation">Payload example</h4>
+<h3 id="payload-representation">Payload example</h3>
 
 <div class="preview"><pre><code>{
   "subscription": { "id": "50f54f5f5e74ef2873000006" },
@@ -268,7 +268,7 @@ to the callback URL defined in the subscription.
   }
 }</code></pre></div>
 
-<h4>Payload explained</h4>
+<h3>Payload explained</h3>
 
 <dl>
   <dd><span>subscription.id</span> - Subscription ID firing the notification</dd>
@@ -281,7 +281,7 @@ to the callback URL defined in the subscription.
   </dd>
 </dl>
 
-<h4>Callback response</h4>
+<h3>Callback response</h3>
 
 <p>
   Respond with a 2xx HTTP status when the callback URL is called. If a different
@@ -291,7 +291,7 @@ to the callback URL defined in the subscription.
   more calls are made.
 </p>
 
-<h4>Security check</h4>
+<h3>Security check</h3>
 
 <p>
 To verify that the payload you received comes from us, you must verify the <code>X-Hub-Signature</code>
@@ -345,6 +345,7 @@ payload as message. <a href="/community/faq#signature">Learn more about</a>.
   <li><a href="#get-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-subscription-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-subscription-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -388,6 +389,15 @@ Lelylan.Subscription.find('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
 subscription = lelylan.subscription('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-subscription-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth, subscriptions
+oauth.oauth('<client_id>', '<client_secret>')
+
+subscription = subscriptions.get_sub('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -468,6 +478,7 @@ subscription = lelylan.subscription('<id>')</xmp></pre>
   <li><a href="#get-all-subscriptions-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-subscriptions-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-subscriptions-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-subscriptions-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -511,6 +522,15 @@ Lelylan.Subscription.all({}, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
 subscriptions = lelylan.subscriptions</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-subscriptions-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth, subscriptions
+oauth.oauth('<client_id>', '<client_secret>')
+
+subs = subscriptions.get_all_sub()</xmp></pre>
     </div>
   </div>
 </div>
@@ -590,6 +610,7 @@ Create a subscription and returns extended information for it.
   <li><a href="#create-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-subscription-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#create-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-subscription-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -655,6 +676,20 @@ params = {
   callback_uri: '<callback-uri>' }
 
 subscription = lelylan.create_subscription(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-subscription-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth, subscriptions
+oauth.oauth('<client_id>', '<client_secret>')
+
+params = {
+  resource: '<resource>',
+  event: '<event>',
+  callback_uri: '<callback-uri>' }
+
+subscription = subscriptions.create_sub(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -737,6 +772,7 @@ Update a subscription identified from its ID and returns extended information fo
   <li><a href="#update-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-subscription-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-subscription-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -785,6 +821,16 @@ Lelylan.Subscription.update('<id>', params, callback);</xmp></pre>
 params = { resource: 'devices' }
 
 subscription = lelylan.update_subscription('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-subscription-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth, subscriptions
+oauth.oauth('<client_id>', '<client_secret>')
+
+params = { resource: 'devices' }
+subscription = subscriptions.update_sub('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -839,6 +885,7 @@ Delete a subscription identified from its ID and returns extended information fo
   <li><a href="#delete-a-subscription-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-subscription-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#delete-a-subscription-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-subscription-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -883,6 +930,15 @@ Lelylan.Subscription.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(client_id: '<client-id>', client_secret: '<client-secret>')
 subscription = lelylan.delete_subscription('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-subscription-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth, subscriptions
+oauth.oauth('<client_id>', '<client_secret>')
+
+subscription = subscriptions.delete_sub('<id>')</xmp></pre>
     </div>
   </div>
 </div>

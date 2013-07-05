@@ -106,7 +106,7 @@ status = lelylan.status('<id>')</xmp></pre>
   <div class="tab-pane" id="get-a-status-python">
     <div class="preview">
         <pre class="prettyprint"><xmp>from lelylan import statuses
-status = get_status('<id>')</xmp></pre>
+status = statuses.get_status('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -291,10 +291,10 @@ statuses = lelylan.public_statuses # all existing resources</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import statuses
-statuses = get_created_status() # owned resources
+statuses = statuses.get_created_status() # owned resources
 
 from lelylan import statuses
-statuses = get_all_status() # all existing resources</xmp></pre>
+statuses = statuses.get_all_status() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -480,7 +480,7 @@ params = {
         pending: false } ] }
 
 from lelylan import statuses
-status = create_status(params)</xmp></pre>
+status = statuses.create_status(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -635,7 +635,7 @@ status = lelylan.update_status('<id>', params)</xmp></pre>
 params = { name: 'Light On' }
 
 from lelylan import statuses
-status = update_status('<id>', params)</xmp></pre>
+status = statuses.update_status('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -742,7 +742,7 @@ status = lelylan.delete_status('<id>')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import statuses
-status = delete_status('<id>')</xmp></pre>
+status = statuses.delete_status('<id>')</xmp></pre>
     </div>
   </div>
 </div>

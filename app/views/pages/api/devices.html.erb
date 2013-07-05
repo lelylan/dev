@@ -138,7 +138,7 @@ device = lelylan.device('<id>')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import devices
-device = get_dev('<id>')</xmp></pre>
+device = devices.get_dev('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -314,7 +314,7 @@ device = lelylan.device_privates('<id>');</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import devices
-device = get_dev_privates('<id>')</xmp></pre>
+device = devices.get_dev_privates('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -509,7 +509,7 @@ devices = lelylan.devices(name: 'light')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import devices
-devices = get_all_dev({ name: 'light' })</xmp></pre>
+devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
     </div>
   </div>
 </div>
@@ -664,7 +664,7 @@ params = {
   physical: { uri: '<physical-device-uri>' } };
 
 from lelylan import devices
-device = create_dev(params)</xmp></pre>
+device = devices.create_dev(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -797,7 +797,7 @@ device = lelylan.update_device('<id>', params)</xmp></pre>
 params = { name: 'Zigbee closet dimmer' }
 
 from lelylan import devices
-device = update_dev('<id>', params)</xmp></pre>
+device = devices.update_dev('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -898,7 +898,7 @@ device = lelylan.delete_device('<id>')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import devices
-device = delete_dev('<id>')</xmp></pre>
+device = devices.delete_dev('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -1098,7 +1098,7 @@ params = {
         value: '50' } ] }
 
 from lelylan import devices
-device = update_dev_prop('<id>', params)</xmp></pre>
+device = devices.update_dev_prop('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -1275,7 +1275,7 @@ device = lelylan.execute('<id>', params)</xmp></pre>
 params = { function: '<turn-on>' }
 
 from lelylan import devices
-device = exec_dev_func('<id>', params)</xmp></pre>
+device = devices.exec_dev_func('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -1373,7 +1373,7 @@ params = {
         value: '90' } ] };
 
 from lelylan import devices
-device = exec_dev_func('<id>', params)</xmp></pre>
+device = devices.exec_dev_func('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>

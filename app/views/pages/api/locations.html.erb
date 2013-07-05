@@ -65,6 +65,7 @@ Locations are still in development and could not work properly.
   <li><a href="#get-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-location-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-location-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -102,8 +103,15 @@ Lelylan.Location.find('<id>', callback);</code></pre>
   </div>
   <div class="tab-pane" id="get-a-location-ruby">
     <div class="preview">
-      <pre class="prettyprint"><code>lelylan = Lelylan::Client.new(token: token)
-location = lelylan.location('<id>')</code></pre>
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+location = lelylan.location('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-location-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import locations
+location = locations.get_loc('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -251,6 +259,7 @@ List of available location types. No other type values are accepted right now.
   <li><a href="#get-all-locations-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-locations-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-locations-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-locations-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -290,6 +299,13 @@ Lelylan.Location.all({}, callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 locations = lelylan.locations</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-locations-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import locations
+locations = locations.get_all_loc()</xmp></pre>
     </div>
   </div>
 </div>
@@ -386,6 +402,7 @@ locations = lelylan.locations</xmp></pre>
   <li><a href="#create-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-location-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#create-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-location-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -451,6 +468,19 @@ params = {
   devices: ['http://api.lelylan.com/devices/<id>'] }
 
 location = lelylan.create_location(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-location-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  into: 'http://api.lelylan.com/locations/<id>',
+  name: 'Bedroom',
+  type: 'room',
+  devices: ['http://api.lelylan.com/devices/<id>'] }
+
+from lelylan import locations
+location = locations.create_loc(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -551,6 +581,7 @@ Location: http://api.lelylan.com/locations/50427d5914a0d60a00000001</code></pre>
   <li><a href="#update-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-location-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-location-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -596,6 +627,15 @@ Lelylan.Location.update('<id>', params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { name: 'Babies bedroom' }
 location = lelylan.update_location('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-location-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { name: 'Babies bedroom' }
+
+from lelylan import locations
+location = locations.update_loc('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -657,6 +697,7 @@ Connected devices are not deleted.
   <li><a href="#delete-a-location-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-location-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#delete-a-location-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-location-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -697,6 +738,13 @@ Lelylan.Location.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 location = lelylan.delete_location('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-location-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import locations
+location = locations.delete_loc('<id>')</xmp></pre>
     </div>
   </div>
 </div>

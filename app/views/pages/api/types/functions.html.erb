@@ -105,7 +105,7 @@ function = lelylan.function('<id>')</xmp></pre>
   <div class="tab-pane" id="get-a-function-python">
     <div class="preview">
       <pre class="prettyprint"><xmp>from lelylan import functions
-function = get_func('<id>')</xmp></pre>
+function = functions.get_func('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -267,10 +267,10 @@ functions = lelylan.public_functions # all existing resources</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import functions
-functions = get_created_func() # owned resources
+functions = functions.get_created_func() # owned resources
 
 from lelylan import functions
-functions = get_all_func() # all existing resources</xmp></pre>
+functions = functions.get_all_func() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -440,7 +440,7 @@ params = {
       { id: '<intensity>' } ] }
 
 from lelylan import functions
-function = create_func(params)</xmp></pre>
+function = functions.create_func(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -615,7 +615,7 @@ params = {
       { id: '<intensity>', expected: '50' } ] }
 
 from lelylan import functions
-function = update_func('<id>', params)</xmp></pre>
+function = functions.update_func('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -722,7 +722,7 @@ function = lelylan.delete_function('<id>')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import functions
-function = delete_func('<id>')</xmp></pre>
+function = functions.delete_func('<id>')</xmp></pre>
     </div>
   </div>
 </div>

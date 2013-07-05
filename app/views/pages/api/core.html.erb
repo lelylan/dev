@@ -395,6 +395,7 @@ Returns extended information for the authenticated user.
   <li><a href="#get-a-user-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-user-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-user-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-user-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -435,6 +436,13 @@ Lelylan.Profile.me(callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 profile = lelylan.me</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-user-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import user
+profile = user.me()</xmp></pre>
     </div>
   </div>
 </div>

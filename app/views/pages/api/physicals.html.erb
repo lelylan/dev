@@ -63,67 +63,67 @@ and <strong>budget</strong>.
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://www.arduino.cc/">Arduino</a></td>
+      <td><span class="label link"><a href="http://www.arduino.cc/">Arduino</a></span></td>
       <td>
         Open-source electronics prototyping platform.
       </td>
     </tr>
     <tr>
-      <td><a href="http://electricimp.com/">Electric imp</a></td>
+      <td><span class="label link"><a href="http://electricimp.com/">Electric imp</a></span></td>
       <td>
         A complete and cheap solution to connect devices to the internet, wirelessly.
       </td>
     </tr>
     <tr>
-      <td><a href="http://www.raspberrypi.org/">Raspberry Pi</a></td>
+      <td><span class="label link"><a href="http://www.raspberrypi.org/">Raspberry Pi</a></span></td>
       <td>
         Credit-card sized computer as ARM GNU/Linux box for $25.
       </td>
     </tr>
     <tr>
-      <td><a href="http://nanode.eu/">Nanode</a></td>
+      <td><span class="label link"><a href="http://nanode.eu/">Nanode</a></span></td>
       <td>
         Open-source Arduino-like board that has in-built web connectivity.
       </td>
     </tr>
     <tr>
-      <td><a href="http://www.openpicus.com/">openPICUS</a></td>
+      <td><span class="label link"><a href="http://www.openpicus.com/">openPICUS</a></span></td>
       <td>
         Platform to control and communication for your electronic devices through the web.
       </td>
     </tr>
     <tr>
-      <td><a href="http://www.libelium.com/">Libelium</a></td>
+      <td><span class="label link"><a href="http://www.libelium.com/">Libelium</a></span></td>
       <td>
         Hardware technology for the implementation of wireless sensor networks.
       </td>
     </tr>
     <tr>
-      <td><a href="http://netduino.com/">Netduino</a></td>
+      <td><span class="label link"><a href="http://netduino.com/">Netduino</a></span></td>
       <td>
         Open-source electronics platform using the .NET Micro Framework.
       </td>
     </tr>
     <tr>
-      <td><a href="http://developer.android.com/tools/adk/index.html">Android ADK</a></td>
+      <td><span class="label link"><a href="http://developer.android.com/tools/adk/index.html">Android ADK</a></span></td>
       <td>
         Designed to let hardware builders and software developers create accessories for Android.
       </td>
     </tr>
     <tr>
-      <td><a href="http://rascalmicro.com/">The Rascal</a></td>
+      <td><span class="label link"><a href="http://rascalmicro.com/">The Rascal</a></span></td>
       <td>
         Small computer to monitor and control the world remotely.
       </td>
     </tr>
     <tr>
-      <td><a href="http://pandaboard.org/">Beagle Board</a></td>
+      <td><span class="label link"><a href="http://pandaboard.org/">Beagle Board</a></span></td>
       <td>
         Open OMAP 4 mobile software development platform.
       </td>
     </tr>
     <tr>
-      <td><a href="http://www.plugcomputer.org/">Plug Computer</a></td>
+      <td><span class="label link"><a href="http://www.plugcomputer.org/">Plug Computer</a></span></td>
       <td>
         Small form factor server.
       </td>
@@ -157,12 +157,6 @@ We are continuosly seeking for new projects and collaborations.
   <li><a href="#sending-property-updates">Let the physical device send updates to Lelylan</a></li>
   <li><a href="#set-physical-device-uri">Set the physical device URI</a></li>
 </ul>
-
-<p class="notice">
-  <span class="label warning">todo</span>
-  Read "<a href="/start/physical/">connect your first physical device</a>" to see a complete
-  tutorial explaining how to connect a physical device.
-</p>
 
 </article>
 
@@ -369,7 +363,7 @@ secret = '<secret>'; # see dev.lelylan.com/api/devices#get-a-device-private-info
 params = { properties: [{ id: '<status>', value: 'on' }] }
 
 from lelylan import physical
-response = receive_update(uri, secret, params)</xmp></pre>
+response = physical.receive_update(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -497,7 +491,7 @@ secret = '<device-secret>' # see dev.lelylan.com/api/devices#get-a-device-privat
 params = { properties: [{ id: '<status>', value: 'on', pending: false }] }
 
 from lelylan import physical
-response = receive_update(uri, secret, params)</xmp></pre>
+response = physical.receive_update(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>

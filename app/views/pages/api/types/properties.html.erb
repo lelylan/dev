@@ -103,7 +103,7 @@ property = lelylan.property('<id>')</xmp></pre>
   <div class="tab-pane" id="get-a-property-python">
     <div class="preview">
         <pre class="prettyprint"><xmp>from lelylan import properties
-property = get_prop('<id>')</xmp></pre>
+property = properties.get_prop('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -267,10 +267,10 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import properties
-properties = get_created_prop() # owned resources
+properties = properties.get_created_prop() # owned resources
 
 from lelylan import properties
-properties = get_all_prop() # all existing resources</xmp></pre>
+properties = properties.get_all_prop() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -447,7 +447,7 @@ var params = {
   range: {'min': '0', 'max': '100', 'step': '1'} };
 
 from lelylan import properties
-property = create_prop(params)</xmp></pre>
+property = properties.create_prop(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -604,7 +604,7 @@ property = lelylan.update_property('<id>', params)</xmp></pre>
 params = { default: '100' };
 
 from lelylan import properties
-property = update_prop('<id>', params)</xmp></pre>
+property = properties.update_prop('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -705,7 +705,7 @@ property = lelylan.delete_property('<id>')</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>oauth.set_access_token()
 from lelylan import properties
-property = delete_prop('<id>')</xmp></pre>
+property = properties.delete_prop('<id>')</xmp></pre>
     </div>
   </div>
 </div>
