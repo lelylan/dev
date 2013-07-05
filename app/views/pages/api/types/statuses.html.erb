@@ -62,6 +62,7 @@ moment of its life is to use the status API.
   <li><a href="#get-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-status-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -100,6 +101,12 @@ Lelylan.Status.find('<id>', callback);</xmp></pre>
     <div class="preview">
         <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
 status = lelylan.status('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-status-python">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>from lelylan import statuses
+status = get_status('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -229,6 +236,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
   <li><a href="#get-all-statuses-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#get-all-statuses-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-statuses-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-statuses-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -277,6 +285,16 @@ statuses = lelylan.statuses # owned resources
 
 lelylan = Lelylan::Client.new
 statuses = lelylan.public_statuses # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-statuses-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import statuses
+statuses = get_created_status() # owned resources
+
+from lelylan import statuses
+statuses = get_all_status() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -374,6 +392,7 @@ statuses = lelylan.public_statuses # all existing resources</xmp></pre>
   <li><a href="#create-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#create-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-status-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -447,6 +466,21 @@ params = {
         pending: false } ] }
 
 status = lelylan.create_status(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-status-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'On',
+  function: { id: '<turn-off>' },
+  properties:
+    [ { id: '<intensity>',
+        value: ['100'],
+        pending: false } ] }
+
+from lelylan import statuses
+status = create_status(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -548,6 +582,7 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
   <li><a href="#update-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-status-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -592,6 +627,15 @@ Lelylan.Status.update('<id>', params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { name: 'Light On' }
 status = lelylan.update_status('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-status-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { name: 'Light On' }
+
+from lelylan import statuses
+status = update_status('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -652,6 +696,7 @@ Connected properties are not deleted.
   <li><a href="#delete-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#delete-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-status-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -691,6 +736,13 @@ Lelylan.Status.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 status = lelylan.delete_status('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-status-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import statuses
+status = delete_status('<id>')</xmp></pre>
     </div>
   </div>
 </div>

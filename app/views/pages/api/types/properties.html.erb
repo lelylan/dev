@@ -59,6 +59,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
   <li><a href="#get-a-property-node" data-toggle="tab" class="node">Node</a></li>
   <li><a href="#get-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-property-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -97,6 +98,12 @@ Lelylan.Property.find('<id>', callback);</xmp></pre>
     <div class="preview">
         <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
 property = lelylan.property('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-property-python">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>from lelylan import properties
+property = get_prop('<id>')</xmp></pre>
     </div>
   </div>
 </div>
@@ -205,6 +212,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
   <li><a href="#get-all-properties-node" data-toggle="tab" class="node">Node</a></li>
   <li><a href="#get-all-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#get-all-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-properties-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -253,6 +261,16 @@ properties = lelylan.properties # owned resources
 
 lelylan = Lelylan::Client.new
 properties = lelylan.public_properties # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import properties
+properties = get_created_prop() # owned resources
+
+from lelylan import properties
+properties = get_all_prop() # all existing resources</xmp></pre>
     </div>
   </div>
 </div>
@@ -351,6 +369,7 @@ properties = lelylan.public_properties # all existing resources</xmp></pre>
   <li><a href="#create-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#create-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#create-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-property-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -416,6 +435,19 @@ var params = {
   range: {'min': '0', 'max': '100', 'step': '1'} };
 
 property = lelylan.create_property(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-property-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+var params = {
+  name: 'Intensity',
+  default: '50',
+  type: 'range',
+  range: {'min': '0', 'max': '100', 'step': '1'} };
+
+from lelylan import properties
+property = create_prop(params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -519,6 +551,7 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
   <li><a href="#update-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#update-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#update-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-property-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -563,6 +596,15 @@ Lelylan.Property.update('<id>', params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 params = { default: '100' };
 property = lelylan.update_property('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-property-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { default: '100' };
+
+from lelylan import properties
+property = update_prop('<id>', params)</xmp></pre>
     </div>
   </div>
 </div>
@@ -617,6 +659,7 @@ property = lelylan.update_property('<id>', params)</xmp></pre>
   <li><a href="#delete-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
   <li><a href="#delete-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
   <li><a href="#delete-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-property-python" data-toggle="tab" class="python">Python</a></li>
 </ul>
 
 <div class="tab-content">
@@ -656,6 +699,13 @@ Lelylan.Property.delete('<id>', callback);</xmp></pre>
     <div class="preview">
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
 property = lelylan.delete_property('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-property-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import properties
+property = delete_prop('<id>')</xmp></pre>
     </div>
   </div>
 </div>
