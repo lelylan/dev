@@ -1,26 +1,31 @@
 <article>
 
-<h1 class="small"><a name="introduction"><%= title %></a></h1>
+<h1 class="small"><a name="resources">Resources</a></h1>
 
 <p>
-Lelylan makes it easy for developers to monitor and control all devices in your house
-providing a simple, self descriptive and consistent representation of them. Lelylan maps
-every device in your house to a unique URI which will provide a simple access over it.
+  Lelylan is built on top of four resources. Here follows a short description that will give you a
+  first idea of what we'll be talking about. If you don't get the concepts, don't
+  worry, they will be extensively covered in the next sections.
 </p>
 
-<p>
-With Lelylan developers can build secure applications and services that use
-<a href="/api/realtime">real-time</a>
-data coming from the real world to create the connected home of the future.
-</p>
+<ul>
+  <li><strong>Devices</strong> - creates, monitors, controls and simulates physical devices.</li>
+  <li><strong>Physical Devices</strong> - defines a set of services to connect Lelylan to the physical world.</li>
+  <li><strong>Types</strong> - describes the structure of a device.</li>
+  <li><strong>Locations</strong> - describes the places devices live in.</li>
+</ul>
 
 </article>
 
-</br>
+<br/>
 
 <article>
 
-<h1 class="small"><a name="lelylan-flow">Lelylan request flow</a></h1>
+<h1 class="small"><a name="lelylan-flow">Request flow</a></h1>
+
+<p>
+Get a first idea of how Lelylan works with your third party apps.
+</p>
 
 <%= render 'shared/animations/lelylan' %>
 
@@ -30,21 +35,75 @@ data coming from the real world to create the connected home of the future.
 
 <article>
 
-<h1 class="small"><a name="resources">Resources</a></h1>
+  <h1 class="small"><a name="lelylan-languages">Languages</a></h1>
 
-<p>
-  Lelylan REST API is built on top of four resources.
-</p>
+  <div>
+    <p>
+      See how turning a light on using Lelylan only
+      requires a few lines of code using your favorite language.
+    </p>
 
-<ul>
-  <li><a href="/api/devices">Devices</a> - creates, monitors, controls and simulates physical devices.</li>
-  <li><a href="/api/types">Types</a> - describes the structure of a device.</li>
-  <li><a href="/api/locations">Locations</a> - describes the places devices live in.</li>
-  <li><a href="/api/physicals">Physical Devices</a> - defines a set of services to connect Lelylan to the physical world.</li>
-</ul>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+      <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+      <li><a href="#update-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+      <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+      <li><a href="#update-properties-python" data-toggle="tab" class="python">Python</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="update-properties-curl">
+        <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/devices/<light-id>/properties \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{ "properties": [{ "id": "<status>", "value": "on" }] }'</xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-node">
+          <div class="preview">
+            <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params  = { properties: [{ id: '<status>', value: 'on' }] };
+Lelylan.Device.properties('<light-id>', params, callback);</xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-angular">
+          <div class="preview">
+            <pre class="prettyprint"><xmp><div ng-app="lelylan">
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{device}}</div>
+  <script>
+  function LelylanController($scope, Device) {
+    var params = { id: '<light-id>', properties: [{ id: '<status>', value: 'on' }] };
+    $scope.device = new Device(params);
+    $scope.device.$properties();
+  }
+  </script>
+</div></xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-ruby">
+          <div class="preview">
+            <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params  = { properties: [{ id: '<status>', value: 'on' }] };
+device  = lelylan.device_properties('<light-id>', params)</xmp></pre>
+          </div>
+        </div>
+        <div class="tab-pane" id="update-properties-python">
+          <div class="preview">
+            <pre class="prettyprint"><xmp>from lelylan import devices
+oauth.set_access_token()
+params = { properties: [{ id: '<status>', value: 'on' }] }
+device = update_dev_prop('<light-id>', params)</xmp></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
 
 </article>
 
+</br>
 </br>
 
 <article>
@@ -68,14 +127,14 @@ data coming from the real world to create the connected home of the future.
     </a>
     </li>
     <li>
-    <a  href="/start/projects" title="">
-      <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-      <span>See existing projects</span></a>
-    </li>
-    <li>
     <a  href="/api" title="">
       <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
       <span>Lelylan API</span></a>
+    </li>
+    <li>
+    <a  href="/start/projects" title="">
+      <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+      <span>See existing projects</span></a>
     </li>
   </ul>
 </nav>

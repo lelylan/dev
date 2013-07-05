@@ -15,12 +15,12 @@ titles:
   'api/devices': Devices
   'api/devices/consumptions': Consumptions
   'api/devices/histories': Histories
-  'api/devices/activations': Activations
   'api/types': Types
   'api/types/properties': Properties
   'api/types/functions': Functions
   'api/types/statuses': Statuses
   'api/locations': Locations
+  'api/activations': Activations
   'api/oauth': OAuth 2.0
   'api/realtime': Realtime
   'api/physicals': Physical Devices

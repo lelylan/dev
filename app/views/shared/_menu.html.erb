@@ -9,10 +9,6 @@
 <h2><%= link_to 'API', static_path('api') %></h2>
 <ul>
   <li><%= link_to 'Devices', static_path('api/devices') %></li>
-  <% if params[:id]=~/api\/devices/ %>
-  <li class="little">&raquo; <%= link_to 'Activations', static_path('api/devices/activations') %></li>
-  <!-- <li class="little">&raquo; <%= link_to 'Histories', static_path('api/devices/histories') %></li> -->
-  <% end %>
   <li><%= link_to 'Physical devices', static_path('api/physicals') %></li>
   <li><%= link_to 'Types', static_path('api/types') %></li>
   <% if params[:id]=~/api\/types/ %>
@@ -21,6 +17,7 @@
   <li class="little">&raquo; <%= link_to 'Statuses', static_path('api/types/statuses') %></li>
   <% end %>
   <li><%= link_to 'Locations', static_path('api/locations') %> <span class="label">todo</span></li>
+  <li><%= link_to 'Activations', static_path('api/activations') %></li>
   <li><%= link_to 'Oauth 2.0', static_path('api/oauth') %></li>
   <li><%= link_to 'Realtime', static_path('api/realtime') %></li>
   <li><%= link_to 'Core concepts', static_path('api/core') %></li>
@@ -31,7 +28,6 @@
   <li><%= link_to 'Client libraries', static_path('community/clients') %></li>
   <li><%= link_to 'Support', static_path('community/support') %></li>
   <li><%= link_to 'FAQ', static_path('community/faq') %></li>
-  <!--<li><a href="https://lelylan.uservoice.com">Your feedback</a></li>-->
 </ul>
 
 <!--<div id="search">-->

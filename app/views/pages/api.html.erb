@@ -1,75 +1,5 @@
 <div class="introduction">
 
-  <h2 class="internal"><%= Settings.titles['api'] %></h2>
-
-  <div>
-    <p>
-      The connected home should be easy and accessible to everyone. Here you can see how turning
-      a light on using Lelylan requires only a few lines of code using your favorite language.
-    </p>
-
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#update-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
-      <li><a href="#update-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-      <li><a href="#update-properties-node" data-toggle="tab" class="node">Node.js</a></li>
-      <li><a href="#update-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
-      <li><a href="#update-properties-python" data-toggle="tab" class="python">Python</a></li>
-    </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="update-properties-curl">
-        <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/devices/<light-id>/properties \
-     -H 'Authorization: Bearer <token>' \
-     -H 'Content-Type: application/json' \
-     -d '{ "properties": [{ "id": "<status>", "value": "on" }] }'</xmp></pre>
-          </div>
-        </div>
-        <div class="tab-pane" id="update-properties-node">
-          <div class="preview">
-            <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-var params  = { properties: [{ id: '<status>', value: 'on' }] };
-Lelylan.Device.properties('<light-id>', params, callback);</xmp></pre>
-          </div>
-        </div>
-        <div class="tab-pane" id="update-properties-angular">
-          <div class="preview">
-            <pre class="prettyprint"><xmp><div ng-app="lelylan">
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
-  <div ng-controller="LelylanController">{{device}}</div>
-  <script>
-  function LelylanController($scope, Device) {
-    var params = { id: '<light-id>', properties: [{ id: '<status>', value: 'on' }] };
-    $scope.device = new Device(params);
-    $scope.device.$properties();
-  }
-  </script>
-</div></xmp></pre>
-          </div>
-        </div>
-        <div class="tab-pane" id="update-properties-ruby">
-          <div class="preview">
-            <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-params  = { properties: [{ id: '<status>', value: 'on' }] };
-device  = lelylan.device_properties('<light-id>', params)</xmp></pre>
-          </div>
-        </div>
-        <div class="tab-pane" id="update-properties-python">
-          <div class="preview">
-            <pre class="prettyprint"><xmp>from lelylan import oauth, devices
-oauth.set_access_token()
-params = { properties: [{ id: '<status>', value: 'on' }] }
-device = update_dev_prop('<light-id>', params)</xmp></pre>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-
-  <br>
-
-  <p>Learn how the Lelylan API and build your ideas.</p>
-
   <nav class="nav-intro">
     <ul>
       <li>
@@ -95,6 +25,12 @@ device = update_dev_prop('<light-id>', params)</xmp></pre>
         <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
         <span>Locations API <span class="small"> | Places we live in | </span></span>
           <span class="label">todo</span>
+      </a>
+      </li>
+      <li>
+      <a href="/api/activations" title="">
+        <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+        <span>Activations API <span class="small"> | Selling your cool devices</span></span>
       </a>
       </li>
       <li>
