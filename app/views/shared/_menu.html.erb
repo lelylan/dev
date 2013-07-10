@@ -10,6 +10,10 @@
 <ul>
   <li><%= link_to 'Devices', static_path('api/devices') %></li>
   <li><%= link_to 'Physical devices', static_path('api/physicals') %></li>
+  <% if params[:id]=~/api\/physicals/ %>
+  <li class="little">&raquo; <%= link_to 'MQTT', static_path('api/physicals/mqtt') %> <span class="label">todo</span></li>
+  <li class="little">&raquo; <%= link_to 'Direct Access', static_path('api/physicals/direct') %></li>
+  <% end %>
   <li><%= link_to 'Types', static_path('api/types') %></li>
   <% if params[:id]=~/api\/types/ %>
   <li class="little">&raquo; <%= link_to 'Properties', static_path('api/types/properties') %></li>

@@ -1,0 +1,366 @@
+<article>
+
+<aside class="menu">
+</br>
+<table>
+  <tbody>
+    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
+    <tr><td>&raquo; <a href="#creating-the-device">Creating the device</a></td></tr>
+    <tr><td>&raquo; <a href="#connecting-to-lelylan-mqtt">Connecting to Lelylan MQTT</a></td></tr>
+    <tr><td>&raquo; <a href="#receiving-device-updates">Receiving updates from Lelylan</a></td></tr>
+    <tr><td>&raquo; <a href="#sending-device-updates">Sending updates to Lelylan</a></td></tr>
+    <tr><td>&raquo; <a href="#setting-physical-uri">Setting physical URI</a></td></tr>
+  </tbody>
+</table>
+</aside>
+
+<h1 class="call"><a name="direct-access"><%= title %></a></h1>
+
+<p>
+  Lelylan MQTT is the suggested way to connect a physical device to Lelylan by providing
+  publish and subscription functionalities.
+  To learn more about the MQTT protocol check out
+  <a href="http://mqtt.org">mqtt.org</a> or read the
+  <a href="http://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html">specs</a>.
+</p>
+
+<p>
+  The source code of Lelylan MQTT is available on
+  <a href="https://github.com/lelylan/mqtt">Github</a>. It's built with Node.js and uses
+  <a href="https://github.com/mcollina/mosca">Mosca</a>
+  to give you a MQTT 3.1 compliant solution supporting QoS 0 and QoS 1 levels on message delivering.
+</p>
+
+<span class="label warning">delivered for the end of july</span><br><br>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="creating-the-device">Create the device</a></h2>
+
+<p>
+To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>.
+Click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
+with the desired device name and type. For the moment leave empty the physical field
+(we'll come back later on that).
+<p>
+<div class="overlay">
+  <div class="ao-item">
+    <div class="ao-preview">
+      <%= image_tag('device-create.png') %>
+      <div class="ao-annotations">
+        <span style="top: 5%; left: 28%; width: 140px;" class="from-right">Create link</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<p>
+  When created, you'll see a detailed view of your device (device component). Now click on
+  <code>settings</code> and you'll find all the needed info to implement the physical device API.
+</p>
+
+<ul>
+  <li><strong>Type</strong> - Link to the type properties the physical device needs to accept.</li>
+  <li><strong>ID</strong> - Unique device identifier.</li>
+  <li><strong>Secret</strong> - Device secret code used to authenticate the communication with Lelylan.</li>
+</ul>
+
+<div class="overlay" style="margin-left: 190px;">
+  <div class="ao-item">
+    <div class="ao-preview">
+      <%= image_tag('device-component.png') %>
+      <div class="ao-annotations">
+        <span style="top: 7.5%; left: 78%; width: 140px;" class="from-right">Settings link</span>
+        <span style="top: 71%; left: 97%; width: 140px;" class="from-right">Type link</span>
+        <span style="top: 79%; left: -66%; width: 140px;">Device URI</span>
+        <span style="top: 86.5%; left: 97%; width: 140px;" class="from-right">Device secret</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+</article>
+
+<article>
+
+<h2 class="call"><a name="connecting-to-lelylan-mqtt">Connecting to Lelylan MQTT</a></h2>
+
+<p>
+Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
+the connection phase the client needs to set the <code>device.id</code> as username and the
+<code>device.secret</code> as password. This is done to limit the client publish and subscribe
+scope to the authorized device.
+</p>
+
+<p>
+When the credentialas are missing or not valid, the connection is rejected.
+</p>
+
+<h4>MQTT Connection Info</h4>
+
+<div class="preview">
+<pre><code><span style="color: #999">host:</span> mqtt.lelylan.com
+<span style="color: #999">port:</span> 1883</code></pre>
+</div>
+
+<h4>Example Subscription</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
+  <li><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="connect-physical-device-arduino">
+    <div class="preview">
+      <pre class="prettyprint">
+// The subscription example for Arduino is not ready yet.
+// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="connect-physical-device-node">
+    <div class="preview">
+          <pre class="prettyprint">
+// The subscription example for Node.js is not ready yet.
+// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+    </div>
+  </div>
+</div>
+
+</article>
+
+<br/>
+
+<article>
+
+<h2 class="call"><a name="receiving-device-updates">Receiving updates from Lelylan</a></h2>
+
+<p>
+When a user <a href="/api/devices#update-properties">updates a device property</a> or
+<a href="/api/devices#execute-a-function">executes a function</a> using Lelylan, a message is
+published to the topic <code>devices/:id/get</code>. Subscribe this topic to get
+all device updates.
+</p>
+
+<h4>Topic Example</h4>
+
+<div class="preview">
+<pre><xmp>devices/<device-id>/get</xmp></pre>
+</div>
+
+<h4>JSON Payload</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Desired property value.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Subscription Example</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#subscribe-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
+  <li><a href="#subscribe-node" data-toggle="tab" class="node">Node.js</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="subscribe-arduino">
+    <div class="preview">
+      <pre class="prettyprint">
+// The subscription example for Arduino is not ready yet.
+// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="subscribe-node">
+    <div class="preview">
+          <pre class="prettyprint">
+// The subscription example for Node.js is not ready yet.
+// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+    </div>
+  </div>
+</div>
+
+</article>
+
+<br/>
+
+<article>
+
+<h2 class="call"><a name="sending-device-updates">Sending updates to Lelylan</a></h2>
+
+<p>
+When a physical device changes its status through a physical interaction a message is
+published to the device topic <code>devices/:id/set</code> with the list of the updated
+properties.
+</p>
+
+<h4>Topic Example</h4>
+
+<div class="preview">
+<pre><xmp>devices/<device-id>/set</xmp></pre>
+</div>
+
+<h4>JSON Payload</h4>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Updated property value.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Publish Example</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#publish-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
+  <li><a href="#publish-node" data-toggle="tab" class="node">Node.js</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="publish-arduino">
+    <div class="preview">
+      <pre class="prettyprint">
+// The publish example for Arduino is not ready yet.
+// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="publish-node">
+    <div class="preview">
+          <pre class="prettyprint">
+// The publish example for Node.js is not ready yet.
+// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+    </div>
+  </div>
+</div>
+
+</article>
+
+<br/>
+
+<article>
+
+<h2 class="call"><a name="setting-physical-uri">Setting physical URI</a></h2>
+
+<p>
+To connect the device to the physical device you need to fill the
+<code>physical</code> field with the following URI structure
+<code>http://nodes.lelylan.com/mqtt/&lt;device-id&gt;</code>,
+where the device id is the one you are working at.
+</p>
+
+<h4>Example</h4>
+
+<div class="preview">
+<pre><code><span style="color: #999">device.id:</span>   518be5a700045e1521000001
+<span style="color: #999">physical uri</span> http://nodes.lelylan.com/mqtt/518be5a700045e1521000001</pre></code>
+</div>
+
+<h4>Configuration</h4>
+
+<div class="overlay">
+  <div class="ao-item">
+    <div class="ao-preview">
+      <%= image_tag('device-component-update.png') %>
+      <div class="ao-annotations">
+        <span style="top: 12%; left: 78%; width: 140px;" class="from-right">Settings link</span>
+        <span style="top: 68.5%; left: 99%; width: 140px;" class="from-right">Physical URI Field</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>
+You are done. Interact with the device component and play with it. Give us your feedback and
+whenever you had any problem during the physical device integration, do not hesitate to
+<a href="http://twitter.com/#!/lelylan">tweet</a> or
+<a href="mailto:touch@lelylan.com">mail</a> us.
+</p>
+
+</article>
+
+<br/>
+<br/>
+<br/>
+
+<article>
+
+<h1 class="call"><a>What's next?</a></h1>
+
+<nav class="nav-intro">
+<ul>
+  </li>
+  <li>
+  <a href="http://twitter.com/lelylan" title="">
+    <span  class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+    <span>Tell us your story<span class="small"> | Share your experiences using lelylan</span></span>
+  </a>
+  </li>
+  <li>
+  <a href="/api" title="">
+    <span  class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
+    <span class="highlight">Lelylan API<span class="small"> | Find out more about Lelylan</span></span>
+  </a>
+  </li>
+</ul>
+</nav>
+
+<div class="clearfix">
+
+</article>
