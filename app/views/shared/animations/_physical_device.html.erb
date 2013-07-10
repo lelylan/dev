@@ -8,13 +8,13 @@
 
           <p>
           When you update a device
-          <a href="/api/devices#update-properties">properties</a> or you execute a
+          <a href="/api/devices#update-properties">property</a> or you execute a
           <a href="/api/devices#execute-a-function">function</a> using Lelylan, the request
-          is forwarded to the connected physical device URI, sending the properties to update.
+          is forwarded to the connected physical device URI.
           </p>
 
           <div class="preview unified"><pre><xmp>PUT http://arduino.house.com/<physical-light></xmp></pre></div>
-          <div class="preview"><pre><xmp>{ "properties": [{ "id": "<status>", "value": "on" }] }</xmp></pre></div>
+          <div class="preview"><pre><xmp>{ "properties": [{ "id": "<status-id>", "value": "on" }] }</xmp></pre></div>
 
         </div>
 
@@ -23,15 +23,15 @@
           <a class="btn btn-warning" href="#">Notify Lelylan &raquo;</a>
 
           <p>
-          When the physical device receives the request returns a 202 status.
-          This lets Lelylan know that the request has been accepted.
+          When the physical device receives the request returns a 202 status
+          (request accepted).
           </p>
 
           <div class="preview"><pre><xmp>HTTP/1.1 202 Accepted</xmp></pre></div>
 
           <p>
           At this point the physical device applies the request using the desired
-          communication protocol (e.g Zigbee, WiFi, Konnex, Lonworks, Bluetooth, etc.).
+          communication protocol (e.g WiFi, Ethernet, Bluetooth, Zigbee, Konnex, Lonworks, etc.).
           </p>
 
         </div>
@@ -39,17 +39,16 @@
         <div class="third-step">
 
           <p>
-          When the physical device applies the desired changes in the physical world
-          it must notify Lelylan about the changes.
+          When the physical device applies the desired changes, it notifies Lelylan.
           </p>
 
           <div class="preview unified"><pre><xmp>PUT http://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
 
-          <div class="preview"><pre><xmp>{ "properties": [{ "id": "<status>", "value": "on" }] }</xmp></pre></div>
+          <div class="preview"><pre><xmp>{ "properties": [{ "id": "<status-id>", "value": "on" }] }</xmp></pre></div>
 
           <p>
-          As the whole physical communication flow is asynchronous, you need to subscribe to the
-          <a href="/api/realtime">realtime service</a> to get realtime notifications.
+          Use the <a href="/api/realtime">realtime service</a> to receive updates
+          (physical communication flow is asynchronous).
           </p>
 
         </div>

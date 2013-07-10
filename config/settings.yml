@@ -32,7 +32,7 @@ titles:
 code_pages:
   - api/core
   - api/devices
-  - api/devices/activations
+  - api/activations
   - api/devices/consumptions
   - api/devices/histories
   - api/types

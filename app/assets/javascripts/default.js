@@ -31,7 +31,6 @@ $(function () {
 
     // show all code examples for the actual language
     $('.nav-tabs a.' + language).tab('show');
-    console.log('.nav-tabs a.' + language);
   }
 
   $('#language').change(function () {
@@ -43,7 +42,6 @@ $(function () {
 
     // show all code examples for the actual language
     $('.nav-tabs a.' + language).tab('show');
-    console.log('.nav-tabs a.' + language);
 
     // set the language on the browser url
     var path = window.location.pathname;
