@@ -43,4 +43,6 @@ code_pages:
   - api/locations
   - api/realtime
   - api/physicals
+  - api/physicals/mqtt
+  - api/physicals/direct
   - api/oauth

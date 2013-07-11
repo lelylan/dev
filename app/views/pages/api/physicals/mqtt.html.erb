@@ -31,7 +31,7 @@
   to give you a MQTT 3.1 compliant solution supporting QoS 0 and QoS 1 levels on message delivering.
 </p>
 
-<span class="label warning">delivered for the end of july</span><br><br>
+<span class="label warning">work in progress | ready for the end of july</span><br><br>
 
 </article>
 
@@ -112,23 +112,47 @@ When the credentialas are missing or not valid, the connection is rejected.
 <h4>Example Subscription</h4>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
-  <li><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li class="active"><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="connect-physical-device-arduino">
+  <div class="tab-pane active" id="connect-physical-device-node">
     <div class="preview">
-      <pre class="prettyprint">
-// The subscription example for Arduino is not ready yet.
-// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+      <pre class="prettyprint"><xmp>// connection settings
+var mqtt = require('mqtt')
+  , host = 'mqtt.lelylan.com'
+  , port = '1883'
+  , device = { id: '<device-id>', secret: '<device-secret>' };
+
+// client settings
+var settings = {
+  username = device.id,     // set device.id as client username
+  password = device.secret, // set device.secret as client password
+  keepalive: 1000,
+  protocolId: 'MQIsdp',
+  protocolVersion: 3,
+  clientId: 'client-' + device.id }
+
+// client connection
+var client = createClient(port, host, settings);</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="connect-physical-device-node">
+  <div class="tab-pane" id="connect-physical-device-arduino">
     <div class="preview">
-          <pre class="prettyprint">
-// The subscription example for Node.js is not ready yet.
-// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+      <pre class="prettyprint"><xmp>#include <PubSubClient.h>
+#include <aJSON.h>
+#include <Ethernet.h>
+
+#define DEVICE_ID "<device-id>"
+#define DEVICE_SECRET "<device-secret>"
+#define CLIENT_ID "client-<device-id>"
+
+PubSubClient client;
+
+void setup() {
+  client = PubSubClient("mqtt.lelylan.com", 1883, callback);
+}</xmp></pre>
     </div>
   </div>
 </div>
@@ -191,23 +215,47 @@ all device updates.
 <h4>Subscription Example</h4>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#subscribe-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
-  <li><a href="#subscribe-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li class="active"><a href="#subscribe-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#subscribe-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="subscribe-arduino">
+  <div class="tab-pane active" id="subscribe-node">
     <div class="preview">
-      <pre class="prettyprint">
-// The subscription example for Arduino is not ready yet.
-// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+      <pre class="prettyprint"><xmp>var topic = 'devices/' + device.id + '/get';
+client.subscribe(topic);
+
+client.on(topic, function(topic, message) {
+  console.log('Received JSON message', message);
+});</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="subscribe-node">
+  <div class="tab-pane" id="subscribe-arduino">
     <div class="preview">
-          <pre class="prettyprint">
-// The subscription example for Node.js is not ready yet.
-// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+      <pre class="prettyprint"><xmp>void loop() {
+  // authorize the client
+  if (!client.connected()) {
+    client.connect(CLIENT_ID, DEVICE_ID, DEVICE_SECRET);
+    client.subscribe("devices/" + DEVICE_ID + "/get");
+  }
+  // ...
+  client.loop();
+}
+
+// callback function when a message is received (set during the connection phase)
+void callback(char* topic, byte* payload, unsigned int length) {
+
+  // extract the payload
+  char * string;
+  string = (char*) malloc(length + 1);
+  memcpy(string, payload, length);
+  string[length] = '\0';
+
+  // define a JSON object to parse
+  aJsonObject* root = aJson.parse(string);
+  aJsonObject* value = aJson.getObjectItem(root, "properties");
+}
+</xmp></pre>
     </div>
   </div>
 </div>
@@ -269,23 +317,43 @@ properties.
 <h4>Publish Example</h4>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#publish-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
-  <li><a href="#publish-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li class="active"><a href="#publish-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#publish-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="publish-arduino">
+  <div class="tab-pane active" id="publish-node">
     <div class="preview">
-      <pre class="prettyprint">
-// The publish example for Arduino is not ready yet.
-// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+      <pre class="prettyprint"><xmp>var topic = 'devices/' + device.id + '/set';
+  , payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
+
+client.publish(topic, payload, { retain: true });</xmp></pre>
     </div>
   </div>
-  <div class="tab-pane" id="publish-node">
+  <div class="tab-pane" id="publish-arduino">
     <div class="preview">
-          <pre class="prettyprint">
-// The publish example for Node.js is not ready yet.
-// <a href="http://twitter.com/lelylan" class="nocode">Help us</a> writing one.</pre>
+      <pre class="prettyprint"><xmp>void loop() {
+  // authorize the client
+  if (!client.connected()) {
+    aJsonObject *root, *properties, *property;
+    char *payload;
+
+    // create the properties object { properties: [{ id: '<property-id>', value: '<value>' }] }
+    root = aJson.createObject();
+    aJson.addItemToObject(root, "properties", properties = aJson.createArray(););
+    properties.createItem(property = aJson.createObject());
+    aJson.addStringToObject(property, "id", "<property-id>");
+    aJson.addStringToObject(property, "value", "<value>");
+    payload = aJson.print(root);
+
+    // publish the message
+    client.connect(CLIENT_ID, DEVICE_ID, DEVICE_SECRET);
+    client.publish("devices/" + DEVICE_ID + "/set", payload);
+  }
+
+  // ...
+  client.loop();
+}</xmp></pre>
     </div>
   </div>
 </div>
