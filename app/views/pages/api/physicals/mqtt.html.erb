@@ -31,7 +31,7 @@
   to give you a MQTT 3.1 compliant solution supporting QoS 0 and QoS 1 levels on message delivering.
 </p>
 
-<span class="label warning">work in progress | ready for the end of july</span><br><br>
+<span class="label warning">Lelylan MQTT is in beta testing (tell us about any problem)</span><br><br>
 
 </article>
 
@@ -60,11 +60,11 @@ with the desired device name and type. For the moment leave empty the physical f
 
 <p>
   When created, you'll see a detailed view of your device (device component). Now click on
-  <code>settings</code> and you'll find all the needed info to implement the physical device API.
+  <code>settings</code> and you'll find all info you'll need to implement the physical device API.
 </p>
 
 <ul>
-  <li><strong>Type</strong> - Link to the type properties the physical device needs to accept.</li>
+  <li><strong>Type</strong> - Link to the type definition (to see the device properties)</li>
   <li><strong>ID</strong> - Unique device identifier.</li>
   <li><strong>Secret</strong> - Device secret code used to authenticate the communication with Lelylan.</li>
 </ul>
@@ -105,7 +105,7 @@ When the credentialas are missing or not valid, the connection is rejected.
 <h4>MQTT Connection Info</h4>
 
 <div class="preview">
-<pre><code><span style="color: #999">host:</span> mqtt.lelylan.com
+<pre><code><span style="color: #999">host:</span> 96.126.109.170
 <span style="color: #999">port:</span> 1883</code></pre>
 </div>
 
@@ -158,7 +158,7 @@ client.on('connect', function() {
 PubSubClient client;
 
 void setup() {
-  client = PubSubClient("mqtt.lelylan.com", 1883, callback);
+  client = PubSubClient("96.126.109.170", 1883, callback);
 }</xmp></pre>
     </div>
   </div>
@@ -275,8 +275,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
 <h2 class="call"><a name="sending-device-updates">Sending updates to Lelylan</a></h2>
 
 <p>
-When a physical device changes its status through a physical interaction a message is
-published to the device topic <code>devices/:id/set</code> with the list of the updated
+When a physical device changes its status through a physical interaction a message needs
+to be published to the device topic <code>devices/:id/set</code> with the list of the updated
 properties.
 </p>
 
@@ -385,7 +385,7 @@ where the device id is the one you are working at.
 <span style="color: #999">physical uri</span> http://nodes.lelylan.com/mqtt/518be5a700045e1521000001</pre></code>
 </div>
 
-<h4>Configuration</h4>
+<h4>Device Component</h4>
 
 <div class="overlay">
   <div class="ao-item">
