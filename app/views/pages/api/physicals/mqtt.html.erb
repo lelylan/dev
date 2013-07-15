@@ -119,23 +119,30 @@ When the credentialas are missing or not valid, the connection is rejected.
 <div class="tab-content">
   <div class="tab-pane active" id="connect-physical-device-node">
     <div class="preview">
-      <pre class="prettyprint"><xmp>// connection settings
-var mqtt = require('mqtt')
-  , host = 'mqtt.lelylan.com'
-  , port = '1883'
-  , device = { id: '<device-id>', secret: '<device-secret>' };
+      <pre class="prettyprint"><xmp>// install mqtt client `npm install mqtt`
+// set device id and secret to your own device
+var device = { id: '<device>', secret: '<secret>' }
+  , topic  = 'devices/' + device.id;
+
+// connection settings
+var mqtt   = require('mqtt')
+  , host   = 'localhost'
+  , port   = '1883'
 
 // client settings
 var settings = {
-  username = device.id,     // set device.id as client username
-  password = device.secret, // set device.secret as client password
+  username: device.id,     // device.id as client username
+  password: device.secret, // device.secret as client password
   keepalive: 1000,
   protocolId: 'MQIsdp',
   protocolVersion: 3,
   clientId: 'client-' + device.id }
 
 // client connection
-var client = createClient(port, host, settings);</xmp></pre>
+var client = mqtt.createClient(port, host, settings);
+client.on('connect', function() {
+  console.log('Client successfully connected');
+});</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="connect-physical-device-arduino">
@@ -222,11 +229,10 @@ all device updates.
 <div class="tab-content">
   <div class="tab-pane active" id="subscribe-node">
     <div class="preview">
-      <pre class="prettyprint"><xmp>var topic = 'devices/' + device.id + '/get';
-client.subscribe(topic);
-
-client.on(topic, function(topic, message) {
-  console.log('Received JSON message', message);
+      <pre class="prettyprint"><xmp>// client subscription
+client.subscribe(topic + '/get')
+client.on('message', function(topic, message) {
+  console.log('received', topic, message);
 });</xmp></pre>
     </div>
   </div>
@@ -324,10 +330,9 @@ properties.
 <div class="tab-content">
   <div class="tab-pane active" id="publish-node">
     <div class="preview">
-      <pre class="prettyprint"><xmp>var topic = 'devices/' + device.id + '/set';
-  , payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
-
-client.publish(topic, payload, { retain: true });</xmp></pre>
+      <pre class="prettyprint"><xmp>// client publishing
+var payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
+client.publish(topic + '/set', JSON.stringify(payload), { retain: true });</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="publish-arduino">
