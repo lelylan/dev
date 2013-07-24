@@ -99,12 +99,8 @@ with the desired device name and type. For the moment leave empty the physical f
 <p>
 Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
 the connection phase the client needs to set the <code>device.id</code> as username and the
-<code>device.secret</code> as password. This is done to limit the client publish and subscribe
-scope to the authorized device.
-</p>
-
-<p>
-When the credentialas are missing or not valid, the connection is rejected.
+<code>device.secret</code> as password.
+When the credentials are missing or not valid, the connection is rejected.
 </p>
 
 <h4>MQTT Connection Info</h4>
@@ -124,7 +120,8 @@ When the credentialas are missing or not valid, the connection is rejected.
 <div class="tab-content">
   <div class="tab-pane active" id="connect-physical-device-node">
     <div class="preview">
-      <pre class="prettyprint"><xmp>// install mqtt client `npm install mqtt`
+      <pre class="prettyprint"><xmp>// `npm install mqtt` to install mqtt client
+
 // set device id and secret to your own device
 var device = { id: '<device>', secret: '<secret>' }
   , topic  = 'devices/' + device.id;
@@ -235,7 +232,7 @@ all device updates.
   <div class="tab-pane active" id="subscribe-node">
     <div class="preview">
       <pre class="prettyprint"><xmp>// client subscription
-client.subscribe(topic + '/get')
+client.subscribe('devices/' + device.id + '/get')
 client.on('message', function(topic, message) {
   console.log('received', topic, message);
 });</xmp></pre>
@@ -336,8 +333,8 @@ properties.
   <div class="tab-pane active" id="publish-node">
     <div class="preview">
       <pre class="prettyprint"><xmp>// client publishing
-var payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
-client.publish(topic + '/set', JSON.stringify(payload), { retain: true });</xmp></pre>
+var payload = { properties: [{ id: '<property-id>', value: '<value>', pending: false }] };
+client.publish('devices/' + device.id + '/set', JSON.stringify(payload), { retain: true });</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="publish-arduino">
@@ -377,20 +374,20 @@ client.publish(topic + '/set', JSON.stringify(payload), { retain: true });</xmp>
 <h2 class="call"><a name="setting-physical-uri">Setting physical URI</a></h2>
 
 <p>
-To connect the device to the physical device you need to fill the
-<code>physical</code> field with the following URI structure
-<code>http://nodes.lelylan.com/mqtt/&lt;device-id&gt;</code>,
-where the device id is the one you are working at.
+To connect Lelylan to the physical device fill the <code>physical</code> field with the
+<a href="https://github.com/lelylan/nodes">MQTT Node</a> URI
+<code>http://nodes.lelylan.com/mqtt/&lt;device-id&gt;</code>, where <code>device-id</code>
+is the device id you are working at.
 </p>
 
-<h4>Example</h4>
+<h4>Structure Example</h4>
 
 <div class="preview">
-<pre><code><span style="color: #999">device.id:</span>   518be5a700045e1521000001
-<span style="color: #999">physical uri</span> http://nodes.lelylan.com/mqtt/518be5a700045e1521000001</pre></code>
+<pre><code><span style="color: #999">physical uri</span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001
+<span style="color: #999">device id:</span>   518be5a700045e1521000001</pre></code>
 </div>
 
-<h4>Device Component</h4>
+<h4>Fill the physical field</h4>
 
 <div class="overlay">
   <div class="ao-item">
@@ -405,9 +402,9 @@ where the device id is the one you are working at.
 </div>
 
 <p>
-You are done. Interact with the device component and play with it. Give us your feedback and
-whenever you had any problem during the physical device integration, do not hesitate to
-<a href="http://twitter.com/#!/lelylan">tweet</a> or
+You are done. You can now control your device through the <a href="http://manage.lelylan.com">Dashboard</a>.
+Give us your feedback and whenever you have any problem during the physical device integration,
+do not hesitate to <a href="http://twitter.com/#!/lelylan">tweet</a> or
 <a href="mailto:touch@lelylan.com">mail</a> us.
 </p>
 
