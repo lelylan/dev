@@ -6,7 +6,7 @@
   <tbody>
     <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
     <tr><td>&raquo; <a href="#creating-the-device">Creating the device</a></td></tr>
-    <tr><td>&raquo; <a href="#setting-physical-uri">Setting physical URI</a></td></tr>
+    <tr><td>&raquo; <a href="#setting-physical-uri">Setting the physical URI</a></td></tr>
     <tr><td>&raquo; <a href="#connecting-to-lelylan">Connecting to Lelylan</a></td></tr>
   </tbody>
 </table>
@@ -29,7 +29,7 @@
 
 <p class="notice">
 <span class="label">notice</span>
-Lelylan MQTT is in early beta testing and unstable, so <a href="http://twitter.com/#!/lelylan">tweet</a> or
+Lelylan MQTT is in early beta testing and it's unstable, so <a href="http://twitter.com/#!/lelylan">tweet</a> or
 <a href="mailto:touch@lelylan.com">mail</a> us about any problem.
 </p>
 
@@ -59,8 +59,8 @@ with the desired device name and type. For the moment leave empty the physical f
 <br/>
 
 <p>
-  When created, you'll see a detailed view of your device. Click on <code>settings</code> and
-  you'll find all needed info to connect the physical device to Lelylan.
+  When created, you'll see a detailed view of your new device. Click on <code>settings</code>
+  and you'll find all needed info to connect the physical device to Lelylan.
 </p>
 
 <ul>
@@ -89,12 +89,13 @@ with the desired device name and type. For the moment leave empty the physical f
 
 <article>
 
-<h2 class="call"><a name="setting-physical-uri">Setting physical URI</a></h2>
+<h2 class="call"><a name="setting-physical-uri">Setting the physical URI</a></h2>
 
 <p>
-To let Lelylan communicate with to the physical device fill the <code>physical</code>
-field with the URI <code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>.
-In this way all updates happening in Lelylan will be forwarded to the MQTT client.
+To communicate with the physical device you need to connect Lelylan with the MQTT client.
+To make this possible fill the <code>physical</code> field with the URI
+<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>.
+In this way all updates coming from Lelylan will be forwarded to the authorized MQTT client.
 </p>
 
 <h4>Structure Example</h4>
@@ -151,14 +152,15 @@ this topic in order to apply the required changes.
 <h4>How to send data</h4>
 
 <p>
-When a physical device changes its status through a physical interaction a message needs
-to be published to the topic <code>devices/:id/set</code> with the list of updated properties.
+When a physical device updates its status through a physical interaction Lelylan needs to be
+notified publishing a message to the topic <code>devices/:id/set</code> with the list of all
+updated properties.
 </p>
 
 <h4>JSON Payload</h4>
 
 <p>
-Every exchanged message contains a list of properties.
+Every message (received or published) is made up from a list of properties.
 </p>
 
 <table class="zebra-striped">
@@ -481,6 +483,8 @@ print("rc: " + str(rc))</xmp></pre>
     </div>
   </div>
 </div>
+
+<h4>Conclusions</h4>
 
 <p>
 You are done. You can now control your device through the <a href="http://manage.lelylan.com">Dashboard</a>.
