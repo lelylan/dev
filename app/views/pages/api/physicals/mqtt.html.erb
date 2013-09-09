@@ -496,6 +496,36 @@ integration do not hesitate to <a href="http://twitter.com/lelylan">tweet</a> or
 </article>
 
 <br/>
+
+<article>
+
+<h1 class="call"><a>Frequently Asked Questions</a></h1>
+
+<h4>Why the spinner doesn't stop?</h4>
+
+<p>
+When communicating with the physical world, Lelylan expects a feedback to its requests.
+For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
+the light was turned on. In the meantime the device is in a
+<a href="/community/faq#value-expected-pending">pending</a>
+status and the spinner is visible.
+</p>
+
+<p>
+To close the pending status and tell Lelylan that the required changes were applied, the
+physical device should publish a message to the out topic <code>/devices/:id/set</code>
+with the new property values.
+</p>
+
+<pre class="prettyprint"><xmp>// node.js example confirming the light is on
+var payload = { properties: [{ id: '518be5a700045e1521000001', value: 'on' }] };
+client.publish(out_topic, JSON.stringify(payload));
+</xmp></pre>
+
+</article>
+
+<br/>
+<br/>
 <br/>
 
 <article>
