@@ -360,6 +360,27 @@ response = physical.receive_update(uri, secret, params)</xmp></pre>
   </li>
 </ul>
 
+<h4>A note about the physical flow</h4>
+
+<p>
+When communicating with the physical world, Lelylan expects a feedback to its requests.
+For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
+the light was turned on. In the meantime the device is in a
+<a href="/community/faq#value-expected-pending">pending</a>
+status and the spinner is visible.
+</p>
+
+<p>
+To close the pending status and tell Lelylan that the required changes were applied, the
+physical device must send a request to Lelylan with the new property values.
+</p>
+
+<pre class="prettyprint"><xmp>// node.js example confirming that the light is on
+var Lelylan = require('lelylan-node')();
+var uri = 'http://api.lelylan.com/devices/<id>/properties';
+var secret = '<secret>';
+var params = { 'properties': [{ 'id': '518be5a700045e1521000001', 'value': 'on' }] };</xmp></pre>
+
 </article>
 
 <br/>
