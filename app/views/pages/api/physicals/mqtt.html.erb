@@ -29,7 +29,8 @@
 
 <p class="notice">
 <span class="label">notice</span>
-Lelylan MQTT is in early beta testing and it's unstable, so <a href="http://twitter.com/#!/lelylan">tweet</a> or
+Lelylan MQTT is in early beta testing and it's unstable.
+<a href="http://twitter.com/#!/lelylan">Tweet</a> or
 <a href="mailto:touch@lelylan.com">mail</a> us about any problem.
 </p>
 
@@ -92,10 +93,10 @@ with the desired device name and type. For the moment leave empty the physical f
 <h2 class="call"><a name="setting-physical-uri">Setting the physical URI</a></h2>
 
 <p>
-To communicate with the physical device you need to connect Lelylan with the MQTT client.
-To make this possible fill the <code>physical</code> field with the URI
-<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>.
-In this way all updates coming from Lelylan will be forwarded to the authorized MQTT client.
+To communicate with the physical device Lelylan must be able to forward all requests to the
+MQTT client. To make this possible set the <code>physical</code> field with
+<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>. This URI will enable
+the communication between Lelylan and the MQTT client.
 </p>
 
 <h4>Structure Example</h4>
