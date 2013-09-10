@@ -100,6 +100,7 @@ GEM
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
+    newrelic_rpm (3.6.7.152)
     nokogiri (1.5.9)
     origin (1.1.0)
     orm_adapter (0.4.0)
@@ -182,6 +183,7 @@ DEPENDENCIES
   foreman
   high_voltage
   mongoid (~> 3.1.4)
+  newrelic_rpm
   rails (= 3.2.13)
   rails_config
   sass-rails
