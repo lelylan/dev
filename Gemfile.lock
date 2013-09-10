@@ -100,7 +100,6 @@ GEM
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
-    newrelic_rpm (3.6.7.152)
     nokogiri (1.5.9)
     origin (1.1.0)
     orm_adapter (0.4.0)
@@ -120,8 +119,13 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_config (0.3.3)
       activesupport (>= 3.0)
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.2)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -183,8 +187,8 @@ DEPENDENCIES
   foreman
   high_voltage
   mongoid (~> 3.1.4)
-  newrelic_rpm
   rails (= 3.2.13)
+  rails_12factor
   rails_config
   sass-rails
   uglifier
