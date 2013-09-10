@@ -225,4 +225,3 @@ staging:
   <<: *default_settings
   monitor_mode: true
   # app_name: staging-lelylan-dev
-
