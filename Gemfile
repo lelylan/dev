@@ -9,7 +9,10 @@ gem 'devise'
 gem 'rails_config'
 gem 'bundler'
 gem 'high_voltage'
-gem 'newrelic_rpm'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'foreman'
