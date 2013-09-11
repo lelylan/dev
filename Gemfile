@@ -19,6 +19,7 @@ end
 group :assets do
   gem 'asset_sync'
   gem 'sass-rails'
+  gem 'bootstrap-sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
 end

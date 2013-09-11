@@ -56,7 +56,7 @@
 
 .ao-item .ao-annotations span:after {
 	position: absolute;
-	background: transparent url(arrow.png) no-repeat center center;
+	background: transparent url(../images/arrow.png) no-repeat center center;
 	width: 32px;
 	height: 33px;
 	top: 50%;
@@ -70,10 +70,10 @@
 	left: auto;
 	right: 100%;
 	margin: -16px -16px 0 0;
-	background-image: url(arrow_left.png);
+	background-image: url(../images/arrow_left.png);
 }
 
-.overlay {
-  margin: 30px 0 20px 0;
+.presentation .overlay {
+  margin: 35px 0;
 }
 

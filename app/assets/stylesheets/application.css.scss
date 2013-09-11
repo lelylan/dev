@@ -1,0 +1,330 @@
+/*
+ *= require overlay
+ *= require circles
+ */
+
+
+$lelylanColor: #239cbb;
+$lelylanHoverColor: #239cbb;
+$linkColor: $lelylanColor;
+$linkColorHover: $lelylanHoverColor;
+$lelylanBorderColor: #e8e8e8;
+
+// import to override variables and to access the mixins
+@import "twitter/bootstrap";
+
+
+/*
+ * Lelylan apps navbar
+ */
+
+.lelylan-navbar-apps {
+  background-color: $lelylanColor;
+  border: none;
+  height: 25px;
+  min-height: 25px;
+  margin-top: 0;
+
+  .navbar-nav > li > a {
+    color: #00C4E9;
+    font-size: 11px;
+    padding: 2px 15px 0;
+    text-shadow: 0 0 0 #333;
+    text-transform: uppercase;
+
+  }
+
+  .navbar-nav > li > a:hover,
+  .navbar-nav > li.active > a,
+  .navbar-nav > li.active > a:hover {
+    background-color: transparent;
+    color: #eee;
+  }
+}
+
+
+/* Dashboard (generic) */
+
+body {
+  background-color: $lelylanBorderColor !important;
+}
+
+.dashboard {
+  padding-top: 60px;
+}
+
+.dashboard input {
+  @include placeholder(#ccc);
+}
+
+.dashboard a:hover {
+  text-decoration: none;
+}
+
+.dashboard footer {
+  margin-top: 20px;
+  padding-right: 2px;
+}
+
+.dashboard .badge {
+  margin-top: 0px;
+  line-height: 14px;
+  margin-right: 10px;
+  background-color: #ddd;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dashboard .lelylan-badge {
+  margin-left: 5px;
+}
+
+#lelylan-request-loading {
+  display: none;
+  margin-top: 4px;
+}
+
+button.lelylan-big {
+  height: 50px;
+  font-size: 26px;
+  line-height:40px;
+  margin-top: 0px;
+}
+
+
+.dashboard  {
+
+  /* Header */
+
+  .top-menu {
+    background-color: #239cbb;
+    margin-top: 24px
+  }
+
+  .navbar {
+    background-color: rgba(232, 232, 232, 0.9);
+  }
+
+  .navbar-fixed-top a {
+    color: $linkColor !important;
+  }
+
+  .navbar-fixed-top a.active {
+    color: $linkColorHover !important;
+  }
+
+  .navbar-fixed-top a:hover {
+    color: $linkColorHover !important;
+  }
+
+  .navbar .brand {
+    padding: 5px 20px 10px !important;
+  }
+
+  .navbar .realtime {
+    opacity: 0.5;
+  }
+
+  .clearfix {
+    margin-bottom: 0 !important;
+  }
+
+  .notifications .alert {
+    margin: 5px 0 0;
+    font-weight: 200;
+    font-size: 14px;
+    padding: 4px 29px 4px 7px;
+  }
+
+
+  /* Side */
+
+  .nav-list {
+    padding-left: 0;
+  }
+
+  .nav-list li > a {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .nav-list .divider {
+    background-color: transparent;
+    border-color: #ddd;
+  }
+
+  .nav-header {
+    font-size: 13px;
+    font-weight: normal;
+  }
+
+  .nav-list [class^="icon-"] {
+    margin-top: -1px;
+  }
+
+  .nav-list li.deactivated {
+    opacity: 0.3;
+  }
+
+  .nav-list li.deactivated a:hover {
+    background: transparent;
+    color: $lelylanColor;
+    cursor: default;
+  }
+
+
+  /* Content (generic) */
+
+  .dashboard-content {
+    background-color: #fff;
+    border: 1px solid $lelylanBorderColor;
+    min-height: 760px;
+    padding: 20px;
+  }
+
+  .search-query {
+    height: 40px;
+    width: 360px;
+    font-size: 26px;
+    line-height: 32px;
+    border-radius: 30px;
+  }
+
+  /* Dashboard messages */
+
+  .alert-block {
+    background-color: $lelylanBorderColor;
+    border-color: $lelylanBorderColor;
+    color: #333;
+  }
+
+
+  /* Prsesentation pages (general) */
+  .presentation {
+    margin: 10px 0;
+  }
+
+  .presentation h1 {
+    color: $lelylanColor;
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 28px;
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+
+  .presentation h3,
+  .presentation h2 {
+    margin-top: 30px;
+    font-weight: 200;
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .presentation h2 {
+    margin-top: 50px;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .presentation h4 {
+    font-size: 26px;
+    font-weight: 200;
+  }
+
+  .presentation .description {
+    margin-left: 10px;
+    margin-right: 30px;
+    font-weight: 200;
+  }
+
+  .presentation .description li,
+  .presentation .description p {
+    font-size: 16px;
+    line-height: 28px;
+    color: #555;
+  }
+
+  .presentation .description ul,
+  .presentation .description p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .presentation .description .btn {
+    line-height: 20px;
+    width: 240px;
+    height: 20px;
+    font-size: 18px;
+    margin: 10px;
+    letter-spacing: 1px;
+  }
+
+  .presentation p {
+    margin-bottom: 10px;
+  }
+
+  .presentation code {
+    font-size: 12px;
+    color: #333;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .presentation .label-info {
+    background-color: #239cbb;
+  }
+
+  .presentation .more-buttons {
+    text-align: center;
+  }
+
+  .presentation .description p.lead {
+    font-size: 22px;
+    line-height: 34px;
+  }
+
+  /* Presentation home page */
+
+  .home {
+    text-align: center;
+  }
+
+  .home hr {
+    margin: 40px 0;
+  }
+
+  .home h1.title {
+    margin-top: 25px;
+    font-size: 72px;
+    padding-left: 0;
+    line-height: 52px;
+    letter-spacing: 2px;
+  }
+
+  .home h2.payoff {
+    padding: 0 10px 20px;
+    font-size: 32px;
+    color: #333;
+    font-weight: 200;
+    line-height: 36px;
+  }
+
+  .home h3 {
+    font-size: 28px;
+  }
+
+  .home .description {
+    margin-top: 55px;
+    padding: 0px 30px;
+  }
+
+  .home .description p {
+    font-size: 15px;
+    line-height: 24px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+
+}
+

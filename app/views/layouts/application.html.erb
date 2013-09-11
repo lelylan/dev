@@ -1,47 +1,53 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Lelylan Dev Center | <%= title %></title>
-
-    <%= stylesheet_link_tag 'bootstrap.min', 'default', 'prettify', 'getting-started', 'overlay', media: 'all' %>
+    <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
+    <meta name="description" content="Lelylan Dev Center">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/main.css">
   </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
 
-  <body class="docs <%= body_style %>">
-    <header id="header">
-    <div class="left"><h1><a href="/">Lelylan Dev Center</a></h1></div>
-    <nav>
-    <ul>
-      <%= render "devise/shared/links" %>
-      <% if code_page? -%>
-      <li>
-      <select id="language">
-        <option value="curl">See examples in Curl</option>
-        <option value="node">See examples in Node.js</option>
-        <option value="angular">See examples in AngularJS</option>
-        <option value="ruby">See examples in Ruby</option>
-        <option value="python">See examples in Python</option>
-      </select>
-      </li>
-    <% end -%>
-    </ul>
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <nav class="navbar navbar-default lelylan-navbar-apps" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".lelylan-apps-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse lelylan-apps-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://beta.lelylan.com">Lelylan site</a></li>
+          <li><a href="http://manage.lelylan.com">Dashboard</a></li>
+          <li><a href="http://types.lelylan.com">Types</a></li>
+          <li class="active"><a href="/">Dev Center</a></li>
+          <li><a href="http://try.lelylan.com">Demo</a></li>
+          <li><a href="http://people.lelylan.com">Profile</a></li>
+        </ul>
+      </div>
+    </div>
     </nav>
-    <!--<h2><a href="/">Documentation</a><%# breadcrumbs_html %></h2>-->
-    </header>
 
-    <article id="article">
-
-      <nav id="nav">
-      <%= render 'shared/menu' %>
-      </nav>
-
-      <section id="section">
-        <%= yield %>
-        <%= render 'shared/services/disqus' %>
-      </section>
-    </article>
-
-    <%= render 'shared/services/analytics' %>
   </body>
 </html>
+
