@@ -20,10 +20,47 @@ body {
   background-color: $lelylanBorderColor !important;
 }
 
+body {
+  position: relative; /* For scrollyspy */
+  padding-top: 100px; /* Account for fixed navbar */
+}
+
+h1 {
+margin: 0;
+padding: 40px;
+background-color: #01B2D5;
+color: white;
+font-size: 48px;
+font-weight: 200;
+}
+
+/* lelylan documentation page */
+
+.bs-docs {
+  background-color: #f8f8f8;
+  padding: 0;
+  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+}
+
+.bs-docs-section {
+  padding: 40px;
+}
+
+
 // correct positionning for afflix elements
 h1[id] {
-  padding-top: 105px;
+  border-top: 105px solid red;
   margin-top: -90px;
+}
+
+h1[id] {
+    border-top:105px solid transparent;
+    margin-top:-105px;
+    -webkit-background-clip:padding-box;
+    -moz-background-clip:padding;
+    background-clip:padding-box;
 }
 
 h3[id] {
@@ -226,11 +263,6 @@ h3[id] {
  *
  * Update the basics of our documents to prep for docs content.
  */
-
-body {
-  position: relative; /* For scrollyspy */
-  padding-top: 50px; /* Account for fixed navbar */
-}
 
 /* Keep code small in tables on account of limited space */
 .table code {
