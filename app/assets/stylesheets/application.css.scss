@@ -15,8 +15,20 @@ $lelylanBorderColor: #e8e8e8;
 
 /* default */
 
+// defaults for body
 body {
   background-color: $lelylanBorderColor !important;
+}
+
+// correct positionning for afflix elements
+h1[id] {
+  padding-top: 105px;
+  margin-top: -90px;
+}
+
+h3[id] {
+  padding-top: 115px;
+  margin-top: -90px;
 }
 
 
@@ -649,7 +661,7 @@ body {
   }
   .bs-sidebar.affix {
     position: fixed; /* Undo the static from mobile first approach */
-    top: 80px;
+    top: 100px;
   }
   .bs-sidebar.affix-bottom {
     position: absolute; /* Undo the static from mobile first approach */
@@ -680,11 +692,6 @@ body {
   padding-top: 40px;
 }
 
-/* Janky fix for preventing navbar from overlapping */
-h1[id] {
-  padding-top: 80px;
-  margin-top: -45px;
-}
 
 
 /*
