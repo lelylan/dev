@@ -5,7 +5,7 @@
 
 
 $lelylanColor: #239cbb;
-$lelylanHoverColor: #239cbb;
+$lelylanHoverColor: #01cf9e;
 $linkColor: $lelylanColor;
 $linkColorHover: $lelylanHoverColor;
 $lelylanBorderColor: #e8e8e8;
@@ -23,6 +23,7 @@ $lelylanBorderColor: #e8e8e8;
   border: none;
   height: 25px;
   min-height: 25px;
+  margin-bottom: 0;
   margin-top: 0;
 
   .navbar-nav > li > a {
@@ -31,7 +32,6 @@ $lelylanBorderColor: #e8e8e8;
     padding: 2px 15px 0;
     text-shadow: 0 0 0 #333;
     text-transform: uppercase;
-
   }
 
   .navbar-nav > li > a:hover,
@@ -40,7 +40,42 @@ $lelylanBorderColor: #e8e8e8;
     background-color: transparent;
     color: #eee;
   }
+
+  .navbar-nav > li.active > a:hover {
+    color: $linkColorHover;
+  }
 }
+
+.lelylan-navbar-top-menu {
+
+  .navbar-nav > li.open > a.dropdown-toggle {
+    background-color: transparent;
+    color: $linkColorHover !important;
+  }
+
+  .navbar-nav > li > a.dropdown-toggle {
+    background-color: transparent;
+    color: $linkColor !important;
+  }
+
+  .navbar-nav > li > a:hover {
+    color: $linkColorHover !important;
+  }
+}
+
+
+/*
+ * Lelylan top menu navbar
+ */
+
+.lelylan-navbar-top-menu {
+  border: none;
+  height: 50px;
+  min-height: 50px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 
 
 /* Dashboard (generic) */
