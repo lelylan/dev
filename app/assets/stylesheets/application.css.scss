@@ -54,6 +54,7 @@ body {
   position: relative; /* For scrollyspy */
 }
 
+
 /* anchor positioning */
 
 h1[id] {
@@ -138,10 +139,14 @@ h2[id] {
   margin-bottom: 0;
   margin-top: 0;
 
+  .container {
+    padding-left: 0;
+  }
+
   .navbar-nav > li > a {
     color: #00C4E9;
     font-size: 11px;
-    padding: 2px 15px 0;
+    padding: 2px 30px  0 0;
     text-shadow: 0 0 0 #333;
     text-transform: uppercase;
   }
@@ -168,18 +173,35 @@ h2[id] {
   margin-bottom: 0;
   margin-top: 25px;
 
+  .container {
+    padding-right: 0;
+  }
+
+  /* menu items */
+
+  .navbar-nav > li > a {
+    background-color: transparent;
+    color: $linkColor !important;
+    padding-right: 0;
+    padding-left: 30px;
+  }
+
+  .navbar-nav > li > a:hover {
+    color: $linkColorHover !important;
+  }
+
   .navbar-nav > li.open > a.dropdown-toggle {
     background-color: transparent;
     color: $linkColorHover !important;
   }
 
-  .navbar-nav > li > a.dropdown-toggle {
-    background-color: transparent;
-    color: $linkColor !important;
-  }
+  /* brand */
 
-  .navbar-nav > li > a:hover {
-    color: $linkColorHover !important;
+  .navbar-brand {
+    text-shadow: 0 1px 0 #eee;
+    font-weight: 200;
+    padding-left: 15px !important;
+    color: #000 !important;
   }
 }
 
