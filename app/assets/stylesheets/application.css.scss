@@ -28,7 +28,7 @@
 
 $lelylanColor:           #239cbb;
 $lelylanHoverColor:      #01cf9e;
-$lelylanBackgroundColor: #01B2D5;
+$lelylanBackgroundColor: #009FC7;
 $linkColor:              $lelylanColor;
 $linkColorHover:         $lelylanHoverColor;
 
@@ -54,46 +54,73 @@ body {
   position: relative; /* For scrollyspy */
 }
 
-/* titles and subtitles styles */
-
-h1 {
-  background-color: $lelylanBackgroundColor;
-  color: #fff;
-  font-size: 48px;
-  font-weight: 200;
-  margin: 0;
-  padding: 40px;
-}
-
 /* anchor positioning */
 
 h1[id] {
-  border-top: 105px solid red;
-  margin-top: -90px;
-  border-top:105px solid transparent;
-  margin-top:-105px;
+  border-top:120px solid transparent;
+  margin-top:-120px;
   -webkit-background-clip:padding-box;
   -moz-background-clip:padding;
   background-clip:padding-box;
 }
 
-h3[id] {
+h2[id] {
   padding-top: 115px;
-  margin-top: -90px;
+  margin-top: -95px;
 }
 
-/* documentation page style */
+/* titles */
+
+.bs-title {
+  background-color: $lelylanBackgroundColor;
+  color: #fff;
+  margin: 0;
+  padding: 20px 60px;
+}
+
+.bs-title h1 {
+  font-size: 48px;
+  font-weight: 200;
+}
+
+.bs-title h4 {
+  color: #9EDAE6;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+/* internal subtitles */
+
+.bs-docs-section h2 {
+  color: $lelylanColor;
+  font-size: 30px;
+}
+
+.bs-docs-section h3 {
+  font-size: 22px;
+}
+
+.bs-docs-section p {
+  font-size: 19px;
+  font-weight: 200;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+/* documentation page */
 
 .bs-docs {
   background-color: #f8f8f8;
   padding: 0;
-  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  @include box-shadow
 }
 
 .bs-docs-section {
   padding: 20px 60px;
+}
+
+.col-md-offset-3 {
+  margin-top: 50px;
 }
 
 
@@ -104,7 +131,7 @@ h3[id] {
 /* lelylan apps navbar */
 
 .lelylan-navbar-apps {
-  background-color: $lelylanColor;
+  background-color: $lelylanBackgroundColor;
   border: none;
   height: 25px;
   min-height: 25px;
