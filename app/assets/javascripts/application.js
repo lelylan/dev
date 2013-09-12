@@ -15,6 +15,7 @@
 //= require_tree .
 //
 
+addEventListener('load', function (event) { prettyPrint() }, false);
 
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!

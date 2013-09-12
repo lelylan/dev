@@ -22,7 +22,7 @@ Site.animation = (function() {
         third_circle  = paper.circle(675, 20, 10).attr(circle_attr);
 
     // Moving circle visualization settings
-    var moving_circle_attr = {stroke: "#FF7600", "stroke-width": 4},
+    var moving_circle_attr = {stroke: "#239cbb", "stroke-width": 4},
         moving_circle      = paper.circle(15, 20, 4).attr(moving_circle_attr);
 
     // Apply a bouncing animation to the first circle
@@ -32,9 +32,9 @@ Site.animation = (function() {
     show_step('.first-step');
 
     // Buttons click
-    container.find(".first-step .btn-warning").click(function (e)  { go_to_second_step(e) })
-    container.find(".second-step .btn-warning").click(function (e) { go_to_third_step(e) })
-    container.find(".third-step .btn-warning").click(function (e)  { go_to_first_step(e) })
+    container.find(".first-step .btn-lelylan").click(function (e)  { go_to_second_step(e) })
+    container.find(".second-step .btn-lelylan").click(function (e) { go_to_third_step(e) })
+    container.find(".third-step .btn-lelylan").click(function (e)  { go_to_first_step(e) })
 
     first_circle.click(function (e) { go_to_first_step(e) })
     second_circle.click(function (e) { go_to_second_step(e) })
@@ -50,7 +50,7 @@ Site.animation = (function() {
       function fade(circle, step) {
         return function () {
           show_step(step);
-          circle.attr({fill: "#FF7600", r: 14}).animate({fill: "#ddd", r: 10, easing: '>'}, 1000);
+          circle.attr({fill: "#239cbb", r: 14}).animate({fill: "#ddd", r: 10, easing: '>'}, 1000);
         };
       }
 

@@ -1,6 +1,5 @@
 /*
- *= require overlay
- *= require circles
+ *= require prettify.css
  */
 
 
@@ -54,6 +53,13 @@ body {
   position: relative; /* For scrollyspy */
 }
 
+/* link colors animation */
+
+a {
+  -webkit-transition: color 0.3s ease, text-decoration 0.3s ease, background 0.3s ease;
+  -moz-transition: color 0.3s ease, text-decoration 0.3s ease, background 0.3s ease;
+  transition: color 0.3s ease, text-decoration 0.3s ease, background 0.3s ease;
+}
 
 /* anchor positioning */
 
@@ -87,6 +93,8 @@ h2[id] {
 .bs-title h4 {
   color: #9EDAE6;
   font-size: 22px;
+  font-weight: 100;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
@@ -102,7 +110,7 @@ h2[id] {
 }
 
 .bs-docs-section p {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 200;
   line-height: 1.4;
   margin-bottom: 20px;
@@ -113,7 +121,15 @@ h2[id] {
 .bs-docs {
   background-color: #f8f8f8;
   padding: 0;
-  @include box-shadow
+  @include box-shadow;
+
+  p a {
+    color: $linkColor !important;
+  }
+
+  p a:hover {
+    color: $linkColorHover !important;
+  }
 }
 
 .bs-docs-section {
@@ -206,7 +222,6 @@ h2[id] {
 }
 
 
-
 /* * * * * * * * * */
 /* Left navigation */
 /* * * * * * * * * */
@@ -220,35 +235,36 @@ h2[id] {
 /* First level of nav */
 
 .bs-sidenav {
+  //background-color: #f8f8f8;
   margin-top: 30px;
   margin-bottom: 30px;
-  padding-top:    10px;
   padding-bottom: 10px;
-  text-shadow: 0 1px 0 #fff;
-  background-color: #f7f5fa;
-  border-radius: 5px;
+  //@include box-shadow;
 }
 
 /* All levels of nav */
 
 .bs-sidebar .nav > li > a {
+  color: $lelylanColor;
   display: block;
-  color: #716b7a;
-  padding: 5px 20px;
+  font-size: 12px;
+  padding: 5px 10px;
+  text-transform: uppercase;
 }
+
 .bs-sidebar .nav > li > a:hover,
 .bs-sidebar .nav > li > a:focus {
   text-decoration: none;
-  background-color: #e5e3e9;
-  border-right: 1px solid #dbd8e0;
+  background-color: transparent;
+  color: $lelylanHoverColor;
 }
+
 .bs-sidebar .nav > .active > a,
 .bs-sidebar .nav > .active:hover > a,
 .bs-sidebar .nav > .active:focus > a {
   font-weight: bold;
-  color: #563d7c;
   background-color: transparent;
-  border-right: 1px solid #563d7c;
+  border-left: 1px solid $lelylanColor;
 }
 
 /* Nav: second level (shown on .active) */
@@ -257,11 +273,11 @@ h2[id] {
   display: none; /* Hide by default, but at >768px, show it */
   margin-bottom: 8px;
 }
+
 .bs-sidebar .nav .nav > li > a {
-  padding-top:    3px;
+  padding-top: 3px;
   padding-bottom: 3px;
-  padding-left: 30px;
-  font-size: 90%;
+  padding-left: 25px;
 }
 
 /* Show and affix the side nav when space allows it */
@@ -297,3 +313,149 @@ h2[id] {
     width: 263px;
   }
 }
+
+
+/* * * * * * * */
+/* Code syntax */
+/* * * * * * * */
+
+code {
+  color: #111;
+  background-color: #eee;
+}
+
+pre code,
+pre xmp {
+  display:block;
+  color:#111;
+  font-family: Monaco, Consolas, monospace;
+  font-size:12px;
+  line-height:1.5;
+  padding:5px;
+  margin: 5px 3px;
+}
+
+pre {
+  margin: 0;
+  padding: 5px 0 5px 5px !important;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0;
+}
+
+ul.nav-tabs,
+ol.nav-tabs {
+  margin:15px 0 0 0;
+  line-height:1.7em
+}
+
+ul.nav-tabs li.active a,
+ol.nav-tabs li.active a {
+  background-color:#fff
+}
+
+ul.nav-tabs {
+  padding-left:0
+}
+
+div.tab-content pre {
+  border-top:none
+}
+
+.nav-tabs > li > a {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.nav-tabs > li a {
+  color: $linkColor;
+}
+
+.nav-tabs > li.active a:hover,
+.nav-tabs > li.active a {
+  color: $linkColorHover;
+  background-color: #fff;
+}
+
+
+/* * * * * * * * * */
+/* Animated steps  */
+/* * * * * * * * * */
+
+.animation {
+  max-width: 100%;
+  background-color: #fff;
+  padding: 0 15px 5px 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+
+  h3 {
+    display:inline;
+  }
+
+  p {
+    float:clear;
+    margin-top: 15px;
+    margin-left: 6px;
+  }
+
+  pre {
+    margin-left: 4px;
+  }
+
+  .button-lelylan {
+    background-color: $lelylanColor;
+  }
+
+  .button-lelylan:hover {
+    color: #fff;
+  }
+
+  .canvas {
+    position:relative;
+    width: 690px;
+    height: 40px;
+    margin: 20px 0 20px 0;
+  }
+
+  .action {
+    padding-left: 5px;
+    padding-bottom: 10px;
+  }
+}
+
+
+/* * * * * * * * */
+/* Button style  */
+/* * * * * * * * */
+
+.btn-lelylan {
+  background: $lelylanColor;
+  box-sizing: border-box;
+  min-height: 35px;
+  width: auto;
+  display: inline-block;
+  padding: 0.9em 1.37em;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+  line-height: 13px;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: none;
+  border-radius: 0.2em;
+  border: rgba(0,0,0,0.05) 0.1em solid;
+  -webkit-transition: background 0.3s ease, border-color 0.3s ease;
+  -moz-transition: background 0.3s ease, border-color 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-lelylan:hover {
+  background: $lelylanHoverColor;
+  color: #fff;
+  text-decoration: none;
+}
+

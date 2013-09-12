@@ -3,68 +3,40 @@
           <div id="core-animation-canvas" class="canvas"></div>
 
           <div class="first-step">
-
-            <a class="btn btn-warning" href="#">Send request &raquo;</a>
+            <div class="action">
+              <a class="btn-lelylan" href="#">Send request &raquo;</a>
+            </div>
 
             <p>
-            A user turn on a light using a third party application (e.g mobile app). <br>
-            For example the following request turns on a light by setting its <code>status</code> to <code>on</code>.
+            A user turn on a light using a third party application (e.g dashboard, mobile app)
+            which uses the REST API to forward the request to Lelylan.
             </p>
+          </div>
 
-          <div class="preview unified"><pre><xmp>PUT http://api.lelylan.com/devices/<id>/properties</xmp></pre></div>
-            <div class="preview"><pre><xmp>{
-  "properties": [{
-    "id": "<status-id>",
-    "value": "on"
-  }]
-}</xmp></pre></div>
-
+          <div class="second-step">
+            <div class="action">
+              <a class="btn-lelylan" href="#">Get reatime updates &raquo;</a>
             </div>
 
-            <div class="second-step">
+            <p>
+            Lelylan receives the request and forwards it to the connected physical device.
+            Lelylan does not wait for the physical device to apply the request and returns
+            the expected device representation (optimistic async flow).
+            </p>
+          </div>
 
-              <a class="btn btn-warning" href="#">Get reatime updates &raquo;</a>
-
-              <p>
-              Lelylan receives the request and forwards it to the connected
-              <a href="/api/physicals">physical device</a>. Lelylan does not wait for
-              the physical device to apply the request and returns the expected device
-              representation.
-              </p>
-
-              <div class="preview unified"><pre><xmp>HTTP/1.1 202 Accepted</xmp></pre></div>
-              <div class="preview"><pre><xmp>{
-  "id": "<light-id>",
-  "uri": "http://api.lelylan.com/devices/<light-id>",
-  "name": "Connected Light",
-  "type": { "id": "<light-type-id>", "uri": "http://api.lelylan.com/types/<light-type-id>" },
-  "physical": { "uri": "http://arduino.house.com/<physical-light-id>" },
-  "properties": [{
-    "id": "<status-id>",
-    "uri": "http://api.lelylan.com/properties/<status-id>",
-    "value": "on"
-    "expected": "on"
-  }]
-}</xmp></pre></div>
-
-              </div>
-
-              <div class="third-step">
-
-                <p>
-                Once the request is applied to the physical device Lelylan notifies the third
-                party application through the <a href="/api/realtime">realtime service</a>.
-                </p>
-
-              <div class="preview unified"><pre><xmp>POST http://api.lelylan.com/subscriptions</xmp></pre></div>
-              <div class="preview"><pre><xmp>{ "resource": "device",
-  "event": "property-update",
-  "callback_uri": "http://example.com/callback" }</xmp></pre></div>
-
-              </div>
-
+          <div class="third-step">
+            <div class="action">
+              <a class="btn-lelylan" href="#">Get reatime updates &raquo;</a>
             </div>
 
-            <script>
-              $(function () { Site.animation.init('#core-animation'); })
-            </script>
+            <p>
+            Once the physical device applies the request a message is sent to Lelylan,
+            which in turn, notifies the third party applications.
+            </p>
+          </div>
+        </div>
+
+        <script>
+          $(function () { Site.animation.init('#core-animation'); })
+        </script>
