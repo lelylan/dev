@@ -73,7 +73,7 @@ h1[id] {
 
 h2[id] {
   padding-top: 115px;
-  margin-top: -95px;
+  margin-top: -90px;
 }
 
 /* titles */
@@ -103,18 +103,29 @@ h2[id] {
 .bs-docs-section h2 {
   color: $lelylanColor;
   font-size: 30px;
+  margin-bottom: 20px;
 }
 
 .bs-docs-section h3 {
-  font-size: 22px;
+  font-size: 20px;
+  margin: 25px 0 15px;
 }
 
-.bs-docs-section p {
+.bs-docs-section p,
+.bs-docs-section ul li {
   font-size: 17px;
   font-weight: 200;
   line-height: 1.4;
+}
+
+.bs-docs-section p {
+  margin-bottom: 10px;
+}
+
+.bs-docs-section ul {
   margin-bottom: 20px;
 }
+
 
 /* documentation page */
 
@@ -123,11 +134,13 @@ h2[id] {
   padding: 0;
   @include box-shadow;
 
-  p a {
+  p a,
+  li a{
     color: $linkColor !important;
   }
 
-  p a:hover {
+  p a:hover,
+  li a:hover {
     text-decoration: none;
     color: $linkColorHover !important;
   }
@@ -279,6 +292,8 @@ h2[id] {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 25px;
+  font-size: 13px;
+  text-transform: none;
 }
 
 /* Show and affix the side nav when space allows it */
@@ -323,6 +338,7 @@ h2[id] {
 code {
   color: #111;
   background-color: #eee;
+  font-size: 80%;
 }
 
 pre code,
@@ -388,7 +404,7 @@ div.tab-content pre {
   background-color: #fff;
   padding: 0 15px 5px 20px;
   border: 1px solid #ddd;
-  margin-bottom: 15px;
+  margin: 20px 0;
 
   h3 {
     display:inline;
@@ -460,21 +476,28 @@ div.tab-content pre {
   text-decoration: none;
 }
 
+
+/* * * * * * * * */
+/* Mishellaneous */
+/* * * * * * * * */
+
 .alert {
+  padding: 10px;
 
   .label-lelylan {
     color: $lelylanColor;
     text-transform: uppercase;
     background-color: #fff;
-    margin-right: 2px;
+    margin-right: 5px;
     font-weight: 400;
-    padding: .2em .6em .2em;
+    padding: .3em .6em .2em;
     letter-spacing: 1px;
   }
 
   p {
-    color: #666;
+    color: #3A3A3A;
     margin-bottom: 0;
+    font-size: 16px;
   }
 }
 

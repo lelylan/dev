@@ -82,9 +82,23 @@
             <ul class="nav bs-sidenav">
               <li>
                 <a href="#overview">Overview</a>
+                <ul class="nav">
+                  <li><a href="#overview-what-is-lelylan">What is Lelylan</a></li>
+                  <li><a href="#overview-how-does-it-work">How does it work</a></li>
+                  <li><a href="#overview-resources">Resources</a></li>
+                  <li><a href="#overview-next">What's next</a></li>
+                </ul>
               </li>
               <li>
                 <a href="#connect-your-first-light">Connect your first light</a>
+                <ul class="nav">
+                  <li><a href="#connect-your-first-light-introduction">Introduction</a></li>
+                  <li><a href="#connect-your-first-light-">Components</a></li>
+                  <li><a href="#connect-your-first-light-">Lelylan Setup</a></li>
+                  <li><a href="#connect-your-first-light-">Arduino Setup</a></li>
+                  <li><a href="#connect-your-first-light-">Arduinio Code</a></li>
+                  <li><a href="#connect-your-first-light-">Control your first light</a></li>
+                </ul>
               </li>
               <li class="active">
                 <a href="#create-your-first-js-app">Create your first js app</a>
@@ -97,107 +111,111 @@
         </div>
 
 
-        <!-- overview -->
+        <!-- ======== -->
+        <!-- Overview -->
+        <!-- ======== -->
 
         <div class="col-md-9 bs-docs" role="main">
 
-
           <div class="bs-title">
-            <h1 id="overview">Connect your first device</h1>
-            <h4>some text should be placed here</h4>
+            <h1 id="overview">Overview</h1>
+            <h4>Understanding Lelylan</h4>
           </div>
 
           <div class="bs-docs-section">
-            <p>There are a few easy ways to quickly get started with Bootstrap, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
-            <h3>Compiled CSS, JS, and fonts</h3>
-            <p>The fastest way to get Bootstrap is to download the compiled and minified versions of our CSS and JavaScript, along with the included fonts. No documentation or original source files are included.</p>
 
-            <p class="notice">
-              <span class="label label-info"><a href="https://github.com/lelylan/devices-dashboard-ng/">github</a></span>
-              Lelylan Dashboard is available as open source on <a href="https://github.com/lelylan/devices-dashboard-ng/">Github</a>.
+            <h2 id="overview-what-is-lelylan">What is Lelylan</h2>
+
+            <p>
+              Lelylan is a simple and open API to build the Connected Home where makers can
+              focus on the hardware and on the design process, while developers create new
+              apps for the web, the mobile and much more.
             </p>
 
-            <p class="notice">
-              <span class="label label-info">github</span>
-              Lelylan Dashboard is available as open source on <a href="https://github.com/lelylan/devices-dashboard-ng/">Github</a>.
+            <h2 id="overview-how-does-it-work">How does it work</h2>
+
+            <p>
+              Any request sent to the Lelylan API is forwarded the the physical device, which
+              is in charge of applying the desired changes and of sending back a message to
+              Lelylan when those are made.
             </p>
 
-            <div class="alert alert-info">
-              <p>
-              <span class="label label-lelylan">notice</span>
-                Lelylan Dashboard is available as open source on <a href="https://github.com/lelylan/devices-dashboard-ng/">Github</a>.
-                Lelylan Dashboard is available as open source on <a href="https://github.com/lelylan/devices-dashboard-ng/">Github</a>.
-              </p>
-            </div>
+            <p>
+              Take a look at this request flow to better understand the most important steps.
+            </p>
 
             <%= render 'shared/animations/lelylan' %>
 
-            <ul class="nav nav-tabs">
-  <li class="active"><a href="#get-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#get-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#get-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
-  <li><a href="#get-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-  <li><a href="#get-a-device-python" data-toggle="tab" class="python">Python</a></li>
-</ul>
+            <h2 id="overview-resources">Resources</h2>
 
-<div class="tab-content">
-  <div class="tab-pane active" id="get-a-device-curl">
-    <div class="preview">
-      <pre><xmp>curl http://api.lelylan.com/devices/<id> \
-     -H 'Authorization: Bearer <token>'</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="get-a-device-node">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.find('<id>', callback);</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="get-a-device-angular">
-    <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
-<body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
-  <div ng-controller="LelylanController">{{device}}</div>
-  <script>
-    function LelylanController($scope, Device) {
-      $scope.device = Device.get({ id: '<id>' });
-    }
-  </script>
+            <p>
+              Lelylan is based on three resources. Just grasp the general concept behind them
+              and don't warry if something is not clear, we'll come back later on them.
+            </p>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
-</body>
-</html></xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="get-a-device-ruby">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-device = lelylan.device('<id>')</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="get-a-device-python">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>oauth.set_access_token()
-from lelylan import devices
-device = devices.get_dev('<id>')</xmp></pre>
-    </div>
-  </div>
-</div>
+            <h3>Devices</h3>
+
+            <p>
+              A Device is a resource virtually representing
+              everything you interact with everyday of your life. You interact with lights,
+              appliances, alarms, cooling and heating systems, gas sensors, rolling
+              shutters, windows, irrigations, video surveillance, gates, multimedia (audio and
+              video) and much more. With a Device you can simulate, monitor and
+              control any of those devices through a unique URI.
+            </p>
+
+            <h3>Physicals</h3>
+
+            <p>
+            Whereas Devices are a virtual representation, Physicals are the real objects
+            you interact with everyday of your life. To enable the communication between Lelylan
+            and the physical world, the physical device must be able to connect to the Internet
+            and to implement the Physical API.
+            <p>
+
+            <h3>Types</h3>
+
+            <p>
+            A Type describes the structure of a device. Lelylan has started to define the most
+            used ones, but anyone, can create new ones. In its simplest form every Type can be
+            defined as the combination of three key elements.
+            </p>
+
+            <ul>
+              <li><strong>Properties</strong> - what vary during time.</li>
+              <li><strong>Functions</strong> - what a device can do.</li>
+              <li><strong>Statuses</strong> - what a device is in a specific time of its life.</li>
+            </ul>
+
+            <h2 id="overview-next">What's next</h2>
+
+            <p>
+              It's time to try Lelylan out.
+            </p>
+
+            <ul>
+              <li>
+              <i>For Makers</i> -
+              <a href="">Connect your First Light</a> using an Arduino UNO and MQTT.
+              </li>
+              <li>
+              <i>For Developers</i> -
+              <a href="">Create your First JS App</a> using AngularJS, HTML5 and Websockets.
+              </li>
+            </ul>
           </div>
         </div>
 
 
-        <!-- connect your first light -->
+        <!-- ======================== -->
+        <!-- Connect your first light -->
+        <!-- ======================== -->
 
         <div class="col-md-offset-3 col-md-9 bs-docs" role="main">
 
           <div class="bs-title">
-            <h1 id="connect-your-first-light">Connect your first device</h1>
-            <h4>some text should be placed here</h4>
+            <h1 id="connect-your-first-light">Connect your First Light</h1>
+            <h4>Connect your Arduino UNO to Lelylan using MQTT</h4>
           </div>
 
           <div class="bs-docs-section">
