@@ -97,8 +97,8 @@
                   <li><a href="#connect-your-first-light-libraries">Libraries</a></li>
                   <li><a href="#connect-your-first-light-hardware-setup">Hardware Setup</a></li>
                   <li><a href="#connect-your-first-light-lelylan-setup">Lelylan Setup</a></li>
-                  <li><a href="#connect-your-first-light-code">Code</a></li>
-                  <li><a href="#connect-your-first-light-control">Control your light</a></li>
+                  <li><a href="#connect-your-first-light-arduino-code">Arduino Code</a></li>
+                  <li><a href="#connect-your-first-light-control">Control and Monitor</a></li>
                   <li><a href="#connect-your-first-light-code-explained">Code explained</a></li>
                   <li><a href="#connect-your-first-light-next">What's Next</a></li>
                 </ul>
@@ -374,7 +374,7 @@
               </tbody>
             </table>
 
-            <h2 id="connect-your-first-light-code">Code</h2>
+            <h2 id="connect-your-first-light-arduino-code">Arduino Code</h2>
 
             <p>
             Here is the Arduino sketch. To make it work set the <code>deviceId</code>
@@ -597,7 +597,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
 }</xmp></pre>
 
-            <h2 id="connect-your-first-light-control">Control</h2>
+            <h2 id="connect-your-first-light-control">Control and Monitor</h2>
 
             <p>
               Now that all the components are ready and your Arduino is connected to Lelylan
@@ -973,8 +973,8 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
             <h2 id="connect-your-first-light-next">What's next</h2>
 
             <p>
-            To deeply understand how to connect any physical device to Lelylan check out
-            the <a href="">Makers API</a>.
+            Check out the <a href="">Makers API</a> to deeply understand how to connect any
+            physical device to Lelylan.
             </p>
           </div>
         </div>
