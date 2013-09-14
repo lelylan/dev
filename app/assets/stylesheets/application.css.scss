@@ -48,7 +48,7 @@ $linkColorHover:         $lelylanHoverColor;
 /* body defaults */
 
 body {
-  background-color: #e8e8e8 !important;
+  background-color: #f8f8f8 !important;
   padding-top: 100px; /* Account for fixed navbar */
   position: relative; /* For scrollyspy */
 }
@@ -102,20 +102,22 @@ h2[id] {
 
 .bs-docs-section h2 {
   color: $lelylanColor;
-  font-size: 30px;
+  font-size: 32px;
   margin-bottom: 20px;
+  font-weight: 200;
 }
 
 .bs-docs-section h3 {
-  font-size: 20px;
-  margin: 25px 0 15px;
+  font-size: 22px;
+  margin: 30px 0 20px;
+  font-weight: 200;
 }
 
 .bs-docs-section p,
 .bs-docs-section ul li {
   font-size: 17px;
   font-weight: 200;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .bs-docs-section p {
@@ -130,16 +132,18 @@ h2[id] {
 /* documentation page */
 
 .bs-docs {
-  background-color: #f8f8f8;
+  background-color: #fbfbfb;
   padding: 0;
   @include box-shadow;
 
   p a,
+  table a,
   li a{
     color: $linkColor !important;
   }
 
   p a:hover,
+  table a:hover,
   li a:hover {
     text-decoration: none;
     color: $linkColorHover !important;
@@ -202,6 +206,7 @@ h2[id] {
   min-height: 50px;
   margin-bottom: 0;
   margin-top: 25px;
+  @include box-shadow;
 
   .container {
     padding-right: 0;
@@ -276,9 +281,10 @@ h2[id] {
 .bs-sidebar .nav > .active > a,
 .bs-sidebar .nav > .active:hover > a,
 .bs-sidebar .nav > .active:focus > a {
-  font-weight: bold;
+  //font-weight: bold;
+  color: $lelylanHoverColor;
   background-color: transparent;
-  border-left: 1px solid $lelylanColor;
+  border-left: 1px solid $lelylanHoverColor;
 }
 
 /* Nav: second level (shown on .active) */
@@ -292,8 +298,9 @@ h2[id] {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 25px;
-  font-size: 13px;
-  text-transform: none;
+  font-size: 12px;
+  line-height: 1.6em;
+  //text-transform: none;
 }
 
 /* Show and affix the side nav when space allows it */
@@ -337,8 +344,12 @@ h2[id] {
 
 code {
   color: #111;
-  background-color: #eee;
-  font-size: 80%;
+  background-color: transparent;
+  font-size: 75%;
+}
+
+table code {
+  font-size: 90%;
 }
 
 pre code,
@@ -353,9 +364,9 @@ pre xmp {
 }
 
 pre {
-  margin: 0;
+  margin: 20px 0 10px;
   padding: 5px 0 5px 5px !important;
-  background: #fff;
+  background: #f8f8f8;
   border: 1px solid #ddd;
   border-radius: 0;
 }
@@ -368,7 +379,7 @@ ol.nav-tabs {
 
 ul.nav-tabs li.active a,
 ol.nav-tabs li.active a {
-  background-color:#fff
+  background-color: #f8f8f8;
 }
 
 ul.nav-tabs {
@@ -391,7 +402,7 @@ div.tab-content pre {
 .nav-tabs > li.active a:hover,
 .nav-tabs > li.active a {
   color: $linkColorHover;
-  background-color: #fff;
+  background-color: #f8f8f8;
 }
 
 
@@ -477,8 +488,27 @@ div.tab-content pre {
 }
 
 
+/* * * * * * * * * */
+/* Circular images */
+/* * * * * * * * * */
+
+.circular {
+	width: 300px;
+	height: 300px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+	background: url(http://link-to-your/image.jpg) no-repeat;
+	}
+
+.circular img {
+	opacity: 0;
+	filter: alpha(opacity=0);
+	}
+
+
 /* * * * * * * * */
-/* Mishellaneous */
+/* Miscellaneous */
 /* * * * * * * * */
 
 .alert {
@@ -501,4 +531,45 @@ div.tab-content pre {
   }
 }
 
+img {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
 
+table {
+  margin: 20px 0;
+
+  tr th {
+    border-bottom: 1px solid #dddddd !important;
+  }
+
+  tr td,
+  tr th {
+    color: #333;
+    font-size: 15px;
+    font-weight: 200;
+    line-height: 1.5 !important;
+  }
+}
+
+table .parameter {
+  width: 30%;
+}
+
+table .extra {
+  width: 30% !important;
+}
+
+table .nested {
+  padding-left: 30px !important;
+}
+
+table .parameter span {
+  font-style: italic;
+}
+
+table span.info {
+  display: block;
+  color: #888;
+  font-style: italic;
+}

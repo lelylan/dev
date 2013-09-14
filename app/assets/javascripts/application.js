@@ -15,7 +15,23 @@
 //= require_tree .
 //
 
+// pretty print
 addEventListener('load', function (event) { prettyPrint() }, false);
+
+// open all external links in new tab
+
+$(function(){
+  $('a').each(function() {
+    var a = new RegExp('/' + window.location.host + '/');
+    if(!a.test(this.href)) {
+        $(this).click(function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            window.open(this.href, '_blank');
+        });
+    }
+  });
+});
 
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!
