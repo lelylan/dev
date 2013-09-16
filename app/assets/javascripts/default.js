@@ -20,22 +20,25 @@ $(function () {
     // set a default
     if (!language) language = 'curl';
 
-    // set language on cookies
-    $.cookie('lelylan-dev-language', language);
-
-    // show the selected language examples
-    $('#language').val(language);
-
-    // set the menu to the actual language
-    $('#language').val(language);
-
-    // show all code examples for the actual language
-    $('.nav-tabs a.' + language).tab('show');
+    // change the language description
+    setLanguage(language);
   }
 
-  $('#language').change(function () {
-    // check the selected language
-    var language = $("#language option:selected").first().attr('value');
+  // Add a listener on language change
+  $('.languages a').click(function (e) {
+
+    e.preventDefault()
+
+    // get the selected language
+    var language = $(this).attr('class');
+
+
+    // change the language description
+    setLanguage(language);
+  })
+
+  // Set the current language
+  var setLanguage = function(language) {
 
     // set language on cookies
     $.cookie('lelylan-dev-language', language);
@@ -43,11 +46,16 @@ $(function () {
     // show all code examples for the actual language
     $('.nav-tabs a.' + language).tab('show');
 
-    // set the language on the browser url
-    var path = window.location.pathname;
-    window.history.pushState(null, path, path + '#' + language);
-  })
+    // set the menu to the actual language
+    var language_description = 'Curl';
+    if (language.match(/node/))    language_description = 'Node.js';
+    if (language.match(/angular/)) language_description = 'AngularJS';
+    if (language.match(/ruby/))    language_description = 'Ruby';
+    if (language.match(/python/))  language_description = 'Python';
 
+    $('.language-description').html(language_description);
+
+  }
 
   initLanguage();
 });

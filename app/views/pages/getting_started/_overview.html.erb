@@ -1,0 +1,87 @@
+<div class="col-md-9 bs-docs" role="main">
+
+  <div class="bs-title">
+    <h1 id="lelylan-overview">Lelylan Overview</h1>
+    <h4>Understanding Lelylan basic concepts</h4>
+  </div>
+
+  <div class="bs-docs-section">
+
+    <h2 id="overview-what-is-lelylan">What is Lelylan</h2>
+
+    <p>
+      Lelylan is a simple and open API to build the Connected Home where makers can
+      focus on the hardware and on the design process, while developers create new
+      apps for the web, the mobile and much more.
+    </p>
+
+    <h2 id="overview-how-does-it-work">How does it work</h2>
+
+    <p>
+      Any request sent to the Lelylan API is forwarded the the physical device, which
+      is in charge of applying the desired changes and of sending back a message to
+      Lelylan when those are made.
+    </p>
+
+    <p>
+      Take a look at this request flow to better understand the most important steps.
+    </p>
+
+    <%= render 'shared/animations/lelylan' %>
+
+    <h2 id="overview-resources">Resources</h2>
+
+    <p>
+      Lelylan is based on three resources. Just grasp the general concept behind them
+      and don't warry if something is not clear, we'll come back later on them.
+    </p>
+
+    <h3>Devices</h3>
+
+    <p>
+      A Device is a resource virtually representing
+      everything you interact with everyday of your life. You interact with lights,
+      appliances, alarms, cooling and heating systems, gas sensors, rolling
+      shutters, windows, irrigations, video surveillance, gates, multimedia (audio and
+      video) and much more. With a Device you can simulate, monitor and
+      control any of those devices through a unique URI.
+    </p>
+
+    <h3>Physicals</h3>
+
+    <p>
+    Whereas Devices are a virtual representation, Physicals are the real objects
+    you interact with everyday of your life. To enable the communication between Lelylan
+    and the physical world, the physical device must be able to connect to the Internet
+    and to implement the Physical API.
+    <p>
+
+    <h3>Types</h3>
+
+    <p>
+    A Type describes the structure of a device. Lelylan has started to define the most
+    used ones, but anyone, can create new ones. In its simplest form every Type can be
+    defined as the combination of three key elements.
+    </p>
+
+    <ul>
+      <li><em>Properties</em> - what vary during time.</li>
+      <li><em>Functions</em> - what a device can do.</li>
+      <li><em>Statuses</em> - what a device is in a specific time of its life.</li>
+    </ul>
+
+    <h2 id="overview-next">What's next</h2>
+
+    <ul>
+      <li>
+      <em>For Makers</em> -
+      <a href="">Connect Your First Light</a> using an Arduino UNO and MQTT.
+      </li>
+      <li>
+      <em>For Developers</em> -
+      <a href="">Create Your First JS App</a> using AngularJS, HTML5 and Websockets.
+      </li>
+    </ul>
+  </div>
+</div>
+

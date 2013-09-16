@@ -130,8 +130,8 @@ In this way all updates coming from Lelylan will be forwarded to the authorized 
 <p>
 Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
 the connection phase the client needs to set the <code>device.id</code> as username and the
-<code>device.secret</code> as password.
-When the credentials are missing or not valid, the connection is rejected.
+<code>device.secret</code> as password. When the credentials are missing or not valid, the
+connection is rejected.
 </p>
 
 <h4>MQTT Broker parmas</h4>
@@ -246,7 +246,7 @@ byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
  * Lelylan config
  * --------------- */
 
-// local lelylan mqtt server
+// lelylan mqtt server
 byte server[] = { 192, 168, 1, 101 };
 
 // set your device id (MQTT client username)
