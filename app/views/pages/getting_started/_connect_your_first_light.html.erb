@@ -381,7 +381,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
 }</xmp></pre>
 
-    <h2 id="connect-your-first-light-control">Control your device</h2>
+    <h2 id="connect-your-first-light-control">Control your light</h2>
 
     <p>
       Now that all the components are ready and your Arduino is connected to Lelylan
@@ -664,7 +664,7 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
 
     <p>
     When a user updates a device property or executes a function using Lelylan
-    (e.g dashboard, mobile, etc.), a message is published to the topic
+    (e.g from dashboard, mobile, etc.), a message is published to the topic
     <code>devices/:id/get</code>. The physical device (that subscribed to this
     channel during the connection phase) will receive all incoming messages through
     the <code>callback</code> function (defined during the MQTT client initialization).
@@ -725,7 +725,6 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
         <tr>
           <td class="parameter">
             <span>properties</span>
-            <span class="info">optional</span>
           </td>
           <td>
             Array of properties to send to Lelylan.
@@ -734,7 +733,6 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
         <tr>
           <td class="parameter nested">
             <span>&raquo; property.id</span>
-            <span class="info">required</span>
           </td>
           <td>
             Property ID.
@@ -743,10 +741,9 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
         <tr>
           <td class="parameter nested">
             <span>&raquo; property.value</span>
-            <span class="info">required</span>
           </td>
           <td>
-            Desired property value.
+            New property value.
           </td>
         </tr>
       </tbody>
