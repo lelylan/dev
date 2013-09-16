@@ -1,0 +1,355 @@
+<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
+
+  <div class="bs-title">
+    <h1 id="core-concepts">Core Concepts</h1>
+    <h4>Shared Concepts for Lelylan API</h4>
+  </div>
+
+  <div class="bs-docs-section">
+
+    <h2 id="">REST interface</h2>
+
+    <p>
+    Lelylan API attempts to conform to the design principles of Representational
+    State Transfer (REST). The basic idea is to define services that look like the
+    web, through the definition and the representation of all the resources that interact
+    with the house.
+    If you are thinking about what a resource is, think at it as
+    anything important enough to be referenced as a thing by itself.
+    </p>
+    <p>
+    That said,
+    following the REST architecture, Lelylan defined its API following these rules.
+    </p>
+
+    <table class="table table-stripped table-hover">
+      <tbody>
+        <tr>
+          <td><em>Connectedness</em></td>
+          <td>You can move between resources using the links contained in them</td>
+        </tr>
+        <tr>
+          <td><em>Addressability</em></td>
+          <td>Every resource is identified from an address</td>
+        </tr>
+        <tr>
+          <td><em>Uniform interface</em></td>
+          <td>The HTTP verb is used to define the action to apply</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-info">
+      <p>
+      <span class="label label-lelylan">notice</span>
+      To better understand how REST works read Leonard Richardson
+      <a href="http://www.amazon.com/RESTful-Web-Services-Leonard-Richardson/dp/0596529260/">Restful Web Services</a>.
+      </p>
+    </div>
+
+    <h2 id="">Response formats</h2>
+
+    <p>
+      Lelylan responds only with JSON representations.
+    </p>
+
+    <table class="table table-stripped table-hover">
+      <thead>
+        <tr>
+          <th>Format</th>
+          <th>Suffix</th>
+          <th>Content-Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>JSON</td>
+          <td>.json</td>
+          <td>application/json</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="">CORS</h2>
+
+    <p>
+      Lelylan supports <a href="http://www.html5rocks.com/en/tutorials/cors/">CORS</a>
+      (Cross Origin Resource Sharing) for AJAX requests. CORS allows cross-domain communication
+      from the browser. By building on top of the XmlHttpRequest object, CORS allows developers
+      to work with the same idioms as same-domain requests. Here a complete list of
+      <a href="http://caniuse.com/cors">browsers supporting CORS</a>.
+    </p>
+
+    <div class="alert alert-info">
+      <p>
+      <span class="label label-lelylan">notice</span>
+        Lelylan does not support JSON-P at the moment.
+        Let <a href="">@lelylan</a> know if you need it.
+      </p>
+    </div>
+
+    <h2 id="">Public resources</h2>
+
+    <table class="table table-stripped table-hover">
+      <thead>
+        <tr>
+          <th>API Endpoint</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><a href="/api/types/#get-all-types">GET /types/public</a></td>
+        <td>Get all public types</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/#get-a-type">GET /types/:id</a></td>
+        <td>Get a type</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/properties/#get-all-properties">GET /properties/public</a></td>
+        <td>Get all public properties</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/properties/#get-a-property">GET /properties/:id</a></td>
+        <td>Get a property</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/functions/#get-all-functions">GET /functions/public</a></td>
+        <td>Get all public functions</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/functions/#get-a-function">GET /functions/:id</a></td>
+        <td>Get a function</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/statuses/#get-all-statuses">GET /statuses/public</a></td>
+        <td>Get all public statuses</td>
+      </tr>
+      <tr>
+        <td><a href="/api/types/statuses/#get-a-status">GET /statuses/:id</a></td>
+        <td>Get a status</td>
+      </tr>
+    </table>
+
+    <h2 id="">Error responses</h2>
+
+    <h3>401 - Unauthorized</h2>
+
+<pre><code>HTTP/1.1 401 Unauthorized
+<hr>
+{
+  "status": 401,
+  "method": "POST",
+  "request": "http://api.lelylan.com/devices/4f4bb686d033a957c1000251",
+  "error": {
+    "code": "notifications.access.not_authorized",
+    "description": "Token not valid"
+  }
+}</code></pre>
+
+    <h3>404 - Not Found</h3>
+
+<pre><code>HTTP/1.1 404 Not Found
+<hr>
+{
+  "status": 404,
+  "method": "GET",
+  "request": "http://api.lelylan.com/devices/4f4ba959d033a95549000261",
+  "error": {
+    "code": "notifications.resource.not_found",
+    "description": "Resource not found",
+    "uri": "http://api.lelylan.com/devices/4f4ba959d033a95549000261"
+  }
+}</code></pre>
+
+    <h3>422 - Not Valid</h3>
+
+<pre><code>HTTP/1.1 422 Not Valid
+<hr>
+{
+  "status": 422,
+  "method": "POST",
+  "request": "http://api.lelylan.com/devices",
+  "error": {
+    "code": "notifications.resource.not_valid",
+    "description": "Name can't be blank.",
+    "body": { "name": "" },
+  }
+}</code></pre>
+
+    <h2 id="">Rate limit</h2>
+
+    <p>
+    We limit requests to <code>5000</code> per day. You can check the returned HTTP headers
+    of any authenticated API request to see your current status.
+    </p>
+
+<pre><code>HTTP/1.1 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+    <p>
+    When you exceed the API calls limit your request is forbidden.
+    </p>
+
+<pre><code>HTTP/1.1 403 Forbidden
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 0</code></pre>
+
+<pre><code>{
+  "status": 403,
+  "method": "POST",
+  "request": "http://api.lelylan.com/devices",
+  "error": {
+    "code": "notifications.access.rate_limit",
+    "description": "Rate limit exceeded",
+    "daily_rate_limit": 5000,
+  }
+}</code></pre>
+
+
+    <div class="alert alert-info">
+      <p>
+      <span class="label label-lelylan">notice</span>
+        Do you need white listed access? <a href="mailto:touch@lelylan.com">Let us know</a>
+        explaining why.
+      </p>
+    </div>
+    <p>
+
+    <h2 id="">HTTP caching</h2>
+
+    <p>
+    HTTP caching is a universally adopted specification across all modern web
+    browsers. Appropriate use of these standards let you improve response times
+    and reduce server load. At Lelylan we focus on conditional requests.
+    When a conditional requests is made across the network, unmodified resources result
+    in an empty response body, aka 304 Not Modified, saving the cost of transferring the
+    resource back to the end client. To make this possible Lelylan returns the
+    <code>Etag</code> and <code>Last-Modified</code> headers.
+    </p>
+
+<div class="preview"><pre><code>Etag: "e59b3c1fca50b5d0bf44c931253ded86"
+Last-Modified: Sat, 01 Sep 2012 16:00:32 GMT</code></pre></div>
+
+    <h2 id="">Infinite scrolling pagination</h2>
+
+    <p>
+      Sometimes your database will be so large that it's impossible to pre-load it client-side.
+      The solution is to pre-load a segment of the database and then use
+      pagination to load more data. Pagination is better with an infinite
+      scrolling pattern, rather than showing a list of pages.
+      When fetching the next page set the parameter <code>start</code>
+      with the last fetched resource <code>ID</code>.
+    </p>
+
+    <pre><code>curl -L http://api.lelylan.com/devices.json?start=5042205c70eda61000000003</code></pre>
+
+    <p>
+    The default number of resources per page is 25 and the maximum is 100.
+    </p>
+
+    <h2 id="">Accepted time formats</h2>
+
+    <p>
+    The preferred time format accepted from time attributes is
+    <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> but
+    <a href="http://ruby-doc.org/core-1.9.3/Time.html">orher formats</a> are accepted.
+    The following examples describe the same time using two different accepted formats.
+    </p>
+
+<pre><code>2012-07-03 12:45:29Z        # ISO 8601
+2012-07-03 14:45:29 +0200   # UTC local time with offset "+hh:mm"</code></pre>
+
+    <h2 id="">HTTP verbs limitations</h2>
+
+    <p>
+    Not all HTTP clients are able to make PUT or DELETE requests.
+    In order to work around this limitation, it is possible to send a POST request
+    with a <code>_method</code> parameter set to <code>put</code> or <code>delete</code>.
+    </p>
+
+    <h2 id="">GET /me</h2>
+
+    <p>
+    Returns extended information for the authenticated user.
+    </p>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-user-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-user-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-user-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-a-user-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-user-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-user-curl">
+    <div class="preview">
+      <pre><xmp>curl http://api.lelylan.com/me \
+    -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-user-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Profile.me(callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-user-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<head></head>
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{profile}}</div>
+  <script>
+    function LelylanController($scope, Profile) {
+      $scope.profile = Profile.get();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-user-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+profile = lelylan.me</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-user-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import user
+profile = user.me()</xmp></pre>
+    </div>
+  </div>
+</div>
+
+    <h3>Example header response</h3>
+
+    <pre><code>HTTP/1.1 200 OK</code></pre>
+
+    <h3 id="device-representation">Example body response</h3>
+
+<pre><code>{
+  "id": "5036227a4f1b030200009000",
+  "email": "reggie@lelylan.com",
+  "full_name": "Reggie",
+  "homepage": "http://lelylan.com",
+  "location": "New York",
+  "rate_limit": 5000
+}</code></pre>
+
+  </div>
+</div>
+
