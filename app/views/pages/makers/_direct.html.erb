@@ -1,162 +1,121 @@
-<article>
+<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
 
-<aside class="menu">
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#create-device-resource">Create the device</a></td></tr>
-    <tr><td>&raquo; <a href="#receive-property-updates">Receive updates from Lelylan</a></td></tr>
-    <tr><td>&raquo; <a href="#send-property-updates">Send updates to Lelylan</a></td></tr>
-    <tr><td>&raquo; <a href="#set-physical-uri">Set physical URI</a></td></tr>
-  </tbody>
-</table>
-</aside>
-
-<h1 class="call"><a name="direct-access"><%= title %></a></h1>
-
-<p>
-  Using the direct access solution the physical device is directly accessible through a URI.
-  Use a static IP address or create a tunnel using solutions like
-  <a href="http://progrium.com/localtunnel/">Local Tunnel</a>,
-  <a href="https://forwardhq.com/">Forward</a> or
-  <a href="http://tunnlr.com/">Tunnlr</a>.
-</p>
-
-</article>
-
-<article>
-
-<h2 class="call"><a name="create-device-resource">Create the device</a></h2>
-
-<p>
-To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>.
-Click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
-with the desired device name and type. For the moment leave empty the physical field
-(we'll come back later on that).
-<p>
-<div class="overlay">
-  <div class="ao-item">
-    <div class="ao-preview">
-      <%= image_tag('device-create.png') %>
-      <div class="ao-annotations">
-        <span style="top: 5%; left: 28%; width: 140px;" class="from-right">Create link</span>
-      </div>
-    </div>
+  <div class="bs-title">
+    <h1 id="direct">Direct Access</h1>
+    <h4>Connect the physical world using a public IP</h4>
   </div>
-</div>
 
-<br/>
+  <div class="bs-docs-section">
 
-<p>
-  When created, you'll see a detailed view of your device (device component). Now click on
-  <code>settings</code> and you'll find all the needed info to implement the physical device API.
-</p>
 
-<ul>
-  <li><strong>Type</strong> - Link to the type properties the physical device needs to accept.</li>
-  <li><strong>URI</strong> - URI where the physical will send the physical updates.</li>
-  <li><strong>Secret</strong> - Device secret code used to authenticate the communication with Lelylan.</li>
-</ul>
+    <h2 id="direct-overview">Overview</h2>
 
-<div class="overlay" style="margin-left: 190px;">
-  <div class="ao-item">
-    <div class="ao-preview">
-      <%= image_tag('device-component.png') %>
-      <div class="ao-annotations">
-        <span style="top: 7.5%; left: 78%; width: 140px;" class="from-right">Settings link</span>
-        <span style="top: 67%; left: 97%; width: 140px;" class="from-right">Type link</span>
-        <span style="top: 81%; left: -66%; width: 140px;">Device URI</span>
-        <span style="top: 88%; left: 97%; width: 140px;" class="from-right">Device secret</span>
-      </div>
+    <p>
+      Using the direct access solution the physical device is directly accessible through
+      a Public IP Address. If you do not have one, you can create a tunnel using
+      <a href="http://progrium.com/localtunnel/">Local Tunnel</a>,
+      <a href="https://forwardhq.com/">Forward</a> or
+      <a href="http://tunnlr.com/">Tunnlr</a>.
+    </p>
+
+    <h2 id="direct-create-the-device">Create the Device</h2>
+
+    <p>
+    To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>,
+    click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
+    with the desired device name and type. For the moment leave empty the physical field
+    (we'll come back later on that).
+    <p>
+
+    <%= image_tag('makers-api/create-device.png', class: 'img-thumbnail') %>
+
+    <p>
+      When created, you'll see a detailed view of your new device. Click on <code>settings</code>
+      and you'll find all needed info to connect the physical device to Lelylan.
+    </p>
+
+    <ul>
+      <li><em>Type</em> - Link to the device type definition (use it to check the device properties).</li>
+      <li><em>URI</em> - URI where the physical will send the physical updates.</li>
+      <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
+    </ul>
+
+    <%= image_tag('makers-api/device-component-settings.png', class: "img-thumbnail") %>
+
+    <h2 id="direct-how-to-receive-data">How to Receive Data</h2>
+
+    <p>
+    When a user updates a device property or executes a function using Lelylan, a request
+    with the list of properties to update is sent to the physical device. Every received
+    request is made up from a list of properties with the following structure.
+    </p>
+
+    <h3>Received Request Example</h3>
+
+    <div class="preview">
+    <pre><code>PUT http://arduino.house.com/physical-id</code></pre>
     </div>
-  </div>
-</div>
 
-<br/>
-</article>
+    <h3>Received Headers</h3>
 
-<article>
+    <table class="table table-stripped table-hover">
+      <tbody>
+        <tr>
+          <td class="parameter">
+            <span>X-Physical-Secret</span>
+          </td>
+          <td>
+            The device <a href="/api/devices#get-a-device-private-info">secret</a>.
+            The physical device needs it to reject not valid requests.
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<h2 class="call"><a name="receive-property-updates">Receive updates from Lelylan</a></h2>
+    <h3>Received Params</h3>
 
-<p>
-When a user <a href="/api/devices#update-properties">updates a device property</a> or
-<a href="/api/devices#execute-a-function">executes a function</a> using Lelylan, a request
-with the list of properties to update is sent to the physical device. This is why the physical
-device must be able to recognize the device properties to apply the desired changes.
-</p>
+    <table class="table table-stripped table-hover">
+      <tbody>
+        <tr>
+          <td class="parameter">
+            <span>properties</span>
+          </td>
+          <td>
+            Array of properties to change in the physical world.
+          </td>
+        </tr>
+        <tr>
+          <td class="parameter nested">
+            <span>&raquo; property.id</span>
+          </td>
+          <td>
+            Property ID.
+          </td>
+        </tr>
+        <tr>
+          <td class="parameter nested">
+            <span>&raquo; property.value</span>
+          </td>
+          <td>
+            New property value.
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<h4>Example Resource URL (sent form Lelylan)</h4>
+    <h3>Received Request Example</h3>
 
-<div class="preview">
-<pre><code>PUT http://arduino.house.com/physical-id</code></pre>
-</div>
+    <p>
+    Follows an example request a physical device must be able to solve.
+    </p>
 
-<h4>Sent Headers</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>X-Physical-Secret</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The device <a href="/api/devices#get-a-device-private-info">secret</a>.
-        The physical device needs it to reject not valid requests.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Sent Params</h4>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>properties</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Array of properties to change in the physical world.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.id</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Property ID.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.value</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Desired property value.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4>Example Request</h4>
-
-<p>
-Follows a sample request a device must be able to solve.
-</p>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#update-physical-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-physical-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-physical-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
-  <li><a href="#update-physical-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-  <li><a href="#update-physical-device-properties-python" data-toggle="tab" class="python">Python</a></li>
-</ul>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#update-physical-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+      <li><a href="#update-physical-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+      <li><a href="#update-physical-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+      <li><a href="#update-physical-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+      <li><a href="#update-physical-device-properties-python" data-toggle="tab" class="python">Python</a></li>
+    </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-physical-device-properties-curl">
@@ -224,62 +183,124 @@ response = physical.receive_update(uri, secret, params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+    <h3>Response Example</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 202 Accepted</code></pre></div>
+    <p>
+    When receiving a request the physical device must respond with a status code
+    <code>202 Accepted</code>. This tells Lelylan that the request has been accepted
+    and that the processing has not been completed. From this moment the device is pending.
+    </p>
 
-<h4 id="device-representation">Example body response</h4>
+    <div class="preview"><pre><code>HTTP/1.1 202 Accepted<hr>
+{ "status": "202" }</code></pre></div>
 
-<div class="preview"><pre><code>{ "status": "202" }</code></pre></div>
+    <p>
+    Once the physical completes the processing, the device must notify Lelylan sending
+    a request with the updated properties. When Lelylan receives the request, it sets the
+    pending status to false.
+    </p>
 
-</article>
+    <div class="alert alert-info">
+      <p>
+      <span class="label label-lelylan">notice</span>
+      Learn more about the <a href="">pending status</a> of a device.
+      </p>
+    </div>
 
-<br/>
+    <h2 id="direct-how-to-send-data">How to Send Data</h2>
 
-<article>
+    <p>
+    When a physical device updates its status through a physical interaction, a request with the
+    list of updated properties needs to be sent to Lelylan.
+    </p>
 
-<h2 class="call"><a name="send-property-updates">Send updates to Lelylan</a></h2>
+    <h3>Sent Request Example</h3>
 
-<p>
-When a physical device changes its status through a physical interaction, a request with the
-list of updated properties needs to be sent to Lelylan.
-</p>
+    <div class="preview">
+    <pre><code>PUT http://api.lelylan.com/devices/:device-id/properties</code></pre>
+    </div>
 
-<h4>Example Resource URL</h4>
-<div class="preview">
-<pre><code>PUT http://api.lelylan.com/devices/:id/properties</code></pre>
-</div>
+    <h3>Sent Headers</h3>
 
-<h4>Sent Headers</h4>
+    <table class="table table-stripped table-hover">
+      <tbody>
+        <tr>
+          <td class="parameter">
+            <span>X-Physical-Secret</span>
+            <span class="info">required</span>
+          </td>
+          <td>
+            The <a href="/api/devices#get-a-device-private-info">device secret</a>.
+            Lelylan needs it to reject not valid requests.
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>X-Physical-Secret</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The <a href="/api/devices#get-a-device-private-info">device secret</a>.
-        Lelylan needs it to reject not valid requests.
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <h3>Sent Params</h3>
 
-<h4>Example Request</h4>
+    <table class="table table-stripped table-hover">
+      <tbody>
+        <tr>
+          <td class="parameter">
+            <span>properties</span>
+            <span class="info">optional</span>
+          </td>
+          <td>
+            Array of properties to change in the physical world.
+          </td>
+        </tr>
+        <tr>
+          <td class="parameter nested">
+            <span>&raquo; property.id</span>
+            <span class="info">required</span>
+          </td>
+          <td>
+            Property ID.
+          </td>
+        </tr>
+        <tr>
+          <td class="parameter nested">
+            <span>&raquo; property.value</span>
+            <span class="info">required</span>
+          </td>
+          <td>
+            Desired property value.
+          </td>
+        </tr>
+            <tr>
+          <td class="parameter nested">
+            <span>&raquo; property.expected</span>
+            <span class="info">optional</span>
+          </td>
+          <td>
+            Expected property value.
+            <a href="/community/faq#value-expected-pending">Learn more about</a>.
+          </td>
+        </tr>
+            <tr>
+          <td class="parameter nested">
+            <span>&raquo; property.pending</span>
+            <span class="info">optional</span>
+          </td>
+          <td>
+            Property pending status.
+            <a href="/community/faq#value-expected-pending">Learn more about</a>
+            <span class="info">Valid values: true, false.</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<p>
-Most of the time the physical device needs to update the device properties. Here an example.
-</p>
+    <h3>Example Request</h3>
 
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#update-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#update-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
-  <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-  <li><a href="#update-device-properties-python" data-toggle="tab" class="python">Python</a></li>
-</ul>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+      <li><a href="#update-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+      <li><a href="#update-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+      <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+      <li><a href="#update-device-properties-python" data-toggle="tab" class="python">Python</a></li>
+    </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="update-device-properties-curl">
@@ -287,7 +308,7 @@ Most of the time the physical device needs to update the device properties. Here
       <pre><xmp>curl -X PUT http://api.lelylan.com/devices/<id>/properties \
     -H 'X-Physical-Secret: <secret>' \
     -H 'Content-Type: application/json' \
-    -d '{ "properties": [{ "id": "<status>", "value": "on", "pending": false }] }'</xmp></pre>
+    -d '{ "properties": [{ "id": "<status>", "value": "on" }] }'</xmp></pre>
     </div>
   </div>
   <div class="tab-pane" id="update-device-properties-node">
@@ -295,7 +316,7 @@ Most of the time the physical device needs to update the device properties. Here
       <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
 var uri = 'http://api.lelylan.com/devices/<id>/properties'; // device property API
 var secret = '<secret>'; // see dev.lelylan.com/api/devices#get-a-device-private-info
-var params = { 'properties': [{ 'id': '<status>', 'value': 'on', 'pending': false }] };
+var params = { 'properties': [{ 'id': '<status>', 'value': 'on' }] };
 
 Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
     </div>
@@ -309,7 +330,7 @@ Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
     function LelylanController($scope, $resource) {
       var uri = 'http://api.lelylan.com/devices/<id>/properties'; // device property API
       var secret = '<device-secret>'; //see dev.lelylan.com/api/devices#get-a-device-private-info
-      var params = { 'properties': [{ 'id': '<status>', 'value': 'on', 'pending': false }] };
+      var params = { 'properties': [{ 'id': '<status>', 'value': 'on' }] };
 
       var action = { update: { method: 'PUT', headers: { 'X-Physical-Secret': secret } } };
       var Physical = $resource(uri, {}, action);
@@ -329,7 +350,7 @@ Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
       <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
 uri = 'http://api.lelylan.com/devices/<id>/properties' # device property API
 secret = '<device-secret>' # see dev.lelylan.com/api/devices#get-a-device-private-info
-params = { properties: [{ id: '<status>', value: 'on', pending: false }] }
+params = { properties: [{ id: '<status>', value: 'on' }] }
 response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
     </div>
   </div>
@@ -345,107 +366,75 @@ response = physical.receive_update(uri, secret, params)</xmp></pre>
   </div>
 </div>
 
-<h4>Accessible services</h4>
+    <h3>Accessible services</h3>
 
-<p>
-  A physical device has access to a limited set of services in Lelylan.
-</p>
+    <p>
+      A physical device has access to a limited set of API in Lelylan.
+    </p>
 
-<ul>
-  <li>
-  <strong><a href="/api/devices#update-a-device">Update device</a></strong>
-  </li>
-  <li>
-  <strong><a href="/api/devices#update-properties">Update device properties</a></strong>
-  </li>
-</ul>
+    <ul>
+      <li>
+      <a href="/api/devices#update-a-device">Update device</a>
+      </li>
+      <li>
+      <a href="/api/devices#update-properties">Update device properties</a>
+      </li>
+    </ul>
 
-<h4>A note about the physical flow</h4>
+    <h2 id="direct-set-the-physical-uri">Set the physical URI</h2>
 
-<p>
-When communicating with the physical world, Lelylan expects a feedback to its requests.
-For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
-the light was turned on. In the meantime the device is in a
-<a href="/community/faq#value-expected-pending">pending</a>
-status and the spinner is visible.
-</p>
+     <p>
+     All requests coming to Lelylan must be forwarded to the Physical Device. To make this
+     possible we need to tell Lelylan where the Physical Device is. This can be done by setting
+     the physical field of your Device (in the Dashboard) with the URI or IP address of your
+     Physical Device.
+    </p>
 
-<p>
-To close the pending status and tell Lelylan that the required changes were applied, the
-physical device must send a request to Lelylan with the new property values.
-</p>
+    <p>
+    To associate a direct URI to the physical device you can use a public IP address or
+    you can create a tunnel with solutions like
+    <a href="http://progrium.com/localtunnel/">local tunnel</a>,
+    <a href="https://forwardhq.com/">forward</a> or
+    <a href="http://tunnlr.com/">tunnlr</a>.
+    </p>
 
-<pre class="prettyprint"><xmp>// node.js example confirming that the light is on
-var Lelylan = require('lelylan-node')();
-var uri = 'http://api.lelylan.com/devices/<id>/properties';
-var secret = '<secret>';
-var params = { 'properties': [{ 'id': '518be5a700045e1521000001', 'value': 'on' }] };</xmp></pre>
+    <%# image_tag('device-component-update.png') %>
 
-</article>
+    <h2 id="direct-control-your-physical-device">Control your physical device</h2>
 
-<br/>
+    <p>
+    Open the <a href="http://manage.lelylan.com">Dashboard</a>
+    and start interacting with the physical world receiving and sending updates.
+    </p>
 
-<article>
+    <a href="http://manage.lelylan.com">
+    <%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
+    </a>
 
-<h2 class="call"><a name="set-physical-uri">Set physical URI</a></h2>
+    <h2 id="direct-articles">Articles</h2>
 
-<p>
-To associate a direct URI to the physical device you can use a static IP address or
-you can create a tunnel with solutions like
-<a href="http://progrium.com/localtunnel/">local tunnel</a>,
-<a href="https://forwardhq.com/">forward</a> or
-<a href="http://tunnlr.com/">tunnlr</a>.
-Once you have a URI pointing to the physical device fill the <code>physical</code> field.
-</p>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>TITLE</th>
+          <th>LANGUAGE</th>
+          <th>AUTHOR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>There were no articles for this section. Be the first to write one and let <a href="">@lelylan</a> know.</td>
+        </tr>
+      </tbody>
+    </table>
 
+    <h2 id="direct-feedback">Feedback</h2>
 
-<div class="overlay">
-  <div class="ao-item">
-    <div class="ao-preview">
-      <%= image_tag('device-component-update.png') %>
-      <div class="ao-annotations">
-        <span style="top: 12.5%; left: 78%; width: 140px;" class="from-right">Settings link</span>
-        <span style="top: 69.5%; left: 99%; width: 140px;" class="from-right">Physical URI Field</span>
-      </div>
-    </div>
+    <p>
+    Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+    If you find a bug or have any questions, do not hesitate to send them to
+    <a href="">dev@lelylan.com</a>.
+    </p>
+
   </div>
 </div>
-
-<p>
-You are done. Interact with the device component and play with it. Give us your feedback and
-whenever you had any problem during the physical device integration, do not hesitate to
-<a href="http://twitter.com/#!/lelylan">tweet</a> or
-<a href="mailto:touch@lelylan.com">mail</a> us.
-</p>
-
-</article>
-
-<br/>
-<br/>
-<br/>
-
-<article>
-
-<h1 class="call"><a>What's next?</a></h1>
-
-<nav class="nav-intro">
-<ul>
-  </li>
-  <li>
-  <a href="http://twitter.com/lelylan" title="">
-    <span  class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span>Tell us your story<span class="small"> | Share your experiences using lelylan</span></span>
-  </a>
-  </li>
-  <li>
-  <a href="/api" title="">
-    <span  class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span class="highlight">Lelylan API<span class="small"> | Find out more about Lelylan</span></span>
-  </a>
-  </li>
-</ul>
-</nav>
-
-<div class="clearfix">
-
-</article>

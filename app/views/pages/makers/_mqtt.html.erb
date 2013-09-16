@@ -22,7 +22,6 @@
       1 levels on message delivering.
     </p>
 
-
     <div class="alert alert-info">
       <p>
       <span class="label label-lelylan">notice</span>
@@ -32,8 +31,7 @@
       </p>
     </div>
 
-
-    <h2 id="mqtt-creating-the-device">Creating the device</a></h2>
+    <h2 id="mqtt-create-the-device">Create the device</a></h2>
 
     <p>
     To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>,
@@ -50,14 +48,14 @@
     </p>
 
     <ul>
-      <li><em>Type</em> - Link to the type definition (to see the device properties)</li>
+      <li><em>Type</em> - Link to the type definition (use it to check the device properties)</li>
       <li><em>ID</em> - Unique device identifier.</li>
       <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
     </ul>
 
     <%= image_tag('makers-api/device-component-settings.png', class: 'img-thumbnail') %>
 
-    <h2 id="mqtt-setting-the-physical-uri">Setting the physical URI</h2>
+    <h2 id="mqtt-set-the-physical-uri">Set the physical URI</h2>
 
     <p>
     To communicate with the physical device you need to connect Lelylan with the
@@ -101,17 +99,16 @@
 
     <div class="preview">
     <pre><code><span style="color: #999">host:</span> 96.126.109.170
-    <span style="color: #999">port:</span> 1883</code></pre>
+<span style="color: #999">port:</span> 1883</code></pre>
     </div>
 
     <h3>How to receive data</h3>
 
     <p>
     When a user updates a device property or executes a function using Lelylan
-    (e.g from dashboard, mobile, etc.), a message is published to the topic
-    <code>devices/:id/get</code>. The physical device must subscribe this topic
-    in order to receive all messages from Lelylan. Every received message is made
-    up from a list of properties with the following structure.
+    (e.g from dashboard, mobile, etc.), a message with the list of properties
+    to update is published to the topic <code>devices/:id/get</code>. Every received
+    message is made up from a list of properties with the following structure.
     </p>
 
     <table class="table table-stripped table-hover">
@@ -149,10 +146,7 @@
     When a physical device updates its status through a physical interaction Lelylan needs to be
     notified publishing a message to the topic <code>devices/:id/set</code> with the list of all
     updated properties.
-    </p>
-
-    <p>
-    Every sent message is made up from a list of properties.
+    Every sent message is made up from a list of properties with the following structure.
     </p>
 
     <table class="table table-stripped table-hover">
@@ -501,21 +495,21 @@ print("rc: " + str(rc))</xmp></pre>
     <%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
     </a>
 
-    <h2 id="mqtt-tutorials">Tutorials</h2>
+    <h2 id="mqtt-articles">Articles</h2>
 
     <table class="table table-stripped">
       <thead>
         <tr>
           <th>TITLE</th>
-          <th>LANGUAGE</th>
+          <th>TAGS</th>
           <th>AUTHOR</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th><a href="/getting-started#connect-your-first-light">Connect Your First Light with Arduino and MQTT</a></th>
-          <th>Arduino</th>
-          <th><a href="http://twitter.com/lelylan">@lelylan</a></th>
+          <td><a href="/getting-started#connect-your-first-light">Connect Your First Light</a></td>
+          <td>ARDUINO, MQTT</td>
+          <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
         </tr>
       </tbody>
     </table>
@@ -527,5 +521,6 @@ print("rc: " + str(rc))</xmp></pre>
     If you find a bug or have any questions, do not hesitate to send them to
     <a href="">dev@lelylan.com</a>.
     </p>
+
   </div>
 </div>
