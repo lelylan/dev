@@ -138,7 +138,7 @@ h2[id] {
 
   p a,
   table a,
-  li a{
+  li a {
     color: $linkColor !important;
   }
 
@@ -581,5 +581,17 @@ table span.info {
 
   a {
     font-size: 16px
+  }
+}
+
+footer .bs-docs-section {
+  padding-right: 0;
+
+  a {
+    color: $linkColor !important;
+  }
+  a:hover {
+    text-decoration: none;
+    color: $linkColorHover !important;
   }
 }
