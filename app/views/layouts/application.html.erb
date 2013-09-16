@@ -119,6 +119,13 @@
               </li>
               <li>
                 <a href="#see-existing-projects">See existing projects</a>
+                <ul class="nav">
+                  <li><a href="#projects-device-component">Device Component</a></li>
+                  <li><a href="#projects-lelylan-dashboard">Lelylan Dashboard</a></li>
+                  <li><a href="#projects-lelylan-demo">Lelylan Demo</a></li>
+                  <li><a href="#projects-type-component">Type Component</a></li>
+                  <li><a href="#projects-lelylan-types">Lelylan Types</a></li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -984,7 +991,7 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
             <h2 id="connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
             <p>
-            </span> Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+            Have feedback? Let <a href="">@lelylan</a> know on Twitter.
             If you find a bug or have any questions, do not hesitate to send them to
             <a href="">dev@lelylan.com</a>.
             </p>
@@ -1010,7 +1017,7 @@ PubSubClient client(server, 1883, callback, ethClient); // MQTT client initializ
             based on Javascript and HTML5.
             </p>
 
-            <%= image_tag('create-your-first-js-app/introduction.new.png', class: 'img-thumbnail') %>
+            <%= image_tag('create-your-first-js-app/introduction.png', class: 'img-thumbnail') %>
 
             <div class="button-group">
               <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Download Code</a>
@@ -1215,7 +1222,7 @@ socket.on('update', function (event) {
             <h2 id="create-your-first-js-app-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
             <p>
-            </span> Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+            Have feedback? Let <a href="">@lelylan</a> know on Twitter.
             If you find a bug or have any questions, do not hesitate to send them to
             <a href="">dev@lelylan.com</a>.
             </p>
@@ -1227,8 +1234,108 @@ socket.on('update', function (event) {
 
         <div class="col-md-offset-3 col-md-9 bs-docs" role="main">
           <div class="bs-title">
-            <h1 id="see-existing-projects">See exisitng projects</h1>
-            <h4>some text should be placed here</h4>
+            <h1 id="see-existing-projects">See existing projects</h1>
+            <h4>open source real projects to better learn Lelylan</h4>
+          </div>
+
+          <div class="bs-docs-section">
+
+            <h2 id="projects-device-component">Device Component</h2>
+
+            <p>
+            AngularJS directive (aka Web Components, Widget, Card) defines the new HTML
+            <code>&lt;device&gt;</code> tag. It can be used to control and monitor any
+            device connected to Lelylan and to to create third party web apps in a matter of
+            minutes.
+            </p>
+
+            <div class="alert alert-info">
+              <p>
+              <span class="label label-lelylan">notice</span>
+              Check out the <a href="">Devices API</a> to better understand what a device is.
+              </p>
+            </div>
+
+            <%= image_tag('projects/device-component.png', class: 'img-thumbnail') %>
+
+            <div class="button-group">
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Github</a>
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> See in action</a>
+            </div>
+
+            <h2 id="projects-lelylan-dashboard">Lelylan Dashboard</h2>
+
+            <p>
+            A Dashboard created with AngularJS to create, control and monitor all your devices.
+            It uses the device component and gives you realtime notifications when one of your
+            devices changes its status.
+            </p>
+
+            <%= image_tag('projects/lelylan-dashboard.png', class: 'img-thumbnail') %>
+
+            <div class="button-group">
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Github</a>
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> See in action</a>
+            </div>
+
+            <h2 id="projects-lelylan-demo">Lelylan Demo</h2>
+
+            <p>
+            A Demo Dashboard created with AngularJS simulating the interaction with different
+            type of devices.
+            </p>
+
+            <%= image_tag('projects/lelylan-demo.png', class: 'img-thumbnail') %>
+
+            <div class="button-group">
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Github</a>
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> See in action</a>
+            </div>
+
+            <h2 id="projects-type-component">Type Component</h2>
+
+            <p>
+            AngularJS directive (aka Web Components, Widget, Card) defines the new HTML
+            <code>&lt;lelylan-type&gt;</code> tag. It can be used to create and see the
+            device type structures.
+            </p>
+
+            <div class="alert alert-info">
+              <p>
+              <span class="label label-lelylan">notice</span>
+              Check out the <a href="">Types API</a> to better understand what a type is.
+              </p>
+            </div>
+
+            <%= image_tag('projects/type-component.png', class: 'img-thumbnail') %>
+
+            <div class="button-group">
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Github</a>
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> See in action</a>
+            </div>
+
+            <h2 id="projects-lelylan-types">Lelylan Types</h2>
+
+            <p>
+            A Dashboard created with AngularJS to create and discuss any device types structure.
+            </p>
+
+            <%= image_tag('projects/lelylan-types.png', class: 'img-thumbnail') %>
+
+            <div class="button-group">
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Github</a>
+              <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> See in action</a>
+            </div>
+
+            <h2 id="projects-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+            <p>
+            Have feedback? Are we missing a project based on Lelylan?
+            Let <a href="">@lelylan</a> know on Twitter.
+            If you find a bug or have any questions, do not hesitate to send them to
+            <a href="">dev@lelylan.com</a>.
+            </p>
+
           </div>
         </div> <!-- content -->
 
