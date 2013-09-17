@@ -1,17 +1,6 @@
-<article>
 
-<aside class="menu">
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#activate-a-device">Activate a device</a></td></tr>
-    <tr><td>&raquo; <a href="#deactivate-a-device">Deactivate a device</a></td></tr>
-  </tbody>
-</table>
-</aside>
 
-<h1 class="call"><a name="activations"><%= title %></a></h1>
+<h2>What is an Activation?</h2>
 
 <p>
 When you create a device, it's automatically yours. This is generally what you want when
@@ -21,12 +10,12 @@ couple of scenarios where changing the device ownership is what you want.
 
 <ul>
   <li>
-  <strong>Selling a great device</strong>.
+  <em>Selling a great device</em> -
   Suppose you are a startup and you want to produce a new smart device with the best design ever.
   You want to put it in the stores and let everyone own it.
   </li>
   <li>
-  <strong>Making a gift</strong>.
+  <em>Making a gift</em> -
   Suppose you are a wonderful girlfriend and a great hacker. You have built the most beautiful
   light in earth and you want to give it to your man to celebrate your first year.
   </li>
@@ -39,58 +28,53 @@ way. To do this you can use the activation services, keeping in mind few simple 
 
 <ul>
   <li>
-  <strong>Only one person at time can be the owner of a device</strong>. If someone takes your
+  <em>Only one person at time can be the owner of a device</em> - If someone takes your
   activation code and try to activate the device after you already did it, the activation will
   not work.
   </li>
   <li>
-  <strong>Deactivate your device to let other people own it</strong>. When you create a device
-  it's yours by default. To move the device ownership you must first <a href="#deactivate-a-device">
-  deactivate</a> it. Once deactivated, the device can be <a href="#activate-a-device">claimed</a>
+  <em>Deactivate your device to let other people own it</em> - When you create a device
+  it's yours by default. To move the device ownership you must first <a href="#">
+  deactivate</a> it. Once deactivated, the device can be <a href="#">claimed</a>
   from whoever has the activation code.
   </li>
 </ul>
 
-</article>
-
-<br>
-
-<article>
-
-<h1 class="call"><a name="activate-a-device">POST /activations</a></h1>
+<h2 id="">POST /activations</h2>
 
 <p>
 Activate a device and returns extended information for it.
 </p>
 
-<p class="notice">
-<span class="label">Notice</span>
-When you create a device you own it. To let others own that same
-device first <a href="#deactivate-a-device">deactivate</a> it.
-</p>
-
-<h4>Resource URL</h4>
-<div class="preview">
-<pre><code>POST  http://api.lelylan.com/activations</code></pre>
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    When you create a device you own it. To let others own your
+    devices first <a href="#">deactivate</a> them.
+  </p>
 </div>
 
-<h4>Parameters</h4>
+<h3>Resource URL</h3>
 
-<table class="zebra-striped">
+<pre><code>POST  http://api.lelylan.com/activations</code></pre>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
-        <span>activation_code</span>
+        activation_code
         <span class="info">required</span>
       </td>
       <td>
-        Device <a href="/api/devices#get-a-device-private-info">activation code</a>.
+        Device activation code.
       </td>
     </tr>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#activate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -154,7 +138,7 @@ device = activations.activate_dev(params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
 <div class="preview"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
@@ -163,15 +147,15 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
   See <a href="/api/devices#device-representation">device representation</a> for body response.
 </p>
 
-<h2>What if the device is already activated?</h2>
+<h3>What if the device is already activated?</h3>
 
 <p>
 Trying to activate a device already activate will return a not valid response.
 </p>
 
-<div class="preview unified"><pre><code>HTTP/1.1 422 Not Valid</code></pre></div>
-
-<div class="preview"><pre><code>{
+<pre><code>HTTP/1.1 422 Not Valid
+<hr>
+{
   "status": "422",
   "method": "POST",
   "request": "http://api.lelylan.com/activations",
@@ -180,15 +164,9 @@ Trying to activate a device already activate will return a not valid response.
     "description": "Resource already activated",
     "body": { "activation_code": "3cd6360a163b112c5eb910967c5866f77f019694" }
   }
-}</code></pre></div>
+}</code></pre>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="deactivate-a-device">DELETE /activations/:activation-code</a></h1>
+<h2 id="">DELETE /activations/:activation-code</h2>
 
 <p>
 Deactivate a device identified from its activation code and returns extended information for it.
@@ -196,18 +174,17 @@ When a device is deactivated, anyone owning the activation code can claim the de
 Until that moment the previous owner remains.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
 <pre><code>DELETE https://api.lelylan.com/activations/:activation-code</code></pre>
-</div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
-        <span>activation_code</span>
+        activation_code
         <span class="info">required</span>
       </td>
       <td>
@@ -217,7 +194,7 @@ Until that moment the previous owner remains.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#deactivate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -278,36 +255,20 @@ device = activations.deactivate_dev(params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<pre><code>HTTP/1.1 200 OK</code></pre>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="/api/devices#device-representation">device representation</a> for body response.
 </p>
 
-</article>
+<h2 id=""><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<br/>
-<br/>
-
-<article>
-
-<h1 class="call"><a>What's next?</a></h1>
-
-<nav class="nav-intro">
-<ul>
-  <li>
-  <a href="/api/oauth" title="">
-    <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span>OAuth 2.0 <span class="small"> | Authorizing your resources</span></span>
-  </a>
-  </li>
-</ul>
-</nav>
-
-<div class="clearfix">
-
-</article>
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>

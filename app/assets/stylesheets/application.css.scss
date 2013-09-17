@@ -350,6 +350,7 @@ code {
 
 table code {
   font-size: 90%;
+  padding-left: 0;
 }
 
 pre code,
@@ -407,6 +408,10 @@ div.tab-content pre {
 .nav-tabs > li.active a {
   color: $linkColorHover;
   background-color: #f8f8f8;
+}
+
+.code-block {
+  margin: 20px 0 30px;
 }
 
 
@@ -601,3 +606,25 @@ footer .bs-docs-section {
     color: $linkColorHover !important;
   }
 }
+
+.table-labeled .label {
+  padding: 0;
+}
+
+.table-labeled .label {
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 23px;
+  padding: 3px 6px 2px;
+  text-transform: uppercase;
+  background: #eee;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.table-labeled .link {
+  background: #E5F4FF;
+  border: 1px solid #C5EAFF;
+}
+
