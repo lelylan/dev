@@ -1,4 +1,4 @@
-<h2 id="">What is a Device</h2>
+<h2 id="devices-api-overview">What is a Device</h2>
 
 <p>
 A device is everything you interact with everyday of your life. You interact with
@@ -23,7 +23,7 @@ creating a basic light, the device inherits the <em>status</em>
   </p>
 </div>
 
-<h2 id="">GET /devices/:id</h2>
+<h2 id="get-a-device">GET /devices/:id</h2>
 
 <p>Returns extended information for a given device identified from its ID.</p>
 
@@ -236,7 +236,7 @@ device = devices.get_dev('<id>')</xmp></pre>
   </tbody>
 </table>
 
-<h2 id="">GET /devices/:id/privates</h2>
+<h2 id="get-a-device-private-info">GET /devices/:id/privates</h2>
 
 <p>
 Returns private information for a given device identified from its ID.
@@ -371,7 +371,7 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
   </tbody>
 </table>
 
-<h2 id="">GET /devices</h2>
+<h2 id="get-all-devices">GET /devices</h2>
 
 <p>Returns a list of owned devices.</p>
 
@@ -545,15 +545,8 @@ devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
 <p>
   See <a href="#device-representation">device representation</a> for body response.
 </p>
-</article>
 
-
-
-<br/>
-
-<article>
-
-<h2 id="">POST /devices</h2>
+<h2 id="create-a-device">POST /devices</h2>
 
 <p>
   Create a device and returns extended information for it.
@@ -695,7 +688,7 @@ Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></
 See <a href="#device-representation">device representation</a> for body response.
 </p>
 
-<h2 id="">PUT /devices/:id</h2>
+<h2 id="update-a-device">PUT /devices/:id</h2>
 
 <p>
 Update a device identified from its ID and returns extended information for it.
@@ -823,101 +816,7 @@ device = devices.update_dev('<id>', params)</xmp></pre>
   See <a href="#device-representation">device representation</a> for body response.
 </p>
 
-<h2 id="">DELETE /devices/:id</h2>
-
-<p>
-  Delete a device identified from its ID and return extended information for it.
-</p>
-
-<h3>Resource URL</h3>
-
-<pre><code>DELETE http://api.lelylan.com/devices/:id</code></pre>
-
-<h3>Parameters</h3>
-
-<table class="zebra-striped">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>id</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        The ID of the desired device.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Example Request</h3>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#delete-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
-  <li><a href="#delete-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
-  <li><a href="#delete-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
-  <li><a href="#delete-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-  <li><a href="#delete-a-device-python" data-toggle="tab" class="python">Python</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="delete-a-device-curl">
-    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/devices/<id> \
-     -H 'Authorization: Bearer <token>'</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="delete-a-device-node">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
-Lelylan.Device.delete('<id>', callback);</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="delete-a-device-angular">
-    <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
-<body>
-  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
-  <div ng-controller="LelylanController">{{device}}</div>
-  <script>
-    function LelylanController($scope, Device) {
-      $scope.device = new Device({ id: '<id>' });
-      $scope.device.$delete();
-    };
-  </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
-</body>
-</html></xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="delete-a-device-ruby">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
-device = lelylan.delete_device('<id>')</xmp></pre>
-    </div>
-  </div>
-  <div class="tab-pane" id="delete-a-device-python">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>oauth.set_access_token()
-from lelylan import devices
-device = devices.delete_dev('<id>')</xmp></pre>
-    </div>
-  </div>
-</div>
-
-<h3>Example header response</h3>
-
-<pre><code>HTTP/1.1 200 OK</code></pre>
-
-<h3>Example body response</h3>
-
-<p>
-  See <a href="#device-representation">device representation</a> for body response.
-</p>
-
-<h2 id="">PUT /devices/:id/properties</h2>
+<h2 id="update-device-properties">PUT /devices/:id/properties</h2>
 
 <p>
   Update properties on a device identified from its ID and returns extended
@@ -1107,6 +1006,99 @@ device = devices.update_dev_prop('<id>', params)</xmp></pre>
   See <a href="#device-representation">device representation</a> for body response.
 </p>
 
+<h2 id="delete-a-device">DELETE /devices/:id</h2>
+
+<p>
+  Delete a device identified from its ID and return extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<pre><code>DELETE http://api.lelylan.com/devices/:id</code></pre>
+
+<h3>Parameters</h3>
+
+<table class="zebra-striped">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired device.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#delete-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#delete-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-device-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-device-curl">
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/devices/<id> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-device-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.delete('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-device-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{device}}</div>
+  <script>
+    function LelylanController($scope, Device) {
+      $scope.device = new Device({ id: '<id>' });
+      $scope.device.$delete();
+    };
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-device-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+device = lelylan.delete_device('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import devices
+device = devices.delete_dev('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<pre><code>HTTP/1.1 200 OK</code></pre>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#device-representation">device representation</a> for body response.
+</p>
 
 <% if false %>
 <!-- we need to fix this service functionality before using it -->
@@ -1380,7 +1372,7 @@ device = devices.exec_dev_func('<id>', params)</xmp></pre>
 
 <% end %>
 
-<h2 id=""><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+<h2 id="devices-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
 <p>
 Have feedback? Let <a href="">@lelylan</a> know on Twitter.
