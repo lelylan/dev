@@ -1,231 +1,222 @@
-<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
+<h2 id="mqtt-overview">Overview</h2>
 
-  <div class="bs-title">
-    <h1 id="mqtt">MQTT</h1>
-    <h4>Easily Connect any device to the web</h4>
-  </div>
+<p>
+  <a href="http://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html">MQTT</a>
+  is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for
+  constrained devices and low-bandwidth, high-latency or unreliable networks.
+</p>
 
-  <div class="bs-docs-section">
+<p>
+  The Lelylan MQTT Broker is a simple way to interact with Lelylan directly from any
+  MQTT client. It provides full API interaction, as well as push notifications and
+  subscriptions. It gives you a MQTT 3.1 compliant solution supporting QoS 0 and QoS
+  1 levels on message delivering.
+</p>
 
-    <h2 id="mqtt-overview">Overview</h2>
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Lelylan MQTT is in alpha testing.
+  If you find a bug do not hesitate to send it to
+  <a href="">dev@lelylan.com</a>
+  </p>
+</div>
 
-    <p>
-      <a href="http://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html">MQTT</a>
-      is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for
-      constrained devices and low-bandwidth, high-latency or unreliable networks.
-    </p>
+<h2 id="mqtt-create-the-device">Create the device</a></h2>
 
-    <p>
-      The Lelylan MQTT Broker is a simple way to interact with Lelylan directly from any
-      MQTT client. It provides full API interaction, as well as push notifications and
-      subscriptions. It gives you a MQTT 3.1 compliant solution supporting QoS 0 and QoS
-      1 levels on message delivering.
-    </p>
+<p>
+To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>,
+click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
+with the desired device name and type. For the moment leave empty the physical field
+(we'll come back later on that).
+<p>
 
-    <div class="alert alert-info">
-      <p>
-      <span class="label label-lelylan">notice</span>
-      Lelylan MQTT is in alpha testing.
-      If you find a bug do not hesitate to send it to
-      <a href="">dev@lelylan.com</a>
-      </p>
-    </div>
+<%= image_tag('makers-api/create-device.png', class: 'img-thumbnail') %>
 
-    <h2 id="mqtt-create-the-device">Create the device</a></h2>
+<p>
+  When created, you'll see a detailed view of your new device. Click on <code>settings</code>
+  and you'll find all needed info to connect the physical device to Lelylan.
+</p>
 
-    <p>
-    To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>,
-    click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
-    with the desired device name and type. For the moment leave empty the physical field
-    (we'll come back later on that).
-    <p>
+<ul>
+  <li><em>Type</em> - Link to the type definition (use it to check the device properties)</li>
+  <li><em>ID</em> - Unique device identifier.</li>
+  <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
+</ul>
 
-    <%= image_tag('makers-api/create-device.png', class: 'img-thumbnail') %>
+<%= image_tag('makers-api/device-component-settings.png', class: 'img-thumbnail') %>
 
-    <p>
-      When created, you'll see a detailed view of your new device. Click on <code>settings</code>
-      and you'll find all needed info to connect the physical device to Lelylan.
-    </p>
+<h2 id="mqtt-set-the-physical-uri">Set the physical URI</h2>
 
-    <ul>
-      <li><em>Type</em> - Link to the type definition (use it to check the device properties)</li>
-      <li><em>ID</em> - Unique device identifier.</li>
-      <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
-    </ul>
+<p>
+To communicate with the physical device you need to connect Lelylan with the
+MQTT client. To make this possible use the <em>Nodes Service</em>,
+which is in charge of forwarding all incoming requests from Lelylan to
+the MQTT client.
+</p>
 
-    <%= image_tag('makers-api/device-component-settings.png', class: 'img-thumbnail') %>
+<p>
+To use the Nodes Service you need to set in the physical
+field of your device a URI having the structure
+<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>,
+where you need to change the <code>&lt;device-id&gt;</code> with your
+actual device id.
+</p>
 
-    <h2 id="mqtt-set-the-physical-uri">Set the physical URI</h2>
+<table class="table table-stripped">
 
-    <p>
-    To communicate with the physical device you need to connect Lelylan with the
-    MQTT client. To make this possible use the <em>Nodes Service</em>,
-    which is in charge of forwarding all incoming requests from Lelylan to
-    the MQTT client.
-    </p>
+  <tbody>
+    <tr>
+      <td>Your Device ID</td>
+      <td><code>518be5a700045e1521000001</code></span></td>
+    </tr>
+    <tr>
+      <td>Your Physical URI</td>
+      <td><code><span class="glyphicon glyphicon-arrow-right"></span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001</code></td>
+    </tr>
+  </tbody>
+</table>
 
-    <p>
-    To use the Nodes Service you need to set in the physical
-    field of your device a URI having the structure
-    <code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>,
-    where you need to change the <code>&lt;device-id&gt;</code> with your
-    actual device id.
-    </p>
+<%= image_tag('makers-api/direct-connect-physical.png', class: 'img-thumbnail') %>
 
-    <table class="table table-stripped">
+<h2 id="mqtt-connecting-to-lelylan">Connecting to Lelylan</h2>
 
-      <tbody>
-        <tr>
-          <td>Your Device ID</td>
-          <td><code>518be5a700045e1521000001</code></span></td>
-        </tr>
-        <tr>
-          <td>Your Physical URI</td>
-          <td><code><span class="glyphicon glyphicon-arrow-right"></span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001</code></td>
-        </tr>
-      </tbody>
-    </table>
+<p>
+Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
+the connection phase the client needs to set the <code>device.id</code> as username and the
+<code>device.secret</code> as password. When the credentials are missing or not valid, the
+connection is rejected.
+</p>
 
-    <%= image_tag('makers-api/direct-connect-physical.png', class: 'img-thumbnail') %>
+<h3>MQTT Broker parmas</h3>
 
-    <h2 id="mqtt-connecting-to-lelylan">Connecting to Lelylan</h2>
-
-    <p>
-    Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
-    the connection phase the client needs to set the <code>device.id</code> as username and the
-    <code>device.secret</code> as password. When the credentials are missing or not valid, the
-    connection is rejected.
-    </p>
-
-    <h3>MQTT Broker parmas</h3>
-
-    <div class="preview">
-    <pre><code><span style="color: #999">host:</span> 96.126.109.170
+<div class="code-block">
+<pre><code><span style="color: #999">host:</span> 96.126.109.170
 <span style="color: #999">port:</span> 1883</code></pre>
-    </div>
+</div>
 
-    <h3>How to receive data</h3>
+<h3>How to receive data</h3>
 
-    <p>
-    When a user updates a device property or executes a function using Lelylan
-    (e.g from dashboard, mobile, etc.), a message with the list of properties
-    to update is published to the topic <code>devices/:id/get</code>. Every received
-    message is made up from a list of properties with the following structure.
-    </p>
+<p>
+When a user updates a device property or executes a function using Lelylan
+(e.g from dashboard, mobile, etc.), a message with the list of properties
+to update is published to the topic <code>devices/:id/get</code>. Every received
+message is made up from a list of properties with the following structure.
+</p>
 
-    <table class="table table-stripped table-hover">
-      <tbody>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+      </td>
+      <td>
+        New property value.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>How to send data</h3>
+
+<p>
+When a physical device updates its status through a physical interaction Lelylan needs to be
+notified publishing a message to the topic <code>devices/:id/set</code> with the list of all
+updated properties.
+Every sent message is made up from a list of properties with the following structure.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Desired property value.
+      </td>
+    </tr>
         <tr>
-          <td class="parameter">
-            <span>properties</span>
-          </td>
-          <td>
-            Array of properties to change in the physical world.
-          </td>
-        </tr>
+      <td class="parameter nested">
+        <span>&raquo; property.expected</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Expected property value.
+        <a href="/community/faq#value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
         <tr>
-          <td class="parameter nested">
-            <span>&raquo; property.id</span>
-          </td>
-          <td>
-            Property ID.
-          </td>
-        </tr>
-        <tr>
-          <td class="parameter nested">
-            <span>&raquo; property.value</span>
-          </td>
-          <td>
-            New property value.
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>How to send data</h3>
-
-    <p>
-    When a physical device updates its status through a physical interaction Lelylan needs to be
-    notified publishing a message to the topic <code>devices/:id/set</code> with the list of all
-    updated properties.
-    Every sent message is made up from a list of properties with the following structure.
-    </p>
-
-    <table class="table table-stripped table-hover">
-      <tbody>
-        <tr>
-          <td class="parameter">
-            <span>properties</span>
-            <span class="info">optional</span>
-          </td>
-          <td>
-            Array of properties to change in the physical world.
-          </td>
-        </tr>
-        <tr>
-          <td class="parameter nested">
-            <span>&raquo; property.id</span>
-            <span class="info">required</span>
-          </td>
-          <td>
-            Property ID.
-          </td>
-        </tr>
-        <tr>
-          <td class="parameter nested">
-            <span>&raquo; property.value</span>
-            <span class="info">required</span>
-          </td>
-          <td>
-            Desired property value.
-          </td>
-        </tr>
-            <tr>
-          <td class="parameter nested">
-            <span>&raquo; property.expected</span>
-            <span class="info">optional</span>
-          </td>
-          <td>
-            Expected property value.
-            <a href="/community/faq#value-expected-pending">Learn more about</a>.
-          </td>
-        </tr>
-            <tr>
-          <td class="parameter nested">
-            <span>&raquo; property.pending</span>
-            <span class="info">optional</span>
-          </td>
-          <td>
-            Property pending status.
-            <a href="/community/faq#value-expected-pending">Learn more about</a>
-            <span class="info">Valid values: true, false.</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/community/faq#value-expected-pending">Learn more about</a>
+        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
-    <h3>A note about the physical flow</h3>
+<h3>A note about the physical flow</h3>
 
-    <p>
-    When communicating with the physical world, Lelylan expects a feedback to its requests.
-    For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
-    the light was turned on. In the meantime the device is in a
-    <a href="/community/faq#value-expected-pending">pending</a>
-    status and the spinner is visible.
-    To close the pending status and tell Lelylan that the requested changes were applied, the
-    physical device should publish a message to the out topic <code>/devices/:id/set</code>
-    confirming the updated property values.
-    </p>
+<p>
+When communicating with the physical world, Lelylan expects a feedback to its requests.
+For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
+the light was turned on. In the meantime the device is in a
+<a href="/community/faq#value-expected-pending">pending</a>
+status and the spinner is visible.
+To close the pending status and tell Lelylan that the requested changes were applied, the
+physical device should publish a message to the out topic <code>/devices/:id/set</code>
+confirming the updated property values.
+</p>
 
-    <h2 id="mqtt-code-examples">Code Examples</h2>
+<h2 id="mqtt-code-examples">Code Examples</h2>
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
-      <li><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
-      <li><a href="#connect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
-      <li><a href="#connect-physical-device-python" data-toggle="tab" class="python">Python</a></li>
-    </ul>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
+  <li><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#connect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#connect-physical-device-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="connect-physical-device-arduino">
@@ -340,11 +331,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.println(topic);
   Serial.write(payload, length);
 }</xmp></pre>
-    </div>
   </div>
-  <div class="tab-pane" id="connect-physical-device-node">
-    <div class="preview">
-      <pre class="prettyprint"><xmp>// ------------------------------
+</div>
+<div class="tab-pane" id="connect-physical-device-node">
+  <div class="preview">
+    <pre class="prettyprint"><xmp>// ------------------------------
 // Install first the mqtt client
 // $ npm install mqtt
 // ------------------------------
@@ -382,11 +373,11 @@ client.on('connect', function() {
   var payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
   client.publish(out_topic, JSON.stringify(payload));
 });</xmp></pre>
-    </div>
   </div>
-  <div class="tab-pane" id="connect-physical-device-ruby">
-    <div class="preview">
-      <pre class="prettyprint"><xmp># ------------------------------
+</div>
+<div class="tab-pane" id="connect-physical-device-ruby">
+  <div class="preview">
+    <pre class="prettyprint"><xmp># ------------------------------
 # Install first the mqtt client
 # $ gem install mqtt
 # ------------------------------
@@ -425,11 +416,11 @@ MQTT::Client.connect(settings) do |client|
   puts "Published #{out_topic}: #{payload}"
   loop { sleep 0.1 } # keep listening
 end</xmp></pre>
-    </div>
   </div>
-  <div class="tab-pane" id="connect-physical-device-python">
-    <div class="preview">
-      <pre class="prettyprint"><xmp># --------------------------
+</div>
+<div class="tab-pane" id="connect-physical-device-python">
+  <div class="preview">
+    <pre class="prettyprint"><xmp># --------------------------
 # Install first mosquitto
 # $ pip install mosquitto
 # --------------------------
@@ -486,43 +477,40 @@ print("rc: " + str(rc))</xmp></pre>
   </div>
 </div>
 
-    <h2 id="mqtt-control-your-physical-device">Control your physical device</h2>
+<h2 id="mqtt-control-your-physical-device">Control your physical device</h2>
 
-    <p>
-    Once your MQTT client is connected to Lelylan open the <a href="http://manage.lelylan.com">Dashboard</a>
-    and start interacting with the physical world receiving and sending updates.
-    </p>
+<p>
+Once your MQTT client is connected to Lelylan open the <a href="http://manage.lelylan.com">Dashboard</a>
+and start interacting with the physical world receiving and sending updates.
+</p>
 
-    <a href="http://manage.lelylan.com">
-    <%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
-    </a>
+<a href="http://manage.lelylan.com">
+<%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
+</a>
 
-    <h2 id="mqtt-articles">Articles</h2>
+<h2 id="mqtt-articles">Articles</h2>
 
-    <table class="table table-stripped">
-      <thead>
-        <tr>
-          <th>TITLE</th>
-          <th>TAGS</th>
-          <th>AUTHOR</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="/getting-started#connect-your-first-light">Connect Your First Light</a></td>
-          <td>ARDUINO, MQTT</td>
-          <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
-        </tr>
-      </tbody>
-    </table>
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>TITLE</th>
+      <th>TAGS</th>
+      <th>AUTHOR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/getting-started#connect-your-first-light">Connect Your First Light</a></td>
+      <td>ARDUINO, MQTT</td>
+      <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+    </tr>
+  </tbody>
+</table>
 
-    <h2 id="mqtt-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+<h2 id="mqtt-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-    <p>
-    Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-    If you find a bug or have any questions, do not hesitate to send them to
-    <a href="">dev@lelylan.com</a>.
-    </p>
-
-  </div>
-</div>
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>
