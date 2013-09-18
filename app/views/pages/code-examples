@@ -1,0 +1,97 @@
+<%= render 'pages/menus/code_examples' %>
+
+<div class="col-md-9 bs-docs" role="main">
+  <div class="bs-title">
+    <h1 id="code-examples">Code Examples</h1>
+    <h4>Learning by doing</h4>
+  </div>
+  <div class="bs-docs-section">
+
+  <h2 id="articles">Articles</h2>
+
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th style="width:300px;">TITLE</th>
+        <th style="width:350px;">TAGS</th>
+        <th>AUTHORS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="/getting-started#connect-your-first-light" target="blank">Connect Your First Light</a></td>
+        <td>ARDUINO, MQTT</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="/getting-started#create-your-first-js-app" target="blank">Create Your First JavaScript App</a></td>
+        <td>JAVASCRIPT, WEBSOCKET, HTML5</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="open-source-projects">Open Source Projects</h2>
+
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th style="width:300px;">TITLE</th>
+        <th style="width:350px;">TAGS</th>
+        <th>AUTHORS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="" target="blank">AngularJS Client</a></td>
+        <td>ANGULARJS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <td><a href="" target="blank">Node.js Client</a></td>
+        <td>NODE.JS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <td><a href="" target="blank">Ruby Client</a></td>
+        <td>RUBY</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <td><a href="" target="blank">Python Client</a></td>
+        <td>PYTHON</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">Lelylan Dashboard</a></td>
+        <td>ANGULARJS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">Lelylan Demo</a></td>
+        <td>ANGULARJS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">Type Component</a></td>
+        <td>ANGULARJS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">Type Dashboard</a></td>
+        <td>ANGULARJS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">MQTT Server for Lelylan</a></td>
+        <td>NODE.JS, MQTT</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">Physical Devices Gateway</a></td>
+        <td>NODE.JS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
+</div>
+
