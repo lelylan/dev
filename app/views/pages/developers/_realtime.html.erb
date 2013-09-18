@@ -1,4 +1,4 @@
-<h2 id="">Overview</h2>
+<h2 id="realtime-api-overview">Overview</h2>
 
 <p>
 Real-time Lelylan updates provide your application with instant notifications of
@@ -13,7 +13,7 @@ to check to see what's happening, we POST to your servers new data when availabl
 developers running servers like Node.js can provide real-time experiences to their users.
 </p>
 
-<h2 id="">Getting Started</h2>
+<h2 id="realtime-api-getting-started">Getting Started</h2>
 
 <h3>Register a client</h3>
 
@@ -29,7 +29,7 @@ Create a service able to receive Lelylan updates. This callback URL must support
 the POST method because when we have new data we POST this data to your callback.
 </p>
 
-<h2 id="">Events</h2>
+<h2 id="realtime-api-events">Events</h2>
 
 <p>
 You can get real-time updates by subscribing to a <code>resource</code> and its related
@@ -164,33 +164,7 @@ can subscribe at.
   </tbody>
 </table>
 
-<h3>Subscription example</h3>
-
-<p>
-  To create a subscription make a POST request to the subscriptions endpoint setting the
-  <code>resource</code> and <code>event</code> you want. Here an example where we subscribe
-  to all device properties updates.
-</p>
-
-<div class="code-block">
-  <pre><xmp>curl -X POST http://api.lelylan.com/subscriptions \
-     -u <client-id>:<client-secret> \
-     -H 'Content-Type: application/json' \
-     -d '{
-          "resource": "device",
-          "event": "property-update",
-          "callback_uri": "http://callback.com/lelylan"
-        }'</xmp></pre>
-</div>
-
-<div class="alert alert-info">
-  <p>
-  <span class="label label-lelylan">notice</span>
-  Check out the <a href="#">subscriptions API</a> for more information.
-  </p>
-</div>
-
-<h2 id="">Receiving updates</h2>
+<h2 id="realtime-api-reveiving-updates">Receiving updates</h2>
 
 <p>
 When a user fires an event (for example creating a new device), a POST request is sent
@@ -277,7 +251,14 @@ Lelylan. This is a SHA-1 signed hexadecimal digest using your client secret as k
 payload as message.
 </p>
 
-<h2 id="">GET /subscriptions/:id</h2>
+<h2 id="subscriptions-api">Subscribe for Notifications</h2>
+
+<p>
+  To get realtime notification you first need to create a subscription. Check out the
+  Subscriptions API above to undestand how to receive the desired updates.
+</p>
+
+<h2 id="get-a-subscription">GET /subscriptions/:id</h2>
 
 <p>
   Returns extended information for a given subscription identified from its ID.
@@ -427,7 +408,7 @@ subscription = subscriptions.get_sub('<id>')</xmp></pre>
   </tbody>
 </table>
 
-<h2 id="">GET /subscriptions</h2>
+<h2 id="get-all-subscriptions">GET /subscriptions</h2>
 
 <p>Returns the list of all subscriptions related to a client.</p>
 
@@ -540,7 +521,7 @@ subs = subscriptions.get_all_sub()</xmp></pre>
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
-<h2 id="">POST /subscriptions</h2>
+<h2 id="create-a-subscription">POST /subscriptions</h2>
 
 <p>
 Create a subscription and returns extended information for it.
@@ -687,7 +668,7 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
-<h2 id="">PUT /subscriptions/:id</h2>
+<h2 id="update-a-subscription">PUT /subscriptions/:id</h2>
 
 <p>
 Update a subscription identified from its ID and returns extended information for it.
@@ -820,7 +801,7 @@ subscription = subscriptions.update_sub('<id>', params)</xmp></pre>
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
-<h2 id="">DELETE /subscriptions/:id</h2>
+<h2 id="delete-a-subscription">DELETE /subscriptions/:id</h2>
 
 <p>
 Delete a subscription identified from its ID and returns extended information for it.</br>
@@ -921,7 +902,7 @@ subscription = subscriptions.delete_sub('<id>')</xmp></pre>
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
-<h2 id=""><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+<h2 id="realtime-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
 <p>
 Have feedback? Let <a href="">@lelylan</a> know on Twitter.
