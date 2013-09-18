@@ -1,0 +1,121 @@
+<h2 id="faq-device-and-physical-device-differences">Devices and Physical Devices Differences</a></h2>
+
+<p>
+The differences between a Device and a Physical Device (aka Physicals) isn't always clear.
+</p>
+
+<ul>
+  <li>
+  <a href="">Device</a> - Is the virtual representation of any object. A device can be
+  simulate all interaction or can be connected to the physical world by setting the
+  <code>physical</code> attribute.
+  </li>
+  <li>
+  <a href="">Physical device</a> - Is the physical object you interact with in the real world.
+  It's can be connected to a Device to let Lelylan control the real world.
+  </li>
+</ul>
+
+<h2 id="faq-value-expected-pending">Value, Expected and Pending</h2>
+
+<p>
+A device can be monitored or controlled through the <code>value</code> param. The problem is that
+using only <code>value</code> you can't have a full control of your device's status. Think at
+a window. How can I distinguish the actual opening level from the desired one? How can I
+know when it's finally open? To solve those problems Lelylan let you update a property using three
+params.
+</p>
+
+<ul>
+  <li>
+  <em>value</em> - Represents the actual value of the physical device property.
+  </li>
+  <li>
+  <em>expected</em> - Represents the expected property value for the physical device property.
+  </li>
+  <li>
+  <em>pending</em> - A property is pending when the expected value and value doesn't match.
+  </li>
+</ul>
+
+<h3>Can you make an example?</h3>
+
+<p>
+<em>1.</em> You decide to open the window with your mobile app. When doing so you set the
+<code>expected</code> level to 100 and set the <code>pending</code> status to true. The
+device will be pending until the physical device does totally open the window.
+</p>
+
+<p>
+<em>2.</em> The physical device sends some intermediate messages to Lelylan notifying
+Lelylan when the window is opening. For example, supposing it's half open, the physical will
+set <code>value</code> to 50 and <code>pending</code> to false as the window is not totally open
+().
+</p>
+
+<p>
+<em>3.</em> The physical device tells Lelylan that the window is totally open by
+setting the device <code>value</code> to 100. We do not set the <code>pending</code> status
+as it's set to false by default.
+As you can see now the expected and the value matches and the pending status is false.
+</p>
+
+<h2 id="faq-accepted-values">Accepted values</h2>
+
+<p>
+The field <code>accepted</code> represents a list of key/label pairs where the key
+is the value used to update the <a href="">device properties</a> and the label is
+a friendly description.
+</p>
+
+<div class="code-block">
+<pre><code class="ruby">{ "accepted": { "on": "On", "off": "Off" } }</code></pre>
+</div>
+
+<p>
+Populating the accepted list gives you at least two benefits.
+</p>
+
+<ul>
+  <li>
+  <em>Uniformity</em> - A clear definition of the values accepted form the device property.
+  </li>
+  <li>
+  <em>Presentation</em> - Better user interface automatic generation.
+  </li>
+</ul>
+
+<p>
+When creating a device, the accepted values are inherited by the
+<a href="/api/types/properties">type properties</a>, but you can change it whenever
+you want on your devices. This is useful in scenarios where a physical device needs to set
+the accepted values (e.g. a television setting the channel names) for every specific device.
+</p>
+
+<h2 id="faq-device-status">Device Status</h2>
+
+<p>
+Sometimes properties are not enough to describe the device status. Think at a window for
+example. It has the property status that accepts the values open and close. Now think at
+what happens when a window is opening. It is neither open or close: it's opening. To have
+a complete control over the device at every moment of its life use the
+<a href="">status resource</a>.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    A basic implementation is available on the
+    <a href="http://lelylan.github.com/devices-component-ng/">AngularJS Device Component</a>
+    to give the device status description. Right now this service is not available on server side
+    for performance reasons.
+  </p>
+</div>
+
+<h2 id="faq-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>
