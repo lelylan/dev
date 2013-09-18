@@ -218,21 +218,34 @@ h2[id] {
     background-color: transparent;
     color: $linkColor !important;
     padding-right: 0;
-    padding-left: 30px;
+    padding-left: 20px;
+    font-weight: 200;
+    font-size: 15px;
   }
 
   .navbar-nav > li > a:hover {
     color: $linkColorHover !important;
   }
 
-  .navbar-nav > li.open > a.dropdown-toggle {
+  .navbar-nav > li > a.dropdown-toggle {
+    padding-left: 50px;
+  }
+
+  .navbar-nav > li.active > a,
+  .navbar-nav > li.active:hover > a,
+  .navbar-nav > li.open > a {
     background-color: transparent;
-    color: $linkColorHover !important;
+  }
+
+  .navbar-nav > li.active > a {
+    color: $lelylanHoverColor !important;
+
   }
 
   /* brand */
 
   .navbar-brand {
+    font-size: 18px !important;
     text-shadow: 0 1px 0 #eee;
     font-weight: 200;
     padding-left: 15px !important;

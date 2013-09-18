@@ -1,20 +1,4 @@
-<article>
-
-<aside class="menu">
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#get-a-function">Get a function</a></td></tr>
-    <tr><td>&raquo; <a href="#get-all-functions">Get all functions</a></td></tr>
-    <tr><td>&raquo; <a href="#create-a-function">Create a function</a></td></tr>
-    <tr><td>&raquo; <a href="#update-a-function">Update a function</a></td></tr>
-    <tr><td>&raquo; <a href="#delete-a-function">Delete a function</a></td></tr>
-  </tbody>
-</table>
-</aside>
-
-<h1 class="call"><a name="functions"><%= title %></a></h1>
+<h2 id="functions-api-overview">What is a Function?</h2>
 
 <p>
 Functions defines the daily interactions you have with the devices in your house,
@@ -23,24 +7,19 @@ room. With functions you can control any device in the same way you do everyday 
 your life.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="get-a-function">GET /functions/:id</a></h1>
+<h2 id="get-a-function">GET /functions/:id</h2>
 
 <p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> function identified from its ID.</p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>GET http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -54,7 +33,7 @@ your life.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -110,13 +89,13 @@ function = functions.get_func('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4 id="function-representation">Example body response</h4>
+<h3 id="function-representation">Example body response</h3>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "uri": "http://api.lelylan.com/functions/504210df70eda60a00000003",
   "id": "504210df70eda60a00000003",
   "name": "Set intensity",
@@ -135,44 +114,69 @@ function = functions.get_func('<id>')</xmp></pre>
   }]
 }</code></pre></div>
 
-<h4>Body response explained</h4>
+<h3>Body response explained</h3>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Function URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Function ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Function name</td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Function properties</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.uri</span>
+      </td>
+      <td>Property URI</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>Property ID</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.expected</span>
+      </td>
+      <td>Expected property value.</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.pending</span>
+      </td>
+      <td>Property pending status.</td>
+    </tr>
+  </tbody>
+</table>
 
-<dl>
-  <dd><span>uri</span> - Function URI.</dd>
-  <dd><span>id</span> - Function ID.</dd>
-  <dd><span>name</span> - Function name.</dd>
-  <dd><span>properties</span> - List of properties the function updates.</dd>
-  <div>
-    <dd><span>id</span> - Property ID.</dd>
-    <dd><span>uri</span> - Property URI.</dd>
-    <dd><span>expected</span> - Expected value assigned to the device property when the
-    function is executed. <a href="/community/faq#value-expected-pending">Learn more about</a>.
-    </dd>
-    <dd><span>pending</span> - Property pending setting (always <code>true</code> for function properties).
-    <a href="/community/faq#value-expected-pending">Learn more about</a>.</dd>
-  </div>
-</dl>
-
-</article>
-
-
-<br>
-
-<article>
-<h1 class="call"><a name="get-all-functions">GET /functions</a></h1>
+<h2 id="get-all-functions">GET /functions</h2>
 
 <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) functions.</p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code># created functions
-GET http://api.lelylan.com/functions</code><code># all functions
+GET http://api.lelylan.com/functions
+<hr>
+# all existing functions
 GET http://api.lelylan.com/functions/public</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -205,7 +209,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#get-all-functions-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -275,13 +279,13 @@ functions = functions.get_all_func() # all existing resources</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
-<div class="preview highlight"><pre><code>[
+<div class="code-block highlight"><pre><code>[
   { # function representation },
   { # function representation },
   ...
@@ -291,27 +295,21 @@ functions = functions.get_all_func() # all existing resources</xmp></pre>
   See <a href="#function-representation">function representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="create-a-function">POST /functions</a></h1>
+<h2 id="create-a-function">POST /functions</h2>
 
 <p>
   Create a function and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>POST http://api.lelylan.com/functions</code></pre>
 </div>
-</div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -347,14 +345,14 @@ functions = functions.get_all_func() # all existing resources</xmp></pre>
       </td>
       <td>
         Expected value assigned to the device property when the function is executed.
-        Leave it <code>null</code> if the value needs to be fullfilled by the user.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>.
+        Don't set it (null) if the value needs to be fullfilled by the user.
+        <a href="">Learn more about</a>.
       </td>
     </tr>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -445,38 +443,32 @@ function = functions.create_func(params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 201 Created
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
 </div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#function-representation">function representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="update-a-function">PUT /functions/:id</a></h1>
+<h2 id="update-a-function">PUT /functions/:id</h2>
 
 <p>
   Update a function identified from its ID and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+<div class="code-block">
 <pre><code>PUT  http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -528,7 +520,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -620,42 +612,40 @@ function = functions.update_func('<id>', params)</xmp></pre>
   </div>
 </div>
 
-<p class="notice">
-<span class="label">Notice</span>
-When updating <code>properties</code> all previous connected properties are replaced.
-</p>
+<br>
 
-<h4>Example header response</h4>
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    When updating properties all previous connected properties are replaced.
+  </p>
+</div>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<h3>Example header response</h3>
 
-<h4>Example body response</h4>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
 
 <p>
   See <a href="#function-representation">function representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="delete-a-function">DELETE /functions/:id</a></h1>
+<h2 id="delete-a-function">DELETE /functions/:id</h2>
 
 <p>
 Delete a function identified from its ID and returns extended information for it. </br>
 Connected properties are not deleted.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+<div class="code-block">
   <pre><code>DELETE http://api.lelylan.com/functions/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -669,7 +659,7 @@ Connected properties are not deleted.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -727,14 +717,21 @@ function = functions.delete_func('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
 See <a href="#function-representation">function representation</a> for body response.
 </p>
 
-</article>
+<h2 id="functions-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>
+

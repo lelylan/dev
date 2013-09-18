@@ -1,47 +1,25 @@
-<article>
-
-<aside class="menu">
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#get-a-status">Get a status</a></td></tr>
-    <tr><td>&raquo; <a href="#get-all-statuses">Get all statuses</a></td></tr>
-    <tr><td>&raquo; <a href="#create-a-status">Create a status</a></td></tr>
-    <tr><td>&raquo; <a href="#update-a-status">Update a status</a></td></tr>
-    <tr><td>&raquo; <a href="#delete-a-status">Delete a status</a></td></tr>
-  </tbody>
-</table>
-</aside>
-
-<h1 class="call"><a name="statuses"><%= title %></a></h1>
+<h2 id="statuses-api">What is the device status?</h2>
 
 <p>
-Properties are not always enough to describe the status of a device. Think at a roller
-shutter for example. It has the property <code>aperture</code> that is <code>100</code>
-when open or <code>0</code> when closed. But what if the roller shutter is opening? It
-is nether open or close. To have a complete control over the device status in a specific
-moment of its life is to use the status API.
+Properties are not always enough to describe the status of a device. Think at a window for
+example. It has the property aperture to 100 when open or 0 when closed. But what if the
+roller shutter is opening? It is nether open or close. To have a complete control over the
+device status in every specific moment of its life use the Status API.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="get-a-status">GET /statuses/:id</a></h1>
+<h2 id="get-a-status">GET /statuses/:id</h2>
 
 <p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> status identified from its ID.</p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
   <pre><code>GET http://api.lelylan.com/statuses/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -55,7 +33,7 @@ moment of its life is to use the status API.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -111,13 +89,13 @@ status = statuses.get_status('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4 id="status-representation">Example body response</h4>
+<h3 id="status-representation">Example body response</h3>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "name": "Setting intensity",
   "id": "5042176370eda61200000004",
   "uri": "http://api.lelylan.com/statuses/5042176370eda61200000004",
@@ -141,62 +119,98 @@ status = statuses.get_status('<id>')</xmp></pre>
 }</code></pre>
 </div>
 
-<h4>Body response explained</h4>
+<h3>Body response explained</h3>
 
-<dl>
-  <dd><span>name</span> - Status name.</dd>
-  <dd><span>id</span> - Status ID.</dd>
-  <dd><span>uri</span> - Status URI.</dd>
-  <dd><span>function</span> - Default status function. <a href="/community/faq#default-status-function">Learn more about</a></dd>
-  <dd><span>properties</span> - List of properties that affect the status.</dd>
-  <div>
-    <dd><span>uri</span> - Property URI.</dd>
-    <dd><span>id</span> - Property ID.</dd>
-    <dd><span>value</span> - List of matching values. It accepts specific values or range of values.</dd>
-    <dd><span>pending</span> - Property pending status. <a href="/community/faq#value-expected-pending">Learn more about</a>.</dd>
-  </div>
-</dl>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Device URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Device ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Device name</td>
+    </tr>
+    <tr>
+      <td>function</td>
+      <td>
+        Default function associated to the status.
+        <a href="">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Device properties</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.uri</span>
+      </td>
+      <td>Property URI</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>Property ID</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.value</span>
+      </td>
+      <td>Property value</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.pending</span>
+      </td>
+      <td>Property pending status.</td>
+    </tr>
+  </tbody>
+</table>
 
-<br/>
-
-<h1><a name="connections">How do I use the matching values?</a></h1>
+<h3>How do I use the matching values?</h3>
 
 <p>
-A status is based on its properties. To understand when a status match to a device
-in a specific moment of its life you need to check two things.
+A status is based on its properties. To understand when a status match to a device in a specific
+moment of its life you need to check two things.
 </p>
 
 <ul>
-  <li>If the device property <code>value</code> is included into the status <code>value</code> list.</li>
-  <li>If the device property <code>pending</code> status is the same as the <code>pending</code> value.</li>
+  <li>If the current device property value is included into the status <code>value</code> list.</li>
+  <li>If the current device property pending status is the same as the status <code>pending</code> value.</li>
 </ul>
 
-<p class="notice">
-<span class="label">Notice</span>
-Lelylan does not offer a server side service to get back the device status as this is a
-client side specific task. <a href="/community/faq/#device-status">Learn more about</a>.
-</p>
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    At the moment it's not possible to get the device status from server side. A basic implementation
+    is available on the <a href="http://lelylan.github.com/devices-component-ng/">AngularJS Device Component</a>
+    which gives you the device status description.
+  </p>
+</div>
 
-</article>
+<h2 id="get-all-statuses">GET /statuses</h2>
 
+<p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) statuses.</p>
 
-<br/>
+<h3>Resource URL</h3>
 
-<article>
-  <h1 class="call"><a name="get-all-statuses">GET /statuses</a></h1>
-
-  <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) statuses.</p>
-
-  <h4>Resource URL</h4>
-  <div class="preview">
-  <pre><code># created statuses
-GET http://api.lelylan.com/statuses</code><code># all statuses
+<div class="code-block">
+<pre><code># created statuses
+GET http://api.lelylan.com/statuses
+<hr>
+# all statuses
 GET http://api.lelylan.com/statuses/public</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -229,7 +243,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-statuses-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -299,13 +313,13 @@ statuses = statuses.get_all_status() # all existing resources</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
-<div class="preview highlight"><pre><code>[
+<div class="code-block highlight"><pre><code>[
   { # status representation },
   { # status representation },
   ...
@@ -316,26 +330,21 @@ statuses = statuses.get_all_status() # all existing resources</xmp></pre>
   See <a href="#status-representation">status representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="create-a-status">POST /statuses</a></h1>
+<h2 id="create-a-status">POST /statuses</h2>
 
 <p>
   Create a status and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>POST  http://api.lelylan.com/statuses</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -385,7 +394,7 @@ statuses = statuses.get_all_status() # all existing resources</xmp></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -485,37 +494,32 @@ status = statuses.create_status(params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 201 Created
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#status-representation">status representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="update-a-status">PUT /statuses/:id</a></h1>
+<h2 id="update-a-status">PUT /statuses/:id</h2>
 
 <p>
   Update a status identified from its ID and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>PUT  http://api.lelylan.com/statuses/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -575,7 +579,7 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -645,37 +649,32 @@ status = statuses.update_status('<id>', params)</xmp></pre>
 When updating the <code>properties</code> field all previous connected properties are replaced.
 </p>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#status-representation">status representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="delete-a-status">DELETE /statuses/:id</a></h1>
+<h2 id="delete-a-status">DELETE /statuses/:id</h2>
 
 <p>
 Delete a statuses identified from its ID and returns extended information for it.</br>
 Connected properties are not deleted.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>DELETE http://api.lelylan.com/statuses/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -689,7 +688,7 @@ Connected properties are not deleted.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#delete-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -747,14 +746,21 @@ status = statuses.delete_status('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
 See <a href="#status-representation">status representation</a> for body response.
 </p>
 
-</article>
+<h2 id="statuses-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>
+

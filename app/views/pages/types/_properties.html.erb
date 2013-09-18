@@ -1,44 +1,23 @@
-<article>
-
-<aside class="menu">
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#get-a-property">Get a property</a></td></tr>
-    <tr><td>&raquo; <a href="#get-all-properties">Get all properties</a></td></tr>
-    <tr><td>&raquo; <a href="#create-a-property">Create a property</a></td></tr>
-    <tr><td>&raquo; <a href="#update-a-property">Update a property</a></td></tr>
-    <tr><td>&raquo; <a href="#delete-a-property">Delete a property</a></td></tr>
-  </tbody>
-</table>
-</aside>
-
-<h1 class="call"><a name="properties"><%= title %></a></h1>
+<h2 id="properties-api-overview">What is a Property?</a></h2>
 
 <p>
 A property is whatever vary in a device during time. It can be the intensity in
 a dimmer, the temperature in a cooling system or the volume in a television.
 </p>
 
-</article>
+<h2 id="get-a-property">GET /properties/:id</h2>
 
-<br/>
+<p>Returns extended information for a given <a href="">public</a> property identified from its ID.</p>
 
-<article>
+<h3>Resource URL</h3>
 
-<h1 class="call"><a name="get-a-property">GET /properties/:id</a></h1>
-
-<p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> property identified from its ID.</p>
-
-<h4>Resource URL</h4>
-<div class="preview">
+<div class="code-block">
   <pre><code>GET http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -52,7 +31,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -108,15 +87,15 @@ property = properties.get_prop('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4 id="property-representation">Example body response</h4>
+<h3 id="property-representation">Example body response</h3>
 
-<p>Light <code>status</code> accepting <code>text</code> values <code>on</code> and <code>off</code></p>
+<p>Light status accepting text values on and off</p>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "name": "Status",
   "id": "50420c3a267ff51300000001",
   "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
@@ -127,9 +106,9 @@ property = properties.get_prop('<id>')</xmp></pre>
   "updated_at": "2012-09-01T10:56:41Z"
 }</code></pre></div>
 
-<p>Light <code>intensity</code> accepting any value between the <code>range</code> that goes from <code>0</code> to <code>100</code> with step <code>1</code></p>
+<p>Light intensity accepting any value between the range that goes from 0 to 100 with step 1</p>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "name": "Intensity",
   "id": "518be8b100045e99cc000004",
   "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
@@ -141,38 +120,58 @@ property = properties.get_prop('<id>')</xmp></pre>
   "updated_at": "2012-09-01T10:56:41Z"
 }</code></pre></div>
 
-<h4>Body response explained</h4>
+<h3>Body Response explained</h3>
 
-<dl>
-<dd><span>uri</span> - Property URI.</dd>
-<dd><span>id</span> - Property ID.</dd>
-<dd><span>name</span> - Property name.</dd>
-<dd><span>type</span> - Property type.</dd>
-<dd><span>range</span> - Accepted range values. Visible only when <code>type</code> is <code>range</code>.</dd>
-<dd><span>default</span> - Default property value assigned when the device is created.</dd>
-<dt><span>accepted</span> - List of accepted values from the property. <a href="/community/faq#accepted-values">Learn more about</a>.</dt>
-</dl>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Type URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Type ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Type name</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Property type</td>
+    </tr>
+    <tr>
+      <td>range</td>
+      <td>Accepted range values. Visible only when type has <code>range</code> as value</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Default property value assigned to the property when the device is created</td>
+    </tr>
+    <tr>
+      <td>accepted</td>
+      <td>List of accepted values from the property. <a href="">Learn more about</a></td>
+    </tr>
+  </tbody>
+</table>
 
-</article>
-
-<br>
-
-<article>
-
-<h1 class="call"><a name="get-all-properties">GET /properties</a></h1>
+<h2 id="get-all-properties">GET /properties</h2>
 
 <p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) properties.</p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code># created properties
-GET http://api.lelylan.com/properties</code><code># all properties
+GET http://api.lelylan.com/properties
+<hr>
+# all properties
 GET http://api.lelylan.com/properties/public</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -189,7 +188,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -205,7 +204,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -275,13 +274,13 @@ properties = properties.get_all_prop() # all existing resources</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
-<div class="preview highlight"><pre><code>[
+<div class="code-block"><pre><code>[
   { # property representation },
   { # property representation },
   ...
@@ -290,26 +289,22 @@ properties = properties.get_all_prop() # all existing resources</xmp></pre>
 <p>
   See <a href="#property-representation">property representation</a> for body response.
 </p>
-</article>
 
-<br/>
-
-<article>
-
-<h1 class="call"><a name="create-a-property">POST /properties</a></h1>
+<h2 id="create-a-property">POST /properties</h2>
 
 <p>
   Create a property and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>POST  http://api.lelylan.com/properties</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -324,11 +319,11 @@ properties = properties.get_all_prop() # all existing resources</xmp></pre>
       <td class="parameter">
         <span>type</span>
         <span class="info">optional</span>
+        <span class="info">default to 'text'</span>
       </td>
       <td>
         Property type.
         <span class="info">Valid values: text, number, range, color, password, date, time, datetime, url.</span>
-        <span class="info">Default value: text</span>
       </td>
     </tr>
     <tr>
@@ -362,7 +357,7 @@ properties = properties.get_all_prop() # all existing resources</xmp></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -452,38 +447,33 @@ property = properties.create_prop(params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 201 Created
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
 </div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#property-representation">property representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="update-a-property">PUT /properties/:id</a></h1>
+<h2 id="update-a-property">PUT /properties/:id</h2>
 
 <p>
   Update a property identified from its ID and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>PUT  http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -544,7 +534,7 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -609,36 +599,31 @@ property = properties.update_prop('<id>', params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#property-representation">property representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="delete-a-property">DELETE /properties/:id</a></h1>
+<h2 id="delete-a-property">DELETE /properties/:id</h2>
 
 <p>
   Delete a property identified from its ID and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>DELETE http://api.lelylan.com/properties/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -652,7 +637,7 @@ property = properties.update_prop('<id>', params)</xmp></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class=" active"><a href="#delete-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -710,13 +695,21 @@ property = properties.delete_prop('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#property-representation">property representation</a> for body response.
 </p>
-</article>
+
+<h2 id="properties-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>
+

@@ -1,43 +1,26 @@
-<article>
-
-<aside class="menu">
-</br>
-<table>
-  <tbody>
-    <tr><td><a href="" class="upcase"><%= title %></a></td></tr>
-    <tr><td>&raquo; <a href="#get-a-type">Get a type</a></td></tr>
-    <tr><td>&raquo; <a href="#get-all-types">Get all types</a></td></tr>
-    <tr><td>&raquo; <a href="#create-a-type">Create a type</a></td></tr>
-    <tr><td>&raquo; <a href="#update-a-type">Update a type</a></td></tr>
-    <tr><td>&raquo; <a href="#delete-a-type">Delete a type</a></td></tr>
-    <tr><td>&raquo; <a href="#categories">Get type categories</a></td></tr>
-  </tbody>
-</table>
-</aside>
-
-<h1 class="call"><a name="types"><%= title %></a></h1>
+<h2 id="types-api-overview">What is a Type?</a></h2>
 
 <p>
-A type describes the structure of a device.
-In its simplest form every type can be defined as the combination of three key elements.
-
+A type describes the structure of a device. In its simplest form every type can be defined
+as the combination of three key elements.
 </p>
 
 <ul>
-  <li><a href="/api/types/properties/">Properties</a> - what vary during time.</li>
-  <li><a href="/api/types/functions/">Functions</a> - what a device can do.</li>
-  <li><a href="/api/types/statuses/">Statuses</a> - what a device is in a specific time of its life.</li>
+  <li><em>Properties</em> - what vary during time.</li>
+  <li><em>Functions</em> - what a device can do.</li>
+  <li><em>Statuses</em> - what a device is in a specific time of its life.</li>
 </ul>
+
 
 <p>
 Here an example describing a simplified dimmer type.
 </p>
 
-<table>
+<table class="table table-stripped table-hover">
   <tbody>
-    <tr><td><strong>Properties</strong></td><td>status, intensity</td></tr>
-    <tr><td><strong>Functions</strong></td><td>turn on, turn off, set intensity</td></tr>
-    <tr><td><strong>Statuses</strong></td><td>light on, light off</td></tr>
+    <tr><td>Properties</td><td>status, intensity</td></tr>
+    <tr><td>Functions</td><td>turn on, turn off, set intensity</td></tr>
+    <tr><td>Statuses</td><td>light on, light off</td></tr>
   </tbody>
 </table>
 
@@ -45,62 +28,45 @@ Here an example describing a simplified dimmer type.
 
 <article>
 
-<h2 class="call"><a name="start">Lelylan Types</a></h2>
+<h3>Creating Your First Type</h3>
 
 <p>
-The simplest way to get started with the Types API is to use <a href="http://types.lelylan.com">Lelylan Types</a>.
+The simplest way to use the Types API is to use <a href="http://types.lelylan.com">Lelylan Types</a>.
 It gives you everything you need to find, define and discuss any device structure in an open
 and collaborative way.
 </p>
 
-<p class="notice">
-<span class="label link"><a href="https://github.com/lelylan/types-dashboard-ng/">github</a></span>
-  - Lelylan Types is available as open source on <a href="https://github.com/lelylan/types-dashboard-ng/">Github</a>.
-</p>
+<a href="">
+<%= image_tag('lelylan-types.png', class: 'img-thumbnail') %>
+</a>
 
-</article>
-
-<article>
-
-<h2 class="call"><a name="need">Do I really need to learn the Types API?</a></h2>
+<h3>Do I really need to learn the Types API?</h3>
 
 <p>
-<strong>No</strong>. If all you need is to search or define a device type just use
+No. If all you need is to search or define a device type just use
 <a href="http://types.lelylan.com">Lelylan Types</a>.
+But, if you are curious to fully understand how a type is defined, this is the right place
+where to start. It can be a little tricky to get started with types because its JSON structure
+appears to be quite complex. A solution is to think at that JSON as the composition of
+of three resources: properties, funcitons and statuses.
 </p>
 
-<p>
-But, if you want to fully understand how a device works, this is the right place
-where to start. It will be a little tricky to get started with types at first. When you
-will see its json structure it will appear to be quite complex, but it's not.
-It simply combines three resources:
-<a href="/api/types/properties/">properties</a>,
-<a href="/api/types/functions/">functions</a> and
-<a href="/api/types/statuses/">statuses</a>.
-</p>
-
-</article>
-
-<br>
-
-<article>
-
-<h1 class="call"><a name="get-a-type">GET /types/:id</a></h1>
+<h2 id="get-a-type">GET /types/:id</h2>
 
 <p>
-
 Returns extended information for a given <a href="/api/core/#public-resources">public</a>
 type identified from its ID.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
   <pre><code>GET http://api.lelylan.com/types/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -114,7 +80,7 @@ type identified from its ID.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -170,24 +136,24 @@ type = types.get_type('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-  <div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4 id="type-representation">Example body response</h4>
+<h3 id="type-representation">Example body response</h3>
 
 <div class="preview highlight"><pre><code>{
   "id": "5042234270eda61200000006",
   "uri": "http://api.lelylan.com/types/5042234270eda61200000006",
   "name": "Connected Light",
   "description": "Define a *basic* light structure",
-  "categories": ["lights"],
   "owner": {
     "id": "5036227a4f1b030200000001",
     "uri": "http://api.lelylan.com/people/5036227a4f1b030200000001"
   },
   "created_at": "2012-09-01T15:01:22Z",
   "updated_at": "2012-09-01T15:01:22Z",
+  "categories": ["lights"],
   "properties": [{
     "name": "Status",
     "id": "50420c3a267ff51300000001",
@@ -266,40 +232,65 @@ type = types.get_type('<id>')</xmp></pre>
   }]
 }</code></pre></div>
 
-<h4>Body Response explained</h4>
+<h3>Body Response explained</h3>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Type URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Type ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Type name</td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>Type description</td>
+    </tr>
+    <tr>
+      <td>owner</td>
+      <td>Type creator</td>
+    </tr>
+    <tr>
+      <td>categories</td>
+      <td>List of type categories</td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Learn more about <a href="">properties representation</a></td>
+    </tr>
+    <tr>
+      <td>functions</td>
+      <td>Learn more about <a href="">functions representation</a></td>
+    </tr>
+    <tr>
+      <td>statuses</td>
+      <td>Learn more about <a href="">statuses representation</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<dl>
-  <dd><span>id</span> - Type ID.</dd>
-  <dd><span>uri</span> - Type URI.</dd>
-  <dd><span>name</span> - Type name.</dd>
-  <dd><span>description</span> - Type description.</dd>
-  <dd><span>categories</span> - Type categories.</dd>
-  <dd><span>owner</span> - Type creator.</dd>
-  <dd><span>properties</span> - See <a href="/api/types/properties#property-representation">property representation</a>.</dd>
-  <dd><span>functions</span> - See <a href="/api/types/functions#function-representation">function representation</a>.</dd>
-  <dd><span>statuses</span> - See <a href="/api/types/statuses#status-representation">status representation</a>.</dd>
-</dl>
+<h2 id="get-all-types">GET /types</h2>
 
-</article>
+<p>Returns a list of owned (and <a href="">public</a>) types.</p>
 
-<br>
+<h3>Resource URL</h3>
 
-<article>
-
-<h1 class="call"><a name="get-all-types">GET /types</a></h1>
-
-<p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) types.</p>
-
-<h4>Resource URL</h4>
-<div class="preview">
+<div class="code-block">
 <pre><code># owned types
-GET http://api.lelylan.com/types</code><code># all types
+GET http://api.lelylan.com/types
+<hr>
+# all types
 GET http://api.lelylan.com/types/public</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -332,7 +323,7 @@ GET http://api.lelylan.com/types/public</code></pre>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-types-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -401,13 +392,13 @@ types = types.get_all_type() # all existing resources</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
-<div class="preview"><pre><code>[
+<div class="code-block"><pre><code>[
   {
     "uri": "http://api.lelylan.com/types/5042223470eda60d00000005",
     "id": "5042223470eda60d00000005",
@@ -425,33 +416,30 @@ types = types.get_all_type() # all existing resources</xmp></pre>
   }, ...
 ]</code></pre></div>
 
-<p class="notice">
-<span class="label">notice</span>
-Due to the type complexity structure the type representation is a simplified version of
-its <a href="#type-representation">standard representation</a>. Most of the time having
-the name and the category will be enough.
-</p>
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Due to the type complex structure when you get a list of types each of them is returned with
+  a simplified JSON representation. Having the name, the ID and the category will be more than
+  enough.
+  </p>
+</div>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="create-a-type">POST /types</a></h1>
+<h2 id="create-a-type">POST /types</h2>
 
 <p>
 Create a type and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
   <pre><code>POST http://api.lelylan.com/types</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -478,7 +466,7 @@ Create a type and returns extended information for it.
       <span class="info">optional</span>
     </td>
     <td>
-      List of categories. <a href="/api/types#categories">See valid categories</a>.
+      List of categories.
     </td>
   </tr>
   <tr>
@@ -488,7 +476,6 @@ Create a type and returns extended information for it.
     </td>
     <td>
       List of property IDs.
-      <a href="/api/types/properties/">Learn more about properties</a>.
     </td>
   </tr>
   <tr>
@@ -498,7 +485,6 @@ Create a type and returns extended information for it.
     </td>
     <td>
       List of function IDs.
-      <a href="/api/types/functions/">Learn more about functions</a>.
     </td>
   </tr>
   <tr>
@@ -508,18 +494,12 @@ Create a type and returns extended information for it.
     </td>
     <td>
       List of status IDs.
-      <a href="/api/types/statuses/">Learn more about statuses</a>.
     </td>
   </tr>
 </tbody>
         </table>
 
-<h4>Example Request</h4>
-
-<p class="notice">
-<span class="label">Notice</span>
-In this example the resource IDs are identified from friendly names.
-</p>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#create-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -591,9 +571,9 @@ Lelylan.Type.create(params, callback);</xmp></pre>
 params = {
   name: 'Light',
   categories: [ 'lights' ],
-  properties: [ '<status>', '<intensity>' ],
-  functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
-  statuses: [ '<light-on>', '<light-off>' ] };
+  properties: [ '<status-id>', '<intensity-id>' ],
+  functions: [ '<turn-on-id>', '<turn-off-id>', '<set-intensity-id>' ],
+  statuses: [ '<light-on-id>', '<light-off-id>' ] };
 
 type = lelylan.create_type(params)</xmp></pre>
     </div>
@@ -614,37 +594,41 @@ type = types.create_type(params)</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<br>
 
-<div class="preview"><pre><code>HTTP/1.1 201 Created
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  In this example the resource IDs are replaced from friendly names.
+  </p>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#type-representation">type representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="update-a-type">PUT /types/:id</a></h1>
+<h2 id="update-a-type">PUT /types/:id</h2>
 
 <p>
   Update a type identified from its ID and returns extended information for it.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>PUT  http://api.lelylan.com/types/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -679,7 +663,7 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
         <span class="info">optional</span>
       </td>
       <td>
-        List of categories. <a href="/api/types#categories">See valid categories</a>.
+        List of categories.
       </td>
     </tr>
     <tr>
@@ -689,7 +673,6 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
       </td>
       <td>
         List of property IDs.
-        <a href="/api/types/properties/">Learn more about properties</a>.
       </td>
     </tr>
     <tr>
@@ -699,7 +682,6 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
       </td>
       <td>
         List of function IDs.
-        <a href="/api/types/functions/">Learn more about functions</a>.
       </td>
     </tr>
     <tr>
@@ -709,13 +691,12 @@ Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></di
       </td>
       <td>
         List of status IDs.
-        <a href="/api/types/statuses/">Learn more about statuses</a>.
       </td>
     </tr>
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#update-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -780,43 +761,43 @@ type = types.update_type('<id>', params)</xmp></pre>
   </div>
 </div>
 
-<p class="notice">
-<span class="label">Notice</span>
-When updating a type connection (categories, properties, functions and statuses)
+<br>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+When updating a type connection (e.g. properties)
 all previous connected resources are replaced.
+  </p>
+</div>
 </p>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#type-representation">type representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="delete-a-type">DELETE /types/:id</a></h1>
+<h2 id="delete-a-type">DELETE /types/:id</h2>
 
 <p>
   Delete a type identified from its ID and returns extended information for it.
-  All connected resources (properties, functions and statuses) are not deleted.
+  All connected resources (e.g. properties, functions and statuses) are not deleted.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>DELETE http://api.lelylan.com/types/:id</code></pre>
 </div>
 
-<h4>Parameters</h4>
+<h3>Parameters</h3>
 
-<table class="zebra-striped">
+<table class="table table-stripped table-hover">
   <tbody>
     <tr>
       <td class="parameter">
@@ -830,7 +811,7 @@ all previous connected resources are replaced.
   </tbody>
 </table>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#delete-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -888,34 +869,29 @@ type = types.delete_type('<id>')</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
 <p>
   See <a href="#type-representation">type representation</a> for body response.
 </p>
 
-</article>
-
-<br/>
-
-<article>
-
-<h1 class="call"><a name="categories">GET /categories</a></h1>
+<h2 id="get-all-categories">GET /categories</h2>
 
 <p>
   Returns a list of common categories to associate to your types.
 </p>
 
-<h4>Resource URL</h4>
-<div class="preview">
+<h3>Resource URL</h3>
+
+<div class="code-block">
 <pre><code>GET http://api.lelylan.com/categories</code></pre>
 </div>
 
-<h4>Example Request</h4>
+<h3>Example Request</h3>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#get-all-categories-curl" data-toggle="tab" class="curl">Curl</a></li>
@@ -974,70 +950,24 @@ categories = types.get_type_cat()</xmp></pre>
   </div>
 </div>
 
-<h4>Example header response</h4>
+<h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
-<h4>Example body response</h4>
+<h3>Example body response</h3>
 
-<div class="preview"><pre><code>[
+<div class="code-block"><pre><code>[
   { "name": "lights" },
   { "name": "locks" },
   { "name": "thermostats" },
-  { "name": "alarms" },
-  { "name": "meters" },
-  { "name": "cameras" },
   ...
 ]</code></pre></div>
 
-</article>
+<h2 id="types-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<br/>
-<br/>
+<p>
+Have feedback? Let <a href="">@lelylan</a> know on Twitter.
+If you find a bug or have any questions, do not hesitate to send them to
+<a href="">dev@lelylan.com</a>.
+</p>
 
-<article>
-
-<h1 class="call"><a>What's next?</a></h1>
-
-<p> If you want to learn more about types, check out how properties, functions and statuses are defined.</p>
-
-<nav class="nav-intro">
-<ul>
-  <li>
-  <a href="/api/types/properties" title="">
-    <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span>Properties API <span class="small"> | What vary during time </span></span>
-  </a>
-  </li>  <li>
-  <a href="/api/types/functions" title="">
-    <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span>Functions API <span class="small"> | What a device can do </span></span>
-  </a>
-  </li>  <li>
-  <a href="/api/types/statuses" title="">
-    <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span>Statuses API <span class="small"> | what a device is in a specific time of its life </span></span>
-  </a>
-  </li>
-</ul>
-</nav>
-
-<div class="clearfix">
-
-<p>Otherwise, if you done with types, check out how locations works.</p>
-
-<nav class="nav-intro">
-<ul>
-  <li>
-  <a href="/api/locations" title="">
-    <span class="icon"><i aria-hidden="true" class="icon-blog"></i></span>
-    <span>Locations API <span class="small"> | Places we live in | </span></span>
-    <span class="label">TODO</span>
-  </a>
-  </li>
-</ul>
-</nav>
-
-<div class="clearfix">
-
-</article>

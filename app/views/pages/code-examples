@@ -1,9 +1,9 @@
-<%= render 'pages/menus/code_examples' %>
+<%= render 'menus/code_examples' %>
 
 <div class="col-md-9 bs-docs" role="main">
   <div class="bs-title">
     <h1 id="code-examples">Code Examples</h1>
-    <h4>Learning by doing</h4>
+    <h4>Learning by doing and real projects</h4>
   </div>
   <div class="bs-docs-section">
 
@@ -43,20 +43,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><a href="" target="blank">AngularJS Client</a></td>
-        <td>ANGULARJS</td>
-        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
-      </tr>
-      <td><a href="" target="blank">Node.js Client</a></td>
-        <td>NODE.JS</td>
-        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
-      </tr>
-      <td><a href="" target="blank">Ruby Client</a></td>
-        <td>RUBY</td>
-        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
-      </tr>
-      <td><a href="" target="blank">Python Client</a></td>
-        <td>PYTHON</td>
+        <td><a href="" target="blank">AngularJS Component</a></td>
+        <td>ANGULARJS, HTML5</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
@@ -87,6 +75,26 @@
       <tr>
         <td><a href="" target="blank">Physical Devices Gateway</a></td>
         <td>NODE.JS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+        <td><a href="" target="blank">AngularJS Client</a></td>
+        <td>ANGULARJS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+      <td><a href="" target="blank">Node.js Client</a></td>
+        <td>NODE.JS</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+      <td><a href="" target="blank">Ruby Client</a></td>
+        <td>RUBY</td>
+        <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+      </tr>
+      <tr>
+      <td><a href="" target="blank">Python Client</a></td>
+        <td>PYTHON</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
     </tbody>
