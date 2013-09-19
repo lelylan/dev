@@ -7,7 +7,7 @@ a dimmer, the temperature in a cooling system or the volume in a television.
 
 <h2 id="get-a-property">GET /properties/:id</h2>
 
-<p>Returns extended information for a given <a href="">public</a> property identified from its ID.</p>
+<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> property identified from its ID.</p>
 
 <h3>Resource URL</h3>
 
@@ -150,14 +150,15 @@ property = properties.get_prop('<id>')</xmp></pre>
     </tr>
     <tr>
       <td>accepted</td>
-      <td>List of accepted values from the property. <a href="">Learn more about</a></td>
+      <td>List of accepted values from the property.
+      <a href="/support#faq-accepted-values">Learn more about</a></td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="get-all-properties">GET /properties</h2>
 
-<p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) properties.</p>
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) properties.</p>
 
 <h3>Resource URL</h3>
 
@@ -188,7 +189,8 @@ GET http://api.lelylan.com/properties/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="">pagination</a>.
+        ID of the last fetched record.
+        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -351,7 +353,7 @@ properties = properties.get_all_prop() # all existing resources</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        List of accepted values. <a href="/community/faq#accepted-values">Learn more about</a>.
+        List of accepted values. <a href="/support#faq-accepted-values">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -528,7 +530,7 @@ Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre
         <span class="info">optional</span>
       </td>
       <td>
-        List of accepted values. <a href="/community/faq#accepted-values">Learn more about</a>.
+        List of accepted values. <a href="/support#faq-accepted-values">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -707,9 +709,4 @@ property = properties.delete_prop('<id>')</xmp></pre>
 
 <h2 id="properties-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>

@@ -36,7 +36,7 @@ It gives you everything you need to find, define and discuss any device structur
 and collaborative way.
 </p>
 
-<a href="">
+<a href="http://types.lelylan.com">
 <%= image_tag('lelylan-types.png', class: 'img-thumbnail') %>
 </a>
 
@@ -54,7 +54,7 @@ properties, functions and statuses.
 <h2 id="get-a-type">GET /types/:id</h2>
 
 <p>
-Returns extended information for a given <a href="/api/core/#public-resources">public</a>
+Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a>
 type identified from its ID.
 </p>
 
@@ -261,22 +261,22 @@ type = types.get_type('<id>')</xmp></pre>
     </tr>
     <tr>
       <td>properties</td>
-      <td>Learn more about <a href="">properties representation</a></td>
+      <td>Learn more about <a href="#properties-api">properties</a></td>
     </tr>
     <tr>
       <td>functions</td>
-      <td>Learn more about <a href="">functions representation</a></td>
+      <td>Learn more about <a href="#functions-api">functions</a></td>
     </tr>
     <tr>
       <td>statuses</td>
-      <td>Learn more about <a href="">statuses representation</a></td>
+      <td>Learn more about <a href="#statuses-api">statuses</a></td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="get-all-types">GET /types</h2>
 
-<p>Returns a list of owned (and <a href="">public</a>) types.</p>
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) types.</p>
 
 <h3>Resource URL</h3>
 
@@ -307,7 +307,8 @@ GET http://api.lelylan.com/types/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record.
+        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -965,9 +966,4 @@ categories = types.get_type_cat()</xmp></pre>
 
 <h2 id="types-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>

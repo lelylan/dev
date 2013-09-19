@@ -1,4 +1,4 @@
-<h2 id="statuses-api">What is the device status?</h2>
+<h2 id="statuses-api-overview">What is the device status?</h2>
 
 <p>
 Properties are not always enough to describe the status of a device. Think at a window for
@@ -9,7 +9,7 @@ device status in every specific moment of its life use the Status API.
 
 <h2 id="get-a-status">GET /statuses/:id</h2>
 
-<p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> status identified from its ID.</p>
+<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> status identified from its ID.</p>
 
 <h3>Resource URL</h3>
 
@@ -125,50 +125,55 @@ status = statuses.get_status('<id>')</xmp></pre>
   <tbody>
     <tr>
       <td>uri</td>
-      <td>Device URI</td>
+      <td>Device URI.</td>
     </tr>
     <tr>
       <td>id</td>
-      <td>Device ID</td>
+      <td>Device ID.</td>
     </tr>
     <tr>
       <td>name</td>
-      <td>Device name</td>
+      <td>Device name.</td>
     </tr>
     <tr>
       <td>function</td>
       <td>
         Default function associated to the status.
-        <a href="">Learn more about</a>
       </td>
     </tr>
     <tr>
       <td>properties</td>
-      <td>Device properties</td>
+      <td>Device properties.</td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.uri</span>
       </td>
-      <td>Property URI</td>
+      <td>Property URI.</td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.id</span>
       </td>
-      <td>Property ID</td>
+      <td>Property ID.</td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.value</span>
       </td>
-      <td>Property value</td>
+      <td>
+        Property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.pending</span>
       </td>
-      <td>Property pending status.</td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
     </tr>
   </tbody>
 </table>
@@ -196,7 +201,7 @@ moment of its life you need to check two things.
 
 <h2 id="get-all-statuses">GET /statuses</h2>
 
-<p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) statuses.</p>
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) statuses.</p>
 
 <h3>Resource URL</h3>
 
@@ -227,7 +232,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -380,6 +385,7 @@ statuses = statuses.get_all_status() # all existing resources</xmp></pre>
       </td>
       <td>
         List of matching values.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
     <tr>
@@ -388,7 +394,8 @@ statuses = statuses.get_all_status() # all existing resources</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Property pending status. <a href="/community/faq#value-expected-pending">Learn more about</a>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
   </tbody>
@@ -564,6 +571,8 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
       </td>
       <td>
         List of matching values and ranges.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
     <tr>
@@ -572,7 +581,8 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
         <span class="info">optional</span>
       </td>
       <td>
-        Property pending status. <a href="/community/faq#value-expected-pending">Learn more about</a>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -758,9 +768,4 @@ See <a href="#status-representation">status representation</a> for body response
 
 <h2 id="statuses-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>

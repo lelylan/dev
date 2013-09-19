@@ -9,7 +9,7 @@ your life.
 
 <h2 id="get-a-function">GET /functions/:id</h2>
 
-<p>Returns extended information for a given <a href="/api/core/#public-resources">public</a> function identified from its ID.</p>
+<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> function identified from its ID.</p>
 
 <h3>Resource URL</h3>
 
@@ -162,7 +162,7 @@ function = functions.get_func('<id>')</xmp></pre>
 
 <h2 id="get-all-functions">GET /functions</h2>
 
-<p>Returns a list of owned (and <a href="/api/core/#public-resources">public</a>) functions.</p>
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) functions.</p>
 
 <h3>Resource URL</h3>
 
@@ -193,7 +193,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="/api/core/#pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -346,7 +346,7 @@ functions = functions.get_all_func() # all existing resources</xmp></pre>
       <td>
         Expected value assigned to the device property when the function is executed.
         Don't set it (null) if the value needs to be fullfilled by the user.
-        <a href="">Learn more about</a>.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -514,7 +514,7 @@ Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
       <td>
         Expected value assigned to the device property when the function is executed.
         Set it to <code>null</code> if the value needs to be fullfilled by the user.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -729,9 +729,4 @@ See <a href="#function-representation">function representation</a> for body resp
 
 <h2 id="functions-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>
