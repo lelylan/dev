@@ -8,9 +8,17 @@ rolling shutters and windows, irrigations, video surveillance, gates, multimedia
 control, simulate and connect any of those devices device and more.
 </p>
 
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    Use <a href="http://manage.lelylan.com">Lelylan Dashboard</a> to create, monitor and
+    connect your devices.
+  </p>
+</div>
+
 <p>
-Simplifying, a device is characterized by a <a href="">type</a> and the
-<a href="">properties</a> it inherits from. For example, when
+Simplifying, a device is characterized by a type and the
+properties it inherits from. For example, when
 creating a basic light, the device inherits the <em>status</em>
 (on or off) property from it.
 </p>
@@ -18,8 +26,7 @@ creating a basic light, the device inherits the <em>status</em>
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-    Use <a href="http://manage.lelylan.com">Lelylan Dashboard</a> to create, monitor and
-    connect your devices.
+    See <a href="/types">Types API</a> to better understand how a type is defined.
   </p>
 </div>
 
@@ -159,15 +166,15 @@ device = devices.get_dev('<id>')</xmp></pre>
   <tbody>
     <tr>
       <td>uri</td>
-      <td>Device URI</td>
+      <td>Device URI.</td>
     </tr>
     <tr>
       <td>id</td>
-      <td>Device ID</td>
+      <td>Device ID.</td>
     </tr>
     <tr>
       <td>name</td>
-      <td>Device name</td>
+      <td>Device name.</td>
     </tr>
     <tr>
       <td>type</td>
@@ -175,37 +182,37 @@ device = devices.get_dev('<id>')</xmp></pre>
     </tr>
     <tr>
       <td>physical</td>
-      <td>Connected physical device URI</td>
+      <td>Connected physical device URI.</td>
     </tr>
     <tr>
       <td>owner</td>
-      <td>Device owner having full control on the device</td>
+      <td>Device owner having full control on the device.</td>
     </tr>
     <tr>
       <td>maker</td>
-      <td>Device creator</td>
+      <td>Device creator.</td>
     </tr>
     <tr>
       <td>activated</td>
-      <td>Device activation status</td>
+      <td>Device activation status<./td>
     </tr>
     <tr>
       <td>categories</td>
-      <td>Device categories</td>
+      <td>Device categories.</td>
     </tr>
     <tr>
       <td>properties</td>
-      <td>Device properties</td>
+      <td>Device properties.</td>
     </tr>
     <tr>
       <td class="nested">
-        <span>&raquo; property.uri</span>
+        <span>&raquo; property.uri.</span>
       </td>
       <td>Property URI</td>
     </tr>
     <tr>
       <td class="nested">
-        <span>&raquo; property.id</span>
+        <span>&raquo; property.id.</span>
       </td>
       <td>Property ID</td>
     </tr>
@@ -213,25 +220,37 @@ device = devices.get_dev('<id>')</xmp></pre>
       <td class="nested">
         <span>&raquo; property.value</span>
       </td>
-      <td>Property value</td>
+      <td>
+        Property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.expected</span>
       </td>
-      <td>Expected property value.</td>
+      <td>
+        Expected property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.pending</span>
       </td>
-      <td>Property pending status.</td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
     </tr>
     <tr>
       <td class="nested">
         <span>&raquo; property.accepted</span>
       </td>
-      <td>List of accepted values.</td>
+      <td>
+        List of accepted values.
+        <a href="/support#faq-accepted-values">Learn more about</a>.
+      </td>
     </tr>
   </tbody>
 </table>
@@ -245,7 +264,7 @@ Returns private information for a given device identified from its ID.
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-    To access this service you must use the <a href="/api/oauth#scopes">privates</a> scope.
+    To access this service you must use the <a href="/developers#oauth-scopes">privates</a> scope.
   </p>
 </div>
 
@@ -350,15 +369,15 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
   <tbody>
     <tr>
       <td>uri</td>
-      <td>Device URI</td>
+      <td>Device URI.</td>
     </tr>
     <tr>
       <td>id</td>
-      <td>Device ID</td>
+      <td>Device ID.</td>
     </tr>
     <tr>
       <td>name</td>
-      <td>Device name</td>
+      <td>Device name.</td>
     </tr>
     <tr>
       <td>secret</td>
@@ -366,7 +385,7 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
     </tr>
     <tr>
       <td>activation_code</td>
-      <td>Device activation code used to claim the device ownership</td>
+      <td>Device activation code used to claim the device ownership.</td>
     </tr>
   </tbody>
 </table>
@@ -426,6 +445,7 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
       </td>
       <td>
         Property value to search.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
     <tr>
@@ -435,16 +455,17 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
       </td>
       <td>
         Expected value to search.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
     <tr>
       <td class="parameter">
         <span>properties[pending]</span>
         <span class="info">optional</span>
-        <span class="info">default to false</span>
       </td>
       <td>
         Pending property status to search.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -576,8 +597,8 @@ devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
         <span class="info">required</span>
       </td>
       <td>
-        Type ID (check out <a href="http://types.lelylan.com">available types</a> or
-        <a href="http://types.lelylan.com/new">create</a> a new one).
+        Type ID. Check out <a href="http://types.lelylan.com">available types</a> or
+        <a href="http://types.lelylan.com/new">create</a> a new one.
       </td>
     </tr>
     <tr>
@@ -586,7 +607,7 @@ devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical device URI. <a href="/api/physicals">Learn more about</a>
+        Physical device URI. <a href="/makers">Learn more about</a>
       </td>
     </tr>
   </tbody>
@@ -734,7 +755,7 @@ Update a device identified from its ID and returns extended information for it.
         <span class="info">optional</span>
       </td>
       <td>
-        Physical device URI. <a href="">Learn more about</a>
+        Physical device URI. <a href="/makers">Learn more about</a>
       </td>
     </tr>
   </tbody>
@@ -867,6 +888,7 @@ device = devices.update_dev('<id>', params)</xmp></pre>
       </td>
       <td>
         Property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
     <tr>
@@ -876,6 +898,7 @@ device = devices.update_dev('<id>', params)</xmp></pre>
       </td>
       <td>
         Expected property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
     <tr>
@@ -885,6 +908,7 @@ device = devices.update_dev('<id>', params)</xmp></pre>
       </td>
       <td>
         Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -895,7 +919,7 @@ device = devices.update_dev('<id>', params)</xmp></pre>
       </td>
       <td>
         List of accepted values.
-        <a href="/community/faq#accepted-values">Learn more about</a>.
+        <a href="/support#faq-accepted-values">Learn more about</a>.
         <span class="info">Valid values: JSON objects.</span>
       </td>
     </tr>
@@ -1375,9 +1399,4 @@ device = devices.exec_dev_func('<id>', params)</xmp></pre>
 
 <h2 id="devices-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>
