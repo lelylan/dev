@@ -22,15 +22,15 @@ Lelylan supports the following flows.
 
 <ul>
   <li>
-  <a href="#">Authorization Code Flow</a> -
+  <a href="#oauth-authorization-code">Authorization Code Flow</a> -
   for apps with servers that can store persistent information.
   </li>
   <li>
-  <a href="#">Implicit Grant Flow</a> -
+  <a href="#oauth-implicit-grant">Implicit Grant Flow</a> -
   for apps running in a browser (read Javascript) or mobile apps.
   </li>
   <li>
-  <a href="#">Password Credentials</a> -
+  <a href="#oauth-password-credentials">Password Credentials</a> -
   when previous flows can't be used or during development.
   </li>
 </ul>
@@ -156,7 +156,7 @@ Follow a description of the needed parameters.
     </tr>
     <tr>
       <td>scope</td>
-      <td>Application privileges. <a href="#">Learn more about</a>.</td>
+      <td>Application privileges. <a href="#oauth-scopes">Learn more about</a>.</td>
     </tr>
     <tr>
       <td>state</td>
@@ -340,7 +340,7 @@ The flow starts redirecting the user to the authorization endpoint.
   <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
-      </div>
+    </div>
   </div>
   <div class="tab-pane" id="implicit-grant-ruby">
     <div class="preview">
@@ -383,7 +383,7 @@ Here a description of the needed parameters.
     <tr>
       <td>scope</td>
       <td>
-        Application privileges. <a href="">Learn more about</a>
+        Application privileges. <a href="#oauth-scopes">Learn more about</a>
       </td>
     </tr>
     <tr>
@@ -547,7 +547,7 @@ Here a description of the needed parameters.
     <tr>
       <td>scope</td>
       <td>
-        Application privileges. <a href="">Learn more about</a>.
+        Application privileges. <a href="#oauth-scopes">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -721,15 +721,17 @@ When no scopes are defined user is the default one.
         <span class="info">Full access to all services.</span>
       </td>
       <td><span class="label">all services</span>
-      (only the <a href="/api/devices/#get-a-device-private-info">private</a> service is not included)</td>
+      (only the <a href="#get-a-device-private-info">private</a> service is not included)</td>
     </tr>
     <tr>
       <td>
         <code>resources:read</code>
         <span class="info">Full access to all read resources.</span>
-        <span class="info">The <a href="/api/devices/#get-a-device-private-info">private</a> service is not included.</span>
       </td>
-      <td><span class="label">all read only services</span></td>
+      <td>
+        <span class="label">all read only services</span>
+        (only the <a href="#get-a-device-private-info">private</a> service is not included)
+      </td>
     </tr>
     <tr>
       <td>
@@ -737,7 +739,7 @@ When no scopes are defined user is the default one.
         <span class="info">Access to the owned devices private info.</span>
       </td>
       <td>
-        <span class="label link"><a href="/api/devices/#get-a-device-private-info">Get a device private info</a></span>
+        <span class="label link"><a href="#get-a-device-private-info">Get a device private info</a></span>
       </td>
     </tr>
     <tr>
@@ -746,13 +748,13 @@ When no scopes are defined user is the default one.
         <span class="info">Read, control and write access to owned devices.</span>
       </td>
       <td>
-        <span class="label link"><a href="/api/devices#get-a-device">get a device</a></span>
-        <span class="label link"><a href="/api/devices#get-all-devices">get all devices</a></span>
-        <span class="label link"><a href="/api/devices#create-a-device">create a device</a></span>
-        <span class="label link"><a href="/api/devices#update-a-device">update a device</a></span>
-        <span class="label link"><a href="/api/devices#delete-a-device">delete a device</a></span>
-        <span class="label link"><a href="/api/devices#update-properties">update properties</a></span>
-        <span class="label link"><a href="/api/devices#execute-a-function">execute a function</a></span>
+        <span class="label link"><a href="#get-a-device">get a device</a></span>
+        <span class="label link"><a href="#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="#create-a-device">create a device</a></span>
+        <span class="label link"><a href="#update-a-device">update a device</a></span>
+        <span class="label link"><a href="#delete-a-device">delete a device</a></span>
+        <span class="label link"><a href="#update-device-properties">update properties</a></span>
+        <span class="label link"><a href="#execute-a-function">execute a function</a></span>
         <span class="label link"><a href="#activate-a-device">activate a device</a></span>
         <span class="label link"><a href="#deactivate-a-device">deactivate a device</a></span>
       </td>
@@ -763,11 +765,11 @@ When no scopes are defined user is the default one.
         <span class="info">Read and control access to owned devices.</span>
         </td>
       <td>
-        <span class="label link"><a href="/api/devices#get-a-device">get a device</a></span>
-        <span class="label link"><a href="/api/devices#get-all-devices">get all devices</a></span>
-        <span class="label link"><a href="/api/devices#update-a-device">update a device</a></span>
-        <span class="label link"><a href="/api/devices#update-properties">update properties</a></span>
-        <span class="label link"><a href="/api/devices#execute-a-function">execute a function</a></span>
+        <span class="label link"><a href="#get-a-device">get a device</a></span>
+        <span class="label link"><a href="#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="#update-a-device">update a device</a></span>
+        <span class="label link"><a href="#update-device-properties">update properties</a></span>
+        <span class="label link"><a href="#execute-a-function">execute a function</a></span>
       </td>
     </tr>
     <tr>
@@ -776,8 +778,8 @@ When no scopes are defined user is the default one.
         <span class="info">Read access to owned devices.</span>
       </td>
       <td>
-        <span class="label link"><a href="/api/devices#get-a-device">get a device</a></span>
-        <span class="label link"><a href="/api/devices#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="#get-a-device">get a device</a></span>
+        <span class="label link"><a href="#get-all-devices">get all devices</a></span>
       </td>
     </tr>
     <%#<tr>%>
@@ -819,26 +821,26 @@ When no scopes are defined user is the default one.
         <span class="info">Read and write access to owned types.</span>
       </td>
       <td>
-        <span class="label link"><a href="/api/types#get-a-type">Get a type</a></span>
-        <span class="label link"><a href="/api/types#get-all-types">Get all types</a></span>
-        <span class="label link"><a href="/api/types#create-a-type">Create a type</a></span>
-        <span class="label link"><a href="/api/types#update-a-type">Update a type</a></span>
-        <span class="label link"><a href="/api/types#delete-a-type">Delete a type</a></span>
-        <span class="label link"><a href="/api/types/properties/#get-a-property">Get a property</a></span>
-        <span class="label link"><a href="/api/types/properties/#get-all-properties">Get all properties</a></span>
-        <span class="label link"><a href="/api/types/properties/#create-a-property">Create a property</a></span>
-        <span class="label link"><a href="/api/types/properties/#update-a-property">Update a property</a></span>
-        <span class="label link"><a href="/api/types/properties/#delete-a-property">Delete a property</a></span>
-        <span class="label link"><a href="/api/types/functions#get-a-function">Get a function</a></span>
-        <span class="label link"><a href="/api/types/functions#get-all-functions">Get all functions</a></span>
-        <span class="label link"><a href="/api/types/functions#create-a-function">Create a function</a></span>
-        <span class="label link"><a href="/api/types/functions#update-a-function">Update a function</a></span>
-        <span class="label link"><a href="/api/types/functions#delete-a-function">Delete a function</a></span>
-        <span class="label link"><a href="/api/types/statuses#get-a-status">Get a status</a></span>
-        <span class="label link"><a href="/api/types/statuses#get-all-statuses">Get all statuses</a></span>
-        <span class="label link"><a href="/api/types/statuses#create-a-status">Create a status</a></span>
-        <span class="label link"><a href="/api/types/statuses#update-a-status">Update a status</a></span>
-        <span class="label link"><a href="/api/types/statuses#delete-a-status">Delete a status</a></span>
+        <span class="label link"><a href="/types#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/types#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/types#create-a-type">Create a type</a></span>
+        <span class="label link"><a href="/types#update-a-type">Update a type</a></span>
+        <span class="label link"><a href="/types#delete-a-type">Delete a type</a></span>
+        <span class="label link"><a href="/types#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/types#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/types#create-a-property">Create a property</a></span>
+        <span class="label link"><a href="/types#update-a-property">Update a property</a></span>
+        <span class="label link"><a href="/types#delete-a-property">Delete a property</a></span>
+        <span class="label link"><a href="/types#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/types#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/types#create-a-function">Create a function</a></span>
+        <span class="label link"><a href="/types#update-a-function">Update a function</a></span>
+        <span class="label link"><a href="/types#delete-a-function">Delete a function</a></span>
+        <span class="label link"><a href="/types#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/types#get-all-statuses">Get all statuses</a></span>
+        <span class="label link"><a href="/types#create-a-status">Create a status</a></span>
+        <span class="label link"><a href="/types#update-a-status">Update a status</a></span>
+        <span class="label link"><a href="/types#delete-a-status">Delete a status</a></span>
       </td>
     </tr>
     <tr>
@@ -847,14 +849,14 @@ When no scopes are defined user is the default one.
         <span class="info">Read access to owned types.</span>
       </td>
       <td>
-        <span class="label link"><a href="/api/types#get-a-type">Get a type</a></span>
-        <span class="label link"><a href="/api/types#get-all-types">Get all types</a></span>
-        <span class="label link"><a href="/api/types/properties/#get-a-property">Get a property</a></span>
-        <span class="label link"><a href="/api/types/properties/#get-all-properties">Get all properties</a></span>
-        <span class="label link"><a href="/api/types/functions#get-a-function">Get a function</a></span>
-        <span class="label link"><a href="/api/types/functions#get-all-functions">Get all functions</a></span>
-        <span class="label link"><a href="/api/types/statuses#get-a-status">Get a status</a></span>
-        <span class="label link"><a href="/api/types/statuses#get-all-statuses">Get all statuses</a></span>
+        <span class="label link"><a href="/types#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/types#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/types/#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/types/#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/types#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/types#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/types#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/types#get-all-statuses">Get all statuses</a></span>
       </td>
     </tr>
     <%#<tr>%>
@@ -886,7 +888,7 @@ When no scopes are defined user is the default one.
         <span class="info">Read access to user profile</span>
       </td>
       <td>
-        <span class="label link"><a href="/api/core#user-profile">Get /me</a></span>
+        <span class="label link"><a href="#core-concepts-get-me">Get /me</a></span>
       </td>
     </tr>
   </tbody>
@@ -938,10 +940,13 @@ might be of help.
 
 <ul>
   <li>
-  <a href="http://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified" class="bigger">OAuth2 Simplified</a>
+  <a href="#developers-api-clients" class="bigger">Lelylan Clients (using OAuth2)</a>
   </li>
   <li>
   <a href="http://oauthbible.com" class="bigger">OAuth Bible</a>
+  </li>
+  <li>
+  <a href="http://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified" class="bigger">OAuth2 Simplified</a>
   </li>
   <li>
   <a href="https://developers.google.com/accounts/docs/OAuth2" class="bigger">Google</a>
@@ -955,16 +960,8 @@ might be of help.
   <li>
   <a href="http://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
   </li>
-  <li>
-  <a href="/community/clients/" class="bigger">Lelylan Clients (using OAuth2)</a>
-  </li>
 </ul>
 
 <h2 id="oauth-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>
