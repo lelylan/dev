@@ -1,7 +1,7 @@
 <h2 id="mqtt-overview">Overview</h2>
 
 <p>
-  <a href="http://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html">MQTT</a>
+  <a href="http://mqtt.org">MQTT</a>
   is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for
   constrained devices and low-bandwidth, high-latency or unreliable networks.
 </p>
@@ -18,16 +18,16 @@
   <span class="label label-lelylan">notice</span>
   Lelylan MQTT is in alpha testing.
   If you find a bug do not hesitate to send it to
-  <a href="">dev@lelylan.com</a>
+  <a href="mailto:dev@lelylan.com">dev@lelylan.com</a>
   </p>
 </div>
 
 <h2 id="mqtt-create-the-device">Create the device</a></h2>
 
 <p>
-To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>,
+To create a new device open your Dashboard,
 click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
-with the desired device name and type. For the moment leave empty the physical field
+with the desired name and type. For the moment leave empty the physical field
 (we'll come back later on that).
 <p>
 
@@ -128,6 +128,7 @@ message is made up from a list of properties with the following structure.
       </td>
       <td>
         New property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -169,6 +170,7 @@ Every sent message is made up from a list of properties with the following struc
       </td>
       <td>
         Desired property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
         <tr>
@@ -178,7 +180,7 @@ Every sent message is made up from a list of properties with the following struc
       </td>
       <td>
         Expected property value.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
         <tr>
@@ -188,7 +190,7 @@ Every sent message is made up from a list of properties with the following struc
       </td>
       <td>
         Property pending status.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -202,7 +204,7 @@ Every sent message is made up from a list of properties with the following struc
 When communicating with the physical world, Lelylan expects a feedback to its requests.
 For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
 the light was turned on. In the meantime the device is in a
-<a href="/community/faq#value-expected-pending">pending</a>
+<a href="/support#faq-value-expected-pending">pending</a>
 status and the spinner is visible.
 To close the pending status and tell Lelylan that the requested changes were applied, the
 physical device should publish a message to the out topic <code>/devices/:id/set</code>
@@ -480,8 +482,8 @@ print("rc: " + str(rc))</xmp></pre>
 <h2 id="mqtt-control-your-physical-device">Control your physical device</h2>
 
 <p>
-Once your MQTT client is connected to Lelylan open the <a href="http://manage.lelylan.com">Dashboard</a>
-and start interacting with the physical world receiving and sending updates.
+Once your light is connected to Lelylan control and monitor it in realtime using the
+<a href="http://manage.lelylan.com">Dashboard</a>.
 </p>
 
 <a href="http://manage.lelylan.com">
@@ -509,8 +511,4 @@ and start interacting with the physical world receiving and sending updates.
 
 <h2 id="mqtt-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
+<%= render 'shared/feedback' %>

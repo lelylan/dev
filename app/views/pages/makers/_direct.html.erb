@@ -11,9 +11,9 @@
 <h2 id="direct-create-the-device">Create the Device</h2>
 
 <p>
-To create a new device open your <a href="http://manage.lelylan.com">Dashboard</a>,
+To create a new device open your Dashboard,
 click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
-with the desired device name and type. For the moment leave empty the physical field
+with the desired name and type. For the moment leave empty the physical field
 (we'll come back later on that).
 <p>
 
@@ -36,8 +36,7 @@ with the desired device name and type. For the moment leave empty the physical f
 
 <p>
 When a user updates a device property or executes a function using Lelylan, a request
-with the list of properties to update is sent to the physical device. Every received
-request is made up from a list of properties with the following structure.
+with the list of properties to update is sent to the physical device.
 </p>
 
 <h3>Received Request Example</h3>
@@ -55,7 +54,7 @@ request is made up from a list of properties with the following structure.
         <span>X-Physical-Secret</span>
       </td>
       <td>
-        The device <a href="/api/devices#get-a-device-private-info">secret</a>.
+        The device <a href="/developers#get-a-device-private-info">secret</a>.
         The physical device needs it to reject not valid requests.
       </td>
     </tr>
@@ -87,7 +86,7 @@ request is made up from a list of properties with the following structure.
         <span>&raquo; property.value</span>
       </td>
       <td>
-        New property value.
+        Property value to set.
       </td>
     </tr>
   </tbody>
@@ -193,7 +192,7 @@ pending status to false.
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  Learn more about the <a href="">pending status</a> of a device.
+  Learn more about the <a href="/support#faq-value-expected-pending">pending status</a> of a device.
   </p>
 </div>
 
@@ -220,7 +219,7 @@ list of updated properties needs to be sent to Lelylan.
         <span class="info">required</span>
       </td>
       <td>
-        The <a href="/api/devices#get-a-device-private-info">device secret</a>.
+        The device <a href="/developers#get-a-device-private-info">secret</a>.
         Lelylan needs it to reject not valid requests.
       </td>
     </tr>
@@ -256,6 +255,7 @@ list of updated properties needs to be sent to Lelylan.
       </td>
       <td>
         Desired property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
         <tr>
@@ -265,7 +265,7 @@ list of updated properties needs to be sent to Lelylan.
       </td>
       <td>
         Expected property value.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
         <tr>
@@ -275,7 +275,7 @@ list of updated properties needs to be sent to Lelylan.
       </td>
       <td>
         Property pending status.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -364,10 +364,10 @@ response = physical.receive_update(uri, secret, params)</xmp></pre>
 
 <ul>
   <li>
-  <a href="/api/devices#update-a-device">Update device</a>
+  <a href="/developers#update-a-device">Update device</a>
   </li>
   <li>
-  <a href="/api/devices#update-properties">Update device properties</a>
+  <a href="/developers#update-device-properties">Update device properties</a>
   </li>
 </ul>
 
@@ -413,15 +413,15 @@ and start interacting with the physical world receiving and sending updates.
   </thead>
   <tbody>
     <tr>
-      <td>There were no articles for this section. Be the first to write one and let <a href="">@lelylan</a> know.</td>
+      <td colspan="3">
+        There were no articles for this section.<br>
+        Do you want to write one? We would love it.
+        Let <a href="http://twitter.com/lelylan">@lelylan</a> know on Twitter.
+      </td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="direct-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
+<%= render 'shared/feedback' %>
