@@ -32,8 +32,8 @@ way. To do this you can use the activation services, keeping in mind few simple 
   </li>
   <li>
   <em>Deactivate your device to let other people own it</em> - When you create a device
-  it's yours by default. To move the device ownership you must first <a href="#">
-  deactivate</a> it. Once deactivated, the device can be <a href="#">claimed</a>
+  it's yours by default. To move the device ownership you must first <a href="#deactivate-a-device">
+  deactivate</a> it. Once deactivated, the device can be <a href="#activate-a-device">claimed</a>
   from whoever has the activation code.
   </li>
 </ul>
@@ -48,7 +48,7 @@ Activate a device and returns extended information for it.
   <p>
   <span class="label label-lelylan">notice</span>
     When you create a device you own it. To let others own your
-    devices first <a href="#">deactivate</a> them.
+    devices first <a href="#deactivate-a-device">deactivate</a> them.
   </p>
 </div>
 
@@ -142,7 +142,7 @@ device = activations.activate_dev(params)</xmp></pre>
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
 <p>
-  See <a href="/api/devices#device-representation">device representation</a> for body response.
+  See <a href="/developers#device-representation">device representation</a> for body response.
 </p>
 
 <h3>What if the device is already activated?</h3>
@@ -188,7 +188,7 @@ Until that moment the previous owner remains.
         <span class="info">required</span>
       </td>
       <td>
-        The <a href="/api/devices#get-a-device-private-info">activation code</a> of the desired device.
+        The <a href="/developers#get-a-device-private-info">activation code</a> of the desired device.
       </td>
     </tr>
   </tbody>
@@ -262,13 +262,9 @@ device = activations.deactivate_dev(params)</xmp></pre>
 <h3>Example body response</h3>
 
 <p>
-  See <a href="/api/devices#device-representation">device representation</a> for body response.
+  See <a href="/developers#device-representation">device representation</a> for body response.
 </p>
 
 <h2 id="activations-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
+<%= render 'shared/feedback' %>
