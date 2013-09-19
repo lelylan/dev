@@ -55,11 +55,11 @@ can subscribe at.
         property-update
       </td>
       <td>
-        <a href="">device representation</a>
+        <a href="#device-representation">device</a>
       </td>
       <td>
         Notified when a device
-        <a href="">updates its properties</a>.
+        updates its properties.
       </td>
     </tr>
     <tr>
@@ -70,10 +70,10 @@ can subscribe at.
         create
       </td>
       <td>
-        <a href="">device representation</a>
+        <a href="#device-representation">device</a>
       </td>
       <td>
-        Notified when a <a href="">device is created</a>.
+        Notified when a device is created.
       </td>
     </tr>
     <tr>
@@ -84,10 +84,10 @@ can subscribe at.
         update
       </td>
       <td>
-        <a href="">device representation</a>
+        <a href="#device-representation">device</a>
       </td>
       <td>
-        Notified when a <a href="">device is update</a>.
+        Notified when a device is update.
       </td>
     </tr>
     <tr>
@@ -98,10 +98,10 @@ can subscribe at.
         destroy
       </td>
       <td>
-        <a href="">device representation</a>
+        <a href="#device-representation">device</a>
       </td>
       <td>
-        Notified when a <a href="/api/devices#delete-a-device">device is deleted</a>.
+        Notified when a device is deleted.
       </td>
     </tr>
     <%#<tr>%>
@@ -426,7 +426,7 @@ subscription = subscriptions.get_sub('<id>')</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Resource name to search. See available <a href="">resources</a>.
+        Resource name to search. See available <a href="#realtime-api-events">resources</a>.
       </td>
     </tr>
     <tr>
@@ -435,7 +435,7 @@ subscription = subscriptions.get_sub('<id>')</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Event name to search. See available <a href="">events</a>.
+        Event name to search. See available <a href="#realtime-api-events">events</a>.
       </td>
     </tr>
   </tbody>
@@ -541,7 +541,7 @@ Create a subscription and returns extended information for it.
         <span class="info">required</span>
       </td>
       <td>
-        Notified resource. See <a href="#subscriptions">available resources</a>.
+        Notified resource. See <a href="#realtime-api-events">available resources</a>.
       </td>
     </tr>
     <tr>
@@ -550,7 +550,7 @@ Create a subscription and returns extended information for it.
         <span class="info">required</span>
       </td>
       <td>
-        Notified event. See <a href="#subscriptions">available events</a>.
+        Notified event. See <a href="#realtime-api-events">available events</a>.
       </td>
     </tr>
     <tr>
@@ -697,7 +697,7 @@ Update a subscription identified from its ID and returns extended information fo
         <span class="info">optional</span>
       </td>
       <td>
-        Notified resource. See <a href="#subscriptions">available resources</a>.
+        Notified resource. See <a href="#realtime-api-events">available resources</a>.
       </td>
     </tr>
     <tr>
@@ -706,7 +706,7 @@ Update a subscription identified from its ID and returns extended information fo
         <span class="info">optional</span>
       </td>
       <td>
-        Notified event. See <a href="#subscriptions">available events</a>.
+        Notified event. See <a href="#realtime-api-events">available events</a>.
       </td>
     </tr>
     <tr>
@@ -904,9 +904,4 @@ See <a href="#subscription-representation">subscription representation</a> for b
 
 <h2 id="realtime-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
-
+<%= render 'shared/feedback' %>
