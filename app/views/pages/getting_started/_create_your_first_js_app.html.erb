@@ -6,11 +6,13 @@ you control and monitor any device connected with Lelylan through a simple web a
 based on Javascript and HTML5.
 </p>
 
+<a href="#">
 <%= image_tag('create-your-first-js-app/introduction.png', class: 'img-thumbnail') %>
+</a>
 
 <div class="button-group">
-  <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Download Code</a>
-  <a href="" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> View Demo</a>
+  <a href="#" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Download Code</a>
+  <a href="#" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> View Demo</a>
 </div>
 
 
@@ -49,7 +51,7 @@ and testing easier.
 <%# image_tag('create-your-first-js-app/device-component.png', class: 'img-thumbnail') %>
 
 <p>
-Lelylan <a href="http://lelylan.github.io/device-component-ng/">Device Component</a>
+Lelylan <a href="https://github.com/lelylan/device-component-ng">Device Component</a>
 is a AngularJS directive (aka Web Components, Card or Widget) that makes it dead
 easy to control and monitor any device connected to Lelylan through the web.
 </p>
@@ -77,7 +79,7 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  Read the Bred Barrow
+  Read Bred Barrow
   <a href="http://www.sitepoint.com/kickstart-your-angularjs-development-with-yeoman-grunt-and-bower/">article</a>
   to deeply understand how Yeoman and AngularJS works together.
   </p>
@@ -86,8 +88,8 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 <h2 id="create-your-first-js-app-add-lelylan-device-component">Add Lelylan Device Component</h2>
 
 <p>
-  The first thing to do is to add the <a href="">Device Component</a>
-  JavaScript and CSS files into <code>app/index.html</code>.
+  Now add the Device Component JavaScript and CSS files into
+  <code>app/index.html</code>.
 </p>
 
 <div class="code-block">
@@ -101,8 +103,8 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 </div>
 
 <p>
-  Now go to <code>app/app.js</code> and add the device component module. You need
-  to do this to be able to access to all the device component functionalities.
+  Go to <code>app/app.js</code> and add the device component module to the AngularJS app.
+  You need to do this to be able to access to all the device component functionalities.
 </p>
 
 <div class="code-block">
@@ -112,7 +114,8 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  Use the latest version of Lelylan <a href="">Device Component</a> as v0.1.0 could get old pretty fast.
+  Use the latest version of Lelylan <a href="https://github.com/lelylan/device-component-ng">Device Component</a>
+  as v0.1.0 could get old pretty fast.
   </p>
 </div>
 
@@ -133,9 +136,10 @@ with the following one.
 
 <p>
 The &lt;login&gt; tag renders a login link that handles the communication
-with the OAuth2 servers. To make it work got to <a href="">Lelylan People</a>
+with the OAuth2 servers. To make it work go to <a href="http://people.lelylan.com">Lelylan People</a>
 and create a new app giving a name and setting <code>http://localhost:9000</code> as
-redirect link. Once created, copy the Client ID into the client attribute.
+redirect link. Once created, copy the Client ID into the client attribute
+you have in the &lt;login&gt; tag.
 </p>
 
 <p>
@@ -163,7 +167,7 @@ if (authorized) { $scope.devices = Device.query(); }</xmp></pre>
 </div>
 
 <p>
-In the code above we extract the <a href="">Access Token</a> (we get one during the
+In the code above we extract the Access Token (we get one during the
 login phase) and retrieve the list of owned devices only if the user is logged in.
 </p>
 
@@ -217,14 +221,10 @@ Login and get the control of your devices.
   <p>
   <span class="label label-lelylan">notice</span>
   If you don't have any device in Lelylan create the first one using the
-  <a href="">Dashboard</a>.
+  <a href="http://manage.lelylan.com">Dashboard</a>.
   </p>
 </div>
 
 <h2 id="create-your-first-js-app-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
+<%= render 'shared/feedback' %>

@@ -100,32 +100,36 @@ h2[id] {
 
 /* internal subtitles */
 
-.bs-docs-section h2 {
-  color: $lelylanColor;
-  font-size: 32px;
-  margin-bottom: 20px;
-  font-weight: 200;
-}
+.bs-docs-section {
+  padding: 20px 60px 40px;
 
-.bs-docs-section h3 {
-  font-size: 22px;
-  margin: 30px 0 20px;
-  font-weight: 200;
-}
+  h2 {
+    color: $lelylanColor;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 200;
+  }
 
-.bs-docs-section p,
-.bs-docs-section ul li {
-  font-size: 17px;
-  font-weight: 200;
-  line-height: 1.6;
-}
+  h3 {
+    font-size: 22px;
+    margin: 30px 0 20px;
+    font-weight: 200;
+  }
 
-.bs-docs-section p {
-  margin-bottom: 10px;
-}
+  p,
+  ul li {
+    font-size: 17px;
+    font-weight: 200;
+    line-height: 1.6;
+  }
 
-.bs-docs-section ul {
-  margin-bottom: 20px;
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin-bottom: 20px;
+  }
 }
 
 
@@ -148,10 +152,6 @@ h2[id] {
     text-decoration: none;
     color: $linkColorHover !important;
   }
-}
-
-.bs-docs-section {
-  padding: 20px 60px;
 }
 
 .col-md-offset-3 {
@@ -641,8 +641,6 @@ footer .bs-docs-section {
   background: #E5F4FF;
   border: 1px solid #C5EAFF;
 }
-
-
 
 /* * * * * * */
 /* Home Page */

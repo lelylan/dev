@@ -154,7 +154,7 @@ actual device id.
 Here is the Arduino sketch. To make it work set the <code>deviceId</code>
 and the <code>deviceSecret</code> to your device credentials, upload the
 sketch and connect it to the Internet. For further
-instructions see the <a href="">Code Explained</a> section.
+instructions see the <a href="#connect-your-first-light-code-explained">Code Explained</a> section.
 </p>
 
 <div class="alert alert-info">
@@ -377,7 +377,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 <p>
   Now that all the components are ready and your Arduino is connected to Lelylan
   access the <a href="http://manage.lelylan.com">Lelylan Dashboard</a>. From here you can control your light
-  and get realtime notifications when the button is pressed.
+  and get realtime notifications.
 </p>
 
 <a href="http://manage.lelylan.com">
@@ -409,7 +409,7 @@ char* deviceSecret = "DEVICE-SECRET";  // set your device secret (will be the MQ
 
 <p>
   Those are the pins used to connect the led and the button. If you have followed
-  the <a href="">Fritzing diagram</a> you don't have to change anything. If you
+  the <a href="#connect-your-first-light-hardware-setup">Fritzing diagram</a> you don't have to change anything. If you
   used different pins, remember to change those values.
 </p>
 
@@ -439,7 +439,7 @@ byte server[] = { 192, 168, 1, 101 };         // MQTT server</xmp></pre>
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  To deeply understand how MQTT works check out the <a href="">MQTT API</a>.
+  To deeply understand how MQTT works check out the <a href="/makers#mqtt">MQTT API</a>.
   </p>
 </div>
 
@@ -463,7 +463,7 @@ base of your device structure and where you can see all properties.
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  To deeply understand how Types works check out the <a href="">Types API</a>.
+  To deeply understand how Types works check out the <a href="/types">Types API</a>.
   </p>
 </div>
 
@@ -642,6 +642,7 @@ Every published message is made up from a list of properties.
       </td>
       <td>
         Desired property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
         <tr>
@@ -651,7 +652,7 @@ Every published message is made up from a list of properties.
       </td>
       <td>
         Expected property value.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
         <tr>
@@ -661,7 +662,7 @@ Every published message is made up from a list of properties.
       </td>
       <td>
         Property pending status.
-        <a href="/community/faq#value-expected-pending">Learn more about</a>
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
         <span class="info">Valid values: true, false.</span>
       </td>
     </tr>
@@ -762,8 +763,4 @@ the property ID and the property value to change.
 
 <h2 id="connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
-<p>
-Have feedback? Let <a href="">@lelylan</a> know on Twitter.
-If you find a bug or have any questions, do not hesitate to send them to
-<a href="">dev@lelylan.com</a>.
-</p>
+<%= render 'shared/feedback' %>
