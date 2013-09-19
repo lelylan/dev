@@ -43,62 +43,70 @@
     </thead>
     <tbody>
       <tr>
-        <td><a href="" target="blank">AngularJS Device Component</a></td>
+        <td><a href="https://github.com/lelylan/device-component-ng" target="blank">AngularJS Device Component</a></td>
         <td>ANGULARJS, HTML5</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">Lelylan Dashboard</a></td>
+        <td><a href="https://github.com/lelylan/devices-dashboard-ng" target="blank">Lelylan Dashboard</a></td>
         <td>ANGULARJS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">Lelylan Demo</a></td>
+        <td><a href="https://github.com/lelylan/demo-dashboard-ng" target="blank">Lelylan Demo</a></td>
         <td>ANGULARJS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">Type Component</a></td>
+        <td><a href="https://github.com/lelylan/type-component-ng" target="blank">Type Component</a></td>
         <td>ANGULARJS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">Type Dashboard</a></td>
+        <td><a href="https://github.com/lelylan/types-dashboard-ng" target="blank">Type Dashboard</a></td>
         <td>ANGULARJS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">MQTT Server for Lelylan</a></td>
+        <td><a href="https://github.com/lelylan/mqtt" target="blank">MQTT Server for Lelylan</a></td>
         <td>NODE.JS, MQTT</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">Physical Devices Gateway</a></td>
+        <td><a href="https://github.com/lelylan/nodes" target="blank">Physical Devices Gateway</a></td>
         <td>NODE.JS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-        <td><a href="" target="blank">AngularJS Client</a></td>
+        <td><a href="https://github.com/lelylan/lelylan-ng" target="blank">AngularJS Client</a></td>
         <td>ANGULARJS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-      <td><a href="" target="blank">Node.js Client</a></td>
+      <td><a href="https://github.com/lelylan/lelylan-node" target="blank">Node.js Client</a></td>
         <td>NODE.JS</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-      <td><a href="" target="blank">Ruby Client</a></td>
+      <td><a href="https://github.com/lelylan/lelylan-rb" target="blank">Ruby Client</a></td>
         <td>RUBY</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
       <tr>
-      <td><a href="" target="blank">Python Client</a></td>
+      <td><a href="https://github.com/lelylan/lelylan-py" target="blank">Python Client</a></td>
         <td>PYTHON</td>
         <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
       </tr>
     </tbody>
   </table>
+
+  <h2 id="code-examples-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+  <p>
+    A project is missing? Let <a href="http://twitter.com/lelylan">@lelylan</a> know on Twitter.
+    If you find a bug or have any idea about a cool project, do not hesitate to send them to
+    <a href="mailto:dev@lelylan.com">dev@lelylan.com</a>.
+  </p>
 
   </div>
 </div>
