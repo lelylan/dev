@@ -1,27 +1,163 @@
-<header class="intro">
-<h2>Sign in to Lelylan</h2>
-<h3>{ connected house for developers }</h3>
-<% if flash[:alert] -%>
-<h3 class="errors"><%= flash[:alert] %></h3>
-<% end -%>
-</header>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+  <style>
 
-</br>
+    /* http://codepen.io/m412c0/pen/Fybpf */
 
-<div class="content">
+    @charset "utf-8";
+    /* CSS Document */
 
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div><%= f.label :email, class: 'email-label' %>
-      <%= f.email_field :email, class: 'text-input' %></div>
+    /* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
+    @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 
-    <div><%= f.label :password, class: 'password-label' %>
-      <%= f.password_field :password, class: 'text-input'  %></div>
+    /* ---------- http://meyerweb.com/eric/tools/css/reset/ ---------- */
+    @import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
 
-    <% if devise_mapping.rememberable? -%>
-      <div class='invisible'><%= f.check_box :remember_me, checked: true %> <%= f.label :remember_me %></div>
-    <% end -%>
+    [class*="fontawesome-"]:before {
+      font-family: 'FontAwesome', sans-serif;
+    }
 
-    <div class="bcta"><%= f.submit "Sign in", class: 'cta' %></div>
-  <% end %>
+    body {
+      background: #f8f8f8;
+      color: #606468;
+      font: 87.5%/1.5em 'Open Sans', sans-serif;
+      margin: 0;
+    }
 
-</div>
+    a {
+      color: #239cbb;
+      text-decoration: none;
+      -webkit-transition: background 0.3s ease, border-color 0.3s ease;
+      -moz-transition: background 0.3s ease, border-color 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    a:hover {
+      color: #01cf9e;
+    }
+
+    input {
+      border: none;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5em;
+      padding: 0;
+      -webkit-appearance: none;
+    }
+
+    p {
+      line-height: 1.5em;
+    }
+
+    .clearfix { *zoom: 1; } /* For IE 6/7 */
+    .clearfix:before, .clearfix:after {
+      display: table;
+      content: "";
+    }
+    .clearfix:after { clear: both; }
+
+    #login {
+      margin: 100px auto;
+      width: 275px;
+    }
+
+    #login form span {
+      background-color: #DFDFDF;
+      border-radius: 3px 0px 0px 3px;
+      color: #606468;
+      display: block;
+      float: left;
+      height: 48px;
+      line-height: 50px;
+      text-align: center;
+      width: 50px;
+      border: 1px solid #ccc;
+    }
+
+    #login form input {
+      height: 50px;
+    }
+
+    #login form input[type="email"], input[type="password"] {
+      background-color: #EBEBEB;
+      border-radius: 0px 3px 3px 0px;
+      color: #606468;
+      margin-bottom: 1em;
+      padding: 0 16px;
+      width: 225px;
+      border: 1px solid #ccc;
+      border-left: none;
+    }
+
+    #login form input[type="submit"] {
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      background-color: #239cbb;
+      color: #f8f8f8;
+      font-weight: 200;
+      font-size: 17px;
+      margin-bottom: 1em;
+      text-transform: uppercase;
+      width: 280px;
+      -webkit-transition: background 0.3s ease, border-color 0.3s ease;
+      -moz-transition: background 0.3s ease, border-color 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    #login form input[type="submit"]:hover {
+      background-color: #01cf9e;
+    }
+
+    #login > p {
+      text-align: center;
+    }
+
+    #login > p.intro {
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: #e4e4e4;
+    }
+
+    #login > p span {
+      padding-left: 5px;
+    }
+  </style>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+  <div id="login">
+    <p class="intro">Lelylan Dev Center</p>
+      <form accept-charset="UTF-8" action="/users/sign_in" method="post">
+        <fieldset class="clearfix">
+          <p>
+          <span class="fontawesome-user"></span>
+          <input type="email" id="user_email" name="user[email]" placeholder="Username"  required>
+          </p>
+
+          <p>
+          <span class="fontawesome-lock"></span>
+          <input type="password" id="user_password" name="user[password]" placeholder="Password" required>
+          </p>
+
+          <div style="display:none;">
+            <input name="user[remember_me]" type="hidden" value="0"><input checked="checked" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1">
+          </div>
+
+          <p><input type="submit" value="Sign In"></p>
+        </fieldset>
+      </form>
+
+    <p><%= link_to 'Did you forget your password?', "#{people_host}/users/password/new" %><a href=""></a></p>
+  </div> <!-- end login -->
+</body>
+</html>
+
