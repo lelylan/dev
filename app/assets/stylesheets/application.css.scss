@@ -191,6 +191,13 @@ h2[id] {
     background-color: transparent;
     color: #eee;
   }
+
+  .signout > a {
+    text-transform: none !important;
+    font-size: 12px !important;
+    padding-right: 0 !important;
+    font-weight: 200;
+  }
 }
 
 

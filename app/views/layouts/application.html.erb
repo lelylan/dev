@@ -12,7 +12,7 @@
     <meta name="description" content="Lelylan Dev Center">
     <meta name="viewport" content="width=device-width">
   </head>
-  <body <% if params[:id]=='index' %> class="presentation" <% end%> >
+  <body <% if params[:id]=='index' %> class="presentation" <% end %>>
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -35,6 +35,10 @@
           <li><a href="http://try.lelylan.com">Demo</a></li>
           <li><a href="http://people.lelylan.com">Profile</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active signout"><%= link_to "Sign out #{current_user.email}", destroy_user_session_path, method: :delete %></li>
+        </ul>
+
       </div>
     </div>
     </nav>
