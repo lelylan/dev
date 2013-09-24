@@ -36,7 +36,7 @@ creating a basic light, the device inherits the <em>status</em>
 
 <h3>Resource URL</h3>
 
-<div class="preview">
+<div class="code-block">
   <pre><code>GET http://api.lelylan.com/devices/:id</code></pre>
 </div>
 
@@ -116,11 +116,11 @@ device = devices.get_dev('<id>')</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3 id="device-representation">Example body response</h3>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
   "id": "5042344b95fc441000000001",
   "name": "Light",
@@ -269,7 +269,7 @@ Returns private information for a given device identified from its ID.
 </div>
 
 <h3>Resource URL</h3>
-<div class="preview">
+<div class="code-block">
 <pre><code>GET http://api.lelylan.com/devices/:id/privates</code></pre>
 </div>
 
@@ -350,11 +350,11 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3 id="device-representation">Example body response</h3>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
   "id": "5042344b95fc441000000001",
   "name": "Closet dimmer",
@@ -555,11 +555,11 @@ devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3>Example body response</h3>
 
-<div class="preview"><pre><code>[
+<div class="code-block"><pre><code>[
   { # device representation },
   { # device representation },
   ...
@@ -702,7 +702,7 @@ device = devices.create_dev(params)</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 201 Created
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
 <h3>Example body response</h3>
@@ -831,7 +831,7 @@ device = devices.update_dev('<id>', params)</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3>Example body response</h3>
 
@@ -1302,8 +1302,7 @@ to be sent from the user.
 <div class="tab-content">
   <div class="tab-pane active" id="execute-a-function-ii-curl">
     <div class="preview">
-      <div class="preview">
-        <pre><xmp>curl -X PUT http://api.lelylan.com/devices/<id>/functions \
+      <pre><xmp>curl -X PUT http://api.lelylan.com/devices/<id>/functions \
      -H 'Authorization: Bearer <token>' \
      -H 'Content-Type: application/json' \
      -d '{
@@ -1313,7 +1312,6 @@ to be sent from the user.
              "value": "90" }
            ]
          }'</xmp></pre>
-      </div>
     </div>
   </div>
   <div class="tab-pane" id="execute-a-function-ii-node">

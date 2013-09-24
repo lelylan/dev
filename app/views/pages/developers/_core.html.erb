@@ -65,10 +65,13 @@ profile = user.me()</xmp></pre>
 
 <h3>Example header response</h3>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 200 OK</code></pre>
+</div>
 
 <h3 id="device-representation">Example body response</h3>
 
+<div class="code-block">
 <pre><code>{
   "id": "5036227a4f1b030200009000",
   "email": "reggie@lelylan.com",
@@ -77,6 +80,7 @@ profile = user.me()</xmp></pre>
   "location": "New York",
   "rate_limit": 5000
 }</code></pre>
+</div>
 
 <h2 id="core-concepts-rate-limit">Rate Limit</h2>
 
@@ -85,14 +89,17 @@ We limit requests to <code>5000</code> per day. You can check the returned HTTP 
 of any authenticated API request to see your current status.
 </p>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+</div>
 
 <p>
 When you exceed the API calls limit your request is forbidden.
 </p>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 403 Forbidden
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 0
@@ -107,7 +114,7 @@ X-RateLimit-Remaining: 0
     "daily_rate_limit": 5000,
   }
 }</code></pre>
-
+</div>
 
 <div class="alert alert-info">
   <p>
@@ -170,7 +177,9 @@ X-RateLimit-Remaining: 0
   with the last fetched resource <code>ID</code>.
 </p>
 
+<div class="code-block">
 <pre><code>curl -L http://api.lelylan.com/devices.json?start=5042205c70eda61000000003</code></pre>
+</div>
 
 <p>
 The default number of resources per page is 25 and the maximum is 100.
@@ -238,6 +247,7 @@ The following examples describe the same time using two different accepted forma
 
 <h3>401 - Unauthorized</h3>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 401 Unauthorized
 <hr>
 {
@@ -249,9 +259,11 @@ The following examples describe the same time using two different accepted forma
     "description": "Token not valid"
   }
 }</code></pre>
+</div>
 
 <h3>404 - Not Found</h3>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 404 Not Found
 <hr>
 {
@@ -264,9 +276,11 @@ The following examples describe the same time using two different accepted forma
     "uri": "http://api.lelylan.com/devices/4f4ba959d033a95549000261"
   }
 }</code></pre>
+</div>
 
 <h3>422 - Not Valid</h3>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 422 Not Valid
 <hr>
 {
@@ -279,6 +293,7 @@ The following examples describe the same time using two different accepted forma
     "body": { "name": "" },
   }
 }</code></pre>
+</div>
 
 <h2 id="core-concepts-http-caching">HTTP Caching</h2>
 
@@ -292,7 +307,7 @@ resource back to the end client. To make this possible Lelylan returns the
 <code>Etag</code> and <code>Last-Modified</code> headers.
 </p>
 
-<div class="preview"><pre><code>Etag: "e59b3c1fca50b5d0bf44c931253ded86"
+<div class="code-block"><pre><code>Etag: "e59b3c1fca50b5d0bf44c931253ded86"
 Last-Modified: Sat, 01 Sep 2012 16:00:32 GMT</code></pre></div>
 
 <h2 id="core-concepts-rest-interface">REST Interface</h2>

@@ -1,48 +1,11 @@
-index_pages:
-  - index
-  - start
-  - api
-  - community
 titles:
-  'start': Introducing Lelylan
-  'start/introduction': Getting Started
-  'start/app': Building your first app
-  'start/physical': Connect your first device
-  'start/tutorials': Tutorials & Articles
-  'start/projects': Projects
-  'api': Lelylan API
-  'api/core': Core Concepts
-  'api/devices': Devices
-  'api/devices/consumptions': Consumptions
-  'api/devices/histories': Histories
-  'api/types': Types
-  'api/types/properties': Properties
-  'api/types/functions': Functions
-  'api/types/statuses': Statuses
-  'api/locations': Locations
-  'api/activations': Activations
-  'api/oauth': OAuth 2.0
-  'api/realtime': Realtime
-  'api/physicals': Physical Devices
-  'api/physicals/mqtt': MQTT
-  'api/physicals/direct': Direct Access
-  'community': Community
-  'community/clients': Client Libraries
-  'community/support': Support
-  'community/faq': Frequently Asked Questions
+  'getting-started': Getting Started
+  'makers': Makers API
+  'developers': Developers API
+  'types': Types API
+  'code-examples': Code Examples
+  'support': support
 code_pages:
-  - api/core
-  - api/devices
-  - api/activations
-  - api/devices/consumptions
-  - api/devices/histories
-  - api/types
-  - api/types/properties
-  - api/types/functions
-  - api/types/statuses
-  - api/locations
-  - api/realtime
-  - api/physicals
-  - api/physicals/mqtt
-  - api/physicals/direct
-  - api/oauth
+  - makers
+  - developers
+  - types

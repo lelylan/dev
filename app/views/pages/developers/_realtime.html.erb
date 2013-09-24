@@ -173,7 +173,7 @@ to the callback URL defined in the subscription.
 
 <h3 id="payload-representation">Payload example</h3>
 
-<div class="preview"><pre><code>{
+<div class="code-block"><pre><code>{
   "subscription": { "id": "50f54f5f5e74ef2873000006" },
   "resource": "devices",
   "event": "create",
@@ -266,7 +266,9 @@ payload as message.
 
 <h3>Resource URL</h3>
 
+<div class="code-block">
 <pre><code>GET http://api.lelylan.com/subscriptions/:id</code></pre>
+</div>
 
 <h3>Parameters</h3>
 
@@ -350,7 +352,9 @@ subscription = subscriptions.get_sub('<id>')</xmp></pre>
 
 <h3>Example header response</h3>
 
+<div class="code-block">
 <pre><code>HTTP/1.1 200 OK</code></pre>
+</div>
 
 <h3 id="subscription-representation">Example body response</h3>
 
@@ -507,11 +511,11 @@ subs = subscriptions.get_all_sub()</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3>Example body response</h3>
 
-<div class="preview highlight"><pre><code>[
+<div class="code-block highlight"><pre><code>[
   { # subscription representation },
   { # subscription representation },
   ...
@@ -659,7 +663,7 @@ subscription = subscriptions.create_sub(params)</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 201 Created
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
 Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></pre></div>
 
 <h3>Example body response</h3>
@@ -793,7 +797,7 @@ subscription = subscriptions.update_sub('<id>', params)</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3>Example body response</h3>
 
@@ -894,7 +898,7 @@ subscription = subscriptions.delete_sub('<id>')</xmp></pre>
 
 <h3>Example header response</h3>
 
-<div class="preview"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
 
 <h3>Example body response</h3>
 
