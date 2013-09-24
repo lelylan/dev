@@ -88,14 +88,16 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 <h2 id="create-your-first-js-app-add-lelylan-device-component">Add Lelylan Device Component</h2>
 
 <p>
-  Now add the Device Component JavaScript and CSS files into
-  <code>app/index.html</code>.
+  Open <code>app/index.html</code> and add the Device Component JavaScript and CSS files.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint colorify"><xmp><!-- load device component css -->
-<link href="//s.lelylan.com/device-component-ng/0.1.0/device-component-ng.min.css" rel="stylesheet">
-<!-- load device component javascript libraries -->
+<pre class="prettyprint colorify"><xmp><!-- Device Component CSS -->
+<link href="//s.lelylan.com/device-component-ng/0.1.0/device-component-ng.min.css" rel="stylesheet"></xmp></pre>
+</div>
+
+<div class="code-block">
+<pre class="prettyprint colorify"><xmp><!-- Device Component JavaScripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
 <script src="//s.lelylan.com/lelylan-ng/0.1.0/lelylan-ng.min.js"></script>
@@ -103,7 +105,7 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 </div>
 
 <p>
-  Go to <code>app/app.js</code> and add the device component module to the AngularJS app.
+  Open <code>app/scripts/app.js</code> and add the device component module to the AngularJS app.
   You need to do this to be able to access to all the device component functionalities.
 </p>
 
@@ -122,8 +124,7 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 <h2 id="create-your-first-js-app-add-login-and-device-tags">Add the &lt;login&gt; and &lt;device&gt; tag</h2>
 
 <p>
-The next step is to replace the existing code in <code>app/views/main.html</code>
-with the following one.
+Open <code>app/views/main.html</code> and replace the existing code with the following one.
 </p>
 
 <div class="code-block">
@@ -152,23 +153,26 @@ instantiates an HTML template for every device in the collection by setting its
 <h2 id="create-your-first-js-app-get-all-your-devices">Get All Your Devices</h2>
 
 <p>
-We now need to define the <code>devices</code> variable. Open
-<code>scripts/controllers/main.js</code> and add the following code into the
-main controller function.
+Open <code>scripts/controllers/main.js</code> and replace the existing code with
+the following.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>// get the access token (you get it when you log in)
-var token = AccessToken.get().access_token;
-// create an authorized variable which is true when a token is set
-var authorized = !!token;
-// if the user is logged in then get all owned devices
-if (authorized) { $scope.devices = Device.query(); }</xmp></pre>
+<pre class="prettyprint"><xmp>angular.module('lelylanAngularTestApp')
+  .controller('MainCtrl', function ($scope, $rootScope, AccessToken, Device) {
+    // get the access token (you get it when you log in)
+    var token = AccessToken.get().access_token;
+    // create an authorized variable which is true when a token is set
+    var authorized = !!token;
+    // if the user is logged in then get all owned devices
+    if (authorized) { $scope.devices = Device.query(); }
+});</xmp></pre>
 </div>
 
 <p>
-In the code above we extract the Access Token (we get one during the
-login phase) and retrieve the list of owned devices only if the user is logged in.
+In the code above we extract the Access Token (we get it during the login phase)
+and retrieve the list of owned devices. If the user is not authorized, nothing is
+visualized.
 </p>
 
 <div class="alert alert-info">
@@ -213,9 +217,6 @@ Login and get the control of your devices.
 <div class="code-block">
 <pre class="prettyprint"><code>grunt server</code></pre>
 </div>
-
-<p>
-</p>
 
 <div class="alert alert-info">
   <p>
