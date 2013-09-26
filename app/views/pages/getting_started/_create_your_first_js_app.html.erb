@@ -6,13 +6,13 @@ you control and monitor any device connected with Lelylan through a simple web a
 based on Javascript and HTML5.
 </p>
 
-<a href="#">
+<a href="http://create-your-first-js-app.herokuapp.com/">
 <%= image_tag('create-your-first-js-app/introduction.png', class: 'img-thumbnail') %>
 </a>
 
 <div class="button-group">
-  <a href="#" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Download Code</a>
-  <a href="#" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> View Demo</a>
+  <a href="https://github.com/andreareginato/create-your-first-js-app" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Download Code</a>
+  <a href="http://create-your-first-js-app.herokuapp.com/" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> View Demo</a>
 </div>
 
 
@@ -114,7 +114,8 @@ The generator will ask you a couple of questions. You can answer yes to all of t
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>angular.module('myApp', ['lelylan.components.device'])</xmp></pre>
+<pre class="prettyprint"><xmp>angular.module('<YOUR-APP-NAME>', ['lelylan.components.device'])
+// ...</xmp></pre>
 </div>
 
 <div class="alert alert-info">
@@ -133,7 +134,7 @@ Open <code>app/views/main.html</code> and replace the existing code with the fol
 
 <div class="code-block">
 <pre class="prettyprint colorify"><xmp><div class="hero-unit">
-  <login client="<client-id>" redirect="http://localhost:9000" scope="devices privates"></login>
+  <login client="<CLIENT-ID>" redirect="http://localhost:9000" scope="devices privates"></login>
   <device device-id="device.id" ng-repeat="device in devices"></device>
   <div class="clearfix"></div>
 </div></xmp></pre>
