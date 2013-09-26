@@ -584,6 +584,31 @@ table {
   }
 }
 
+.table-labeled {
+
+  .label {
+    padding: 0;
+  }
+
+  .label {
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 23px;
+    padding: 3px 6px 2px;
+    text-transform: uppercase;
+    background: #eee;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+
+  .link {
+    background: #E5F4FF;
+    border: 1px solid #C5EAFF;
+  }
+}
+
+
 
 
 /* * * * * * */
@@ -599,9 +624,56 @@ body.presentation {
     background-color: #fbfbfb !important;
   }
 
-  .presenttion-block > .row {
+  .presentation-block > .row {
     padding: 70px 0 60px;
     border-bottom: 1px solid #eee;
+  }
+
+  .banner {
+    margin-top: 10px;
+    height: 520px;
+    background: $lelylanColor url(header.jpg) center center;
+    background-size: cover;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+
+    .banner-content {
+      padding: 120px 40px;
+      font-weight: 300;
+    }
+
+    p, h1 {
+      text-align: center;
+      background: rgba(255,255,255,0.9) !important;
+      margin-bottom: 5px;
+      margin-left: 25px;
+      padding: 9px 15px 10px 20px;
+      color: #000;
+    }
+
+    h1 {
+      font-size: 68px;
+    }
+
+    p {
+      font-size: 32px;
+      font-weight: 100;
+    }
+
+    .banner-button {
+      text-align: center;
+
+      a {
+        border: rgba(255, 255, 255, 1) 0.1em solid;
+        margin-top: 60px;
+        height: 52px;
+        font-size: 20px;
+        font-weight: 100;
+        letter-spacing: 2px;
+      }
+    }
+
   }
 
   h1 {
@@ -644,28 +716,6 @@ body.presentation {
     color: $linkColorHover !important;
   }
 }
-
-.table-labeled .label {
-  padding: 0;
-}
-
-.table-labeled .label {
-  border-radius: 2px;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 23px;
-  padding: 3px 6px 2px;
-  text-transform: uppercase;
-  background: #eee;
-  border: 1px solid #ddd;
-  color: #333;
-}
-
-.table-labeled .link {
-  background: #E5F4FF;
-  border: 1px solid #C5EAFF;
-}
-
 
 
 
