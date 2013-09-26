@@ -142,6 +142,8 @@
     <p class="intro">Lelylan Dev Center</p>
       <form accept-charset="UTF-8" action="/users/sign_in" method="post">
         <fieldset class="clearfix">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
           <p>
           <span class="fontawesome-user"></span>
           <input type="email" id="user_email" name="user[email]" placeholder="Username"  required>
