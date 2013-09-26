@@ -1,2 +1,2 @@
 .pln{color:#111}@media screen{.str{color:#F05}.kwd{color:#111}.com{color:#999}.typ{color:#F05}.lit{color:#111}.pun,.opn,.clo{color:#111}.tag{color:#111}.atn{color:#111}.atv{color:#111}.dec,.var{color:#606}.fun{color:red}}
-pre code, pre xmp{display:block;color:#111;font-family:Monaco, Consolas, monospace;font-size:12px;line-height:1.5;padding:5px}
+.colorify .atv{color:#f05}

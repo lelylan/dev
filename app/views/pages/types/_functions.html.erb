@@ -1,0 +1,732 @@
+<h2 id="functions-api-overview">What is a Function?</h2>
+
+<p>
+Functions defines the daily interactions you have with the devices in your house,
+for example when you turn on a light, close a door or raise the temperature in a
+room. With functions you can control any device in the same way you do everyday of
+your life.
+</p>
+
+<h2 id="get-a-function">GET /functions/:id</h2>
+
+<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> function identified from its ID.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>GET http://api.lelylan.com/functions/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired function.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-function-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-function-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-function-curl">
+    <div class="preview">
+      <pre><xmp>curl http://api.lelylan.com/functions/<id></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-function-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Function.find('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-function-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      $scope.function = Function.get({ id: '<id>' });
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-function-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+function = lelylan.function('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-function-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>from lelylan import functions
+function = functions.get_func('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3 id="function-representation">Example body response</h3>
+
+<div class="code-block"><pre><code>{
+  "uri": "http://api.lelylan.com/functions/504210df70eda60a00000003",
+  "id": "504210df70eda60a00000003",
+  "name": "Set intensity",
+  "created_at": "2012-09-01T13:42:55Z",
+  "updated_at": "2012-09-01T13:42:55Z",
+  "properties": [{
+    "id": "50420c7e267ff51000000001",
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+    "expected": "on"
+    "pending": "true"
+  }, {
+    "id": "50420c7e267ff51000000001",
+    "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+    "expected": null
+    "pending": true
+  }]
+}</code></pre></div>
+
+<h3>Body response explained</h3>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Function URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Function ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Function name</td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Function properties</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.uri</span>
+      </td>
+      <td>Property URI</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>Property ID</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.expected</span>
+      </td>
+      <td>Expected property value.</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.pending</span>
+      </td>
+      <td>Property pending status.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="get-all-functions">GET /functions</h2>
+
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) functions.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code># created functions
+GET http://api.lelylan.com/functions
+<hr>
+# all existing functions
+GET http://api.lelylan.com/functions/public</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        ID of the last fetched record. Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#get-all-functions-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-functions-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-functions-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-all-functions-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-functions-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-funcitons-curl">
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/functions \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-functions-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Function.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
+Lelylan.Function.public({}, callback); // all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-functions-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">
+    <div ng-repeat="function in owned">{{function}}</div>
+    <div ng-repeat="function in public">{{function}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Function) {
+      $scope.owned  = Function.query();   // owned resources
+      $scope.public = Function.public();  // all existing resources
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-functions-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+functions = lelylan.functions # owned resources
+
+lelylan = Lelylan::Client.new
+functions = lelylan.public_functions # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-functions-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import functions
+functions = functions.get_created_func() # owned resources
+
+from lelylan import functions
+functions = functions.get_all_func() # all existing resources</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<div class="code-block highlight"><pre><code>[
+  { # function representation },
+  { # function representation },
+  ...
+]</code></pre></div>
+
+<p>
+  See <a href="#function-representation">function representation</a> for body response.
+</p>
+
+<h2 id="create-a-function">POST /functions</h2>
+
+<p>
+  Create a function and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>POST http://api.lelylan.com/functions</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Function name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.expected</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Expected value assigned to the device property when the function is executed.
+        Don't set it (null) if the value needs to be fullfilled by the user.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#create-a-function-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#create-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-function-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-function-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://api.lelylan.com/functions \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+          "name": "Set intensity",
+          "properties": [
+            { "id": "<status>", "expected": "on" },
+            { "id": "<intensity>" }
+          ]
+         }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-function-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  name: 'Set intensity',
+  properties:
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>' } ] };
+
+Lelylan.Function.create(params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-function-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      var params = {
+        name: 'Set intensity',
+        properties: [
+          { id: '<status>', expected: 'on'},
+          { id: '<intensity>' } ] };
+
+      $scope.function = new Function(params);
+      $scope.function.$save();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-function-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Set intensity',
+  properties:
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>' } ] }
+
+function = lelylan.create_function(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-function-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'Set intensity',
+  properties:
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>' } ] }
+
+from lelylan import functions
+function = functions.create_func(params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
+Location: http://api.lelylan.com/functions/504210df70eda60a00000003</code></pre>
+</div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#function-representation">function representation</a> for body response.
+</p>
+
+<h2 id="update-a-function">PUT /functions/:id</h2>
+
+<p>
+  Update a function identified from its ID and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+<div class="code-block">
+<pre><code>PUT  http://api.lelylan.com/functions/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired function.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Function name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.expected</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Expected value assigned to the device property when the function is executed.
+        Set it to <code>null</code> if the value needs to be fullfilled by the user.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-a-function-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-function-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-function-curl">
+    <div class="preview"><pre><xmp>
+curl -X PUT http://api.lelylan.com/functions/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "Set intensity to 50%",
+           "properties": [
+             { "id": "<status>", "expected": "on"},
+             { "id": "<intensity>", "expected": "50" }
+           ]
+         }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-function-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  name: 'Set intensity to 50%',
+  properties:
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>', expected: '50' } ] };
+
+Lelylan.Function.update('<id>', params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-function-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      var params = {
+        id: '<id>',
+        name: 'Set intensity to 50%',
+        properties:
+          [ { id: '<status>', expected: 'on'},
+            { id: '<intensity>', expected: '50' } ] };
+
+      $scope.function = new Function(params);
+      $scope.function.$update();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-function-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Set intensity to 50%',
+  properties:
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>', expected: '50' } ] }
+
+function = lelylan.update_function('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-function-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'Set intensity to 50%',
+  properties:
+    [ { id: '<status>', expected: 'on'},
+      { id: '<intensity>', expected: '50' } ] }
+
+from lelylan import functions
+function = functions.update_func('<id>', params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    When updating properties all previous connected properties are replaced.
+  </p>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#function-representation">function representation</a> for body response.
+</p>
+
+<h2 id="delete-a-function">DELETE /functions/:id</h2>
+
+<p>
+Delete a function identified from its ID and returns extended information for it. </br>
+Connected properties are not deleted.
+</p>
+
+<h3>Resource URL</h3>
+<div class="code-block">
+  <pre><code>DELETE http://api.lelylan.com/functions/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired function.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-function-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-function-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#delete-a-function-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#delete-a-function-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-function-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-function-curl">
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/functions/<id> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-function-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Function.delete('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-function-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{function}}</div>
+  <script>
+    function LelylanController($scope, Function) {
+      $scope.function= new Function({ id: '<id>' });
+      $scope.function.$delete();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-function-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+function = lelylan.delete_function('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-function-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import functions
+function = functions.delete_func('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+See <a href="#function-representation">function representation</a> for body response.
+</p>
+
+<h2 id="functions-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

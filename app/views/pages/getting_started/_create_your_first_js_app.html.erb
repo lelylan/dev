@@ -1,0 +1,236 @@
+<h2 id="create-your-first-js-app-introduction">Introduction</h2>
+
+<p>
+This tutorial shows you how to build your first Connected Home app. It lets
+you control and monitor any device connected with Lelylan through a simple web app
+based on Javascript and HTML5.
+</p>
+
+<a href="http://create-your-first-js-app.herokuapp.com/">
+<%= image_tag('create-your-first-js-app/introduction.png', class: 'img-thumbnail') %>
+</a>
+
+<div class="button-group">
+  <a href="https://github.com/andreareginato/create-your-first-js-app" class="btn-lelylan"><span class="glyphicon glyphicon-download"></span> Download Code</a>
+  <a href="http://create-your-first-js-app.herokuapp.com/" class="btn-lelylan"><span class="glyphicon glyphicon-play-circle"></span> View Demo</a>
+</div>
+
+
+<h2 id="create-your-first-js-app-software-stack">Software Stack</h2>
+
+<h3>Yeoman</h3>
+
+<%# image_tag('create-your-first-js-app/yeoman.png', class: 'img-thumbnail') %>
+
+<p>
+<a href="http://yeoman.io">Yeoman</a> is a collection of tools and best practices
+to make developing for the modern web easy. The Yeoman workflow is based on three
+tools.
+</p>
+
+<ul>
+  <li><a href="https://yeoman.io">yo</a> - scaffolds out a new application and parts of it.</li>
+  <li><a href="http://gruntjs.com/">grunt</a> - builds, previews and tests your project.</li>
+  <li><a href="http://bower.io/">bower</a> - a dependency manager, so that you no longer have to manually download your scripts.</li>
+</ul>
+
+<h3>AngularJS</h3>
+
+<%# image_tag('create-your-first-js-app/angularjs.png', class: 'img-thumbnail') %>
+
+<p>
+<a href="http://angularjs.org/">AngularJS</a>
+is an open-source JavaScript framework, maintained by Google, that assists with
+running single-page applications. Its goal is to augment browser-based applications
+with model–view–controller (MVC) capability, in an effort to make both development
+and testing easier.
+</p>
+
+<h3>Lelylan Device Component</h3>
+
+<%# image_tag('create-your-first-js-app/device-component.png', class: 'img-thumbnail') %>
+
+<p>
+Lelylan <a href="https://github.com/lelylan/device-component-ng">Device Component</a>
+is a AngularJS directive (aka Web Components, Card or Widget) that makes it dead
+easy to control and monitor any device connected to Lelylan through the web.
+</p>
+
+<h2 id="create-your-first-js-app-getting-started">Getting Started</h2>
+
+<p>
+The first thing you need to do is install Yeoman. In a terminal, run the following
+command.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>npm install -g yo generator-angular</xmp></pre>
+</div>
+
+<p>
+Now it's time to generate a new AngularJS application. In a fresh project
+directory, run this.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>yo angular</xmp></pre>
+</div>
+
+<p>
+The generator will ask you a couple of questions. You can answer yes to all of them.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Read Bred Barrow
+  <a href="http://www.sitepoint.com/kickstart-your-angularjs-development-with-yeoman-grunt-and-bower/">article</a>
+  to deeply understand how Yeoman and AngularJS works together.
+  </p>
+</div>
+
+<h2 id="create-your-first-js-app-add-lelylan-device-component">Add Lelylan Device Component</h2>
+
+<p>
+  Open <code>app/index.html</code> and add the Device Component JavaScript and CSS files.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint colorify"><xmp><!-- Device Component CSS -->
+<link href="//s.lelylan.com/device-component-ng/0.1.0/device-component-ng.min.css" rel="stylesheet"></xmp></pre>
+</div>
+
+<div class="code-block">
+<pre class="prettyprint colorify"><xmp><!-- Device Component JavaScripts -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+<script src="//s.lelylan.com/lelylan-ng/0.1.0/lelylan-ng.min.js"></script>
+<script src="//s.lelylan.com/device-component-ng/0.1.0/device-component-ng.min.js"></script></xmp></pre>
+</div>
+
+<p>
+  Open <code>app/scripts/app.js</code> and add the device component module to the AngularJS app.
+  You need to do this to be able to access to all the device component functionalities.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>angular.module('<YOUR-APP-NAME>', ['lelylan.components.device'])
+// ...</xmp></pre>
+</div>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Use the latest version of Lelylan <a href="https://github.com/lelylan/device-component-ng">Device Component</a>
+  as v0.1.0 could get old pretty fast.
+  </p>
+</div>
+
+<h2 id="create-your-first-js-app-add-login-and-device-tags">Add the &lt;login&gt; and &lt;device&gt; tag</h2>
+
+<p>
+Open <code>app/views/main.html</code> and replace the existing code with the following one.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint colorify"><xmp><div class="hero-unit">
+  <login client="<CLIENT-ID>" redirect="http://localhost:9000" scope="devices privates"></login>
+  <device device-id="device.id" ng-repeat="device in devices"></device>
+  <div class="clearfix"></div>
+</div></xmp></pre>
+</div>
+
+<p>
+The &lt;login&gt; tag renders a login link that handles the communication
+with the OAuth2 servers. To make it work go to <a href="http://people.lelylan.com">Lelylan People</a>
+and create a new app giving a name and setting <code>http://localhost:9000</code> as
+redirect link. Once created, copy the Client ID into the client attribute
+you have in the &lt;login&gt; tag.
+</p>
+
+<p>
+The &lt;device&gt; tag renders a device component for all of your devices.
+To make this possible we use the AngularJS <code>ng-repeat</code> directive which
+instantiates an HTML template for every device in the collection by setting its
+<code>device-id</code> attribute.
+</p>
+
+<h2 id="create-your-first-js-app-get-all-your-devices">Get All Your Devices</h2>
+
+<p>
+Open <code>scripts/controllers/main.js</code> and replace the existing code with
+the following.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>angular.module('lelylanAngularTestApp')
+  .controller('MainCtrl', function ($scope, $rootScope, AccessToken, Device) {
+    // get the access token (you get it when you log in)
+    var token = AccessToken.get().access_token;
+    // create an authorized variable which is true when a token is set
+    var authorized = !!token;
+    // if the user is logged in then get all owned devices
+    if (authorized) { $scope.devices = Device.query(); }
+});</xmp></pre>
+</div>
+
+<p>
+In the code above we extract the Access Token (we get it during the login phase)
+and retrieve the list of owned devices. If the user is not authorized, nothing is
+visualized.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Learn more about the <a href="https://github.com/lelylan/lelylan-ng">AngularJS Client</a>.
+  </p>
+</div>
+
+<h2 id="create-your-first-js-app-add-realtime-notifications">Add Realtime Notifications</h2>
+
+<p>
+Lelylan lets third party apps to get realtime notifications using websockets.
+It connects to our servers using the access token and it fires an event to all
+device components when receiving realtime updates. When intercepting the event,
+the device components update their statuses.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint colorify"><xmp>// socket io connection
+var socket = io.connect('http://96.126.109.170:80');
+// connection funciton
+socket.on('connect', function() {
+  socket.emit('subscribe', token);
+});
+// realtime update received
+socket.on('update', function (event) {
+  $rootScope.$broadcast('lelylan:device:request:end', event.data);
+  console.log('Received an update for the device', event.data.name);
+  $scope.$apply() // refresh the UI
+});</xmp></pre>
+</div>
+
+<h2 id="create-your-first-js-app-run-your-app">Run Your App</h2>
+
+<p>
+Navigate to the root directory of your app and run the command above. After a few seconds
+a browser window should pop up with your first connected home app.
+Login and get the control of your devices.
+</p>
+
+<div class="code-block">
+<pre class="prettyprint"><code>grunt server</code></pre>
+</div>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  If you don't have any device in Lelylan create the first one using the
+  <a href="http://manage.lelylan.com">Dashboard</a>.
+  </p>
+</div>
+
+<h2 id="create-your-first-js-app-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

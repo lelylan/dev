@@ -1,0 +1,967 @@
+<h2 id="oauth-overview">Why OAuth 2.0</h2>
+
+<p>
+Lelylan API uses the OAuth 2.0 protocol for authentication and authorization.
+OAuth lets users grant the access to the desired resources to third party applications,
+giving them the possibility to enable and disable those accesses whenever they want.
+</p>
+
+<h2 id="oauth-registration">Registration</h2>
+
+<p>
+All developers need to <%= link_to 'register their applications', "#{people_host}/oauth/applications" %>
+before getting started. A registered OAuth application is assigned with a unique
+Client ID and Client Secret.
+</p>
+
+<h2 id="oauth-flows">OAuth Flows</h2>
+
+<p>
+Lelylan supports the following flows.
+</p>
+
+<ul>
+  <li>
+  <a href="#oauth-authorization-code">Authorization Code Flow</a> -
+  for apps with servers that can store persistent information.
+  </li>
+  <li>
+  <a href="#oauth-implicit-grant">Implicit Grant Flow</a> -
+  for apps running in a browser (read Javascript) or mobile apps.
+  </li>
+  <li>
+  <a href="#oauth-password-credentials">Password Credentials</a> -
+  when previous flows can't be used or during development.
+  </li>
+</ul>
+
+<h2 id="oauth-authorization-code">Authorization Code</h2>
+
+<p>
+The Authorization Code flow is made up from two parts. At first your application
+asks to the user the permission to access their data. If the user approves Lelylan
+sends to the client an authorization code. In the second part, the client POST the
+authorization code along with its client secret to the Lelylan in order to get the
+access token.
+</p>
+
+<h3>1. Redirect the user to the authorization page</h3>
+
+<p>
+Redirect the user to the authorization endpoint.
+<p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#authorization-code-first-step-curl" data-toggle="tab" class="curl">Manual</a></li>
+  <li><a href="#authorization-code-first-step-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#authorization-code-first-step-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#authorization-code-first-step-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#authorization-code-first-step-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="authorization-code-first-step-curl">
+    <div class="preview">
+      <pre><xmp>http://people.lelylan.com/oauth/authorize?
+       response_type=code&
+       client_id=<client-id>&
+       redirect_uri=<redirect-uri>&
+       scope=<scope>&
+       state=<state></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-first-step-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var credentials = {
+  clientID: '<client-id>',
+  clientSecret: '<client-secret>',
+  site: 'http://people.lelylan.com' };
+
+var OAuth2 = require('simple-oauth2')(credentials);
+
+var authorization_uri = OAuth2.AuthCode.authorizeURL({
+  redirect_uri: '<callback-uri>',
+  scope: '<scopes>' });
+
+// => http://people.lelylan.com/oauth/authorize?
+//      redirect_uri=<callback-uri>&
+//      scope=<scopes>&
+//      response_type=code&
+//      client_id=<client-id></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-first-step-angular">
+    <div class="preview">
+      <pre class="prettyprint"><code>// This flow is not available in AngularJS.
+// To authenticate an AngularJS app use the <a href="#implicit-grant" class="nocode">Implicit Grant flow</a></code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-first-step-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth = OAuth2::Client.new(
+  '<client-id>',
+  '<client-secret>',
+  site: 'http://people.lelylan.com' )
+
+oauth.auth_code.authorize_url(redirect_uri: '<callback-uri>', scope: '<scopes>' )
+
+# => http://people.lelylan.com/oauth/authorize?
+#      redirect_uri=<callback-uri>&
+#      scope=<scopes>&
+#      response_type=code&
+#      client_id=<client-id></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-first-step-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth
+
+oauth.oauth('<client_id>', '<client_secret>', '<redirect_uri>', '<scope>')
+oauth.get_auth_uri()
+
+# => http://people.lelylan.com/oauth/authorize?
+#      redirect_uri=<redirect-uri>&
+#      client_id=<client-id>&
+#      scope=<scope>&
+#      response_type=code</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<p>
+Follow a description of the needed parameters.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>response_type</td>
+      <td>Always use 'code' as response type<td>
+    </tr>
+    <tr>
+      <td>client_id</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      </td>
+    </tr>
+    <tr>
+      <td>redirect_uri</td>
+      <td>
+        <%= link_to 'Registered', "#{people_host}/oauth/applications" %>
+        application URI where the user is redirected after authorization.
+      </td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>Application privileges. <a href="#oauth-scopes">Learn more about</a>.</td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>Optional opaque value used by the client to maintain state between the request and callback.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+If the user grants the access, Lelylan redirects the user to <code>redirect_uri</code>
+and appends the authorization code in the query string. This code will be used to get
+the final access token.
+</p>
+
+<div class="code-block">
+<pre><code>http://example.com/redirect-uri?code=code&state=state</code></pre>
+</div>
+
+<h3>2. Get the access token</h3>
+
+<p>
+Get the access token (remember to basic authenticate with client id and client secret).
+<p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#authorization-code-second-step-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#authorization-code-second-step-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#authorization-code-second-step-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#authorization-code-second-step-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#authorization-code-second-step-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="authorization-code-second-step-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://people.lelylan.com/oauth/token \
+     -u  <client-id>:<client-secret> \
+     -d 'grant_type=authorization_code' \
+     -d 'code=<code>' \
+     -d 'redirect_uri=<redirect_uri>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-second-step-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>OAuth2.AuthCode.getToken({ code: '<code>', redirect_uri: '<redirect-uri>' }, saveToken);
+
+var token;
+var saveToken = function(error, result) {
+  if (error) console.log('Access Token Error', error.message);
+  token = OAuth2.AccessToken.create(result);
+  console.log('Access Token successfully saved');
+});</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-second-step-angular">
+    <div class="preview">
+      <pre class="prettyprint"><code>// This flow is not available in AngularJS.
+// To authenticate an AngularJS app use the <a href="#implicit-grant" class="nocode">Implicit Grant Flow</a></code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-second-step-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>token = oauth.auth_code.get_token('<code>', redirect_uri: '<redirect-uri>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="authorization-code-second-step-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp># automatically parse the query string and set the access token
+oauth.set_access_token()</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<p>
+Here a description of the needed parameters.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      </td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      </td>
+    </tr>
+    <tr>
+      <td>grant_type</td>
+      <td>Always use 'authorization_code' as grant type.<td>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>
+        Authorization code (from the previous step).
+      </td>
+    </tr>
+    <tr>
+      <td>redirect_uri</td>
+      <td>Application URI where the user is redirected after authorization.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+Here a response example.
+</p>
+
+<div class="code-block">
+<pre><code>HTTP/1.1 200 OK
+<hr>
+{
+  "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
+  "refresh_token": "ec1a59d298aa51b3f133b6135b817bb19eb917aac5bc7821d410ffbf5ebXXXXX",
+  "token_type": "bearer",
+  "expires_in": 7200
+}</code></pre></div>
+
+<h2 id="oauth-implicit-grant">Implicit Grant</h2>
+
+<p>
+This flow is meant for Javascript-based web applications that can't maintain state
+over time (it includes Actionscript, Silverlight and similar).
+The flow starts redirecting the user to the authorization endpoint.
+<p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#implicit-grant-curl" data-toggle="tab" class="curl">Manual</a></li>
+  <li><a href="#implicit-grant-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#implicit-grant-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#implicit-grant-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#implicit-grant-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="implicit-grant-curl">
+    <div class="preview"><pre><xmp>http://people.lelylan.com/oauth/authorize?
+       response_type=token&
+       client_id=<client-id>&
+       redirect_uri=<redirect-uri>&
+       scope=<scope>&
+       state=<state></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-node">
+    <div class="preview">
+      <pre class="prettyprint"><code>// This flow is not available in Node.js.
+// To authenticate a Node app use the <a href="#authorization-code-node" class="nocode">Authorization Code Flow</a></code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller = "LoginController">
+    <login client   = "{{oauth.client}}"
+           redirect = "{{oauth.redirect}}"
+           scope    = "{{oauth.scope}}"
+           state    = "{{oauth.state}}"></login>
+  </div>
+
+  <script>
+    function LoginController($scope) {
+      $scope.oauth = {
+        client:   '<client-id>',
+        redirect: '<redirect-uri>',
+        scope:    '<scope>',
+        state:    '<state>' };
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><code>// This flow is not available in Ruby.
+// To authenticate a Ruby app use the <a href="#authorization-code" class="nocode">Authorization Code Flow</a></code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="implicit-grant-python">
+    <div class="preview">
+      <pre class="prettyprint"><code>// This flow is not available in Python.
+// To authenticate a Python app use the <a href="#authorization-code" class="nocode">Authorization Code Flow</a></code></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<p>
+Here a description of the needed parameters.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>response_type</td>
+      <td>Always use 'token' as response type.<td>
+    </tr>
+    <tr>
+      <td>client_id</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      </td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      </td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>
+        Application privileges. <a href="#oauth-scopes">Learn more about</a>
+      </td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>Optional opaque value used by the client to maintain state between the request and callback.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+If the user grants the access, Lelylan redirects the user to <code>redirect_uri</code>
+and appends the access token to the <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment URI</a>.
+</p>
+
+<div class="code-block">
+<pre><code>http://example.com/redirect-uri#
+  access_token=1146eeea7054e3fc39aebb0f3820742981c65e243a2fa85174ce98b564XXXXX&
+  token_type=bearer&
+  expires_in=7200&
+  state=remember-me</code></pre>
+</div>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  This flow does not return the refresh token. When the token is expired you need to go
+  to the authorization page to get the new access token.
+  </p>
+</div>
+
+<p>
+If your application is pure Javascript, you can easily parse the token from the URI.
+If your application is a native phone app you perform the flow in an embedded webview and
+redirect the user to a dummy website where you can grab the token from the URL.
+</p>
+
+<h2 id="oauth-password-credentials">Password Credentials</h2>
+
+<p>
+This flow is suitable when the resource owner has a trust relationship
+with the client, such as its computer operating system or a highly privileged application.
+Use this flow only when other flows are not viable or when you need a fast way to test
+your application.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Remember to basic authenticate your request using the Client ID and Secret.
+  </p>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#password-credentials-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#password-credentials-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#password-credentials-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#password-credentials-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#password-credentials-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="password-credentials-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://people.lelylan.com/oauth/token \
+     -u <client-id>:<client-secret> \
+     -d 'grant_type=password' \
+     -d 'username=<email>' \
+     -d 'password=<password>' \
+     -d 'scope=<scopes></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="password-credentials-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var token;
+var credentials = {
+  clientID: '<client-id>',
+  clientSecret: '<client-secret>',
+  site: 'http://people.lelylan.com' };
+
+var OAuth2 = require('simple-oauth2')(credentials);
+OAuth2.Password.getToken({
+  username: '<username>',
+  password: '<password>',
+  scope: '<scopes>'
+}, saveToken);
+
+var saveToken = function(error, result) {
+  if (error) console.log('Access Token Error', error.message);
+  token = OAuth2.AccessToken.create(result);
+  console.log('Access Token successfully saved');
+});</xmp></pre></div>
+  </div>
+  <div class="tab-pane" id="password-credentials-angular">
+    <div class="preview">
+      <pre class="prettyprint"><code>// This flow is not available in AngularJS.
+// To authenticate an AngularJS app use the <a href="#implicit-grant" class="nocode">Implicit Grant Flow</a></code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="password-credentials-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth = OAuth2::Client.new(
+  '<client-id>',
+  '<client-secret>',
+  site: 'http://people.lelylan.com' )
+
+token = oauth.password.get_token('<email>', '<password>', scopes: '<scopes>')
+</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="password-credentials-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>import lelylan
+from lelylan import oauth
+oauth.oauth('<client_id>', '<client_secret>')
+
+# automatically store the access token for future requests
+oauth.password_credentials('<email>', '<password>', '<scopes>')
+</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<p>
+Here a description of the needed parameters.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      </td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      </td>
+    </tr>
+    <tr>
+      <td>grant_type</td>
+      <td>
+        Always use 'password' as grant type.
+      </td>
+    </tr>
+    <tr>
+      <td>username</td>
+      <td>
+        Registered user email.
+      </td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>
+        Registered user password.
+      </td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>
+        Application privileges. <a href="#oauth-scopes">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+Here a response example.
+</p>
+
+<div class="code-block">
+<pre><code>HTTP/1.1 200 OK
+<hr>
+{
+  "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
+  "refresh_token": "ec1a59d298aa51b3f133b6135b817bb19eb917aac5bc7821d410ffbf5ebXXXXX",
+  "token_type": "bearer",
+  "expires_in": 7200
+}</code></pre></div>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Lelylan can block clients using this flow whenever the security for the final user is compromised.
+  </p>
+</div>
+
+<h2 id="oauth-refresh-access-token">Refresh Access Token</h2>
+
+<p>
+For security reasons an access token expires every two hours. To get a new one
+use the refresh token you previously received together with the access token.
+<p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Remember to basic authenticate your request using the Client ID and Secret.
+  </p>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#refresh-access-token-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#refresh-access-token-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#refresh-access-token-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#refresh-access-token-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#refresh-access-token-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="refresh-access-token-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://people.lelylan.com/oauth/token \
+     -u <client-id>:<client-secret> \
+     -d 'grant_type=refresh_token' \
+     -d 'refresh_token=<refresh-token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="refresh-access-token-node">
+    <div class="preview">
+      <pre class="prettyprint"><code>// The access token is automatically refreshed by the Node.js Client.</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="refresh-access-token-angular">
+    <div class="preview">
+      <pre class="prettyprint"><code>// The access token is automatically refreshed by AngularJS Client.</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="refresh-access-token-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><code>// The access token is automatically refreshed by the Ruby Client.</code></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="refresh-access-token-python">
+    <div class="preview">
+      <pre class="prettyprint"><code>// The access token is automatically refreshed by the Python Client.</code></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<p>
+Here a description of the needed parameters.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      </td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td>
+      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      </td>
+    </tr>
+    <tr>
+      <td>grant_type</td>
+      <td>
+        Always use 'refresh_token' as grant type.
+      </td>
+    </tr>
+    <tr>
+      <td>refresh_token</td>
+      <td>
+        Refresh token code (from previous access token request).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+Here a response example.
+</p>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK
+<hr>
+{
+  "access_token": "4adc339e06c20e84c41d0c04c8ad5daf89cc3655d79b399930d112f5f7fXXXXX",
+  "refresh_token": "ec1a59d298aa51b3f133b6135b817bb19eb917aac5bc7821d410ffbf5ebXXXXX",
+  "token_type": "bearer",
+  "expires_in": 7200
+}</code></pre></div>
+
+</article>
+
+</br>
+
+<article>
+
+<h2 id="oauth-api-requests">API requests</h2>
+
+<p>
+Once you have the access token you can access the API in different ways.
+</p>
+
+<h3>Authorization header</h3>
+
+<div class="preview"><pre><xmp>curl http://api.lelylan.com/devices.json -H "Authorization: Bearer <access-token>"</xmp></pre>
+</div>
+
+<h3>Query string access_token param</h3>
+
+<div class="preview"><pre><xmp>curl http://api.lelylan.com/devices?access_token=<access-token></xmp></pre></div>
+
+<h3>Body access_token param</h3>
+
+<div class="code-block"><pre><xmp>curl http://api.lelylan.com/devices -X POST -d 'access_token=<access-token>'</xmp></pre></div>
+
+<h2 id="oauth-scopes">Scopes</h2>
+
+<p>
+Scopes let you specify what can and can't be accessed from a third party application.
+When no scopes are defined user is the default one.
+</p>
+
+<table class="table table-stripped table-hover table-labeled">
+  <thead>
+    <tr>
+      <th style="width:300px;">Scope</th>
+      <th>Accessible Services</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>resources</code>
+        <span class="info">Full access to all services.</span>
+      </td>
+      <td><span class="label">all services</span>
+      (only the <a href="#get-a-device-private-info">private</a> service is not included)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>resources:read</code>
+        <span class="info">Full access to all read resources.</span>
+      </td>
+      <td>
+        <span class="label">all read only services</span>
+        (only the <a href="#get-a-device-private-info">private</a> service is not included)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>privates</code>
+        <span class="info">Access to the owned devices private info.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="#get-a-device-private-info">Get a device private info</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>devices</code>
+        <span class="info">Read, control and write access to owned devices.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="#get-a-device">get a device</a></span>
+        <span class="label link"><a href="#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="#create-a-device">create a device</a></span>
+        <span class="label link"><a href="#update-a-device">update a device</a></span>
+        <span class="label link"><a href="#delete-a-device">delete a device</a></span>
+        <span class="label link"><a href="#update-device-properties">update properties</a></span>
+        <span class="label link"><a href="#execute-a-function">execute a function</a></span>
+        <span class="label link"><a href="#activate-a-device">activate a device</a></span>
+        <span class="label link"><a href="#deactivate-a-device">deactivate a device</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>devices:control</code>
+        <span class="info">Read and control access to owned devices.</span>
+        </td>
+      <td>
+        <span class="label link"><a href="#get-a-device">get a device</a></span>
+        <span class="label link"><a href="#get-all-devices">get all devices</a></span>
+        <span class="label link"><a href="#update-a-device">update a device</a></span>
+        <span class="label link"><a href="#update-device-properties">update properties</a></span>
+        <span class="label link"><a href="#execute-a-function">execute a function</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>devices:read</code>
+        <span class="info">Read access to owned devices.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="#get-a-device">get a device</a></span>
+        <span class="label link"><a href="#get-all-devices">get all devices</a></span>
+      </td>
+    </tr>
+    <%#<tr>%>
+      <%#<td>%>
+        <%#<code>consumptions</code>%>
+        <%#<span class="info">Read and write access to owned <br/> consumptions</span>%>
+      <%#</td>%>
+      <%#<td>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#get-a-consumption">Get a consumption</a></span>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#get-all-consumptions">Get all consumptions</a></span>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#create-a-consumption">Create a consumption</a></span>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#update-a-consumption">Update a consumption</a></span>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#delete-a-consumption">Delete a consumption</a></span>%>
+      <%#</td>%>
+    <%#</tr>%>
+    <%#<tr>%>
+       <%#<td>%>
+        <%#<code>consumptions:read</code>%>
+        <%#<span class="info">Read access to owned consumptions</span>%>
+      <%#</td>%>
+      <%#<td>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#get-a-consumption">Get a consumption</a></span>%>
+        <%#<span class="label link"><a href="/api/devices/consumptions#get-all-consumptions">Get all consumptions</a></span>%>
+      <%#</td>%>
+    <%#</tr>%>
+    <%#<tr>%>
+       <%#<td>%>
+        <%#<code>histories:read</code>%>
+        <%#<span class="info">Read access to owned histories</span>%>
+      <%#</td>%>
+      <%#<td>%>
+        <%#<span class="label link"><a href="/api/devices/histories#get-a-history">Get a history</a></span>%>
+        <%#<span class="label link"><a href="/api/devices/histories#get-all-histories">Get all histories</a></span>%>
+      <%#</td>%>
+    <%#</tr>%>
+    <tr>
+      <td>
+        <code>types</code>
+        <span class="info">Read and write access to owned types.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/types#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/types#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/types#create-a-type">Create a type</a></span>
+        <span class="label link"><a href="/types#update-a-type">Update a type</a></span>
+        <span class="label link"><a href="/types#delete-a-type">Delete a type</a></span>
+        <span class="label link"><a href="/types#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/types#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/types#create-a-property">Create a property</a></span>
+        <span class="label link"><a href="/types#update-a-property">Update a property</a></span>
+        <span class="label link"><a href="/types#delete-a-property">Delete a property</a></span>
+        <span class="label link"><a href="/types#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/types#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/types#create-a-function">Create a function</a></span>
+        <span class="label link"><a href="/types#update-a-function">Update a function</a></span>
+        <span class="label link"><a href="/types#delete-a-function">Delete a function</a></span>
+        <span class="label link"><a href="/types#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/types#get-all-statuses">Get all statuses</a></span>
+        <span class="label link"><a href="/types#create-a-status">Create a status</a></span>
+        <span class="label link"><a href="/types#update-a-status">Update a status</a></span>
+        <span class="label link"><a href="/types#delete-a-status">Delete a status</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>types:read</code>
+        <span class="info">Read access to owned types.</span>
+      </td>
+      <td>
+        <span class="label link"><a href="/types#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/types#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/types/#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/types/#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/types#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/types#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/types#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/types#get-all-statuses">Get all statuses</a></span>
+      </td>
+    </tr>
+    <%#<tr>%>
+      <%#<td>%>
+        <%#<code>locations</code>%>
+        <%#<span class="info">Read and write access to owned locations</span>%>
+      <%#</td>%>
+      <%#<td>%>
+        <%#<span class="label link"><a href="/api/locations#get-a-location">Get a location</a></span>%>
+        <%#<span class="label link"><a href="/api/locations#get-all-locations">Get all locations</a></span>%>
+        <%#<span class="label link"><a href="/api/locations#create-a-location">Create a location</a></span>%>
+        <%#<span class="label link"><a href="/api/locations#update-a-location">Update a location</a></span>%>
+        <%#<span class="label link"><a href="/api/locations#delete-a-location">Delete a location</a></span>%>
+      <%#</td>%>
+    <%#</tr>%>
+    <%#<tr>%>
+       <%#<td>%>
+        <%#<code>locations:read</code>%>
+        <%#<span class="info">Read access to owned locations</span>%>
+      <%#</td>%>
+      <%#<td>%>
+        <%#<span class="label link"><a href="/api/locations#get-a-location">Get a location</a></span>%>
+        <%#<span class="label link"><a href="/api/locations#get-all-locations">Get all locations</a></span>%>
+      <%#</td>%>
+    <%#</tr>%>
+    <tr>
+      <td>
+        <code>user</code>
+        <span class="info">Read access to user profile</span>
+      </td>
+      <td>
+        <span class="label link"><a href="#core-concepts-get-me">Get /me</a></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example</h3>
+
+<p>
+In the following request an application requires read access for all resources and write
+access for all devices. You can specify multiple scopes by separating them with a space
+(encoded as a <code>+</code>).
+<p>
+
+<div class="code-block">
+<pre><xmp>http://people.lelylan.com/oauth/authorize?
+  response_type=code&
+  client_id=<client_id>&
+  redirect_uri=<redirect_uri>&
+  scope=resources:read+devices</xmp></pre>
+</div>
+
+<h2 id="oauth-filtering-resources">Filtering resources</h2>
+
+<p>
+Lelylan offers a detailed control about the resource a third party application can
+access. Simply click to the <em>Filter Accessible Devices</em> button (in the
+authorization page) and add the desired accessible devices.
+A user can filter a specific device or all devices contained into a location.
+In case you add all devices contained in a location (keep in mind that when new
+ones are added into the location, the access to them is not inherited, and a new
+authorization is needed).
+</p>
+
+<h2 id="oauth-expiring-token">Expiring token</h2>
+
+<p>
+When authorizing a third party application an access token expires in 2 hours (for
+security reasons). Anyway, when developing your applications a not expiring token could
+be something useful. To have it, simply uncheck the <em>Expiring token</em> checkbox
+on the authorization page.
+</p>
+
+<h2 id="oauth-learn-more">Learn more</h2>
+
+<p>
+It can be a little tricky to get started with OAuth 2. Here are a few links that
+might be of help.
+</p>
+
+<ul>
+  <li>
+  <a href="#developers-api-clients" class="bigger">Lelylan Clients (using OAuth2)</a>
+  </li>
+  <li>
+  <a href="http://oauthbible.com" class="bigger">OAuth Bible</a>
+  </li>
+  <li>
+  <a href="http://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified" class="bigger">OAuth2 Simplified</a>
+  </li>
+  <li>
+  <a href="https://developers.google.com/accounts/docs/OAuth2" class="bigger">Google</a>
+  </li>
+  <li>
+  <a href="http://developers.facebook.com/docs/authentication/" class="bigger">Facebook</a>
+  </li>
+  <li>
+  <a href="http://developer.github.com/v3/oauth/" class="bigger">Github</a>
+  </li>
+  <li>
+  <a href="http://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
+  </li>
+</ul>
+
+<h2 id="oauth-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

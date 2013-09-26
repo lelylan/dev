@@ -1,110 +1,72 @@
-<div class="introduction">
+<div class="presentation-block">
+  <div class="row">
+    <div class="col-md-8" role="main">
+      <h4>With The Makers API</h4>
+      <h1>Connect Any Hardware</h1>
+      <p>With Lelylan you focus on the hardware and on the design process. We do the rest by making it easy to connect your devices to the web and by giving you a complete set of Apps ready to use.</p>
+      <a href="/getting-started#connect-your-first-light" class="btn-lelylan">Connect your first light &rarr;</a>
+    </div>
+    <div class="col-md-4" role="main">
+      <div class="pull-right">
+        <%= image_tag 'makers.png' %>
+      </div>
+    </div>
+  </div>
 
-  <h2 class="internal">What is Lelylan</h2>
+  <div class="row">
+    <div class="col-md-4" role="main">
+      <div class="pull-left">
+        <%= image_tag 'developers.png' %>
+      </div>
+    </div>
+    <div class="col-md-8" role="main">
+      <h4>With The Developers API</h4>
+      <h1>Build Apps for the Connected Home</h1>
+      <p>Lelylan offers an open API for the Connected Home. Whether or not you want to build an app for web, mobile, voice, glasses, etc. Lelylan offers everything you need to get started in minutes.</p>
+      <a href="/getting-started#create-your-first-js-app" class="btn-lelylan">Create your first App &rarr;</a>
+    </div>
+  </div>
 
-  <p>
-  Welcome to Lelylan Dev Center.
-  This place will help you to familiarize with the development of physical devices and apps for
-  the connected home providing detailed information about Lelylan's platform specific features
-  and about where to get help when you need it.
-  </p>
+  <div class="row">
+    <div class="col-md-4" role="main">
+      <div>
+        <%= image_tag 'makers-api.png' %>
+        <p>
+          Use hardware like
+          <a href="http://www.arduino.cc/">Arduino</a>,
+          <a href="http://electricimp.com/">Electric imp</a>,
+          <a href="http://mbed.org">mbed</a>,
+          <a href="http://www.raspberrypi.org/">Raspberry Pi</a> or
+          <a href="http://www.openpicus.com/">Flyport</a>
+          and connect it to the web using the Makers API and MQTT.
+        </p>
+        <a href="/makers" class="btn-lelylan">Makers API &rarr;</a>
+      </div>
+    </div>
 
-  <p>
-  With Lelylan, you can monitor and control any device through a simple
-  representation of them. Every device in your house is mapped to a unique URI which will provide
-  an easy access over it.
-  </p>
+        <div class="col-md-4" role="main">
+      <div>
+        <%= image_tag 'developers-api.png' %>
+        <p>
+        An open API to control every physical device. With wrappers in
+        <a href="https://github.com/lelylan/lelylan-ng">AngularJS</a>,
+        <a href="https://github.com/lelylan/lelylan-rb">Ruby</a>,
+        <a href="https://github.com/lelylan/lelylan-node">Node.js</a> and
+        more you can get started in minutes.
+        </p>
+        <a href="/developers" class="btn-lelylan">Developers API &rarr;</a>
+      </div>
+    </div>
 
-  <nav class="nav-intro">
-    <ul>
-      <li>
-        <a href="/start/introduction" title="Getting Started">
-          <span class="icon"><i aria-hidden="true" class="icon-home"></i></span>
-          <span class="highlight">Getting Started</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="clear"></div><br><br>
-
-  <h2 class="internal">Makers, Designers and Kickstarters</h2>
-
-  <p>
-  Connect new physical device to the web and make it accessible through a rich set of API.
-  Your products become part of a bigger platform where devices communicate with each other
-  and where services like IFTTT, Twitter and Glasses can be easily integrated.
-  </p>
-
-  <nav class="nav-intro">
-    <ul>
-      <li class="todo">
-        <a href="#" title="">
-          <span class="icon"><i aria-hidden="true" class="icon-services"></i></span>
-          <span>Connect your first physical device</span>
-          <span class="label">todo</span>
-        </a>
-      </li>
-      <li>
-        <a href="/api/physicals" title="">
-          <span  class="icon"><i aria-hidden="true" class="icon-home"></i></span>
-          <span class="highlight">Lelylan Physical API</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="clear"></div><br><br>
-
-  <h2 class="internal">Web Developers and Designers</h2>
-
-  <p>
-  A simple, open and consistent REST API to access every physical device in your house through
-  a unique URL. With wrappers in Angular, Ruby, Node.js and more, you can get started in minutes.
-  </p>
-
-  <nav class="nav-intro">
-  <ul>
-    <li class="todo">
-      <a href="#" title="">
-        <span  class="icon"><i  aria-hidden="true" class="icon-services"></i></span>
-        <span>Build your first connected home app</span>
-        <span class="label">todo</span>
-      </a>
-      </li>
-      <li>
-        <a href="/api" title="">
-          <span  class="icon"><i aria-hidden="true" class="icon-home"></i></span>
-          <span class="highlight">Lelylan API</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/lelylan/device-component-ng" title="">
-          <span class="icon"><i aria-hidden="true" class="icon-services"></i></span>
-          <span>HTML5 Device Component</span>
-        </a>
-      </li>
-      <li>
-        <a href="/community/clients" title="">
-          <span class="icon"><i aria-hidden="true" class="icon-team"></i></span>
-          <span>Client Libraries</span>
-        </a>
-      </li>
-      <li>
-      <a  href="/start/projects" title="">
-        <span  class="icon"><i  aria-hidden="true" class="icon-blog"></i></span>
-        <span>Existing projects</span></a>
-      </li>
-    </ul>
-  </nav>
+    <div class="col-md-4" role="main">
+      <div>
+        <%= image_tag 'examples-api.png' %>
+        <p>
+        Learn by doing. Check out all articles and open-source projects
+        related to Lelylan and contribute building your own.
+        </p>
+        <a href="/code-examples" class="btn-lelylan">Code Examples &rarr;</a>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="clear"></div><br><br>
-
-  <p class="notice">
-    <span class="label">notice</span>
-    This documentation is in Beta changing it day by day, but we can’t wait to get initial
-    feedback from you about our first release. Feel free to start looking around
-    our API, our vision and <a href="https://twitter.com/lelylan">get in touch</a>
-    with us providing your suggestions and wish lists.
-  </p>

@@ -1,47 +1,123 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Lelylan Dev Center | <%= title %></title>
-
-    <%= stylesheet_link_tag 'bootstrap.min', 'default', 'prettify', 'getting-started', 'overlay', media: 'all' %>
+    <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
+    <meta name="description" content="Lelylan Dev Center">
+    <meta name="viewport" content="width=device-width">
   </head>
+  <body <% if params[:id]=='index' %> class="presentation" <% end %>>
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
 
-  <body class="docs <%= body_style %>">
-    <header id="header">
-    <div class="left"><h1><a href="/">Lelylan Dev Center</a></h1></div>
-    <nav>
-    <ul>
-      <%= render "devise/shared/links" %>
-      <% if code_page? -%>
-      <li>
-      <select id="language">
-        <option value="curl">See examples in Curl</option>
-        <option value="node">See examples in Node.js</option>
-        <option value="angular">See examples in AngularJS</option>
-        <option value="ruby">See examples in Ruby</option>
-        <option value="python">See examples in Python</option>
-      </select>
-      </li>
-    <% end -%>
-    </ul>
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- apps navbar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top lelylan-navbar-apps" role="navigation">
+    <div class="container">
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://beta.lelylan.com">Lelylan site</a></li>
+          <li><a href="http://manage.lelylan.com">Dashboard</a></li>
+          <li><a href="http://types.lelylan.com">Types</a></li>
+          <li class="active"><a href="/">Dev Center</a></li>
+          <li><a href="http://try.lelylan.com">Demo</a></li>
+          <li><a href="http://people.lelylan.com">Profile</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active signout"><%= link_to "Sign out #{current_user.email}", destroy_user_session_path, method: :delete %></li>
+        </ul>
+
+      </div>
+    </div>
     </nav>
-    <!--<h2><a href="/">Documentation</a><%# breadcrumbs_html %></h2>-->
-    </header>
 
-    <article id="article">
+    <!-- top navbar -->
 
-      <nav id="nav">
-      <%= render 'shared/menu' %>
-      </nav>
+    <nav class="navbar navbar-default navbar-fixed-top lelylan-navbar-top-menu" role="navigation">
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner-flat">
+          <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="/"><strong>Lelylan</strong> Dev Center</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li <% if params[:id]=='getting-started' %>class="active"<% end %> >
+              <a href="/getting-started">Getting Started</a>
+            </li>
+            <li <% if params[:id]=='makers' %>class="active"<% end %> >
+              <a href="/makers">Makers API</a>
+            </li>
+            <li <% if params[:id]=='developers' %>class="active"<% end %> >
+              <a href="/developers">Developers API</a>
+            </li>
+            <li <% if params[:id]=='types' %>class="active"<% end %> >
+              <a href="/types">Types API</a>
+            </li>
+            <li <% if params[:id]=='code-examples' %>class="active"<% end %> >
+              <a href="/code-examples">Code Examples</a>
+            </li>
+            <li <% if params[:id]=='support' %>class="active"<% end %> >
+              <a href="/support">Support</a>
+            </li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> See examples in <b class="language-description">Curl</b> <b class="caret"></b> </a>
+            <ul class="dropdown-menu languages">
+              <li><a href="#" class="curl"><span class="glyphicon glyphicon-link"></span> Curl</a></li>
+              <li><a href="#" class="node"><span class="glyphicon glyphicon-link"></span> Node.js</a></li>
+              <li><a href="#" class="angular"><span class="glyphicon glyphicon-link"></span> AngularJS</a></li>
+              <li><a href="#" class="ruby"><span class="glyphicon glyphicon-link"></span> Ruby</a></li>
+              <li><a href="#" class="python"><span class="glyphicon glyphicon-link"></span> Python</a></li>
+            </ul>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+    </nav>
 
-      <section id="section">
+    <!-- homepage banner -->
+    <% if params[:id] == 'index' %>
+    <div class="banner">
+      <div class="container">
+        <div class="banner-content">
+          <h1 class="title">Building the Connected Home</h1>
+          <p>Connect any device to the web and create new apps to get control of them</p>
+          <div class="banner-button">
+          <a href="/getting-started" class="btn-lelylan">Getting Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <!-- contant -->
+    <div class="container bs-docs-container">
+      <div class="row">
         <%= yield %>
-        <%= render 'shared/services/disqus' %>
-      </section>
-    </article>
+      </div>
+    </div>
+
+    <footer class="bs-footer" role="contentinfo">
+      <div class="container">
+        <div class="row bs-docs-section">
+          <p class="pull-right">© <a href="http://lelylan.com">Lelylan</a> 2013</p>
+        </div>
+      </div>
+    </footer>
 
     <%= render 'shared/services/analytics' %>
   </body>
 </html>
+

@@ -1,0 +1,771 @@
+<h2 id="statuses-api-overview">What is the device status?</h2>
+
+<p>
+Properties are not always enough to describe the status of a device. Think at a window for
+example. It has the property aperture to 100 when open or 0 when closed. But what if the
+roller shutter is opening? It is nether open or close. To have a complete control over the
+device status in every specific moment of its life use the Status API.
+</p>
+
+<h2 id="get-a-status">GET /statuses/:id</h2>
+
+<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> status identified from its ID.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+  <pre><code>GET http://api.lelylan.com/statuses/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired status.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-status-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-status-curl">
+    <div class="preview">
+        <pre><xmp>curl http://api.lelylan.com/statuses/<id></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-status-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Status.find('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-status-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{status}}</div>
+  <script>
+    function LelylanController($scope, Status) {
+      $scope.status = Status.get({ id: '<id>' });
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-status-ruby">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+status = lelylan.status('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-status-python">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>from lelylan import statuses
+status = statuses.get_status('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3 id="status-representation">Example body response</h3>
+
+<div class="code-block"><pre><code>{
+  "name": "Setting intensity",
+  "id": "5042176370eda61200000004",
+  "uri": "http://api.lelylan.com/statuses/5042176370eda61200000004",
+  "created_at": "2012-09-01T14:10:43Z",
+  "updated_at": "2012-09-01T14:10:43Z",
+  "function": {
+    "id": "5042205c70eda61000000003",
+    "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003"
+  },
+  "properties":[{
+    "id": "50420c7e267ff51000000001",
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
+    "pending": false
+    "value": ["on"],
+  }, {
+    "id": "50420c7e267ff51300000001",
+    "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
+    "pending": true
+    "value": ["0..100"],
+  }]
+}</code></pre>
+</div>
+
+<h3>Body response explained</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Device URI.</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Device ID.</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Device name.</td>
+    </tr>
+    <tr>
+      <td>function</td>
+      <td>
+        Default function associated to the status.
+      </td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Device properties.</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.uri</span>
+      </td>
+      <td>Property URI.</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>Property ID.</td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.value</span>
+      </td>
+      <td>
+        Property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="nested">
+        <span>&raquo; property.pending</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>How do I use the matching values?</h3>
+
+<p>
+A status is based on its properties. To understand when a status match to a device in a specific
+moment of its life you need to check two things.
+</p>
+
+<ul>
+  <li>If the current device property value is included into the status <code>value</code> list.</li>
+  <li>If the current device property pending status is the same as the status <code>pending</code> value.</li>
+</ul>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    At the moment it's not possible to get the device status from server side. A basic implementation
+    is available on the <a href="http://lelylan.github.com/devices-component-ng/">AngularJS Device Component</a>
+    which gives you the device status description.
+  </p>
+</div>
+
+<h2 id="get-all-statuses">GET /statuses</h2>
+
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) statuses.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code># created statuses
+GET http://api.lelylan.com/statuses
+<hr>
+# all statuses
+GET http://api.lelylan.com/statuses/public</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Status name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        ID of the last fetched record. Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-statuses-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-statuses-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-statuses-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-all-statuses-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-statuses-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-statuses-curl">
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/statuses \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-statuses-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Status.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
+Lelylan.Status.public({}, callback); // all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-statuses-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">
+    <div ng-repeat="status in owned">{{status}}</div>
+    <div ng-repeat="status in public">{{status}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Status) {
+      $scope.owned  = Status.query();   // owned resources
+      $scope.public = Status.public();  // all existing resources
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-statuses-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+statuses = lelylan.statuses # owned resources
+
+lelylan = Lelylan::Client.new
+statuses = lelylan.public_statuses # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-statuses-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import statuses
+statuses = statuses.get_created_status() # owned resources
+
+from lelylan import statuses
+statuses = statuses.get_all_status() # all existing resources</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<div class="code-block highlight"><pre><code>[
+  { # status representation },
+  { # status representation },
+  ...
+]</code></pre>
+</div>
+
+<p>
+  See <a href="#status-representation">status representation</a> for body response.
+</p>
+
+<h2 id="create-a-status">POST /statuses</h2>
+
+<p>
+  Create a status and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>POST  http://api.lelylan.com/statuses</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Status name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties affecting the status.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of matching values.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
+      </td>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#create-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#create-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-status-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-status-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://api.lelylan.com/statuses \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "On",
+           "function": {"id": "<turn-off>" },
+           "properties": [{
+              "id": "<intensity>",
+              "value": ["100"],
+              "pending": false
+            }]
+         }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-status-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  name: 'On',
+  function: { id: '<turn-off>' },
+  properties:
+    [ { id: '<intensity>',
+        value: ['100'],
+        pending: false } ] };
+
+Lelylan.Status.create(params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-status-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{status}}</div>
+  <script>
+    function LelylanController($scope, Status) {
+      var params = {
+        name: 'On',
+        function: { id: '<turn-off>' },
+        properties:
+          [ { id: '<status>',
+              value: ['on'] } ] };
+
+      $scope.status = new Status(params);
+      $scope.status.$save();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-status-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'On',
+  function: { id: '<turn-off>' },
+  properties:
+    [ { id: '<intensity>',
+        value: ['100'],
+        pending: false } ] }
+
+status = lelylan.create_status(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-status-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'On',
+  function: { id: '<turn-off>' },
+  properties:
+    [ { id: '<intensity>',
+        value: ['100'],
+        pending: false } ] }
+
+from lelylan import statuses
+status = statuses.create_status(params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
+Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#status-representation">status representation</a> for body response.
+</p>
+
+<h2 id="update-a-status">PUT /statuses/:id</h2>
+
+<p>
+  Update a status identified from its ID and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>PUT  http://api.lelylan.com/statuses/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired status.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Status name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties affecting the status.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of matching values and ranges.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-status-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-status-curl">
+    <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/statuses/5042176370eda61200000004 \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{ "name": "Light On" }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-status-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = { name: 'Light On' }
+Lelylan.Status.update('<id>', params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-status-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{status}}</div>
+  <script>
+    function LelylanController($scope, Status) {
+      var params = { id: '<id>', name: 'Light On' };
+      $scope.property = new Property(params);
+      $scope.type.$update();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-status-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = { name: 'Light On' }
+status = lelylan.update_status('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-status-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { name: 'Light On' }
+
+from lelylan import statuses
+status = statuses.update_status('<id>', params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<p class="notice">
+<span class="label">Notice</span>
+When updating the <code>properties</code> field all previous connected properties are replaced.
+</p>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#status-representation">status representation</a> for body response.
+</p>
+
+<h2 id="delete-a-status">DELETE /statuses/:id</h2>
+
+<p>
+Delete a statuses identified from its ID and returns extended information for it.</br>
+Connected properties are not deleted.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>DELETE http://api.lelylan.com/statuses/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired status.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#delete-a-status-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-status-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#delete-a-status-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#delete-a-status-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-status-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-status-curl">
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/statuses/<id> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-status-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Status.delete('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-status-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{status}}</div>
+  <script>
+    function LelylanController($scope, Status) {
+      $scope.status= new Status({ id: '<id>' });
+      $scope.status.$delete();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-status-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+status = lelylan.delete_status('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-status-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import statuses
+status = statuses.delete_status('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+See <a href="#status-representation">status representation</a> for body response.
+</p>
+
+<h2 id="statuses-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

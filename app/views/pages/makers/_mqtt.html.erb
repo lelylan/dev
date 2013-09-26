@@ -1,0 +1,514 @@
+<h2 id="mqtt-overview">Overview</h2>
+
+<p>
+  <a href="http://mqtt.org">MQTT</a>
+  is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for
+  constrained devices and low-bandwidth, high-latency or unreliable networks.
+</p>
+
+<p>
+  The Lelylan MQTT Broker is a simple way to interact with Lelylan directly from any
+  MQTT client. It provides full API interaction, as well as push notifications and
+  subscriptions. It gives you a MQTT 3.1 compliant solution supporting QoS 0 and QoS
+  1 levels on message delivering.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Lelylan MQTT is in alpha testing.
+  If you find a bug do not hesitate to send it to
+  <a href="mailto:dev@lelylan.com">dev@lelylan.com</a>
+  </p>
+</div>
+
+<h2 id="mqtt-create-the-device">Create the device</a></h2>
+
+<p>
+To create a new device open your Dashboard,
+click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
+with the desired name and type. For the moment leave empty the physical field
+(we'll come back later on that).
+<p>
+
+<%= image_tag('makers-api/create-device.png', class: 'img-thumbnail') %>
+
+<p>
+  When created, you'll see a detailed view of your new device. Click on <code>settings</code>
+  and you'll find all needed info to connect the physical device to Lelylan.
+</p>
+
+<ul>
+  <li><em>Type</em> - Link to the type definition (use it to check the device properties)</li>
+  <li><em>ID</em> - Unique device identifier.</li>
+  <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
+</ul>
+
+<%= image_tag('makers-api/device-component-settings.png', class: 'img-thumbnail') %>
+
+<h2 id="mqtt-set-the-physical-uri">Set the physical URI</h2>
+
+<p>
+To communicate with the physical device you need to connect Lelylan with the
+MQTT client. To make this possible use the <em>Nodes Service</em>,
+which is in charge of forwarding all incoming requests from Lelylan to
+the MQTT client.
+</p>
+
+<p>
+To use the Nodes Service you need to set in the physical
+field of your device a URI having the structure
+<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>,
+where you need to change the <code>&lt;device-id&gt;</code> with your
+actual device id.
+</p>
+
+<table class="table table-stripped">
+
+  <tbody>
+    <tr>
+      <td>Your Device ID</td>
+      <td><code>518be5a700045e1521000001</code></span></td>
+    </tr>
+    <tr>
+      <td>Your Physical URI</td>
+      <td><code><span class="glyphicon glyphicon-arrow-right"></span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= image_tag('makers-api/direct-connect-physical.png', class: 'img-thumbnail') %>
+
+<h2 id="mqtt-connecting-to-lelylan">Connecting to Lelylan</h2>
+
+<p>
+Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
+the connection phase the client needs to set the <code>device.id</code> as username and the
+<code>device.secret</code> as password. When the credentials are missing or not valid, the
+connection is rejected.
+</p>
+
+<h3>MQTT Broker parmas</h3>
+
+<div class="code-block">
+<pre><code><span style="color: #999">host:</span> 96.126.109.170
+<span style="color: #999">port:</span> 1883</code></pre>
+</div>
+
+<h3>How to receive data</h3>
+
+<p>
+When a user updates a device property or executes a function using Lelylan
+(e.g from dashboard, mobile, etc.), a message with the list of properties
+to update is published to the topic <code>devices/:id/get</code>. Every received
+message is made up from a list of properties with the following structure.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+      </td>
+      <td>
+        New property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>How to send data</h3>
+
+<p>
+When a physical device updates its status through a physical interaction Lelylan needs to be
+notified publishing a message to the topic <code>devices/:id/set</code> with the list of all
+updated properties.
+Every sent message is made up from a list of properties with the following structure.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Desired property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+        <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.expected</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Expected property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+        <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>A note about the physical flow</h3>
+
+<p>
+When communicating with the physical world, Lelylan expects a feedback to its requests.
+For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
+the light was turned on. In the meantime the device is in a
+<a href="/support#faq-value-expected-pending">pending</a>
+status and the spinner is visible.
+To close the pending status and tell Lelylan that the requested changes were applied, the
+physical device should publish a message to the out topic <code>/devices/:id/set</code>
+confirming the updated property values.
+</p>
+
+<h2 id="mqtt-code-examples">Code Examples</h2>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
+  <li><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#connect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#connect-physical-device-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="connect-physical-device-arduino">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>/* ------------------------------------------------
+ * Install the following PubSubClient fork
+ * https://github.com/andreareginato/pubsubclient
+ * It sets the max packet size to 512 bytes
+ * ------------------------------------------------ */
+
+#include <SPI.h>
+#include <Ethernet.h>
+#include <PubSubClient.h>
+#include <aJSON.h>
+
+// Update these with values suitable for your network.
+byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
+
+/* ---------------
+ * Lelylan config
+ * --------------- */
+
+// lelylan mqtt server
+byte server[] = { 192, 168, 1, 101 };
+
+// set your device id (MQTT client username)
+char* deviceId = "<device-id>";
+
+// set your device secret (MQTT client password)
+char* deviceSecret = "<device-secret>";
+
+// mqtt client identifier (random unique value, max 23 bytes)
+char* clientId = "<client-id>";
+
+// out topic (where physical updates are published)
+char* outTopic = "devices/<device-id>/set";
+
+// in topic (where lelylan updates are received)
+char* inTopic = "devices/<device-id>/get";
+
+/* ----------------
+ * MQTT connection
+ * ---------------- */
+
+// callback function for any subscribed channel
+void callback(char* topic, byte* payload, unsigned int length);
+
+// ethernet connection
+EthernetClient ethClient;
+PubSubClient client(server, 1883, callback, ethClient);
+
+// arduino setup
+void setup() {
+  Serial.begin(9600);
+  delay(500);
+
+  Serial.println("Start Ethernet");
+  Ethernet.begin(mac);
+
+  // debug to show IP address
+  Serial.print("IP address: ");
+  Serial.println(Ethernet.localIP());
+
+  // connect to the MQTT server
+  connectToMQTT();
+}
+
+// arduino loop
+void loop() {
+  connectToMQTT();
+}
+
+// connect to the MQTT server and subscribe to the desired topic
+void connectToMQTT() {
+  // add reconnection logics
+  if (!client.connected()) {
+    // connection to MQTT server
+    if (client.connect(clientId, deviceId, deviceSecret)) {
+      Serial.print("[OK] Connected with MQTT");
+      subscribeToTopic();
+      publishToTopic();
+    }
+  }
+
+  client.loop();
+}
+
+/* --------------
+ * MQTT publish
+ * -------------- */
+
+void publishToTopic() {
+  // publish a predefined JSON that set the property to the desired value
+  // to create proper json use https://github.com/interactive-matter/aJson
+  char* payload = "{\"properties\":[{ \"id\": \"<property-id>\", \"value\": \"<value>\" }]}";
+  client.publish(outTopic, payload);
+}
+
+/* ---------------
+ * MQTT subscribe
+ * --------------- */
+
+// subscribe for incoming messages
+void subscribeToTopic() {
+  client.subscribe(inTopic);
+}
+
+// subscription callback
+void callback(char* topic, byte* payload, unsigned int length) {
+  // debug to show the received message
+  Serial.print("Receiving subscribed message");
+  Serial.println(topic);
+  Serial.write(payload, length);
+}</xmp></pre>
+  </div>
+</div>
+<div class="tab-pane" id="connect-physical-device-node">
+  <div class="preview">
+    <pre class="prettyprint"><xmp>// ------------------------------
+// Install first the mqtt client
+// $ npm install mqtt
+// ------------------------------
+
+// device credentials
+var device = { id: '<device-id>', secret: '<device-secret>' }
+
+// device topics
+var in_topic  = 'devices/' + device.id + '/get'   // receiving messages
+  , out_topic = 'devices/' + device.id + '/set';  // publishing messages
+
+// connection settings
+var mqtt = require('mqtt')
+  , host = '96.126.109.170'
+  , port = '1883'
+
+// client settings
+var settings = {
+  username: device.id,     // device.id as client username
+  password: device.secret  // device.secret as client password
+}
+
+// client connection
+var client = mqtt.createClient(port, host, settings);
+client.on('connect', function() {
+  console.log('Client successfully connected');
+
+  // subscribe for incoming messages
+  client.subscribe(in_topic);
+  client.on('message', function(topic, message) {
+    console.log('received', topic, message);
+  });
+
+  // publish a message
+  var payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
+  client.publish(out_topic, JSON.stringify(payload));
+});</xmp></pre>
+  </div>
+</div>
+<div class="tab-pane" id="connect-physical-device-ruby">
+  <div class="preview">
+    <pre class="prettyprint"><xmp># ------------------------------
+# Install first the mqtt client
+# $ gem install mqtt
+# ------------------------------
+
+require 'mqtt'
+require 'uri'
+require 'json'
+
+# device credentials
+device = { id: '<device-id>', secret: '<device-secret>' }
+
+# device topics
+in_topic  = 'devices/' + device[:id] + '/get' # receiving messages
+out_topic = 'devices/' + device[:id] + '/set' # published messages
+
+# connection parameters
+settings = {
+  remote_host: '96.126.109.170',
+  remote_port: '1883',
+  username: device[:id],
+  password: device[:secret]
+}
+
+# client connection
+MQTT::Client.connect(settings) do |client|
+  Thread.new do
+    # subscribe for incoming messages
+    client.get(in_topic) do |topic, message|
+      puts "Received #{topic}: #{message}"
+    end
+  end
+
+  # publish a message
+  payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
+  client.publish(out_topic, payload.to_json)
+  puts "Published #{out_topic}: #{payload}"
+  loop { sleep 0.1 } # keep listening
+end</xmp></pre>
+  </div>
+</div>
+<div class="tab-pane" id="connect-physical-device-python">
+  <div class="preview">
+    <pre class="prettyprint"><xmp># --------------------------
+# Install first mosquitto
+# $ pip install mosquitto
+# --------------------------
+
+import mosquitto, json
+
+# event callbacks
+def on_connect(mosq, obj, rc):
+    print("rc: " + str(rc))
+
+def on_message(mosq, obj, msg):
+    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+
+def on_publish(mosq, obj, mid):
+    print("mid: " + str(mid))
+
+def on_subscribe(mosq, obj, mid, granted_qos):
+    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+
+# create client
+client = mosquitto.Mosquitto()
+
+# assign event callbacks
+client.on_message = on_message
+client.on_connect = on_connect
+client.on_publish = on_publish
+client.on_subscribe = on_subscribe
+
+# device credentials
+device_id     = '<device-id>'
+device_secret = '<device-secret>'
+
+# device topics
+in_topic  = 'devices/' + device_id + '/get'  # receiving messages
+out_topic = 'devices/' + device_id + '/set'  # publishing messages
+
+# client connection
+client.username_pw_set(device_id, device_secret)
+client.connect('96.126.109.170', '1883')
+
+# subscribe (with QoS level 0)
+client.subscribe(in_topic, 0)
+
+# publish a message
+payload = { 'properties': [{ 'id': '<property-id>', 'value': '<value>' }] };
+client.publish(out_topic, json.dumps(payload))
+
+# Continue the network loop, exit when an error occurs
+rc = 0
+while rc == 0:
+    rc = client.loop()
+print("rc: " + str(rc))</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h2 id="mqtt-control-your-physical-device">Control your physical device</h2>
+
+<p>
+Once your light is connected to Lelylan control and monitor it in realtime using the
+<a href="http://manage.lelylan.com">Dashboard</a>.
+</p>
+
+<a href="http://manage.lelylan.com">
+<%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
+</a>
+
+<h2 id="mqtt-articles">Articles</h2>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>TITLE</th>
+      <th>TAGS</th>
+      <th>AUTHOR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/getting-started#connect-your-first-light">Connect Your First Light</a></td>
+      <td>ARDUINO, MQTT</td>
+      <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="mqtt-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

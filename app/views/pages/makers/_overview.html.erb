@@ -1,0 +1,168 @@
+<h2 id="makers-api-what-is-a-physical-api">What is a Physical Device</h2>
+
+<p>
+Physical devices are the objects you interact with everyday of your life like lights,
+appliances, alarms and more. To enable the communication between Lelylan and the physical
+world, the physical device should implement the Physical API.
+<p>
+
+<p>
+To make things simple, physical devices are characterized uniquely by their properties. This makes
+physical devices easy to build, still giving the chance to extend their functionalities by adding
+new services (e.g. functions, rules engines, sceneries, etc.) on top of Lelylan.
+<p>
+
+<h2 id="makers-api-how-does-it-work">How does it work</h2>
+
+<p>
+  Any request sent to the Lelylan API is forwarded the the physical device, which
+  is in charge of applying the requested changes and of sending back a confirmation
+  message to Lelylan when those are made. The physical device also need to send a
+  message to Lelylan when its status change (for example somebody turns a light on
+  in the real world).
+</p>
+
+<%= render 'shared/animations/physical_device' %>
+
+
+<h2 id="makers-api-any-hardware">Any Hardware</h2>
+
+<p>
+To connect a physical device you can use any hardware with web connectivity. Different
+solutions are available varying on computational power, wireless capability and budget.
+Follows some.
+</p>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.arduino.cc/">Arduino</a></td>
+      <td>
+        Open-source electronics prototyping platform.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://electricimp.com/">Electric imp</a></td>
+      <td>
+        A complete and cheap solution to connect devices to the internet, wirelessly.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.raspberrypi.org/">Raspberry Pi</a></td>
+      <td>
+        Credit-card sized computer as ARM GNU/Linux box for $25.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.sparkdevices.com/">Spark Core</a></td>
+      <td>
+        A tiny Wi-Fi development board that makes it easy to create internet-connected hardware.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://nanode.eu/">Nanode</a></td>
+      <td>
+        Open-source Arduino-like board that has in-built web connectivity.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://mbed.org/">mbed</a></td>
+      <td>
+        Rapid Prototyping for Microcontrollers.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.udoo.org/">udoo</a></td>
+      <td>
+        Android, Linux and Arduino in a tiny single-board computer.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://pinocc.io/">Pinoccio</a></td>
+      <td>
+        A wireless microcontroller to connect anything to the web.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.gainspan.com/">GainSpan</a></td>
+      <td>
+        Optimized Wi-Fi chips to lower down energy consumptions.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.panstamp.com/">PanStamp</a></td>
+      <td>
+        Small wireless boards specially designed to fit in low-power applications.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openpicus.com/">openPICUS</a></td>
+      <td>
+        Platform to control and communication for your electronic devices through the web.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.libelium.com/">Libelium</a></td>
+      <td>
+        Hardware technology for the implementation of wireless sensor networks.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://netduino.com/">Netduino</a></td>
+      <td>
+        Open-source electronics platform using the .NET Micro Framework.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://tiny-circuits.com/products/tinyduino">TinyDuino</a></td>
+      <td>
+        Arduino compatible boards smaller than a quarter.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://cubieboard.org/">Cubieboard</a></td>
+      <td>
+        A small, high-performance arm box.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://developer.android.com/tools/adk/index.html">Android ADK</a></td>
+      <td>
+        Designed to let hardware builders and software developers create accessories for Android.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://rascalmicro.com/">The Rascal</a></td>
+      <td>
+        Small computer to monitor and control the world remotely.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://pandaboard.org/">Beagle Board</a></td>
+      <td>
+        Open OMAP 4 mobile software development platform.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.plugcomputer.org/">Plug Computer</a></td>
+      <td>
+        Small form factor server.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    Are we are missing any good hardware solution? Let
+    <a href="http://twitter.com/lelylan">@lelylan</a> know on Twitter.
+  </p>
+</div>
+

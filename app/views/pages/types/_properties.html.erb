@@ -1,0 +1,712 @@
+<h2 id="properties-api-overview">What is a Property?</a></h2>
+
+<p>
+A property is whatever vary in a device during time. It can be the intensity in
+a dimmer, the temperature in a cooling system or the volume in a television.
+</p>
+
+<h2 id="get-a-property">GET /properties/:id</h2>
+
+<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> property identified from its ID.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+  <pre><code>GET http://api.lelylan.com/properties/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired property.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-property-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-property-curl">
+    <div class="preview">
+        <pre><xmp>curl http://api.lelylan.com/properties/<id></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-property-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Property.find('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-property-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.property = Property.get({ id: '<id>' });
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-property-ruby">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+property = lelylan.property('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-property-python">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>from lelylan import properties
+property = properties.get_prop('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3 id="property-representation">Example body response</h3>
+
+<p>Light status accepting text values on and off</p>
+
+<div class="code-block"><pre><code>{
+  "name": "Status",
+  "id": "50420c3a267ff51300000001",
+  "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+  "type": "text",
+  "default": "0",
+  "accepted": { "on": "On", "off": "Off" },
+  "created_at": "2012-09-01T10:56:41Z",
+  "updated_at": "2012-09-01T10:56:41Z"
+}</code></pre></div>
+
+<p>Light intensity accepting any value between the range that goes from 0 to 100 with step 1</p>
+
+<div class="code-block"><pre><code>{
+  "name": "Intensity",
+  "id": "518be8b100045e99cc000004",
+  "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
+  "type": "range",
+  "range": { "min": "0", "max": "100", "step": "1" }
+  "default": "50",
+  "accepted": null,
+  "created_at": "2012-09-01T10:56:41Z",
+  "updated_at": "2012-09-01T10:56:41Z"
+}</code></pre></div>
+
+<h3>Body Response explained</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Type URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Type ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Type name</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Property type</td>
+    </tr>
+    <tr>
+      <td>range</td>
+      <td>Accepted range values. Visible only when type has <code>range</code> as value</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Default property value assigned to the property when the device is created</td>
+    </tr>
+    <tr>
+      <td>accepted</td>
+      <td>List of accepted values from the property.
+      <a href="/support#faq-accepted-values">Learn more about</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="get-all-properties">GET /properties</h2>
+
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) properties.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code># created properties
+GET http://api.lelylan.com/properties
+<hr>
+# all properties
+GET http://api.lelylan.com/properties/public</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        ID of the last fetched record.
+        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-all-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-properties-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-properties-curl">
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/properties \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-properties-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Property.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
+Lelylan.Property.public({}, callback); // all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-properties-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">
+    <div ng-repeat="property in owned">{{property}}</div>
+    <div ng-repeat="property in public">{{property}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.owned  = Property.query();   // owned resources
+      $scope.public = Property.public();  // all existing resources
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-properties-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+properties = lelylan.properties # owned resources
+
+lelylan = Lelylan::Client.new
+properties = lelylan.public_properties # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import properties
+properties = properties.get_created_prop() # owned resources
+
+from lelylan import properties
+properties = properties.get_all_prop() # all existing resources</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<div class="code-block"><pre><code>[
+  { # property representation },
+  { # property representation },
+  ...
+]</code></pre></div>
+
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
+
+<h2 id="create-a-property">POST /properties</h2>
+
+<p>
+  Create a property and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>POST  http://api.lelylan.com/properties</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>type</span>
+        <span class="info">optional</span>
+        <span class="info">default to 'text'</span>
+      </td>
+      <td>
+        Property type.
+        <span class="info">Valid values: text, number, range, color, password, date, time, datetime, url.</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>range</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Object containing the <code>min</code>, <code>max</code> and <code>step </code> range values.<br/>
+        Usi it only when <code>type</code> is set to <code>range</code>.</dd>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>default</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Default property value assigned to the device when created.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>accepted</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of accepted values. <a href="/support#faq-accepted-values">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#create-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#create-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-property-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-property-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://api.lelylan.com/properties \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "Intensity",
+           "default": "50",
+           "type": "range",
+           "range": {"min": "0", "max": "100", "step": "1"}
+         }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-property-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  name: 'Intensity',
+  default: '50',
+  type: 'range',
+  range: {'min': '0', 'max': '100', 'step': '1'} };
+
+Lelylan.Property.create(params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-property-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      var params = {
+        name: 'Intensity',
+        default: '50',
+        type: 'range',
+        range: {'min': '0', 'max': '100', 'step': '1'} };
+
+      $scope.property = new Property(params);
+      $scope.property.$save();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-property-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+var params = {
+  name: 'Intensity',
+  default: '50',
+  type: 'range',
+  range: {'min': '0', 'max': '100', 'step': '1'} };
+
+property = lelylan.create_property(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-property-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+var params = {
+  name: 'Intensity',
+  default: '50',
+  type: 'range',
+  range: {'min': '0', 'max': '100', 'step': '1'} };
+
+from lelylan import properties
+property = properties.create_prop(params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
+Location: http://api.lelylan.com/properties/5041e9e9230de31300000001</code></pre>
+</div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
+
+<h2 id="update-a-property">PUT /properties/:id</h2>
+
+<p>
+  Update a property identified from its ID and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>PUT  http://api.lelylan.com/properties/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired property.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>type</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property type.
+        <span class="info">Valid values: text, number, range, color, password, date, time, datetime, url.</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>range</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Object containing the <code>min</code>, <code>max</code> and <code>step </code> range values.<br/>
+        Usi it only when <code>type</code> is set to <code>range</code>.</dd>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>default</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Default property value assigned to the device when created.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>accepted</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of accepted values. <a href="/support#faq-accepted-values">Learn more about</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-property-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-property-curl">
+    <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/properties/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{ "default": "100" }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-property-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = { default: '100' };
+Lelylan.Property.update('<id>', params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-property-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      var params = { id: '<id>', default: '100' };
+      $scope.property = new Property(params);
+      $scope.type.$update();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-property-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = { default: '100' };
+property = lelylan.update_property('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-property-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { default: '100' };
+
+from lelylan import properties
+property = properties.update_prop('<id>', params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
+
+<h2 id="delete-a-property">DELETE /properties/:id</h2>
+
+<p>
+  Delete a property identified from its ID and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>DELETE http://api.lelylan.com/properties/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired property.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#delete-a-property-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-property-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#delete-a-property-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#delete-a-property-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-property-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-property-curl">
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/properties/<id> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-property-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Property.delete('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-property-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{property}}</div>
+  <script>
+    function LelylanController($scope, Property) {
+      $scope.properties = new Property({ id: '<id>' });
+      $scope.properties.$delete();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-property-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+property = lelylan.delete_property('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-property-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import properties
+property = properties.delete_prop('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#property-representation">property representation</a> for body response.
+</p>
+
+<h2 id="properties-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

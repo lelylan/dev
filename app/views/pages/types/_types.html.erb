@@ -1,0 +1,916 @@
+<h2 id="get-a-type">GET /types/:id</h2>
+
+<p>
+Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a>
+type identified from its ID.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+  <pre><code>GET http://api.lelylan.com/types/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired type.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-a-type-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-a-type-curl">
+    <div class="preview">
+        <pre><xmp>curl http://api.lelylan.com/types/<id></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-type-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Type.find('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-type-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.type = Type.get({ id: '<id>' });
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-type-ruby">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+type = lelylan.type('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-a-type-python">
+    <div class="preview">
+        <pre class="prettyprint"><xmp>from lelylan import types
+type = types.get_type('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3 id="type-representation">Example body response</h3>
+
+<div class="code-block"><pre><code>{
+  "id": "5042234270eda61200000006",
+  "uri": "http://api.lelylan.com/types/5042234270eda61200000006",
+  "name": "Connected Light",
+  "description": "Define a *basic* light structure",
+  "owner": {
+    "id": "5036227a4f1b030200000001",
+    "uri": "http://api.lelylan.com/people/5036227a4f1b030200000001"
+  },
+  "created_at": "2012-09-01T15:01:22Z",
+  "updated_at": "2012-09-01T15:01:22Z",
+  "categories": ["lights"],
+  "properties": [{
+    "name": "Status",
+    "id": "50420c3a267ff51300000001",
+    "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+    "type": "text",
+    "default": "0",
+    "accepted": { "on": "On", "off": "Off" },
+  }, {
+    "name": "Intensity",
+    "id": "518be8b100045e99cc000004",
+    "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
+    "type": "range",
+    "range": { "min": "0", "max": "100", "step": "1" }
+    "default": "50",
+    "accepted": null,
+  }],
+  "functions": [{
+    "name": "Turn on",
+    "id": "5042205c70eda61000000003",
+    "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003",
+    "properties": [{
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "expected": "on",
+      "pending": true
+    }]
+  }, {
+    "name": "Turn off",
+    "uri": "http://api.lelylan.com/functions/5042209370eda61000000004",
+    "id": "5042209370eda61000000004",
+    "properties": [{
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "expected": "off",
+      "pending": true
+    }]
+  }, {
+    "name": "Set intensity",
+    "uri": "http://api.lelylan.com/functions/504220c470eda60d00000005",
+    "id": "504220c470eda60d00000005",
+    "properties": [{
+      "uri": "http://api.lelylan.com/properties/518be8b100045e99cc000004",
+      "id": "518be8b100045e99cc000004",
+      "expected": null,
+      "pending": true
+    }]
+  }],
+  "statuses": [{
+    "name": "Light is On",
+    "id": "518bea2500045e99cc000009",
+    "uri": "http://api.lelylan.com/statuses/518bea2500045e99cc000009",
+    "function": {
+      "id": "5042209370eda61000000004",
+      "uri": "http://api.lelylan.com/functions/5042209370eda61000000004"
+    },
+    "properties": [{
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "pending": false,
+      "values": ["on"]
+    }],
+  }, {
+    "name": "Light is Off",
+    "id": "518bea3100045e99cc00000b",
+    "uri": "http://api.lelylan.com/statuses/518bea3100045e99cc00000b",
+    "function": {
+      "id": "5042205c70eda61000000003",
+      "uri": "http://api.lelylan.com/functions/5042205c70eda61000000003"
+    },
+    "properties": [{
+      "id": "50420c3a267ff51300000001",
+      "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
+      "pending": false,
+      "values": ["off"]
+    }],
+  }]
+}</code></pre></div>
+
+<h3>Body Response explained</h3>
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>uri</td>
+      <td>Type URI</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Type ID</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Type name</td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>Type description</td>
+    </tr>
+    <tr>
+      <td>owner</td>
+      <td>Type creator</td>
+    </tr>
+    <tr>
+      <td>categories</td>
+      <td>List of type categories</td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Learn more about <a href="#properties-api">properties</a></td>
+    </tr>
+    <tr>
+      <td>functions</td>
+      <td>Learn more about <a href="#functions-api">functions</a></td>
+    </tr>
+    <tr>
+      <td>statuses</td>
+      <td>Learn more about <a href="#statuses-api">statuses</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="get-all-types">GET /types</h2>
+
+<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) types.</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code># owned types
+GET http://api.lelylan.com/types
+<hr>
+# all types
+GET http://api.lelylan.com/types/public</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Type name to search.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>start</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        ID of the last fetched record.
+        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>per</span>
+        <span class="info">optional</span>
+        <span class="info">default to '25'</span>
+      </td>
+      <td>
+        Number of resources per page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-types-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-types-node" data-toggle="tab" class="node"> Node.js</a></li>
+  <li><a href="#get-all-types-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-all-types-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-types-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-types-curl">
+    <div class="preview"><pre><xmp>curl http://api.lelylan.com/types \
+     -H 'Authorization: Bearer <token>'</xmp></pre></div>
+  </div>
+  <div class="tab-pane" id="get-all-types-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Type.all({}, callback); // owned resources
+
+var Lelylan = require('lelylan-node')();
+Lelylan.Type.public({}, callback); // all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-types-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">
+    <div ng-repeat="type in owned">{{type}}</div>
+    <div ng-repeat="type in public">{{type}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.owned  = Type.query();   // owned resources
+      $scope.public = Type.public();  // all existing resources
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-types-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+types = lelylan.types # owned resources
+
+lelylan = Lelylan::Client.new
+types = lelylan.public_types # all existing resources</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-types-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import types
+types = types.get_owned_type() # owned resources
+
+from lelylan import types
+types = types.get_all_type() # all existing resources</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<div class="code-block"><pre><code>[
+  {
+    "uri": "http://api.lelylan.com/types/5042223470eda60d00000005",
+    "id": "5042223470eda60d00000005",
+    "name": "Light",
+    "categories": ["lights"],
+    "created_at": "2012-09-01T14:56:52Z",
+    "updated_at": "2012-09-01T14:56:52Z"
+  }, {
+    "uri": "http://api.lelylan.com/types/5042229270eda61200000005",
+    "id": "5042229270eda61200000005",
+    "name": "Basic Light",
+    "categories": ["lights"],
+    "created_at": "2012-09-01T14:58:26Z",
+    "updated_at": "2012-09-01T14:58:26Z"
+  }, ...
+]</code></pre></div>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Due to the type complex structure when you get a list of types each of them is returned with
+  a simplified JSON representation. Having the name, the ID and the category will be more than
+  enough.
+  </p>
+</div>
+
+<h2 id="create-a-type">POST /types</h2>
+
+<p>
+Create a type and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+  <pre><code>POST http://api.lelylan.com/types</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Type name.
+      </td>
+    </tr>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>description</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      Type description.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>categories</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of categories.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>properties</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of property IDs.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>functions</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of function IDs.
+    </td>
+  </tr>
+  <tr>
+    <td class="parameter">
+      <span>statuses</span>
+      <span class="info">optional</span>
+    </td>
+    <td>
+      List of status IDs.
+    </td>
+  </tr>
+</tbody>
+        </table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#create-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#create-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#create-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#create-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#create-a-type-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="create-a-type-curl">
+    <div class="preview">
+      <pre><xmp>curl -X POST http://api.lelylan.com/types \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{
+           "name": "Light",
+           "categories": ["lights"],
+           "properties": [ "<status>", "<intensity>" ],
+           "functions": [ "<turn-on>", "<turn-off>", "<set-intensity>" ],
+           "statuses": [ "<light-on>", "<light-off>" ]
+         }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-type-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = {
+  name: 'Light',
+  categories: [ 'lights' ],
+  properties: [ '<status>', '<intensity>' ],
+  functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+  statuses: [ '<light-on>', '<light-off>' ] };
+
+Lelylan.Type.create(params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-type-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      var params = {
+        name: 'Light',
+        categories: [ 'lights' ],
+        properties: [ '<status>', '<intensity>' ],
+        functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+        statuses: [ '<light-on>', '<light-off>' ] };
+
+      $scope.type = new Type(params);
+      $scope.type.$save();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-type-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = {
+  name: 'Light',
+  categories: [ 'lights' ],
+  properties: [ '<status-id>', '<intensity-id>' ],
+  functions: [ '<turn-on-id>', '<turn-off-id>', '<set-intensity-id>' ],
+  statuses: [ '<light-on-id>', '<light-off-id>' ] };
+
+type = lelylan.create_type(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="create-a-type-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = {
+  name: 'Light',
+  categories: [ 'lights' ],
+  properties: [ '<status>', '<intensity>' ],
+  functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
+  statuses: [ '<light-on>', '<light-off>' ] };
+
+from lelylan import types
+type = types.create_type(params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  In this example the resource IDs are replaced from friendly names.
+  </p>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
+Location: http://api.lelylan.com/types/5042234270eda61200000006</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#type-representation">type representation</a> for body response.
+</p>
+
+<h2 id="update-a-type">PUT /types/:id</h2>
+
+<p>
+  Update a type identified from its ID and returns extended information for it.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>PUT  http://api.lelylan.com/types/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired type.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>name</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Type name.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>description</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Type description.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>categories</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of categories.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of property IDs.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>functions</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of function IDs.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter">
+        <span>statuses</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of status IDs.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-a-type-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-a-type-curl">
+    <div class="preview"><pre><xmp>curl -X PUT http://api.lelylan.com/types/<id> \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{ "name": "RBG Light" }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-type-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = { name: 'RBG Light' };
+Lelylan.Type.update('<id>', params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-type-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      var params = { id: '<id>', name: 'RBG Light' };
+      $scope.type = new Type(params);
+      $scope.type.$update();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-type-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = { name: 'RBG Light' }
+type = lelylan.update_type('<id>', params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-a-type-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { name: 'RBG Light' }
+
+from lelylan import types
+type = types.update_type('<id>', params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+When updating a type connection (e.g. properties)
+all previous connected resources are replaced.
+  </p>
+</div>
+</p>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#type-representation">type representation</a> for body response.
+</p>
+
+<h2 id="delete-a-type">DELETE /types/:id</h2>
+
+<p>
+  Delete a type identified from its ID and returns extended information for it.
+  All connected resources (e.g. properties, functions and statuses) are not deleted.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>DELETE http://api.lelylan.com/types/:id</code></pre>
+</div>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The ID of the desired type.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#delete-a-type-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#delete-a-type-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#delete-a-type-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#delete-a-type-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#delete-a-type-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="delete-a-type-curl">
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/types/<id> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-type-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Type.delete('<id>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-type-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, Type) {
+      $scope.type= new Type({ id: '<id>' });
+      $scope.type.$delete();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-type-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+type = lelylan.delete_type('<id>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="delete-a-type-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+from lelylan import types
+type = types.delete_type('<id>')</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="#type-representation">type representation</a> for body response.
+</p>
+
+<h2 id="get-all-categories">GET /categories</h2>
+
+<p>
+  Returns a list of common categories to associate to your types.
+</p>
+
+<h3>Resource URL</h3>
+
+<div class="code-block">
+<pre><code>GET http://api.lelylan.com/categories</code></pre>
+</div>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#get-all-categories-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#get-all-categories-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#get-all-categories-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#get-all-categories-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#get-all-categories-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="get-all-categories-curl">
+    <div class="preview">
+      <pre><xmp>curl http://api.lelylan.com/categories \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+     </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+Lelylan.Category.all({}, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">
+    <div ng-repeat="category in categories">{{category}}</div>
+  </div>
+  <script>
+    function LelylanController($scope, Category) {
+      $scope.categories = Category.query();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+categories = lelylan.categories</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="get-all-categories-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>from lelylan import types
+categories = types.get_type_cat()</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 200 OK</code></pre></div>
+
+<h3>Example body response</h3>
+
+<div class="code-block"><pre><code>[
+  { "name": "lights" },
+  { "name": "locks" },
+  { "name": "thermostats" },
+  ...
+]</code></pre></div>
+
+<h2 id="types-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

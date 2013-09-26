@@ -1,0 +1,270 @@
+<h2 id="activations-api-overview">What is an Activation?</h2>
+
+<p>
+When you create a device, it's automatically yours. This is generally what you want when
+hacking and playing with Lelylan, but real needs can be different. There are at least a
+couple of scenarios where changing the device ownership is what you want.
+</p>
+
+<ul>
+  <li>
+  <em>Selling a great device</em> -
+  Suppose you are a startup and you want to produce a new smart device with the best design ever.
+  You want to put it in the stores and let everyone own it.
+  </li>
+  <li>
+  <em>Making a gift</em> -
+  Suppose you are a wonderful girlfriend and a great hacker. You have built the most beautiful
+  light in earth and you want to give it to your man to celebrate your first year.
+  </li>
+</ul>
+
+<p>
+As you can see, we need an easy way to move the device ownership to somebody else, in a controlled
+way. To do this you can use the activation services, keeping in mind few simple things.
+</p>
+
+<ul>
+  <li>
+  <em>Only one person at time can be the owner of a device</em> - If someone takes your
+  activation code and try to activate the device after you already did it, the activation will
+  not work.
+  </li>
+  <li>
+  <em>Deactivate your device to let other people own it</em> - When you create a device
+  it's yours by default. To move the device ownership you must first <a href="#deactivate-a-device">
+  deactivate</a> it. Once deactivated, the device can be <a href="#activate-a-device">claimed</a>
+  from whoever has the activation code.
+  </li>
+</ul>
+
+<h2 id="activate-a-device">POST /activations</h2>
+
+<p>
+Activate a device and returns extended information for it.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+    When you create a device you own it. To let others own your
+    devices first <a href="#deactivate-a-device">deactivate</a> them.
+  </p>
+</div>
+
+<h3>Resource URL</h3>
+
+<pre><code>POST  http://api.lelylan.com/activations</code></pre>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        activation_code
+        <span class="info">required</span>
+      </td>
+      <td>
+        Device activation code.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class=" active"><a href="#activate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#activate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#activate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#activate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#activate-a-device-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="activate-a-device-curl">
+    <div class="preview"><pre><xmp>curl -X POST http://api.lelylan.com/activations \
+     -H 'Authorization: Bearer <token>' \
+     -H 'Content-Type: application/json' \
+     -d '{ "activation_code": "<activation-code>" }'</xmp></pre></div>
+  </div>
+  <div class="tab-pane" id="activate-a-device-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')({ token: token });
+var params = { activation_code: '<activation-code>' };
+Lelylan.Device.activate(params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="activate-a-device-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{activated}}</div>
+  <script>
+    function LelylanController($scope, Activation) {
+      var params = { activation_code: '<activation-code>' };
+      $scope.activated = new Activation(params);
+      $scope.activated.$execute();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="activate-a-device-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new(token: token)
+params = { activation_code: '<activation-code>' }
+device = lelylan.activate_device(params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="activate-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { activation_code: '<activation-code>' }
+
+from lelylan import activations
+device = activations.activate_dev(params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<div class="code-block"><pre><code>HTTP/1.1 201 Created
+Location: http://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
+
+<p>
+  See <a href="/developers#device-representation">device representation</a> for body response.
+</p>
+
+<h3>What if the device is already activated?</h3>
+
+<p>
+Trying to activate a device already activate will return a not valid response.
+</p>
+
+<div class="code-block">
+<pre><code>HTTP/1.1 422 Not Valid
+<hr>
+{
+  "status": "422",
+  "method": "POST",
+  "request": "http://api.lelylan.com/activations",
+  "error": {
+    "code": "notifications.resource.already_activated",
+    "description": "Resource already activated",
+    "body": { "activation_code": "3cd6360a163b112c5eb910967c5866f77f019694" }
+  }
+}</code></pre>
+</div>
+
+<h2 id="deactivate-a-device">DELETE /activations/:activation-code</h2>
+
+<p>
+Deactivate a device identified from its activation code and returns extended information for it.
+When a device is deactivated, anyone owning the activation code can claim the device ownership.
+Until that moment the previous owner remains.
+</p>
+
+<h3>Resource URL</h3>
+
+<pre><code>DELETE https://api.lelylan.com/activations/:activation-code</code></pre>
+
+<h3>Parameters</h3>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        activation_code
+        <span class="info">required</span>
+      </td>
+      <td>
+        The <a href="/developers#get-a-device-private-info">activation code</a> of the desired device.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#deactivate-a-device-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#deactivate-a-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#deactivate-a-device-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#deactivate-a-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#deactivate-a-device-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="deactivate-a-device-curl">
+    <div class="preview"><pre><xmp>curl -X DELETE http://api.lelylan.com/activations/<activation-code> \
+     -H 'Authorization: Bearer <token>'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="deactivate-a-device-node">
+    <div class="preview">
+      <pre><xmp class="prettyprint">var Lelylan = require('lelylan-node')({ token: token });
+Lelylan.Device.deactivate('<activation-code>', callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="deactivate-a-device-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
+  <div ng-controller="LelylanController">{{deactivated}}</div>
+  <script>
+    function LelylanController($scope, Deactivation) {
+      var params = { activation_code: '<activation-code>' };
+      $scope.deactivated = new Deactivation(params);
+      $scope.deactivated.$execute();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
+  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="deactivate-a-device-ruby">
+    <div class="preview">
+      <pre><xmp class="prettyprint">lelylan = Lelylan::Client.new(token: token)
+device = lelylan.deactivate_device('<activation-code>')</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="deactivate-a-device-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>oauth.set_access_token()
+params = { activation_code: '<activation-code>' }
+
+from lelylan import activations
+device = activations.deactivate_dev(params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Example header response</h3>
+
+<pre><code>HTTP/1.1 200 OK</code></pre>
+
+<h3>Example body response</h3>
+
+<p>
+  See <a href="/developers#device-representation">device representation</a> for body response.
+</p>
+
+<h2 id="activations-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>
