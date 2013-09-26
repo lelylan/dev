@@ -87,8 +87,8 @@
     </div>
     </nav>
 
-    <!-- contant -->
-
+    <!-- homepage banner -->
+    <% if params[:id] == 'index' %>
     <div class="banner">
       <div class="container">
         <div class="banner-content">
@@ -100,7 +100,9 @@
         </div>
       </div>
     </div>
+    <% end %>
 
+    <!-- contant -->
     <div class="container bs-docs-container">
       <div class="row">
         <%= yield %>
