@@ -223,112 +223,84 @@ confirming the updated property values.
 <div class="tab-content">
   <div class="tab-pane active" id="connect-physical-device-arduino">
     <div class="preview">
-      <pre class="prettyprint"><xmp>/* ------------------------------------------------
- * Install the following PubSubClient fork
- * https://github.com/andreareginato/pubsubclient
- * It sets the max packet size to 512 bytes
- * ------------------------------------------------ */
+      <pre class="prettyprint"><xmp>/* -------------------------------------------------------
+ * Install https://github.com/andreareginato/pubsubclient
+ * It sets the max packet size to 512 bytes.
+ * ------------------------------------------------------- */
 
 #include <SPI.h>
 #include <Ethernet.h>
 #include <PubSubClient.h>
-#include <aJSON.h>
 
 // Update these with values suitable for your network.
 byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
 
-/* ---------------
- * Lelylan config
- * --------------- */
+/* device credentials */
+char* deviceId = "<DEVICE-ID>";         // set your device id (will be the MQTT client username)
+char* deviceSecret = "<DEVICE-SECRET>"; // set your device secret (will be the MQTT client password)
 
-// lelylan mqtt server
-byte server[] = { 192, 168, 1, 101 };
+/* device topics */
+char* outTopic = "devices/<DEVICE-ID>/set"; // where physical updates are published
+char* inTopic = "devices/<DEVICE-ID>/get";  // where lelylan updates are received
 
-// set your device id (MQTT client username)
-char* deviceId = "<device-id>";
+/* sample payload published to lelylan */
+/* (to get the desired property-id go to the device settings and click on the type link) */
+char* payload = "{\"properties\":[{ \"id\": \"<PROPERTY-ID>\", \"value\": \"<VALUE>\" }]}";
 
-// set your device secret (MQTT client password)
-char* deviceSecret = "<device-secret>";
+/* access settings */
+byte server[] = { 192, 168, 1, 101 }; // MQTT server address
+char* clientId = "mqtt-client-1";     // MQTT client id (max 23 bytes)
 
-// mqtt client identifier (random unique value, max 23 bytes)
-char* clientId = "<client-id>";
+/* communication definition */
+void callback(char* topic, byte* payload, unsigned int length); // subscription callback
+EthernetClient ethClient;                                       // ethernet client
+PubSubClient client(server, 1883, callback, ethClient);         // mqtt client
 
-// out topic (where physical updates are published)
-char* outTopic = "devices/<device-id>/set";
 
-// in topic (where lelylan updates are received)
-char* inTopic = "devices/<device-id>/get";
-
-/* ----------------
- * MQTT connection
- * ---------------- */
-
-// callback function for any subscribed channel
-void callback(char* topic, byte* payload, unsigned int length);
-
-// ethernet connection
-EthernetClient ethClient;
-PubSubClient client(server, 1883, callback, ethClient);
-
-// arduino setup
+/* arduino setup */
 void setup() {
   Serial.begin(9600);
   delay(500);
 
-  Serial.println("Start Ethernet");
   Ethernet.begin(mac);
-
-  // debug to show IP address
-  Serial.print("IP address: ");
+  Serial.print("Connected with IP: ");
   Serial.println(Ethernet.localIP());
 
-  // connect to the MQTT server
-  connectToMQTT();
+  lelylanConnection(); // MQTT server connection
 }
 
-// arduino loop
+/* arduino loop */
 void loop() {
-  connectToMQTT();
+  lelylanConnection();
 }
 
-// connect to the MQTT server and subscribe to the desired topic
-void connectToMQTT() {
+/* MQTT server connection */
+void lelylanConnection() {
   // add reconnection logics
   if (!client.connected()) {
     // connection to MQTT server
     if (client.connect(clientId, deviceId, deviceSecret)) {
       Serial.print("[OK] Connected with MQTT");
-      subscribeToTopic();
-      publishToTopic();
+      lelylanSubscribe();  // topic subscription
+      lelylanPublish();    // topic publishing
     }
   }
 
   client.loop();
 }
 
-/* --------------
- * MQTT publish
- * -------------- */
-
-void publishToTopic() {
-  // publish a predefined JSON that set the property to the desired value
-  // to create proper json use https://github.com/interactive-matter/aJson
-  char* payload = "{\"properties\":[{ \"id\": \"<property-id>\", \"value\": \"<value>\" }]}";
+/* MQTT publish */
+void lelylanPublish() {
   client.publish(outTopic, payload);
 }
 
-/* ---------------
- * MQTT subscribe
- * --------------- */
-
-// subscribe for incoming messages
-void subscribeToTopic() {
+/* MQTT subscribe */
+void lelylanSubscribe() {
   client.subscribe(inTopic);
 }
 
-// subscription callback
+// debug to show the received message
 void callback(char* topic, byte* payload, unsigned int length) {
-  // debug to show the received message
   Serial.print("Receiving subscribed message");
   Serial.println(topic);
   Serial.write(payload, length);

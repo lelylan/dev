@@ -160,215 +160,141 @@ instructions see the <a href="#connect-your-first-light-code-explained">Code Exp
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  In order to make this sketch work you need to set your Device ID and Secret.
+  In order to make this sketch work set the deviceId, deviceSecret, outTopic, inTopic
+  and clientId.
   </p>
 </div>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>/* -----------------
- * Import libraries
- * ----------------- */
-
-#include <SPI.h>
+<pre class="prettyprint"><xmp>#include <SPI.h>
 #include <Ethernet.h>
 #include <PubSubClient.h>
-#include <aJSON.h>
 
-/* --------------------
- * Device credentials
- * -------------------- */
+/* Device credentials */
+char* deviceId = "<DEVICE-ID>"; // set your device id (will be the MQTT client username)
+char* deviceSecret = "<DEVICE-SECRET>"; // set your device secret (will be the MQTT client password)
 
-char* deviceId = "DEVICE-ID";          // set your device id (will be the MQTT client username)
-char* deviceSecret = "DEVICE-SECRET";  // set your device secret (will be the MQTT client password)
+/* Device topics */
+char* outTopic = "devices/<DEVICE-ID>/set"; // where physical updates are published
+char* inTopic = "devices/<DEVICE-ID>/get";  // where lelylan updates are received
 
-/* ------------
- * Pin config
- * ------------ */
+/* Access settings */
+byte server[] = { 96, 126, 109, 170 }; // MQTT server address
+char* clientId = "<CLIENT-ID>"; // MQTT client id (random, max 23 bytes)
 
-int inPin = 2;    // button
-int outPin = 13;  // led
+/* Sample payload published to lelylan */
+/* Status-id is the basic light status id (http://types.lelylan.com/types/518be107ef539711af000001) */
+char* payloadOn  = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"value\":\"on\"}]}";
+char* payloadOff = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"value\":\"off\"}]}";
 
-/* ----------------
- * Lelylan config
- * ---------------- */
+/* Ethernet configuration */
+byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
+EthernetClient ethClient;
 
-char* outTopic = "devices/<device-id>/set";  // out topic (where physical updates are published)
-char* inTopic = "devices/<device-id>/get";   // in topic (where lelylan updates are received)
-char* clientId = "mqtt-client-1";            // mqtt client id (random unique value, max 23 bytes)
-byte server[] = { 192, 168, 1, 101 };        // MQTT server
-char* statusId = "51f919db3d9395c5c1000001"  // simple light status ID
+/* MQTT communication */
+void callback(char* topic, byte* payload, unsigned int length); // subscription callback
+PubSubClient client(server, 1883, callback, ethClient);         // mqtt client
 
-/* ----------------
- * Arduino config
- * ---------------- */
+/* Pins configuration */
+int inPin = 2;  // button
+int outPin = 4; // led
 
+/* Button and led logics */
 int state = HIGH;     // current state of the output pin
 int reading;          // current reading from the input pin
 int previous = LOW;   // previous reading from the input pin
 long time = 0;        // the last time the output pin was toggled
 long debounce = 200;  // the debounce time, increase if the output flickers
 
-/* -----------------
- * Ethernet config
- * ----------------- */
-
-// update these with values suitable for your network.
-byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
-EthernetClient ethClient;
-
-/* -------------
- * MQTT config
- * ------------- */
-
-void callback(char* topic, byte* payload, unsigned int length); // callback for any received message
-PubSubClient client(server, 1883, callback, ethClient); // MQTT client initialization
-
-/* ---------------
- * Arduino setup
- * --------------- */
-
+/* arduino setup */
 void setup() {
   Serial.begin(9600);
   delay(500);
 
   Ethernet.begin(mac);
-  Serial.print("Connected with IP address: ");
+  Serial.print("Connected with IP: ");
   Serial.println(Ethernet.localIP());
 
-  connectToMQTT();          // MQTT connection with the server
+  lelylanConnection();      // MQTT server connection
   pinMode(inPin, INPUT);    // button pin setup
   pinMode(outPin, OUTPUT);  // led pin setup
 }
 
-/* --------------
- * Arduino loop
- * -------------- */
-
+/* arduino loop */
 void loop() {
-  var *char value;
+  lelylanConnection();
 
-  connectToMQTT();               // reconnection logics
+  char* value;
   reading = digitalRead(inPin);  // read the button state
 
   // if the input just went from LOW and HIGH and we've waited long enough to ignore
   // any noise on the circuit, toggle the output pin and remember the time
   if (reading == HIGH && previous == LOW && millis() - time > debounce) {
-
-    if (state == HIGH) {  // turn off the light
-      state = LOW;
-      value = "off";
-    } else {              // turn on the light
+    if (state == LOW) {
+      Serial.println("[PHYSICAL] Led turned on");
+      lelylanPublish("on");
       state = HIGH;
-      value = "on";
+    } else {
+      Serial.println("[PHYSICAL] Led turned off");
+      lelylanPublish("off");
+      state = LOW;
     }
 
-    publishToTopic(statusId, value)  // publish the new light status to lelylan
     time = millis();
   }
 
-  // effectively turn the light on or off
+  // effectively update the light status
   digitalWrite(outPin, state);
   previous = reading;
 }
 
-/* ----------------
- * MQTT Connection
- * ---------------- */
-
-void connectToMQTT() {
-  // reconnection logics
+/* MQTT server connection */
+void lelylanConnection() {
+  // add reconnection logics
   if (!client.connected()) {
-    // connect to the MQTT server
+    // connection to MQTT server
     if (client.connect(clientId, deviceId, deviceSecret)) {
-      Serial.print("[OK] Connected with MQTT");
-      // once connected subscribe to the in topic
-      client.subscribe(inTopic);
+      Serial.println("[PHYSICAL] Successfully connected with MQTT");
+      lelylanSubscribe(); // topic subscription
     }
   }
-
   client.loop();
 }
 
-/* --------------
- * MQTT publish
- * -------------- */
-
-// publish message to Lelylan
-void publishToTopic(char* property, char* value) {
-
-  // initialize
-  char* payload;
-  aJsonObject* root = aJson.createObject();
-  aJsonObject* list = aJson.createArray();
-  aJsonObject* prop = aJson.createObject();
-
-  // create property object with the updated values
-  aJson.addStringToObject(prop, "id", property);
-  aJson.addStringToObject(prop, "value", value);
-
-  // add property to property list
-  aJson.addItemToArray(list, prop);
-
-  // add properties list to root
-  aJson.addItemToObject(root, "properties", list);
-  payload = aJson.print(root);
-
-  // publish message to Lelylan
-  client.publish(outTopic, payload);
-
-  // free used memory
-  aJson.deleteItem(root);
-  free(payload);
+/* MQTT publish */
+void lelylanPublish(char* value) {
+  if (value == "on")
+    client.publish(outTopic, payloadOn);
+  else
+    client.publish(outTopic, payloadOff);
 }
 
-/* ---------------
- * MQTT subscribe
- * --------------- */
+/* MQTT subscribe */
+void lelylanSubscribe() {
+  client.subscribe(inTopic);
+}
 
-// subscription callback
+/* Receive Lelylan message and confirm the physical change */
 void callback(char* topic, byte* payload, unsigned int length) {
-
-  // In order to republish this payload, a copy must be made as the original
-  // payload buffer will be overwritten whilst constructing the PUBLISH packet.
+  // copu the payload content into a char*
   char* json;
   json = (char*) malloc(length + 1);
   memcpy(json, payload, length);
   json[length] = '\0';
 
-  // debug to show the received message
-  Serial.println("Receiving subscribed message ");
-  Serial.print(topic);
-  Serial.println(json);
-
-  // create a JSON object with the payload
-  aJsonObject* root = aJson.parse(json);
-
-  // extract properties array
-  aJsonObject* properties = aJson.getObjectItem(root, "properties");
-  int list = aJson.getArraySize(properties);
-
-  // extract the first property
-  aJsonObject* element = aJson.getArrayItem(properties, 0);
-  aJsonObject* id = aJson.getObjectItem(element, "id");
-  aJsonObject* value = aJson.getObjectItem(element, "value");
-
-  // check for the status property
-  if(strcmp(id->valuestring, statusId) == 0){
-
-    // turn on the light
-    if(strcmp(value->valuestring, "on") == 0 && state != HIGH) {
-      state = HIGH;
-      digitalWrite(outPin, state);     // turn light on
-      publishToTopic(statusId, 'on');  // confirm light is on to Lelylan
-    }
-
-    // turn off the light
-    if(strcmp(value->valuestring, "off") == 0 && state != LOW) {
-      state = LOW;
-      digitalWrite(lightPin, state);    // turn light off
-      publishToTopic(statusId, 'off');  // confirm light is off to Lelylan
-    }
+  // update the physical status and confirm the executed update
+  if (String(payloadOn) == String(json)) {
+    Serial.println("[LELYLAN] Led turned on");
+    lelylanPublish("on");
+    state = HIGH;
+  } else {
+    Serial.println("[LELYLAN] Led turned off");
+    lelylanPublish("off");
+    state = LOW;
   }
+
+  digitalWrite(outPin, state);
+  free(json);
 }</xmp></pre>
 </div>
 
