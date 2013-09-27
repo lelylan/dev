@@ -243,17 +243,20 @@ char* deviceSecret = "<DEVICE-SECRET>"; // set your device secret (will be the M
 char* outTopic = "devices/<DEVICE-ID>/set"; // where physical updates are published
 char* inTopic = "devices/<DEVICE-ID>/get";  // where lelylan updates are received
 
+/* Access settings */
+byte server[] = { 96, 126, 109, 170 }; // MQTT server address
+char* clientId = "<CLIENT-ID>"; // MQTT client id (random, max 23 bytes)
+
 /* sample payload published to lelylan */
 /* (to get the desired property-id go to the device settings and click on the type link) */
 char* payload = "{\"properties\":[{ \"id\": \"<PROPERTY-ID>\", \"value\": \"<VALUE>\" }]}";
 
-/* access settings */
-byte server[] = { 192, 168, 1, 101 }; // MQTT server address
-char* clientId = "mqtt-client-1";     // MQTT client id (max 23 bytes)
+/* Ethernet configuration */
+byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
+EthernetClient ethClient;
 
-/* communication definition */
+/* MQTT communication */
 void callback(char* topic, byte* payload, unsigned int length); // subscription callback
-EthernetClient ethClient;                                       // ethernet client
 PubSubClient client(server, 1883, callback, ethClient);         // mqtt client
 
 
