@@ -2,7 +2,7 @@
 
 Lelylan Dev Center site is the official site where all documentation, examples, libraries,
 showcases and general information related to Lelylan APIs are collected.
-Learn more about at {Lelylan Ded Center}[http://dev.lelylan.com/]
+Learn more about at [Lelylan Dev Center](http://dev.lelylan.com/)
 
 
 ## Requirements
