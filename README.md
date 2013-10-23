@@ -7,7 +7,7 @@ Learn more about at {Lelylan Ded Center}[http://dev.lelylan.com/]
 
 ## Requirements
 
-Ruby ~> {1.9.3}[www.ruby-lang.org/en/]
+Ruby ~> [1.9.3](www.ruby-lang.org/en/)
 
 
 ## Installation
@@ -37,21 +37,21 @@ be accepted.
 
 ## Feedback
 
-Use the {issue tracker}[http://github.com/lelylan/dev/issues] for any bug you find and
-write us a {mail}[mailto:touch@lelylan.com] or a {tweet}[http://twitter.com/lelylan] for any
+Use the [issue tracker](http://github.com/lelylan/dev/issues) for any bug you find and
+write us a [mail](mailto:touch@lelylan.com) or a [tweet](http://twitter.com/lelylan) for any
 feature idea that can improve the project. Feedback is always welcome. Always.
 
 
 ## Links
 
-* (GIT Repository)[https://github.com/lelylan/dev]
-* (Lelylan)[http://lelylan.com]
-* (Lelylan | Dev Center)[http://dev.lelylan.com]
+* [GIT Repository](https://github.com/lelylan/dev)
+* [Lelylan](http://lelylan.com)
+* [Lelylan | Dev Center](http://dev.lelylan.com)
 
 
 ## Authors
 
-(Andrea Reginato)[http://twitter.com/andreareginato]
+[Andrea Reginato](http://twitter.com/andreareginato)
 
 
 ## Contributors
@@ -66,4 +66,4 @@ See CHANGELOG
 
 ## Copyright
 
-Copyright (c) 2013 {Lelylan}[http://lelylan.com]. See LICENSE for details.
+Copyright (c) 2013 [Lelylan](http://lelylan.com). See LICENSE for details.
