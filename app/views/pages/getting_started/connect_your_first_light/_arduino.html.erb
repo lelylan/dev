@@ -1,4 +1,4 @@
-<h2 id="connect-your-first-light-using-arduino-introduction">Introduction</h2>
+<h2 id="connect-your-first-light-arduino-introduction">Introduction</h2>
 
 <%= image_tag('connect-your-first-light/overview.jpg', class: 'img-thumbnail') %>
 
@@ -9,7 +9,7 @@
   messages with Lelylan in a simple and transparent way.
 </p>
 
-<h2 id="connect-your-first-light-using-arduino-components">Components</h2>
+<h2 id="connect-your-first-light-arduino-components">Components</h2>
 
 <p>
   To connect your first light you need an Arduino Ethernet or an Arduino UNO with
@@ -54,7 +54,7 @@
   </tbody>
 </table>
 
-<h2 id="connect-your-first-light-using-arduino-libraries">Libraries</h2>
+<h2 id="connect-your-first-light-arduino-libraries">Libraries</h2>
 
 <p>
 To program your Arduino you need to install the <a href="http://arduino.cc/en/main/software">Arduino IDE</a>
@@ -85,7 +85,7 @@ and the following libraries (if you do not know how to install a library checkou
   </tbody>
 </table>
 
-<h2 id="connect-your-first-light-using-arduino-hardware-setup">Hardware Setup</h2>
+<h2 id="connect-your-first-light-arduino-hardware-setup">Hardware Setup</h2>
 
 <p>
 This example demonstrates the use of a pushbutton as a switch. Each time you press
@@ -95,7 +95,7 @@ the button, the LED is turned on (if it's off) or off (if on).
 <%= image_tag('connect-your-first-light/components.png', class: 'img-thumbnail') %>
 
 
-<h2 id="connect-your-first-light-using-arduino-lelylan-setup">Lelylan Setup</h2>
+<h2 id="connect-your-first-light-arduino-lelylan-setup">Lelylan Setup</h2>
 
 <p>
 To create a new device open the <a href="http://manage.lelylan.com">Dashboard</a>.
@@ -148,13 +148,13 @@ actual device id.
   </tbody>
 </table>
 
-<h2 id="connect-your-first-light-using-arduino-arduino-code">Arduino Code</h2>
+<h2 id="connect-your-first-light-arduino-arduino-code">Arduino Code</h2>
 
 <p>
 Here is the Arduino sketch. To make it work set the <code>deviceId</code>
 and the <code>deviceSecret</code> to your device credentials, upload the
 sketch and connect it to the Internet. For further
-instructions see the <a href="#connect-your-first-light-using-arduino-code-explained">Code Explained</a> section.
+instructions see the <a href="#connect-your-first-light-arduino-code-explained">Code Explained</a> section.
 </p>
 
 <div class="alert alert-info">
@@ -298,7 +298,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }</xmp></pre>
 </div>
 
-<h2 id="connect-your-first-light-using-arduino-control">Control your light</h2>
+<h2 id="connect-your-first-light-arduino-control">Control your light</h2>
 
 <p>
   Now that all the components are ready and your Arduino is connected to Lelylan
@@ -310,7 +310,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 <%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
 </a>
 
-<h2 id="connect-your-first-light-using-arduino-code-explained">Code Explained</h2>
+<h2 id="connect-your-first-light-arduino-code-explained">Code Explained</h2>
 
 <p>
 To better understand how the Arduino sketch works we'll give you a brief
@@ -418,7 +418,7 @@ PubSubClient client(server, 1883, callback, ethClient); // mqtt client</xmp></pr
 
 <p>
   Those are the pins used to connect the led and the button. If you have followed the
-  <a href="#connect-your-first-light-using-arduino-hardware-setup">Fritzing diagram</a> you don't have to change
+  <a href="#connect-your-first-light-arduino-hardware-setup">Fritzing diagram</a> you don't have to change
   anything. If you used different pins, remember to change those values.
 </p>
 
@@ -689,7 +689,7 @@ the property ID and the property value to change.
   </tbody>
 </table>
 
-<h2 id="connect-your-first-light-using-arduino-problems">Possible Problems</h2>
+<h2 id="connect-your-first-light-arduino-problems">Possible Problems</h2>
 
 <ul>
   <li>
@@ -708,6 +708,6 @@ the property ID and the property value to change.
 
 </ul>
 
-<h2 id="connect-your-first-light-using-arduino-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+<h2 id="connect-your-first-light-arduino-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
 <%= render 'shared/feedback' %>

@@ -72,6 +72,10 @@ $(function () {
   var initHardware = function() {
     var hardware;
 
+    // hide all menus
+    $('.bs-sidenav ul.arduino').hide()
+    $('.bs-sidenav ul.raspberry-pi').hide()
+
     // search in the fragment
     if (window.location.hash.match(/arduino/))    hardware = 'arduino';
     if (window.location.hash.match(/raspberry/))  hardware = 'raspberry-pi';
@@ -104,8 +108,13 @@ $(function () {
     // set hardware on cookies
     $.cookie('lelylan-dev-hardware', hardware);
 
+    // hide all menus
+    $('.bs-sidenav ul.arduino').hide()
+    $('.bs-sidenav ul.raspberry-pi').hide()
+
     // show the hardware related menu
-    $('.nav-tabs a.' + hardware).tab('show');
+    console.log(hardware)
+    $('.bs-sidenav ul.' + hardware).show()
 
   }
 
