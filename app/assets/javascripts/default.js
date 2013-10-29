@@ -113,7 +113,6 @@ $(function () {
     $('.bs-sidenav ul.raspberry-pi').hide()
 
     // show the hardware related menu
-    console.log(hardware)
     $('.bs-sidenav ul.' + hardware).show()
 
   }
