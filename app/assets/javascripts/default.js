@@ -1,7 +1,11 @@
+
 // code highlight
+
 addEventListener('load', function (event) { prettyPrint() }, false);
 
+
 // language examples selection (ruby, angular, curl, etc.)
+
 $(function () {
 
   var initLanguage = function() {
@@ -32,7 +36,6 @@ $(function () {
     // get the selected language
     var language = $(this).attr('class');
 
-
     // change the language description
     setLanguage(language);
   })
@@ -58,4 +61,53 @@ $(function () {
   }
 
   initLanguage();
+});
+
+
+
+// Connect your first light hardware switch
+
+$(function () {
+
+  var initHardware = function() {
+    var hardware;
+
+    // search in the fragment
+    if (window.location.hash.match(/arduino/))    hardware = 'arduino';
+    if (window.location.hash.match(/raspberry/))  hardware = 'raspberry-pi';
+
+    // search in the cookie
+    if (!hardware) hardware = $.cookie('lelylan-dev-hardware');
+
+    // set a default
+    if (!hardware) hardware = 'arduino';
+
+    // change the Hardware description
+    setHardware(hardware);
+  }
+
+  // Add a listener on hardware change
+  $('.connect-your-first-light a').click(function (e) {
+
+    e.preventDefault()
+
+    // get the selected hardware
+    var hardware = $(this).data('hardware');
+
+    // change the hardware description
+    setHardware(hardware);
+  })
+
+  // Set the current hardware
+  var setHardware = function(hardware) {
+
+    // set hardware on cookies
+    $.cookie('lelylan-dev-hardware', hardware);
+
+    // show the hardware related menu
+    $('.nav-tabs a.' + hardware).tab('show');
+
+  }
+
+  initHardware();
 });

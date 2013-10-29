@@ -134,6 +134,29 @@ h3[id] {
   }
 }
 
+/* multiselection subtitles */
+
+.bs-title .nav-pills {
+  margin-top: 20px;
+
+  li {
+    margin-right: 13px;
+  }
+
+  li a {
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    color: $lelylanColor;
+  }
+
+  li.active a,
+  li a:hover {
+    background-color: $lelylanHoverColor;
+    color: #fff !important;
+  }
+}
+
 
 /* documentation page */
 

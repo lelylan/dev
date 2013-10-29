@@ -12,21 +12,21 @@
 
 <div class="col-md-offset-3 col-md-9 bs-docs" role="main">
   <div class="bs-title">
-    <h1 id="connect-your-first-light-using-arduino">Connect your First Light Using Arduino</h1>
-    <h4>MQTT and Lelylan</h4>
+    <h1 id="connect-your-first-light">Connect your First Light</h1>
+    <ul class="nav nav-pills connect-your-first-light">
+      <li class="active"><a href="#test-arduino" class="btn-lelylan" data-hardware="arduino" data-toggle="tab">Arduino</a></li>
+      <li><a href="#test-raspberry-pi" class="btn-lelylan" data-hardware="raspberry-pi" data-toggle="tab">Raspberry Pi</a></li>
+    </ul>
   </div>
   <div class="bs-docs-section">
-    <%= render 'pages/getting_started/connect_your_first_light_using_arduino' %>
-  </div>
-</div>
-
-<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
-  <div class="bs-title">
-    <h1 id="connect-your-first-light-using-raspberry-pi">Connect your First Light Using Raspberry Pi</h1>
-    <h4>MQTT and Lelylan</h4>
-  </div>
-  <div class="bs-docs-section">
-    <%= render 'pages/getting_started/connect_your_first_light_using_raspberry_pi' %>
+    <div class="tab-content">
+      <div class="tab-pane active" id="test-arduino">
+        <%= render 'pages/getting_started/connect_your_first_light/arduino' %>
+      </div>
+      <div class="tab-pane" id="test-raspberry-pi">
+        <%= render 'pages/getting_started/connect_your_first_light/raspberry_pi' %>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -49,4 +49,3 @@
     <%= render 'pages/getting_started/projects' %>
   </div>
 </div>
-
