@@ -82,35 +82,24 @@ $(function () {
     // set a default
     if (!hardware) hardware = 'arduino';
 
-    // change the Hardware description
-    setHardware(hardware);
+    // show the hardware tab
+    $('[data-hardware=' + hardware + ']').tab('show')
   }
 
   // Add a listener on hardware change
   $('.connect-your-first-light a').click(function (e) {
 
-    e.preventDefault()
-
     // get the selected hardware
     var hardware = $(this).data('hardware');
-
-    // change the hardware description
-    setHardware(hardware);
-    window.location.reload();
-  })
-
-  // Set the current hardware
-  var setHardware = function(hardware) {
 
     // set hardware on cookies
     $.cookie('lelylan-dev-hardware', hardware);
 
-    // show the hardware tab
-    $('[data-hardware=' + hardware + ']').tab('show')
-
-
-    console.log(hardware, '[data-hardware=' + hardware + ']');
-  }
+    // change the hardware description
+    setTimeout(function() {
+      window.location.reload();
+    }, 100)
+  })
 
   initHardware();
 });
