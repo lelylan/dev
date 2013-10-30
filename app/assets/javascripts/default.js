@@ -65,60 +65,52 @@ $(function () {
 
 
 
-//// Connect your first light hardware switch
+// Connect your first light hardware switch
 
-//$(function () {
+$(function () {
 
-  //var initHardware = function() {
-    //var hardware;
+  var initHardware = function() {
+    var hardware;
 
-    //// hide all menus
-    //$('.bs-sidenav ul.arduino').hide()
-    //$('.bs-sidenav ul.raspberry-pi').hide()
+    // search in the fragment
+    if (window.location.hash.match(/arduino/))    hardware = 'arduino';
+    if (window.location.hash.match(/raspberry/))  hardware = 'raspberry-pi';
 
-    //// search in the fragment
-    //if (window.location.hash.match(/arduino/))    hardware = 'arduino';
-    //if (window.location.hash.match(/raspberry/))  hardware = 'raspberry-pi';
+    // search in the cookie
+    if (!hardware) hardware = $.cookie('lelylan-dev-hardware');
 
-    //// search in the cookie
-    //if (!hardware) hardware = $.cookie('lelylan-dev-hardware');
+    // set a default
+    if (!hardware) hardware = 'arduino';
 
-    //// set a default
-    //if (!hardware) hardware = 'arduino';
+    // change the Hardware description
+    setHardware(hardware);
+  }
 
-    //// change the Hardware description
-    //setHardware(hardware);
-  //}
+  // Add a listener on hardware change
+  $('.connect-your-first-light a').click(function (e) {
 
-  //// Add a listener on hardware change
-  //$('.connect-your-first-light a').click(function (e) {
+    e.preventDefault()
 
-    //e.preventDefault()
+    // get the selected hardware
+    var hardware = $(this).data('hardware');
 
-    //// get the selected hardware
-    //var hardware = $(this).data('hardware');
+    // change the hardware description
+    setHardware(hardware);
+    window.location.reload();
+  })
 
-    //// change the hardware description
-    //setHardware(hardware);
-  //})
+  // Set the current hardware
+  var setHardware = function(hardware) {
 
-  //// Set the current hardware
-  //var setHardware = function(hardware) {
+    // set hardware on cookies
+    $.cookie('lelylan-dev-hardware', hardware);
 
-    //// set hardware on cookies
-    //$.cookie('lelylan-dev-hardware', hardware);
+    // show the hardware tab
+    $('[data-hardware=' + hardware + ']').tab('show')
 
-    //// hide all menus
-    //$('.bs-sidenav ul a.arduino').hide()
-    //$('.bs-sidenav ul a.raspberry-pi').hide()
 
-    //// show the hardware related menu
-    //$('.bs-sidenav ul a.' + hardware).show()
+    console.log(hardware, '[data-hardware=' + hardware + ']');
+  }
 
-    //// TODO show the raspberry tab
-
-    //console.log(hardware);
-  //}
-
-  //initHardware();
-//});
+  initHardware();
+});
