@@ -1,3 +1,143 @@
-<h2 id="connect-your-first-light-using-raspberry-pi-introduction">Introduction</h2>
+<h2 id="connect-your-first-light-introduction">Introduction</h2>
 
-Fungo Studios roks!
+<%= image_tag('connect-your-first-light/raspberry-pi/overview.jpg', class: 'img-thumbnail') %>
+
+<p>
+This tutorial will show you how to control and monitor a simple light by connecting a Raspberry
+Pi (with WiFi dongle) to Lelylan using <a href="http://mqtt.org/" target="blank">MQTT</a>,
+a publish/subscribe messaging protocol enabling your Raspberry Pi to receive and send messages
+in a simple and transparent way.
+</p>
+
+
+<h2 id="connect-your-first-light-components">Components</h2>
+
+<p>
+TODO
+<p>
+
+
+<table class="table table-stripped table-hover">
+  <thead>
+    <tr>
+      <th>Components</th>
+      <th>Buy</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="">todo</a></td>
+      <td><a href="">todo</a></td>
+      <td>$</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<h2 id="connect-your-first-light-libraries">Libraries</h2>
+
+<p>
+TODO
+</p>
+
+
+
+<h2 id="connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
+
+<p>
+To create a new device open the <a href="http://manage.lelylan.com">Dashboard</a>.
+Click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the
+form with the desired device name and choosing <code>Basic Light</code> as type.
+<p>
+
+<a href="http://manage.lelylan.com/new">
+  <%= image_tag('connect-your-first-light/create-device.png', class: 'img-thumbnail') %>
+</a>
+
+<p>
+When created, you'll see a detailed view of your new device. Click on <code>settings</code>
+and you'll find all needed info to connect your hardware to Lelylan.
+</p>
+
+<ul>
+  <li><code>Type</code> - Link to the type definition (to see the device properties).</li>
+  <li><code>ID</code> - Unique device identifier.</li>
+  <li><code>Secret</code> - Device secret code used to authenticate the communication with Lelylan.</li>
+</ul>
+
+<h3>Connect Lelylan to the Physical World</h3>
+
+<p>
+To communicate with the physical device you need to connect Lelylan with the
+MQTT client. To make this possible use the <em>Nodes Service</em>,
+which is in charge of forwarding all incoming requests from Lelylan to
+the MQTT client.
+</p>
+
+<p>
+To use the Nodes Service you need to set in the physical
+field of your device a URI having the structure
+<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>,
+where you need to change the <code>&lt;device-id&gt;</code> with your
+actual device id.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td>Your Device ID</td>
+      <td><code>518be5a700045e1521000001</code></td>
+    </tr>
+    <tr>
+      <td>Your Physical URI</td>
+      <td><code><span class="glyphicon glyphicon-arrow-right"></span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2 id="connect-your-first-light-code">Raspberry Pi Code</h2>
+
+<p>
+TODO
+</p>
+
+
+<h2 id="connect-your-first-light-control">Control your light</h2>
+
+<p>
+Now that all the components are ready and your Arduino is connected to Lelylan access the
+<a href="http://manage.lelylan.com">Lelylan Dashboard</a>. From here you can control your light
+and get realtime notifications.
+</p>
+
+<a href="http://manage.lelylan.com">
+<%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
+</a>
+
+
+<h2 id="connect-your-first-light-code-explained">Code Explained</h2>
+
+<p>
+TODO
+</p>
+
+
+<h2 id="connect-your-first-light-authors">Guest Article</h2>
+
+<p>
+This article is brought to life from the guys at <a href="http://www.fungostudios.com/">FunGo Studios</a>.
+</p>
+
+<a href="http://www.fungostudios.com/">
+  <%= image_tag('collaborators/fungostudios.png', class: 'img-thumbnail') %>
+</a>
+
+
+<h2 id="arduino-connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+
+<%= render 'shared/feedback' %>

@@ -1,15 +1,15 @@
-<h2 id="arduino-connect-your-first-light-introduction">Introduction</h2>
+<h2 id="connect-your-first-light-introduction">Introduction</h2>
 
-<%= image_tag('connect-your-first-light/overview.jpg', class: 'img-thumbnail') %>
+<%= image_tag('connect-your-first-light/arduino/overview.jpg', class: 'img-thumbnail') %>
 
 <p>
   This tutorial will show you how to control and monitor a simple light by connecting an
   Arduino Ethernet to Lelylan using <a href="http://mqtt.org/" target="blank">MQTT</a>,
   a publish/subscribe messaging protocol enabling your Arduino to receive and send
-  messages with Lelylan in a simple and transparent way.
+  messages in a simple and transparent way.
 </p>
 
-<h2 id="arduino-connect-your-first-light-components">Components</h2>
+<h2 id="connect-your-first-light-components">Components</h2>
 
 <p>
   To connect your first light you need an Arduino Ethernet or an Arduino UNO with
@@ -54,7 +54,7 @@
   </tbody>
 </table>
 
-<h2 id="arduino-connect-your-first-light-libraries">Libraries</h2>
+<h2 id="connect-your-first-light-libraries">Libraries</h2>
 
 <p>
 To program your Arduino you need to install the <a href="http://arduino.cc/en/main/software">Arduino IDE</a>
@@ -74,7 +74,7 @@ and the following libraries (if you do not know how to install a library checkou
       <td><a href="https://github.com/andreareginato/pubsubclient">PubSubClient</a></td>
       <td>
         This is a fork of the <a href="https://github.com/knolleary/pubsubclient">original</a>
-        PubSubClient setting the <a href="http://knolleary.net/arduino-client-for-mqtt/api/#configoptions">max packet size</a>
+        PubSubClient setting the <a href="http://knolleary.net/client-for-mqtt/api/#configoptions">max packet size</a>
         to 512 bytes
       </td>
     </tr>
@@ -85,17 +85,18 @@ and the following libraries (if you do not know how to install a library checkou
   </tbody>
 </table>
 
-<h2 id="arduino-connect-your-first-light-hardware-setup">Hardware Setup</h2>
+
+<h2 id="connect-your-first-light-hardware-setup">Hardware Setup</h2>
 
 <p>
 This example demonstrates the use of a pushbutton as a switch. Each time you press
 the button, the LED is turned on (if it's off) or off (if on).
 </p>
 
-<%= image_tag('connect-your-first-light/components.png', class: 'img-thumbnail') %>
+<%= image_tag('connect-your-first-light/arduino/components.png', class: 'img-thumbnail') %>
 
 
-<h2 id="arduino-connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
+<h2 id="connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
 
 <p>
 To create a new device open the <a href="http://manage.lelylan.com">Dashboard</a>.
@@ -109,7 +110,7 @@ form with the desired device name and choosing <code>Basic Light</code> as type.
 
 <p>
 When created, you'll see a detailed view of your new device. Click on <code>settings</code>
-and you'll find all needed info to connect Arduino to Lelylan.
+and you'll find all needed info to connect your hardware to Lelylan.
 </p>
 
 <ul>
@@ -148,7 +149,7 @@ actual device id.
   </tbody>
 </table>
 
-<h2 id="arduino-connect-your-first-light-arduino-code">Arduino Code</h2>
+<h2 id="connect-your-first-light-code">Arduino Code</h2>
 
 <p>
 Here is the Arduino sketch. To make it work set the <code>deviceId</code>
@@ -298,7 +299,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }</xmp></pre>
 </div>
 
-<h2 id="arduino-connect-your-first-light-control">Control your light</h2>
+<h2 id="connect-your-first-light-control">Control your light</h2>
 
 <p>
   Now that all the components are ready and your Arduino is connected to Lelylan
@@ -689,14 +690,14 @@ the property ID and the property value to change.
   </tbody>
 </table>
 
-<h2 id="arduino-connect-your-first-light-problems">Possible Problems</h2>
+<h2 id="connect-your-first-light-problems">Possible Problems</h2>
 
 <ul>
   <li>
   <em>Message Size</em> -
   Using Lelylan your messages are usually bigger than 128 bytes. For this reason we
   <a href="https://github.com/andreareginato/pubsubclient">forked</a> the
-  original PubSubClient setting the <a href="http://knolleary.net/arduino-client-for-mqtt/api/#configoptions">max packet size</a>
+  original PubSubClient setting the <a href="http://knolleary.net/client-for-mqtt/api/#configoptions">max packet size</a>
   to 512 bytes.
   </li>
   <li>
@@ -708,6 +709,6 @@ the property ID and the property value to change.
 
 </ul>
 
-<h2 id="arduino-connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
+<h2 id="connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
 <%= render 'shared/feedback' %>
