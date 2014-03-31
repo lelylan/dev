@@ -4,16 +4,20 @@
 
 <p>
   This tutorial will show you how to control and monitor a simple light by connecting an
-  Arduino Yun to Lelylan using <a href="http://mqtt.org/" target="blank">MQTT</a>,
-  a publish/subscribe messaging protocol enabling your Arduino to receive and send
+  <a href="http://arduino.cc/en/Main/ArduinoBoardYun">Arduino Yun</a> to Lelylan using <a href="http://mqtt.org/" target="blank">MQTT</a>,
+  a publish/subscribe messaging protocol enabling your Arduino Yun to receive and send
   messages in a simple and transparent way.
 </p>
 
 <h2 id="connect-your-first-light-components">Components</h2>
 
 <p>
-  To connect your first light you need an Arduino Ethernet or an Arduino UNO with
-  an Ethernet shield. Follows a list with the needed components to reach the final
+  To connect your first light you need a Arduino Yun connected to the Internet. In the following 
+  example we will test it via WiFi so be sure to follow the <a href="http://arduino.cc/en/Guide/ArduinoYun"> Arduino Yun Getting started guide</a>
+  with particular attention to <a href="http://arduino.cc/en/Guide/ArduinoYun#toc13">Wireless Parameters</a> section where you have to set your
+  WiFi network Id and password.
+
+  Follows a list with the needed components to reach the final
   result.
 <p>
 
@@ -28,9 +32,9 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://arduino.cc/en/Main/arduinoBoardUno">Arduino Ethernet</a></td>
-      <td><a href="http://store.arduino.cc/it/index.php?main_page=product_info&cPath=11&products_id=197">Arduino Store</a></td>
-      <td>$52.00</td>
+      <td><a href="http://arduino.cc/en/Main/ArduinoBoardYun">Arduino Yun</a></td>
+      <td><a href="http://store.arduino.cc/index.php?main_page=product_info&cPath=11&products_id=313">Arduino Store</a></td>
+      <td>$72.00</td>
       <td>1</td>
     </tr>
     <tr>
@@ -66,7 +70,7 @@ and the following libraries (if you do not know how to install a library checkou
   <thead>
     <tr>
       <th>Library</th>
-      <th>Notes</th>
+      <th>Notes</th> 
     </tr>
   </thead>
   <tbody>
@@ -75,7 +79,8 @@ and the following libraries (if you do not know how to install a library checkou
       <td>
         This is a fork of the <a href="https://github.com/knolleary/pubsubclient">original</a>
         PubSubClient setting the <a href="http://knolleary.net/client-for-mqtt/api/#configoptions">max packet size</a>
-        to 512 bytes
+        to 512 bytes. If you already have PubSubClient library installed, just manually change the max packet size in 
+        your PubSubClient.h file.
       </td>
     </tr>
     <%#<tr>%>
@@ -91,9 +96,12 @@ and the following libraries (if you do not know how to install a library checkou
 <p>
 This example demonstrates the use of a pushbutton as a switch. Each time you press
 the button, the LED is turned on (if it's off) or off (if on).
+
+When you choose pins for input or output be sure to check if they are already used by some shields or if they have a special function
+Take a look at the <a href="http://arduino.cc/en/Main/ArduinoBoardYun">Input and Output</a> section of the Arduino Yun board overview.
 </p>
 
-<%= image_tag('connect-your-first-light/arduino/components.png', class: 'img-thumbnail') %>
+<%= image_tag('connect-your-first-light/arduino-yun/components.png', class: 'img-thumbnail') %>
 
 
 <h2 id="connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
@@ -149,10 +157,10 @@ actual device id.
   </tbody>
 </table>
 
-<h2 id="connect-your-first-light-code">Arduino Code</h2>
+<h2 id="connect-your-first-light-code">Arduino Yun Code</h2>
 
 <p>
-Here is the Arduino sketch. To make it work set the <code>deviceId</code>
+Here is the Arduino Yun sketch. To make it work set the <code>deviceId</code>
 and the <code>deviceSecret</code> to your device credentials, upload the
 sketch and connect it to the Internet. For further
 instructions see the <a href="#connect-your-first-light-code-explained">Code Explained</a> section.
@@ -168,7 +176,7 @@ instructions see the <a href="#connect-your-first-light-code-explained">Code Exp
 
 <div class="code-block">
 <pre class="prettyprint"><xmp>#include <SPI.h>
-#include <Ethernet.h>
+#include <YunClient.h>
 #include <PubSubClient.h>
 
 /* Device credentials */
@@ -188,17 +196,17 @@ char* clientId = "<CLIENT-ID>"; // MQTT client id (random, max 23 bytes)
 char* payloadOn  = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"value\":\"on\"}]}";
 char* payloadOff = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"value\":\"off\"}]}";
 
-/* Ethernet configuration */
+/* Yun configuration */
 byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
-EthernetClient ethClient;
+YunClient yun;
 
 /* MQTT communication */
 void callback(char* topic, byte* payload, unsigned int length); // subscription callback
-PubSubClient client(server, 1883, callback, ethClient);         // mqtt client
+PubSubClient client(server, 1883, callback, yun);         // mqtt client
 
 /* Pins configuration */
-int inPin = 2; // button
-int outPin = 4; // led
+int inPin = 3; // button
+int outPin = 13; // led
 
 /* Button and led logics */
 int state = HIGH;     // current state of the output pin
@@ -212,9 +220,10 @@ void setup() {
   Serial.begin(9600);
   delay(500);
 
-  Ethernet.begin(mac);
-  Serial.print("Connected with IP: ");
-  Serial.println(Ethernet.localIP());
+  Serial.println("Start initialization of Yun...");
+  Bridge.begin();
+  Serial.println("Bridge finished setup");
+  Serial.println("Starting connection to lelylan...");
 
   lelylanConnection();      // MQTT server connection
   pinMode(inPin, INPUT);    // button pin setup
@@ -412,7 +421,7 @@ char* payloadOff = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"valu
 
 <div class="code-block">
 <pre class="prettyprint"><xmp>void callback(char* topic, byte* payload, unsigned int length); // subscription callback
-PubSubClient client(server, 1883, callback, ethClient); // mqtt client</xmp></pre>
+PubSubClient client(server, 1883, callback, yun); // mqtt client</xmp></pre>
 </div>
 
 <h3>Led and Button Pins</h3>
@@ -458,9 +467,10 @@ long debounce = 200;  // the debounce time, increase if the output flickers</xmp
   Serial.begin(9600);
   delay(500);
 
-  Ethernet.begin(mac);
-  Serial.print("Connected with IP: ");
-  Serial.println(Ethernet.localIP());
+  Serial.println("Start initialization of Yun...");
+  Bridge.begin();
+  Serial.println("Bridge finished setup");
+  Serial.println("Starting connection to lelylan...");
 
   lelylanConnection();      // MQTT server connection
   pinMode(inPin, INPUT);    // button pin setup
