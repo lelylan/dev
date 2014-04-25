@@ -222,7 +222,7 @@ device.on("data", function(data) {
 </div>
 
 
-<h3>Lelylan direct Access: Getting Data</h3>
+<h3>Lelylan Direct Access: Getting Data</h3>
 <p>
   When Leylan send an update to the Agent it sends a PUT request with a JSON payload and some headers as described in the <a href="http://dev.lelylan.com/makers#direct-how-to-receive-data">Makers Api</a>. The <code> lelylanUpdate</code>
   function check if the <code> X-Physical-Secret</code> header is the same as <code>deviceSecret</code> (for security reason), if they match it sends
@@ -257,24 +257,15 @@ function lelylanUpdate(request, response) {
   on requests will call the <code>lelylanUpdate</code> function.
 </p>
 
-<div class="code-block">
-<pre class="prettyprint"><xmp>// callback used to handle request from lelylan dashboard
-http.onrequest(lelylanUpdate);</xmp></pre>
-</div>
-
-
-<h2> Device Code</h2>
-
-<h3>JSON Payloads</h3>
-
 <p>
-  When communicating with Lelylan we use a fixed JSON structure. For this basic example we
-  defined the JSON to turn the light on and the JSON to turn the light off.
+Once the led state is updated a confirmation message
+needs to be send to Lelylan telling it that the new properties has been
+successfully updated in the physical world. That's why we reuse <code>lelylanSet(data)</code>
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>char* payloadOn  = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"value\":\"on\"}]}";
-char* payloadOff = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"value\":\"off\"}]}";</xmp></pre>
+<pre class="prettyprint"><xmp>// callback used to handle request from lelylan dashboard
+http.onrequest(lelylanUpdate);</xmp></pre>
 </div>
 
 <p>
@@ -292,6 +283,9 @@ char* payloadOff = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"valu
   </p>
 </div>
 
+
+<h2> Device Code</h2>
+
 <h3>Led and Button Pins</h3>
 
 <p>
@@ -301,290 +295,149 @@ char* payloadOff = "{\"properties\":[{\"id\":\"518be5a700045e1521000001\",\"valu
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>int inPin = 2; // button
-int outPin = 4; // led</xmp></pre>
+<pre class="prettyprint"><xmp>// pins configuration
+led <- hardware.pin9;
+btn <- hardware.pin1;
+
+// pins setup
+led.configure(DIGITAL_OUT);
+btn.configure(DIGITAL_IN);</xmp></pre>
 </div>
 
 <h3>Led and Button Logics</h3>
 
 <p>
-  Here we define all needed variables to make the button correctly work. If you are new to
-  pushbuttons check out the <a href="http://www.arduino.cc/en/Tutorial/Switch">Arduino tutorial</a>.
+  Here we define all needed variables to make the button correctly work.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>int state = HIGH;     // current state of the output pin
-int reading;          // current reading from the input pin
-int previous = LOW;   // previous reading from the input pin
-long time = 0;        // the last time the output pin was toggled
-long debounce = 200;  // the debounce time, increase if the output flickers</xmp></pre>
+<pre class="prettyprint"><xmp>// button and led logic
+state <- 1; // current state of the output pin
+reading <- 0; // current reading from the imput pin
+previous <- 0; // previous reading from the input pin
+debounce <- 200; // the debounce time, increase if the outp flickers
+time <- 0; // the last time the output pin was toggled</xmp></pre>
 </div>
 
-
-
-<h3>Arduino Setup</h3>
-
-<p>
-  During the Arduino setup Arduino connects to Lelylan MQTT server and set the
-  pin mode for the led and the button pins. Before, it connects to the Internet
-  using DHCP.
-</p>
-
-<div class="code-block">
-<pre class="prettyprint"><xmp>void setup() {
-  Serial.begin(9600);
-  delay(500);
-
-  Ethernet.begin(mac);
-  Serial.print("Connected with IP: ");
-  Serial.println(Ethernet.localIP());
-
-  lelylanConnection();      // MQTT server connection
-  pinMode(inPin, INPUT);    // button pin setup
-  pinMode(outPin, OUTPUT);  // led pin setup
-}</xmp></pre>
-</div>
-
-<h3>Arduino Loop</h3>
+<h3>Electric Imp Loop</h3>
 
 <p>
 We use of a pushbutton as a switch: each time you press the button the led is
 turned on or off. It also debounces the input, without which pressing the button
 once would appear to the code as multiple presses. Once the led state changes,
-Arduino publishes a message to Lelylan about the updates.
+the Device will send a "data" event to the Agent with the associated payload.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>void loop() {
-  lelylanConnection();
-  char* value;
-  reading = digitalRead(inPin);
-
+<pre class="prettyprint"><xmp>function loop() {
+  // read the button state
+  reading = btn.read(); 
+  
   // if the input just went from LOW and HIGH and we've waited long enough to ignore
   // any noise on the circuit, toggle the output pin and remember the time
-  if (reading == HIGH && previous == LOW && millis() - time > debounce) {
-    if (state == LOW) {
-      Serial.println("[PHYSICAL] Led turned on");
+  if (reading && !previous && hardware.millis() - time > debounce) {
+    if (state == 0) {
+      server.log("[PHYSICAL] Led turned on");
+      state = 1;
       lelylanPublish("on");
-      state = HIGH;
     } else {
-      Serial.println("[PHYSICAL] Led turned off");
+      server.log("[PHYSICAL] Led turned off");
+      state = 0;
       lelylanPublish("off");
-      state = LOW;
     }
-    time = millis();
+    time = hardware.millis();
   }
-
+  
   // effectively update the light status
-  digitalWrite(outPin, state);
-  previous = reading;
-}</xmp></pre>
-</div>
-
-<h3>MQTT connection</h3>
-
-<p>
-During the connection phase the client needs to set the <code>deviceId</code>
-as username and the <code>deviceSecret</code> as password. When the credentials
-are missing or not valid, the connection is rejected.
-</p>
-
-<div class="code-block">
-<pre class="prettyprint"><xmp>void lelylanConnection() {
-  // add reconnection logics
-  if (!client.connected()) {
-    // connection to MQTT server
-    if (client.connect(clientId, deviceId, deviceSecret)) {
-      Serial.println("[PHYSICAL] Successfully connected with MQTT");
-      lelylanSubscribe(); // topic subscription
-    }
-  }
-  client.loop();
+  led.write(state);
+  previous = reading;  
+  
+  // schedule imp to wakeup in 0.05 seconds and do it again. 
+  imp.wakeup(0.05, loop);
 }</xmp></pre>
 </div>
 
 <p>
-  To keep the connection alive after temporary loss of internet connection we
-  check if the client is connected. When not, Arduino reconnects to Lelylan. This
-  is why the <code>lelylanConnection</code> method is used in the loop function.
+To actual start the loop for the first time we must invoke the <code>loop</code> function
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>void loop() {
-  // reconnection logics
-  lelylanConnection();
-  // ...</xmp></pre>
+<pre class="prettyprint"><xmp>// electric imp bootstrap
+loop();</xmp></pre>
 </div>
 
-<h3>Publish Messages to Lelylan</h3>
+<h3>Payload</h3>
 
 <p>
-  To notify the execution of a request or to notify a light status update
-  Arduino needs to publish a message to the topic <code>devices/:id/set</code> with the list
-  all of updated properties.
+  When communicating with Lelylan we use a fixed JSON structure. For this basic example we
+  defined first a Squirrel object which later will be JSON encoded by the Agent.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>void lelylanPublish(char* value) {
-  if (value == "on")
-    client.publish(outTopic, payloadOn);  // light is on
-  else
-    client.publish(outTopic, payloadOff); // light is off
-}</xmp></pre>
+<pre class="prettyprint"><xmp>// Status-id is the basic light status id (http://types.lelylan.com/types/518be107ef539711af000001)
+const property_light_status = "518be5a700045e1521000001";</xmp></pre>
+</div>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>// sends payload to update the device on lelylan
+function lelylanPublish(val) {
+  payload <- {
+    "properties": [{
+      "id": property_light_status,
+      "value": val
+    }]
+  };
+  
+  // the device sends the "data" event to agent with associated payload
+  agent.send("data", payload);
+};</xmp></pre>
+</div>
+
+<h3>Event Handlers</h3>
+
+<p>
+The <code>success</code> and the <code>error</code> are used for logging purpose 
+of the Agent's <code>lelylanSet</code> function
+</p>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>// callback to notify lelylan updated succesfully 
+agent.on("success", success);
+
+// callback to notify an error on lelylan communications
+agent.on("error", error);</xmp></pre>
+</div>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>function error(body) {
+  server.log("[LELYLAN]: physical device not updated correctly");
+};
+
+function success(body) {
+  server.log("[LELYLAN]: physical device updated correctly");
+};</xmp></pre>
 </div>
 
 <p>
-Every published message is made up from a list of properties.
-</p>
-
-<table class="table table-stripped table-hover">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>properties</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Array of properties to send to Lelylan.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.id</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Property ID.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.value</span>
-        <span class="info">required</span>
-      </td>
-      <td>
-        Desired property value.
-        <a href="/support#faq-value-expected-pending">Learn more about</a>.
-      </td>
-    </tr>
-        <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.expected</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Expected property value.
-        <a href="/support#faq-value-expected-pending">Learn more about</a>.
-      </td>
-    </tr>
-        <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.pending</span>
-        <span class="info">optional</span>
-      </td>
-      <td>
-        Property pending status.
-        <a href="/support#faq-value-expected-pending">Learn more about</a>.
-        <span class="info">Valid values: true, false.</span>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
-<h3>Receive Messages from Lelylan</h3>
-
-<p>
-When a user updates a device property or executes a function using Lelylan
-(e.g from dashboard, mobile, etc.), a message is published to the topic
-<code>devices/:id/get</code>. The physical device (that subscribed to this
-channel during the connection phase) will receive all incoming messages through
-the <code>callback</code> function (defined during the MQTT client initialization).
-</p>
-
-<p>
+The <code>update</code> handler is used to update the physical device when someone change its status through Lelylan (Dashboard, mobile, etc)
 To correctly apply a command to our light we need to check the value for the status
-property, turning it on or off. Once the led state is updated a confirmation message
-needs to be published to Lelylan telling it that the new properties has been
-successfully updated in the physical world.
+property, turning it on or off.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>void callback(char* topic, byte* payload, unsigned int length) {
-  // copu the payload content into a char*
-  char* json;
-  json = (char*) malloc(length + 1);
-  memcpy(json, payload, length);
-  json[length] = '\0';
-
-  // update the physical status and confirm the executed update
-  if (String(payloadOn) == String(json)) {
-    Serial.println("[LELYLAN] Led turned on");
-    lelylanPublish("on");
-    state = HIGH;
-  } else {
-    Serial.println("[LELYLAN] Led turned off");
-    lelylanPublish("off");
-    state = LOW;
-  }
-
-  digitalWrite(outPin, state);
-  free(json);
-}</xmp></pre>
+<pre class="prettyprint"><xmp>// callback called when changes come from lelylan dashboard
+agent.on("update", update);</xmp></pre>
 </div>
 
-<p>
-Every received message is made up from a list of properties each of them containing
-the property ID and the property value to change.
-</p>
-
-<table class="table table-stripped table-hover">
-  <tbody>
-    <tr>
-      <td class="parameter">
-        <span>properties</span>
-      </td>
-      <td>
-        Array of properties to send to Lelylan.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.id</span>
-      </td>
-      <td>
-        Property ID.
-      </td>
-    </tr>
-    <tr>
-      <td class="parameter nested">
-        <span>&raquo; property.value</span>
-      </td>
-      <td>
-        New property value.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="connect-your-first-light-problems">Possible Problems</h2>
-
-<ul>
-  <li>
-  <em>Message Size</em> -
-  Using Lelylan your messages are usually bigger than 128 bytes. For this reason we
-  <a href="https://github.com/andreareginato/pubsubclient">forked</a> the
-  original PubSubClient setting the <a href="http://knolleary.net/client-for-mqtt/api/#configoptions">max packet size</a>
-  to 512 bytes.
-  </li>
-  <li>
-  <em>Memory Usage</em> -
-  Arduino doesn't have that much memory. Take care of it and free all variables you have used.
-  If not, your Arduino will restart to get back the needed memory. A nice library to check
-  the memory consumption out is <a href="http://playground.arduino.cc/Code/AvailableMemory">MemoryFree</a>.
-  </li>
-
-</ul>
+<div class="code-block">
+<pre class="prettyprint"><xmp>// device receives "update" event from agent with light status value
+function update(data){
+  if (data == "on") state = 1;
+  else state = 0;
+  
+  led.write(state);
+};</xmp></pre>
+</div>
 
 <h2 id="connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
