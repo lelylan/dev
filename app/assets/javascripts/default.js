@@ -76,6 +76,7 @@ $(function () {
     if (window.location.hash.match(/arduino/))    hardware = 'arduino';
     if (window.location.hash.match(/raspberry/))  hardware = 'raspberry-pi';
     if (window.location.hash.match(/arduino-yun/))  hardware = 'arduino-yun';
+    if (window.location.hash.match(/electric-imp/))  hardware = 'electric-imp';
 
     // search in the cookie
     if (!hardware) hardware = $.cookie('lelylan-dev-hardware');
@@ -89,6 +90,7 @@ $(function () {
     $('#arduino').hide();
     $('#raspberry-pi').hide();
     $('#arduino-yun').hide();
+    $('#electric-imp').hide();
 
     $('#' + hardware).show();
   }
