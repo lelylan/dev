@@ -63,7 +63,7 @@ the button, the LED is turned on (if it's off) or off (if on).
 
 <h2 id="connect-your-first-light-lelylan-setup">Electric Imp Setup</h2>
 <p>
-  In order to connect Electric Imp to the internet you should first follow the official <a href="https://electricimp.com/docs/gettingstarted/1-blinkup/">Getting started guide</a>. You should also need to understand the Electric Imp's concepts behind <a href="https://electricimp.com/docs/gettingstarted/2-helloworld/">Agent</a> and <a href="https://electricimp.com/docs/gettingstarted/3-agents/">Device</a> entities. 
+  In order to connect Electric Imp to the internet you should first follow the official <a href="https://electricimp.com/docs/gettingstarted/1-blinkup/">Getting started guide</a>. You should also need to understand the Electric Imp's concepts behind <a href="https://electricimp.com/docs/gettingstarted/2-helloworld/">Agent</a> and <a href="https://electricimp.com/docs/gettingstarted/3-agents/">Device</a> entities.
 </p>
 
 <h2 id="connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
@@ -171,33 +171,21 @@ const deviceSecret = "<DEVICE-SECRET>";</xmp></pre>
 </div>
 
 <h3> Lelylan Direct Access: Setting Data</h3>
-<p> 
-  When you want to update the device on Lelylan Dashboard through HTTP you should use the
-  <a href="http://dev.lelylan.com/makers#direct">Direct Access</a> method. The <code>request</code> function
-  does this for you. It accepts the <code> lelylan_url</code> of your device and a <code>body</code> object (Squirrel <a href="http://www.squirrel-lang.org/doc/squirrel3.html#d0e514">Table</a>) that rapresents the payload (builded in the Device code). If the Agent's request is succesfully it will send a "success" event to device, else an "error" event.
+
+<p>
+  When the Device wants to communicate any physical update to Lelylan it sends a "data" event to the Agent,
+  which will call the <code>lelylanSet(data)</code> function to send the notification to Lelylan.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>// send the request to lelyan dashboard
-function request(lelylan_url, body) {
-  local data = http.jsonencode(body);
-  local headers = {
-    "Content-Type": "application/json",
-    "X-Physical-Secret": deviceSecret 
-  };
-   // send data to your web service
-  local req = http.put(lelylan_url, headers, data);
-  local res = req.sendsync();
-  
-  if(res.statuscode < 200 || res.statuscode > 299) {
-    device.send("error", res.body);
-  } else device.send("success", res.body);
-}</xmp></pre>
+<pre class="prettyprint"><xmp>// callback to update the device on lelylan dashboard
+device.on("data", function(data) {
+  lelylanSet(data);
+});</xmp></pre>
 </div>
 
 <p>
-The <code> lelylanSet</code> function it's a shortcut for the <code> request </code> function
-which sets the url.
+The <code> lelylanSet</code> prepares the Lelylan URL to call to update the properties.
 </p>
 
 <div class="code-block">
@@ -209,40 +197,70 @@ function lelylanSet(body) {
 </div>
 
 <p>
-  The Agent should be notified by the Device when it should send an update to Lelylan.
-  When the Device wants to communicate with Lelylan it sends an event called "data" so the Agent should be ready to handle this
-  event. In order to achive that we set on Agent: 
+  When you want to update the Lelylan Device with an HTTP request you have to use the
+  <a href="http://dev.lelylan.com/makers#direct">Direct Access</a> flow. The <code>request</code>
+  function prepares the payload with the properties that changed in the physical world and makes
+  the request to Lelylan.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>// callback to update the device on lelylan dashboard
-device.on("data", function(data) {
-  lelylanSet(data);
-});</xmp></pre>
+<pre class="prettyprint"><xmp>// send the request to lelyan dashboard
+function request(lelylan_url, body) {
+  local data = http.jsonencode(body);
+  local headers = {
+    "Content-Type": "application/json",
+    "X-Physical-Secret": deviceSecret
+  };
+   // send data to your web service
+  local req = http.put(lelylan_url, headers, data);
+  local res = req.sendsync();
+
+  if(res.statuscode < 200 || res.statuscode > 299) {
+    device.send("error", res.body);
+  } else device.send("success", res.body);
+}</xmp></pre>
 </div>
 
-
 <h3>Lelylan Direct Access: Getting Data</h3>
+
 <p>
-  When Leylan send an update to the Agent it sends a PUT request with a JSON payload and some headers as described in the <a href="http://dev.lelylan.com/makers#direct-how-to-receive-data">Makers Api</a>. The <code> lelylanUpdate</code>
-  function check if the <code> X-Physical-Secret</code> header is the same as <code>deviceSecret</code> (for security reason), if they match it sends
-  an "update" event to the Device with the light status value associated in order to update the Electric Imp.
+  To receive the requests from Lelylan the Agent must declare a unique handler for
+  incoming requests, so that the <code>lelylanUpdate</code> function can be called.
 </p>
+
+<div class="code-block">
+<pre class="prettyprint"><xmp>// callback used to handle request from lelylan dashboard
+http.onrequest(lelylanUpdate);</xmp></pre>
+</div>
+
+<p>
+  When, interacting with the Dashboard or the API, Lelylan sends a PUT request with a JSON payload
+  with the properties you want to change in the physical world
+  (as described in the <a href="http://dev.lelylan.com/makers#direct-how-to-receive-data">Makers Api</a>.
+  The <code>lelylanUpdate</code> function checks if the <code>X-Physical-Secret</code> header is
+  matches with the <code>deviceSecret</code> (for security reason) and sends an <code>update<code>
+  event to the Device with the desired light status in order to update the physical world.
+</p>
+
+<p>
+Once the led state is updated a confirmation message needs to be send to Lelylan to confirm that
+the light status has been successfully updated in the physical world. That's why we reuse
+<code>lelylanSet(data)</code> and we set the <code>pending</code> value to false.</p>
 
 <div class="code-block">
 <pre class="prettyprint"><xmp>// send to the physical device the light status received from lelylan dashboard
 function lelylanUpdate(request, response) {
-  // json parsing 
+  // json parsing
   local data = http.jsondecode(request.body);
-  
+
   server.log("[LELYLAN] Light status: " + data.properties[0].value);
-  
+
   // security check to avoid not authorized requests
   if (request.headers["x-physical-secret"] == deviceSecret) {
-    
+
     // the agent sends the "update" event to the device with light status
     device.send("update", data.properties[0].value);
-    
+
     // confirm physical device update to lelylan dashboard
     data.properties[0].pending <- false; // tells lelylan that the update is completed
     lelylanSet(data);
@@ -250,22 +268,6 @@ function lelylanUpdate(request, response) {
     server.log("[LELYLAN] Wrong secret! Check it out");
   }
 }</xmp></pre>
-</div>
-
-<p>
-  This time the Agent should be notified by Lelylan so we must declare a unique handler for HTTP requests that
-  on requests will call the <code>lelylanUpdate</code> function.
-</p>
-
-<p>
-Once the led state is updated a confirmation message
-needs to be send to Lelylan telling it that the new properties has been
-successfully updated in the physical world. That's why we reuse <code>lelylanSet(data)</code>
-</p>
-
-<div class="code-block">
-<pre class="prettyprint"><xmp>// callback used to handle request from lelylan dashboard
-http.onrequest(lelylanUpdate);</xmp></pre>
 </div>
 
 <p>
@@ -331,8 +333,8 @@ the Device will send a "data" event to the Agent with the associated payload.
 <div class="code-block">
 <pre class="prettyprint"><xmp>function loop() {
   // read the button state
-  reading = btn.read(); 
-  
+  reading = btn.read();
+
   // if the input just went from LOW and HIGH and we've waited long enough to ignore
   // any noise on the circuit, toggle the output pin and remember the time
   if (reading && !previous && hardware.millis() - time > debounce) {
@@ -347,12 +349,12 @@ the Device will send a "data" event to the Agent with the associated payload.
     }
     time = hardware.millis();
   }
-  
+
   // effectively update the light status
   led.write(state);
-  previous = reading;  
-  
-  // schedule imp to wakeup in 0.05 seconds and do it again. 
+  previous = reading;
+
+  // schedule imp to wakeup in 0.05 seconds and do it again.
   imp.wakeup(0.05, loop);
 }</xmp></pre>
 </div>
@@ -387,7 +389,7 @@ function lelylanPublish(val) {
       "value": val
     }]
   };
-  
+
   // the device sends the "data" event to agent with associated payload
   agent.send("data", payload);
 };</xmp></pre>
@@ -396,12 +398,12 @@ function lelylanPublish(val) {
 <h3>Event Handlers</h3>
 
 <p>
-The <code>success</code> and the <code>error</code> are used for logging purpose 
+The <code>success</code> and the <code>error</code> are used for logging purpose
 of the Agent's <code>lelylanSet</code> function
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>// callback to notify lelylan updated succesfully 
+<pre class="prettyprint"><xmp>// callback to notify lelylan updated succesfully
 agent.on("success", success);
 
 // callback to notify an error on lelylan communications
@@ -419,9 +421,9 @@ function success(body) {
 </div>
 
 <p>
-The <code>update</code> handler is used to update the physical device when someone change its status through Lelylan (Dashboard, mobile, etc)
-To correctly apply a command to our light we need to check the value for the status
-property, turning it on or off.
+The <code>update</code> handler is used to update the physical device when someone change
+its status through Lelylan (Dashboard, mobile, etc) To correctly apply a command to our
+light we need to check the value for the status property, turning it on or off.
 </p>
 
 <div class="code-block">
@@ -434,10 +436,22 @@ agent.on("update", update);</xmp></pre>
 function update(data){
   if (data == "on") state = 1;
   else state = 0;
-  
+
   led.write(state);
 };</xmp></pre>
 </div>
+
+
+<h2 id="connect-your-first-light-authors">Guest Article</h2>
+
+<p>
+This article is brought to life from William Bergamo.
+</p>
+
+<a href="https://twitter.com/bugduino">
+  <%= image_tag('collaborators/bugduino.png', class: 'img-thumbnail') %>
+</a>
+
 
 <h2 id="connect-your-first-light-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 

@@ -12,7 +12,7 @@ class User
 
   validates_presence_of :email
   validates_presence_of :encrypted_password
-  
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -37,4 +37,11 @@ class User
   # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
   # field :locked_at,       :type => Time
+
+  # Tell doorkeeper how to authenticate the resource owner with username/password
+  def self.authenticate!(email, password)
+    user = User.where(email: email).first
+    return (user.valid_password?(password) ? user : nil) unless user.nil?
+    nil
+  end
 end
