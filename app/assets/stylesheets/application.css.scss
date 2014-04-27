@@ -177,6 +177,12 @@ h3[id] {
     text-decoration: none;
     color: $linkColorHover !important;
   }
+
+  a .img-guest {
+    height: 100px;
+    width: 100px;
+    margin-right: 10px;
+  }
 }
 
 /* link colors animation */

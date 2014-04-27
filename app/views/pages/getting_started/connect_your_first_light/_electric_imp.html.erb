@@ -173,8 +173,9 @@ const deviceSecret = "<DEVICE-SECRET>";</xmp></pre>
 <h3> Lelylan Direct Access: Setting Data</h3>
 
 <p>
-  When the Device wants to communicate any physical update to Lelylan it sends a "data" event to the Agent,
-  which will call the <code>lelylanSet(data)</code> function to send the notification to Lelylan.
+  When the Device wants to communicate any physical update to Lelylan it sends a <code>data</code>
+  event to the Agent, which will call the <code>lelylanSet(data)</code> function to send the
+  notification to Lelylan.
 </p>
 
 <div class="code-block">
@@ -238,7 +239,7 @@ http.onrequest(lelylanUpdate);</xmp></pre>
   with the properties you want to change in the physical world
   (as described in the <a href="http://dev.lelylan.com/makers#direct-how-to-receive-data">Makers Api</a>.
   The <code>lelylanUpdate</code> function checks if the <code>X-Physical-Secret</code> header is
-  matches with the <code>deviceSecret</code> (for security reason) and sends an <code>update<code>
+  matches with the <code>deviceSecret</code> (for security reason) and sends an <code>update</code>
   event to the Device with the desired light status in order to update the physical world.
 </p>
 
@@ -449,7 +450,7 @@ This article is brought to life from William Bergamo.
 </p>
 
 <a href="https://twitter.com/bugduino">
-  <%= image_tag('collaborators/bugduino.jpg', class: 'img-thumbnail') %>
+  <%= image_tag('collaborators/bugduino.jpg', class: 'img-thumbnail img-guest') %>
 </a>
 
 
