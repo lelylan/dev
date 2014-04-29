@@ -319,17 +319,17 @@ debounce <- 200; // the debounce time, increase if the outp flickers
 time <- 0; // the last time the output pin was toggled</xmp></pre>
 </div>
 
-<h3>Electric Imp Loop</h3>
+<h3>Button's handler</h3>
 
 <p>
-We use of a pushbutton as a switch: each time you press the button the led is
+We use of a pushbutton as a switch: each time you press the button the <code>onBtnPressed</code> is called and the led is
 turned on or off. It also debounces the input, without which pressing the button
 once would appear to the code as multiple presses. Once the led state changes,
 the Device will send a "data" event to the Agent with the associated payload.
 </p>
 
 <div class="code-block">
-<pre class="prettyprint"><xmp>function loop() {
+<pre class="prettyprint"><xmp>function onBtnPressed() {
   // read the button state
   reading = btn.read(); 
   
@@ -352,18 +352,7 @@ the Device will send a "data" event to the Agent with the associated payload.
   led.write(state);
   previous = reading;  
   
-  // schedule imp to wakeup in 0.05 seconds and do it again. 
-  imp.wakeup(0.05, loop);
 }</xmp></pre>
-</div>
-
-<p>
-To actual start the loop for the first time we must invoke the <code>loop</code> function
-</p>
-
-<div class="code-block">
-<pre class="prettyprint"><xmp>// electric imp bootstrap
-loop();</xmp></pre>
 </div>
 
 <h3>Payload</h3>
