@@ -99,70 +99,41 @@ the button, the LED is turned on (if it's off) or off (if on).
 <h2 id="connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
 
 <p>
-To create a new device open the <a href="http://manage.lelylan.com">Dashboard</a>.
-Click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the
-form with the desired device name and choosing <code>Basic Light</code> as type.
-<p>
-
-<a href="http://manage.lelylan.com/new">
-  <%= image_tag('connect-your-first-light/create-device.png', class: 'img-thumbnail') %>
-</a>
-
-<p>
-When created, you'll see a detailed view of your new device. Click on <code>settings</code>
-and you'll find all needed info to connect your hardware to Lelylan.
+The first thing you need to to is to open the <a href="http://lelylan.github.io/devices-dashboard-ng/">Dashboard</a>
+and click on the <a href="http://lelylan.github.io/devices-dashboard-ng/#/create">create</a> link where you can start
+creating a new device by following 3 simple steps.
 </p>
 
 <ul>
-  <li><code>Type</code> - Link to the type definition (to see the device properties).</li>
-  <li><code>ID</code> - Unique device identifier.</li>
-  <li><code>Secret</code> - Device secret code used to authenticate the communication with Lelylan.</li>
+  <li>
+    Set a meaningful name (e.g Kitchen light).
+  </li>
+  <li>
+    Choose the device type (for this tutorial select the Basic Light).
+  </li>
+  <li>
+    Connect the device to the physical world using MQTT.
+  </li>
 </ul>
 
-<h3>Connect Lelylan to the Physical World</h3>
-
 <p>
-To communicate with the physical device you need to connect Lelylan with the
-MQTT client. To make this possible use the <em>Nodes Service</em>,
-which is in charge of forwarding all incoming requests from Lelylan to
-the MQTT client.
+  At this point you created a new device. Click on <code>settings</code> to find
+  the device credentials (you'll need them later). Right now this device does not
+  communicate with the physical world. To make this possible we need to create the
+  physical device by programming our hardware.
 </p>
-
-<p>
-To use the Nodes Service you need to set in the physical
-field of your device a URI having the structure
-<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>,
-where you need to change the <code>&lt;device-id&gt;</code> with your
-actual device id.
-</p>
-
-<table class="table table-stripped table-hover">
-  <tbody>
-    <tr>
-      <td>Your Device ID</td>
-      <td><code>518be5a700045e1521000001</code></td>
-    </tr>
-    <tr>
-      <td>Your Physical URI</td>
-      <td><code><span class="glyphicon glyphicon-arrow-right"></span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001</code></td>
-    </tr>
-  </tbody>
-</table>
 
 <h2 id="connect-your-first-light-code">Arduino Code</h2>
 
 <p>
-Here is the Arduino sketch. To make it work set the <code>deviceId</code>
-and the <code>deviceSecret</code> to your device credentials, upload the
-sketch and connect it to the Internet. For further
-instructions see the <a href="#connect-your-first-light-code-explained">Code Explained</a> section.
+Here you have the Arduino sketch. In order to make this sketch work you need to set the
+deviceId, deviceSecret, outTopic, inTopic and clientId with the device credentials.
 </p>
 
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-  In order to make this sketch work you need to set the deviceId, deviceSecret, outTopic, inTopic
-  and clientId. To get all the needed information access the device settings section.
+For further instructions see the <a href="#connect-your-first-light-code-explained">Code Explained</a> section.
   </p>
 </div>
 
@@ -303,11 +274,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 <p>
   Now that all the components are ready and your Arduino is connected to Lelylan
-  access the <a href="http://manage.lelylan.com">Lelylan Dashboard</a>. From here you can control your light
+  access the <a href="http://lelylan.github.io/devices-dashboard-ng">Lelylan Dashboard</a>. From here you can control your light
   and get realtime notifications.
 </p>
 
-<a href="http://manage.lelylan.com">
+<a href="http://lelylan.github.io/devices-dashboard-ng">
 <%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
 </a>
 
@@ -323,7 +294,7 @@ description of what the most important code sections do.
 <p>
   The <code>deviceId</code> and <code>deviceSecret</code> are used to let the Arduino
   rduino understand which one is the communicating device on Lelylan. To get the device
-  credentials open the <a href="http://manage.lelylan.com">Dashboard</a>, select the
+  credentials open the <a href="http://lelylan.github.io/devices-dashboard-ng">Dashboard</a>, select the
   desired device, click on settings and copy the Device ID and the Device Secret.
 </p>
 

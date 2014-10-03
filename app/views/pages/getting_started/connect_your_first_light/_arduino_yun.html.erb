@@ -107,12 +107,12 @@ Take a look at the <a href="http://arduino.cc/en/Main/ArduinoBoardYun">Input and
 <h2 id="connect-your-first-light-lelylan-setup">Lelylan Setup</h2>
 
 <p>
-To create a new device open the <a href="http://manage.lelylan.com">Dashboard</a>.
-Click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the
+To create a new device open the <a href="http://lelylan.github.io/devices-dashboard-ng">Dashboard</a>.
+Click the <a href="http://lelylan.github.io/devices-dashboard-ng/new">create device</a> link and fill the
 form with the desired device name and choosing <code>Basic Light</code> as type.
 <p>
 
-<a href="http://manage.lelylan.com/new">
+<a href="http://lelylan.github.io/devices-dashboard-ng/new">
   <%= image_tag('connect-your-first-light/create-device.png', class: 'img-thumbnail') %>
 </a>
 
@@ -312,11 +312,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 <p>
   Now that all the components are ready and your Arduino is connected to Lelylan
-  access the <a href="http://manage.lelylan.com">Lelylan Dashboard</a>. From here you can control your light
+  access the <a href="http://lelylan.github.io/devices-dashboard-ng">Lelylan Dashboard</a>. From here you can control your light
   and get realtime notifications.
 </p>
 
-<a href="http://manage.lelylan.com">
+<a href="http://lelylan.github.io/devices-dashboard-ng">
 <%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
 </a>
 
@@ -332,7 +332,7 @@ description of what the most important code sections do.
 <p>
   The <code>deviceId</code> and <code>deviceSecret</code> are used to let the Arduino
   rduino understand which one is the communicating device on Lelylan. To get the device
-  credentials open the <a href="http://manage.lelylan.com">Dashboard</a>, select the
+  credentials open the <a href="http://lelylan.github.io/devices-dashboard-ng">Dashboard</a>, select the
   desired device, click on settings and copy the Device ID and the Device Secret.
 </p>
 
