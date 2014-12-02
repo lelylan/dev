@@ -20,7 +20,8 @@
 /tmp
 
 # Ignore .rvmrc file.
-/.rvmrc
+/.ruby-gemset
+/.ruby-version
 
 # Config files
 /config/settings.local.yml

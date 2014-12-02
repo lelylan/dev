@@ -795,3 +795,40 @@ img {
   margin-top: 10px;
   margin-bottom: 30px;
 }
+
+
+/* * * * * * * * * * * */
+/* Lab personalization */
+/* * * * * * * * * * * */
+
+.ly-project-item-card.ly-project-list-item {
+  font-size: 1.2em !important;
+  width: 300px !important;
+}
+
+.ly-project-item-card .ly-project-user-avatar {
+  width: 298px !important;
+  height: 118px !important;
+}
+
+.ly-project-item-card .ly-project-tags {
+  display: none;
+  margin: 15px 30px 15px 0;
+}
+
+.ly-project-item-card .ly-project-footer a.ly-project-embed {
+  bottom: 11px !important;
+}
+
+.ly-project-item-card .ly-project-user-avatar {
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.ly-project-item-card .ly-project-description {
+  height: 175px;
+}
+
+.ly-project-item-card .ly-project-link,
+.ly-project-item-card .ly-project-footer {
+  display:none;
+}

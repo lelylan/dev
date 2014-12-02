@@ -1,72 +1,35 @@
-<div class="presentation-block">
-  <div class="row">
-    <div class="col-md-8" role="main">
-      <h4>With The Makers API</h4>
-      <h1>Connect Any Hardware</h1>
-      <p>With Lelylan you focus on the hardware and on the design process. We do the rest by making it easy to connect your devices to the web and by giving you a complete set of Apps ready to use.</p>
-      <a href="/getting-started#connect-your-first-light" class="btn-lelylan">Connect your first light &rarr;</a>
-    </div>
-    <div class="col-md-4" role="main">
-      <div class="pull-right">
-        <%= image_tag 'makers.png' %>
-      </div>
-    </div>
+<%= render 'menus/getting_started' %>
+
+<div ng-app="project-app">
+
+<div class="col-md-9 bs-docs" role="main">
+  <div class="bs-title">
+    <h1 id="getting-started">Getting Started</h1>
+    <h4>Lelylan basic concepts</h4>
   </div>
-
-  <div class="row">
-    <div class="col-md-4" role="main">
-      <div class="pull-left">
-        <%= image_tag 'developers.png' %>
-      </div>
-    </div>
-    <div class="col-md-8" role="main">
-      <h4>With The Developers API</h4>
-      <h1>Build Apps for the Connected Home</h1>
-      <p>Lelylan offers an open API for the Connected Home. Whether or not you want to build an app for web, mobile, voice, glasses, etc. Lelylan offers everything you need to get started in minutes.</p>
-      <a href="http://lelylan.github.io/device-directive-ng/#howto" class="btn-lelylan">Create your first App &rarr;</a>
-    </div>
+  <div class="bs-docs-section">
+    <%= render 'pages/getting_started/overview' %>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-md-4" role="main">
-      <div>
-        <%= image_tag 'makers-api.png' %>
-        <p>
-          Use hardware like
-          <a href="http://www.arduino.cc/">Arduino</a>,
-          <a href="http://electricimp.com/">Electric imp</a>,
-          <a href="http://mbed.org">mbed</a>,
-          <a href="http://www.raspberrypi.org/">Raspberry Pi</a> or
-          <a href="http://www.openpicus.com/">Flyport</a>
-          and connect it to the web using the Makers API and MQTT.
-        </p>
-        <a href="/makers" class="btn-lelylan">Makers API &rarr;</a>
-      </div>
-    </div>
-
-        <div class="col-md-4" role="main">
-      <div>
-        <%= image_tag 'developers-api.png' %>
-        <p>
-        An open API to control every physical device. With wrappers in
-        <a href="https://github.com/lelylan/lelylan-ng">AngularJS</a>,
-        <a href="https://github.com/lelylan/lelylan-rb">Ruby</a>,
-        <a href="https://github.com/lelylan/lelylan-node">Node.js</a> and
-        more you can get started in minutes.
-        </p>
-        <a href="/developers" class="btn-lelylan">Developers API &rarr;</a>
-      </div>
-    </div>
-
-    <div class="col-md-4" role="main">
-      <div>
-        <%= image_tag 'examples-api.png' %>
-        <p>
-        Learn by doing. Check out all articles and open-source projects
-        related to Lelylan and contribute building your own.
-        </p>
-        <a href="/code-examples" class="btn-lelylan">Code Examples &rarr;</a>
-      </div>
-    </div>
+<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
+  <div class="bs-title">
+    <h1 id="makers">Create your first Connected Light</h1>
+    <h4>For makers, kickstarters and manifacturers</h4>
   </div>
+  <div class="bs-docs-section">
+    <%= render 'pages/getting_started/makers' %>
+  </div>
+</div>
+
+<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
+  <div class="bs-title">
+    <h1 id="developers">Create Connected Home Apps</h1>
+    <h4>Web components and wrappers in different languages</h4>
+  </div>
+  <div class="bs-docs-section">
+    <%= render 'pages/getting_started/developers' %>
+  </div>
+</div>
+
 </div>

@@ -12,7 +12,7 @@
     <meta name="description" content="Lelylan Dev Center">
     <meta name="viewport" content="width=device-width">
   </head>
-  <body <% if params[:id]=='index' %> class="presentation" <% end %>>
+  <body>
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -52,8 +52,8 @@
             <li><a class="navbar-brand" href="/"><strong>Lelylan</strong> Dev Center</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li <% if params[:id]=='getting-started' %>class="active"<% end %> >
-              <a href="/getting-started">Getting Started</a>
+            <li <% if params[:id]=='index' %>class="active"<% end %> >
+              <a href="/">Getting Started</a>
             </li>
             <li <% if params[:id]=='makers' %>class="active"<% end %> >
               <a href="/makers">Makers API</a>
@@ -85,21 +85,6 @@
       </div>
     </div>
     </nav>
-
-    <!-- homepage banner -->
-    <% if params[:id] == 'index' %>
-    <div class="banner">
-      <div class="container">
-        <div class="banner-content">
-          <h1 class="title">Building the Connected Home</h1>
-          <p>Connect any device to the web and create new apps to get control of them</p>
-          <div class="banner-button">
-          <a href="/getting-started" class="btn-lelylan">Getting Started</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <% end %>
 
     <!-- contant -->
     <div class="container bs-docs-container">

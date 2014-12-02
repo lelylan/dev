@@ -4,35 +4,37 @@
 
           <div class="first-step">
             <div class="action">
-              <a class="btn-lelylan" href="#">Send the request to Lelylan &raquo;</a>
+              <a class="btn-lelylan" href="#">Lelylan receives the request &raquo;</a>
             </div>
 
             <p>
-            A user turn on a light using a third party application (e.g dashboard, mobile app).
-            This request is sent to Lelylan where all logics take place.
+            A user turn on a light using the Lelylan dashboard or a third party application
+            (e.g voice, gesture). This request is sent to Lelylan where all logics
+            take place.
             </p>
           </div>
 
           <div class="second-step">
             <div class="action">
-              <a class="btn-lelylan" href="#">Forward the request to the physical device &raquo;</a>
+              <a class="btn-lelylan" href="#">The request is forwarded to the physical device &raquo;</a>
             </div>
 
             <p>
             Lelylan receives the request and forwards it to the connected physical device.
             Lelylan does not wait for the physical device to apply the request and returns
-            the expected device representation with a success HTTP status (optimistic async flow).
+            to the user the expected device representation with a successful response
+            (optimistic async flow).
             </p>
           </div>
 
           <div class="third-step">
             <div class="action">
-              <a class="btn-lelylan" href="#">Get reatime notifications &raquo;</a>
+              <a class="btn-lelylan" href="#">Reatime notifications when changes are applied &raquo;</a>
             </div>
 
             <p>
             Once the physical device applies the request a message is sent to Lelylan,
-            which in turn, notifies the third party applications that the light is now on.
+            which in turn, notifies the user that the light is now on.
             </p>
           </div>
         </div>
