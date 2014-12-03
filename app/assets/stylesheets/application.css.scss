@@ -254,7 +254,7 @@ a {
   height: 50px;
   min-height: 50px;
   margin-bottom: 0;
-  //margin-top: 25px;
+  margin-top: 25px;
   @include box-shadow;
 
   .container {
@@ -639,8 +639,6 @@ table {
 }
 
 
-
-
 /* * * * * * */
 /* Home Page */
 /* * * * * * */
@@ -804,6 +802,13 @@ img {
 .ly-project-item-card.ly-project-list-item {
   font-size: 1.2em !important;
   width: 300px !important;
+  box-shadow: none !important;
+  margin-bottom: 30px !important;
+  border: 1px solid #e8e8e8 !important;
+}
+
+.ly-project-item-card .ly-project-title {
+  font-size: 17px !important;
 }
 
 .ly-project-item-card .ly-project-user-avatar {
@@ -828,11 +833,17 @@ img {
   height: 175px;
 }
 
+.ly-project-item-card .ly-project-description,
 .ly-project-item-card .ly-project-link,
 .ly-project-item-card .ly-project-footer {
   display:none;
 }
 
+
+
+/* * * * * * * * * * */
+/* Mobile definition */
+/* * * * * * * * * * */
 
 @media screen and (max-width: 992px) {
 

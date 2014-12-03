@@ -114,7 +114,7 @@ status = statuses.get_status('<id>')</xmp></pre>
     "id": "50420c7e267ff51300000001",
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
     "pending": true,
-    "range": {"min": "0", "max": "100"},
+    "ranges": [{"min": "0", "max": "100"}]
   }]
 }</code></pre>
 </div>
@@ -187,7 +187,7 @@ moment of its life you need to check two things.
 
 <ul>
   <li>If the current device property value is included into the status <code>values</code> list.</li>
-  <li>If the current device property value is included into the status <code>range</code> boundaries.</li>
+  <li>If the current device property value is included into the status <code>ranges</code> list.</li>
   <li>If the current device property pending status is the same as the status <code>pending</code> value.</li>
 </ul>
 
@@ -567,13 +567,22 @@ Location: http://api.lelylan.com/statuses/5042176370eda61200000004</code></pre><
     </tr>
     <tr>
       <td class="parameter nested">
-        <span>&raquo; property.value</span>
+        <span>&raquo; property.values</span>
         <span class="info">optional</span>
       </td>
       <td>
-        List of matching values and ranges.
+        List of matching values.
         <a href="/support#faq-value-expected-pending">Learn more about</a>.
-        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.ranges</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        List of matching ranges.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
     <tr>
