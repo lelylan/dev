@@ -108,13 +108,13 @@ status = statuses.get_status('<id>')</xmp></pre>
   "properties":[{
     "id": "50420c7e267ff51000000001",
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51000000001",
-    "pending": false
-    "value": ["on"],
+    "pending": false,
+    "values": ["on"],
   }, {
     "id": "50420c7e267ff51300000001",
     "uri": "http://api.lelylan.com/properties/50420c7e267ff51300000001",
-    "pending": true
-    "value": ["0..100"],
+    "pending": true,
+    "range": {"min": "0", "max": "100"},
   }]
 }</code></pre>
 </div>
@@ -159,10 +159,10 @@ status = statuses.get_status('<id>')</xmp></pre>
     </tr>
     <tr>
       <td class="nested">
-        <span>&raquo; property.value</span>
+        <span>&raquo; property.values</span>
       </td>
       <td>
-        Property value.
+        Property values.
         <a href="/support#faq-value-expected-pending">Learn more about</a>.
       </td>
     </tr>
@@ -186,16 +186,17 @@ moment of its life you need to check two things.
 </p>
 
 <ul>
-  <li>If the current device property value is included into the status <code>value</code> list.</li>
+  <li>If the current device property value is included into the status <code>values</code> list.</li>
+  <li>If the current device property value is included into the status <code>range</code> boundaries.</li>
   <li>If the current device property pending status is the same as the status <code>pending</code> value.</li>
 </ul>
 
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-    At the moment it's not possible to get the device status from server side. A basic implementation
-    is available on the <a href="http://lelylan.github.com/devices-component-ng/">AngularJS Device Component</a>
-    which gives you the device status description.
+    At the moment it's not possible to get the device status from server side.
+    A basic implementation is available on the
+    <a href="lelylan.github.io/device-directive-ng/">AngularJS Device Component</a>.
   </p>
 </div>
 
@@ -422,7 +423,7 @@ statuses = statuses.get_all_status() # all existing resources</xmp></pre>
            "function": {"id": "<turn-off>" },
            "properties": [{
               "id": "<intensity>",
-              "value": ["100"],
+              "values": ["100"],
               "pending": false
             }]
          }'</xmp></pre>
