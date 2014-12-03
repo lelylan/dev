@@ -866,6 +866,10 @@ img {
     text-transform: uppercase;
   }
 
+  .bs-docs-section ul {
+    padding-left: 20px;
+  }
+
   .bs-title {
     padding: 20px;
   }
@@ -889,4 +893,9 @@ img {
   .ly-project-item-card .ly-project-user-avatar {
     width: 278px !important;
   }
+
+  .col-md-offset-3 {
+    margin-top: 0px;
+  }
+
 }
