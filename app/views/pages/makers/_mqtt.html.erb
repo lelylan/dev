@@ -13,95 +13,62 @@
   1 levels on message delivering.
 </p>
 
-<div class="alert alert-info">
-  <p>
-  <span class="label label-lelylan">notice</span>
-  Lelylan MQTT is in alpha testing.
-  If you find a bug do not hesitate to send it to
-  <a href="mailto:dev@lelylan.com">dev@lelylan.com</a>
-  </p>
-</div>
-
-<h2 id="mqtt-create-the-device">Create the device</a></h2>
+<h2 id="mqtt-lelylan-setup">Lelylan Setup</a></h2>
 
 <p>
-To create a new device open your Dashboard,
-click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
-with the desired name and type. For the moment leave empty the physical field
-(we'll come back later on that).
-<p>
+  To connet your hardware with MQTT you first need to create a new device.
+  Open <a href="http://lelylan.github.io/devices-dashboard-ng/">Lelylan Dashboard</a>
+  and create a new device by following 3 simple steps (if you are new to Lelylan, you can
+  <a href="http://people.lelylan.com/users/sign_up">sign up</a> for free).
+</p>
 
-<%= image_tag('makers-api/create-device.png', class: 'img-thumbnail') %>
+<h3>1) Set a meaningful name (e.g. bedroom light).</h3>
+
+<%= image_tag('makers-api/step-1.png', class: 'img-thumbnail') %>
+
+<h3>2) Choose the device type (for this tutorial choose <em>Basic Light</em>).</h3>
+
+<%= image_tag('makers-api/step-2.png', class: 'img-thumbnail') %>
+
+<h3>3) Choose <em>"Connect with MQTT"</em> as connectivity option.</h3>
+
+<%= image_tag('makers-api/step-3.png', class: 'img-thumbnail') %>
+
+<h3>4) Get the Device ID and Device Secret.</h3>
 
 <p>
-  When created, you'll see a detailed view of your new device. Click on <code>settings</code>
-  and you'll find all needed info to connect the physical device to Lelylan.
+  Once the device is created click on settings (placed under the device name)
+  and get the device info.
 </p>
 
 <ul>
+  <li><em>ID</em> - Unique device identifier (MQTT username).</li>
+  <li><em>Secret</em> - Device secret code (MQTT password).</li>
   <li><em>Type</em> - Link to the type definition (use it to check the device properties)</li>
-  <li><em>ID</em> - Unique device identifier.</li>
-  <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
 </ul>
 
-<%= image_tag('makers-api/device-component-settings.png', class: 'img-thumbnail') %>
-
-<h2 id="mqtt-set-the-physical-uri">Set the physical URI</h2>
-
-<p>
-To communicate with the physical device you need to connect Lelylan with the
-MQTT client. To make this possible use the <em>Nodes Service</em>,
-which is in charge of forwarding all incoming requests from Lelylan to
-the MQTT client.
-</p>
-
-<p>
-To use the Nodes Service you need to set in the physical
-field of your device a URI having the structure
-<code>http://nodes.lelylan.com/mqtt/devices/&lt;device-id&gt;</code>,
-where you need to change the <code>&lt;device-id&gt;</code> with your
-actual device id.
-</p>
-
-<table class="table table-stripped">
-
-  <tbody>
-    <tr>
-      <td>Your Device ID</td>
-      <td><code>518be5a700045e1521000001</code></span></td>
-    </tr>
-    <tr>
-      <td>Your Physical URI</td>
-      <td><code><span class="glyphicon glyphicon-arrow-right"></span> http://nodes.lelylan.com/mqtt/devices/518be5a700045e1521000001</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<%= image_tag('makers-api/direct-connect-physical.png', class: 'img-thumbnail') %>
+<%= image_tag('makers-api/step-4.png', class: 'img-thumbnail') %>
 
 <h2 id="mqtt-connecting-to-lelylan">Connecting to Lelylan</h2>
 
 <p>
-Lelylan MQTT accept connections from any MQTT client supporting the MQTT 3.1 specs. During
-the connection phase the client needs to set the <code>device.id</code> as username and the
-<code>device.secret</code> as password. When the credentials are missing or not valid, the
-connection is rejected.
+Lelylan MQTT accepts connections from any MQTT client supporting the MQTT 3.1 specs. During
+the connection phase the client needs to set the device <code>id</code> as username and the
+device <code>secret</code> as password. Once the connection is successful, you need to implement
+two services.
 </p>
 
-<h3>MQTT Broker parmas</h3>
-
-<div class="code-block">
-<pre><code><span style="color: #999">host:</span> 96.126.109.170
-<span style="color: #999">port:</span> 1883</code></pre>
-</div>
+<ul>
+<li>One to receive data from Lelylan</li>
+<li>One to send data to Lelylan</li>
+</ul>
 
 <h3>How to receive data</h3>
 
 <p>
-When a user updates a device property or executes a function using Lelylan
-(e.g from dashboard, mobile, etc.), a message with the list of properties
-to update is published to the topic <code>devices/:id/get</code>. Every received
-message is made up from a list of properties with the following structure.
+The MQTT client (hardware) receives all messages coming from Lelylan
+(e.g API, dashboard) through the <code>devices/:id/get</code> topic. Every message is
+made up from a list of properties with the following structure.
 </p>
 
 <table class="table table-stripped table-hover">
@@ -111,7 +78,7 @@ message is made up from a list of properties with the following structure.
         <span>properties</span>
       </td>
       <td>
-        Array of properties to change in the physical world.
+        Array of properties (received from your hardware).
       </td>
     </tr>
     <tr>
@@ -127,8 +94,7 @@ message is made up from a list of properties with the following structure.
         <span>&raquo; property.value</span>
       </td>
       <td>
-        New property value.
-        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        Property value.
       </td>
     </tr>
   </tbody>
@@ -137,9 +103,9 @@ message is made up from a list of properties with the following structure.
 <h3>How to send data</h3>
 
 <p>
-When a physical device updates its status through a physical interaction Lelylan needs to be
-notified publishing a message to the topic <code>devices/:id/set</code> with the list of all
-updated properties.
+When a physical device updates its status through a physical interaction (e.g turn on a light
+using the physical switch), Lelylan must be notified by publishing a message to the topic
+<code>devices/:id/set</code> with the list of the updated properties.
 Every sent message is made up from a list of properties with the following structure.
 </p>
 
@@ -151,7 +117,7 @@ Every sent message is made up from a list of properties with the following struc
         <span class="info">optional</span>
       </td>
       <td>
-        Array of properties to change in the physical world.
+        Array of properties (sent from your hardware).
       </td>
     </tr>
     <tr>
@@ -198,16 +164,19 @@ Every sent message is made up from a list of properties with the following struc
 </table>
 
 
-<h3>A note about the physical flow</h3>
+<h3>Async physical flow</h3>
 
 <p>
-When communicating with the physical world, Lelylan expects a feedback to its requests.
-For example when we ask to Arduino to turn on a light, Arduino must tell Lelylan that
-the light was turned on. In the meantime the device is in a
-<a href="/support#faq-value-expected-pending">pending</a>
-status and the spinner is visible.
+When sending a message to the physical world, Lelylan expects a feedback to its requests.
+For example if Lelylan sends a request to turn on a light, your hardware must send back a
+confirmation to Lelylan saying that the light was turned on. Until the confirmation message
+isn't sent back, the device lives in a <a href="/support#faq-value-expected-pending">pending</a>
+status (in the dashboard you'll see a spinner).
+</p>
+
+<p>
 To close the pending status and tell Lelylan that the requested changes were applied, the
-physical device should publish a message to the out topic <code>/devices/:id/set</code>
+physical device must publish a message to the out topic <code>/devices/:id/set</code>
 confirming the updated property values.
 </p>
 
@@ -258,7 +227,6 @@ EthernetClient ethClient;
 /* MQTT communication */
 void callback(char* topic, byte* payload, unsigned int length); // subscription callback
 PubSubClient client(server, 1883, callback, ethClient);         // mqtt client
-
 
 /* arduino setup */
 void setup() {
@@ -457,32 +425,24 @@ print("rc: " + str(rc))</xmp></pre>
 <h2 id="mqtt-control-your-physical-device">Control your physical device</h2>
 
 <p>
-Once your light is connected to Lelylan control and monitor it in realtime using the
-<a href="http://manage.lelylan.com">Dashboard</a>.
+Access <a href="http://lelylan.github.io/devices-dashboard-ng">Lelylan Dashboard</a>
+and control your connected device from mobile, tablet and desktop in realtime.
+If any problem occurs, let <a href="http://twitter.com/lelylan">@lelylan</a> know.
 </p>
 
-<a href="http://manage.lelylan.com">
-<%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
+<a href="http://lelylan.github.io/devices-dashboard-ng/">
+<%= image_tag('makers-api/control.png', class: 'img-thumbnail') %>
 </a>
 
-<h2 id="mqtt-articles">Articles</h2>
+<h2 id="mqtt-learn-more">Learn more</h2>
 
-<table class="table table-stripped">
-  <thead>
-    <tr>
-      <th>TITLE</th>
-      <th>TAGS</th>
-      <th>AUTHOR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="/getting-started#connect-your-first-light">Connect Your First Light</a></td>
-      <td>ARDUINO, MQTT</td>
-      <td><a href="http://twitter.com/lelylan">@lelylan</a></td>
-    </tr>
-  </tbody>
-</table>
+<p>
+In this section we described how MQTT works with Lelylan.
+If you want to learn more check out the hardware tutorials
+in the <a href="#makers">getting started</a> section. Each of them deeply describe how the
+MQTT client communicate with Lelylan (using different hardware platforms).
+</p>
+<br>
 
 <h2 id="mqtt-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 

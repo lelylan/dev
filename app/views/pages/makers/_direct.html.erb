@@ -1,42 +1,60 @@
 <h2 id="direct-overview">Overview</h2>
 
 <p>
-  Using the direct access solution the physical device is directly accessible through
-  a Public IP Address. If you do not have one, you can create a tunnel using
-  <a href="http://progrium.com/localtunnel/">Local Tunnel</a>,
+  When MQTT is not available, use the direct access solution, making the physical device
+  directly accessible through a Public IP Address. If you do not have one, you can create
+  a tunnel with solutions like
+  <a href="https://ngrok.com/">ngrock</a>,
   <a href="https://forwardhq.com/">Forward</a> or
   <a href="http://tunnlr.com/">Tunnlr</a>.
 </p>
 
-<h2 id="direct-create-the-device">Create the Device</h2>
+<h2 id="direct-lelylan-setup">Lelylan Setup</a></h2>
 
 <p>
-To create a new device open your Dashboard,
-click the <a href="http://manage.lelylan.com/new">create device</a> link and fill the form
-with the desired name and type. For the moment leave empty the physical field
-(we'll come back later on that).
-<p>
+  To connet your hardware with MQTT you first need to create a new device.
+  Open <a href="http://lelylan.github.io/devices-dashboard-ng/">Lelylan Dashboard</a>
+  and create a new device by following 3 simple steps (if you are new to Lelylan, you can
+  <a href="http://people.lelylan.com/users/sign_up">sign up</a> for free).
+</p>
 
-<%= image_tag('makers-api/create-device.png', class: 'img-thumbnail') %>
+<h3>1) Set a meaningful name (e.g. bedroom light).</h3>
+
+<%= image_tag('makers-api/step-1.png', class: 'img-thumbnail') %>
+
+<h3>2) Choose the device type (for this tutorial choose <em>Basic Light</em>).</h3>
+
+<%= image_tag('makers-api/step-2.png', class: 'img-thumbnail') %>
+
+<h3>3) Choose <em>"Custom URI"</em> as connectivity option.</h3>
 
 <p>
-  When created, you'll see a detailed view of your new device. Click on <code>settings</code>
-  and you'll find all needed info to connect the physical device to Lelylan.
+When you choose custom URI as connectivity option you need to set the physical device
+URI that makes it accessible.
+</p>
+
+<%= image_tag('makers-api/direct.png', class: 'img-thumbnail') %>
+
+<h3>4) Get the Device ID and Device Secret.</h3>
+
+<p>
+  Once the device is created click on settings (placed under the device name)
+  and get the device info.
 </p>
 
 <ul>
-  <li><em>Type</em> - Link to the device type definition (use it to check the device properties).</li>
-  <li><em>URI</em> - URI where the physical will send the physical updates.</li>
-  <li><em>Secret</em> - Device secret code used to authenticate the communication with Lelylan.</li>
+  <li><em>ID</em> - Unique device identifier (MQTT username).</li>
+  <li><em>Secret</em> - Device secret code (MQTT password).</li>
+  <li><em>Type</em> - Link to the type definition (use it to check the device properties)</li>
 </ul>
 
-<%= image_tag('makers-api/device-component-settings.png', class: "img-thumbnail") %>
+<%= image_tag('makers-api/step-4.png', class: 'img-thumbnail') %>
 
 <h2 id="direct-how-to-receive-data">How to Receive Data</h2>
 
 <p>
-When a user updates a device property or executes a function using Lelylan, a request
-with the list of properties to update is sent to the physical device.
+When a user updates a device using Lelylan (e.g API, dashboard), a request
+with the properties to update is sent to the physical device.
 </p>
 
 <h3>Received Request Example</h3>
@@ -54,8 +72,8 @@ with the list of properties to update is sent to the physical device.
         <span>X-Physical-Secret</span>
       </td>
       <td>
-        The device <a href="/developers#get-a-device-private-info">secret</a>.
-        The physical device needs it to reject not valid requests.
+        The device <a href="/developers#get-a-device-private-info">secret</a>
+        (checked by the physical device).
       </td>
     </tr>
   </tbody>
@@ -95,7 +113,7 @@ with the list of properties to update is sent to the physical device.
 <h3>Received Request Example</h3>
 
 <p>
-Follows an example request a physical device must be able to solve.
+Follows a request that the physical device could receive.
 </p>
 
 <ul class="nav nav-tabs">
@@ -184,9 +202,8 @@ and that the processing has not been completed. From this moment the device is p
 { "status": "202" }</code></pre></div>
 
 <p>
-Once the physical completes the processing, the device must notify Lelylan sending
-a request with the updated properties. When Lelylan receives the request, it sets the
-pending status to false.
+Once the physical device completes the request, it must notify Lelylan by sending
+the updated properties. When Lelylan receives it, the device end up its pending status.
 </p>
 
 <div class="alert alert-info">
@@ -355,11 +372,12 @@ response = physical.receive_update(uri, secret, params)</xmp></pre>
     </div>
   </div>
 </div>
+<br>
 
-<h3>Accessible services</h3>
+<h2 id="direct-accessible-services">Accessible services</h2>
 
 <p>
-  A physical device has access to a limited set of API in Lelylan.
+A physical device has access to a limited set of Lelylan API.
 </p>
 
 <ul>
@@ -371,56 +389,25 @@ response = physical.receive_update(uri, secret, params)</xmp></pre>
   </li>
 </ul>
 
-<h2 id="direct-set-the-physical-uri">Set the physical URI</h2>
-
-<p>
-All requests coming to Lelylan must be forwarded to the Physical Device. To make this
-possible we need to tell Lelylan where the Physical Device is. This can be done by setting
-the physical field of your Device (in the Dashboard) with the URI or IP address of your
-Physical Device.
-</p>
-
-<p>
-To associate a direct URI to the physical device you can use a public IP address or
-you can create a tunnel with solutions like
-<a href="http://progrium.com/localtunnel/">local tunnel</a>,
-<a href="https://forwardhq.com/">forward</a> or
-<a href="http://tunnlr.com/">tunnlr</a>.
-</p>
-
-<%= image_tag('makers-api/direct-connect-physical.png', class: 'img-thumbnail') %>
-
 <h2 id="direct-control-your-physical-device">Control your physical device</h2>
 
 <p>
-Open the <a href="http://manage.lelylan.com">Dashboard</a>
-and start interacting with the physical world receiving and sending updates.
+Access <a href="http://lelylan.github.io/devices-dashboard-ng">Lelylan Dashboard</a>
+and control your connected device from mobile, tablet and desktop in realtime.
+If any problem occours, let <a href="http://twitter.com/lelylan">@lelylan</a> know.
 </p>
 
-<a href="http://manage.lelylan.com">
-<%= image_tag('connect-your-first-light/dashboard.png', class: 'img-thumbnail') %>
+<a href="lelylan.github.io/devices-dashboard-ng/">
+<%= image_tag('makers-api/control.png', class: 'img-thumbnail') %>
 </a>
 
-<h2 id="direct-articles">Articles</h2>
+<h2 id="direct-learn-more">Learn more</h2>
 
-<table class="table table-stripped">
-  <thead>
-    <tr>
-      <th>TITLE</th>
-      <th>LANGUAGE</th>
-      <th>AUTHOR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="3">
-        There were no articles for this section.<br>
-        Do you want to write one?
-        Let <a href="http://twitter.com/lelylan">@lelylan</a> know on Twitter.
-      </td>
-    </tr>
-  </tbody>
-</table>
+<p>
+There were no articles for this section. If you are using the "direct access" flow
+in any of your projects let <a href="http://twitter.com/lelylan">@lelylan</a> know on Twitter
+and we'll add new use cases to our documentation.
+</p>
 
 <h2 id="direct-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
 
