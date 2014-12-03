@@ -790,9 +790,16 @@ footer .bs-docs-section {
 }
 
 img {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
+
+.github-edit {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
 
 
 /* * * * * * * * * * * */
@@ -833,7 +840,7 @@ img {
   height: 175px;
 }
 
-.ly-project-item-card .ly-project-description,
+//.ly-project-item-card .ly-project-description,
 .ly-project-item-card .ly-project-link,
 .ly-project-item-card .ly-project-footer {
   display:none;
