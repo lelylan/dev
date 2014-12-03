@@ -286,8 +286,7 @@ Here a response example.
 
 <p>
 This flow is meant for Javascript-based web applications that can't maintain state
-over time (it includes Actionscript, Silverlight and similar).
-The flow starts redirecting the user to the authorization endpoint.
+over time. The flow starts redirecting the user to the authorization endpoint.
 <p>
 
 <ul class="nav nav-tabs">
@@ -579,7 +578,7 @@ Here a response example.
 <h2 id="oauth-refresh-access-token">Refresh Access Token</h2>
 
 <p>
-For security reasons an access token expires every two hours. To get a new one
+For security reasons an access token expires every 24 hours. To get a new one
 use the refresh token you previously received together with the access token.
 <p>
 
@@ -706,8 +705,16 @@ Once you have the access token you can access the API in different ways.
 
 <p>
 Scopes let you specify what can and can't be accessed from a third party application.
-When no scopes are defined user is the default one.
 </p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  When no scopes are defined <code>user</code> is the default one.
+  </p>
+</div>
+
+<br>
 
 <table class="table table-stripped table-hover table-labeled">
   <thead>
@@ -723,7 +730,7 @@ When no scopes are defined user is the default one.
         <span class="info">Full access to all services.</span>
       </td>
       <td><span class="label">all services</span>
-      (only the <a href="#get-a-device-private-info">private</a> service is not included)</td>
+      (the <a href="#get-a-device-private-info">private</a> service is not included)</td>
     </tr>
     <tr>
       <td>
@@ -732,7 +739,7 @@ When no scopes are defined user is the default one.
       </td>
       <td>
         <span class="label">all read only services</span>
-        (only the <a href="#get-a-device-private-info">private</a> service is not included)
+        (the <a href="#get-a-device-private-info">private</a> service is not included)
       </td>
     </tr>
     <tr>
@@ -756,7 +763,7 @@ When no scopes are defined user is the default one.
         <span class="label link"><a href="#update-a-device">update a device</a></span>
         <span class="label link"><a href="#delete-a-device">delete a device</a></span>
         <span class="label link"><a href="#update-device-properties">update properties</a></span>
-        <span class="label link"><a href="#execute-a-function">execute a function</a></span>
+        <%#<span class="label link"><a href="#execute-a-function">execute a function</a></span>%>
         <span class="label link"><a href="#activate-a-device">activate a device</a></span>
         <span class="label link"><a href="#deactivate-a-device">deactivate a device</a></span>
       </td>
@@ -771,7 +778,7 @@ When no scopes are defined user is the default one.
         <span class="label link"><a href="#get-all-devices">get all devices</a></span>
         <span class="label link"><a href="#update-a-device">update a device</a></span>
         <span class="label link"><a href="#update-device-properties">update properties</a></span>
-        <span class="label link"><a href="#execute-a-function">execute a function</a></span>
+        <%#<span class="label link"><a href="#execute-a-function">execute a function</a></span>%>
       </td>
     </tr>
     <tr>
@@ -942,7 +949,7 @@ might be of help.
 
 <ul>
   <li>
-  <a href="#developers-api-clients" class="bigger">Lelylan Clients (using OAuth2)</a>
+  <a href="/#developers" class="bigger">Lelylan Clients (using OAuth2)</a>
   </li>
   <li>
   <a href="http://oauthbible.com" class="bigger">OAuth Bible</a>

@@ -3,7 +3,7 @@
 <p>
 Real-time Lelylan updates provide your application with instant notifications of
 what happens to Lelylan and the physical world. The most interesting way to view the world
-is live, as it happens. Through the use of a couple simple web hooks, we've been able to create
+is live, as it happens. Through the use of web hooks we've been able to create
 a system where your application gets notified of changes as they happen.
 </p>
 
@@ -238,7 +238,7 @@ to the callback URL defined in the subscription.
 <p>
   Respond with a 2xx HTTP status when the callback URL is called. If a different
   HTTP status is received, Lelylan will try to re-send the payload 10 times with an
-  exponentially growing delay between the requests (1 sec, 3 secs, 9, secs, 27 secs,
+  exponentially growing delay between the requests (1 sec, 3 secs, 9 secs, 27 secs,
   ..., 16 hours). After the 10th failed attempt the event is set as processed and no
   more calls are made.
 </p>
