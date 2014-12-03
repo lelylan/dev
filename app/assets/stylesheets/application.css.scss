@@ -789,6 +789,19 @@ footer .bs-docs-section {
   }
 }
 
+a.label-lab {
+  margin: 10px 20px !important;
+  padding: 5px 10px !important;
+  background-color: #01cf9e !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+}
+
+.navbar-nav > li > a.label-lab,
+.navbar-nav > li > a.label-lab:hover {
+  color: #fff  !important;
+}
+
 img {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -873,7 +886,7 @@ img {
   }
 
   .col-md-3 .bs-sidenav {
-    height: 140px;
+    height: 200px;
   }
 
   .navbar-right {
