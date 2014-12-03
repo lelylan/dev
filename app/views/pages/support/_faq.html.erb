@@ -62,17 +62,16 @@ As you can see now the expected and the value matches and the pending status is 
 <h2 id="faq-accepted-values">Accepted values</h2>
 
 <p>
-The field <code>accepted</code> represents a list of key/label pairs where the key
-is the value used to update the device properties
-and the label is a friendly description.
+The field <code>accepted</code> represents a list of objects where the key
+is the value used to update the device properties and the value is a friendly description.
 </p>
 
 <div class="code-block">
-<pre><code class="ruby">{ "accepted": { "on": "On", "off": "Off" } }</code></pre>
+<pre><code class="ruby">{ "accepted": [{ "key": "on", "value": "On" }, { "key": "off", "value": "Off" }] }</code></pre>
 </div>
 
 <p>
-Populating the accepted list gives you at least two benefits.
+Populating the accepted list gives two main benefits.
 </p>
 
 <ul>
@@ -86,9 +85,9 @@ Populating the accepted list gives you at least two benefits.
 
 <p>
 When creating a device, the accepted values are inherited by the
-<a href="/types/#properties-api">type properties</a>, but you can change it whenever
-you want on your devices. This is useful in scenarios where a physical device needs to set
-the accepted values (e.g. a television setting the channel names) for every specific device.
+<a href="/types/#properties-api">type properties</a>, but if you want you can change it
+on every device. This is useful in scenarios where a device needs to have custom
+accepted values (e.g. a television setting the channel names).
 </p>
 
 <h2 id="faq-device-status">Device Status</h2>

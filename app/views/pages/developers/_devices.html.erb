@@ -1,34 +1,4 @@
-<h2 id="devices-api-overview">What is a Device</h2>
 
-<p>
-A device is everything you interact with everyday of your life. You interact with
-lights, alarms, cooling and heating systems, smoke and gas sensors, appliances,
-rolling shutters and windows, irrigations, video surveillance, gates, multimedia
-(audio and video) and much more. The Devices API defines a set of services to monitor,
-control, simulate and connect any of those devices device and more.
-</p>
-
-<div class="alert alert-info">
-  <p>
-  <span class="label label-lelylan">notice</span>
-    Use <a href="http://manage.lelylan.com">Lelylan Dashboard</a> to create, monitor and
-    connect your devices.
-  </p>
-</div>
-
-<p>
-Simplifying, a device is characterized by a type and the
-properties it inherits from. For example, when
-creating a basic light, the device inherits the <em>status</em>
-(on or off) property from it.
-</p>
-
-<div class="alert alert-info">
-  <p>
-  <span class="label label-lelylan">notice</span>
-    See <a href="/types">Types API</a> to better understand how a type is defined.
-  </p>
-</div>
 
 <h2 id="get-a-device">GET /devices/:id</h2>
 
@@ -137,14 +107,17 @@ device = devices.get_dev('<id>')</xmp></pre>
     "value": "off",
     "expected": "off",
     "pending": false,
-    "accepted": null
+    "accepted": [
+      { "key": "on", "value": "On" },
+      { "key": "off", "value": "Off" }
+    ]
   }, {
     "uri": "http://api.lelylan.com/properties/50420c3a267ff51300000001",
     "id": "50420c3a267ff51300000001",
     "value": "100",
     "expected": "100",
     "pending": false,
-    "accepted": {"0": "Min", "25": "Low", "50": "Half", "75": "High", "100": "Max"}
+    "accepted": []
   }],
   "owner": {
     "id": "5036227a4f1b030200000001",
@@ -358,8 +331,8 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
   "uri": "http://api.lelylan.com/devices/5042344b95fc441000000001",
   "id": "5042344b95fc441000000001",
   "name": "Closet dimmer",
-  "secret": "0ca70cc411e9e9de25b47b3e76b8a1932ae48bee6e6fa8808b534994dff5045d",
-  "activation_code": "3a9e8732e30c7c06031ad28fd5310425bca3d9bc",
+  "secret": "fkJVeURdtONfXw40wB+K0xI2Zxxxxxxxx",
+  "activation_code": "3a9e8732e30c7c06031ad28fd5310425xxxxxxxx",
 }</code></pre></div>
 
 <h3>Body Response explained</h3>
