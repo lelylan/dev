@@ -832,3 +832,61 @@ img {
 .ly-project-item-card .ly-project-footer {
   display:none;
 }
+
+
+@media screen and (max-width: 400px) {
+
+  body {
+    font-size: 80%;
+  }
+
+  .navbar-fixed-top {
+    z-index: -1;
+  }
+
+  .animation,
+  .col-md-3 .bs-sidenav li,
+  .lelylan-navbar-top-menu .navbar-nav > li > a.dropdown-toggle {
+    display:none
+  }
+
+  .lelylan-navbar-top-menu .navbar-nav > li > a {
+    padding-left: 20px;
+  }
+
+  .ly-project-item-card.ly-project-list-item {
+    margin-left: 0 !important;
+  }
+
+  .col-md-3 .bs-sidenav {
+    height: 140px;
+  }
+
+  .navbar-right {
+    text-transform: uppercase;
+  }
+
+  .bs-title {
+    padding: 20px;
+  }
+
+  .bs-title h1 {
+    font-size: 28px;
+  }
+
+  .bs-title h4 {
+    font-size: 18px;
+  }
+
+  .bs-docs-section {
+    padding: 20px;
+  }
+
+  .ly-project-item-card.ly-project-list-item {
+    width: 280px !important;
+  }
+
+  .ly-project-item-card .ly-project-user-avatar {
+    width: 278px !important;
+  }
+}
