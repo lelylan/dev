@@ -63,7 +63,7 @@ Lelylan.Function.find('<id>', callback);</xmp></pre>
   <div ng-controller="LelylanController">{{function}}</div>
   <script>
     function LelylanController($scope, Function) {
-      $scope.function = Function.get({ id: '<id>' });
+      Function.find('<ID>').success(function(response) { $scope.function = response })
     }
   </script>
 
@@ -236,7 +236,7 @@ Lelylan.Function.public({}, callback); // all existing resources</xmp></pre>
   </div>
   <div class="tab-pane" id="get-all-functions-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
@@ -245,8 +245,8 @@ Lelylan.Function.public({}, callback); // all existing resources</xmp></pre>
   </div>
   <script>
     function LelylanController($scope, Function) {
-      $scope.owned  = Function.query();   // owned resources
-      $scope.public = Function.public();  // all existing resources
+      Function.all({ name: 'turn' }).success(function(response) { $scope.owned = response })
+      Function.public({ name: 'turn' }).success(function(response) { $scope.public = response })
     }
   </script>
 
@@ -391,7 +391,7 @@ Lelylan.Function.create(params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="create-a-function-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{function}}</div>
@@ -403,8 +403,7 @@ Lelylan.Function.create(params, callback);</xmp></pre>
           { id: '<status>', expected: 'on'},
           { id: '<intensity>' } ] };
 
-      $scope.function = new Function(params);
-      $scope.function.$save();
+      Function.create(params).success(function(response) { $scope.function = response })
     }
   </script>
 
@@ -559,21 +558,19 @@ Lelylan.Function.update('<id>', params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="update-a-function-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{function}}</div>
   <script>
     function LelylanController($scope, Function) {
       var params = {
-        id: '<id>',
         name: 'Set intensity to 50%',
         properties:
           [ { id: '<status>', expected: 'on'},
             { id: '<intensity>', expected: '50' } ] };
 
-      $scope.function = new Function(params);
-      $scope.function.$update();
+      Function.update('<ID>', params).success(function(response) { $scope.function = response })
     }
   </script>
 
@@ -683,14 +680,13 @@ Lelylan.Function.delete('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="delete-a-function-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{function}}</div>
   <script>
     function LelylanController($scope, Function) {
-      $scope.function= new Function({ id: '<id>' });
-      $scope.function.$delete();
+      Function.delete('<ID>').success(function(response) { $scope.function = response })
     }
   </script>
 

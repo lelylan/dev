@@ -51,20 +51,15 @@ Lelylan.Type.find('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-a-type-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{type}}</div>
   <script>
     function LelylanController($scope, Type) {
-      $scope.type = Type.get({ id: '<id>' });
+      Type.find('<ID>').success(function(response) { $scope.type = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -302,7 +297,7 @@ Lelylan.Type.public({}, callback); // all existing resources</xmp></pre>
   </div>
   <div class="tab-pane" id="get-all-types-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
@@ -311,15 +306,10 @@ Lelylan.Type.public({}, callback); // all existing resources</xmp></pre>
   </div>
   <script>
     function LelylanController($scope, Type) {
-      $scope.owned  = Type.query();   // owned resources
-      $scope.public = Type.public();  // all existing resources
+      Type.all({ name: 'light' }).success(function(response) { $scope.owned = response })
+      Type.public({ name: 'light' }).success(function(response) { $scope.public = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -492,7 +482,7 @@ Lelylan.Type.create(params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="create-a-type-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{type}}</div>
@@ -500,20 +490,14 @@ Lelylan.Type.create(params, callback);</xmp></pre>
     function LelylanController($scope, Type) {
       var params = {
         name: 'Light',
-        categories: [ 'lights' ],
-        properties: [ '<status>', '<intensity>' ],
-        functions: [ '<turn-on>', '<turn-off>', '<set-intensity>' ],
-        statuses: [ '<light-on>', '<light-off>' ] };
+        categories: [ 'light' ],
+        properties: [ '<status-id>', '<intensity-id>' ],
+        functions: [ '<turn-on-id>', '<turn-off-id>', '<set-intensity-id>' ],
+        statuses: [ '<light-on-id>', '<light-off-id>' ] };
 
-      $scope.type = new Type(params);
-      $scope.type.$save();
+      Type.create(params).success(function(response) { $scope.type = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -676,22 +660,16 @@ Lelylan.Type.update('<id>', params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="update-a-type-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{type}}</div>
   <script>
     function LelylanController($scope, Type) {
-      var params = { id: '<id>', name: 'RBG Light' };
-      $scope.type = new Type(params);
-      $scope.type.$update();
+      var params = { name: 'RBG Light' };
+      Type.update('<ID>', params).success(function(response) { $scope.type = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -788,21 +766,15 @@ Lelylan.Type.delete('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="delete-a-type-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{type}}</div>
   <script>
     function LelylanController($scope, Type) {
-      $scope.type= new Type({ id: '<id>' });
-      $scope.type.$delete();
+      Type.delete('<ID>').success(function(response) { $scope.type = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -868,7 +840,7 @@ Lelylan.Category.all({}, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-all-categories-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
@@ -876,14 +848,9 @@ Lelylan.Category.all({}, callback);</xmp></pre>
   </div>
   <script>
     function LelylanController($scope, Category) {
-      $scope.categories = Category.query();
+      Category.all().success(function(response) { $scope.categories = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
