@@ -315,29 +315,18 @@ over time. The flow starts redirecting the user to the authorization endpoint.
   </div>
   <div class="tab-pane" id="implicit-grant-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="app">
 <body>
-  <div ng-controller = "LoginController">
-    <login client   = "{{oauth.client}}"
-           redirect = "{{oauth.redirect}}"
-           scope    = "{{oauth.scope}}"
-           state    = "{{oauth.state}}"></login>
+  <div ng-controller="LoginController">
+    <!-- http://lelylan.github.io/lelylan-ng/ -->
+    <oauth
+      site="http://people.lelylan.com"
+      client-id="<CLIENT_ID>"
+      redirect-uri="<REDIRECT_URI>"
+      profile-uri="http://api.lelylan.com/me"
+      scope="resources">
+    </oauth>
   </div>
-
-  <script>
-    function LoginController($scope) {
-      $scope.oauth = {
-        client:   '<client-id>',
-        redirect: '<redirect-uri>',
-        scope:    '<scope>',
-        state:    '<state>' };
-    }
-  </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>

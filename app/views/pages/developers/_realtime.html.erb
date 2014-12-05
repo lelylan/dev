@@ -313,22 +313,16 @@ Lelylan.Subscription.find('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-a-subscription-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
-    function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
-      BasicAuth.set(credentials);
-
-      $scope.subscription = Subscription.get({ id: '<id>' });
+    function LelylanController($scope, Subscription) {
+      var credentials = { clientID: '<CLIENT-ID>', clientSecret: '<CLIENT-SECRET>' };
+      Subscription.auth(creadentials);
+      Subscription.get('<ID>').success(function(response) { $scope.subscriptions = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -470,24 +464,18 @@ Lelylan.Subscription.all({}, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-all-subscriptions-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <div ng-controller="LelylanController">
     <div ng-repeat="subscription in subscriptions">{{subscription}}</div>
   </div>
   <script>
-    function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
-      BasicAuth.set(credentials);
-
-      $scope.subscriptions = Subscription.query();
+    function LelylanController($scope, Subscription) {
+      var credentials = { clientID: '<CLIENT-ID>', clientSecret: '<CLIENT-SECRET>' };
+      Subscription.auth(creadentials);
+      Subscription.all().success(function(response) { $scope.subscriptions = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -608,28 +596,17 @@ Lelylan.Subscription.create(params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="create-a-subscription-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
-    function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
-      BasicAuth.set(credentials);
-
-      var params = {
-        resource: '<resource>',
-        event: '<event>',
-        callback_uri: '<callback-uri>' };
-
-      $scope.subscription = new Subscription(params);
-      $scope.subscription.$save();
+    function LelylanController($scope, Subscription) {
+      var credentials = { clientID: '<CLIENT-ID>', clientSecret: '<CLIENT-SECRET>' };
+      Subscription.auth(creadentials);
+      var params = { resource: '<resource>', event: '<event>', callback_uri: '<callback-uri>' };
+      Subscription.create(params).success(function(response) { $scope.subscriptions = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -753,24 +730,17 @@ Lelylan.Subscription.update('<id>', params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="update-a-subscription-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
-    function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
-      BasicAuth.set(credentials);
-
-      var params = { id: '<id>', resource: 'devices' };
-      $scope.subscription = new Subscription(params)
-      $scope.subscription.$update();
+    function LelylanController($scope, Subscription) {
+      var credentials = { clientID: '<CLIENT-ID>', clientSecret: '<CLIENT-SECRET>' };
+      Subscription.auth(creadentials);
+      var params = { resource: 'devices' };
+      Subscription.update('<ID>', params).success(function(response) { $scope.subscriptions = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -858,23 +828,16 @@ Lelylan.Subscription.delete('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="delete-a-subscription-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <div ng-controller="LelylanController">{{subscription}}</div>
   <script>
-    function LelylanController($scope, BasicAuth, Subscription) {
-      var credentials = { clientID: '<client-id>', clientSecret: '<client-secret>' };
-      BasicAuth.set(credentials);
-
-      $scope.subscription = new Subscription({ id: '<id>' })
-      $scope.subscription.$delete();
+    function LelylanController($scope, Subscription) {
+      var credentials = { clientID: '<CLIENT-ID>', clientSecret: '<CLIENT-SECRET>' };
+      Subscription.auth(creadentials);
+      Subscription.delete('<ID>').success(function(response) { $scope.subscriptions = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>

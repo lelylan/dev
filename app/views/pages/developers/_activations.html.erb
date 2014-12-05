@@ -108,22 +108,16 @@ Lelylan.Device.activate(params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="activate-a-device-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{activated}}</div>
   <script>
     function LelylanController($scope, Activation) {
       var params = { activation_code: '<activation-code>' };
-      $scope.activated = new Activation(params);
-      $scope.activated.$execute();
+      Activation.activate(params).success(function(response) { $scope.activated = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -228,22 +222,16 @@ Lelylan.Device.deactivate('<activation-code>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="deactivate-a-device-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{deactivated}}</div>
   <script>
     function LelylanController($scope, Deactivation) {
       var params = { activation_code: '<activation-code>' };
-      $scope.deactivated = new Deactivation(params);
-      $scope.deactivated.$execute();
+      Activation.deactivate('1').success(function(response) { $scope.deactivated = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>

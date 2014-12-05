@@ -71,20 +71,15 @@ Lelylan.Device.find('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-a-device-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      $scope.device = Device.get({ id: '<id>' });
+      Device.find('<id>').success(function(response) { $scope.device = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -307,20 +302,15 @@ Lelylan.Device.privates('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-a-device-private-info-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      $scope.device = Device.privates({ id: '<id>' });
+      Device.privates('<id>').success(function(response) { $scope.device = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -511,7 +501,7 @@ Lelylan.Device.all({ 'name': 'light' }, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="get-all-devices-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">
@@ -519,14 +509,9 @@ Lelylan.Device.all({ 'name': 'light' }, callback);</xmp></pre>
   </div>
   <script>
     function LelylanController($scope, Device) {
-      $scope.devices = Device.query({ 'name': 'light' });
+      Device.all({ name: 'light' }).success(function(response) { $scope.devices = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -644,7 +629,7 @@ device = Lelylan.Device.create(params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="create-a-device-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{device}}</div>
@@ -655,15 +640,9 @@ device = Lelylan.Device.create(params, callback);</xmp></pre>
         type: { id: '<id>' },
         physical: { uri: '<physical-device-uri>' } };
 
-      $scope.device = new Device(params);
-      $scope.device.$save();
+      Device.create(params).success(function(response) { $scope.device = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -783,22 +762,16 @@ Lelylan.Device.update('<id>', params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="update-a-device-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      var params = { id: '<id>', name: 'Zigbee closet dimmer' };
-      $scope.device = new Device(params);
-      $scope.device.$update();
+      var params = { name: 'Zigbee closet dimmer' };
+      Device.update('<id>', params).success(function(response) { $scope.device = response })
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -963,29 +936,20 @@ Lelylan.Device.properties('<id>', params, callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="update-properties-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
     var params = {
-      id: '<id>',
       properties:
-        [ { id: '<status>',
-            value: 'on' },
-          { id: '<intensity>',
-            value: '50' } ] };
+        [ { id: '<status>', value: 'on' },
+          { id: '<intensity>', value: '50' } ] };
 
-      $scope.device = new Device(params);
-      $scope.device.$properties();
+      Device.properties('<id>', params).success(function(response) { $scope.device = response });
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -1075,21 +1039,15 @@ Lelylan.Device.delete('<id>', callback);</xmp></pre>
   </div>
   <div class="tab-pane" id="delete-a-device-angular">
     <div class="preview">
-      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan.client">
 <body>
   <!-- login component here (dev.lelylan.com/api/oauth#implicit-grant-angular) -->
   <div ng-controller="LelylanController">{{device}}</div>
   <script>
     function LelylanController($scope, Device) {
-      $scope.device = new Device({ id: '<id>' });
-      $scope.device.$delete();
+      Device.delete('<id>').success(function(response) { $scope.device = response })
     };
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -1250,11 +1208,6 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
       $scope.device.$execute();
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
@@ -1338,11 +1291,6 @@ Lelylan.Device.execute('<id>', params, callback);</xmp></pre>
       $scope.device.$execute();
     }
   </script>
-
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-  <script src="//s.lelylan.com/angularjs/0.1.0/lelylan.min.js"/></script>
 </body>
 </html></xmp></pre>
     </div>
