@@ -569,6 +569,13 @@ div.tab-content pre {
   }
 }
 
+.bordered {
+  border: 5px solid #eee !important;
+  border-radius: 5px;
+  width: 100%;
+}
+
+
 
 /* * * * * * * * */
 /* Table Listing */
@@ -853,12 +860,21 @@ img {
   height: 175px;
 }
 
-//.ly-project-item-card .ly-project-description,
 .ly-project-item-card .ly-project-link,
-.ly-project-item-card .ly-project-footer {
-  display:none;
+.ly-project-item-card .ly-project-description {
+  display: none;
 }
 
+.ly-project-item-card .ly-project-footer {
+  display: block;
+  font-size: .9em !important;
+}
+
+.ly-project-item-card.ly-project-list-item {
+  margin-left: 0 !important;
+  margin-bottom: 10 !important;
+  margin-right: 20px !important;
+}
 
 
 /* * * * * * * * * * */
