@@ -13,6 +13,28 @@
   1 levels on message delivering.
 </p>
 
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>MQTT Broker IP</th>
+      <th>Port</th>
+      <th>Secure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>178.62.108.47</td>
+      <td>1883</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>178.62.108.47</td>
+      <td>8883</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="mqtt-lelylan-setup">Lelylan Setup</a></h2>
 
 <p>
@@ -207,14 +229,14 @@ byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
 /* device credentials */
 char* deviceId = "<DEVICE-ID>";         // set your device id (will be the MQTT client username)
 char* deviceSecret = "<DEVICE-SECRET>"; // set your device secret (will be the MQTT client password)
+char* clientId = "<CLIENT-ID>";         // MQTT client id (random, max 23 bytes)
 
 /* device topics */
 char* outTopic = "devices/<DEVICE-ID>/set"; // where physical updates are published
 char* inTopic = "devices/<DEVICE-ID>/get";  // where lelylan updates are received
 
 /* Access settings */
-byte server[] = { 96, 126, 109, 170 }; // MQTT server address
-char* clientId = "<CLIENT-ID>"; // MQTT client id (random, max 23 bytes)
+byte server[] = { 178, 62, 108, 47 }; // MQTT server address
 
 /* sample payload published to lelylan */
 /* (to get the desired property-id go to the device settings and click on the type link) */
@@ -294,7 +316,7 @@ var in_topic  = 'devices/' + device.id + '/get'   // receiving messages
 
 // connection settings
 var mqtt = require('mqtt')
-  , host = '96.126.109.170'
+  , host = '178.62.108.47'
   , port = '1883'
 
 // client settings
@@ -340,7 +362,7 @@ out_topic = 'devices/' + device[:id] + '/set' # published messages
 
 # connection parameters
 settings = {
-  remote_host: '96.126.109.170',
+  remote_host: '178.62.108.47',
   remote_port: '1883',
   username: device[:id],
   password: device[:secret]
@@ -404,7 +426,7 @@ out_topic = 'devices/' + device_id + '/set'  # publishing messages
 
 # client connection
 client.username_pw_set(device_id, device_secret)
-client.connect('96.126.109.170', '1883')
+client.connect('178.62.108.47', '1883')
 
 # subscribe (with QoS level 0)
 client.subscribe(in_topic, 0)
