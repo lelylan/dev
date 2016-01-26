@@ -1,7 +1,7 @@
 ## Introduction
 
-[Lelylan Dev Center](http://dev.lelylan.com/) site is the official site where all documentation, examples, libraries,
-showcases and general information related to Lelylan are collected.
+[Lelylan Dev Center](http://dev.lelylan.com/) site where documentations, examples, libraries, and
+showcases related to Lelylan are collected.
 
 
 ## Requirements
