@@ -1,0 +1,43 @@
+<%= render 'menus/api' %>
+
+<div ng-app="project-app">
+
+  <div class="col-md-9 bs-docs" role="main">
+    <div class="bs-title">
+      <h1 id="api">Lelylan API</h1>
+      <h4>API for the Internet of Things</h4>
+      <a href="https://github.com/lelylan/dev/blob/master/app/views/pages/api/_overview.html.erb" class="github-edit">
+        <%= image_tag('github/Light-32px.png') %>
+      </a>
+    </div>
+    <div class="bs-docs-section">
+      <%= render 'pages/api/overview' %>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
+  <div class="bs-title">
+    <h1 id="api-devices">Device API</h1>
+    <h4>Modeling the physical world</h4>
+    <a href="https://github.com/lelylan/dev/blob/master/app/views/pages/api/_devices.html.erb" class="github-edit">
+      <%= image_tag('github/Light-32px.png') %>
+    </a>
+  </div>
+  <div class="bs-docs-section">
+    <%= render 'pages/api/devices' %>
+  </div>
+</div>
+
+<div class="col-md-offset-3 col-md-9 bs-docs" role="main">
+  <div class="bs-title">
+    <h1 id="core-concepts">Core Concepts</h1>
+    <h4>Shared Ideas between Lelylan</h4>
+    <a href="https://github.com/lelylan/dev/blob/master/app/views/pages/api/_core.html.erb" class="github-edit">
+      <%= image_tag('github/Light-32px.png') %>
+    </a>
+  </div>
+  <div class="bs-docs-section">
+    <%= render 'pages/api/core' %>
+  </div>
+</div>

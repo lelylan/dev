@@ -1,3 +1,5 @@
+<br><br>
+
 <h2 id="core-concepts-get-me">GET /me</h2>
 
 <p>
@@ -77,6 +79,10 @@ profile = user.me()</xmp></pre>
 }</code></pre>
 </div>
 
+<hr>
+
+
+
 <h2 id="core-concepts-rate-limit">Rate Limit</h2>
 
 <p>
@@ -120,6 +126,10 @@ X-RateLimit-Remaining: 0
 </div>
 <p>
 
+<hr>
+
+
+
 <h2 id="core-concepts-response-format">Response Formats</h2>
 
 <p>
@@ -143,6 +153,10 @@ X-RateLimit-Remaining: 0
   </tbody>
 </table>
 
+<hr>
+
+
+
 <h2 id="core-concepts-cors">CORS</h2>
 
 <p>
@@ -160,6 +174,10 @@ X-RateLimit-Remaining: 0
     Let <a href="">@lelylan</a> know if you need it.
   </p>
 </div>
+
+<hr>
+
+
 
 <h2 id="core-concepts-infinite-scrolling-pagination">Infinite Scrolling Pagination</h2>
 
@@ -180,6 +198,10 @@ X-RateLimit-Remaining: 0
 The default number of resources per page is 25 and the maximum is 100.
 </p>
 
+<hr>
+
+
+
 <h2 id="core-concepts-accepted-time-formats">Accepted Time Formats</h2>
 
 <p>
@@ -193,6 +215,10 @@ The following examples describe the same time using two different accepted forma
 <pre><code>2012-07-03 12:45:29Z        # ISO 8601
 2012-07-03 14:45:29 +0200   # UTC local time with offset "+hh:mm"</code></pre>
 </div>
+
+<hr>
+
+
 
 <h2 id="core-concepts-public-resources">Public Resources</h2>
 
@@ -237,6 +263,10 @@ The following examples describe the same time using two different accepted forma
     <td>Get a status</td>
   </tr>
 </table>
+
+<hr>
+
+
 
 <h2 id="core-concepts-error-responses">Error Responses</h2>
 
@@ -290,6 +320,10 @@ The following examples describe the same time using two different accepted forma
 }</code></pre>
 </div>
 
+<hr>
+
+
+
 <h2 id="core-concepts-http-caching">HTTP Caching</h2>
 
 <p>
@@ -304,6 +338,10 @@ resource back to the end client. To make this possible Lelylan returns the
 
 <div class="code-block"><pre><code>Etag: "e59b3c1fca50b5d0bf44c931253ded86"
 Last-Modified: Sat, 01 Sep 2012 16:00:32 GMT</code></pre></div>
+
+<hr>
+
+
 
 <h2 id="core-concepts-rest-interface">REST Interface</h2>
 
@@ -345,6 +383,10 @@ following the REST architecture, Lelylan defined its API following these rules.
   </p>
 </div>
 
+<hr>
+
+
+
 <h2 id="core-concepts-http-verbs-limitations">HTTP verbs limitations</h2>
 
 <p>
@@ -352,7 +394,3 @@ Not all HTTP clients are able to make PUT or DELETE requests.
 In order to work around this limitation, it is possible to send a POST request
 with a <code>_method</code> parameter set to <code>put</code> or <code>delete</code>.
 </p>
-
-<h2 id="core-concepts-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
-
-<%= render 'shared/feedback' %>

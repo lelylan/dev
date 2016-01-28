@@ -52,7 +52,7 @@ $linkColorHover:         $lelylanHoverColor;
 body {
   font: normal 81.2%/1.65 Lato, sans-serif;
   background-color: #f8f8f8 !important;
-  padding-top: 100px; /* Account for fixed navbar */
+  padding-top: 70px; /* Account for fixed navbar */
   position: relative; /* For scrollyspy */
 }
 
@@ -62,13 +62,14 @@ body {
 h1[id] {
   border-top:100px solid transparent;
   margin-top:-100px;
+  letter-spacing: 2px;
   -webkit-background-clip:padding-box;
   -moz-background-clip:padding;
   background-clip:padding-box;
 }
 
 h2[id] {
-  padding-top: 100px;
+  padding-top: 80px;
   margin-top: -90px;
 }
 
@@ -143,6 +144,18 @@ h3[id] {
   ul {
     margin-bottom: 20px;
   }
+
+  hr {
+    margin-bottom: 50px;
+  }
+
+  code hr {
+    margin-bottom: 0px;
+  }
+
+  .spaced {
+    margin-top: 30px;
+  }
 }
 
 /* multiselection subtitles */
@@ -164,7 +177,6 @@ h3[id] {
   li.active a,
   li a:hover {
     background-color: $lelylanHoverColor;
-    color: #fff !important;
   }
 }
 
@@ -220,8 +232,8 @@ a {
 .lelylan-navbar-apps {
   background-color: $lelylanBackgroundColor;
   border: none;
-  height: 25px;
-  min-height: 25px;
+  height: 0px;
+  min-height: 0px;
   margin-bottom: 0;
   margin-top: 0;
 
@@ -265,7 +277,7 @@ a {
   height: 50px;
   min-height: 50px;
   margin-bottom: 0;
-  margin-top: 25px;
+  margin-top: 0px;
   @include box-shadow;
 
   .container {
@@ -276,11 +288,12 @@ a {
 
   .navbar-nav > li > a {
     background-color: transparent;
-    color: $linkColor !important;
+    color: $lelylanColor;
+    font-size: 13px;
+    font-weight: 100;
     padding-right: 0;
     padding-left: 20px;
-    font-weight: 200;
-    font-size: 15px;
+    text-transform: uppercase;
   }
 
   .navbar-nav > li > a:hover {
@@ -328,11 +341,8 @@ a {
 /* First level of nav */
 
 .bs-sidenav {
-  //background-color: #f8f8f8;
-  margin-top: 30px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-  //@include box-shadow;
 }
 
 /* All levels of nav */
@@ -343,6 +353,7 @@ a {
   font-size: 12px;
   padding: 5px 10px;
   text-transform: uppercase;
+  font-weight: 100;
 }
 
 .bs-sidebar .nav > li > a:hover,
@@ -374,7 +385,6 @@ a {
   padding-left: 25px;
   font-size: 12px;
   line-height: 1.6em;
-  //text-transform: none;
 }
 
 /* Show and affix the side nav when space allows it */
@@ -397,7 +407,7 @@ a {
   }
   .bs-sidebar.affix-bottom .bs-sidenav,
   .bs-sidebar.affix .bs-sidenav {
-    margin-top: 0;
+    margin-top: -30px;
     margin-bottom: 0;
   }
 }
@@ -487,6 +497,12 @@ div.tab-content pre {
 .code-block {
   margin: 20px 0 30px;
 }
+
+.alert-info {
+  background-color: rgba(147, 81, 229, 0.1) !important;
+  border: none !important;
+}
+
 
 
 /* * * * * * * * * */
@@ -805,6 +821,7 @@ footer .bs-docs-section {
     margin-bottom: 0;
     font-size: 16px;
   }
+
 }
 
 a.label-lab {
@@ -890,6 +907,10 @@ img {
     font-size: 80%;
   }
 
+  .lelylan-navbar-top-menu .navbar-nav {
+    margin-top: 8px;
+  }
+
   .animation,
   .col-md-3 .bs-sidenav li,
   .lelylan-navbar-top-menu .navbar-nav > li > a.dropdown-toggle {
@@ -898,6 +919,12 @@ img {
 
   .lelylan-navbar-top-menu .navbar-nav > li > a {
     padding-left: 20px;
+    color: #333 !important;
+    padding-bottom: 0;
+  }
+
+  .navbar-nav-list {
+    margin-top: 8px;
   }
 
   .ly-project-item-card.ly-project-list-item {
@@ -905,7 +932,7 @@ img {
   }
 
   .col-md-3 .bs-sidenav {
-    height: 200px;
+    height: 0;
   }
 
   .navbar-right {
@@ -952,7 +979,15 @@ img {
     position: absolute;
   }
 
+}
+
+@media screen and (max-width: 768px) {
+
+  .col-md-3 .bs-sidenav {
+    height: 120px;
+  }
+
   .navbar-nav-list {
-    margin-top: 20px;
+    margin-top: 18px !important;
   }
 }
