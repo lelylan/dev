@@ -33,6 +33,39 @@ Lelylan provides many blocks you need to run an connected product at scale in pr
 <hr>
 
 
+<h2 id="overview-tutorials">Tutorials</h2>
+
+<p>
+Get confident with Lelylan by creating a connected light using the hardware platforms you are most familiar with (e.g. Arduino, Raspberry, Electric Imp, CC3000) or by creating your first application for the Internet of Things. You can get started in 15 minutes (find more on <a href="http://lelylan.github.io/lab-ng/#/projects">Lelylan Labs</a>).
+</p>
+
+<br><br>
+
+<div>
+  <div class="project">
+    <ly-project ly-project-id="56a9fd353734640017000000"></ly-project>
+  </div>
+  <div class="project">
+    <ly-project ly-project-id="547d9f7f316135000e030000"></ly-project>
+  </div>
+  <div class="project">
+    <ly-project ly-project-id="5457a193386166008d000000"></ly-project>
+  </div>
+  <div class="project">
+    <ly-project ly-project-id="547d9104316135000e000000"></ly-project>
+  </div>
+  
+  <link rel="stylesheet" href="http://lelylan.github.io/lab-directives-ng/styles/main.css">
+  <script src="http://lelylan.github.io/lab-directives-ng/scripts/vendor.js"></script>
+  <script src="http://lelylan.github.io/lab-directives-ng/scripts/scripts.js"></script>
+  <script>angular.module('project-app', ['lelylan-lab.directives.project']);</script>
+</div>
+
+<br style="clear:both">
+
+<hr>
+
+
 <h2 id="overview-core">Core concepts</h2>
 
 <p>
@@ -47,4 +80,3 @@ as the combination of three key elements: properties (what vary during time), fu
 <p>
 <a href="">Physical</a>. Whereas Devices are a virtual representation, Physicals are the real objects you interact with. To enable the communication between Lelylan and the physical world, the physical device must be able to connect to the Internet and to implement the Physical API.
 <p>
-
