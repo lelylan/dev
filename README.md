@@ -1,69 +1,74 @@
 ## Introduction
 
-Lelylan Dev Center site is the official site where all documentation, examples, libraries,
-showcases and general information related to Lelylan APIs are collected.
-Learn more about at [Lelylan Dev Center](http://dev.lelylan.com/)
+[Lelylan Dev Center](http://dev.lelylan.com/) site where documentations, examples, libraries, and
+showcases related to Lelylan are collected.
 
 
 ## Requirements
 
-Ruby ~> [1.9.3](www.ruby-lang.org/en/)
+Lelylan Dev Center is tested against MRI 1.9.3.
 
 
 ## Installation
 
-  bundle install
+Clone the repository.
+
+    git clone git@github.com:lelylan/dev.git
+
+
+## Resources
+
+* [Lelylan Dev Center](http://dev.lelylan.com)
+
+
+## Contributing
+
+Fork the repo on github and send a pull requests with topic branches.
 
 
 ## Usage
 
-Compile the site locally.
+* Fork and clone the repository.
+* Run `gem install bundler` to get the latest for the gemset.
+* Run `bundle install` for dependencies.
+* Run `foreman start` for dependencies.
 
-  foreman run
 
+## Guidelines
 
-## Contribute
-
-If you find some errors or you want to improve the documentation fork the repository on github
-and issue a pull request with your changes. No other means of supplying code to the team will
-be accepted.
-
-### Documentation guidelines
-
-* Do not duplicate existing knowledge (read twice what already exists).
-* Add the right information in the right place.
-* Update the CHANGELOG (if you remember)
+* Duplicated documentation is not accepted.
+* Documentation should be placed in the right section.
+* Update the CHANGELOG.
 
 
 ## Feedback
 
-Use the [issue tracker](http://github.com/lelylan/dev/issues) for any bug you find and
-write us a [mail](mailto:touch@lelylan.com) or a [tweet](http://twitter.com/lelylan) for any
-feature idea that can improve the project. Feedback is always welcome. Always.
+Use the [issue tracker](http://github.com/lelylan/dev/issues) for bugs or [stack overflow](http://stackoverflow.com/questions/tagged/lelylan) for questions.
+[Mail](mailto:dev@lelylan.com) or [Tweet](http://twitter.com/lelylan) us for any idea that can improve the project.
 
 
 ## Links
 
-* [GIT Repository](https://github.com/lelylan/dev)
-* [Lelylan](http://lelylan.com)
-* [Lelylan | Dev Center](http://dev.lelylan.com)
+* [GIT Repository](http://github.com/lelylan/dev)
+* [Lelylan Dev Center](http://dev.lelylan.com)
+* [Lelylan Site](http://lelylan.com)
 
 
 ## Authors
 
-[Andrea Reginato](http://twitter.com/andreareginato)
+[Andrea Reginato](https://www.linkedin.com/in/andreareginato)
 
 
 ## Contributors
 
-Special thanks to the following people for submitting patches.
+Special thanks to [all people](https://github.com/lelylan/dev/graphs/contributors) helping to make the project real.
 
 
 ## Changelog
 
-See CHANGELOG
+See [CHANGELOG](https://github.com/lelylan/dev/blob/master/CHANGELOG.md)
 
 
-## Copyright
+## License
 
-Copyright (c) 2013 [Lelylan](http://lelylan.com). See LICENSE for details.
+Lelylan is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
