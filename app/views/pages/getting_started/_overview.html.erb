@@ -1,64 +1,50 @@
-<h2 id="overview-">Introduction</h2>
+<h2 id="overview-overview">Overview</h2>
 
 <p>
-Welcome to Lelylan Dev Center. This document will help familiarize you with using Lelylan
-providing detailed information on how it works.
+Lelylan breaks up the Internet of Things complexities by providing a highly elastic and highly scalable way to build, deploy and manage modern iot applications based on microservices. Based on a clear API, a complete test suite, and a secure communication (HTTP, MQTT), every service is dedicated to one task (e.g. mqtt, device api, webhooks) creating an easier to maintain code and reducing the time to market by ~30%.
 </p>
 
-<h2 id="overview-what-is-lelylan">What is Lelylan</h2>
-
 <p>
-Lelylan is a open API and a set of tools that make it simple to build the Connected Home.
-In this way makers can focus on the hardware and on the design process, while developers
-can create new apps and services for the web, the mobile and much more.
+Lelylan is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> (free from any commercial license).
 </p>
 
-<h2 id="overview-how-does-it-work">How does it work</h2>
+<hr>
+
+
+<h2 id="overview-architecture">Architecture</h2>
 
 <p>
-  Any request sent to the Lelylan API is forwarded the the physical device, which
-  is in charge of applying the desired changes and of sending back a confirmation
-  message when those are made.
+  Microservices architecture is not a new style of building large scale enterprise applications. Companies like Netflix and Amazon have implemented microservices architecture to deliver successful products over the last few years. Lelylan brings these ideas into the Internet of Things.
 </p>
 
-<%= render 'shared/animations/lelylan' %>
+<%= image_tag('microservices-3-col.png', class: 'img-thumbnail') %>
 
-<h2 id="overview-core-concepts">Core concepts</h2>
+<hr>
+
+
+<h2 id="overview-installation">Installation</h2>
 
 <p>
-  Lelylan is based on three resources. Just grasp the general concept behind them
-  and don't worry if something is not clear, we'll come back later on them.
+Lelylan provides many blocks you need to run an connected product at scale in production. You can run on premise, in a cloud environment, or in a hybrid environment using both cloud and on premise infrastructure (we are studying solutions like Docker, Mesos, and Ansible to simplify the installation process).
 </p>
 
-<h3>Devices</h3>
+<%= image_tag('cloud-purple.png', class: 'img-thumbnail') %>
+
+<hr>
+
+
+<h2 id="overview-core">Core concepts</h2>
 
 <p>
-  A Device is a resource virtually representing everything you interact with everyday of your
-  life like lights, appliances, alarms, cooling and heating systems, gas sensors, rolling
-  shutters, windows, irrigations, video surveillance, gates, multimedia (audio and
-  video) and much more. With a Device you can simulate, monitor and
-  control any of those devices through a unique URL.
+<a href="">Type</a>. A Type describes the structure of a device. In its simplest form every Type is defined
+as the combination of three key elements: properties (what vary during time), functions (what a device can do) and statuses (what a device is in a specific time of its life).
 </p>
 
-<h3>Physicals</h3>
-
 <p>
-Whereas Devices are a virtual representation, Physicals are the real objects
-you interact with everyday of your life. To enable the communication between Lelylan
-and the physical world, the physical device must be able to connect to the Internet
-and to implement the Physical API (which we'll see later).
-<p>
-
-<h3>Types</h3>
-
-<p>
-A Type describes the structure of a device. In its simplest form every Type is defined
-as the combination of three key elements.
+  <a href="">Device</a>. A Device represents everything you interact with everyday of your life like sensors, lights, thermostats, locks, cameras, multimedia, bikes, cars and much, much more. The Device API lets you create, monitor and control any those objects you interact with.
 </p>
 
-<ul>
-  <li><em>Properties</em> - what vary during time.</li>
-  <li><em>Functions</em> - what a device can do.</li>
-  <li><em>Statuses</em> - what a device is in a specific time of its life.</li>
-</ul>
+<p>
+<a href="">Physical</a>. Whereas Devices are a virtual representation, Physicals are the real objects you interact with. To enable the communication between Lelylan and the physical world, the physical device must be able to connect to the Internet and to implement the Physical API.
+<p>
 

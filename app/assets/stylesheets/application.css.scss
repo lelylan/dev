@@ -27,10 +27,10 @@
 
 /* variables */
 
-$lelylanColor:           #239cbb;
-$lelylanHoverColor:      #01cf9e;
-$lelylanBackgroundColor: #009FC7;
-$linkColor:              $lelylanColor;
+$lelylanColor:           #333;
+$lelylanHoverColor:      #9351e5;
+$lelylanBackgroundColor: #9351e5;
+$linkColor:              $lelylanHoverColor;
 $linkColorHover:         $lelylanHoverColor;
 
 /* mixins */
@@ -50,23 +50,25 @@ $linkColorHover:         $lelylanHoverColor;
 /* body defaults */
 
 body {
+  font: normal 81.2%/1.65 Lato, sans-serif;
   background-color: #f8f8f8 !important;
   padding-top: 100px; /* Account for fixed navbar */
   position: relative; /* For scrollyspy */
 }
 
+
 /* anchor positioning */
 
 h1[id] {
-  border-top:120px solid transparent;
-  margin-top:-120px;
+  border-top:100px solid transparent;
+  margin-top:-100px;
   -webkit-background-clip:padding-box;
   -moz-background-clip:padding;
   background-clip:padding-box;
 }
 
 h2[id] {
-  padding-top: 120px;
+  padding-top: 100px;
   margin-top: -90px;
 }
 
@@ -89,16 +91,25 @@ h3[id] {
 
 .bs-title h1 {
   font-size: 48px;
-  font-weight: 200;
+  font-weight: 100;
 }
 
 .bs-title h4 {
-  color: #9EDAE6;
+  color: #FFF;
   font-size: 22px;
   font-weight: 100;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
+.bs-title h4.light {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bs-title h4.small {
+  font-size: 1.5em;
+}
+
 
 /* internal subtitles */
 
@@ -799,7 +810,7 @@ footer .bs-docs-section {
 a.label-lab {
   margin: 10px 20px !important;
   padding: 5px 10px !important;
-  background-color: #01cf9e !important;
+  background-color: $lelylanHoverColor !important;
   color: #fff !important;
   border-radius: 5px !important;
 }
@@ -826,55 +837,47 @@ img {
 /* Lab personalization */
 /* * * * * * * * * * * */
 
-.ly-project-item-card.ly-project-list-item {
-  font-size: 1.2em !important;
-  width: 300px !important;
-  box-shadow: none !important;
-  margin-bottom: 30px !important;
-  border: 1px solid #e8e8e8 !important;
-}
-
-.ly-project-item-card .ly-project-title {
-  font-size: 17px !important;
-}
-
-.ly-project-item-card .ly-project-user-avatar {
-  width: 298px !important;
-  height: 118px !important;
+.project {
+  height: 400px;
+  display: inline-block;
 }
 
 .ly-project-item-card .ly-project-tags {
   display: none;
-  margin: 15px 30px 15px 0;
-}
-
-.ly-project-item-card .ly-project-footer a.ly-project-embed {
-  bottom: 11px !important;
-}
-
-.ly-project-item-card .ly-project-user-avatar {
-  border-bottom: 1px solid #f6f6f6;
-}
-
-.ly-project-item-card .ly-project-description {
-  height: 175px;
-}
-
-.ly-project-item-card .ly-project-link,
-.ly-project-item-card .ly-project-description {
-  display: none;
-}
-
-.ly-project-item-card .ly-project-footer {
-  display: block;
-  font-size: .9em !important;
 }
 
 .ly-project-item-card.ly-project-list-item {
   margin-left: 0 !important;
-  margin-bottom: 10 !important;
-  margin-right: 20px !important;
 }
+
+.ly-project-item-card .ly-project-title a, .ly-project-item-card .ly-project-title a:hover, .ly-project-item-card .ly-project-title a:visited:hover,
+.ly-project-item-card .ly-project-link a, .ly-project-item-card .ly-project-link a span, .ly-project-item-card .ly-project-link a:hover {
+  color: #9351e5 !important;
+}
+
+.ly-project-item-card.ly-project-list-item {
+  width: 280px !important;
+  border: 1px solid rgba(147, 81, 229, 0.2)  !important;
+  box-shadow: 0 2px 2px rgba(147, 81, 229, 0.05) !important;
+}
+
+.ly-project-item-card .ly-project-user-avatar {
+  width: 278px !important;
+  height: 110px !important;
+}
+.ly-project-item-card .features .row p {
+  width: 100% !important;
+}
+
+.ly-project-item-card .ly-project-footer * {
+  background-color: transparent !important;
+}
+
+.ly-project-item-card .ly-project-footer {
+  background-color: transparent !important;
+  border-top:1px solid rgba(147, 81, 229, 0.1);
+}
+
 
 
 /* * * * * * * * * * */
