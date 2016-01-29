@@ -1,3 +1,5 @@
+<br><br>
+
 <h2 id="realtime-api-overview">Overview</h2>
 
 <p>
@@ -12,6 +14,10 @@ Our real-time API serves a couple of basic needs. First, instead of polling the 
 to check to see what's happening, we POST to your servers new data when available. Second,
 developers running servers like Node.js can provide real-time experiences to their users.
 </p>
+
+<hr>
+
+
 
 <h2 id="realtime-api-getting-started">Getting Started</h2>
 
@@ -28,6 +34,10 @@ to obtain a Client ID and Client Secret.
 Create a service able to receive Lelylan updates. This callback URL must support
 the POST method because when we have new data we POST this data to your callback.
 </p>
+
+<hr>
+
+
 
 <h2 id="realtime-api-events">Events</h2>
 
@@ -164,12 +174,17 @@ can subscribe at.
   </tbody>
 </table>
 
+<hr>
+
+
+
 <h2 id="realtime-api-reveiving-updates">Receiving updates</h2>
 
 <p>
 When a user fires an event (for example creating a new device), a POST request is sent
 to the callback URL defined in the subscription.
 </p>
+<br>
 
 <h3 id="payload-representation">Payload example</h3>
 
@@ -195,6 +210,7 @@ to the callback URL defined in the subscription.
      }
   }
 }</code></pre></div>
+
 
 <h3>Payload explained</h3>
 
@@ -251,12 +267,20 @@ Lelylan. This is a SHA-1 signed hexadecimal digest using your client secret as k
 payload as message.
 </p>
 
-<h2 id="subscriptions-api">Subscribe for Notifications</h2>
+<hr>
+
+
+
+<h2 id="subscriptions-api">Subscribtion API</h2>
 
 <p>
   To get realtime notification you first need to create a subscription. Check out the
   Subscriptions API above to undestand how to receive the desired updates.
 </p>
+
+<hr>
+
+
 
 <h2 id="get-a-subscription">GET /subscriptions/:id</h2>
 
@@ -406,6 +430,10 @@ subscription = subscriptions.get_sub('<id>')</xmp></pre>
   </tbody>
 </table>
 
+<hr>
+
+
+
 <h2 id="get-all-subscriptions">GET /subscriptions</h2>
 
 <p>Returns the list of all subscriptions related to a client.</p>
@@ -512,6 +540,10 @@ subs = subscriptions.get_all_sub()</xmp></pre>
 <p>
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
+
+<hr>
+
+
 
 <h2 id="create-a-subscription">POST /subscriptions</h2>
 
@@ -649,6 +681,10 @@ Location: http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026</code></
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
+<hr>
+
+
+
 <h2 id="update-a-subscription">PUT /subscriptions/:id</h2>
 
 <p>
@@ -775,6 +811,10 @@ subscription = subscriptions.update_sub('<id>', params)</xmp></pre>
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
 
+<hr>
+
+
+
 <h2 id="delete-a-subscription">DELETE /subscriptions/:id</h2>
 
 <p>
@@ -868,7 +908,3 @@ subscription = subscriptions.delete_sub('<id>')</xmp></pre>
 <p>
 See <a href="#subscription-representation">subscription representation</a> for body response.
 </p>
-
-<h2 id="realtime-api-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
-
-<%= render 'shared/feedback' %>

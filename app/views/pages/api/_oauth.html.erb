@@ -1,3 +1,5 @@
+<br><br>
+
 <h2 id="oauth-overview">Why OAuth 2.0</h2>
 
 <p>
@@ -6,7 +8,7 @@ OAuth lets users grant the access to the desired resources to third party applic
 giving them the possibility to enable and disable those accesses whenever they want.
 </p>
 
-<h2 id="oauth-registration">Registration</h2>
+<h3 id="oauth-registration">Registration</h3>
 
 <p>
 All developers need to <%= link_to 'register their applications', "#{people_host}/oauth/applications" %>
@@ -14,7 +16,7 @@ before getting started. A registered OAuth application is assigned with a unique
 Client ID and Client Secret.
 </p>
 
-<h2 id="oauth-flows">OAuth Flows</h2>
+<h3 id="oauth-flows">OAuth Flows</h3>
 
 <p>
 Lelylan supports the following flows.
@@ -34,6 +36,10 @@ Lelylan supports the following flows.
   when previous flows can't be used or during development.
   </li>
 </ul>
+
+<hr>
+
+
 
 <h2 id="oauth-authorization-code">Authorization Code</h2>
 
@@ -282,6 +288,10 @@ Here a response example.
   "scope": "user"
 }</code></pre></div>
 
+<hr>
+
+
+
 <h2 id="oauth-implicit-grant">Implicit Grant</h2>
 
 <p>
@@ -408,6 +418,10 @@ If your application is pure Javascript, you can easily parse the token from the 
 If your application is a native phone app you perform the flow in an embedded webview and
 redirect the user to a dummy website where you can grab the token from the URL.
 </p>
+
+<hr>
+
+
 
 <h2 id="oauth-password-credentials">Password Credentials</h2>
 
@@ -564,6 +578,10 @@ Here a response example.
   </p>
 </div>
 
+<hr>
+
+
+
 <h2 id="oauth-refresh-access-token">Refresh Access Token</h2>
 
 <p>
@@ -671,6 +689,10 @@ Here a response example.
 
 <article>
 
+<hr>
+
+
+
 <h2 id="oauth-api-requests">API requests</h2>
 
 <p>
@@ -689,6 +711,10 @@ Once you have the access token you can access the API in different ways.
 <h3>Body access_token param</h3>
 
 <div class="code-block"><pre><xmp>curl http://api.lelylan.com/devices -X POST -d 'access_token=<access-token>'</xmp></pre></div>
+
+<hr>
+
+
 
 <h2 id="oauth-scopes">Scopes</h2>
 
@@ -908,6 +934,10 @@ access for all devices. You can specify multiple scopes by separating them with 
   scope=resources:read+devices</xmp></pre>
 </div>
 
+<hr>
+
+
+
 <h2 id="oauth-filtering-resources">Filtering resources</h2>
 
 <p>
@@ -920,6 +950,10 @@ ones are added into the location, the access to them is not inherited, and a new
 authorization is needed).
 </p>
 
+<hr>
+
+
+
 <h2 id="oauth-expiring-token">Expiring token</h2>
 
 <p>
@@ -929,6 +963,10 @@ be something useful. To have it, simply uncheck the <em>Expiring token</em> chec
 on the authorization page.
 </p>
 
+<hr>
+
+
+
 <h2 id="oauth-learn-more">Learn more</h2>
 
 <p>
@@ -937,9 +975,6 @@ might be of help.
 </p>
 
 <ul>
-  <li>
-  <a href="/#developers" class="bigger">Lelylan Clients (using OAuth2)</a>
-  </li>
   <li>
   <a href="http://oauthbible.com" class="bigger">OAuth Bible</a>
   </li>
@@ -959,7 +994,3 @@ might be of help.
   <a href="http://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
   </li>
 </ul>
-
-<h2 id="oauth-feedback"><span class="glyphicon glyphicon-comment"></span> Feedback</h2>
-
-<%= render 'shared/feedback' %>
