@@ -1,0 +1,1026 @@
+<br><br>
+
+<h2 id="api-physical-overview">What is a Physical Device</h2>
+
+<p>
+Physical devices are the objects you touch and interact with everyday of your life like lights, bikes, cars and more. Physical devices are characterized only by their properties. This way physical devices are easy to build, still giving the chance to extend their functionalities by adding new services (e.g. functions, rules engines, sceneries, etc.) on top of Lelylan.
+<p>
+
+<hr> 
+
+
+
+<h2>How does it work</h2>
+
+<p>
+  Any request sent to the Lelylan API is forwarded to the physical device, which
+  is in charge of applying the desired changes and of sending back a confirmation
+  message when those are made. The physical device also needs to send to communicate
+  to Lelylan when its status changes (for example somebody turns a light on using a
+  physical switch).
+</p>
+
+<hr> 
+
+
+
+<h2>Any Hardware</h2>
+
+<p>
+To communicate with Lelylan a physical device needs an hardware with Internet connectivity. There are many
+solutions are available, varying on computational power, wireless capability and budget.
+</p>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th width="160px">Model</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.arduino.cc/">Arduino</a></td>
+      <td>
+        Open-source electronics prototyping platform.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.raspberrypi.org/">Raspberry Pi</a></td>
+      <td>
+        Credit-card sized computer as ARM GNU/Linux box for $25.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://www.raspberrypi.org/products/pi-zero/">Raspberry Zero</a></td>
+      <td>
+        A tiny Raspberry Pi for $5<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://www.kickstarter.com/projects/1598272670/chip-the-worlds-first-9-computer">C.H.I.P.</a></td>
+      <td>
+        The World's First $9 Computer with integrated Bluetooth and Wifi<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.esp8266.com/">ESP8266</a></td>
+      <td>
+        SOC with integrated TCP/IP protocol stack to get WiFi access.
+      </td>
+    </tr>    
+    <tr>
+      <td><a href="http://electricimp.com/">Electric imp</a></td>
+      <td>
+        A complete and cheap solution to connect devices to the internet, wirelessly.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.sparkdevices.com/">Spark Core</a></td>
+      <td>
+        A tiny Wi-Fi development board to create internet-connected hardware.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.ti.com/tool/cc3200-launchxl">CC3200</a></td>
+      <td>
+        Evaluation development platform for the CC3200 wireless microcontroller.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://netduino.com/">Netduino</a></td>
+      <td>
+        Open-source electronics platform using the .NET Micro Framework.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://tiny-circuits.com/products/tinyduino">TinyDuino</a></td>
+      <td>
+        Arduino compatible boards smaller than a quarter.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://mbed.org/">mbed</a></td>
+      <td>
+        Rapid Prototyping for Microcontrollers.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.udoo.org/">udoo</a></td>
+      <td>
+        Android, Linux and Arduino in a tiny single-board computer.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://pinocc.io/">Pinoccio</a></td>
+      <td>
+        A wireless microcontroller to connect anything to the web.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://tessel.io/">Tessel</a></td>
+      <td>
+        Hardware development for software developers.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openpicus.com/">openPICUS</a></td>
+      <td>
+        Platform to control and communication for your electronic devices through the web.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.libelium.com/">Libelium</a></td>
+      <td>
+        Hardware technology for the implementation of wireless sensor networks.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://pandaboard.org/">Beagle Board</a></td>
+      <td>
+        Open OMAP 4 mobile software development platform.<br>
+      </td>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://cubieboard.org/">Cubieboard</a></td>
+      <td>
+        A small, high-performance arm box.<br>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://rascalmicro.com/">The Rascal</a></td>
+      <td>
+        Small computer to monitor and control the world remotely.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br><br>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Add any hardware you find essential for the list to be completed.
+  </p>
+</div>
+
+<hr> 
+
+
+
+<h2 id="api-physical-mqtt">MQTT</h2>
+
+<p>
+  <a href="http://mqtt.org">MQTT</a>
+  is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for constrained devices and low-bandwidth, high-latency or unreliable networks. The Lelylan MQTT Server is ready to be used way to interact with Lelylan from any MQTT client. It provides full API interaction, as well as push notifications and subscriptions. It gives you a MQTT 3.1 compliant solution supporting QoS 0 and QoS
+  1 levels on message delivering.
+</p>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>MQTT Broker IP</th>
+      <th>Port</th>
+      <th>Secure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>178.62.108.47</td>
+      <td>1883</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>178.62.108.47</td>
+      <td>8883</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+
+<h3 id="mqtt-lelylan-setup">Setup</a></h3>
+
+<p>
+  To connet your hardware with MQTT you first need to create a new device.
+  Open <a href="http://lelylan.github.io/devices-dashboard-ng/">Lelylan Dashboard</a>
+  and create a new device by following 3 steps (first you need to
+  <a href="http://people.lelylan.com/users/sign_up">sign up</a> for free).
+</p>
+
+<br> 
+
+<p>Set a meaningful name (e.g. bedroom light).</p>
+
+<p>
+<%= image_tag('makers-api/step-1.png', class: 'img-thumbnail img-small') %>
+</p>
+
+<br>
+
+<p>Choose the device type (for this tutorial choose <em>Basic Light</em>).</p>
+
+<p>
+<%= image_tag('makers-api/step-2.png', class: 'img-thumbnail img-small') %>
+</p>
+
+<br>
+
+<p>Choose <em>"Connect with MQTT"</em> as connectivity option.</p>
+
+<p>
+<%= image_tag('makers-api/step-3.png', class: 'img-thumbnail img-small') %>
+</p>
+
+<br>
+
+<p>
+  Once the device is created click on settings (under the device name) and get the device info: 
+  <em>ID</em> (unique device identifier - MQTT username), <em>Secret</em> (device secret code - MQTT password), <em>Type</em> (link to the type definition useful to check the device properties).
+</p>
+
+<p>
+<%= image_tag('makers-api/step-4.png', class: 'img-small') %>
+</p>
+
+<br>
+
+<h3 id="mqtt-connecting-to-lelylan">Connecting to Lelylan</h3>
+
+<p>
+Lelylan MQTT accepts connections from any MQTT client supporting the MQTT 3.1 specs. During
+the connection phase the client needs to set the device <code>id</code> as username and the
+device <code>secret</code> as password. Once the connection is successful, you need to implement
+two services: one to <em>receive data form</em> and one <em>send data to</em> Lelylan.
+</p>
+
+
+<h3>Receive data (devices/:id/get)</h3>
+
+<p>
+The MQTT client (hardware) receives all messages coming from Lelylan
+(e.g API, dashboard) through the <code>devices/:id/get</code> topic. Every message is
+made up from a list of properties with the following structure.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+      </td>
+      <td>
+        Array of properties (received from your hardware).
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+      </td>
+      <td>
+        Property value.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Send data (devices/:id/set)</h3>
+
+<p>
+When a physical device updates its status through a physical interaction (e.g turn on a light
+using the physical switch), Lelylan must be notified by publishing a message to the topic
+<code>devices/:id/set</code> with the list of the updated properties.
+Every sent message is made up from a list of properties with the following structure.
+</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties (sent from your hardware).
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Desired property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+        <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.expected</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Expected property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+        <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Async physical flow</h3>
+
+<p>
+When sending a message to the physical world, Lelylan expects a feedback form it. Suppose a request is sent to turn a light on through the API. Your hardware, should send back to Lelylan a confirmation message abut the light physically turning on (when this happen). From the moment the request is sent to the moment the confirmation message is received, the device is <a href="/support#faq-value-expected-pending">pending</a>.
+</p>
+
+<p>
+To close the pending status through MQTT and tell Lelylan that the requested changes were applied, the physical device must publish a message to the out topic <code>/devices/:id/set</code> with the new property values.
+</p>
+<br>
+
+<h3 id="mqtt-code-examples">Code Examples</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#connect-physical-device-arduino" data-toggle="tab" class="arduino">Adruino</a></li>
+  <li><a href="#connect-physical-device-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#connect-physical-device-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#connect-physical-device-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="connect-physical-device-arduino">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>/* -------------------------------------------------------
+ * Install https://github.com/andreareginato/pubsubclient
+ * It sets the max packet size to 512 bytes.
+ * ------------------------------------------------------- */
+
+#include <SPI.h>
+#include <Ethernet.h>
+#include <PubSubClient.h>
+
+// Update these with values suitable for your network.
+byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
+
+/* device credentials */
+char* deviceId = "<DEVICE-ID>";         // set your device id (will be the MQTT client username)
+char* deviceSecret = "<DEVICE-SECRET>"; // set your device secret (will be the MQTT client password)
+char* clientId = "<CLIENT-ID>";         // MQTT client id (random, max 23 bytes)
+
+/* device topics */
+char* outTopic = "devices/<DEVICE-ID>/set"; // where physical updates are published
+char* inTopic = "devices/<DEVICE-ID>/get";  // where lelylan updates are received
+
+/* Access settings */
+byte server[] = { 178, 62, 108, 47 }; // MQTT server address
+
+/* sample payload published to lelylan */
+/* (to get the desired property-id go to the device settings and click on the type link) */
+char* payload = "{\"properties\":[{ \"id\": \"<PROPERTY-ID>\", \"value\": \"<VALUE>\" }]}";
+
+/* Ethernet configuration */
+byte mac[] = { 0xA0, 0xA0, 0xBA, 0xAC, 0xAE, 0x12 };
+EthernetClient ethClient;
+
+/* MQTT communication */
+void callback(char* topic, byte* payload, unsigned int length); // subscription callback
+PubSubClient client(server, 1883, callback, ethClient);         // mqtt client
+
+/* arduino setup */
+void setup() {
+  Serial.begin(9600);
+  delay(500);
+
+  Ethernet.begin(mac);
+  Serial.print("Connected with IP: ");
+  Serial.println(Ethernet.localIP());
+
+  lelylanConnection(); // MQTT server connection
+}
+
+/* arduino loop */
+void loop() {
+  lelylanConnection();
+}
+
+/* MQTT server connection */
+void lelylanConnection() {
+  // add reconnection logics
+  if (!client.connected()) {
+    // connection to MQTT server
+    if (client.connect(clientId, deviceId, deviceSecret)) {
+      Serial.print("[OK] Connected with MQTT");
+      lelylanSubscribe();  // topic subscription
+      lelylanPublish();    // topic publishing
+    }
+  }
+
+  client.loop();
+}
+
+/* MQTT publish */
+void lelylanPublish() {
+  client.publish(outTopic, payload);
+}
+
+/* MQTT subscribe */
+void lelylanSubscribe() {
+  client.subscribe(inTopic);
+}
+
+// debug to show the received message
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Receiving subscribed message");
+  Serial.println(topic);
+  Serial.write(payload, length);
+}</xmp></pre>
+  </div>
+</div>
+<div class="tab-pane" id="connect-physical-device-node">
+  <div class="preview">
+    <pre class="prettyprint"><xmp>// ------------------------------
+// Install first the mqtt client
+// $ npm install mqtt
+// ------------------------------
+
+// device credentials
+var device = { id: '<device-id>', secret: '<device-secret>' }
+
+// device topics
+var in_topic  = 'devices/' + device.id + '/get'   // receiving messages
+  , out_topic = 'devices/' + device.id + '/set';  // publishing messages
+
+// connection settings
+var mqtt = require('mqtt')
+  , host = '178.62.108.47'
+  , port = '1883'
+
+// client settings
+var settings = {
+  username: device.id,     // device.id as client username
+  password: device.secret  // device.secret as client password
+}
+
+// client connection
+var client = mqtt.createClient(port, host, settings);
+client.on('connect', function() {
+  console.log('Client successfully connected');
+
+  // subscribe for incoming messages
+  client.subscribe(in_topic);
+  client.on('message', function(topic, message) {
+    console.log('received', topic, message);
+  });
+
+  // publish a message
+  var payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
+  client.publish(out_topic, JSON.stringify(payload));
+});</xmp></pre>
+  </div>
+</div>
+<div class="tab-pane" id="connect-physical-device-ruby">
+  <div class="preview">
+    <pre class="prettyprint"><xmp># ------------------------------
+# Install first the mqtt client
+# $ gem install mqtt
+# ------------------------------
+
+require 'mqtt'
+require 'uri'
+require 'json'
+
+# device credentials
+device = { id: '<device-id>', secret: '<device-secret>' }
+
+# device topics
+in_topic  = 'devices/' + device[:id] + '/get' # receiving messages
+out_topic = 'devices/' + device[:id] + '/set' # published messages
+
+# connection parameters
+settings = {
+  remote_host: '178.62.108.47',
+  remote_port: '1883',
+  username: device[:id],
+  password: device[:secret]
+}
+
+# client connection
+MQTT::Client.connect(settings) do |client|
+  Thread.new do
+    # subscribe for incoming messages
+    client.get(in_topic) do |topic, message|
+      puts "Received #{topic}: #{message}"
+    end
+  end
+
+  # publish a message
+  payload = { properties: [{ id: '<property-id>', value: '<value>' }] };
+  client.publish(out_topic, payload.to_json)
+  puts "Published #{out_topic}: #{payload}"
+  loop { sleep 0.1 } # keep listening
+end</xmp></pre>
+  </div>
+</div>
+<div class="tab-pane" id="connect-physical-device-python">
+  <div class="preview">
+    <pre class="prettyprint"><xmp># --------------------------
+# Install first mosquitto
+# $ pip install mosquitto
+# --------------------------
+
+import mosquitto, json
+
+# event callbacks
+def on_connect(mosq, obj, rc):
+    print("rc: " + str(rc))
+
+def on_message(mosq, obj, msg):
+    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+
+def on_publish(mosq, obj, mid):
+    print("mid: " + str(mid))
+
+def on_subscribe(mosq, obj, mid, granted_qos):
+    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+
+# create client
+client = mosquitto.Mosquitto()
+
+# assign event callbacks
+client.on_message = on_message
+client.on_connect = on_connect
+client.on_publish = on_publish
+client.on_subscribe = on_subscribe
+
+# device credentials
+device_id     = '<device-id>'
+device_secret = '<device-secret>'
+
+# device topics
+in_topic  = 'devices/' + device_id + '/get'  # receiving messages
+out_topic = 'devices/' + device_id + '/set'  # publishing messages
+
+# client connection
+client.username_pw_set(device_id, device_secret)
+client.connect('178.62.108.47', '1883')
+
+# subscribe (with QoS level 0)
+client.subscribe(in_topic, 0)
+
+# publish a message
+payload = { 'properties': [{ 'id': '<property-id>', 'value': '<value>' }] };
+client.publish(out_topic, json.dumps(payload))
+
+# Continue the network loop, exit when an error occurs
+rc = 0
+while rc == 0:
+    rc = client.loop()
+print("rc: " + str(rc))</xmp></pre>
+    </div>
+  </div>
+</div>
+
+
+<p>
+You are done. Open the <a href="http://lelylan.github.io/devices-dashboard-ng">Dashboard</a> and control your connected device from the web.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Check out the <a href="http://lelylan.github.io/lab-projects/raspberry-pi-light/">Raspberry Pi tutorial</a> for a pratical use of MQTT.
+  </p>
+</div>
+
+<hr>
+
+
+
+<h2 id="api-physical-direct">URI Flow</h2>
+
+<p>
+  If MQTT isn't available use the <em>URI Flow</em>. It makes the physical device accessible through a Public IP Address and if you do not have one, you can create a tunnel with solutions like 
+  <a href="https://ngrok.com/">ngrock</a>,
+  <a href="https://forwardhq.com/">Forward</a> or
+  <a href="https://pagekite.net/">Pagekite</a>.
+</p>
+
+<br>
+<h3 id="direct-lelylan-setup">Setup</a></h3>
+
+<p>
+  To connet your hardware with MQTT you first need to create a new device.
+  Open <a href="http://lelylan.github.io/devices-dashboard-ng/">Lelylan Dashboard</a>
+  and create a new device by following 3 simple steps (if you are new to Lelylan, you can
+  <a href="http://people.lelylan.com/users/sign_up">sign up</a> for free).
+</p>
+<br>
+
+<p>Set a meaningful name (e.g. bedroom light).</p>
+
+<p>
+<%= image_tag('makers-api/step-1.png', class: 'img-thumbnail img-small') %>
+</p>
+<br>
+
+<p>Choose the device type (for this tutorial choose <em>Basic Light</em>).</p>
+
+<p>
+<%= image_tag('makers-api/step-2.png', class: 'img-thumbnail img-small') %>
+</p>
+<br>
+
+<p>Choose <em>"Custom URI"</em> as connectivity option. and set the physical device URI to forward requests to the physical device.
+</p>
+<br>
+
+<p>
+<%= image_tag('makers-api/direct.png', class: 'img-thumbnail img-small') %>
+</p>
+
+<p>
+  Once the device is created click on settings (under the device name) and get the device info: 
+  <em>ID</em> (unique device identifier - MQTT username), <em>Secret</em> (device secret code - MQTT password), <em>Type</em> (link to the type definition useful to check the device properties).
+
+<p>
+<%= image_tag('makers-api/step-4.png', class: 'img-thumbnail img-small') %>
+</p>
+<br>
+
+<h3 id="direct-how-to-receive-data">How to Receive Data</h3>
+
+<p>
+When a user updates the device properties using Lelylan API a request is forwarded to the physical device. Follow a request example the physical device should be able to handle.
+</p>
+
+<br>
+<p>Received Request</p>
+
+<pre><code>PUT http://pi.connectedhome.com/:physical-id</code></pre>
+
+<br>
+<p>Received Headers</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>X-Physical-Secret</span>
+      </td>
+      <td>
+        The device <a href="/developers#get-a-device-private-info">secret</a>
+        (checked by the physical device).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<p>Received Params</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+      </td>
+      <td>
+        Property value to set.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Received Request Example</h3>
+
+<p>
+Follows a request example the physical device needs to handle.
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-physical-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-physical-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-physical-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-physical-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-physical-device-properties-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-physical-device-properties-curl">
+    <div class="preview">
+      <pre><xmp>curl -X PUT <physical-device-uri> \
+     -H 'Content-Type: application/json' \
+     -H 'X-Physical-Secret: <secret>' \
+     -d '{ "properties": [{ "id": "<status-id>", "value": "on" }] }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+var uri = '<physical-device-uri>'; // physical device URI you want to interact with
+var secret = '<secret>'; // see dev.lelylan.com/api/devices#get-a-device-private-info
+var params = { 'properties': [{ 'id': '<status-id>', 'value': 'on' }] };
+
+Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, $resource) {
+      var uri = '<physical-device-uri>'; // physical device URI you want to interact with
+      var secret = '<secret>';  // see dev.lelylan.com/api/devices#get-a-device-private-info
+      var params = { 'properties': [{ 'id': '<status>', 'value': 'on' }] };
+
+      var action = { update: { method: 'PUT', headers: { 'X-Physical-Secret': secret } } };
+      var Physical = $resource(uri, {}, action);
+
+      $scope.physical = new Physical(params);
+      $scope.physical.$update();
+    }
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.min.js"></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+uri = '<physical-device-uri>' # physical device URI you want to interact with
+secret = '<secret>'; # see dev.lelylan.com/api/devices#get-a-device-private-info
+params = { properties: [{ id: '<status>', value: 'on' }] }
+
+response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-physical-device-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>uri = '<physical-device-uri>' # physical device URI you want to interact with
+secret = '<secret>'; # see dev.lelylan.com/api/devices#get-a-device-private-info
+params = { properties: [{ id: '<status>', value: 'on' }] }
+
+from lelylan import physical
+response = physical.receive_update(uri, secret, params)</xmp></pre>
+    </div>
+  </div>
+</div>
+
+<h3>Response Example</h3>
+
+<p>
+When receiving a request the physical device should respond with the <code>202 Accepted</code> status code. This lets Lelylan know that the request has been accepted and it's processing (it's now <a href="/support#faq-value-expected-pending">pending</a>).
+</p>
+
+<div class="code-block"><pre><code>HTTP/1.1 202 Accepted<hr>
+{ "status": "202" }</code></pre></div>
+
+
+<h3 id="direct-how-to-send-data">How to Send Data</h3>
+
+<p>
+When a physical device applies the request (apply the changes to the real world object), a request with the
+list of updated properties is sent back to Lelylan through the properties API.
+</p>
+
+<br>
+<p>Sent Request Example</p>
+
+<div class="code-block">
+<pre><code>PUT http://api.lelylan.com/devices/:device-id/properties</code></pre>
+</div>
+
+<p>Sent Headers</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>X-Physical-Secret</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        The device <a href="/developers#get-a-device-private-info">secret</a>.
+        Lelylan needs it to reject not valid requests.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Sent Params</p>
+
+<table class="table table-stripped table-hover">
+  <tbody>
+    <tr>
+      <td class="parameter">
+        <span>properties</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Array of properties to change in the physical world.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.id</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Property ID.
+      </td>
+    </tr>
+    <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.value</span>
+        <span class="info">required</span>
+      </td>
+      <td>
+        Desired property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+        <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.expected</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Expected property value.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+      </td>
+    </tr>
+        <tr>
+      <td class="parameter nested">
+        <span>&raquo; property.pending</span>
+        <span class="info">optional</span>
+      </td>
+      <td>
+        Property pending status.
+        <a href="/support#faq-value-expected-pending">Learn more about</a>.
+        <span class="info">Valid values: true, false.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example Request</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#update-device-properties-curl" data-toggle="tab" class="curl">Curl</a></li>
+  <li><a href="#update-device-properties-node" data-toggle="tab" class="node">Node.js</a></li>
+  <li><a href="#update-device-properties-angular" data-toggle="tab" class="angular">AngularJS</a></li>
+  <li><a href="#update-device-properties-ruby" data-toggle="tab" class="ruby">Ruby</a></li>
+  <li><a href="#update-device-properties-python" data-toggle="tab" class="python">Python</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="update-device-properties-curl">
+    <div class="preview">
+      <pre><xmp>curl -X PUT http://api.lelylan.com/devices/<id>/properties \
+    -H 'X-Physical-Secret: <secret>' \
+    -H 'Content-Type: application/json' \
+    -d '{ "properties": [{ "id": "<status>", "value": "on" }] }'</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-node">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>var Lelylan = require('lelylan-node')();
+var uri = 'http://api.lelylan.com/devices/<id>/properties'; // device property API
+var secret = '<secret>'; // see dev.lelylan.com/api/devices#get-a-device-private-info
+var params = { 'properties': [{ 'id': '<status>', 'value': 'on' }] };
+
+Lelylan.Physical.properties(uri, secret, params, callback);</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-angular">
+    <div class="preview">
+      <pre class="prettyprint"><xmp><html ng-app="lelylan">
+<body>
+  <div ng-controller="LelylanController">{{type}}</div>
+  <script>
+    function LelylanController($scope, $resource) {
+      var uri = 'http://api.lelylan.com/devices/<id>/properties'; // device property API
+      var secret = '<device-secret>'; //see dev.lelylan.com/api/devices#get-a-device-private-info
+      var params = { 'properties': [{ 'id': '<status>', 'value': 'on' }] };
+
+      var action = { update: { method: 'PUT', headers: { 'X-Physical-Secret': secret } } };
+      var Physical = $resource(uri, {}, action);
+
+      $scope.physical = new Physical(params);
+      $scope.physical.$update();
+    }
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"/></script>
+  <script src="//cdn.lelylan.com/angular/0.1/lelylan.min.js"/></script>
+</body>
+</html></xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-ruby">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>lelylan = Lelylan::Client.new
+uri = 'http://api.lelylan.com/devices/<id>/properties' # device property API
+secret = '<device-secret>' # see dev.lelylan.com/api/devices#get-a-device-private-info
+params = { properties: [{ id: '<status>', value: 'on' }] }
+response = lelylan.physical_properties(uri, secret, params)</xmp></pre>
+    </div>
+  </div>
+  <div class="tab-pane" id="update-device-properties-python">
+    <div class="preview">
+      <pre class="prettyprint"><xmp>uri = 'http://api.lelylan.com/devices/<id>/properties' # device property API
+secret = '<device-secret>' # see dev.lelylan.com/api/devices#get-a-device-private-info
+params = { properties: [{ id: '<status>', value: 'on', pending: false }] }
+
+from lelylan import physical
+response = physical.receive_update(uri, secret, params)</xmp></pre>
+    </div>
+  </div>
+</div>
+<br>
+
+<br>
+<h3 id="direct-accessible-services">Accessible services</h3>
+
+<p>
+For security reasons a physical device has access to a limited set of Lelylan API. All of these needs to set the <code>X-Physical-Secret</code> to be authenticated and authorized.
+</p>
+
+<ul>
+  <li>
+  <a href="/developers#get-a-device">Get a device</a>
+  </li>
+  <li>
+  <a href="/developers#update-a-device">Update a device</a>
+  </li>
+  <li>
+  <a href="/developers#update-device-properties">Update device properties</a>
+  </li>
+</ul>
+
+<br>
+<h3 id="direct-control-your-physical-device">Control your device</h3>
+
+<p>
+You are done. Open the <a href="http://lelylan.github.io/devices-dashboard-ng">Dashboard</a> and control your connected device from the web.
+</p>
+
+<div class="alert alert-info">
+  <p>
+  <span class="label label-lelylan">notice</span>
+  Check out the <a href="http://lelylan.github.io/lab-projects/electric-imp/">Electric Imp Tutorial</a> for a pratical use of MQTT.
+  </p>
+</div>
