@@ -61,7 +61,9 @@
               <a href="/support">Support</a>
             </li>
             <li class="dropdown">
+            <% if params[:id]=='api' %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> See examples in <b class="language-description">Curl</b> <b class="caret"></b> </a>
+            <% end %>
             <ul class="dropdown-menu languages">
               <li><a href="#" class="curl"><span class="glyphicon glyphicon-link"></span> Curl</a></li>
               <li><a href="#" class="node"><span class="glyphicon glyphicon-link"></span> Node.js</a></li>
