@@ -156,6 +156,15 @@ h3[id] {
   .spaced {
     margin-top: 30px;
   }
+
+  .label-border {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    padding: 2px 4px;
+    background-color: rgba(238, 238, 238, 0.81);
+    text-transform: uppercase;
+    font-size: 85%;
+  }
 }
 
 /* multiselection subtitles */
