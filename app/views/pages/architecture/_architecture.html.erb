@@ -114,62 +114,14 @@ The figure below shows the main components composing Lelylan.
 </ul>
 
 <p>
-  At this point the request life cycle ends. 
-</p>
-
-<hr>
-
-<h2 id="architecture-microservices">Lelylan Microservices</h2>
-
-<p>
-  Lelylan is composed by the following microservices.
-</p>
-
-<ul>
-<li>
-<a href="https://github.com/lelylan/api-proxy">API Proxy</a>. Unique access point for Lelylan API.
-</li>
-<li>
-<a href="https://github.com/lelylan/devices">Devices API</a>. Monitor and control all devices through a unique URL.
-</li>
-<li>
-<a href="https://github.com/lelylan/types">Types API</a>. Identify the device structure through its properties, functions and statuses.
-</li>
-<li>
-<a href="https://github.com/lelylan/subscriptions">Subscriptions API</a>. HTTP POST notifications of what happens to the physical world.
-</li>
-<li>
-<a href="https://github.com/lelylan/profiles">Profiles API</a>. User identity API.
-</li>
-<li>
-<a href="https://github.com/lelylan/people">OAuth 2.0</a>. Authorization solution to communicate with third party apps.
-</li>
-<li>
-<a href="https://github.com/lelylan/physicals">Physical Proxy</a>. Listen to device update requests from the web.
-</li>
-<li>
-<a href="https://github.com/lelylan/nodes">MQTT Node</a>. Gateway between Lelylan and any hardware device using MQTT.
-</li>
-<li>
-<a href="https://github.com/lelylan/mqtt">MQTT Server</a>. A Node.js MQTT server/broker 3.1 compliant.
-</li>
-<li>
-<a href="https://github.com/lelylan/webhooks">Webhooks</a>. Webhooks dispatcher to enable realtime third party updates.
-</li>
-<li>
-<a href="https://github.com/lelylan/websockets">Websockets</a>. Realtime full-duplex communication channels over a single TCP connection.
-</li>
-</ul>
-
-<p>
-Lelylan source code is available on <a href="https://github.com/lelylan">Github</a>. All microservices are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+  At this point the physical device changed its status and a notification is sent to the web app. 
 </p>
 
 <hr>
 
 
 
-<h2 id="Architecture-why">Why Microservices</h2>
+<h2 id="architecture-why">Why Microservices</h2>
 
 <p>
   Successful Internet of Things applications grow more complex over time, and that complexity creates many challenges in development. A monolith application that becomes larger, a single code base that contains all of application logic, where all programmers are involved and where over time it’s difficult for larger team to operate.This approach is perhaps the most natural as a single codebase reduces distribution complexities, but in the long complexities raise up and decreasing software quality and making prices and time to market higher.
