@@ -12,10 +12,10 @@ The figure below shows the main components composing Lelylan.
 
 
 
-<h2 id="architecture-life">Request Life Cicle</h2>
+<h2 id="architecture-life">Request Life Cycle</h2>
 
 <p>
-  Follow the request life cycle describing what happens when a user applies an action (e.g. turn on a light, open a car, unlock a bike) from the mobile app. 
+  Follow the request life cycle describing what happens when a user applies an action (e.g. turns on a light, opens a car, unlocks a bike) from the mobile app. 
 </p>
 
 <br><br>
@@ -23,21 +23,21 @@ The figure below shows the main components composing Lelylan.
 <p>
 
 <p>
-  The API block takes the HTTP request and forward it to the correct microservice. 
+  The API block takes the HTTP request and forwards it to the correct microservice. 
 </p>
 
-<%= image_tag('architecture-1.png', class: 'img-thumbnail', style: 'max-width: 550px') %>
+<%= image_tag('architecture-1.png', class: 'img-thumbnail', style: 'max-width: 600px') %>
 <br><br><br>
 
 <ul>
 <li>
-  1) The <span class="label-border">Web App</span> fire an HTTP request (API call).
+  1) The <span class="label-border">Web App</span> fires an HTTP request (API call).
 </li>
 <li>
   2) The <span class="label-border">API proxy</span> receives the HTTP request.
 </li>
 <li>
-  3) The <span class="label-border">API proxy</span> forward the request to the <span class="label-border">Devices API</span>.
+  3) The <span class="label-border">API proxy</span> forwards the request to the <span class="label-border">Devices API</span>.
 </li>
 <li>
   4) The "device update" event is added to the <span class="label-border">Event Bus</span>.
@@ -54,7 +54,7 @@ The figure below shows the main components composing Lelylan.
 <p>
 
 <p>
-   The Physical block takes the "device update" event and forward it to the physical device. 
+   The Physical block takes the "device update" event and forwards it to the physical device. 
 </p>
 
 <%= image_tag('architecture-2.png', class: 'img-thumbnail', style: 'max-width: 550px') %>
@@ -65,7 +65,7 @@ The figure below shows the main components composing Lelylan.
   5) The <span class="label-border">Physical Proxy</span> is notified about the "device update" event.
 </li>
 <li>
-  6) The <span class="label-border">Physical Proxy</span> forward the request to the <span class="label-border">MQTT Node</span>.
+  6) The <span class="label-border">Physical Proxy</span> forwards the request to the <span class="label-border">MQTT Node</span>.
 </li>
 <li>
   7) The <span class="label-border">MQTT Node</span> sends a MQTT message to the physical device.
@@ -103,7 +103,7 @@ The figure below shows the main components composing Lelylan.
 
 <ul>
 <li>
-  10) The <span class="label-border">WebSockets</span> and <span class="label-border">WebHooks</span>) microservices are notified in realtime about the "physical device update" event.
+  10) The <span class="label-border">WebSockets</span> and <span class="label-border">WebHooks</span>microservices are notified in realtime about the "physical device update" event.
 </li>
 <li>
   11) The <span class="label-border">Websocket</span> notifies the web app about the action being successfully applied.
@@ -139,6 +139,9 @@ The figure below shows the main components composing Lelylan.
 <a href="https://github.com/lelylan/subscriptions">Subscriptions API</a>. HTTP POST notifications of what happens to the physical world.
 </li>
 <li>
+<a href="https://github.com/lelylan/profiles">Profiles API</a>. User identity API.
+</li>
+<li>
 <a href="https://github.com/lelylan/people">OAuth 2.0</a>. Authorization solution to communicate with third party apps.
 </li>
 <li>
@@ -156,9 +159,6 @@ The figure below shows the main components composing Lelylan.
 <li>
 <a href="https://github.com/lelylan/websockets">Websockets</a>. Realtime full-duplex communication channels over a single TCP connection.
 </li>
-<li>
-<a href="https://github.com/lelylan/profiles">Profiles API</a>. User identity API.
-</li>
 </ul>
 
 <p>
@@ -172,13 +172,9 @@ Lelylan source code is available on <a href="https://github.com/lelylan">Github<
 <h2 id="Architecture-why">Why Microservices</h2>
 
 <p>
-  Successful Internet of Things applications grow more complex over time, and that complexity creates many challenges in development. We often see monolith application that becomes larger, a single code base that contains all of application logic, where all programmers are involved and where over time it’s difficult for larger team to operate. 
+  Successful Internet of Things applications grow more complex over time, and that complexity creates many challenges in development. A monolith application that becomes larger, a single code base that contains all of application logic, where all programmers are involved and where over time it’s difficult for larger team to operate.This approach is perhaps the most natural as a single codebase reduces distribution complexities, but in the long complexities raise up and decreasing software quality and making prices and time to market higher.
 </p>
 
 <p>
-  This approach is perhaps the most natural as a single codebase reduces distribution complexities, but in the long complexities raise up and decreasing software quality and making prices and time to market higher. With Lelylan we want to avoid this.
-</p>
-
-<p>
-  Microservices architecture is not a new style of building large scale enterprise applications. Companies like Netflix and Amazon have implemented microservices architecture to deliver successful products over the last few years. Lelylan brings these ideas into the Internet of Things.
+  Microservices architecture is not a new style for building large scale enterprise applications. Companies like Netflix and Amazon have implemented microservices architecture to deliver successful products over the last few years. Lelylan brings these ideas into the Internet of Things.
 </p>

@@ -200,14 +200,14 @@ h3[id] {
   p a,
   table a,
   li a {
-    color: $linkColor !important;
+    color: $linkColor;
   }
 
   p a:hover,
   table a:hover,
   li a:hover {
     text-decoration: none;
-    color: $linkColorHover !important;
+    color: $linkColorHover;
   }
 
   a .img-guest {
@@ -570,7 +570,7 @@ div.tab-content pre {
 /* * * * * * * * */
 
 .btn-lelylan {
-  background: $lelylanColor;
+  background: $lelylanHoverColor;
   box-sizing: border-box;
   min-height: 35px;
   width: auto;
@@ -578,7 +578,7 @@ div.tab-content pre {
   padding: 0.9em 1.37em;
   cursor: pointer;
   text-decoration: none;
-  color: #fff;
+  color: #fff !important;
   font-size: 12px;
   line-height: 13px;
   font-weight: 300;
