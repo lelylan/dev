@@ -69,8 +69,8 @@ Dev::Application.configure do
   config.assets.precompile += ['basic.css', 'bootstrap.min.css', 'default.css', 'prettify.css', 'getting-started.css', 'overlay.css']
 
   # Session store
-  config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
+  # config.session_store :cookie_store, key: '_dev_session', domain: ENV['SESSION_STORE_DOMAIN']
 
   # CDN settings
-  config.action_controller.asset_host = "//#{ENV['FOG_CLOUDFRONT']}.cloudfront.net"
+  # config.action_controller.asset_host = "//#{ENV['FOG_CLOUDFRONT']}.cloudfront.net"
 end
