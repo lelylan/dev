@@ -34,12 +34,12 @@ No, you don't. The <a href="http://lelylan.github.io/types-dashboard-ng/#/">Type
 
 <hr>
 
-
-
-<h2 id="api-type-type">GET /types/:id</h2>
+<h2 id="api-type-types">Types</h2>
+<hr>
+<h2 id="get-a-type">GET /types/:id</h2>
 
 <p>
-Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a>
+Returns extended information for a given <a href="/api#core-concepts-public-resources">public</a>
 type identified from its ID.
 </p>
 
@@ -246,15 +246,15 @@ type = types.get_type('<id>')</xmp></pre>
     </tr>
     <tr>
       <td>properties</td>
-      <td>Learn more about <a href="#properties-api">properties</a></td>
+      <td>Learn more about <a href="#api-type-properties">properties</a></td>
     </tr>
     <tr>
       <td>functions</td>
-      <td>Learn more about <a href="#functions-api">functions</a></td>
+      <td>Learn more about <a href="#api-type-functions">functions</a></td>
     </tr>
     <tr>
       <td>statuses</td>
-      <td>Learn more about <a href="#statuses-api">statuses</a></td>
+      <td>Learn more about <a href="#api-type-statuses">statuses</a></td>
     </tr>
   </tbody>
 </table>
@@ -265,7 +265,7 @@ type = types.get_type('<id>')</xmp></pre>
 
 <h2 id="get-all-types">GET /types</h2>
 
-<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) types.</p>
+<p>Returns a list of owned (and <a href="/api#core-concepts-public-resources">public</a>) types.</p>
 
 <h3>Resource URL</h3>
 
@@ -297,7 +297,7 @@ GET http://api.lelylan.com/types/public</code></pre>
       </td>
       <td>
         ID of the last fetched record.
-        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+        Learn more about <a href="/api#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -957,7 +957,7 @@ a dimmer, the temperature in a cooling system or the speed in a car.
 
 <h2 id="get-a-property">GET /properties/:id</h2>
 
-<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> property identified from its ID.</p>
+<p>Returns extended information for a given <a href="/api#core-concepts-public-resources">public</a> property identified from its ID.</p>
 
 <h3>Resource URL</h3>
 
@@ -1107,7 +1107,7 @@ property = properties.get_prop('<id>')</xmp></pre>
 
 <h2 id="get-all-properties">GET /properties</h2>
 
-<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) properties.</p>
+<p>Returns a list of owned (and <a href="/api#core-concepts-public-resources">public</a>) properties.</p>
 
 <h3>Resource URL</h3>
 
@@ -1139,7 +1139,7 @@ GET http://api.lelylan.com/properties/public</code></pre>
       </td>
       <td>
         ID of the last fetched record.
-        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+        Learn more about <a href="/api#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -1661,7 +1661,7 @@ A Function defines the daily interactions you have with the devices in your hous
 
 <h2 id="get-a-function">GET /functions/:id</h2>
 
-<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> function identified from its ID.</p>
+<p>Returns extended information for a given <a href="/api#core-concepts-public-resources">public</a> function identified from its ID.</p>
 
 <h3>Resource URL</h3>
 
@@ -1818,7 +1818,7 @@ function = functions.get_func('<id>')</xmp></pre>
 
 <h2 id="get-all-functions">GET /functions</h2>
 
-<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) functions.</p>
+<p>Returns a list of owned (and <a href="/api#core-concepts-public-resources">public</a>) functions.</p>
 
 <h3>Resource URL</h3>
 
@@ -1849,7 +1849,7 @@ GET http://api.lelylan.com/functions/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/api#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -2410,7 +2410,7 @@ device status in every specific moment of its life use the Status API.
 
 <h2 id="get-a-status">GET /statuses/:id</h2>
 
-<p>Returns extended information for a given <a href="/developers#core-concepts-public-resources">public</a> status identified from its ID.</p>
+<p>Returns extended information for a given <a href="/api#core-concepts-public-resources">public</a> status identified from its ID.</p>
 
 <h3>Resource URL</h3>
 
@@ -2592,7 +2592,7 @@ moment of its life you need to check two things.
   <span class="label label-lelylan">notice</span>
     At the moment it's not possible to get the device status from server side.
     A basic implementation is available on the
-    <a href="lelylan.github.io/device-directive-ng/">AngularJS Device Component</a>.
+    <a href="http://lelylan.github.io/device-directive-ng/">AngularJS Device Component</a>.
   </p>
 </div>
 
@@ -2602,7 +2602,7 @@ moment of its life you need to check two things.
 
 <h2 id="get-all-statuses">GET /statuses</h2>
 
-<p>Returns a list of owned (and <a href="/developers#core-concepts-public-resources">public</a>) statuses.</p>
+<p>Returns a list of owned (and <a href="/api#core-concepts-public-resources">public</a>) statuses.</p>
 
 <h3>Resource URL</h3>
 
@@ -2633,7 +2633,7 @@ GET http://api.lelylan.com/statuses/public</code></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        ID of the last fetched record. Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+        ID of the last fetched record. Learn more about <a href="/api#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>

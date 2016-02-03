@@ -11,7 +11,7 @@ giving them the possibility to enable and disable those accesses whenever they w
 <h3 id="oauth-registration">Registration</h3>
 
 <p>
-All developers need to <%= link_to 'register their applications', "#{people_host}/oauth/applications" %>
+All developers need to <%= link_to 'register their applications', "http://people.lelylan.com//oauth/applications" %>
 before getting started. A registered OAuth application is assigned with a unique
 Client ID and Client Secret.
 </p>
@@ -150,13 +150,13 @@ Follow a description of the needed parameters.
     <tr>
       <td>client_id</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client ID.
       </td>
     </tr>
     <tr>
       <td>redirect_uri</td>
       <td>
-        <%= link_to 'Registered', "#{people_host}/oauth/applications" %>
+        <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %>
         application URI where the user is redirected after authorization.
       </td>
     </tr>
@@ -247,13 +247,13 @@ Here a description of the needed parameters.
     <tr>
       <td>client_id</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client ID.
       </td>
     </tr>
     <tr>
       <td>client_secret</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client Secret.
       </td>
     </tr>
     <tr>
@@ -370,13 +370,13 @@ Here a description of the needed parameters.
     <tr>
       <td>client_id</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client ID.
       </td>
     </tr>
     <tr>
       <td>client_secret</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client Secret.
       </td>
     </tr>
     <tr>
@@ -520,13 +520,13 @@ Here a description of the needed parameters.
     <tr>
       <td>client_id</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client ID.
       </td>
     </tr>
     <tr>
       <td>client_secret</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client Secret.
       </td>
     </tr>
     <tr>
@@ -646,13 +646,13 @@ Here a description of the needed parameters.
     <tr>
       <td>client_id</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client ID.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client ID.
       </td>
     </tr>
     <tr>
       <td>client_secret</td>
       <td>
-      <%= link_to 'Registered', "#{people_host}/oauth/applications" %> Client Secret.
+      <%= link_to 'Registered', "http://people.lelylan.com//oauth/applications" %> Client Secret.
       </td>
     </tr>
     <tr>
@@ -845,26 +845,26 @@ Scopes let you specify what can and can't be accessed from a third party applica
         <span class="info">Read and write access to owned types.</span>
       </td>
       <td>
-        <span class="label link"><a href="/types#get-a-type">Get a type</a></span>
-        <span class="label link"><a href="/types#get-all-types">Get all types</a></span>
-        <span class="label link"><a href="/types#create-a-type">Create a type</a></span>
-        <span class="label link"><a href="/types#update-a-type">Update a type</a></span>
-        <span class="label link"><a href="/types#delete-a-type">Delete a type</a></span>
-        <span class="label link"><a href="/types#get-a-property">Get a property</a></span>
-        <span class="label link"><a href="/types#get-all-properties">Get all properties</a></span>
-        <span class="label link"><a href="/types#create-a-property">Create a property</a></span>
-        <span class="label link"><a href="/types#update-a-property">Update a property</a></span>
-        <span class="label link"><a href="/types#delete-a-property">Delete a property</a></span>
-        <span class="label link"><a href="/types#get-a-function">Get a function</a></span>
-        <span class="label link"><a href="/types#get-all-functions">Get all functions</a></span>
-        <span class="label link"><a href="/types#create-a-function">Create a function</a></span>
-        <span class="label link"><a href="/types#update-a-function">Update a function</a></span>
-        <span class="label link"><a href="/types#delete-a-function">Delete a function</a></span>
-        <span class="label link"><a href="/types#get-a-status">Get a status</a></span>
-        <span class="label link"><a href="/types#get-all-statuses">Get all statuses</a></span>
-        <span class="label link"><a href="/types#create-a-status">Create a status</a></span>
-        <span class="label link"><a href="/types#update-a-status">Update a status</a></span>
-        <span class="label link"><a href="/types#delete-a-status">Delete a status</a></span>
+        <span class="label link"><a href="/api#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/api#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/api#create-a-type">Create a type</a></span>
+        <span class="label link"><a href="/api#update-a-type">Update a type</a></span>
+        <span class="label link"><a href="/api#delete-a-type">Delete a type</a></span>
+        <span class="label link"><a href="/api#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/api#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/api#create-a-property">Create a property</a></span>
+        <span class="label link"><a href="/api#update-a-property">Update a property</a></span>
+        <span class="label link"><a href="/api#delete-a-property">Delete a property</a></span>
+        <span class="label link"><a href="/api#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/api#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/api#create-a-function">Create a function</a></span>
+        <span class="label link"><a href="/api#update-a-function">Update a function</a></span>
+        <span class="label link"><a href="/api#delete-a-function">Delete a function</a></span>
+        <span class="label link"><a href="/api#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/api#get-all-statuses">Get all statuses</a></span>
+        <span class="label link"><a href="/api#create-a-status">Create a status</a></span>
+        <span class="label link"><a href="/api#update-a-status">Update a status</a></span>
+        <span class="label link"><a href="/api#delete-a-status">Delete a status</a></span>
       </td>
     </tr>
     <tr>
@@ -873,14 +873,14 @@ Scopes let you specify what can and can't be accessed from a third party applica
         <span class="info">Read access to owned types.</span>
       </td>
       <td>
-        <span class="label link"><a href="/types#get-a-type">Get a type</a></span>
-        <span class="label link"><a href="/types#get-all-types">Get all types</a></span>
-        <span class="label link"><a href="/types/#get-a-property">Get a property</a></span>
-        <span class="label link"><a href="/types/#get-all-properties">Get all properties</a></span>
-        <span class="label link"><a href="/types#get-a-function">Get a function</a></span>
-        <span class="label link"><a href="/types#get-all-functions">Get all functions</a></span>
-        <span class="label link"><a href="/types#get-a-status">Get a status</a></span>
-        <span class="label link"><a href="/types#get-all-statuses">Get all statuses</a></span>
+        <span class="label link"><a href="/api#get-a-type">Get a type</a></span>
+        <span class="label link"><a href="/api#get-all-types">Get all types</a></span>
+        <span class="label link"><a href="/api#get-a-property">Get a property</a></span>
+        <span class="label link"><a href="/api#get-all-properties">Get all properties</a></span>
+        <span class="label link"><a href="/api#get-a-function">Get a function</a></span>
+        <span class="label link"><a href="/api#get-all-functions">Get all functions</a></span>
+        <span class="label link"><a href="/api#get-a-status">Get a status</a></span>
+        <span class="label link"><a href="/api#get-all-statuses">Get all statuses</a></span>
       </td>
     </tr>
     <%#<tr>%>
@@ -982,15 +982,13 @@ might be of help.
   <a href="http://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified" class="bigger">OAuth2 Simplified</a>
   </li>
   <li>
+  <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2">
+    An introduction to OAuth 2.0</a>
+  </li>
+  <li>
   <a href="https://developers.google.com/accounts/docs/OAuth2" class="bigger">Google</a>
   </li>
   <li>
-  <a href="http://developers.facebook.com/docs/authentication/" class="bigger">Facebook</a>
-  </li>
-  <li>
   <a href="http://developer.github.com/v3/oauth/" class="bigger">Github</a>
-  </li>
-  <li>
-  <a href="http://developer.foursquare.com/overview/auth" class="bigger">Foursquare</a>
   </li>
 </ul>

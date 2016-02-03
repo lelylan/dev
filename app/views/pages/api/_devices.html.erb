@@ -245,7 +245,7 @@ Returns private information for a given device identified from its ID.
 <div class="alert alert-info">
   <p>
   <span class="label label-lelylan">notice</span>
-    To access this service you must use the <a href="/developers#oauth-scopes">privates</a> scope.
+    To access this service you must use the <a href="/api#oauth-scopes">privates</a> scope.
   </p>
 </div>
 
@@ -457,7 +457,7 @@ device = devices.get_dev_privates('<id>')</xmp></pre>
       </td>
       <td>
         ID of the last fetched record.
-        Learn more about <a href="/developers#core-concepts-infinite-scrolling-pagination">pagination</a>.
+        Learn more about <a href="/api#core-concepts-infinite-scrolling-pagination">pagination</a>.
       </td>
     </tr>
     <tr>
@@ -578,8 +578,8 @@ devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
         <span class="info">required</span>
       </td>
       <td>
-        Type ID. Check out <a href="https://types.lelylan.com">available types</a> or
-        <a href="https://types.lelylan.com/new">create</a> a new one.
+        Type ID (check out <a href="http://lelylan.github.io/types-dashboard-ng/#/">available types</a> or
+        create a new one).
       </td>
     </tr>
     <tr>
@@ -588,7 +588,7 @@ devices = devices.get_all_dev({ name: 'light' })</xmp></pre>
         <span class="info">optional</span>
       </td>
       <td>
-        Physical device URI. <a href="/makers">Learn more about</a>
+        Physical device URI. <a href="/api#api-physical">Learn more about</a>.
       </td>
     </tr>
   </tbody>
@@ -734,7 +734,7 @@ Update a device identified from its ID and returns extended information for it.
         <span class="info">optional</span>
       </td>
       <td>
-        Physical device URI. <a href="/makers">Learn more about</a>
+        Physical device URI. <a href="/api#api-physical">Learn more about</a>
       </td>
     </tr>
   </tbody>
@@ -1458,7 +1458,7 @@ device = activations.activate_dev(params)</xmp></pre>
 Location: https://api.lelylan.com/devices/5042344b95fc441000000001</code></pre></div>
 
 <p>
-  See <a href="/developers#device-representation">device representation</a> for body response.
+  See <a href="#device-representation">device representation</a> for body response.
 </p>
 
 <h3>What if the device is already activated?</h3>
@@ -1508,7 +1508,7 @@ Until the claim happents, the previous owner remains.
         <span class="info">required</span>
       </td>
       <td>
-        The <a href="/developers#get-a-device-private-info">activation code</a> of the desired device.
+        The <a href="/api#get-a-device-private-info">activation code</a> of the desired device.
       </td>
     </tr>
   </tbody>
@@ -1576,5 +1576,5 @@ device = activations.deactivate_dev(params)</xmp></pre>
 <h3>Example body response</h3>
 
 <p>
-  See <a href="/developers#device-representation">device representation</a> for body response.
+  See <a href="#device-representation">device representation</a> for body response.
 </p>

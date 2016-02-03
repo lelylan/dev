@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Profile', "#{people_host}" %></li>
-  <li><%= link_to 'Authorized Apps', "#{people_host}/oauth/authorized_applications" %></li>
-  <li><%= link_to 'Your Apps', "#{people_host}/oauth/applications" %></li>
+  <li><%= link_to 'Profile', "http://people.lelylan.com/" %></li>
+  <li><%= link_to 'Authorized Apps', "http://people.lelylan.com//oauth/authorized_applications" %></li>
+  <li><%= link_to 'Your Apps', "http://people.lelylan.com//oauth/applications" %></li>
   <li><%= link_to "Sign out #{current_user.email}", destroy_user_session_path, method: :delete %></li>
 <% else %>
   <li><%= link_to 'Sign in', new_user_session_path  %></li>
