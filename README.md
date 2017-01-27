@@ -21,13 +21,13 @@ $ foreman start
 ## Install with docker
 
 #### Badges
-Docker image: [lelylanlab/api-proxy](https://hub.docker.com/r/lelylanlab/dev/)
+Docker image: [lelylanlab/devices-dashboard-ng](https://hub.docker.com/r/lelylanlab/dev/)
 
 [![](https://images.microbadger.com/badges/version/lelylanlab/dev:latest.svg)](http://microbadger.com/images/lelylanlab/dev:latest "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/lelylanlab/dev:latest.svg)](http://microbadger.com/images/lelylanlab/dev:latest "Get your own image badge on microbadger.com")
 
 ### Use docker hub image
 ```bash
-$ docker run -d -it --name api-proxy lelylanlab/dev
+$ docker run -d -it --name devices-dashboard-ng lelylanlab/dev
 ```
 
 ### Generate local image
