@@ -11,10 +11,30 @@ Lelylan Dev Center is tested against MRI 1.9.3.
 
 ## Installation
 
-Clone the repository.
+```bash
+$ git clone git@github.com:lelylan/dev.git && cd dev
+$ gem install bundler
+$ bundle install
+$ foreman start
+```
 
-    git clone git@github.com:lelylan/dev.git
+## Install with docker
 
+#### Badges
+Docker image: [lelylanlab/dev](https://hub.docker.com/r/lelylanlab/dev/)
+
+[![](https://images.microbadger.com/badges/version/lelylanlab/dev:latest.svg)](http://microbadger.com/images/lelylanlab/dev:latest "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/lelylanlab/dev:latest.svg)](http://microbadger.com/images/lelylanlab/dev:latest "Get your own image badge on microbadger.com")
+
+### Use docker hub image
+```bash
+$ docker run -d -it --name dev lelylanlab/dev
+```
+
+### Generate local image
+```bash
+$ docker build --tag=dev .
+$ docker run -d -it --name dev dev
+```
 
 ## Resources
 
