@@ -1,6 +1,7 @@
 development:
   sessions:
-    uri: <%= ENV['MONGOLAB_PEOPLE_URL'] || 'mongodb://localhost:27017/people_development' %>
+    default:
+      uri: <%= ENV['MONGOLAB_PEOPLE_URL'] || 'mongodb://localhost:27017/people_development' %>
 test:
   sessions:
     default:
